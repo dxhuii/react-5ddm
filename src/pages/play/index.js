@@ -1,11 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { withRouter, Link } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { detail } from '../../actions/detail'
-import { playlist } from '../../actions/playlist'
 import { playerLoad } from '../../actions/player'
 import { getPlayerList } from '../../reducers/player'
 
@@ -15,7 +11,7 @@ import Detail from '../../components/play/detail'
 import Shell from '../../components/shell'
 import Meta from '../../components/meta'
 
-@withRouter
+@Shell
 @connect(
   (state, props) => ({
     player: getPlayerList(state, props.match.params.id, props.match.params.pid)
@@ -25,20 +21,6 @@ import Meta from '../../components/meta'
   })
 )
 export class Play extends React.Component {
-
-  // 服务端渲染
-  // 加载需要在服务端渲染的数据
-  static loadData({ store, match }) {
-    return new Promise(async function (resolve, reject) {
-
-      const { id, pid } = match.params
-      await detail({id})(store.dispatch, store.getState)
-      await playlist({id})(store.dispatch, store.getState)
-      await playerLoad({id, pid})(store.dispatch, store.getState)
-      resolve({ code:200 });
-
-    })
-  }
 
   constructor(props) {
     super(props)
@@ -85,4 +67,4 @@ export class Play extends React.Component {
   }
 }
 
-export default Shell(Play);
+export default Play

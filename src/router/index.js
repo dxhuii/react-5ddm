@@ -11,6 +11,8 @@ import Loading from '../components/ui/loading';
 
 import HomeLoadData from '../pages/home/load-data';
 import PostsDetailLoadData from '../pages/posts-detail/load-data';
+import PlayLoadData from '../pages/play/load-data';
+import BangumiLoadData from '../pages/bangumi/load-data';
 
 /**
  * 创建路由
@@ -120,7 +122,8 @@ export default (user) => {
         loader: () => import('../pages/bangumi'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter
+      enter: triggerEnter,
+      loadData: BangumiLoadData
     },
 
     {
@@ -130,7 +133,8 @@ export default (user) => {
         loader: () => import('../pages/play'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter
+      enter: triggerEnter,
+      loadData: PlayLoadData
     },
 
     {
