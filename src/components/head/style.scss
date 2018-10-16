@@ -1,3 +1,109 @@
+@font-face {
+  font-family: "Monospaced Number";
+  src: local("Tahoma");
+  unicode-range: U+30-39;
+}
+@font-face {
+  font-family: "Chinese Quote";
+  src: local("PingFang SC"), local("SimSun");
+  unicode-range: U+2018, U+2019, U+201c, U+201d;
+}
+
+
+@font-face {font-family: "iconfont";
+  src: url('//at.alicdn.com/t/font_647740_ojdjhq2969urqkt9.eot?t=1524901506477'); /* IE9*/
+  src: url('//at.alicdn.com/t/font_647740_ojdjhq2969urqkt9.eot?t=1524901506477#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAT0AAsAAAAAB0gAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFZW7kgGY21hcAAAAYAAAABeAAABhpmoBr5nbHlmAAAB4AAAAScAAAE0168QMGhlYWQAAAMIAAAALwAAADYRM9L6aGhlYQAAAzgAAAAcAAAAJAfeA4RobXR4AAADVAAAAAwAAAAMC+kAAGxvY2EAAANgAAAACAAAAAgAdgCabWF4cAAAA2gAAAAfAAAAIAESAF1uYW1lAAADiAAAAUUAAAJtPlT+fXBvc3QAAATQAAAAIgAAADPnfOFzeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2Bk/sE4gYGVgYOpk+kMAwNDP4RmfM1gxMjBwMDEwMrMgBUEpLmmMDgwVDyTYW7438AQw9zA0AAUZgTJAQAlcAyIeJzFkMENgDAMAy9t6QMxQgfgwUC8mKMTd41iQnkwQS05VhxLiQIsQBQPMYFdGA9OueZ+ZHU/eSZLjUBtpXf1nyqiWXYNKplpsHmr/9i87qPTV6iDOrGVl4QblV8L/wAAeJwVxL1OwlAAhuHznXpOWywtPf0vFPojrQYlsVYcjLC4aBxMHIijF6Ari4ksJg4OXoMx8QYcuQJvwUWju3dQhTdvHsII+fuSFpJPLLJJdskxOScEfIBUpxGSohrSAZyEOZ6tS0VWJHKWDqUjeCm33XJU5R6XuQEdXewl5agY0gL71ZgeonQjIGiHF6LfEdITGn7Rva9P6TOcXtYxxjv1yfbELmNLmWlCBEI8KpwxhdI1Q8e156pMbfD6hRmhs+ht0R60oAjPLptxW1w9VDdR31OB+RxWO9ZfJ2ZoLr8NXUsEcqup+GEz27Ax+1n3LS3Kv8kyrKBv9J2YhPTTvDpQkVej0oNry+C4UzQOs/7lmskRM1Z/8qnWkuHC46bG6w9urvgHRUEvpgB4nGNgZGBgAOLLQlMD4/ltvjJwszCAwHUu9yYE/f8hCwOzBJDLwcAEEgUABN4I2QB4nGNgZGBgbvjfwBDDwgACQJKRARUwAwBHCQJsBAAAAAPpAAAEAAAAAAAAAAB2AJp4nGNgZGBgYGYIZGBlAAEmIOYCQgaG/2A+AwAQ9wFwAHicZY9NTsMwEIVf+gekEqqoYIfkBWIBKP0Rq25YVGr3XXTfpk6bKokjx63UA3AejsAJOALcgDvwSCebNpbH37x5Y08A3OAHHo7fLfeRPVwyO3INF7gXrlN/EG6QX4SbaONVuEX9TdjHM6bCbXRheYPXuGL2hHdhDx18CNdwjU/hOvUv4Qb5W7iJO/wKt9Dx6sI+5l5XuI1HL/bHVi+cXqnlQcWhySKTOb+CmV7vkoWt0uqca1vEJlODoF9JU51pW91T7NdD5yIVWZOqCas6SYzKrdnq0AUb5/JRrxeJHoQm5Vhj/rbGAo5xBYUlDowxQhhkiMro6DtVZvSvsUPCXntWPc3ndFsU1P9zhQEC9M9cU7qy0nk6T4E9XxtSdXQrbsuelDSRXs1JErJCXta2VELqATZlV44RelzRiT8oZ0j/AAlabsgAAAB4nGNgYoAALgbsgJmRiZGZkYWBsYK1KDM9o4SBAQASFQK4AAA=') format('woff'),
+  url('//at.alicdn.com/t/font_647740_ojdjhq2969urqkt9.ttf?t=1524901506477') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/font_647740_ojdjhq2969urqkt9.svg?t=1524901506477#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-right:before { content: "\e61c"; }
+
+:global{
+  body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,img,hr{margin:0;padding:0;vertical-align:baseline;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,th,td,var,i{font-style:normal;font-weight:normal;}
+  ol,ul,li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}
+  sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}
+  input,textarea,select{*font-size:100%;}legend{color:#000;}button{background:none;border:none;}ins{text-decoration:none;}blockquote:before,blockquote:after,q:before, q:after{content:"";}blockquote,q{quotes:"" "";}
+  hr{color:#f5f2ee;background-color:#f5f2ee;border:none;height:1px;}
+  article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section{display:block;}
+  table {border-collapse: collapse;border-spacing: 0;}
+  /* commom */
+  html,body{text-size-adjust:none;text-rendering: optimizeLegibility;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
+  body {font-size: 14px;font-family: "Monospaced Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;-webkit-font-smoothing: antialiased;}
+  button,a{cursor:pointer;}
+  input,button{outline:none;}
+  p{word-wrap:break-word;}
+  a{color:#333;text-decoration:none;transition:all .15s ease-out;}
+  a:hover{color:#f60;text-decoration:none;}
+  i{overflow:hidden;}
+  .clearfix:after,.fn-clear:after{clear:both;content:".";display:block;height:0;visibility:hidden;}
+  .f14{font-size:14px;}.f16{font-size:16px;}.f18{font-size:18px;}
+  .cp{cursor:pointer;}.b{font-weight:700;}.w{white-space:nowrap;}.tal{text-align:left;}.tac{text-align:center;}
+  .tar{text-align:right;}.fr,.fn-right{float:right;}.db img{display:block;}
+  .fl,.fn-left{float:left;}.pr{position:relative;}.pa{position:absolute;}.oh{overflow:hidden;}.hide{display:none;}
+  ::-moz-selection{background: #f60; color: #fff; text-shadow: none;}
+  ::selection {background: #f60; color: #fff; text-shadow: none;}
+  ::-webkit-input-placeholder{color:#666;}
+  ::-moz-placeholder{color:#666;}
+  :-moz-placeholder{color:#666;}
+  ::-ms-input-placeholder{color:#666;}
+  input:-moz-placeholder { color:#666; }
+  textarea:-moz-placeholder {color:#666;}
+  .wp{width: 1200px;margin: auto;}
+
+  body{
+    padding-top: 56px;
+  }
+  /* 滚动条 */
+  html,*{
+    &::-webkit-scrollbar{
+      width: 7px;
+      height: 7px
+  }
+    &::-webkit-scrollbar-thumb{
+      border-radius: 1em;
+      background-color: rgba(50,50,50,0.3)
+    }
+    &::-webkit-scrollbar-track{
+      box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+    }
+    &::-webkit-scrollbar-thumb{
+      background: rgba(100,100,100,0.8)
+    }
+    &::-webkit-scrollbar-corner,&::-webkit-scrollbar-thumb:window-inactive{
+      background: rgba(100,100,100,0.4)
+    }
+  }
+  .iconfont {
+    font-family:"iconfont" !important;
+    font-size:16px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+header{
+  width: 100%;
+  display: flex;
+  :global{
+    .navbar{
+      background-color: #fff;
+      border-bottom: 1px solid #eceef1;
+    }
+  }
+}
 .test{
   width: 100%;
   background-color: #333 !important;

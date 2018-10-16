@@ -63,6 +63,9 @@ export default class Head extends React.Component {
             <li className="nav-item">
               <NavLink className="nav-link" exact to="/topics">Topics</NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" exact to="/week">week</NavLink>
+            </li>
           </ul>
 
           <span className="mt-2 mt-md-0">
