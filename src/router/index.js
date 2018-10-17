@@ -1,7 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import Loadable from 'react-loadable';
+import React from 'react'
+import { Route, Switch, Redirect } from 'react-router-dom'
+import Loadable from 'react-loadable'
 
 // 生成异步加载组件
 // import asyncRouteComponent from '../components/generateAsyncComponent.js';
@@ -13,6 +12,8 @@ import HomeLoadData from '../pages/home/load-data';
 import PostsDetailLoadData from '../pages/posts-detail/load-data';
 import PlayLoadData from '../pages/play/load-data';
 import BangumiLoadData from '../pages/bangumi/load-data';
+import WeekLoadData from '../pages/week/load-data';
+import ListLoadData from '../pages/list/load-data';
 
 /**
  * 创建路由
@@ -112,7 +113,8 @@ export default (user) => {
         loader: () => import('../pages/week'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter
+      enter: triggerEnter,
+      loadData: WeekLoadData
     },
 
     {
@@ -135,6 +137,17 @@ export default (user) => {
       }),
       enter: triggerEnter,
       loadData: PlayLoadData
+    },
+
+    {
+      path: '/list',
+      head: Head,
+      component: Loadable({
+        loader: () => import('../pages/list'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter,
+      loadData: ListLoadData
     },
 
     {

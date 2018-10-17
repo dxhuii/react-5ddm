@@ -18,7 +18,6 @@ import { getTopList } from '../../reducers/top'
 export default class Top extends React.Component {
 
   componentDidMount() {
-
     const { order = 'addtime', area = '' } = this.props
     const { top, topLoad } = this.props
     if (!top || !top.data) {

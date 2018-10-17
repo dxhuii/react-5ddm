@@ -17,6 +17,16 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 // 引入全局样式
 import '../pages/global.scss';
 
+// ArriveFooter 监听抵达页尾的事件
+import '../utils/arrive-footer.js';
+
+/**
+ * 懒加载图片、Dom
+ * 使用方式
+ * 给dom添加class="load-demand"、data-load-demand="<div></div> or <img />"
+ **/
+import '../utils/load-demand';
+
 // import runtime from 'serviceworker-webpack-plugin/lib/runtime'
 // if ('serviceWorker' in navigator) {
 //   const registration = runtime.register();

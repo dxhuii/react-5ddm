@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import Tabs from '../tabs'
 import css from './style.scss'
@@ -6,8 +6,7 @@ import { isNumber } from '../../utils'
 
 
 export default ({ title, weekData, moreLink, isCN = false, isJp }) => {
-  const weekCn = ['最新', '一', '二', '三', '四', '五', '六', '日'];
-  const weekDay = new Date().getDay();
+  const weekCn = ['最新', '一', '二', '三', '四', '五', '六', '日']
   const weekEng = ['Zero', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
   return (
     <Tabs

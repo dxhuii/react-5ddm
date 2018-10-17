@@ -19,7 +19,7 @@ export default {
 	 */
     top: ({ order, area, lz }) => `http://www.ikanfan.com/api.php?s=home-search-reactlist&order=${order}${area ? `&area=${area}` : ''}${lz ? `&lz=${lz}` : ''}`, //获取列表
     typelist: ({ id = 3, mcid = '', area = '', year = '', letter = '', order = 'addtime', limit = 30, lz = '', page = 1 }) => {
-      return `http://www.ikanfan.com/api.php?s=home-vod-ajaxtype-id-${id}-mcid-${mcid}-area-${area}-year-${year}-letter-${letter}-order-${hits}-limit-${limit}-lz-${lz}-p-${page}`
+      return `http://www.ikanfan.com/api.php?s=home-vod-ajaxtype-id-${id}-mcid-${mcid}-area-${area}-year-${year}-letter-${letter}-order-${order}-limit-${limit}-lz-${lz}-p-${page}`
     }, // 列表接口
   }
 }
