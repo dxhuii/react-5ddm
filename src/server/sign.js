@@ -7,15 +7,14 @@ export default () => {
 
   const router = express.Router();
 
-  router.post('/in', (req, res)=>{
-    console.log(req.body)
+  router.post('/in', (req, res) => {
     const userinfo = req.body.userinfo;
 
     res.cookie(auth_cookie_name, userinfo.nickname, { path: '/', httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 })
     res.send({ success: true })
   })
 
-  router.post('/out', (req, res)=>{
+  router.post('/out', (req, res) => {
     res.clearCookie(auth_cookie_name)
     res.send({ success: true })
   })

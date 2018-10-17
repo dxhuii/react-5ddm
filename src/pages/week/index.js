@@ -25,8 +25,8 @@ import Top from '../../components/top'
     weekLoad: bindActionCreators(weekLoad, dispatch)
   })
 )
-@CSSModules(styles)
 @Shell
+@CSSModules(styles)
 export class Week extends Component {
 
   componentDidMount() {

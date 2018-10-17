@@ -48,10 +48,11 @@ export class SignIn extends Component {
     }
 
     let [err, success] = await signIn({ username: username.value, password: password.value });
-
-    if (success) {
-      window.location.href = '/'
-    }
+    setTimeout(() => {
+      if (success) {
+        window.location.href = '/'
+      }
+    }, 300)
 
     return false;
   }
