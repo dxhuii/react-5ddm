@@ -1,6 +1,6 @@
 export default {
   api: {
-    login: 'http://www.ikanfan.com/api.php?s=user-login-index',
+    login: 'http://www.ikanfan.com/index.php?s=user-login-index',
     playlist: ({ id }) => `http://www.ikanfan.com/api.php?s=home-vod-playerJson-id-${id}-react-1`, // 播放列表 id:视频id
     player: ({ id, pid }) => `http://www.ikanfan.com/api.php?s=home-vod-playerJson-id-${id}-pid-${pid}`, // 单集 id:视频id，pid，集数
     detail: ({ id }) => `http://www.ikanfan.com/api.php?s=home-search-reactDetail&q=${id}`, // 视频详情

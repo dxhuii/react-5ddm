@@ -1,4 +1,5 @@
 import Ajax from '../common/ajax'
+import config from '../utils/config';
 
 // 储存accessToken到redux
 export function saveAccessToken({ accessToken }) {
@@ -13,19 +14,38 @@ export function saveUserInfo({ userinfo }) {
   }
 }
 
-export function signIn({ nickname }) {
+export function signIn({ username, password }) {
   return dispatch => {
   return new Promise(async (resolve, reject) => {
 
     // 这里写你的登录请求，登录成功以后，将token储存到cookie，使用httpOnly(比较安全)
     // your code ...
+    let [ err, data ] = await Ajax({
+      url: config.api.login,
+      method: 'post',
+      data: {
+        username,
+        password,
+        isJson: true
+      }
+    })
+
+    console.log(data)
+
+    if(data.rcode === 1){
+      dispatch({ type: 'SAVE_USERINFO', userinfo: data.data })
+      resolve([null, data.data])
+    }else{
+      resolve([data.msg])
+    }
 
     // 储存 cookie
-    let [ err, data ] = await Ajax({
+    [ err, data ] = await Ajax({
       url: window.location.origin+'/sign/in',
       method: 'post',
       data: {
-        nickname: nickname
+        auth_sign: data.data.auth,
+        userinfo: data.data
       }
     })
 

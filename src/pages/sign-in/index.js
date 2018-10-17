@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Route, Link, withRouter } from 'react-router-dom';
 
@@ -12,8 +12,18 @@ import styles from './style.scss';
 import Shell from '../../components/shell';
 import Meta from '../../components/meta';
 
+@withRouter
+@connect(
+  (state, props) => ({
 
-export class SignIn extends React.Component {
+  }),
+  dispatch => ({
+    signIn: bindActionCreators(signIn, dispatch)
+  })
+)
+@Shell
+@CSSModules(styles)
+export class SignIn extends Component {
 
   constructor(props) {
     super(props)
@@ -24,15 +34,20 @@ export class SignIn extends React.Component {
   async submit(event) {
     event.preventDefault();
 
-    const { nickname } = this.refs;
+    const { username, password } = this.refs;
     const { signIn } = this.props;
 
-    if (!nickname.value) {
-      nickname.focus();
+    if (!username.value) {
+      username.focus();
       return false;
     }
-    
-    let [err, success] = await signIn({ nickname: nickname.value });
+
+    if (!password.value) {
+      password.focus();
+      return false;
+    }
+
+    let [err, success] = await signIn({ username: username.value, password: password.value });
 
     if (success) {
       window.location.href = '/'
@@ -43,11 +58,12 @@ export class SignIn extends React.Component {
 
   render() {
     return(<div styleName="container" className="text-center">
-      <Meta title="React同构脚手架" />
+      <Meta title="React" />
       <form className="form-signin" onSubmit={this.submit}>
         <div styleName="icon"></div>
-        <h1 className="h3 mb-3 font-weight-normal">React同构脚手架</h1>
-        <input type="text" ref="nickname" className="form-control mb-3" placeholder="请输入昵称" />
+        <h1 className="h3 mb-3 font-weight-normal">React</h1>
+        <input type="text" ref="username" className="form-control mb-3" placeholder="请输入昵称" />
+        <input type="password" ref="password" className="form-control mb-3" placeholder="请输入昵称" />
         <button className="btn btn-lg btn-primary btn-block" type="submit">登录</button>
       </form>
     </div>)
@@ -55,24 +71,4 @@ export class SignIn extends React.Component {
 
 }
 
-
-SignIn = CSSModules(SignIn, styles);
-
-SignIn.propTypes = {
-  signIn: PropTypes.func.isRequired
-}
-
-const mapStateToProps = (state, props) => {
-  return {
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signIn: bindActionCreators(signIn, dispatch)
-  }
-}
-
-SignIn = withRouter(connect(mapStateToProps,mapDispatchToProps)(SignIn));
-
-export default Shell(SignIn);
+export default SignIn;

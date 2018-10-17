@@ -8,10 +8,10 @@ export default () => {
   const router = express.Router();
 
   router.post('/in', (req, res)=>{
+    console.log(req.body)
+    const userinfo = req.body.userinfo;
 
-    const nickname = req.body.nickname;
-    
-    res.cookie(auth_cookie_name, nickname, { path: '/', httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 })
+    res.cookie(auth_cookie_name, userinfo.nickname, { path: '/', httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 })
     res.send({ success: true })
   })
 
