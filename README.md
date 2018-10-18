@@ -43,7 +43,7 @@ node ./dist/server/server.js
 或使用 pm2 启动服务
 
 ```
-pm2 start ./dist/server/server.js --name "react-starter" --max-memory-restart 400M
+pm2 start ./dist/server/server.js --name "react-99496" --max-memory-restart 400M
 ```
 
 # ⚛️ React 同构脚手架 [https://github.com/54sword/react-starter](https://github.com/54sword/react-starter)
