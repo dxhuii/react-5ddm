@@ -25,6 +25,6 @@ build/Release
 node_modules
 
 https
-dist
+# dist
 *.DS_Store
 package-lock.json
