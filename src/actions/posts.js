@@ -23,7 +23,7 @@ export function loadPostsList({ id, filter = {} }) {
 
     // 储存 cookie
     let [ err, data ] = await Ajax({
-      url: '//admin.xiaoduyu.com/graphql',
+      url: 'https://admin.xiaoduyu.com/graphql',
       method: 'post',
       data: {
         operationName:null,
