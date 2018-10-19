@@ -86,22 +86,24 @@ export class Week extends Component {
     const { week: { data } } = this.props
     const weekType = this.getArea(data)
     return(
-      <div>
+      <>
         <Meta title="星期" keywords="星期, 番表" description="星期" />
-        <section className="wp">
-          <aside styleName="indexleft">
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-8 col-xl-10">
             <WeekDay title="番剧" moreLink="/" isJp={['', '月','火','水','木','金','土','日']} weekData={this.getEveryWeek(weekType[1], 1)} />
-          </aside>
-          <Top order="hits_month" area="CN" />
-          <Top order="hits_month" area="JP" />
-          <Top />
-        </section>
-        <section className="wp">
-          <aside styleName="indexleft">
+          </div>
+          <div class="col-sm-0 col-md-0 col-lg-4 col-xl-2">11
+            <Top order="hits_month" area="JP" />
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-8 col-xl-10">
             <WeekDay title="国创" moreLink="/" isCN={true} weekData={this.getEveryWeek(weekType[0], 0)} />
-          </aside>
-        </section>
-      </div>
+          </div>
+          <div class="col-sm-0 col-md-0 col-lg-4 col-xl-2">22
+            <Top order="hits_month" area="CN" />
+          </div>
+          <Top />
+        </div>
+      </>
     )
   }
 }

@@ -164,7 +164,7 @@ export default (user) => {
     }
   ]
 
-  let router = () => (<div>
+  let router = () => (<>
 
       <Switch>
         {routeArr.map((route, index) => (
@@ -190,7 +190,7 @@ export default (user) => {
         })}
       </Switch>
 
-      </div>)
+      </>)
 
   return {
     list: routeArr,

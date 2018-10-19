@@ -21,7 +21,7 @@ class Tabs extends Component{
 	render(){
     const { icon, title, moreLink, moreTitle, isJp } = this.props
 		return(
-			<div>
+			<>
         { /* 动态生成Tab导航 */ }
         <div className={css.title}>
           <Link to={moreLink}>{moreTitle}<i className="iconfont icon-right"></i></Link>
@@ -44,7 +44,7 @@ class Tabs extends Component{
 						)
 					})
 				}
-			</div>
+			</>
 		)
 	}
 }

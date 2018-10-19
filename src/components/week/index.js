@@ -19,17 +19,18 @@ export default ({ title, weekData, moreLink, isCN = false, isJp }) => {
       {
         weekCn.map((week, index) => <ul className={isCN ? `${css.week} ${css.weekCn}` : css.week} name={week} key={week}>
         {
-          weekData[weekEng[index]].map(item => <li key={item.id}>
-            <Link
-              key={item.id}
-              to={`/bangumi/${item.id}`}
-            >
-                <div>
-                  <img alt={item.title} src={item.pic} />
-                </div>
-                <h4>{item.title}</h4>
-            </Link>
-            {isNumber(item.status) ? <p>更新至<Link className={item.isDate ? css.today : ''} to={`/play/${item.id}/${item.pid}`}>{item.status}话</Link></p> : <p><Link to={`/play/${item.id}/${item.pid}`}>{item.status}</Link></p>}
+          weekData[weekEng[index]].map(item =>
+            <li key={item.id}>
+              <Link
+                key={item.id}
+                to={`/bangumi/${item.id}`}
+              >
+                  <div>
+                    <img alt={item.title} src={item.pic} />
+                  </div>
+                  <h4>{item.title}</h4>
+              </Link>
+              {isNumber(item.status) ? <p>更新至<Link className={item.isDate ? css.today : ''} to={`/play/${item.id}/${item.pid}`}>{item.status}话</Link></p> : <p><Link to={`/play/${item.id}/${item.pid}`}>{item.status}</Link></p>}
             </li>
           )
         }

@@ -10,10 +10,10 @@ export class Topics extends React.Component {
   }
 
   render() {
-    return(<div>
+    return(<>
       <Meta title="话题" />
       <h2>Topics</h2>
-    </div>)
+    </>)
   }
 
 }
