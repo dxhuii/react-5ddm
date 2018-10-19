@@ -28,6 +28,7 @@
     "node-sass": "^4.9.3",
     "popper.js": "^1.12.9",
     "react": "^16.5.2",
+    "react-bootstrap": "^1.0.0-beta.1",
     "react-document-meta": "^2.1.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",

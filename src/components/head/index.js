@@ -7,8 +7,11 @@ import { connect } from 'react-redux';
 import { signOut } from '../../actions/user';
 import { getUserInfo } from '../../reducers/user';
 
-import CSSModules from 'react-css-modules';
+// import CSSModules from 'react-css-modules';
 import styles from './style.scss';
+
+import Navbar from 'react-bootstrap/lib/Navbar'
+import Nav from 'react-bootstrap/lib/Nav'
 
 @connect(
   (state, props) => ({
@@ -18,7 +21,7 @@ import styles from './style.scss';
     signOut: bindActionCreators(signOut, dispatch)
   })
 )
-@CSSModules(styles)
+// @CSSModules(styles)
 export default class Head extends React.Component {
 
   static propTypes = {
@@ -45,43 +48,65 @@ export default class Head extends React.Component {
 
     const { userinfo } = this.props
 
-    return (<header>
-        <nav className="navbar fixed-top navbar-expand-md navbar-expand-lg navbar-dark bg-dark bd-navbar" styleName="test">
-
-        <NavLink className="navbar-brand" exact to="/">React同构脚手架</NavLink>
-
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbarText">
-
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
+    return (
+      <header>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
+          <NavLink className="navbar-brand" exact to="/"><Navbar.Brand>React同构脚手架</Navbar.Brand></NavLink>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
               <NavLink className="nav-link" exact to="/">Home</NavLink>
-            </li>
-            <li className="nav-item">
               <NavLink className="nav-link" exact to="/topics">Topics</NavLink>
-            </li>
-            <li className="nav-item">
               <NavLink className="nav-link" exact to="/week">week</NavLink>
-            </li>
-          </ul>
+            </Nav>
+            <Nav>
+              <Nav.Item><Nav.Link>{userinfo.nickname}</Nav.Link></Nav.Item>
+              <Nav.Item><Nav.Link href="javascript:;" onClick={this.signOut}>退出</Nav.Link></Nav.Item>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      </header>
 
-          <span className="mt-2 mt-md-0">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <span className="nav-link">{userinfo.nickname}</span>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="javascript:void(0)" onClick={this.signOut}>退出</a>
-              </li>
-            </ul>
-          </span>
 
-        </div>
-      </nav>
-    </header>)
+
+    // <header>
+    //     <nav className="navbar fixed-top navbar-expand-md navbar-expand-lg navbar-dark bg-dark bd-navbar" styleName="test">
+
+    //     <NavLink className="navbar-brand" exact to="/">React同构脚手架</NavLink>
+
+    //     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    //       <span className="navbar-toggler-icon"></span>
+    //     </button>
+
+    //     <div className="collapse navbar-collapse" id="navbarText">
+
+    //       <ul className="navbar-nav mr-auto">
+    //         <li className="nav-item">
+    //           <NavLink className="nav-link" exact to="/">Home</NavLink>
+    //         </li>
+    //         <li className="nav-item">
+    //           <NavLink className="nav-link" exact to="/topics">Topics</NavLink>
+    //         </li>
+    //         <li className="nav-item">
+    //           <NavLink className="nav-link" exact to="/week">week</NavLink>
+    //         </li>
+    //       </ul>
+
+    //       <span className="mt-2 mt-md-0">
+    //         <ul className="navbar-nav mr-auto">
+    //           <li className="nav-item">
+    //             <span className="nav-link">{userinfo.nickname}</span>
+    //           </li>
+    //           <li className="nav-item">
+    //             <a className="nav-link" href="javascript:void(0)" onClick={this.signOut}>退出</a>
+    //           </li>
+    //         </ul>
+    //       </span>
+
+    //     </div>
+    //   </nav>
+    // </header>
+    )
 
   }
 
