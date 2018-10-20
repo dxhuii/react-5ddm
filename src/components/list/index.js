@@ -1,10 +1,15 @@
 import React from 'react'
 
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { listLoad } from '../../actions/list'
 import { getList } from '../../reducers/list'
+
+import styles from './index.scss';
+
+import Card from 'react-bootstrap/lib/Card'
+import CardColumns from 'react-bootstrap/lib/CardColumns'
 
 @withRouter
 @connect(
@@ -28,14 +33,14 @@ export class List extends React.Component {
   }
 
   componentDidMount() {
-    const { list, scrollLoad } = this.props
+    const { list, scrollLoad, key } = this.props
     if (!list.data) this.load();
-    if (scrollLoad) ArriveFooter.add('list', this.load);
+    if (scrollLoad) ArriveFooter.add(key, this.load);
   }
 
   componentWillUnmount() {
-    const { scrollLoad } = this.props;
-    if (scrollLoad) ArriveFooter.remove('list');
+    const { scrollLoad, key } = this.props;
+    if (scrollLoad) ArriveFooter.remove(key);
   }
 
   async load() {
@@ -48,12 +53,23 @@ export class List extends React.Component {
     const { list: { data = [], loading } } = this.props
     // console.log(data, loading, 'listlist')
     return(
-      <div className="card">
-        <h5 className="card-header">listlist</h5>
+      <CardColumns>
+        {loading ? <div>loading</div> : null }
         {
-          data.map(item => <div key={item.id} style={{height: 100}}>{item.title}</div>)
-        }
-      </div>
+          data.map(item =>
+            <Link to={`/bangumi/${item.id}`}>
+              <Card key={item.id}>
+                <Card.Img variant="top" src={item.pic} />
+                <Card.Body>
+                  <Card.Title>{item.title}</Card.Title>
+                  <Card.Text>
+                    {item.status}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Link>
+          )}
+      </CardColumns>
     )
   }
 }

@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-// import Tabs from '../tabs'
+import { withRouter, Link } from 'react-router-dom'
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { weekLoad } from '../../actions/week';
+import { getWeekByListId } from '../../reducers/week';
 
 import { isNumber } from '../../utils'
 
@@ -14,7 +18,15 @@ import Nav from 'react-bootstrap/lib/Nav'
 
 const weekCn = ['最新', '一', '二', '三', '四', '五', '六', '日']
 const weekEng = ['Zero', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-
+@withRouter
+@connect(
+  (state, props) => ({
+    week: getWeekByListId(state, 'weekList')
+  }),
+  dispatch => ({
+    weekLoad: bindActionCreators(weekLoad, dispatch)
+  })
+)
 @CSSModules(styles, { allowMultiple: true })
 class WeekDay extends Component {
   constructor(props, context) {
@@ -24,8 +36,64 @@ class WeekDay extends Component {
     };
   }
 
+  componentDidMount() {
+    const { week, weekLoad } = this.props
+    const id = 'weekList'
+    if (week && !week.data) {
+      weekLoad({ id })
+    }
+  }
+
+  getArea(weekData = []){
+    let cn = [],
+        jp = [];
+    weekData.map(item => {
+      if(item.area === '日本'){
+        jp.push(item)
+      }else if(item.area === '大陆'){
+        cn.push(item)
+      }
+    })
+    return [cn, jp]
+  }
+
+  getEveryWeek(weekData, isCN){ // isCN  1 日本  其他为中国
+    let data = {}
+    let [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday] = [[],[],[],[],[],[],[]]
+    weekData.map(item => {
+      const day = item.weekday
+      if(day === 1){
+        Monday.push(item)
+      } else if(day === 2){
+        Tuesday.push(item)
+      } else if(day === 3){
+        Wednesday.push(item)
+      } else if(day === 4){
+        Thursday.push(item)
+      } else if(day === 5){
+        Friday.push(item)
+      } else if(day === 6){
+        Saturday.push(item)
+      } else if(day === 7){
+        Sunday.push(item)
+      }
+    })
+    data.Zero = isCN ? weekData.slice(0, 20) : weekData.slice(0, 12);
+    data.Monday = Monday
+    data.Tuesday = Tuesday
+    data.Wednesday = Wednesday
+    data.Thursday = Thursday
+    data.Friday = Friday
+    data.Saturday = Saturday
+    data.Sunday = Sunday
+    return data
+  }
+
   render(){
-    const { title, weekData, moreLink, isCN = false } = this.props
+    const { title, isCN = false, week: { data } } = this.props
+    const weekType = this.getArea(data)
+    const isType = isCN ? 0 : 1
+    const weekData = this.getEveryWeek(weekType[isType], isType)
     return(
       <Tab.Container id="week" defaultActiveKey="tab0">
         <Nav variant="pills">
