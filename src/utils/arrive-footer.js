@@ -10,15 +10,15 @@
   let list = []
   let clientHeight = document.documentElement.clientHeight
 
-  const resize = (e)=>{
+  const resize = (e)=> {
     clientHeight = document.documentElement.clientHeight
   }
 
-  const scroll = (e)=>{
+  const scroll = (e)=> {
 
     let scrollTop = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset || 0
     let scrollHeight = document.body.scrollHeight || document.documentElement.scrollTop
-    
+    console.log(scrollTop + clientHeight, scrollHeight - 50)
     if (scrollTop + clientHeight >= scrollHeight - 50) {
 
       let timestamp = new Date().getTime()

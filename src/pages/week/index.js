@@ -15,6 +15,7 @@ import styles from './style.scss';
 
 import WeekDay from '../../components/week'
 import Top from '../../components/top'
+import List from '../../components/list'
 
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
@@ -95,13 +96,19 @@ export class Week extends Component {
           <Col md={12} lg={8} xl={9}>
             <WeekDay title="番剧" moreLink="/" isJp={['', '月','火','水','木','金','土','日']} weekData={this.getEveryWeek(weekType[1], 1)} />
           </Col>
-          <Col md={12} lg={4} xl={3}>11 <Top order="hits_month" area="JP" /></Col>
+          <Col md={12} lg={4} xl={3}>
+            <Top order="hits_month" area="JP" />
+          </Col>
+        </Row>
+        <Row style={{marginTop: 20}}>
           <Col md={12} lg={8} xl={9}>
             <WeekDay title="国创" moreLink="/" isCN={true} weekData={this.getEveryWeek(weekType[0], 0)} />
           </Col>
-          <Col md={12} lg={4} xl={3}>22 <Top order="hits_month" area="CN" /></Col>
-          <Col><Top /></Col>
+          <Col md={12} lg={4} xl={3}>
+            <Top order="hits_month" area="CN" />
+          </Col>
         </Row>
+        <List />
       </>
     )
   }

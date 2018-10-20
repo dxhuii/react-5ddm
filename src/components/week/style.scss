@@ -1,7 +1,7 @@
 .title{width: 120px;height: 38px;line-height: 38px;font-size: 24px;color: #444;
   :global(.icon){display: inline-block;position: relative;top: -5px;width: 40px; height: 40px;vertical-align: middle;fill: currentColor;overflow: hidden;}
 }
-.week{height: 510px;overflow-x: hidden;overflow-y: auto;margin-top: 25px;margin-bottom: -10px;
+.week{height: 510px;overflow-x: hidden;overflow-y: auto;margin-top: 1.2rem;margin-bottom: -10px;
   &.weekCn{height: 306px;}
   .list{margin-bottom: 25px;
     .pic{float: left;position: relative;margin-right: 10px;width: 77px;height: 77px;border-radius: 4px;overflow: hidden;box-shadow: 0 3px 14px 0 hsla(23,13%,76%,.4);z-index: 2;
