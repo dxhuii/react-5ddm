@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { signOut } from '../../actions/user';
 import { getUserInfo } from '../../reducers/user';
 
-// import CSSModules from 'react-css-modules';
+import CSSModules from 'react-css-modules';
 import styles from './style.scss';
 
 import Navbar from 'react-bootstrap/lib/Navbar'
@@ -21,7 +21,7 @@ import Nav from 'react-bootstrap/lib/Nav'
     signOut: bindActionCreators(signOut, dispatch)
   })
 )
-// @CSSModules(styles)
+@CSSModules(styles)
 export default class Head extends React.Component {
 
   static propTypes = {

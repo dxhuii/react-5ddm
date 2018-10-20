@@ -16,6 +16,9 @@ import styles from './style.scss';
 import WeekDay from '../../components/week'
 import Top from '../../components/top'
 
+import Row from 'react-bootstrap/lib/Row'
+import Col from 'react-bootstrap/lib/Col'
+
 @withRouter
 @connect(
   (state, props) => ({
@@ -88,21 +91,17 @@ export class Week extends Component {
     return(
       <>
         <Meta title="星期" keywords="星期, 番表" description="星期" />
-        <div className="row">
-          <div className="col-sm-12 col-md-12 col-lg-8 col-xl-10">
+        <Row>
+          <Col md={12} lg={8} xl={9}>
             <WeekDay title="番剧" moreLink="/" isJp={['', '月','火','水','木','金','土','日']} weekData={this.getEveryWeek(weekType[1], 1)} />
-          </div>
-          <div className="col-sm-0 col-md-0 col-lg-4 col-xl-2">11
-            <Top order="hits_month" area="JP" />
-          </div>
-          <div className="col-sm-12 col-md-12 col-lg-8 col-xl-10">
+          </Col>
+          <Col md={12} lg={4} xl={3}>11 <Top order="hits_month" area="JP" /></Col>
+          <Col md={12} lg={8} xl={9}>
             <WeekDay title="国创" moreLink="/" isCN={true} weekData={this.getEveryWeek(weekType[0], 0)} />
-          </div>
-          <div className="col-sm-0 col-md-0 col-lg-4 col-xl-2">22
-            <Top order="hits_month" area="CN" />
-          </div>
-          <Top />
-        </div>
+          </Col>
+          <Col md={12} lg={4} xl={3}>22 <Top order="hits_month" area="CN" /></Col>
+          <Col><Top /></Col>
+        </Row>
       </>
     )
   }
