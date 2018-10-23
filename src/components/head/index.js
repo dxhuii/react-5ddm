@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -22,7 +22,7 @@ import Nav from 'react-bootstrap/lib/Nav'
   })
 )
 @CSSModules(styles)
-export default class Head extends React.Component {
+export default class Head extends Component {
 
   static propTypes = {
     userinfo: PropTypes.object.isRequired,

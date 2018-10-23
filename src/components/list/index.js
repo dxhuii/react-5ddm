@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -20,7 +20,7 @@ import CardColumns from 'react-bootstrap/lib/CardColumns'
     listLoad: bindActionCreators(listLoad, dispatch)
   })
 )
-export class List extends React.Component {
+export class List extends Component {
 
   constructor(props) {
     super(props)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -6,8 +6,8 @@ import { connect } from 'react-redux'
 import { topLoad } from '../../actions/top'
 import { getTopList } from '../../reducers/top'
 
-import CSSModules from 'react-css-modules';
-import styles from './index.scss';
+import CSSModules from 'react-css-modules'
+import styles from './index.scss'
 
 import ListGroup from 'react-bootstrap/lib/ListGroup'
 import Badge from 'react-bootstrap/lib/Badge'
@@ -23,7 +23,7 @@ const { Item } = ListGroup
   })
 )
 @CSSModules(styles)
-export default class Top extends React.Component {
+export default class Top extends Component {
 
   componentDidMount() {
     const { order = 'addtime', area = '' } = this.props
@@ -34,7 +34,7 @@ export default class Top extends React.Component {
   }
 
   render() {
-    const { top: { data = [], loading }, order = 'addtime', area = '' } = this.props
+    const { top: { data = [], loading }, area = '' } = this.props
     return(
       <div styleName="top">
         { loading ? <div>loading...</div> : null }
