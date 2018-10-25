@@ -11,17 +11,15 @@ export class Meta extends Component {
 
   render() {
 
-    let metaObj = {}
-
-    const { title, description, canonical, meta } = this.props;
-
-    if (title) metaObj.title = title;
-    if (description) metaObj.description = description;
-    if (canonical) metaObj.canonical = canonical;
-    if (meta) metaObj.title = meta;
+    const { title, description, meta } = this.props
+    const metaConfig = {
+      title: title,
+      description: description || '',
+      meta: { ...meta }
+    }
 
     return (
-      <DocumentMeta {...metaObj} />
+      <DocumentMeta {...metaConfig} />
     )
 
   }

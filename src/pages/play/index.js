@@ -11,6 +11,13 @@ import Detail from '../../components/play/detail'
 import Shell from '../../components/shell'
 import Meta from '../../components/meta'
 
+import CSSModules from 'react-css-modules'
+import styles from './style.scss'
+
+import play from '../../utils/play'
+
+const { isJump } = play
+
 @Shell
 @connect(
   (state, props) => ({
@@ -20,6 +27,7 @@ import Meta from '../../components/meta'
     playerLoad: bindActionCreators(playerLoad, dispatch)
   })
 )
+@CSSModules(styles, { allowMultiple: true })
 export class Play extends React.Component {
 
   constructor(props) {
@@ -60,7 +68,9 @@ export class Play extends React.Component {
         {loading ? <div>loading...</div> : null}
         <Meta title={`${title} ${subTitle}`} keywords={title} description={title} />
         <Detail subTitle={subTitle} />
-        {playData.map(item => <li key={item.type}>{item.title}({item.type}){item.name}:{item.vid}</li>)}
+        <ul styleName='playlist'>
+          {playData.map(item => <a key={item.type} href={isJump(item.vid, item.type)} target="_blank"><li><i styleName={`icon ${item.type}`}></i>{item.name}</li></a>)}
+        </ul>
         <PlayList />
       </div>
     )

@@ -35,11 +35,25 @@ export class Detail extends React.Component {
 
   render() {
     const { info: { data = {}, loading }, isMeta, subTitle } = this.props
+    const { id, name, content, pic, actor, area, aliases, gold, update_date, filmtime, total, director, type, language } = data
+    const meta = {
+      name: {
+        keywords: name
+      },
+      property: {
+        'og:type': 'videolist',
+        'og:title': name,
+        'og:description': content,
+        'og:image': pic,
+        'og:url': `/bangumi/${id}`,
+        'og:video': `/play/${id}/1`
+      }
+    }
     return(
       <div className="detail">
         { loading ? <div>loading...</div> : null }
-        { isMeta ? <Meta title={data.name} keywords={data.name} description={data.name} /> : null }
-        <Link to={`/bangumi/${data.id}`}>{ data.name }</Link>{ subTitle ? ` ${subTitle}` : null }
+        { isMeta ? <Meta title={name} keywords={name} description={name} meta={meta} /> : null }
+        <Link to={`/bangumi/${data.id}`}>{ name }</Link>{ subTitle ? ` ${subTitle}` : null }
       </div>
     )
   }
