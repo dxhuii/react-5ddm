@@ -74,14 +74,9 @@ export default class Head extends Component {
               <NavLink className="nav-link" exact to="/topics">Topics</NavLink>
               <NavLink className="nav-link" exact to="/week">week</NavLink>
             </Nav>
-            <Form>
-              <Form.Control
-                required
-                type="text"
-                placeholder="请输入动漫名称或者拼音"
-                onChange={this.onChange}
-              />
-              {keyword ? <Link to={`/search?keyword=${keyword}&cn=${keywordCn}`}><Button type="submit">Submit form</Button></Link> : <Button disabled type="submit">Submit form</Button>}
+            <Form inline>
+              <Form.Control required type="text" placeholder="Search" className="mr-sm-2" placeholder="动漫名称或者拼音" onChange={this.onChange} />
+              {keyword ? <Link to={`/search?keyword=${keyword}&cn=${keywordCn}`}><Button variant="outline-success">Submit form</Button></Link> : <Button disabled variant="outline-success">搜索</Button>}
             </Form>
             <Nav>
               <Nav.Item><Nav.Link>{userinfo.nickname}</Nav.Link></Nav.Item>
