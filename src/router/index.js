@@ -151,6 +151,20 @@ export default (user) => {
     },
 
     {
+      path: '/search',
+      exact: true,
+      head: Head,
+      // component: asyncRouteComponent({
+      //   loader: () => import('../pages/topics')
+      // }),
+      component: Loadable({
+        loader: () => import('../pages/search'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter
+    },
+
+    {
       path: '**',
       head: Head,
       // component: asyncRouteComponent({

@@ -1,15 +1,15 @@
-import merge from 'lodash/merge';
+import merge from 'lodash/merge'
 
 export default function detail(state = {}, action = {}) {
   switch (action.type) {
 
     case 'GET_DETAIL':
-      const { id, data } = action;
-      state[id] = data;
-      return merge({}, state, {});
+      const { id, data } = action
+      state[id] = data
+      return merge({}, state, {})
 
     default:
-      return state;
+      return state
   }
 }
 

@@ -96,7 +96,7 @@ const isPlay = (type, pv) => {
 }
 
 const ck = (type, vid ) => {
-  var flvsp = 'https://api.flvsp.com/?type=';
+  const flvsp = 'https://api.flvsp.com/?type=';
   if ( type === 'bitqiu' ) {
     return '//www.acgnz.cn/api/pan.php?url=http://193.112.131.234:8081/play/vbit?v=' + vid
   } else if ( type === 'yunpan' ) {
@@ -119,8 +119,7 @@ export default {
       name = data[1];
       pv = data[0];
     }
-    console.log(pv, name)
-    var isCk = vid.indexOf('.html') !== -1 || vid.indexOf('.shtml') !== -1 || vid.indexOf('.htm') !== -1 || vid.indexOf('https://') !== -1 || vid.indexOf('http://') !== -1 || vid.indexOf('.mp4') !== -1 || vid.indexOf('.m3u8') !== -1 || name === 'full'
+    const isCk = vid.indexOf('.html') !== -1 || vid.indexOf('.shtml') !== -1 || vid.indexOf('.htm') !== -1 || vid.indexOf('https://') !== -1 || vid.indexOf('http://') !== -1 || vid.indexOf('.mp4') !== -1 || vid.indexOf('.m3u8') !== -1 || name === 'full'
     if (isCk) {
       url = isPlay(name, vid)
     } else {
