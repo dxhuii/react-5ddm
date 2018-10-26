@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -15,7 +15,7 @@ import { getPlayList } from '../../../reducers/playlist'
     playlist: bindActionCreators(playlist, dispatch)
   })
 )
-export class PlayList extends React.Component {
+export class PlayList extends Component {
 
   constructor(props) {
     super(props)
@@ -35,14 +35,13 @@ export class PlayList extends React.Component {
     const { play: { data = {}, loading }, match } = this.props
     const list = (data.Data || {}).playurls || []
     const { id, pid } = match.params
-    const title = (data.Vod || [])[0]
     return(
       <div className="card">
         <h5 className="card-header">播放列表</h5>
         <div className="card-body">
         { loading ? <div>loading...</div> : null }
         <ul>
-          {list.map(item => <li key={item[1]}>{pid === item[1].toString() ? <Link style={{color: 'red'}} to={`/play/${id}/${item[1]}`}>{title} {item[0]}</Link> : <Link to={`/play/${id}/${item[1]}`}>{title} {item[0]}</Link>}</li>)}
+          {list.map(item => <li key={item[1]}>{pid === item[1].toString() ? <Link style={{color: 'red'}} to={`/play/${id}/${item[1]}`}>{item[0]}</Link> : <Link to={`/play/${id}/${item[1]}`}>{item[0]}</Link>}</li>)}
         </ul>
         </div>
       </div>

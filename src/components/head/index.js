@@ -12,6 +12,9 @@ import styles from './style.scss';
 
 import Navbar from 'react-bootstrap/lib/Navbar'
 import Nav from 'react-bootstrap/lib/Nav'
+import Form from 'react-bootstrap/lib/Form'
+import FormControl from 'react-bootstrap/lib/FormControl'
+import Button from 'react-bootstrap/lib/Button'
 
 @connect(
   (state, props) => ({
@@ -59,6 +62,10 @@ export default class Head extends Component {
               <NavLink className="nav-link" exact to="/topics">Topics</NavLink>
               <NavLink className="nav-link" exact to="/week">week</NavLink>
             </Nav>
+            <Form inline>
+              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+              <Button variant="outline-success">Search</Button>
+            </Form>
             <Nav>
               <Nav.Item><Nav.Link>{userinfo.nickname}</Nav.Link></Nav.Item>
               <Nav.Item><Nav.Link href="javascript:;" onClick={this.signOut}>退出</Nav.Link></Nav.Item>

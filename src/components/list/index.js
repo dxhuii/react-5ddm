@@ -57,8 +57,8 @@ export class List extends Component {
         {loading ? <div>loading</div> : null }
         {
           data.map(item =>
-            <Link to={`/bangumi/${item.id}`}>
-              <Card key={item.id}>
+            <Link key={item.id} to={`/bangumi/${item.id}`}>
+              <Card>
                 <Card.Img variant="top" src={item.pic} />
                 <Card.Body>
                   <Card.Title>{item.title}</Card.Title>

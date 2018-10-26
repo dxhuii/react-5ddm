@@ -83,6 +83,21 @@ const acfun = (pv) => {
   return isMobile() ? 'https://m.acfun.cn/v/?' + (pv.indexOf('ab') != -1 ? 'ab' : 'ac') + '=' + vid : 'https://www.acfun.cn/v/' + (pv.indexOf('ab') != -1 ? 'ab' : 'ac') + vid
 }
 
+const ck = (type, vid ) => {
+  var flvsp = 'https://api.flvsp.com/?type=';
+  if (vid.indexOf('.mp4') !== -1 || vid.indexOf('.m3u8') !== -1) {
+    return '//www.acgnz.cn/api/play.php?url=' + vid
+  } else if ( type === 'bitqiu' ) {
+    return '//www.acgnz.cn/api/pan.php?url=http://193.112.131.234:8081/play/vbit?v=' + vid
+  } else if ( type === 'yunpan' ) {
+    return '//www.acgnz.cn/api/pan.php?url=http://193.112.131.234:8081/play/va360?v=' + vid
+  } else if(type === 'maoyun'){
+    return 'https://mao.shuikaile.com/play.php?url=' + vid
+  } else {
+    return flvsp + type +'&id=' + vid;
+  }
+}
+
 export default {
   isJump: (vid, playname) => {
     let url = '',
@@ -94,6 +109,7 @@ export default {
       name = data[1];
       pv = data[0];
     }
+    console.log(pv, name)
     switch (name) {
       case 'youku':
         url = youku(pv);
@@ -125,6 +141,9 @@ export default {
       case 'acfun':
         url = acfun(pv);
         break;
+      default:
+        url = ck(name, pv)
+        break
     }
     return url
   }
