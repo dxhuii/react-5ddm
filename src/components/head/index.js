@@ -76,7 +76,7 @@ export default class Head extends Component {
             </Nav>
             <Form inline>
               <Form.Control required type="text" placeholder="Search" className="mr-sm-2" placeholder="动漫名称或者拼音" onChange={this.onChange} />
-              {keyword ? <Link to={`/search?keyword=${keyword}&cn=${keywordCn}`}><Button variant="outline-success">Submit form</Button></Link> : <Button disabled variant="outline-success">搜索</Button>}
+              {keyword ? <Link to={`/search?keyword=${keyword}&cn=${keywordCn}`}><Button variant="outline-success">搜索</Button></Link> : <Button disabled variant="outline-success">搜索</Button>}
             </Form>
             <Nav>
               <Nav.Item><Nav.Link>{userinfo.nickname}</Nav.Link></Nav.Item>
