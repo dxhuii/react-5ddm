@@ -83,11 +83,21 @@ const acfun = (pv) => {
   return isMobile() ? 'https://m.acfun.cn/v/?' + (pv.indexOf('ab') != -1 ? 'ab' : 'ac') + '=' + vid : 'https://www.acfun.cn/v/' + (pv.indexOf('ab') != -1 ? 'ab' : 'ac') + vid
 }
 
+const isPlay = (type, pv) => {
+  if (type === 'full') {
+      return pv.replace('http://', 'https://')
+  } else {
+      if (pv.indexOf('.mp4') !== -1 || pv.indexOf('.m3u8') !== -1) {
+        return '//www.acgnz.cn/api/play.php?url=' + pv
+      } else {
+        return pv
+      }
+  }
+}
+
 const ck = (type, vid ) => {
   var flvsp = 'https://api.flvsp.com/?type=';
-  if (vid.indexOf('.mp4') !== -1 || vid.indexOf('.m3u8') !== -1) {
-    return '//www.acgnz.cn/api/play.php?url=' + vid
-  } else if ( type === 'bitqiu' ) {
+  if ( type === 'bitqiu' ) {
     return '//www.acgnz.cn/api/pan.php?url=http://193.112.131.234:8081/play/vbit?v=' + vid
   } else if ( type === 'yunpan' ) {
     return '//www.acgnz.cn/api/pan.php?url=http://193.112.131.234:8081/play/va360?v=' + vid
@@ -110,40 +120,45 @@ export default {
       pv = data[0];
     }
     console.log(pv, name)
-    switch (name) {
-      case 'youku':
-        url = youku(pv);
-        break;
-      case 'tudou':
-        url = tudou(pv);
-        break;
-      case 'iqiyi':
-        url = iqiyi(pv);
-        break;
-      case 'viqiyi':
-        url = iqiyi(pv);
-        break;
-      case 'letv':
-        url = letv(pv);
-        break;
-      case 'sohu':
-        url = sohu(pv);
-        break;
-      case 'pptv':
-        url = pptv(pv);
-        break;
-      case 'qq':
-        url = qq(pv);
-        break;
-      case 'bilibili':
-        url = bilibili(pv);
-        break;
-      case 'acfun':
-        url = acfun(pv);
-        break;
-      default:
-        url = ck(name, pv)
-        break
+    var isCk = vid.indexOf('.html') !== -1 || vid.indexOf('.shtml') !== -1 || vid.indexOf('.htm') !== -1 || vid.indexOf('https://') !== -1 || vid.indexOf('http://') !== -1 || vid.indexOf('.mp4') !== -1 || vid.indexOf('.m3u8') !== -1 || name === 'full'
+    if (isCk) {
+      url = isPlay(name, vid)
+    } else {
+      switch (name) {
+        case 'youku':
+          url = youku(pv);
+          break;
+        case 'tudou':
+          url = tudou(pv);
+          break;
+        case 'iqiyi':
+          url = iqiyi(pv);
+          break;
+        case 'viqiyi':
+          url = iqiyi(pv);
+          break;
+        case 'letv':
+          url = letv(pv);
+          break;
+        case 'sohu':
+          url = sohu(pv);
+          break;
+        case 'pptv':
+          url = pptv(pv);
+          break;
+        case 'qq':
+          url = qq(pv);
+          break;
+        case 'bilibili':
+          url = bilibili(pv);
+          break;
+        case 'acfun':
+          url = acfun(pv);
+          break;
+        default:
+          url = ck(name, pv)
+          break
+      }
     }
     return url
   }
