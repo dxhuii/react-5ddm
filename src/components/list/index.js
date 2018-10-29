@@ -54,7 +54,7 @@ export class List extends Component {
   render() {
     const { list: { data = [], loading } } = this.props
     return(
-      <div className="row" styleName='d-item'>
+      <div className="row mt-4" styleName='d-item'>
         {loading ? <div>loading</div> : null }
         {
           data.map(item =>
