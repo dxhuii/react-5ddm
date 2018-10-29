@@ -39,9 +39,9 @@ export default class Top extends Component {
       <div styleName="top">
         { loading ? <div>loading...</div> : null }
         <h2>排行榜</h2>
-        <ListGroup>
+        <ul class="list-group">
           {data.map((item, index) => {
-            const elem = <Item key={item.id}><Badge className='float-right' variant='warning'>{item.glod}</Badge><Badge className='float-left' pill variant={index > 2 ? 'secondary' : 'success'}>{index + 1}</Badge><Link className='float-left' to={`/bangumi/${item.id}`}>{item.title}</Link></Item>
+            const elem = <li class="list-group-item" key={item.id}><span className="badge badge-warning float-right">{item.glod}</span><span className={`badge badge-pill badge-${index > 2 ? 'secondary' : 'success'} float-left`}>{index + 1}</span><Link className='float-left' to={`/bangumi/${item.id}`}>{item.title}</Link></li>
             if(area === 'CN'){
               if(index < 7){
                 return elem
@@ -50,7 +50,7 @@ export default class Top extends Component {
               return elem
             }
           })}
-        </ListGroup>
+        </ul>
       </div>
     )
   }

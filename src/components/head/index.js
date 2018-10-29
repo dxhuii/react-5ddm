@@ -1,19 +1,14 @@
-import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { Link, NavLink } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-import { signOut } from '../../actions/user';
-import { getUserInfo } from '../../reducers/user';
+import { signOut } from '../../actions/user'
+import { getUserInfo } from '../../reducers/user'
 
-import CSSModules from 'react-css-modules';
-import styles from './style.scss';
-
-import Navbar from 'react-bootstrap/lib/Navbar'
-import Nav from 'react-bootstrap/lib/Nav'
-import Form from 'react-bootstrap/lib/Form'
-import Button from 'react-bootstrap/lib/Button'
+import CSSModules from 'react-css-modules'
+import styles from './style.scss'
 
 import pinyin from 'pinyin'
 
@@ -39,16 +34,16 @@ export default class Head extends Component {
       keyword: '',
       keywordCn: ''
     }
-    this.signOut = this.signOut.bind(this);
+    this.signOut = this.signOut.bind(this)
   }
 
   async signOut() {
-    let [err, success] = await this.props.signOut();
+    let [err, success] = await this.props.signOut()
     if (success) {
       // 退出成功跳转到首页
-      window.location.href = '/';
+      window.location.href = '/'
     } else {
-      alert('退出失败');
+      alert('退出失败')
     }
   }
 
@@ -64,69 +59,45 @@ export default class Head extends Component {
     const { userinfo } = this.props
     const { keyword, keywordCn } = this.state
     return (
-      <header>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
-          <NavLink className="navbar-brand" exact to="/"><Navbar.Brand>React同构脚手架</Navbar.Brand></NavLink>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto">
+    <header>
+      <nav className="navbar fixed-top navbar-expand-md navbar-expand-lg navbar-dark bg-dark bd-navbar" styleName="test">
+        <NavLink className="navbar-brand" exact to="/">React</NavLink>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarText">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
               <NavLink className="nav-link" exact to="/">Home</NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" exact to="/topics">Topics</NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" exact to="/week">week</NavLink>
-            </Nav>
-            <Form inline>
-              <Form.Control required type="text" placeholder="Search" className="mr-sm-2" placeholder="动漫名称或者拼音" onChange={this.onChange} />
-              {keyword ? <Link to={`/search?keyword=${keyword}&cn=${keywordCn}`}><Button variant="outline-success">搜索</Button></Link> : <Button disabled variant="outline-success">搜索</Button>}
-            </Form>
-            <Nav>
-              <Nav.Item><Nav.Link>{userinfo.nickname}</Nav.Link></Nav.Item>
-              <Nav.Item><Nav.Link href="javascript:;" onClick={this.signOut}>退出</Nav.Link></Nav.Item>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-      </header>
-
-
-
-    // <header>
-    //     <nav className="navbar fixed-top navbar-expand-md navbar-expand-lg navbar-dark bg-dark bd-navbar" styleName="test">
-
-    //     <NavLink className="navbar-brand" exact to="/">React同构脚手架</NavLink>
-
-    //     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    //       <span className="navbar-toggler-icon"></span>
-    //     </button>
-
-    //     <div className="collapse navbar-collapse" id="navbarText">
-
-    //       <ul className="navbar-nav mr-auto">
-    //         <li className="nav-item">
-    //           <NavLink className="nav-link" exact to="/">Home</NavLink>
-    //         </li>
-    //         <li className="nav-item">
-    //           <NavLink className="nav-link" exact to="/topics">Topics</NavLink>
-    //         </li>
-    //         <li className="nav-item">
-    //           <NavLink className="nav-link" exact to="/week">week</NavLink>
-    //         </li>
-    //       </ul>
-
-    //       <span className="mt-2 mt-md-0">
-    //         <ul className="navbar-nav mr-auto">
-    //           <li className="nav-item">
-    //             <span className="nav-link">{userinfo.nickname}</span>
-    //           </li>
-    //           <li className="nav-item">
-    //             <a className="nav-link" href="javascript:void(0)" onClick={this.signOut}>退出</a>
-    //           </li>
-    //         </ul>
-    //       </span>
-
-    //     </div>
-    //   </nav>
-    // </header>
-    )
-
-  }
-
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" exact to="/list">list</NavLink>
+            </li>
+          </ul>
+          <form className="form-inline mt-2 mt-md-0" action="/search">
+            <input name="keyword" defaultValue={keyword} hidden />
+            <input name="cn" defaultValue={keywordCn} hidden />
+            <input required className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" onChange={this.onChange} />
+            <button disabled={keyword ? false : true} className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          <span className="mt-2 mt-md-0">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <span className="nav-link">{userinfo.nickname}</span>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="javascript:void(0)" onClick={this.signOut}>退出</a>
+              </li>
+            </ul>
+          </span>
+        </div>
+      </nav>
+    </header>
+  )}
 }

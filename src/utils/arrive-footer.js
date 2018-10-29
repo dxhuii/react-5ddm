@@ -18,7 +18,6 @@
 
     let scrollTop = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset || 0
     let scrollHeight = document.body.scrollHeight || document.documentElement.scrollTop
-    console.log(scrollTop + clientHeight, scrollHeight - 50)
     if (scrollTop + clientHeight >= scrollHeight - 50) {
 
       let timestamp = new Date().getTime()

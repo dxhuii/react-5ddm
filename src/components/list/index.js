@@ -1,25 +1,23 @@
 import React, { Component } from 'react'
-
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { listLoad } from '../../actions/list'
 import { getList } from '../../reducers/list'
 
+import CSSModules from 'react-css-modules'
 import styles from './index.scss';
-
-import Card from 'react-bootstrap/lib/Card'
-import CardColumns from 'react-bootstrap/lib/CardColumns'
 
 @withRouter
 @connect(
   (state, props) => ({
-    list: getList(state, 'list')
+    list: getList(state, props.key)
   }),
   dispatch => ({
     listLoad: bindActionCreators(listLoad, dispatch)
   })
 )
+@CSSModules(styles, { allowMultiple: true })
 export class List extends Component {
 
   constructor(props) {
@@ -49,27 +47,26 @@ export class List extends Component {
     await listLoad({ id: 'list', limit, order, day })
   }
 
+  picHttps(pic){
+    return pic.replace('http://', '//').replace('https://', '//');
+  }
+
   render() {
     const { list: { data = [], loading } } = this.props
-    // console.log(data, loading, 'listlist')
     return(
-      <CardColumns>
+      <div className="row" styleName='d-item'>
         {loading ? <div>loading</div> : null }
         {
           data.map(item =>
-            <Link key={item.id} to={`/bangumi/${item.id}`}>
-              <Card>
-                <Card.Img variant="top" src={item.pic} />
-                <Card.Body>
-                  <Card.Title>{item.title}</Card.Title>
-                  <Card.Text>
-                    {item.status}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Link>
-          )}
-      </CardColumns>
+            <li key={item.id} className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
+              <Link to={`/bangumi/${item.id}`}>
+                <div><img src={this.picHttps(item.pic)} alt={item.title} /></div>
+                <h3>{item.title}</h3>
+              </Link>
+              <Link to={`/bangumi/${item.id}/${item.pid}`}>{item.isDate ? <p style={{color:'#f60'}}>{item.status}</p> : <p>{item.status}</p>}</Link>
+            </li>
+        )}
+      </div>
     )
   }
 }

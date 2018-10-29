@@ -1,52 +1,10 @@
-:global{
-  .card-columns{margin-top: 20px;}
-  @media (max-width: 576px) {
-    .card-columns {
-        column-count: 2;
+.d-item{
+    li{position: relative;float: left;width: 100%;
+        div{position: relative;z-index: 2;width: 100%;height: 15rem;border-radius: 4px;overflow: hidden;box-shadow: 0 3px 14px 0 rgba(203, 193, 187, .40);}
+        img{position: absolute;left: 0;top: 0;right: 0;bottom: 0;margin: auto;overflow: auto;display: block;width: 100%;}
+        p{margin-top: 6px;height: 16px;line-height: 16px;color: #999;overflow: hidden;}
+        h3{margin: 15px 0;height:20px;line-height: 20px;font-size: 16px;font-weight: blod;color: #333;white-space: normal;overflow: hidden;
+            &:hover{color: #f60;}
+        }
     }
-  }
-  @media (min-width: 576px) {
-    .card-columns {
-        column-count: 3;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .card-columns {
-        column-count: 4;
-    }
-  }
-
-  @media (min-width: 992px) {
-    .card-columns {
-        column-count: 5;
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .card-columns {
-        column-count: 6;
-    }
-  }
-
-  @media (min-width: 1440px) {
-    .card-columns {
-        column-count: 7;
-    }
-  }
-
-  @media (min-width: 1680px) {
-    .card-columns {
-        column-count: 8;
-    }
-  }
-
-  @media (min-width: 1920px) {
-    .card-columns {
-        column-count: 8;
-    }
-  }
-  .card-img-top{
-    img{width: 100%;display: block;}
-  }
 }
