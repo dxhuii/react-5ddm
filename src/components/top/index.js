@@ -9,10 +9,6 @@ import { getTopList } from '../../reducers/top'
 import CSSModules from 'react-css-modules'
 import styles from './index.scss'
 
-import ListGroup from 'react-bootstrap/lib/ListGroup'
-import Badge from 'react-bootstrap/lib/Badge'
-const { Item } = ListGroup
-
 @withRouter
 @connect(
   (state, props) => ({
@@ -39,9 +35,9 @@ export default class Top extends Component {
       <div styleName="top">
         { loading ? <div>loading...</div> : null }
         <h2>排行榜</h2>
-        <ul class="list-group">
+        <ul className="list-group">
           {data.map((item, index) => {
-            const elem = <li class="list-group-item" key={item.id}><span className="badge badge-warning float-right">{item.glod}</span><span className={`badge badge-pill badge-${index > 2 ? 'secondary' : 'success'} float-left`}>{index + 1}</span><Link className='float-left' to={`/bangumi/${item.id}`}>{item.title}</Link></li>
+            const elem = <li className="list-group-item" key={item.id}><span className="badge badge-warning float-right">{item.glod}</span><span className={`badge badge-pill badge-${index > 2 ? 'secondary' : 'success'} float-left`}>{index + 1}</span><Link className='float-left' to={`/bangumi/${item.id}`}>{item.title}</Link></li>
             if(area === 'CN'){
               if(index < 7){
                 return elem

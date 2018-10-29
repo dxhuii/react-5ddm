@@ -11,7 +11,7 @@ import styles from './index.scss';
 @withRouter
 @connect(
   (state, props) => ({
-    list: getList(state, props.key)
+    list: getList(state, 'list')
   }),
   dispatch => ({
     listLoad: bindActionCreators(listLoad, dispatch)
@@ -58,7 +58,7 @@ export class List extends Component {
         {loading ? <div>loading</div> : null }
         {
           data.map(item =>
-            <li key={item.id} className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
+            <li key={item.id} className="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mb-4">
               <Link to={`/bangumi/${item.id}`}>
                 <div><img src={this.picHttps(item.pic)} alt={item.title} /></div>
                 <h3>{item.title}</h3>

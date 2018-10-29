@@ -112,7 +112,9 @@ export class Week extends Component {
           <div className='col-12 col-lg-4 col-xl-2'>
             <Top order="hits_month" area="CN" />
           </div>
-          <List key="weekList" scrollLoad={true}/>
+          <div className='col'>
+            <List key="weekList" scrollLoad={true} />
+          </div>
       </div>
     )
   }
