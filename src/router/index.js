@@ -49,7 +49,7 @@ export default (user) => {
   const routeArr = [
 
     {
-      path: '/',
+      path: '/post',
       exact: true,
       head: Head,
       // component: asyncRouteComponent({
@@ -107,7 +107,7 @@ export default (user) => {
     },
 
     {
-      path: '/week',
+      path: '/',
       head: Head,
       component: Loadable({
         loader: () => import('../pages/week'),

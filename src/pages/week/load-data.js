@@ -1,5 +1,5 @@
-import { weekLoad } from '../../actions/week';
-import { topLoad } from '../../actions/top';
+import { weekLoad } from '../../actions/week'
+import { topLoad } from '../../actions/top'
 // import { listLoad } from '../../actions/list'
 
 export default ({ store, match }) => {

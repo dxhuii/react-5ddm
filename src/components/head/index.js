@@ -74,7 +74,7 @@ export default class Head extends Component {
               <NavLink className="nav-link" exact to="/topics">Topics</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" exact to="/week">week</NavLink>
+              <NavLink className="nav-link" exact to="/post">post</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" exact to="/list">list</NavLink>
