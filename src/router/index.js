@@ -49,6 +49,18 @@ export default (user) => {
   const routeArr = [
 
     {
+      path: '/',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('../pages/week'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter,
+      loadData: WeekLoadData
+    },
+
+    {
       path: '/post',
       exact: true,
       head: Head,
@@ -107,18 +119,8 @@ export default (user) => {
     },
 
     {
-      path: '/',
-      head: Head,
-      component: Loadable({
-        loader: () => import('../pages/week'),
-        loading: () => <Loading />
-      }),
-      enter: triggerEnter,
-      loadData: WeekLoadData
-    },
-
-    {
       path: '/bangumi/:id',
+      exact: true,
       head: Head,
       component: Loadable({
         loader: () => import('../pages/bangumi'),
@@ -130,6 +132,7 @@ export default (user) => {
 
     {
       path: '/play/:id/:pid',
+      exact: true,
       head: Head,
       component: Loadable({
         loader: () => import('../pages/play'),
@@ -141,6 +144,7 @@ export default (user) => {
 
     {
       path: '/list',
+      exact: true,
       head: Head,
       component: Loadable({
         loader: () => import('../pages/list'),
