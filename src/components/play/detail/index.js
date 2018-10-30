@@ -8,6 +8,9 @@ import { getDetail } from '../../../reducers/detail'
 
 import Meta from '../../../components/meta'
 
+import CSSModules from 'react-css-modules'
+import styles from './index.scss';
+
 @withRouter
 @connect(
   (state, props) => ({
@@ -17,6 +20,7 @@ import Meta from '../../../components/meta'
     detail: bindActionCreators(detail, dispatch)
   })
 )
+@CSSModules(styles, { allowMultiple: true })
 export class Detail extends React.Component {
 
   constructor(props) {
@@ -50,10 +54,18 @@ export class Detail extends React.Component {
       }
     }
     return(
-      <div className="detail">
+      <div styleName="detail">
         { loading ? <div>loading...</div> : null }
         { isMeta ? <Meta title={name} keywords={name} description={name} meta={meta} /> : null }
-        <Link to={`/bangumi/${data.id}`}>{ name }</Link>{ subTitle ? ` ${subTitle}` : null }
+        <div styleName='blur' style={{backgroundImage: `url(${pic})`}}></div>
+        <div styleName='detail-con' className='clearfix'>
+          <h1><Link to={`/bangumi/${data.id}`}>{ name }</Link>{ subTitle ? ` ${subTitle}` : null }</h1>
+          <div styleName="pic"><img src={pic} /></div>
+          <div styleName='info'>
+            <p></p>
+          </div>
+          <div styleName='score'>{gold}</div>
+        </div>
       </div>
     )
   }

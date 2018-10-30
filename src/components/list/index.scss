@@ -8,3 +8,12 @@
         }
     }
 }
+
+
+.filter{
+  ul{
+    li{display: inline-block;margin: 5px 10px;cursor: pointer;
+      &.cur{color: #f60;}
+    }
+  }
+}
