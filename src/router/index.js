@@ -155,17 +155,6 @@ export default (user) => {
     },
 
     {
-      path: '/type/:id/:mcid/:order/:day/:area/:year/:letter',
-      exact: true,
-      head: Head,
-      component: Loadable({
-        loader: () => import('../pages/list'),
-        loading: () => <Loading />
-      }),
-      enter: triggerEnter
-    },
-
-    {
       path: '/search',
       exact: true,
       head: Head,
