@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { weekLoad } from '../../actions/week'
-import { topLoad } from '../../actions/top'
 import { getWeekByListId } from '../../reducers/week'
 
 import Shell from '../../components/shell'
@@ -85,19 +84,19 @@ export class Week extends Component {
     return(
       <div className="row">
         <Meta title="星期" keywords="星期, 番表" description="星期" />
-        <div className='col-12 col-lg-6 col-xl-9'>
+        <div className='col-12 col-lg-6 col-xl-9 mt-3'>
           <WeekDay title="番剧" link="/" isJp={['', '月','火','水','木','金','土','日']} weekData={this.getEveryWeek(weekType[1], 1)} />
         </div>
-        <div className='col-12 col-lg-6 col-xl-3'>
+        <div className='col-12 col-lg-6 col-xl-3 mt-3'>
           <Top order="hits_month" area="JP" />
         </div>
-        <div className='col-12 col-lg-6 col-xl-9'>
+        <div className='col-12 col-lg-6 col-xl-9 mt-3'>
           <WeekDay title="国创" link="/" isCN={true} weekData={this.getEveryWeek(weekType[0], 0)} />
         </div>
-        <div className='col-12 col-lg-6 col-xl-3'>
+        <div className='col-12 col-lg-6 col-xl-3 mt-3'>
           <Top order="hits_month" area="CN" />
         </div>
-        <div className='col'>
+        <div className='col mt-3'>
           <List stateId="weekList" id={3} day={365} order='addtime' limit={30} scrollLoad={true} />
         </div>
       </div>

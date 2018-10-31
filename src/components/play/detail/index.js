@@ -57,7 +57,7 @@ export class Detail extends React.Component {
       <div styleName="detail">
         { loading ? <div>loading...</div> : null }
         { isMeta ? <Meta title={name} keywords={name} description={name} meta={meta} /> : null }
-        {/* <div styleName='blur' style={{backgroundImage: `url(${pic})`}}></div>
+        <div styleName='blur' style={{backgroundImage: `url(${pic})`}}></div>
         <div styleName='detail-con' className='clearfix'>
           <h1><Link to={`/bangumi/${data.id}`}>{ name }</Link>{ subTitle ? ` ${subTitle}` : null }</h1>
           <div styleName="pic"><img src={pic} /></div>
@@ -65,7 +65,7 @@ export class Detail extends React.Component {
             <p></p>
           </div>
           <div styleName='score'>{gold}</div>
-        </div> */}
+        </div>
       </div>
     )
   }

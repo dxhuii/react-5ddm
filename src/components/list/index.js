@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import { listLoad } from '../../actions/list'
 import { getList } from '../../reducers/list'
 
+import { picHttps } from '../../utils'
+
 import CSSModules from 'react-css-modules'
 import styles from './index.scss'
 
@@ -67,20 +69,16 @@ export class List extends Component {
     await listLoad({ stateId, id, mcid, year, area, letter, lz, day, order, limit })
   }
 
-  picHttps(pic){
-    return pic.replace('http://', '//').replace('https://', '//');
-  }
-
   render() {
     const { list: { data = [] }, loading } = this.props
     return(
-      <div className="row mt-4" styleName='d-item'>
+      <div className="row" styleName='d-item'>
         {loading ? <div>loading</div> : null }
         {
           data.map(item =>
             <li key={item.id} className="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mb-4">
               <Link to={`/bangumi/${item.id}`}>
-                <div className="load-demand" data-load-demand={`<img src="${this.picHttps(item.pic)}" alt="${item.title}" />`} />
+                <div className="load-demand" data-load-demand={`<img src="${picHttps(item.pic)}" alt="${item.title}" />`} />
                 <h3>{item.title}</h3>
               </Link>
               <Link to={`/bangumi/${item.id}/${item.pid}`}>{item.isDate ? <p style={{color:'#f60'}}>{item.status}</p> : <p>{item.status}</p>}</Link>

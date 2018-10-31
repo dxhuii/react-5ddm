@@ -6,6 +6,11 @@ export const isObjectEqual = (obj1, obj2) => {
   return equal
 }
 
+// http 和 https 替换成 //
+export const picHttps = (pic) => {
+  return pic.replace('http://', '//').replace('https://', '//');
+}
+
 export const isMobile = () => {
   if (typeof navigator == 'undefined') {
     return

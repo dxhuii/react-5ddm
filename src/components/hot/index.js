@@ -11,10 +11,6 @@ export class Hot extends Component {
   componentDidMount() {
   }
 
-  picHttps(pic){
-    return pic.replace('http://', '//').replace('https://', '//');
-  }
-
   render() {
 
     return(
