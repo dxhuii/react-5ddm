@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 
 import Shell from '../../components/shell'
 import Meta from '../../components/meta'
 
-export class Topics extends React.Component {
+@Shell
+export class Topics extends PureComponent {
 
   constructor(props) {
     super(props)
@@ -18,4 +19,4 @@ export class Topics extends React.Component {
 
 }
 
-export default Shell(Topics);
+export default Topics;

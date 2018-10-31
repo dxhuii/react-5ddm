@@ -1,11 +1,11 @@
-import React, { Component } from "react"
+import React, { PureComponent } from "react"
 import { Link } from 'react-router-dom'
 
 import CSSModules from 'react-css-modules'
 import styles from './index.scss'
 
 @CSSModules(styles)
-class Tabs extends Component {
+class Tabs extends PureComponent {
 	constructor(props){
 		super(props)
 		this.state = {
