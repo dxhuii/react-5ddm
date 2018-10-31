@@ -12,7 +12,7 @@ import styles from './index.scss'
 @withRouter
 @connect(
   (state, props) => ({
-    list: getList(state, props.stateId, props.id, props.mcid, props.year, props.area, props.letter, props.lz, props.day, props.order, props.limit)
+    list: getList(state, props.stateId || '', props.id || '', props.mcid || '', props.year || '', props.area || '', props.letter || '', props.lz || '', props.day || '', props.order || '', props.limit || '')
   }),
   dispatch => ({
     listLoad: bindActionCreators(listLoad, dispatch)
@@ -80,7 +80,7 @@ export class List extends Component {
           data.map(item =>
             <li key={item.id} className="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mb-4">
               <Link to={`/bangumi/${item.id}`}>
-                <div><img src={this.picHttps(item.pic)} alt={item.title} /></div>
+                <div className="load-demand" data-load-demand={`<img src="${this.picHttps(item.pic)}" alt="${item.title}" />`} />
                 <h3>{item.title}</h3>
               </Link>
               <Link to={`/bangumi/${item.id}/${item.pid}`}>{item.isDate ? <p style={{color:'#f60'}}>{item.status}</p> : <p>{item.status}</p>}</Link>

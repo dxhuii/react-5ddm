@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-import Shell from '../../components/shell';
-import Meta from '../../components/meta';
+import Shell from '../../components/shell'
+import Meta from '../../components/meta'
 
 export class Topics extends React.Component {
 

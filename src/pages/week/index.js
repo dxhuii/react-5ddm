@@ -26,20 +26,6 @@ import List from '../../components/list'
 @Shell
 export class Week extends Component {
 
-  // 服务端渲染
-  // 加载需要在服务端渲染的数据
-  static loadData({ store, match }) {
-    return new Promise(async function (resolve, reject) {
-
-      await weekLoad({ id: 'weekList' })(store.dispatch, store.getState)
-      await topLoad({ order: 'addtime', area: '' })(store.dispatch, store.getState)
-      await topLoad({ order: 'hits_month', area: 'CN' })(store.dispatch, store.getState)
-      await topLoad({ order: 'hits_month', area: 'JP' })(store.dispatch, store.getState)
-      resolve({ code:200 });
-
-    })
-  }
-
   componentDidMount() {
     const { week, weekLoad } = this.props
     const id = 'weekList'
@@ -112,7 +98,7 @@ export class Week extends Component {
           <Top order="hits_month" area="CN" />
         </div>
         <div className='col'>
-          <List stateId="weekList" scrollLoad={true} />
+          <List stateId="weekList" id={3} day={365} order='addtime' limit={30} scrollLoad={true} />
         </div>
       </div>
     )
