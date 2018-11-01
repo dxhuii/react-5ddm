@@ -50,7 +50,7 @@ export class SignIn extends Component {
     let [err, success] = await signIn({ username: username.value, password: password.value });
     setTimeout(() => {
       if (success) {
-        window.location.href = '/'
+        window.location.href = '/topics'
       }
     }, 300)
 

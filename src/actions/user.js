@@ -30,9 +30,6 @@ export function signIn({ username, password }) {
       }
     })
 
-
-    console.log(data)
-
     if(data.rcode === 1){
       dispatch({ type: 'SAVE_USERINFO', userinfo: data.data })
       resolve([null, data.data])

@@ -13,6 +13,8 @@ let config = {
   // 登录token，cookie 的名称
   auth_cookie_name: 'signin-cookie',
 
+  COOKIE_PREFIX: 'ikf_',
+
   // https://github.com/css-modules/css-modules
   class_scoped_name: '[hash:base64:8]',
 

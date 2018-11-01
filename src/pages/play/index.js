@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { playerLoad } from '../../actions/player'
 import { getPlayerList } from '../../reducers/player'
+import user, { getUserInfo } from '../../reducers/user'
 
 import PlayList from '../../components/play/list'
 import Detail from '../../components/play/detail'
@@ -21,7 +22,8 @@ const { isJump } = play
 @Shell
 @connect(
   (state, props) => ({
-    player: getPlayerList(state, props.match.params.id, props.match.params.pid)
+    player: getPlayerList(state, props.match.params.id, props.match.params.pid),
+    userinfo: getUserInfo(state)
   }),
   dispatch => ({
     playerLoad: bindActionCreators(playerLoad, dispatch)
@@ -59,16 +61,19 @@ export class Play extends React.Component {
   }
 
   render() {
-    const { player: { data = {}, loading } } = this.props
+    const { player: { data = {}, loading }, userinfo: { userid } } = this.props
     const datas = data.Data || []
     const playData = this.player(datas)
-    const title = (data.Vod || [])[0]
+    const vod = data.Vod || []
+    const title = vod[0]
+    const cid = vod[3]
     const subTitle = ((datas[0] || {}).playurls || [])[0]
+    console.log(userid)
     return(
       <div>
         {loading ? <div>loading...</div> : null}
         <Meta title={`${title} ${subTitle}`} keywords={title} description={title} />
-        <Detail subTitle={subTitle} />
+        <Detail subTitle={subTitle} cid={cid} uid={userid} />
         <ul styleName='playlist'>
           {playData.map(item => <a key={item.type} href={isJump(item.vid, item.type)} target="_blank"><li><i styleName={`icon ${item.type}`}></i>{item.name}</li></a>)}
         </ul>

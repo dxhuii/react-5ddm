@@ -4,10 +4,17 @@ export default function detail(state = {}, action = {}) {
   switch (action.type) {
 
     case 'GET_DETAIL':
-      const { id, data } = action
+      var { id, data } = action
       state[id] = data
       return merge({}, state, {})
-
+    case 'GET_MARK':
+      var { data, type, id, cid } = action
+      state[`${type}_${id}_${cid}`] = data
+      return merge({}, state, {})
+    case 'GET_SCORE':
+      var { data, id, sid } = action
+      state[`${id}${sid}`] = data
+      return merge({}, state, {})
     default:
       return state
   }
@@ -15,4 +22,14 @@ export default function detail(state = {}, action = {}) {
 
 export const getDetail = (state, id) => {
   return state.detail[id] ? state.detail[id] : {};
+}
+
+export const getMark = (state, type, id, cid) => {
+  const ids = `${type}_${id}_${cid}`
+  return state.detail[ids] ? state.detail[ids] : {};
+}
+
+export const getScore = (state, id, sid) => {
+  const ids = `${id}_${sid}`
+  return state.detail[ids] ? state.detail[ids] : {};
 }

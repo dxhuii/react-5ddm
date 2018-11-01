@@ -71,7 +71,7 @@ app.get('*', async (req, res) => {
     // 这里可以去查询 accessToken 是否有效
     // your code
     // 这里假设如果有 accessToken ，那么就是登录用户，将他保存到redux中
-    user = { id: '001', nickname: accessToken };
+    user = accessToken;
     // 储存用户信息
     store.dispatch(saveUserInfo({ userinfo: user }));
     // 储存access token

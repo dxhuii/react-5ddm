@@ -41,7 +41,7 @@ export default class Head extends Component {
     let [err, success] = await this.props.signOut()
     if (success) {
       // 退出成功跳转到首页
-      window.location.href = '/'
+      window.location.href = '/topics'
     } else {
       alert('退出失败')
     }
