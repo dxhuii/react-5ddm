@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -30,7 +30,7 @@ const { isJump } = play
   })
 )
 @CSSModules(styles, { allowMultiple: true })
-export class Play extends React.Component {
+export class Play extends Component {
 
   constructor(props) {
     super(props)

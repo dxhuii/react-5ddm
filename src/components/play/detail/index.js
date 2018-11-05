@@ -16,8 +16,7 @@ import styles from './index.scss';
 @withRouter
 @connect(
   (state, props) => ({
-    info: getDetail(state, props.match.params.id),
-    score: getScore(state, props.match.params.id, 1, props.uid)
+    info: getDetail(state, props.match.params.id)
   }),
   dispatch => ({
     detail: bindActionCreators(detail, dispatch),
@@ -44,12 +43,12 @@ export class Detail extends React.Component {
 
   }
 
-  addMark(type, id, cid, uid){
+  addMark(type, id, cid, uid) {
     console.log(type, id, cid, uid)
   }
 
   render() {
-    const { info: { data = {}, loading }, isMeta, subTitle, love, remind, uid } = this.props
+    const { info: { data = {}, loading }, isMeta, subTitle, uid } = this.props
     const { id, cid, name, content, pic, actor, area, aliases, gold, update_date, filmtime, total, director, type, language } = data
     // console.log(love, remind)
     const meta = {

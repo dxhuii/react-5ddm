@@ -6,6 +6,7 @@ import Loadable from 'react-loadable'
 // import asyncRouteComponent from '../components/generateAsyncComponent.js';
 
 import Head from '../components/head';
+import Footer from '../components/footer';
 import Loading from '../components/ui/loading';
 
 import HomeLoadData from '../pages/home/load-data';
@@ -207,7 +208,7 @@ export default (user) => {
           }
         })}
       </Switch>
-
+      <Footer />
       </>)
 
   return {

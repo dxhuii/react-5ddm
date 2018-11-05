@@ -27,6 +27,9 @@ import '../utils/arrive-footer.js';
  **/
 import '../utils/load-demand';
 
+// 回到顶部
+import '../utils/scrollTop';
+
 // import runtime from 'serviceworker-webpack-plugin/lib/runtime'
 // if ('serviceWorker' in navigator) {
 //   const registration = runtime.register();
