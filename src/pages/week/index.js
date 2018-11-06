@@ -6,6 +6,7 @@ import Meta from '../../components/meta'
 import WeekDay from '../../components/week'
 import Top from '../../components/top'
 import List from '../../components/list'
+import Swiper from '../../components/swiper'
 
 @Shell
 export default class Week extends PureComponent {
@@ -13,6 +14,7 @@ export default class Week extends PureComponent {
     return(
       <div className="row">
         <Meta title="星期" keywords="星期, 番表" description="星期" />
+        <Swiper />
         <div className='col-12 col-lg-6 col-xl-9 mt-3'>
           <WeekDay id='weekday' title="番剧" link="/" isJp={['', '月','火','水','木','金','土','日']} type={1} />
         </div>

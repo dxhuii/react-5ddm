@@ -10,6 +10,7 @@ import createRouter from '../router';
 
 // 引入 bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'swiper/dist/css/swiper.min.css';
 import 'jquery';
 import 'popper.js';
 import 'bootstrap/dist/js/bootstrap.min.js';
@@ -66,7 +67,8 @@ const run = async () => {
     await _route.component.preload();
   // }
 
-  ReactDOM.hydrate((
+  const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate
+  renderMethod((
     <Provider store={store}>
       <BrowserRouter>
         <RouterDom />
