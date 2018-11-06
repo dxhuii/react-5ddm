@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -7,6 +7,7 @@ import { detail } from '../../../actions/detail'
 import { mark } from '../../../actions/mark'
 import { score } from '../../../actions/score'
 import { getDetail, getScore } from '../../../reducers/detail'
+import { getUserInfo } from '../../../reducers/user'
 
 import Meta from '../../../components/meta'
 
@@ -16,7 +17,9 @@ import styles from './index.scss';
 @withRouter
 @connect(
   (state, props) => ({
-    info: getDetail(state, props.match.params.id)
+    info: getDetail(state, props.match.params.id),
+    userinfo: getUserInfo(state),
+    cmScore: getScore(state, props.match.params.id, 1, getUserInfo(state).userid || 0)
   }),
   dispatch => ({
     detail: bindActionCreators(detail, dispatch),
@@ -25,19 +28,19 @@ import styles from './index.scss';
   })
 )
 @CSSModules(styles, { allowMultiple: true })
-export class Detail extends React.Component {
+export class Detail extends Component {
 
   constructor(props) {
     super(props)
   }
 
   componentDidMount() {
-    const { match: { params: { id } }, info, detail, getCm, sid = 1, uid } = this.props
+    const { match: { params: { id } }, info, detail, getCm, sid = 1, uid, cmScore } = this.props
 
     if (!info || !info.data) {
       detail({ id })
     }
-    if (!score || !score.data) {
+    if (!cmScore || !cmScore.data) {
       getCm({ id, sid, uid })
     }
 
@@ -50,7 +53,6 @@ export class Detail extends React.Component {
   render() {
     const { info: { data = {}, loading }, isMeta, subTitle, uid } = this.props
     const { id, cid, name, content, pic, actor, area, aliases, gold, update_date, filmtime, total, director, type, language } = data
-    // console.log(love, remind)
     const meta = {
       name: {
         keywords: name

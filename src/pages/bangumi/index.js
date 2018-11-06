@@ -7,12 +7,13 @@ import Shell from '../../components/shell';
 
 @Shell
 export class Bangumi extends React.Component {
-
   render() {
-    return([
-        <Detail key="detail" isMeta={true}/>,
+    return(
+      <>
+        <Detail key="detail" isMeta={true} />
         <PlayList key="playlist" />
-      ])
+      </>
+    )
   }
 }
 

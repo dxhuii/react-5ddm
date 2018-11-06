@@ -18,7 +18,7 @@ export function listLoad({ stateId, id, mcid = '', year = '', area = '', letter 
         method: 'get'
       })
 
-      if (data && data.status === 0) {
+      if (data && data.status) {
         list.loading = false
         list.data = more ? data.data : list.data.concat(data.data)
         list.more = data.total === list.data.length
@@ -27,7 +27,6 @@ export function listLoad({ stateId, id, mcid = '', year = '', area = '', letter 
       } else {
         resolve(['detail failed'])
       }
-
     })
   }
 }

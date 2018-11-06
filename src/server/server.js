@@ -75,7 +75,7 @@ app.get('*', async (req, res) => {
     // 储存用户信息
     store.dispatch(saveUserInfo({ userinfo: user }));
     // 储存access token
-    store.dispatch(saveAccessToken({ accessToken }));
+    store.dispatch(saveAccessToken({ accessToken: user.auth }));
   }
 
   const router = createRouter(user);

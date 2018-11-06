@@ -2,7 +2,7 @@ const api = 'https://api.99496.com/'
 
 export default {
   api: {
-    login: `${api}api.php?s=home-search-login`,
+    login: `${api}api.php?s=home-react-login`,
     addScore: `${api}api.php?s=home-react-addScore`, // 评分 val 分值 id 视频ID sid 视频大类
     playlist: ({ id }) => `${api}api.php?s=home-react-playlist-id-${id}-react-1`, // 播放列表 id:视频id
     player: ({ id, pid }) => `${api}api.php?s=home-react-playlist-id-${id}-pid-${pid}`, // 单集 id:视频id，pid，集数
