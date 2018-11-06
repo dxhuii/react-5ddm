@@ -7,7 +7,7 @@ import { detail } from '../../../actions/detail'
 import { mark } from '../../../actions/mark'
 import { score } from '../../../actions/score'
 import { getDetail, getScore } from '../../../reducers/detail'
-import { getUserInfo } from '../../../reducers/user'
+import user, { getUserInfo } from '../../../reducers/user'
 
 import Meta from '../../../components/meta'
 
@@ -35,13 +35,13 @@ export class Detail extends Component {
   }
 
   componentDidMount() {
-    const { match: { params: { id } }, info, detail, getCm, sid = 1, uid, cmScore } = this.props
+    const { match: { params: { id } }, info, detail, getCm, sid = 1, userinfo: { userid }, cmScore } = this.props
 
     if (!info || !info.data) {
       detail({ id })
     }
     if (!cmScore || !cmScore.data) {
-      getCm({ id, sid, uid })
+      getCm({ id, sid, uid: userid })
     }
 
   }
@@ -51,7 +51,7 @@ export class Detail extends Component {
   }
 
   render() {
-    const { info: { data = {}, loading }, isMeta, subTitle, uid } = this.props
+    const { info: { data = {}, loading }, isMeta, subTitle, userinfo: { userid } } = this.props
     const { id, cid, name, content, pic, actor, area, aliases, gold, update_date, filmtime, total, director, type, language } = data
     const meta = {
       name: {
@@ -79,8 +79,8 @@ export class Detail extends Component {
           </div>
           <div styleName='score'>{gold}</div>
         </div>
-        <div onClick={() => this.addMark('love', id, cid, uid)}>收藏</div>
-        <div onClick={() => this.addMark('remind', id, cid, uid)}>订阅</div>
+        <div onClick={() => this.addMark('love', id, cid, userid)}>收藏</div>
+        <div onClick={() => this.addMark('remind', id, cid, userid)}>订阅</div>
       </div>
     )
   }
