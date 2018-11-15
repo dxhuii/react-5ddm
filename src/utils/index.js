@@ -26,3 +26,11 @@ export const isMobile = () => {
     return false
   }
 }
+
+
+export const location = () => {
+  if(typeof window == 'undefined') {
+    return {}
+  }
+  return window.location
+}

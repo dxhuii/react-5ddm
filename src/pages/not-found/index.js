@@ -16,10 +16,10 @@ export class NotFound extends React.Component {
   }
 
   render() {
-    return(<div>
+    return(<>
       <Meta title="404,无法找到该页面" />
       404,无法找到该页面
-    </div>)
+    </>)
   }
 
 }
