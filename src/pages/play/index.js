@@ -91,7 +91,7 @@ export class Play extends Component {
         {loading ? <div>loading...</div> : null}
         <Meta title={`${title} ${subTitle}`} keywords={title} description={title} />
         <Detail subTitle={subTitle} />
-        <div styleName='player' dangerouslySetInnerHTML={{__html: playHtml || defaultPlay}} />
+        {/* <div styleName='player' dangerouslySetInnerHTML={{__html: playHtml || defaultPlay}} /> */}
         <ul styleName='playlist'>
           {playData.map(item => <li key={item.type} onClick={() => this.onPlay(item.vid, item.type)}><i styleName={`icon ${item.type}`}></i>{item.name}</li>)}
         </ul>

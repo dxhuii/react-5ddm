@@ -1,9 +1,12 @@
 const webpack = require('webpack');
-const HtmlwebpackPlugin = require('html-webpack-plugin');
+// const HtmlwebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const config = require('../index');
+
+console.log(process.env.NODE_ENV);
 
 module.exports = {
 
@@ -12,7 +15,7 @@ module.exports = {
 
   entry: {
     app: [
-      '@babel/polyfill',
+      // '@babel/polyfill',
       './src/server/index'
     ]
   },
@@ -42,8 +45,24 @@ module.exports = {
       {
         test: /\.js$/i,
         exclude: /node_modules/,
-        loader: 'babel'
+        loader: 'babel',
+        query: {
+          plugins: [
+            [
+              'react-css-modules',
+              {
+                "generateScopedName": config.class_scoped_name,
+                "filetypes": {
+                  ".scss": {
+                    "syntax": "postcss-scss"
+                  }
+                }
+              }
+            ]
+          ]
+        }
       },
+
 
       // scss 文件解析
       {
@@ -54,8 +73,8 @@ module.exports = {
             options: {
               modules: true,
               localIdentName: config.class_scoped_name,
-              minimize: true,
-              sourceMap: true
+              // minimize: true,
+              // sourceMap: true
 
               // camelCase: true,
               // importLoaders: 1,
@@ -63,7 +82,15 @@ module.exports = {
               // localIdentName: config.class_scoped_name
             }
           },
-          { loader: `sass` },
+          { loader: `sass` }
+        ]
+      },
+
+      // css 解析
+      {
+        test: /\.css$/,
+        use: [
+          { loader: `css/locals` }
         ]
       }
 
@@ -75,7 +102,11 @@ module.exports = {
     new webpack.DefinePlugin({
       __SERVER__: 'true',
       __CLIENT__: 'false'
-    })
+    }),
+
+    // new CopyWebpackPlugin([
+    //   { from: 'src/server/amp/views', to: 'views/' }
+    // ])
 
   ]
 }

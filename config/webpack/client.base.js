@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const config = require('../index');
-const devMode = process.env.NODE_ENV !== 'production';
+const devMode = process.env.NODE_ENV == 'development' ? true : false;
 
 module.exports = {
 
@@ -41,8 +41,8 @@ module.exports = {
           enforce: true
         },
         commons: {
-          test: /[\\/]node_modules[\\/]/,
           name: 'vendor',
+          test: /[\\/]node_modules[\\/]/,
           chunks: 'all'
         }
       }
@@ -56,9 +56,43 @@ module.exports = {
       {
         test: /\.js$/i,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        query: {
+          plugins: [
+            [
+              'react-css-modules',
+              {
+                "generateScopedName": config.class_scoped_name,
+                "filetypes": {
+                  ".scss": {
+                    "syntax": "postcss-scss"
+                  }
+                }
+              }
+            ]
+          ]
+        }
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'css-hot-loader',
+          { loader: MiniCssExtractPlugin.loader },
+          {
+            loader: `css`,
+            options: {
+              modules: true,
+              localIdentName: config.class_scoped_name,
+              minimize: true,
+              sourceMap: true,
+              importLoaders: 1
+            }
+          },
+          { loader: `sass` }
+        ]
       },
 
+      /*
       // scss 文件解析
       {
         test: /\.scss$/,
@@ -77,6 +111,7 @@ module.exports = {
           { loader: `sass` }
         ]
       },
+      */
 
       // css 解析
       {
@@ -88,6 +123,7 @@ module.exports = {
         ]
       },
 
+
       // 小于8K的图片，转 base64
       { test: /\.(png|jpg|gif)$/, loader: 'url?limit=8192' },
 
@@ -98,6 +134,11 @@ module.exports = {
   },
 
   plugins: [
+
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    }),
 
     new webpack.DefinePlugin({
       __SERVER__: 'false',
@@ -113,10 +154,12 @@ module.exports = {
     // 主要是打包后的添加的css、js静态文件路径添加到模版中
     new HtmlwebpackPlugin({
       filename: path.resolve(__dirname, '../../dist/server/index.ejs'),
-      template: 'src/view/index.html',
-      headMeta: '<%- meta %>',
+      template: 'src/views/index.html',
+      metaDom: '<%- meta %>',
       htmlDom: '<%- html %>',
-      reduxState: '<%- reduxState %>'
+      reduxState: '<%- reduxState %>',
+      head: config.head,
+      analysis_script: config.analysis_script
     }),
 
     // serviceworker 还在研究中

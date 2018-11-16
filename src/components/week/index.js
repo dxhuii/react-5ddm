@@ -11,8 +11,7 @@ import { isNumber, picHttps } from '../../utils'
 
 import Tabs from '../tabs'
 
-import CSSModules from 'react-css-modules'
-import styles from './style.scss';
+import './style.scss'
 
 @withRouter
 @connect(
@@ -23,7 +22,6 @@ import styles from './style.scss';
     weekLoad: bindActionCreators(weekLoad, dispatch)
   })
 )
-@CSSModules(styles, { allowMultiple: true })
 export default class weekDay extends Component {
 
   componentDidMount() {
