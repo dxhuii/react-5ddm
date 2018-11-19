@@ -6,8 +6,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { signIn } from '../../actions/user';
 
-import CSSModules from 'react-css-modules';
-import styles from './style.scss';
+import './style.scss';
 
 import Shell from '../../components/shell';
 import Meta from '../../components/meta';
@@ -22,7 +21,6 @@ import Meta from '../../components/meta';
   })
 )
 @Shell
-@CSSModules(styles)
 export class SignIn extends Component {
 
   constructor(props) {
