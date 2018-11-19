@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-import CSSModules from 'react-css-modules'
-import styles from './style.scss'
+import './style.scss'
 
-@CSSModules(styles)
-export default class LoadingMore extends Component {
+export default class LoadingMore extends PureComponent {
 
   constructor(props) {
     super(props)

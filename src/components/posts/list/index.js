@@ -6,8 +6,7 @@ import { connect } from 'react-redux';
 import { loadPostsList } from '../../../actions/posts';
 import { getPostsListByListId } from '../../../reducers/posts';
 
-import CSSModules from 'react-css-modules';
-import styles from './style.scss';
+import './style.scss'
 
 @connect(
   (state, props) => ({
@@ -17,7 +16,6 @@ import styles from './style.scss';
     loadPostsList: bindActionCreators(loadPostsList, dispatch)
   })
 )
-@CSSModules(styles)
 export default class PostsList extends React.Component {
 
   static propTypes = {

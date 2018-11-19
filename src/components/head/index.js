@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -7,8 +7,7 @@ import { connect } from 'react-redux'
 import { signOut } from '../../actions/user'
 import { getUserInfo } from '../../reducers/user'
 
-import CSSModules from 'react-css-modules'
-import styles from './style.scss'
+import './style.scss'
 
 import pinyin from 'pinyin'
 
@@ -20,7 +19,6 @@ import pinyin from 'pinyin'
     signOut: bindActionCreators(signOut, dispatch)
   })
 )
-@CSSModules(styles)
 export default class Head extends Component {
 
   static propTypes = {

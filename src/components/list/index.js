@@ -8,8 +8,7 @@ import { getList } from '../../reducers/list'
 
 import { picHttps } from '../../utils'
 
-import CSSModules from 'react-css-modules'
-import styles from './index.scss'
+import './style.scss'
 
 @withRouter
 @connect(
@@ -20,7 +19,6 @@ import styles from './index.scss'
     listLoad: bindActionCreators(listLoad, dispatch)
   })
 )
-@CSSModules(styles, { allowMultiple: true })
 export class List extends Component {
   constructor(props) {
     super(props)

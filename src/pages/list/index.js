@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import List from '../../components/list'
 import Shell from '../../components/shell';
 
-import CSSModules from 'react-css-modules'
-import styles from './index.scss';
+import './style.scss';
 
 @Shell
-@CSSModules(styles, { allowMultiple: true })
 export class BangumiList extends Component {
   constructor(props) {
     super(props)
@@ -46,7 +44,7 @@ export class BangumiList extends Component {
     const mcidArr = [{name: '全部', id: -1}, {name: '热血', id: 59}, {name: '冒险', id: 60}]
     const idArr = [{name: '全部', id: -1}, {name: 'TV', id: 201}, {name: 'ova', id: '202'}]
     const lzArr = [{name: '全部', id: -1}, {name: '连载', id: 1}, {name: '完结', id: 2}]
-    return(<>
+    return(<Fragment>
       <div styleName='filter'>
         {(id || mcid || area || year || letter || lz) &&
           <ul>已选：
@@ -90,7 +88,7 @@ export class BangumiList extends Component {
         limit={limit}
         scrollLoad={true}
       />
-    </>)
+    </Fragment>)
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 
 import Shell from '../../components/shell'
 import Meta from '../../components/meta'
@@ -11,10 +11,10 @@ export class Topics extends PureComponent {
   }
 
   render() {
-    return(<>
+    return(<Fragment>
       <Meta title="话题" />
       <h2>Topics</h2>
-    </>)
+    </Fragment>)
   }
 
 }

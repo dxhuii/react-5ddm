@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -38,11 +38,11 @@ export class Search extends Component {
     const { info: { data = [] }, location: { params: { cn } } } = this.props
     console.log(data)
 
-    return(<>
+    return(<Fragment>
       <Meta title="Search" />
       <h2>{decodeURIComponent(cn)}</h2>
       {data.map(item => <div key={item.id}><Link to={`/bangumi/${item.id}`}>{item.name}</Link></div>)}
-    </>)
+    </Fragment>)
   }
 
 }

@@ -6,8 +6,7 @@ import { connect } from 'react-redux'
 import { topLoad } from '../../actions/top'
 import { getTopList } from '../../reducers/top'
 
-import CSSModules from 'react-css-modules'
-import styles from './index.scss'
+import './style.scss'
 
 @withRouter
 @connect(
@@ -18,7 +17,6 @@ import styles from './index.scss'
     topLoad: bindActionCreators(topLoad, dispatch)
   })
 )
-@CSSModules(styles)
 export default class Top extends Component {
 
   componentDidMount() {

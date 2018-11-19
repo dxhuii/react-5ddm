@@ -1,10 +1,8 @@
-import React, { PureComponent } from "react"
+import React, { PureComponent, Fragment } from "react"
 import { Link } from 'react-router-dom'
 
-import CSSModules from 'react-css-modules'
-import styles from './index.scss'
+import './style.scss'
 
-@CSSModules(styles)
 class Tabs extends PureComponent {
 	constructor(props){
 		super(props)
@@ -24,7 +22,7 @@ class Tabs extends PureComponent {
 	render(){
     const { icon, title, link, linkText, isJp } = this.props
 		return(
-			<>
+			<Fragment>
         { /* 动态生成Tab导航 */ }
         <div styleName='title'>
           <Link to={link}>{linkText}<i className="iconfont icon-right"></i></Link>
@@ -47,7 +45,7 @@ class Tabs extends PureComponent {
 						)
 					})
 				}
-			</>
+			</Fragment>
 		)
 	}
 }

@@ -1,17 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { playerLoad } from '../../actions/player'
 import { getPlayerList } from '../../reducers/player'
 
-import PlayList from '../../components/play/list'
-import Detail from '../../components/play/detail'
+import PlayList from '../../components/playList'
+import Detail from '../../components/detail'
 import Shell from '../../components/shell'
 import Meta from '../../components/meta'
 
-import CSSModules from 'react-css-modules'
-import styles from './style.scss'
+import './style.scss'
 
 import play from '../../utils/play'
 
@@ -26,7 +25,6 @@ const { isJump, is9 } = play
     playerLoad: bindActionCreators(playerLoad, dispatch)
   })
 )
-@CSSModules(styles, { allowMultiple: true })
 export class Play extends Component {
 
   constructor(props) {
@@ -87,7 +85,7 @@ export class Play extends Component {
     const playHtml = play ? isJump(play, type, 1) : ''
     console.log(playHtml, this.getOther(playData), defaultPlay)
     return(
-      <>
+      <Fragment>
         {loading ? <div>loading...</div> : null}
         <Meta title={`${title} ${subTitle}`} keywords={title} description={title} />
         <Detail subTitle={subTitle} />
@@ -96,7 +94,7 @@ export class Play extends Component {
           {playData.map(item => <li key={item.type} onClick={() => this.onPlay(item.vid, item.type)}><i styleName={`icon ${item.type}`}></i>{item.name}</li>)}
         </ul>
         <PlayList />
-      </>
+      </Fragment>
     )
   }
 }

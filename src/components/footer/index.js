@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react'
 
-import CSSModules from 'react-css-modules'
-import styles from './index.scss'
+import './style.scss'
 
-@CSSModules(styles, { allowMultiple: true })
 export default class Footer extends PureComponent {
 
   top = () => {

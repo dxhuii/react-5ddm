@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Swiper from 'swiper'
-import './index.scss'
+import './style.scss'
 
 class SwiperMod extends Component {
   componentDidMount() {

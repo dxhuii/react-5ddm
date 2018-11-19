@@ -3,16 +3,15 @@ import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { detail } from '../../../actions/detail'
-import { mark } from '../../../actions/mark'
-import { score } from '../../../actions/score'
-import { getDetail, getScore } from '../../../reducers/detail'
-import user, { getUserInfo } from '../../../reducers/user'
+import { detail } from '../../actions/detail'
+import { mark } from '../../actions/mark'
+import { score } from '../../actions/score'
+import { getDetail, getScore } from '../../reducers/detail'
+import user, { getUserInfo } from '../../reducers/user'
 
-import Meta from '../../../components/meta'
+import Meta from '../../components/meta'
 
-import CSSModules from 'react-css-modules'
-import styles from './index.scss';
+import './style.scss';
 
 @withRouter
 @connect(
@@ -27,7 +26,6 @@ import styles from './index.scss';
     getCm:  bindActionCreators(score, dispatch),
   })
 )
-@CSSModules(styles, { allowMultiple: true })
 export class Detail extends Component {
 
   constructor(props) {
