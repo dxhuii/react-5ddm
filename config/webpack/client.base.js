@@ -22,7 +22,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../../dist/client'),
     filename: devMode ? '[name].bundle.js' : '[name].[hash].js',
-    publicPath: config.public_path + "/"
+    publicPath: config.publicPath + "/"
   },
 
   resolveLoader: {

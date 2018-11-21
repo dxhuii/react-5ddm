@@ -24,7 +24,7 @@ import { initialStateJSON } from '../reducers';
 import { saveAccessToken, saveUserInfo } from '../actions/user';
 
 // 配置
-import { port, auth_cookie_name } from '../../config';
+import { port, auth_cookie_name, api, publicPath } from '../../config';
 import sign from './sign';
 // import webpackHotMiddleware from './webpack-hot-middleware';
 
@@ -54,12 +54,40 @@ app.use(express.static('./dist/client'));
 // console.log(express.static(__dirname + '/dist'));
 
 
-
+const https = require('https');
 
 // 登录、退出
 app.use('/sign', sign());
 
 app.get('*', async (req, res) => {
+  const path = req.path
+  const _res = res
+  console.log(path, path.indexOf('bangumi') !== -1)
+  if (path.indexOf('bangumi') !== -1) {
+    const url = req.path.split('/')
+    const pinyin = url[2]
+    https.get(`${api}api.php?s=home-react-getVodId&pinyin=${pinyin}`, function (res) {
+      res.setEncoding('utf8');
+      var rawData = '';
+      res.on('data', function (chunk) {
+        rawData += chunk;
+      });
+      res.on('end', function () {
+          try {
+            const data = JSON.parse(rawData)
+            console.log(data.data);
+            console.log(url.length, pinyin)
+            const reUrl = url.length === 4 ? `http:${publicPath}/${url[1]}/${data.data}/${url[3].split('.')[0].split('-')[0]}` : `http:${publicPath}/${url[1]}/${data.data}`
+            console.log(reUrl)
+            _res.redirect(reUrl)
+            _res.end();
+          } catch (e) {
+            console.error(e.message);
+            console.log('error')
+          }
+      });
+    })
+  }
 
   const store = configureStore(JSON.parse(initialStateJSON));
 

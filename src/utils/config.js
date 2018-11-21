@@ -1,12 +1,13 @@
-const api = 'https://api.99496.com/'
+import { api } from '../../config'
 
 export default {
   api: {
     login: `${api}api.php?s=home-react-login`,
     addScore: `${api}api.php?s=home-react-addScore`, // 评分 val 分值 id 视频ID sid 视频大类
-    playlist: ({ id }) => `${api}api.php?s=home-react-playlist-id-${id}-react-1`, // 播放列表 id:视频id
+    getVodId: ({ pinyin }) => `${api}api.php?s=home-react-getVodId&pinyin=${pinyin}`, // 根据拼音获取视频ID
+    playlist: ({ id, pinyin }) => `${api}api.php?s=home-react-playlist${id ? `&id=${id}` : pinyin ? `&pinyin=${pinyin}` : ''}&react=1`, // 播放列表 id:视频id
     player: ({ id, pid }) => `${api}api.php?s=home-react-playlist-id-${id}-pid-${pid}`, // 单集 id:视频id，pid，集数
-    detail: ({ id }) => `${api}api.php?s=home-react-Detail&q=${id}`, // 视频详情
+    detail: ({ id, pinyin }) => `${api}api.php?s=home-react-Detail${id ? `&id=${id}` : pinyin ? `&pinyin=${pinyin}` : ''}`, // 视频详情
     newsDetail: ({ id }) => `${api}api.php?s=home-news-readdetail-id-${id}`,  // 新闻内容接口
     week: ({ limit }) => `${api}api.php?s=home-react-Week&limit=${limit}`,  // 每周追番
     /**

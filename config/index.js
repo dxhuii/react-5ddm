@@ -7,6 +7,9 @@ let config = {
   // 域名
   host: 'localhost',
 
+  // 接口地址
+  api: 'https://api.99496.com/',
+
   // 服务端口
   port: 4000,
 
@@ -20,7 +23,7 @@ let config = {
 
   // 前端打包后，静态资源路径前缀
   // 生成效果如：//localhost:4000/app.bundle.js
-  public_path: '//localhost:4000',
+  publicPath: '//localhost:4000',
 }
 
 
