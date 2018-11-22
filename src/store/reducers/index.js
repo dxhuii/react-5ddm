@@ -13,7 +13,6 @@ import search from './search'
 
 let states = {
   user,
-  posts,
   week,
   detail,
   playlist,
