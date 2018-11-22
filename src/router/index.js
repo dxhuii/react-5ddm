@@ -68,7 +68,7 @@ export default (user) => {
       exact: true,
       head: Head,
       component: Loadable({
-        loader: () => import('../pages/Week'),
+        loader: () => import('../pages/week'),
         loading: () => <Loading />
       }),
       enter: triggerEnter,

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
-import List from '../../components/list'
-import Shell from '../../components/shell';
+import List from '../../components/List'
+import Shell from '../../components/Shell';
 
 import './style.scss';
 

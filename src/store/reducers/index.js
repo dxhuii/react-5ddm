@@ -1,9 +1,8 @@
 
-import { combineReducers } from 'redux';
-import merge from 'lodash/merge';
+import { combineReducers } from 'redux'
+import merge from 'lodash/merge'
 
-import user from './user';
-import posts from './posts';
+import user from './user'
 import week from './week'
 import detail from './detail'
 import playlist from './playlist'
@@ -29,8 +28,8 @@ let _states = {};
 for (let i in states) {
   _states[i] = merge({}, states[i](), {})
 }
-_states = JSON.stringify(_states);
-export const initialStateJSON = _states;
+_states = JSON.stringify(_states)
+export const initialStateJSON = _states
 
 // reducer
-export default combineReducers(states);
+export default combineReducers(states)
