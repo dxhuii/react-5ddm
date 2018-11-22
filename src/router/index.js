@@ -10,7 +10,6 @@ import Footer from '../components/Footer'
 import Loading from '../components/Ui/Loading'
 
 import HomeLoadData from '../pages/home/load-data'
-import PostsDetailLoadData from '../pages/posts-detail/load-data'
 import PlayLoadData from '../pages/play/load-data'
 import SubjectLoadData from '../pages/subject/load-data'
 import WeekLoadData from '../pages/week/load-data'
@@ -74,21 +73,6 @@ export default (user) => {
       }),
       enter: triggerEnter,
       loadData: WeekLoadData
-    },
-
-    {
-      path: '/posts/:id',
-      exact: true,
-      head: Head,
-      // component: asyncRouteComponent({
-      //   loader: () => import('../pages/posts-detail')
-      // }),
-      component: Loadable({
-        loader: () => import('../pages/posts-detail'),
-        loading: () => <Loading />
-      }),
-      enter: requireAuth,
-      loadData: PostsDetailLoadData
     },
 
     {
