@@ -1,5 +1,5 @@
-import { detail } from '../../actions/detail'
-import { playlist } from '../../actions/playlist'
+import { detail } from '../../store/actions/detail'
+import { playlist } from '../../store/actions/playlist'
 
 export default ({ store, match }) => {
   return new Promise(async function (resolve, reject) {

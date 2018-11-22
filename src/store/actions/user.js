@@ -1,5 +1,5 @@
-import Ajax from '../common/ajax'
-import config from '../utils/config';
+import Ajax from '../../common/ajax'
+import config from '../../utils/config';
 
 // 储存accessToken到redux
 export function saveAccessToken({ accessToken }) {

@@ -1,6 +1,6 @@
-import Ajax from '../common/ajax'
+import Ajax from '../../common/ajax'
 import { getMark } from '../reducers/detail'
-import config from '../utils/config'
+import config from '../../utils/config'
 
 export function mark({ type, id, cid, uid }) {
   return (dispatch, getState) => {

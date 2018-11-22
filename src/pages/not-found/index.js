@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 
-import Shell from '../../components/shell';
-import Meta from '../../components/meta';
+import Shell from '../../components/Shell';
+import Meta from '../../components/Meta';
 
 export class NotFound extends PureComponent {
 

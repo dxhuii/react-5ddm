@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { signOut } from '../../actions/user'
-import { getUserInfo } from '../../reducers/user'
+import { signOut } from '../../store/actions/user'
+import { getUserInfo } from '../../store/reducers/user'
 
 import './style.scss'
 
@@ -72,7 +72,7 @@ export default class Head extends Component {
               <NavLink className="nav-link" exact to="/topics">Topics</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" exact to="/post">post</NavLink>
+              <NavLink className="nav-link" exact to="/week">week</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" exact to="/list">list</NavLink>

@@ -3,11 +3,11 @@ import React, { Component, Fragment } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { search } from '../../actions/search'
-import { getSearchState } from '../../reducers/search'
+import { search } from '../../store/actions/search'
+import { getSearchState } from '../../store/reducers/search'
 
-import Shell from '../../components/shell'
-import Meta from '../../components/meta'
+import Shell from '../../components/Shell'
+import Meta from '../../components/Meta'
 
 @withRouter
 @connect(

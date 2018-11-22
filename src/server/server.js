@@ -20,8 +20,8 @@ import configureStore from '../store';
 // 路由组件
 import createRouter from '../router';
 // 路由初始化的redux内容
-import { initialStateJSON } from '../reducers';
-import { saveAccessToken, saveUserInfo } from '../actions/user';
+import { initialStateJSON } from '../store/reducers';
+import { saveAccessToken, saveUserInfo } from '../store/actions/user';
 
 // 配置
 import { port, auth_cookie_name, api, publicPath } from '../../config';
@@ -61,6 +61,7 @@ app.use('/sign', sign());
 
 app.get('*', async (req, res) => {
   const path = req.path
+  // 兼容老的URL跳转
   if (path.indexOf('bangumi') !== -1) {
     const url = path.split('/')
     const pinyin = url[2]

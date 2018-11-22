@@ -5,16 +5,16 @@ import Loadable from 'react-loadable'
 // 生成异步加载组件
 // import asyncRouteComponent from '../components/generateAsyncComponent.js';
 
-import Head from '../components/head';
-import Footer from '../components/footer';
-import Loading from '../components/ui/loading';
+import Head from '../components/Head'
+import Footer from '../components/Footer'
+import Loading from '../components/Ui/Loading'
 
-import HomeLoadData from '../pages/home/load-data';
-import PostsDetailLoadData from '../pages/posts-detail/load-data';
-import PlayLoadData from '../pages/play/load-data';
-import BangumiLoadData from '../pages/bangumi/load-data';
-import WeekLoadData from '../pages/week/load-data';
-import ListLoadData from '../pages/list/load-data';
+import HomeLoadData from '../pages/home/load-data'
+import PostsDetailLoadData from '../pages/posts-detail/load-data'
+import PlayLoadData from '../pages/play/load-data'
+import SubjectLoadData from '../pages/subject/load-data'
+import WeekLoadData from '../pages/week/load-data'
+import ListLoadData from '../pages/list/load-data'
 
 /**
  * 创建路由
@@ -53,18 +53,6 @@ export default (user) => {
       path: '/',
       exact: true,
       head: Head,
-      component: Loadable({
-        loader: () => import('../pages/week'),
-        loading: () => <Loading />
-      }),
-      enter: triggerEnter,
-      loadData: WeekLoadData
-    },
-
-    {
-      path: '/post',
-      exact: true,
-      head: Head,
       // component: asyncRouteComponent({
       //   loader: () => import('../pages/home')
       // }),
@@ -74,6 +62,18 @@ export default (user) => {
       }),
       enter: requireAuth,
       loadData: HomeLoadData
+    },
+
+    {
+      path: '/week',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('../pages/Week'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter,
+      loadData: WeekLoadData
     },
 
     {
@@ -124,11 +124,11 @@ export default (user) => {
       exact: true,
       head: Head,
       component: Loadable({
-        loader: () => import('../pages/bangumi'),
+        loader: () => import('../pages/subject'),
         loading: () => <Loading />
       }),
       enter: triggerEnter,
-      loadData: BangumiLoadData
+      loadData: SubjectLoadData
     },
 
     {

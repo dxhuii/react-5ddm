@@ -1,6 +1,6 @@
-import Ajax from '../common/ajax'
+import Ajax from '../../common/ajax'
 import { getSearchState } from '../reducers/search'
-import config from '../utils/config';
+import config from '../../utils/config';
 
 export function search({ q, limit }) {
   return (dispatch, getState) => {

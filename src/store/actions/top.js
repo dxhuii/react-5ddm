@@ -1,6 +1,6 @@
-import Ajax from '../common/ajax'
+import Ajax from '../../common/ajax'
 import { getTopList } from '../reducers/top'
-import config from '../utils/config';
+import config from '../../utils/config';
 
 export function topLoad({ order, area }) {
   return (dispatch, getState) => {

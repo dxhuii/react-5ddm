@@ -2,13 +2,13 @@ import React, { Component, Fragment } from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { playerLoad } from '../../actions/player'
-import { getPlayerList } from '../../reducers/player'
+import { playerLoad } from '../../store/actions/player'
+import { getPlayerList } from '../../store/reducers/player'
 
-import PlayList from '../../components/playList'
-import Detail from '../../components/detail'
-import Shell from '../../components/shell'
-import Meta from '../../components/meta'
+import PlayList from '../../components/Play/PlayList'
+import Detail from '../../components/Detail'
+import Shell from '../../components/Shell'
+import Meta from '../../components/Meta'
 
 import './style.scss'
 

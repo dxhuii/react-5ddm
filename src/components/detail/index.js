@@ -3,13 +3,13 @@ import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { detail } from '../../actions/detail'
-import { mark } from '../../actions/mark'
-import { score } from '../../actions/score'
-import { getDetail, getScore } from '../../reducers/detail'
-import user, { getUserInfo } from '../../reducers/user'
+import { detail } from '../../store/actions/detail'
+import { mark } from '../../store/actions/mark'
+import { score } from '../../store/actions/score'
+import { getDetail, getScore } from '../../store/reducers/detail'
+import user, { getUserInfo } from '../../store/reducers/user'
 
-import Meta from '../../components/meta'
+import Meta from '../../components/Meta'
 
 import './style.scss';
 

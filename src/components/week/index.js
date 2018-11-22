@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { weekLoad } from '../../actions/week'
-import { getWeekByListId } from '../../reducers/week'
+import { weekLoad } from '../../store/actions/week'
+import { getWeekByListId } from '../../store/reducers/week'
 
 import { isNumber, picHttps } from '../../utils'
 
-import Tabs from '../tabs'
+import Tabs from '../Tabs'
 
 import './style.scss'
 

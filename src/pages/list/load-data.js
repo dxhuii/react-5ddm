@@ -1,4 +1,4 @@
-import { listLoad } from '../../actions/list'
+import { listLoad } from '../../store/actions/list'
 
 export default ({ store, match }) => {
   return new Promise(async function (resolve, reject) {

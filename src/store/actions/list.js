@@ -1,6 +1,6 @@
-import Ajax from '../common/ajax'
+import Ajax from '../../common/ajax'
 import { getList } from '../reducers/list'
-import config from '../utils/config'
+import config from '../../utils/config'
 
 export function listLoad({ stateId, id, mcid = '', year = '', area = '', letter = '', lz = '', day, order, limit, more = false }) {
   return (dispatch, getState) => {

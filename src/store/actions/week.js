@@ -1,6 +1,6 @@
-import Ajax from '../common/ajax'
+import Ajax from '../../common/ajax'
 import { getWeekByListId } from '../reducers/week'
-import config from '../utils/config'
+import config from '../../utils/config'
 
 export function weekLoad({ id }) {
   return (dispatch, getState) => {

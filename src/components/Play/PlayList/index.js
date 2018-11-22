@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { playlist } from '../../actions/playlist'
-import { getPlayList } from '../../reducers/playlist'
+import { playlist } from '../../../store/actions/playlist'
+import { getPlayList } from '../../../store/reducers/playlist'
 
 @withRouter
 @connect(

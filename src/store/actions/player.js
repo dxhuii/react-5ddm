@@ -1,6 +1,6 @@
-import Ajax from '../common/ajax'
+import Ajax from '../../common/ajax'
 import { getPlayerList } from '../reducers/player'
-import config from '../utils/config';
+import config from '../../utils/config';
 
 export function playerLoad({ id, pid }) {
   return (dispatch, getState) => {

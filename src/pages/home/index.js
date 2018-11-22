@@ -1,36 +1,41 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { loadPostsList } from '../../actions/posts';
-
-// http://blog.csdn.net/ISaiSai/article/details/78094556
-import { withRouter } from 'react-router-dom';
+import React, { PureComponent } from 'react';
 
 // 壳组件
-import Shell from '../../components/shell';
-import Meta from '../../components/meta';
-import PostsList from '../../components/posts/list';
+import Shell from '../../components/Shell';
+import Meta from '../../components/Meta';
+
+import WeekDay from '../../components/Week'
+import Top from '../../components/Top'
+import List from '../../components/List'
+import Swiper from '../../components/Swiper'
 
 @Shell
-@withRouter
-export default class Home extends React.Component {
+export default class Home extends PureComponent {
 
   constructor(props) {
     super(props);
   }
 
   render() {
-    return(<div>
-
+    return(
+    <div className="row">
       <Meta title="首页" />
-
-      <PostsList
-        id={'home'}
-        filter={{
-          sort_by: "create_at",
-          deleted: false,
-          weaken: false
-        }}
-        />
+      <Swiper />
+        <div className='col-12 col-lg-6 col-xl-9 mt-3'>
+          <WeekDay id='weekday' title="番剧" link="/" isJp={['', '月','火','水','木','金','土','日']} type={1} />
+        </div>
+        <div className='col-12 col-lg-6 col-xl-3 mt-3'>
+          <Top order="hits_month" area="JP" />
+        </div>
+        <div className='col-12 col-lg-6 col-xl-9 mt-3'>
+          <WeekDay id='weekday' title="国创" link="/" type={0} />
+        </div>
+        <div className='col-12 col-lg-6 col-xl-3 mt-3'>
+          <Top order="hits_month" area="CN" />
+        </div>
+        <div className='col mt-3'>
+          <List stateId="weekList" id={3} day={365} order='addtime' limit={30} scrollLoad={true} />
+        </div>
     </div>)
   }
 }

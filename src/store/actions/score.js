@@ -1,6 +1,6 @@
-import Ajax from '../common/ajax'
+import Ajax from '../../common/ajax'
 import { getScore } from '../reducers/detail'
-import config from '../utils/config'
+import config from '../../utils/config'
 
 export function score({ id, sid, uid }) {
   return (dispatch, getState) => {

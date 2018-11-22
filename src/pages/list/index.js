@@ -6,7 +6,7 @@ import Shell from '../../components/shell';
 import './style.scss';
 
 @Shell
-export class BangumiList extends Component {
+export class SubjectList extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -92,4 +92,4 @@ export class BangumiList extends Component {
   }
 }
 
-export default BangumiList
+export default SubjectList

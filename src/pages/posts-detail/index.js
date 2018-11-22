@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { loadPostsList } from '../../actions/posts';
-import { getPostsListByListId } from '../../reducers/posts';
+import { loadPostsList } from '../../store/actions/posts';
+import { getPostsListByListId } from '../../store/reducers/posts';
 
-import Shell from '../../components/shell';
-import Meta from '../../components/meta';
-import Loading from '../../components/ui/loading';
+import Shell from '../../components/Shell';
+import Meta from '../../components/Meta';
+import Loading from '../../components/Ui/Loading';
 
 
 @Shell

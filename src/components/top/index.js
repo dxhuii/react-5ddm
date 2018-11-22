@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { topLoad } from '../../actions/top'
-import { getTopList } from '../../reducers/top'
+import { topLoad } from '../../store/actions/top'
+import { getTopList } from '../../store/reducers/top'
 
 import './style.scss'
 
