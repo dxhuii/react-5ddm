@@ -61,32 +61,22 @@ app.use('/sign', sign());
 
 app.get('*', async (req, res) => {
   const path = req.path
-  const _res = res
-  console.log(path, path.indexOf('bangumi') !== -1)
   if (path.indexOf('bangumi') !== -1) {
-    const url = req.path.split('/')
+    const url = path.split('/')
     const pinyin = url[2]
-    https.get(`${api}api.php?s=home-react-getVodId&pinyin=${pinyin}`, function (res) {
-      res.setEncoding('utf8');
-      var rawData = '';
-      res.on('data', function (chunk) {
-        rawData += chunk;
+    // console.log(url.length, pinyin, url, path);
+    https.get(`${api}api.php?s=home-react-getVodId&pinyin=${pinyin}`, function(r) {
+      // console.log('statusCode:', r.statusCode);
+      // console.log('headers:', r.headers);
+      r.on('data', function (d) {
+        const data = JSON.parse(d)
+        const reUrl = url.length === 4 && path.indexOf('.html') !== -1 ? `http:${publicPath}/play/${data.data}/${url[3].split('.')[0].split('-')[1]}` : `http:${publicPath}/subject/${data.data}`
+        // console.log(reUrl, data)
+        res.status(301);
+        res.redirect(reUrl);
       });
-      res.on('end', function () {
-          try {
-            const data = JSON.parse(rawData)
-            console.log(data.data);
-            console.log(url.length, pinyin)
-            const reUrl = url.length === 4 ? `http:${publicPath}/${url[1]}/${data.data}/${url[3].split('.')[0].split('-')[0]}` : `http:${publicPath}/${url[1]}/${data.data}`
-            console.log(reUrl)
-            _res.redirect(reUrl)
-            _res.end();
-          } catch (e) {
-            console.error(e.message);
-            console.log('error')
-          }
-      });
-    })
+    });
+    return;
   }
 
   const store = configureStore(JSON.parse(initialStateJSON));

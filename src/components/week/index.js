@@ -96,7 +96,7 @@ export default class weekDay extends Component {
             weekData[weekEng[index]].map(item => <li className="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4 clearfix" key={item.id}>
               <Link
                 key={item.id}
-                to={`/bangumi/${item.id}`}
+                to={`/subject/${item.id}`}
               >
                   <div className="load-demand" data-load-demand={`<img src="${picHttps(item.pic)}" alt="${item.title}" />`} />
                   <h4>{item.title}</h4>

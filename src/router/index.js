@@ -120,7 +120,7 @@ export default (user) => {
     },
 
     {
-      path: '/bangumi/:id',
+      path: '/subject/:id',
       exact: true,
       head: Head,
       component: Loadable({

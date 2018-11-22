@@ -41,7 +41,7 @@ export class Search extends Component {
     return(<Fragment>
       <Meta title="Search" />
       <h2>{decodeURIComponent(cn)}</h2>
-      {data.map(item => <div key={item.id}><Link to={`/bangumi/${item.id}`}>{item.name}</Link></div>)}
+      {data.map(item => <div key={item.id}><Link to={`/subject/${item.id}`}>{item.name}</Link></div>)}
     </Fragment>)
   }
 

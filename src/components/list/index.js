@@ -75,11 +75,11 @@ export class List extends Component {
         {
           data.map(item =>
             <li key={item.id} className="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mb-4">
-              <Link to={`/bangumi/${item.id}`}>
+              <Link to={`/subject/${item.id}`}>
                 <div className="load-demand" data-load-demand={`<img src="${picHttps(item.pic)}" alt="${item.title}" />`} />
                 <h3>{item.title}</h3>
               </Link>
-              <Link to={`/bangumi/${item.id}/${item.pid}`}>{item.isDate ? <p style={{color:'#f60'}}>{item.status}</p> : <p>{item.status}</p>}</Link>
+              <Link to={`/subject/${item.id}/${item.pid}`}>{item.isDate ? <p style={{color:'#f60'}}>{item.status}</p> : <p>{item.status}</p>}</Link>
             </li>
         )}
       </div>

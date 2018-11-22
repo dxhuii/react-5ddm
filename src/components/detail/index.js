@@ -60,7 +60,7 @@ export class Detail extends Component {
         'og:title': name,
         'og:description': content,
         'og:image': pic,
-        'og:url': `/bangumi/${id}`,
+        'og:url': `/subject/${id}`,
         'og:video': `/play/${id}/1`
       }
     }
@@ -70,7 +70,7 @@ export class Detail extends Component {
         { isMeta ? <Meta title={name} keywords={name} description={name} meta={meta} /> : null }
         {/* <div styleName='blur' style={{backgroundImage: `url(${pic})`}}></div> */}
         <div styleName='detail-con' className='clearfix'>
-          <h1><Link to={`/bangumi/${data.id}`}>{ name }</Link>{ subTitle ? ` ${subTitle}` : null }</h1>
+          <h1><Link to={`/subject/${data.id}`}>{ name }</Link>{ subTitle ? ` ${subTitle}` : null }</h1>
           {/* <div styleName="pic"><img src={pic} /></div> */}
           <div styleName='info'>
             <p></p>
