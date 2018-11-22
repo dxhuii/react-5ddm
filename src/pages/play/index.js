@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { playerLoad } from '../../store/actions/player'
+import { hits } from '../../store/actions/hits'
 import { getPlayerList } from '../../store/reducers/player'
 
 import PlayList from '../../components/Play/PlayList'
@@ -22,7 +23,8 @@ const { isJump, is9 } = play
     player: getPlayerList(state, props.match.params.id, props.match.params.pid)
   }),
   dispatch => ({
-    playerLoad: bindActionCreators(playerLoad, dispatch)
+    playerLoad: bindActionCreators(playerLoad, dispatch),
+    hits: bindActionCreators(hits, dispatch)
   })
 )
 export class Play extends Component {
@@ -35,12 +37,13 @@ export class Play extends Component {
     }
   }
 
-  componentDidMount () {
+  async componentDidMount () {
 
-    const { player, playerLoad, match: { params: { id, pid } } } = this.props
+    const { player, playerLoad, match: { params: { id, pid } }, hits } = this.props
     if (!player || !player.data) {
       playerLoad({ id, pid })
     }
+    await hits({ id })
 
   }
 
@@ -74,7 +77,7 @@ export class Play extends Component {
   }
 
   render() {
-    const { player: { data = {}, loading }, match: { params: { pid } } } = this.props
+    const { player: { data = {}, loading } } = this.props
     const { play, type } = this.state
     const datas = data.Data || []
     const playData = this.player(datas)
@@ -94,10 +97,13 @@ export class Play extends Component {
         <ul styleName='playlist'>
           {playData.map(item => <li key={item.type} onClick={() => this.onPlay(item.vid, item.type)}><i styleName={`icon ${item.type}`}></i>{item.name}</li>)}
         </ul>
-        <PlayList pid={pid} />
+        <PlayList />
       </Fragment>
     )
   }
 }
 
-export default Play
+export default function(props) {
+  const { match: { params: { pid } } }  = props
+  return <Play {...props} key={pid}/>
+}

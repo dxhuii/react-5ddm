@@ -59,7 +59,7 @@ export default (user) => {
         loader: () => import('../pages/home'),
         loading: () => <Loading />
       }),
-      enter: requireAuth,
+      enter: triggerEnter,
       loadData: HomeLoadData
     },
 

@@ -23,7 +23,7 @@ export class PlayList extends Component {
 
   componentDidMount() {
 
-    const { id } = this.props.match.params;
+    const { id } = this.props.match.params
     const { play, playlist } = this.props
     if (!play || !play.data) {
       playlist({ id })
@@ -49,7 +49,4 @@ export class PlayList extends Component {
   }
 }
 
-export default function(props) {
-  console.log(props, 'xxxxplaylist')
-  return <PlayList {...props} key={props.pid}/>
-}
+export default PlayList

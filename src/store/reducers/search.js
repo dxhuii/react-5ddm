@@ -4,8 +4,8 @@ export default function getSearch(state = {}, action = {}) {
   switch (action.type) {
 
     case 'GET_SEARCH':
-      const { q, data } = action
-      state[q] = data
+      const { wd, data } = action
+      state[wd] = data
       return merge({}, state, {})
 
     default:
@@ -13,6 +13,6 @@ export default function getSearch(state = {}, action = {}) {
   }
 }
 
-export const getSearchState = (state, q) => {
-  return state.search[q] ? state.search[q] : {};
+export const getSearchState = (state, wd) => {
+  return state.search[wd] ? state.search[wd] : {};
 }

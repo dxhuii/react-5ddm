@@ -30,18 +30,18 @@ export class Search extends Component {
     const { location: { params: { keyword } }, info, search} = this.props
 
     if (!info || !info.data) {
-      search({ q: keyword })
+      search({ wd: keyword })
     }
   }
 
   render() {
     const { info: { data = [] }, location: { params: { cn } } } = this.props
-    console.log(data)
+    console.log(data, this.props)
 
     return(<Fragment>
       <Meta title="Search" />
       <h2>{decodeURIComponent(cn)}</h2>
-      {data.map(item => <div key={item.id}><Link to={`/subject/${item.id}`}>{item.name}</Link></div>)}
+      {data.map(item => <div key={item.id}><Link to={`/subject/${item.id}`}>{item.title}</Link></div>)}
     </Fragment>)
   }
 
