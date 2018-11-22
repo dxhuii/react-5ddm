@@ -65,6 +65,7 @@ export class Play extends Component {
   }
 
   onPlay(play, type){
+    console.log(play, type)
     this.setState({ play, type })
   }
 
@@ -73,7 +74,7 @@ export class Play extends Component {
   }
 
   render() {
-    const { player: { data = {}, loading } } = this.props
+    const { player: { data = {}, loading }, match: { params: { pid } } } = this.props
     const { play, type } = this.state
     const datas = data.Data || []
     const playData = this.player(datas)
@@ -93,7 +94,7 @@ export class Play extends Component {
         <ul styleName='playlist'>
           {playData.map(item => <li key={item.type} onClick={() => this.onPlay(item.vid, item.type)}><i styleName={`icon ${item.type}`}></i>{item.name}</li>)}
         </ul>
-        <PlayList />
+        <PlayList pid={pid} />
       </Fragment>
     )
   }

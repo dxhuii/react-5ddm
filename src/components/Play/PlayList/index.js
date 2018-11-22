@@ -39,7 +39,7 @@ export class PlayList extends Component {
       <div className="card">
         <h5 className="card-header">播放列表</h5>
         <div className="card-body">
-        { loading ? <div>loading...</div> : null }
+        {loading ? <div>loading...</div> : null}
         <ul>
           {list.map(item => <li key={item[1]}>{pid === item[1].toString() ? <Link style={{color: 'red'}} to={`/play/${id}/${item[1]}`}>{item[0]}</Link> : <Link to={`/play/${id}/${item[1]}`}>{item[0]}</Link>}</li>)}
         </ul>
@@ -49,4 +49,7 @@ export class PlayList extends Component {
   }
 }
 
-export default PlayList;
+export default function(props) {
+  console.log(props, 'xxxxplaylist')
+  return <PlayList {...props} key={props.pid}/>
+}
