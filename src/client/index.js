@@ -67,21 +67,21 @@ const run = async () => {
     await _route.component.preload();
   // }
 
-  const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate
-  renderMethod((
+  ReactDOM.hydrate(
     <Provider store={store}>
       <BrowserRouter>
-        <RouterDom />
+        {RouterDom()}
       </BrowserRouter>
-    </Provider>
-  ), document.getElementById('app'));
+    </Provider>,
+    document.getElementById('app')
+  );
+
+  if (process.env.NODE_ENV === 'development') {
+    if (module.hot) {
+      module.hot.accept();
+    }
+  }
 
 }
 
 run();
-
-if (process.env.NODE_ENV === 'development') {
-  if (module.hot) {
-    module.hot.accept();
-  }
-}

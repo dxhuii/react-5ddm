@@ -6,8 +6,6 @@ const nodeExternals = require('webpack-node-externals');
 
 const config = require('../index');
 
-console.log(process.env.NODE_ENV);
-
 module.exports = {
 
   name: 'server',
@@ -45,24 +43,8 @@ module.exports = {
       {
         test: /\.js$/i,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          plugins: [
-            [
-              'react-css-modules',
-              {
-                "generateScopedName": config.class_scoped_name,
-                "filetypes": {
-                  ".scss": {
-                    "syntax": "postcss-scss"
-                  }
-                }
-              }
-            ]
-          ]
-        }
+        loader: 'babel'
       },
-
 
       // scss 文件解析
       {
