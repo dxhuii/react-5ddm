@@ -24,7 +24,7 @@ import { initialStateJSON } from '../store/reducers';
 import { saveAccessToken, saveUserInfo } from '../store/actions/user';
 
 // 配置
-import { port, auth_cookie_name, api, publicPath } from '../../config';
+import { port, auth_cookie_name, api, redirectUrl } from '../../config';
 import sign from './sign';
 // import webpackHotMiddleware from './webpack-hot-middleware';
 
@@ -71,10 +71,13 @@ app.get('*', async (req, res) => {
       // console.log('headers:', r.headers);
       r.on('data', function (d) {
         const data = JSON.parse(d)
-        const reUrl = url.length === 4 && path.indexOf('.html') !== -1 ? `http:${publicPath}/play/${data.data}/${url[3].split('.')[0].split('-')[1]}` : `http:${publicPath}/subject/${data.data}`
-        // console.log(reUrl, data)
-        res.status(301);
-        res.redirect(reUrl);
+        if (data.data) {
+          const reUrl = url.length === 4 && path.indexOf('.html') !== -1 ? `http:${redirectUrl}/play/${data.data}/${url[3].split('.')[0].split('-')[1]}` : `http:${redirectUrl}/subject/${data.data}`
+          res.status(301)
+          res.redirect(reUrl)
+        } else {
+          res.redirect(redirectUrl)
+        }
       });
     });
     return;
