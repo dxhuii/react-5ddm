@@ -3,7 +3,6 @@ import React, { Component, Fragment } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { playerLoad } from '../../store/actions/player'
-import { hits } from '../../store/actions/hits'
 import { getPlayerList } from '../../store/reducers/player'
 
 import PlayList from '../../components/Play/PlayList'
@@ -23,8 +22,7 @@ const { isJump, is9 } = play
     player: getPlayerList(state, props.match.params.id, props.match.params.pid)
   }),
   dispatch => ({
-    playerLoad: bindActionCreators(playerLoad, dispatch),
-    hits: bindActionCreators(hits, dispatch)
+    playerLoad: bindActionCreators(playerLoad, dispatch)
   })
 )
 export class Play extends Component {
@@ -37,13 +35,12 @@ export class Play extends Component {
     }
   }
 
-  async componentDidMount () {
+  componentDidMount () {
 
     const { player, playerLoad, match: { params: { id, pid } }, hits } = this.props
     if (!player || !player.data) {
       playerLoad({ id, pid })
     }
-    await hits({ id })
 
   }
 

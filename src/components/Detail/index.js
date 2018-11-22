@@ -6,12 +6,13 @@ import { connect } from 'react-redux'
 import { detail } from '../../store/actions/detail'
 import { mark } from '../../store/actions/mark'
 import { score } from '../../store/actions/score'
+import { hits } from '../../store/actions/hits'
 import { getDetail, getScore } from '../../store/reducers/detail'
-import user, { getUserInfo } from '../../store/reducers/user'
+import { getUserInfo } from '../../store/reducers/user'
 
 import Meta from '../../components/Meta'
 
-import './style.scss';
+import './style.scss'
 
 @withRouter
 @connect(
@@ -24,6 +25,7 @@ import './style.scss';
     detail: bindActionCreators(detail, dispatch),
     mark: bindActionCreators(mark, dispatch),
     getCm:  bindActionCreators(score, dispatch),
+    hits: bindActionCreators(hits, dispatch)
   })
 )
 export class Detail extends Component {
@@ -33,14 +35,15 @@ export class Detail extends Component {
   }
 
   componentDidMount() {
-    const { match: { params: { id } }, info, detail, getCm, sid = 1, userinfo: { userid }, cmScore } = this.props
 
+    const { match: { params: { id } }, info, detail, getCm, sid = 1, userinfo: { userid }, cmScore, hits } = this.props
     if (!info || !info.data) {
       detail({ id })
     }
     if (!cmScore || !cmScore.data) {
       getCm({ id, sid, uid: userid })
     }
+    hits({ id, sid })
 
   }
 
