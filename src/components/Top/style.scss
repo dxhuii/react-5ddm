@@ -1,0 +1,11 @@
+.top{
+  h2{font-size: 24px;height: 38px;line-height: 38px;}
+  :global{
+    .list-group{margin-top: 1.2rem;
+      .list-group-item{
+        a{max-width: 15rem;margin-left: .5rem;overflow: hidden;white-space: nowrap; text-overflow: ellipsis;}
+      }
+      .badge{margin-top: .1rem}
+    }
+  }
+}
