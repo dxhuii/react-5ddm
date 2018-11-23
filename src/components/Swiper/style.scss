@@ -1,25 +1,30 @@
 :global{
-  .swiper-container {
-    width: 100%;
-    height: 100%;
-  }
-  .swiper-slide {
-    text-align: center;
-    font-size: 18px;
+  #mySwipe div b {
+    display:block;
+    font-weight:bold;
+    color:#14ADE5;
+    font-size:20px;
+    text-align:center;
+    margin:10px;
+    padding:100px 10px;
+    box-shadow: 0 1px #EBEBEB;
     background: #fff;
-
-    /* Center slide text vertically */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
+    border-radius: 3px;
+    border: 1px solid;
+    border-color: #E5E5E5 #D3D3D3 #B9C1C6;
+  }
+  .swipe {
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+  }
+  .swipe-wrap {
+    overflow: hidden;
+    position: relative;
+  }
+  .swipe-wrap > div {
+    float:left;
+    width:100%;
+    position: relative;
   }
 }
