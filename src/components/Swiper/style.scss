@@ -1,5 +1,5 @@
 :global{
-  #mySwipe div b {
+  .swipe div b {
     display:block;
     font-weight:bold;
     color:#14ADE5;
@@ -17,14 +17,16 @@
     overflow: hidden;
     visibility: hidden;
     position: relative;
+    max-width: 500px;
+    margin: 0 auto;
   }
   .swipe-wrap {
     overflow: hidden;
     position: relative;
   }
-  .swipe-wrap > div {
+  .swipe-wrap div {
     float:left;
     width:100%;
     position: relative;
-  }
+  }  
 }

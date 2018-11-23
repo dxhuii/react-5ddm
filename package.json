@@ -29,18 +29,15 @@
     "pinyin": "^2.8.3",
     "popper.js": "^1.12.9",
     "react": "16.6.0",
-    "react-document-meta": "^2.1.2",
     "react-dom": "16.6.0",
     "react-meta-tags": "^0.7.2",
     "react-redux": "^5.1.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-simplemde-editor": "^3.6.22",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "serviceworker-webpack-plugin": "^1.0.1",
-    "swiper": "^4.4.2"
+    "serviceworker-webpack-plugin": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",

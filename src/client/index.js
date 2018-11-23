@@ -10,7 +10,6 @@ import createRouter from '../router';
 
 // 引入 bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'swiper/dist/css/swiper.min.css';
 import 'popper.js';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
