@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import Loadable from 'react-loadable'
 
 // 生成异步加载组件
-// import asyncRouteComponent from '../components/generateAsyncComponent.js';
+import { AsyncComponent } from '../components/generate-async-component'
 
 import Head from '../components/Head'
-import Footer from '../components/Footer'
 import Loading from '../components/Ui/Loading'
 
 import HomeLoadData from '../pages/home/load-data'
@@ -140,14 +139,14 @@ export default (user) => {
     },
 
     {
-      path: '/search',
+      path: '/search/:wd',
       exact: true,
       head: Head,
       // component: asyncRouteComponent({
       //   loader: () => import('../pages/topics')
       // }),
       component: Loadable({
-        loader: () => import('../pages/search'),
+        loader: () => import('../pages/list'),
         loading: () => <Loading />
       }),
       enter: triggerEnter
@@ -167,33 +166,35 @@ export default (user) => {
     }
   ]
 
-  let router = () => (<>
+  let router = () => (
+  <Fragment>
+    <Switch>
+      {routeArr.map((route, index) => (
+        <Route
+          key={index}
+          path={route.path}
+          exact={route.exact}
+          component={route.head}
+          />)
+      )}
+    </Switch>
 
-      <Switch>
-        {routeArr.map((route, index) => (
-          <Route
+    <Switch>
+      {routeArr.map((route, index) => {
+        if (route.component) {
+          return (<Route
             key={index}
             path={route.path}
             exact={route.exact}
-            component={route.head}
+            component={props => route.enter(route.component, props)}
             />)
-        )}
-      </Switch>
-
-      <Switch>
-        {routeArr.map((route, index) => {
-          if (route.component) {
-            return (<Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              component={props => route.enter(route.component, props)}
-              />)
-          }
-        })}
-      </Switch>
-      <Footer />
-      </>)
+        }
+      })}
+    </Switch>
+    <AsyncComponent load={() => import('../components/Footer')}>
+      {Component => <Component />}
+    </AsyncComponent>
+  </Fragment>)
 
   return {
     list: routeArr,

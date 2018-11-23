@@ -13,7 +13,7 @@ import './style.scss'
 @withRouter
 @connect(
   (state, props) => ({
-    list: getList(state, props.stateId || '', props.id || '', props.mcid || '', props.year || '', props.area || '', props.letter || '', props.lz || '', props.day || '', props.order || '', props.limit || '')
+    list: getList(state, props.stateId || '', props.id || '', props.mcid || '', props.year || '', props.area || '', props.wd || '', props.letter || '', props.lz || '', props.day || '', props.order || '', props.limit || '')
   }),
   dispatch => ({
     listLoad: bindActionCreators(listLoad, dispatch)
@@ -22,9 +22,9 @@ import './style.scss'
 export class List extends Component {
   constructor(props) {
     super(props)
-    const { stateId, id, mcid, year, area, letter, lz, day, order, limit } = props
+    const { stateId, id, mcid, year, area, wd, letter, lz, day, order, limit } = props
     this.state = {
-      stateId, id, mcid, year, area, letter, lz, day, order, limit
+      stateId, id, mcid, year, area, wd, letter, lz, day, order, limit
     }
     this.load = this.load.bind(this)
   }
@@ -45,9 +45,9 @@ export class List extends Component {
     ) {
       return null;
     }
-    const { stateId, id, mcid, year, area, letter, lz, day, order, limit, listLoad } = nextProps
-    listLoad({ stateId, id, mcid, year, area, letter, lz, day, order, limit, more: true })
-    return { id, mcid, year, area, letter, lz, order }
+    const { stateId, id, mcid, year, area, wd, letter, lz, day, order, limit, listLoad } = nextProps
+    listLoad({ stateId, id, mcid, year, area, letter, wd, lz, day, order, limit, more: true })
+    return { id, mcid, year, area, wd, letter, lz, order }
   }
 
   componentDidMount() {
@@ -63,8 +63,8 @@ export class List extends Component {
 
   async load() {
     const { listLoad } = this.props
-    const { stateId, id, mcid, year, area, letter, lz, day, order, limit } = this.state
-    await listLoad({ stateId, id, mcid, year, area, letter, lz, day, order, limit })
+    const { stateId, id, mcid, year, area, wd, letter, lz, day, order, limit } = this.state
+    await listLoad({ stateId, id, mcid, year, area, wd, letter, lz, day, order, limit })
   }
 
   render() {

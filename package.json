@@ -31,6 +31,7 @@
     "react": "16.6.0",
     "react-document-meta": "^2.1.2",
     "react-dom": "16.6.0",
+    "react-meta-tags": "^0.7.2",
     "react-redux": "^5.1.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",

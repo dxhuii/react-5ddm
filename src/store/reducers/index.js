@@ -9,7 +9,6 @@ import playlist from './playlist'
 import player from './player'
 import top from './top'
 import list from './list'
-import search from './search'
 
 let states = {
   user,
@@ -18,8 +17,7 @@ let states = {
   playlist,
   player,
   top,
-  list,
-  search
+  list
 }
 
 // 创建一个无数据的states，用于在服务端初始redux数据

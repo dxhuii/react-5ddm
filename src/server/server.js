@@ -3,15 +3,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import compress from 'compression';
-import DocumentMeta from 'react-document-meta';
-import 'ejs';
-
 
 // 服务端渲染依赖
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter, matchPath } from 'react-router';
 import { Provider } from 'react-redux';
+import MetaTagsServer from 'react-meta-tags/server';
+import { MetaTagsContext } from 'react-meta-tags';
 import Loadable from 'react-loadable';
 
 // 路由配置
@@ -71,30 +70,30 @@ const https = require('https');
 app.use('/sign', sign());
 
 app.get('*', async (req, res) => {
-  const path = req.path
-  // 兼容老的URL跳转
-  if (path.indexOf('bangumi') !== -1) {
-    const url = path.split('/')
-    const pinyin = url[2]
-    // console.log(url.length, pinyin, url, path);
-    https.get(`${api}api.php?s=home-react-getVodId&pinyin=${pinyin}`, function(r) {
-      // console.log('statusCode:', r.statusCode);
-      // console.log('headers:', r.headers);
-      r.on('data', function (d) {
-        const data = JSON.parse(d)
-        if (data.data) {
-          const reUrl = url.length === 4 && path.indexOf('.html') !== -1 ? `http:${redirectUrl}/play/${data.data}/${url[3].split('.')[0].split('-')[1]}` : `http:${redirectUrl}/subject/${data.data}`
-          res.status(301)
-          res.redirect(reUrl)
-        } else {
-          res.redirect(redirectUrl)
-        }
-      });
-    });
-    return;
-  }
+  // const path = req.path
+  // // 兼容老的URL跳转
+  // if (path.indexOf('bangumi') !== -1) {
+  //   const url = path.split('/')
+  //   const pinyin = url[2]
+  //   // console.log(url.length, pinyin, url, path);
+  //   https.get(`${api}api.php?s=home-react-getVodId&pinyin=${pinyin}`, function(r) {
+  //     // console.log('statusCode:', r.statusCode);
+  //     // console.log('headers:', r.headers);
+  //     r.on('data', function (d) {
+  //       const data = JSON.parse(d)
+  //       if (data.data) {
+  //         const reUrl = url.length === 4 && path.indexOf('.html') !== -1 ? `http:${redirectUrl}/play/${data.data}/${url[3].split('.')[0].split('-')[1]}` : `http:${redirectUrl}/subject/${data.data}`
+  //         res.status(301)
+  //         res.redirect(reUrl)
+  //       } else {
+  //         res.redirect(redirectUrl)
+  //       }
+  //     });
+  //   });
+  //   return;
+  // }
 
-  const store = configureStore(JSON.parse(initialStateJSON));
+  let store = configureStore(JSON.parse(initialStateJSON));
 
   let user = null;
   let accessToken = req.cookies[auth_cookie_name] || '';
@@ -146,21 +145,24 @@ app.get('*', async (req, res) => {
 
   // 获取路由dom
   const _Router = router.dom;
+  const metaTagsInstance = MetaTagsServer();
 
-  // console.log(_Router);
-
-  let html = ReactDOMServer.renderToString(
-    <Provider store={store}>
+  let _mainContent = (<Provider store={store}>
+    <MetaTagsContext extract={metaTagsInstance.extract}>
       <StaticRouter location={req.url} context={context}>
         <_Router />
       </StaticRouter>
-    </Provider>
-  );
+    </MetaTagsContext>
+  </Provider>);
 
-  let reduxState = JSON.stringify(store.getState()).replace(/</g, '\\x3c');
+
+  // html
+  let html = ReactDOMServer.renderToString(_mainContent);
 
   // 获取页面的meta，嵌套到模版中
-  let meta = DocumentMeta.renderAsHTML();
+  let meta = metaTagsInstance.renderToString();
+
+  let reduxState = JSON.stringify(store.getState()).replace(/</g, '\\x3c');
 
   if (context.code == 302) {
     res.writeHead(302, {
@@ -172,6 +174,9 @@ app.get('*', async (req, res) => {
   }
 
   res.end();
+
+  // 释放store内存
+  store = null;
 
 });
 

@@ -30,7 +30,7 @@ const Shell = (Component) => {
     // 组件加载完成
     componentWillMount() {
       const { search } = this.props.location;
-      this.props.location.params = search ? parseUrl(search) : null;
+      this.props.location.params = search ? parseUrl(search) : {};
       // console.log('进入组件')
     }
 

@@ -5678,7 +5678,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.0, prop-types@^15.5.8, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@^15.5.0, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "http://registry.npm.taobao.org/prop-types/download/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   integrity sha1-BdXKd7RFPphdYPx/+MhZCUpJcQI=
@@ -5868,6 +5868,13 @@ react-loadable@^5.5.0:
   integrity sha1-WCJRZ509qGwyquLI5onFnxGW2MQ=
   dependencies:
     prop-types "^15.5.0"
+
+react-meta-tags@^0.7.2:
+  version "0.7.2"
+  resolved "http://registry.npm.taobao.org/react-meta-tags/download/react-meta-tags-0.7.2.tgz#a7553f0ce5b8c7f7e48a4ebcc25b91533e319163"
+  integrity sha1-p1U/DOW4x/fkik68wluRUz4xkWM=
+  dependencies:
+    prop-types "^15.6.0"
 
 react-redux@^5.1.0:
   version "5.1.1"

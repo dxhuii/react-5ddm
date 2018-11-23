@@ -4,8 +4,8 @@ export default function list(state = {}, action = {}) {
   switch (action.type) {
 
     case 'GET_LIST':
-      const { stateId, id, data, mcid, year, area, letter, lz, day, order, limit } = action
-      state[`${stateId}${id}${mcid}${year}${area}${letter}${lz}${day}${order}${limit}`] = data
+      const { stateId, id, data, mcid, year, area, wd, letter, lz, day, order, limit } = action
+      state[`${stateId}${id}${mcid}${year}${area}${wd}${letter}${lz}${day}${order}${limit}`] = data
       return merge({}, state, {})
 
     default:
@@ -13,7 +13,7 @@ export default function list(state = {}, action = {}) {
   }
 }
 
-export const getList = (state, stateId, id, mcid, year, area, letter, lz, day, order, limit) => {
-  const ids = `${stateId}${id}${mcid}${year}${area}${letter}${lz}${day}${order}${limit}`
+export const getList = (state, stateId, id, mcid, year, area, wd, letter, lz, day, order, limit) => {
+  const ids = `${stateId}${id}${mcid}${year}${area}${wd}${letter}${lz}${day}${order}${limit}`
   return state.list[ids] ? state.list[ids] : {}
 }

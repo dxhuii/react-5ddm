@@ -55,23 +55,23 @@ export class Detail extends Component {
   render() {
     const { info: { data = {}, loading }, isMeta, subTitle, userinfo: { userid } } = this.props
     const { id, cid, name, content, pic, actor, area, aliases, gold, update_date, filmtime, total, director, type, language } = data
-    const meta = {
-      name: {
-        keywords: name
-      },
-      property: {
-        'og:type': 'videolist',
-        'og:title': name,
-        'og:description': content,
-        'og:image': pic,
-        'og:url': `/subject/${id}`,
-        'og:video': `/play/${id}/1`
-      }
-    }
     return(
       <div styleName='detail'>
         { loading ? <div>loading...</div> : null }
-        { isMeta ? <Meta title={name} keywords={name} description={name} meta={meta} /> : null }
+        { isMeta ?
+          <Meta title={name}>
+            <meta property="og:locale" content="zh_CN" />
+            <meta property="og:type" content="videolist" />
+            <meta property="og:title" content={name} />
+            <meta property="og:description" content={content} />
+            <meta property="og:image" content={pic} />
+            <meta property="og:url" content={`/subject/${id}`} />
+            <meta property="og:video" content={`/play/${id}/1`} />
+            <meta property="og:site_name" content={'9站'} />
+            <meta name="description" content={content} />
+            <meta name="keywords" content={name} />
+          </Meta> : null
+        }
         {/* <div styleName='blur' style={{backgroundImage: `url(${pic})`}}></div> */}
         <div styleName='detail-con' className='clearfix'>
           <h1><Link to={`/subject/${data.id}`}>{ name }</Link>{ subTitle ? ` ${subTitle}` : null }</h1>

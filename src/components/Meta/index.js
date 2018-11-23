@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import MetaTags, { ReactTitle } from 'react-meta-tags';
 
-// https://github.com/kodyl/react-document-meta
-import DocumentMeta from 'react-document-meta';
+import { name } from '../../../config';
 
-export class Meta extends Component {
+export default class Meta extends Component {
 
   constructor(props) {
     super(props);
@@ -11,18 +11,16 @@ export class Meta extends Component {
 
   render() {
 
-    const { title, description, meta } = this.props
-    const metaConfig = {
-      title: title,
-      description: description || '',
-      meta: { ...meta }
-    }
+    const { title } = this.props
 
-    return (
-      <DocumentMeta {...metaConfig} />
-    )
+    let _title = ''
 
+    _title += title || name
+    if (title) _title += ` - ${name}`
+
+    return (<Fragment>
+      <ReactTitle title={_title} />
+      {this.props.children ? <MetaTags>{this.props.children}</MetaTags> : null}
+    </Fragment>)
   }
 }
-
-export default Meta;

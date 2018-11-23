@@ -40,7 +40,6 @@ export class Play extends Component {
   }
 
   componentDidMount () {
-
     const { player, playerLoad, match: { params: { id, pid } } } = this.props
     if (!player || !player.data) {
       playerLoad({ id, pid })
@@ -97,12 +96,11 @@ export class Play extends Component {
 
   render() {
     const { player: { data = {}, loading }, match: { params: { id } } } = this.props
-    const PlayInfo = this.getData(data)
-    const { title, subTitle, defaultPlay, playHtml, playData } = PlayInfo
+    const { title, subTitle, defaultPlay, playHtml, playData } = this.getData(data)
     return(
       <Fragment>
         {loading ? <div>loading...</div> : null}
-        <Meta title={`${title} ${subTitle}`} keywords={title} description={title} />
+        <Meta title={`${title} ${subTitle}`} />
         <Detail subTitle={subTitle} />
         <div className='row'>
           <div className='col-8 mt-3'>
@@ -128,5 +126,5 @@ export class Play extends Component {
 
 export default function(props) {
   const { match: { params: { pid } } } = props
-  return <Play {...props} key={pid}/>
+  return <Play {...props} key={pid} />
 }
