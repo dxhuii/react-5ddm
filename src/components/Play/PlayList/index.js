@@ -37,7 +37,7 @@ export class PlayList extends Component {
     const { id, pid } = match.params
     return(
       <div className="card">
-        <h5 className="card-header">播放列表</h5>
+        <h5 className="card-header">剧集列表</h5>
         <div className="card-body">
         {loading ? <div>loading...</div> : null}
         <ul>

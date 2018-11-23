@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+
 import { detail } from '../../store/actions/detail'
 import { mark } from '../../store/actions/mark'
 import { score } from '../../store/actions/score'
@@ -68,7 +69,7 @@ export class Detail extends Component {
       }
     }
     return(
-      <div styleName="detail">
+      <div styleName='detail'>
         { loading ? <div>loading...</div> : null }
         { isMeta ? <Meta title={name} keywords={name} description={name} meta={meta} /> : null }
         {/* <div styleName='blur' style={{backgroundImage: `url(${pic})`}}></div> */}

@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+
 import { playerLoad } from '../../store/actions/player'
 import { getPlayerList } from '../../store/reducers/player'
 
@@ -10,9 +11,11 @@ import Detail from '../../components/Detail'
 import Shell from '../../components/Shell'
 import Meta from '../../components/Meta'
 
-import './style.scss'
-
+// 生成异步加载组件
+import { AsyncComponent } from '../../components/generate-async-component'
 import play from '../../utils/play'
+
+import './style.scss'
 
 const { isJump, is9 } = play
 
@@ -31,17 +34,17 @@ export class Play extends Component {
     super(props)
     this.state = {
       play: '',
-      type: ''
+      type: '',
+      outputHTML: ''
     }
   }
 
   componentDidMount () {
 
-    const { player, playerLoad, match: { params: { id, pid } }, hits } = this.props
+    const { player, playerLoad, match: { params: { id, pid } } } = this.props
     if (!player || !player.data) {
       playerLoad({ id, pid })
     }
-
   }
 
   componentWillUnmount () {
@@ -73,34 +76,57 @@ export class Play extends Component {
     return data.filter(item => item.type === 'other')
   }
 
-  render() {
-    const { player: { data = {}, loading } } = this.props
+  getData(data = {}){
     const { play, type } = this.state
     const datas = data.Data || []
     const playData = this.player(datas)
-    const vod = data.Vod || []
-    const title = vod[0]
+    const title = (data.Vod || [])[0]
     const subTitle = ((datas[0] || {}).playurls || [])[0]
     const other = this.getOther(playData)
     const defaultPlay = other.length > 0 && !is9 ? isJump(other[0].vid, other[0].type, 1) : playData.length > 0 ? isJump(playData[0].vid, playData[0].type, 1) : ''
     const playHtml = play ? isJump(play, type, 1) : ''
-    console.log(playHtml, this.getOther(playData), defaultPlay)
+    // console.log(playHtml, this.getOther(playData), defaultPlay)
+    return {
+      title,
+      subTitle,
+      defaultPlay,
+      playHtml,
+      playData
+    }
+  }
+
+  render() {
+    const { player: { data = {}, loading }, match: { params: { id } } } = this.props
+    const PlayInfo = this.getData(data)
+    const { title, subTitle, defaultPlay, playHtml, playData } = PlayInfo
     return(
       <Fragment>
         {loading ? <div>loading...</div> : null}
         <Meta title={`${title} ${subTitle}`} keywords={title} description={title} />
         <Detail subTitle={subTitle} />
-        {/* <div styleName='player' dangerouslySetInnerHTML={{__html: playHtml || defaultPlay}} /> */}
-        <ul styleName='playlist'>
-          {playData.map(item => <li key={item.type} onClick={() => this.onPlay(item.vid, item.type)}><i styleName={`icon ${item.type}`}></i>{item.name}</li>)}
-        </ul>
-        <PlayList />
+        <div className='row'>
+          <div className='col-8 mt-3'>
+            <div styleName='player'>{playHtml || defaultPlay}</div>
+            {/* <div styleName='player' dangerouslySetInnerHTML={{__html: playHtml || defaultPlay}} /> */}
+            <ul styleName='playlist'>
+              {playData.map(item => <li key={item.type} onClick={() => this.onPlay(item.vid, item.type)}><i styleName={`icon ${item.type}`}></i>{item.name}</li>)}
+            </ul>
+          </div>
+          <div className='col-4 mt-3'>
+            <PlayList />
+          </div>
+        </div>
+        <div styleName='editor'>
+          <AsyncComponent load={() => import('../../components/Editor')}>
+            {Component => <Component id={id}/>}
+          </AsyncComponent>
+        </div>
       </Fragment>
     )
   }
 }
 
 export default function(props) {
-  const { match: { params: { pid } } }  = props
+  const { match: { params: { pid } } } = props
   return <Play {...props} key={pid}/>
 }

@@ -1,5 +1,4 @@
 
-import path from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -53,6 +52,18 @@ app.use(express.static('./dist/client'));
 
 // console.log(express.static(__dirname + '/dist'));
 
+app.use(function (req, res, next) {
+  // 计算页面加载完成花费的时间
+  var exec_start_at = Date.now();
+  var _send = res.send;
+  res.send = function () {
+    // 发送Header
+    res.set('X-Execution-Time', String(Date.now() - exec_start_at) + ' ms');
+    // 调用原始处理函数
+    return _send.apply(res, arguments);
+  };
+  next();
+});
 
 const https = require('https');
 
@@ -119,17 +130,6 @@ app.get('*', async (req, res) => {
     // url
   };
 
-  // 加载异步路由组件
-  const loadAsyncRouterComponent = () => {
-    return new Promise(async (resolve) => {
-      await _route.component.load(async (ResolvedComponent)=>{
-        let loadData = ResolvedComponent.WrappedComponent.defaultProps.loadData;
-        let result = await loadData({ store, match: _match });
-        resolve(result);
-      });
-    });
-  }
-
   // console.log(_route.component);
   // console.log(_route.component.loadData);
 
@@ -141,11 +141,6 @@ app.get('*', async (req, res) => {
   await _route.component.preload();
 
   // await Loadable.preloadAll();
-
-  // if (_route.component.load || _route.loadData) {
-    // 在服务端加载异步组件
-    // context = await loadAsyncRouterComponent();
-  // }
 
 
 
@@ -167,14 +162,13 @@ app.get('*', async (req, res) => {
   // 获取页面的meta，嵌套到模版中
   let meta = DocumentMeta.renderAsHTML();
 
-  if (context.code == 301) {
-    res.writeHead(301, {
+  if (context.code == 302) {
+    res.writeHead(302, {
       Location: context.url
     });
   } else {
     res.status(context.code);
     res.render('../dist/server/index.ejs', { html, reduxState, meta });
-    // res.render('../dist/index.ejs', { html, reduxState, meta });
   }
 
   res.end();

@@ -58,3 +58,38 @@ Web前端世界日新月异变化太快，为了让自己跟上节奏不掉队�
  + 🔄 开发环境支持热更新
  + 🎛 内置登录、退出、页面权限控制、帖子列表获取、帖子详情获取等功能
  + 🚧 内置用户访问页面时，301、404 状态相应的处理逻辑  
+
+
+## BraftEditor富文本编辑器调用方法
+- 引入
+```javascript
+import { AsyncComponent } from '../../components/generate-async-component' // 生成异步加载组件
+```
+- 获取数据，写入localStorage里，默认不支持服务端渲染
+- 调用
+```jsx
+<div styleName='editor'>
+  <AsyncComponent load={() => import('../../components/Editor')}>
+    {Component => <Component />}
+  </AsyncComponent>
+</div>
+<h5>输出内容</h5>
+<div className="editorbox">{outputHTML}</div>
+```
+
+## SimpleMDE 富文本编辑器调用方法
+- 引入组件
+```javascript
+import SimpleEditor from '../../components/SimpleEditor'
+```
+- 获取数据
+```javascript
+getValue = (val) => {
+  console.log(val, 'html')
+  localStorage.commit = val
+}
+```
+- 调用
+```jsx
+<SimpleEditor getValue={this.getValue} />
+```
