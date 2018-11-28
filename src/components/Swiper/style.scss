@@ -1,24 +1,16 @@
 :global{
-  .swipe div b {
-    display:block;
-    font-weight:bold;
-    color:#14ADE5;
-    font-size:20px;
-    text-align:center;
-    margin:10px;
-    padding:100px 10px;
-    box-shadow: 0 1px #EBEBEB;
-    background: #fff;
-    border-radius: 3px;
-    border: 1px solid;
-    border-color: #E5E5E5 #D3D3D3 #B9C1C6;
-  }
   .swipe {
     overflow: hidden;
     visibility: hidden;
     position: relative;
     max-width: 500px;
     margin: 0 auto;
+    display: block;
+    background: #EE3769;
+    width: 500px;
+    height: 300px;
+    text-align: center;
+    border-radius: 10px;
   }
   .swipe-wrap {
     overflow: hidden;
@@ -28,5 +20,12 @@
     float:left;
     width:100%;
     position: relative;
-  }  
+  }
+  
+  .swipe-item {
+    position: relative;
+    margin-top: 140px;
+    color: white;
+    font-weight: bold;
+  }
 }
