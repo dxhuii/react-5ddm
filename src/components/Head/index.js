@@ -57,10 +57,7 @@ export default class Head extends Component {
     const { keyword, keywordCn } = this.state
     return (
       <header>
-        <nav
-          className="navbar fixed-top navbar-expand-md navbar-expand-lg navbar-dark bg-dark bd-navbar"
-          styleName="test"
-        >
+        <nav className="navbar fixed-top navbar-expand-md navbar-expand-lg navbar-dark bg-dark bd-navbar" styleName="test">
           <NavLink className="navbar-brand" exact to="/">
             React
           </NavLink>
@@ -98,10 +95,7 @@ export default class Head extends Component {
                 </NavLink>
               </li>
             </ul>
-            <form
-              className="form-inline mt-2 mt-md-0"
-              action={`/search/${keyword}`}
-            >
+            <form className="form-inline mt-2 mt-md-0" action={`/search/${keyword}`}>
               <input name="cn" defaultValue={keywordCn} hidden />
               <input
                 required
@@ -111,11 +105,7 @@ export default class Head extends Component {
                 aria-label="Search"
                 onChange={this.onChange}
               />
-              <button
-                disabled={keyword ? false : true}
-                className="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-              >
+              <button disabled={keyword ? false : true} className="btn btn-outline-success my-2 my-sm-0" type="submit">
                 Search
               </button>
             </form>
@@ -125,11 +115,7 @@ export default class Head extends Component {
                   <span className="nav-link">{userinfo.nickname}</span>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    href="javascript:void(0)"
-                    onClick={this.signOut}
-                  >
+                  <a className="nav-link" href="javascript:void(0)" onClick={this.signOut}>
                     退出
                   </a>
                 </li>

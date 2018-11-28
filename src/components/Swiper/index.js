@@ -9,17 +9,16 @@ class SwiperMod extends Component {
   }
 
   componentDidMount() {
-
     const pager = document.querySelector('.pager')
     const bullets = pager.querySelectorAll('em')
     const that = this
     this.mySwipe = new Swipe(document.querySelector('.swipe'), {
-      startSlide:0,
-      speed:400,
+      startSlide: 0,
+      speed: 400,
       auto: 3000,
-      continuous:!0,
-      disableScroll:!1,
-      stopPropagation:!1,
+      continuous: !0,
+      disableScroll: !1,
+      stopPropagation: !1,
       callback: function(index) {
         that.slideTab(index, bullets)
       }
@@ -32,16 +31,15 @@ class SwiperMod extends Component {
         that.mySwipe.slide(parseInt(this.getAttribute('data-tab'), 10), 500)
       }
     }
-
   }
 
   slideTab(index, bullets) {
-    var i = bullets.length;
+    var i = bullets.length
     while (i--) {
-      bullets[i].className = bullets[i].className.replace('on','')
+      bullets[i].className = bullets[i].className.replace('on', '')
     }
     bullets[index].className = 'on'
-  };
+  }
 
   prev = () => {
     this.mySwipe.prev()
@@ -54,14 +52,20 @@ class SwiperMod extends Component {
   render() {
     return (
       <Fragment>
-        <div className='swipe'>
-          <div className='swipe-wrap'>
-            <div><b>0</b></div>
-            <div><b>1</b></div>
-            <div><b>2</b></div>
+        <div className="swipe">
+          <div className="swipe-wrap">
+            <div>
+              <b>0</b>
+            </div>
+            <div>
+              <b>1</b>
+            </div>
+            <div>
+              <b>2</b>
+            </div>
           </div>
         </div>
-        <div style={{textAlign: 'center', paddingTop: 20}}>
+        <div style={{ textAlign: 'center', paddingTop: 20 }}>
           <div className="pager">
             <em className="on">1</em>
             <em>2</em>
@@ -75,4 +79,4 @@ class SwiperMod extends Component {
   }
 }
 
-export default SwiperMod;
+export default SwiperMod

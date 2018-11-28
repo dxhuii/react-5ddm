@@ -5,13 +5,13 @@ import config from '../../utils/config'
 export function weekLoad({ id }) {
   return (dispatch, getState) => {
     return new Promise(async (resolve, reject) => {
-      let week = getWeekByListId(getState(), id);
-      week.loading = true;
-      if (!week.data) week.data = [];
+      let week = getWeekByListId(getState(), id)
+      week.loading = true
+      if (!week.data) week.data = []
       dispatch({ type: 'GET_WEEK', id, data: week })
 
-      let [ err, data ] = await Ajax({
-        url: config.api.week({limit: 1000}),
+      let [err, data] = await Ajax({
+        url: config.api.week({ limit: 1000 }),
         method: 'get'
       })
 
@@ -19,11 +19,10 @@ export function weekLoad({ id }) {
         week.loading = false
         week.data = data.data
         dispatch({ type: 'GET_WEEK', id, data: week })
-        resolve([ null, week.data ])
+        resolve([null, week.data])
       } else {
         resolve(['weekLoad failed'])
       }
-
     })
   }
 }

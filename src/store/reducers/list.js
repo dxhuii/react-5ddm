@@ -2,7 +2,6 @@ import merge from 'lodash/merge'
 
 export default function list(state = {}, action = {}) {
   switch (action.type) {
-
     case 'GET_LIST':
       const { stateId, id, data, mcid, year, area, wd, letter, lz, day, order, limit } = action
       state[`${stateId}${id}${mcid}${year}${area}${wd}${letter}${lz}${day}${order}${limit}`] = data

@@ -8,7 +8,7 @@ import Shell from '../../components/Shell'
 @Shell
 export class Bangumi extends Component {
   render() {
-    return(
+    return (
       <Fragment>
         <Detail key="detail" isMeta={true} />
         <PlayList key="playlist" />

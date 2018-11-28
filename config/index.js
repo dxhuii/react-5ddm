@@ -1,4 +1,3 @@
-
 // 生产环境配置
 let config = {
   // 正式环境
@@ -62,12 +61,10 @@ let config = {
       // responsive: 'true'
     }
     */
-  },
-
+  }
 }
 
-config.head += config.favicon;
-
+config.head += config.favicon
 
 // 开发环境配置
 if (process.env.NODE_ENV == 'development') {

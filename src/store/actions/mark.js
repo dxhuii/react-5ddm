@@ -5,14 +5,13 @@ import config from '../../utils/config'
 export function mark({ type, id, cid, uid }) {
   return (dispatch, getState) => {
     return new Promise(async (resolve, reject) => {
-
-      let info = getMark(getState(), type, id, cid, uid);
-      info.loading = true;
-      if (!info.data) info.data = [];
+      let info = getMark(getState(), type, id, cid, uid)
+      info.loading = true
+      if (!info.data) info.data = []
 
       dispatch({ type: 'GET_MARK', data: info, type, id, cid, uid })
 
-      let [ err, data ] = await Ajax({
+      let [err, data] = await Ajax({
         url: config.api.mark({ type, id, cid, uid }),
         method: 'get'
       })
@@ -21,11 +20,10 @@ export function mark({ type, id, cid, uid }) {
         info.loading = false
         info.data = data.data
         dispatch({ type: 'GET_MARK', data: info, type, id, cid, uid })
-        resolve([ null, info.data ])
+        resolve([null, info.data])
       } else {
         resolve(['mark failed'])
       }
-
     })
   }
 }

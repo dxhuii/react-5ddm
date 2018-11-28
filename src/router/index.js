@@ -19,8 +19,7 @@ import ListLoadData from '../pages/list/load-data'
  * @param  {Object} userinfo 用户信息，以此判断用户是否是登录状态，并控制页面访问权限
  * @return {[type]}
  */
-export default (user) => {
-
+export default user => {
   // 登录用户才能访问
   const requireAuth = (Layout, props) => {
     if (!user) {
@@ -46,7 +45,6 @@ export default (user) => {
 
   // 路由数组
   const routeArr = [
-
     {
       path: '/',
       exact: true,
@@ -93,7 +91,7 @@ export default (user) => {
       exact: true,
       // head: Head,
       // component: asyncRouteComponent({
-        // loader: () => import('../pages/sign-in')
+      // loader: () => import('../pages/sign-in')
       // }),
       component: Loadable({
         loader: () => import('../pages/sign-in'),
@@ -167,34 +165,23 @@ export default (user) => {
   ]
 
   let router = () => (
-  <Fragment>
-    <Switch>
-      {routeArr.map((route, index) => (
-        <Route
-          key={index}
-          path={route.path}
-          exact={route.exact}
-          component={route.head}
-          />)
-      )}
-    </Switch>
+    <Fragment>
+      <Switch>
+        {routeArr.map((route, index) => (
+          <Route key={index} path={route.path} exact={route.exact} component={route.head} />
+        ))}
+      </Switch>
 
-    <Switch>
-      {routeArr.map((route, index) => {
-        if (route.component) {
-          return (<Route
-            key={index}
-            path={route.path}
-            exact={route.exact}
-            component={props => route.enter(route.component, props)}
-            />)
-        }
-      })}
-    </Switch>
-    <AsyncComponent load={() => import('../components/Footer')}>
-      {Component => <Component />}
-    </AsyncComponent>
-  </Fragment>)
+      <Switch>
+        {routeArr.map((route, index) => {
+          if (route.component) {
+            return <Route key={index} path={route.path} exact={route.exact} component={props => route.enter(route.component, props)} />
+          }
+        })}
+      </Switch>
+      <AsyncComponent load={() => import('../components/Footer')}>{Component => <Component />}</AsyncComponent>
+    </Fragment>
+  )
 
   return {
     list: routeArr,

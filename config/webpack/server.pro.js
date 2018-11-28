@@ -1,6 +1,6 @@
-const baseConfig = require('./server.base');
-const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const baseConfig = require('./server.base')
+const path = require('path')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const config = {
   ...baseConfig,
@@ -14,6 +14,6 @@ const config = {
     ...baseConfig.plugins
   ],
   mode: 'production'
-};
+}
 
-module.exports = config;
+module.exports = config

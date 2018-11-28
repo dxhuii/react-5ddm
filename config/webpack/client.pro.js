@@ -1,5 +1,5 @@
-const baseConfig = require('./client.base');
-const webpack = require('webpack');
+const baseConfig = require('./client.base')
+const webpack = require('webpack')
 
 // const path = require('path');
 
@@ -8,4 +8,4 @@ const config = {
   mode: 'production'
 }
 
-module.exports = config;
+module.exports = config

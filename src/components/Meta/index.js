@@ -1,16 +1,14 @@
-import React, { Component, Fragment } from 'react';
-import MetaTags, { ReactTitle } from 'react-meta-tags';
+import React, { Component, Fragment } from 'react'
+import MetaTags, { ReactTitle } from 'react-meta-tags'
 
-import { name } from '../../../config';
+import { name } from '../../../config'
 
 export default class Meta extends Component {
-
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   render() {
-
     const { title } = this.props
 
     let _title = ''
@@ -18,9 +16,11 @@ export default class Meta extends Component {
     _title += title || name
     if (title) _title += ` - ${name}`
 
-    return (<Fragment>
-      <ReactTitle title={_title} />
-      {this.props.children ? <MetaTags>{this.props.children}</MetaTags> : null}
-    </Fragment>)
+    return (
+      <Fragment>
+        <ReactTitle title={_title} />
+        {this.props.children ? <MetaTags>{this.props.children}</MetaTags> : null}
+      </Fragment>
+    )
   }
 }

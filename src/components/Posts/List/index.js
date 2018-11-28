@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { loadPostsList } from '../../../store/actions/posts';
-import { getPostsListByListId } from '../../../store/reducers/posts';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { loadPostsList } from '../../../store/actions/posts'
+import { getPostsListByListId } from '../../../store/reducers/posts'
 
 import './style.scss'
 
@@ -17,7 +17,6 @@ import './style.scss'
   })
 )
 export default class PostsList extends React.Component {
-
   static propTypes = {
     // 要获取的列表的id
     id: PropTypes.string.isRequired,
@@ -31,12 +30,11 @@ export default class PostsList extends React.Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {}
   }
 
   componentDidMount() {
-
     const { id, filter, list, loadPostsList } = this.props
 
     if (!list.data) {
@@ -45,39 +43,41 @@ export default class PostsList extends React.Component {
         filter
       })
     }
-
   }
 
   render() {
-
     const { list } = this.props
     const { loading, data } = list
 
     // className={styles.avatar}
 
-    return(<div>
-      {loading ? <div>loading...</div> : null}
-      <div className="list-group">
-        {data && data.map(item=>(
-          <Link key={item._id}
-            to={`/posts/${item._id}`}
-            className="list-group-item list-group-item-action flex-column align-items-start">
-            <p className="mb-1">
-              <img src={item.user_id.avatar_url} styleName="avatar" />
-              {item.user_id.nickname}
-            </p>
-            <div className="d-flex w-100 justify-content-between">
-              <h5 className="mb-1">{item.title}</h5>
-              <small>{item.topic_id.name}</small>
-            </div>
-            <p className="mb-1">{item.content_summary}</p>
-            <small>{item.comment_count > 0 ? `有${item.comment_count}人评论` : null}</small>
-          </Link>
-        ))}
+    return (
+      <div>
+        {loading ? <div>loading...</div> : null}
+        <div className="list-group">
+          {data &&
+            data.map(item => (
+              <Link
+                key={item._id}
+                to={`/posts/${item._id}`}
+                className="list-group-item list-group-item-action flex-column align-items-start"
+              >
+                <p className="mb-1">
+                  <img src={item.user_id.avatar_url} styleName="avatar" />
+                  {item.user_id.nickname}
+                </p>
+                <div className="d-flex w-100 justify-content-between">
+                  <h5 className="mb-1">{item.title}</h5>
+                  <small>{item.topic_id.name}</small>
+                </div>
+                <p className="mb-1">{item.content_summary}</p>
+                <small>{item.comment_count > 0 ? `有${item.comment_count}人评论` : null}</small>
+              </Link>
+            ))}
+        </div>
       </div>
-    </div>)
+    )
   }
-
 }
 /*
 PostsList = CSSModules(PostsList, styles);

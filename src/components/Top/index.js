@@ -18,7 +18,6 @@ import './style.scss'
   })
 )
 export default class Top extends Component {
-
   componentDidMount() {
     const { order = 'addtime', area = '' } = this.props
     const { top, topLoad } = this.props
@@ -28,16 +27,27 @@ export default class Top extends Component {
   }
 
   render() {
-    const { top: { data = [], loading }, area = '' } = this.props
-    return(
+    const {
+      top: { data = [], loading },
+      area = ''
+    } = this.props
+    return (
       <div styleName="top">
-        { loading ? <div>loading...</div> : null }
+        {loading ? <div>loading...</div> : null}
         <h2>排行榜</h2>
         <ul className="list-group">
           {data.map((item, index) => {
-            const elem = <li className="list-group-item" key={item.id}><span className="badge badge-warning float-right">{item.glod}</span><span className={`badge badge-pill badge-${index > 2 ? 'secondary' : 'success'} float-left`}>{index + 1}</span><Link className='float-left' to={`/subject/${item.id}`}>{item.title}</Link></li>
-            if(area === 'CN'){
-              if(index < 7){
+            const elem = (
+              <li className="list-group-item" key={item.id}>
+                <span className="badge badge-warning float-right">{item.glod}</span>
+                <span className={`badge badge-pill badge-${index > 2 ? 'secondary' : 'success'} float-left`}>{index + 1}</span>
+                <Link className="float-left" to={`/subject/${item.id}`}>
+                  {item.title}
+                </Link>
+              </li>
+            )
+            if (area === 'CN') {
+              if (index < 7) {
                 return elem
               }
             } else {

@@ -1,11 +1,9 @@
-
-import express from 'express';
-import { auth_cookie_name, COOKIE_PREFIX } from '../../config';
+import express from 'express'
+import { auth_cookie_name, COOKIE_PREFIX } from '../../config'
 
 // (安全实施) 服务端储存 token cookie 设置成httpOnly
 export default () => {
-
-  const router = express.Router();
+  const router = express.Router()
 
   router.post('/in', (req, res) => {
     const userinfo = req.body.userinfo
