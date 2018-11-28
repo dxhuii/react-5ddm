@@ -12,14 +12,14 @@ export const picHttps = pic => {
 }
 
 export const isMobile = () => {
-  if (typeof navigator == 'undefined') {
+  if (typeof navigator === 'undefined') {
     return
   }
-  var ua = navigator.userAgent
-  var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
-    isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
-    isAndroid = ua.match(/(Android)\s+([\d.]+)/),
-    isMobile = isIphone || isAndroid
+  const ua = navigator.userAgent
+  const ipad = ua.match(/(iPad).*OS\s([\d_]+)/)
+  const isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/)
+  const isAndroid = ua.match(/(Android)\s+([\d.]+)/)
+  const isMobile = isIphone || isAndroid
   if (isMobile) {
     return true
   } else {
@@ -28,7 +28,7 @@ export const isMobile = () => {
 }
 
 export const location = () => {
-  if (typeof window == 'undefined') {
+  if (typeof window === 'undefined') {
     return {}
   }
   return window.location

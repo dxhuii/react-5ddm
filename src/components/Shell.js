@@ -1,5 +1,4 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import parseUrl from '../common/parse-url'
@@ -10,7 +9,7 @@ import parseUrl from '../common/parse-url'
 const Shell = Component => {
   if (!Component.loadData) {
     Component.loadData = ({ store, match }) => {
-      return new Promise(async function(resolve, reject) {
+      return new Promise(async function (resolve, reject) {
         resolve({ code: 200 })
       })
     }
@@ -21,33 +20,24 @@ const Shell = Component => {
       loadData: Component.loadData || null
     }
 
-    constructor(props) {
-      super(props)
-    }
-
     // 组件加载完成
-    componentWillMount() {
+    componentDidMount () {
+      // console.log('组件加载完成');
       const { search } = this.props.location
       this.props.location.params = search ? parseUrl(search) : {}
-      // console.log('进入组件')
-    }
-
-    // 组件加载完成
-    componentDidMount() {
-      // console.log('组件加载完成');
     }
 
     // 更新组件
-    componentDidUpdate() {
+    componentDidUpdate () {
       // console.log('组件加载更新了');
     }
 
     // 组件被卸载
-    componentWillUnmount() {
+    componentWillUnmount () {
       // console.log('组件加载被卸载');
     }
 
-    render() {
+    render () {
       return (
         <div>
           <Component {...this.props} />

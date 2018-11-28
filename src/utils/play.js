@@ -16,7 +16,7 @@ const tudou = (pv, isP) => {
   if (len === 1) {
     youku(pv, isP)
   } else if (len === 2) {
-    return isp ? HTML('/') : '/'
+    return isP ? HTML('/') : '/'
   } else if (len >= 3) {
     youku(data[2], isP)
   }
@@ -26,14 +26,14 @@ const youku = (pv, isP) => {
   return is9
     ? HTML(ykUrl(data.length === 3 ? data[2] : pv))
     : isP
-    ? iframe(ykIf(data.length === 3 ? data[2] : pv))
-    : ykUrl(data.length === 3 ? data[2] : pv)
+      ? iframe(ykIf(data.length === 3 ? data[2] : pv))
+      : ykUrl(data.length === 3 ? data[2] : pv)
 }
 const iqiyi = (pv, isP) => {
-  let plus = isMobile() ? '&tvid=' : '&tvId=',
-    data = [],
-    purl = '',
-    vid = ''
+  let plus = isMobile() ? '&tvid=' : '&tvId='
+  let data = []
+  let purl = ''
+  let vid = ''
   if (pv.indexOf(',') > 0) {
     data = pv.split(',')
     vid = data[1] + plus + data[0]
@@ -75,14 +75,14 @@ const bilibili = (pv, isP) => {
     pv.indexOf('http') !== -1
       ? pv
       : data.length === 2
-      ? 'https://www.bilibili.com/video/av' + data[0] + '/?p=' + data[1]
-      : 'https://www.bilibili.com/video/av' + pv + '/'
+        ? 'https://www.bilibili.com/video/av' + data[0] + '/?p=' + data[1]
+        : 'https://www.bilibili.com/video/av' + pv + '/'
   return isP ? HTML(purl) : purl
 }
 const acfun = (pv, isP) => {
-  let vid = '',
-    data = []
-  if (pv.indexOf('ab') != -1) {
+  let vid = ''
+  let data = []
+  if (pv.indexOf('ab') !== -1) {
     data = pv.split('ab')
     const ab = data[1].split(',')
     if (ab.length === 2) {
@@ -93,15 +93,15 @@ const acfun = (pv, isP) => {
   } else {
     data = pv.split(',')
     const len = data.length
-    if (len == 2) {
+    if (len === 2) {
       vid = data[0] + '_' + data[1]
     } else {
       vid = pv
     }
   }
   const purl = isMobile()
-    ? 'https://m.acfun.cn/v/?' + (pv.indexOf('ab') != -1 ? 'ab' : 'ac') + '=' + vid
-    : 'https://www.acfun.cn/v/' + (pv.indexOf('ab') != -1 ? 'ab' : 'ac') + vid
+    ? 'https://m.acfun.cn/v/?' + (pv.indexOf('ab') !== -1 ? 'ab' : 'ac') + '=' + vid
+    : 'https://www.acfun.cn/v/' + (pv.indexOf('ab') !== -1 ? 'ab' : 'ac') + vid
   return isP ? HTML(purl) : purl
 }
 
@@ -181,10 +181,10 @@ const isPlays = (playname, pv) => {
 
 export default {
   isJump: (vid, playname, isP) => {
-    let url = '',
-      name = playname,
-      data = [],
-      pv = vid
+    let url = ''
+    let name = playname
+    let data = []
+    let pv = vid
     if (pv.indexOf('@@') !== -1) {
       data = pv.split('@@')
       name = data[1]

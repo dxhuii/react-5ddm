@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
-import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { weekLoad } from '../../store/actions/week'
@@ -22,17 +21,17 @@ import './style.scss'
     weekLoad: bindActionCreators(weekLoad, dispatch)
   })
 )
-export default class weekDay extends Component {
-  componentDidMount() {
+class weekDay extends Component {
+  componentDidMount () {
     const { week, weekLoad, id } = this.props
     if (week && !week.data) {
       weekLoad({ id })
     }
   }
 
-  getArea(weekData = []) {
-    let cn = [],
-      jp = []
+  getArea (weekData = []) {
+    let cn = []
+    let jp = []
     weekData.map(item => {
       if (item.area === '日本') {
         jp.push(item)
@@ -43,7 +42,7 @@ export default class weekDay extends Component {
     return [cn, jp]
   }
 
-  getEveryWeek(weekData, isCN) {
+  getEveryWeek (weekData, isCN) {
     // isCN  1 日本  其他为中国
     let data = {}
     let [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday] = [[], [], [], [], [], [], []]
@@ -76,7 +75,7 @@ export default class weekDay extends Component {
     return data
   }
 
-  render() {
+  render () {
     const {
       title,
       week: { data = [] },
@@ -145,3 +144,5 @@ export default class weekDay extends Component {
     )
   }
 }
+
+export default weekDay

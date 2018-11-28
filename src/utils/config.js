@@ -15,14 +15,14 @@ export default {
      * 排行榜
      * $hits
      * hits 总排行
-     * hits_week 	周排行
-     * hits_day  	日排行
-     * hits_month	月排行
-     * addtime		按最新
-     * area			按地区，默认全部，日本，国产
-     * lz			是否连载 1 为连载 0 完结
+     * hits_week  周排行
+     * hits_day 日排行
+     * hits_month 月排行
+     * addtime  按最新
+     * area 按地区，默认全部，日本，国产
+     * lz 是否连载 1 为连载 0 完结
      */
-    top: ({ order, area, lz }) => `${api}api.php?s=home-react-topList&order=${order}${area ? `&area=${area}` : ''}${lz ? `&lz=${lz}` : ''}`, //获取列表
+    top: ({ order, area, lz }) => `${api}api.php?s=home-react-topList&order=${order}${area ? `&area=${area}` : ''}${lz ? `&lz=${lz}` : ''}`, // 获取列表
     typelist: ({
       id = 3,
       mcid = '',
