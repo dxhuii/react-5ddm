@@ -20,39 +20,39 @@ export const asyncRouteComponent = ({ loader, Placeholder }) => {
 
   return class asyncComponent extends Component {
     // 加载组件
-    static load(callback = () => {}) {
+    static load (callback = () => {}) {
       return loader().then(ResolvedComponent => {
         Component = ResolvedComponent.default || ResolvedComponent
         callback(Component)
       })
     }
 
-    constructor() {
+    constructor () {
       super()
       this.updateState = this.updateState.bind(this)
       this.state = { Component }
     }
 
-    componentDidMount() {
+    componentDidMount () {
       // if (typeof window == 'undefined' || typeof document == 'undefined') return;
       asyncComponent.load().then(this.updateState)
     }
 
-    updateState() {
+    updateState () {
       if (this.state.Component !== Component) {
         count++
         this.setState({ Component })
       }
     }
 
-    render() {
+    render () {
       const { Component } = this.state
 
       if (Component) return <Component {...this.props} />
 
       // 处理客户端渲染首屏，先出现 “组件装载中...”，在出现内容的清空
       // 如果是在客户端，并且是第一个异步Page组件，loading过程中的 Placeholder 使用页面本身的内容。
-      if (typeof window != 'undefined' && typeof document != 'undefined') {
+      if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         let pageComponent = document.getElementById('page-component') || null
         if (count < 1 && pageComponent && pageComponent.firstChild) {
           return <div dangerouslySetInnerHTML={{ __html: pageComponent.firstChild.innerHTML }} />
@@ -78,22 +78,22 @@ export const asyncRouteComponent = ({ loader, Placeholder }) => {
  * </Bundle>
  */
 export class AsyncComponent extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       mod: null
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.load(this.props)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (nextProps.load !== this.props.load) this.load(nextProps)
   }
 
-  load(props) {
+  load (props) {
     this.setState({ mod: null })
     // 注意这里，使用Promise对象; mod.default导出默认
     props.load().then(mod => {
@@ -103,7 +103,7 @@ export class AsyncComponent extends Component {
     })
   }
 
-  render() {
+  render () {
     return this.state.mod ? this.props.children(this.state.mod) : null
   }
 }
