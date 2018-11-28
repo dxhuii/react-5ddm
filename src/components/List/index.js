@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -13,7 +13,20 @@ import './style.scss'
 @withRouter
 @connect(
   (state, props) => ({
-    list: getList(state, props.stateId || '', props.id || '', props.mcid || '', props.year || '', props.area || '', props.wd || '', props.letter || '', props.lz || '', props.day || '', props.order || '', props.limit || '')
+    list: getList(
+      state,
+      props.stateId || '',
+      props.id || '',
+      props.mcid || '',
+      props.year || '',
+      props.area || '',
+      props.wd || '',
+      props.letter || '',
+      props.lz || '',
+      props.day || '',
+      props.order || '',
+      props.limit || ''
+    )
   }),
   dispatch => ({
     listLoad: bindActionCreators(listLoad, dispatch)
@@ -24,17 +37,27 @@ export class List extends Component {
     super(props)
     const { stateId, id, mcid, year, area, wd, letter, lz, day, order, limit } = props
     this.state = {
-      stateId, id, mcid, year, area, wd, letter, lz, day, order, limit
+      stateId,
+      id,
+      mcid,
+      year,
+      area,
+      wd,
+      letter,
+      lz,
+      day,
+      order,
+      limit
     }
     this.load = this.load.bind(this)
   }
 
   static contextTypes = {
-    router: PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if(
+    if (
       nextProps.id === prevState.id &&
       nextProps.year === prevState.year &&
       nextProps.mcid === prevState.mcid &&
@@ -43,7 +66,7 @@ export class List extends Component {
       nextProps.order === prevState.order &&
       nextProps.area === prevState.area
     ) {
-      return null;
+      return null
     }
     const { stateId, id, mcid, year, area, wd, letter, lz, day, order, limit, listLoad } = nextProps
     listLoad({ stateId, id, mcid, year, area, letter, wd, lz, day, order, limit, more: true })
@@ -52,8 +75,8 @@ export class List extends Component {
 
   componentDidMount() {
     const { list, scrollLoad, stateId } = this.props
-    if (!list.data) this.load();
-    if (scrollLoad) ArriveFooter.add(stateId, this.load);
+    if (!list.data) this.load()
+    if (scrollLoad) ArriveFooter.add(stateId, this.load)
   }
 
   componentWillUnmount() {
@@ -68,20 +91,24 @@ export class List extends Component {
   }
 
   render() {
-    const { list: { data = [] }, loading } = this.props
-    return(
-      <div className="row" styleName='d-item'>
-        {loading ? <div>loading</div> : null }
-        {
-          data.map(item =>
-            <li key={item.id} className="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mb-4">
-              <Link to={`/subject/${item.id}`}>
-                <div className="load-demand" data-load-demand={`<img src="${picHttps(item.pic)}" alt="${item.title}" />`} />
-                <h3>{item.title}</h3>
-              </Link>
-              <Link to={`/subject/${item.id}/${item.pid}`}>{item.isDate ? <p style={{color:'#f60'}}>{item.status}</p> : <p>{item.status}</p>}</Link>
-            </li>
-        )}
+    const {
+      list: { data = [] },
+      loading
+    } = this.props
+    return (
+      <div className="row" styleName="d-item">
+        {loading ? <div>loading</div> : null}
+        {data.map(item => (
+          <li key={item.id} className="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 mb-4">
+            <Link to={`/subject/${item.id}`}>
+              <div className="load-demand" data-load-demand={`<img src="${picHttps(item.pic)}" alt="${item.title}" />`} />
+              <h3>{item.title}</h3>
+            </Link>
+            <Link to={`/subject/${item.id}/${item.pid}`}>
+              {item.isDate ? <p style={{ color: '#f60' }}>{item.status}</p> : <p>{item.status}</p>}
+            </Link>
+          </li>
+        ))}
       </div>
     )
   }

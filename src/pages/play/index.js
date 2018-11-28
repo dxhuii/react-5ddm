@@ -12,7 +12,7 @@ import Shell from '../../components/Shell'
 import Meta from '../../components/Meta'
 
 // 生成异步加载组件
-import { AsyncComponent } from '../../components/generate-async-component'
+// import { AsyncComponent } from '../../components/generate-async-component'
 import play from '../../utils/play'
 
 import './style.scss'
@@ -114,11 +114,11 @@ export class Play extends Component {
             <PlayList />
           </div>
         </div>
-        <div styleName='editor'>
+        {/* <div styleName='editor'>
           <AsyncComponent load={() => import('../../components/Editor')}>
             {Component => <Component id={id}/>}
           </AsyncComponent>
-        </div>
+        </div> */}
       </Fragment>
     )
   }
