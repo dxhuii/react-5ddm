@@ -1,6 +1,6 @@
 var config = require('./config')
 
-module.exports = function (api) {
+module.exports = function(api) {
   api.cache.forever()
 
   return {
