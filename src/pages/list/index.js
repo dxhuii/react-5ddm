@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 
 import List from '../../components/List'
 import Shell from '../../components/Shell'
@@ -7,7 +8,7 @@ import Meta from '../../components/Meta'
 import './style.scss'
 
 @Shell
-export class SubjectList extends Component {
+class SubjectList extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -21,6 +22,11 @@ export class SubjectList extends Component {
       day: 365,
       id: 3
     }
+  }
+
+  static propTypes = {
+    location: PropTypes.object,
+    match: PropTypes.object
   }
 
   getName(data, id) {
@@ -38,6 +44,7 @@ export class SubjectList extends Component {
   }
 
   isSearch() {
+    console.log(this.props)
     const {
       location: { pathname },
       match: {

@@ -1,4 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import './style.scss'
@@ -9,6 +10,15 @@ class Tabs extends PureComponent {
     this.state = {
       currentIndex: 0
     }
+  }
+
+  static propTypes = {
+    icon: PropTypes.any,
+    title: PropTypes.string,
+    link: PropTypes.string,
+    linkText: PropTypes.string,
+    isJp: PropTypes.array,
+    children: PropTypes.any
   }
 
   tabLi(index) {

@@ -1,9 +1,9 @@
 import merge from 'lodash/merge'
 
 export default function player(state = {}, action = {}) {
+  const { id, data, pid } = action
   switch (action.type) {
     case 'GET_PLAYER':
-      const { id, data, pid } = action
       state[`${id}-${pid}`] = data
       return merge({}, state, {})
 

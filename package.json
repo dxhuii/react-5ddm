@@ -28,6 +28,7 @@
     "node-sass": "^4.9.4",
     "pinyin": "^2.8.3",
     "popper.js": "^1.12.9",
+    "rc-form": "^2.2.6",
     "react": "16.6.0",
     "react-dom": "16.6.0",
     "react-meta-tags": "^0.7.2",

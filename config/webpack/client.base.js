@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const config = require('../index')
-const devMode = process.env.NODE_ENV == 'development' ? true : false
+const devMode = process.env.NODE_ENV === 'development'
 
 module.exports = {
   name: 'client',
@@ -57,7 +57,9 @@ module.exports = {
         test: /\.scss$/,
         use: [
           'css-hot-loader',
-          { loader: MiniCssExtractPlugin.loader },
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
           {
             loader: `css`,
             options: {
@@ -68,21 +70,33 @@ module.exports = {
               importLoaders: 1
             }
           },
-          { loader: `sass` }
+          {
+            loader: `sass`
+          }
         ]
       },
 
       // css 解析
       {
         test: /\.css$/,
-        use: ['css-hot-loader', { loader: MiniCssExtractPlugin.loader }, { loader: `css` }]
+        use: ['css-hot-loader', {
+          loader: MiniCssExtractPlugin.loader
+        }, {
+          loader: `css`
+        }]
       },
 
       // 小于8K的图片，转 base64
-      { test: /\.(png|jpg|gif)$/, loader: 'url?limit=8192' },
+      {
+        test: /\.(png|jpg|gif)$/,
+        loader: 'url?limit=8192'
+      },
 
       // 小于8K的字体，转 base64
-      { test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file?limit=8192' }
+      {
+        test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file?limit=8192'
+      }
     ]
   },
 

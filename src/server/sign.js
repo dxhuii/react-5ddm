@@ -7,12 +7,12 @@ export default () => {
 
   router.post('/in', (req, res) => {
     const userinfo = req.body.userinfo
-    res.cookie(auth_cookie_name, userinfo, { path: '/', httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 })
+    res.cookie(`${COOKIE_PREFIX}${auth_cookie_name}`, userinfo, { path: '/', httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 })
     res.send({ success: true })
   })
 
   router.post('/out', (req, res) => {
-    res.clearCookie(auth_cookie_name)
+    res.clearCookie(`${COOKIE_PREFIX}${auth_cookie_name}`)
     res.send({ success: true })
   })
 

@@ -67,28 +67,31 @@ const https = require('https')
 app.use('/sign', sign())
 
 app.get('*', async (req, res) => {
-  // const path = req.path
-  // // 兼容老的URL跳转
-  // if (path.indexOf('bangumi') !== -1) {
-  //   const url = path.split('/')
-  //   const pinyin = url[2]
-  //   // console.log(url.length, pinyin, url, path);
-  //   https.get(`${api}api.php?s=home-react-getVodId&pinyin=${pinyin}`, function(r) {
-  //     // console.log('statusCode:', r.statusCode);
-  //     // console.log('headers:', r.headers);
-  //     r.on('data', function (d) {
-  //       const data = JSON.parse(d)
-  //       if (data.data) {
-  //         const reUrl = url.length === 4 && path.indexOf('.html') !== -1 ? `http:${redirectUrl}/play/${data.data}/${url[3].split('.')[0].split('-')[1]}` : `http:${redirectUrl}/subject/${data.data}`
-  //         res.status(301)
-  //         res.redirect(reUrl)
-  //       } else {
-  //         res.redirect(redirectUrl)
-  //       }
-  //     });
-  //   });
-  //   return;
-  // }
+  const path = req.path
+  // 兼容老的URL跳转
+  if (path.indexOf('bangumi') !== -1) {
+    const url = path.split('/')
+    const pinyin = url[2]
+    // console.log(url.length, pinyin, url, path);
+    https.get(`${api}api.php?s=home-react-getVodId&pinyin=${pinyin}`, function(r) {
+      // console.log('statusCode:', r.statusCode);
+      // console.log('headers:', r.headers);
+      r.on('data', function(d) {
+        const data = JSON.parse(d)
+        if (data.data) {
+          const reUrl =
+            url.length === 4 && path.indexOf('.html') !== -1
+              ? `http:${redirectUrl}/play/${data.data}/${url[3].split('.')[0].split('-')[1]}`
+              : `http:${redirectUrl}/subject/${data.data}`
+          res.status(301)
+          res.redirect(reUrl)
+        } else {
+          res.redirect(redirectUrl)
+        }
+      })
+    })
+    return
+  }
 
   let store = configureStore(JSON.parse(initialStateJSON))
 

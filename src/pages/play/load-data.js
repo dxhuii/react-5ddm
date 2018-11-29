@@ -3,7 +3,7 @@ import { playlist } from '../../store/actions/playlist'
 import { playerLoad } from '../../store/actions/player'
 
 export default ({ store, match }) => {
-  return new Promise(async function(resolve, reject) {
+  return new Promise(async function (resolve, reject) {
     const { id, pid } = match.params
 
     await detail({ id })(store.dispatch, store.getState)

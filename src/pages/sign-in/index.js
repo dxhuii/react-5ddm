@@ -19,7 +19,7 @@ import Meta from '../../components/Meta'
   })
 )
 @Shell
-export class SignIn extends Component {
+class SignIn extends Component {
   constructor(props) {
     super(props)
     this.state = {}
@@ -29,7 +29,7 @@ export class SignIn extends Component {
   async submit(event) {
     event.preventDefault()
 
-    const { username, password } = this.refs
+    const { username, password } = this
     const { signIn } = this.props
 
     if (!username.value) {
@@ -59,8 +59,22 @@ export class SignIn extends Component {
         <form className="form-signin" onSubmit={this.submit}>
           <div styleName="icon" />
           <h1 className="h3 mb-3 font-weight-normal">React</h1>
-          <input type="text" ref="username" className="form-control mb-3" placeholder="请输入昵称" />
-          <input type="password" ref="password" className="form-control mb-3" placeholder="请输入昵称" />
+          <input
+            type="text"
+            ref={c => {
+              this.username = c
+            }}
+            className="form-control mb-3"
+            placeholder="请输入昵称"
+          />
+          <input
+            type="password"
+            ref={c => {
+              this.password = c
+            }}
+            className="form-control mb-3"
+            placeholder="请输入昵称"
+          />
           <button className="btn btn-lg btn-primary btn-block" type="submit">
             登录
           </button>

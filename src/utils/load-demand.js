@@ -1,4 +1,4 @@
-(function () {
+(function() {
   // 如果是服务器，那么就不存在 window 和 document 全局变量，因此不继续执行
   if (typeof window === 'undefined' || typeof document === 'undefined') {
     return
@@ -14,7 +14,7 @@
     false
   )
 
-  function getElementViewTop (element) {
+  function getElementViewTop(element) {
     var actualTop = element.offsetTop
     var current = element.offsetParent
 
@@ -26,7 +26,7 @@
     return actualTop
   }
 
-  var update = function () {
+  var update = function() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
     const elements = document.getElementsByClassName('load-demand')
 
@@ -45,7 +45,7 @@
     }
   }
 
-  setInterval(function () {
+  setInterval(function() {
     update()
   }, 200)
 })()

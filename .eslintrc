@@ -1,11 +1,13 @@
 {
-  "extends": ["eslint:recommended", "plugin:react/recommended", "standard"],
+  "extends": ["standard", "eslint:recommended", "plugin:react/recommended"],
   "globals": {
     "describe": true,
     "beforeEach": true,
     "afterEach": true,
     "after": true,
-    "it": true
+    "it": true,
+    "ArriveFooter": true,
+    "__CLIENT__": true
   },
   "parser": "babel-eslint",
   "env": {
@@ -14,7 +16,10 @@
     "node": true
   },
   "rules": {
-    "react/jsx-uses-react": 1
+    "react/jsx-uses-react": 1,
+    "no-console": "off",
+    "no-unused-vars": 0,
+    "react/display-name": [{ "ignoreTranspilerName": false }]
   },
   "parserOptions": {
     "ecmaVersion": 7,

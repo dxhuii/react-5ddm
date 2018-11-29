@@ -4,12 +4,8 @@ import Shell from '../../components/Shell'
 import Meta from '../../components/Meta'
 
 @Shell
-export class Topics extends PureComponent {
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
+class Topics extends PureComponent {
+  render () {
     return (
       <Fragment>
         <Meta title="话题" />

@@ -1,10 +1,15 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
 import './style.scss'
 
-export default class LoadingMore extends PureComponent {
+export default class Loading extends PureComponent {
   constructor(props) {
     super(props)
+  }
+
+  static propTypes = {
+    text: PropTypes.string
   }
 
   render() {

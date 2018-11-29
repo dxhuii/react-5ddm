@@ -19,12 +19,7 @@ import pinyin from 'pinyin'
     signOut: bindActionCreators(signOut, dispatch)
   })
 )
-export default class Head extends Component {
-  static propTypes = {
-    userinfo: PropTypes.object.isRequired,
-    signOut: PropTypes.func.isRequired
-  }
-
+class Head extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -34,8 +29,13 @@ export default class Head extends Component {
     this.signOut = this.signOut.bind(this)
   }
 
+  static propTypes = {
+    userinfo: PropTypes.object.isRequired,
+    signOut: PropTypes.func.isRequired
+  }
+
   async signOut() {
-    let [err, success] = await this.props.signOut()
+    let [, success] = await this.props.signOut()
     if (success) {
       // 退出成功跳转到首页
       window.location.href = '/topics'
@@ -105,7 +105,7 @@ export default class Head extends Component {
                 aria-label="Search"
                 onChange={this.onChange}
               />
-              <button disabled={keyword ? false : true} className="btn btn-outline-success my-2 my-sm-0" type="submit">
+              <button disabled={!keyword} className="btn btn-outline-success my-2 my-sm-0" type="submit">
                 Search
               </button>
             </form>
@@ -127,3 +127,5 @@ export default class Head extends Component {
     )
   }
 }
+
+export default Head

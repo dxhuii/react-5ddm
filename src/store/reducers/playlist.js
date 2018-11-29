@@ -1,9 +1,9 @@
 import merge from 'lodash/merge'
 
 export default function playlist(state = {}, action = {}) {
+  const { id, data } = action
   switch (action.type) {
     case 'GET_PLAY_LIST':
-      const { id, data } = action
       state[id] = data
       return merge({}, state, {})
 

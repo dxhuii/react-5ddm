@@ -11,7 +11,7 @@ import List from '../../components/List'
 import Swiper from '../../components/Swiper'
 
 @Shell
-export default class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props)
   }
@@ -42,3 +42,5 @@ export default class Home extends Component {
     )
   }
 }
+
+export default Home

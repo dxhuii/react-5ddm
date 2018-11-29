@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -15,14 +15,26 @@ import { getPlayList } from '../../../store/reducers/playlist'
     playlist: bindActionCreators(playlist, dispatch)
   })
 )
-export class PlayList extends Component {
+class PlayList extends Component {
   constructor(props) {
     super(props)
   }
 
+  static propTypes = {
+    id: PropTypes.number,
+    play: PropTypes.object,
+    playlist: PropTypes.func,
+    match: PropTypes.object
+  }
+
   componentDidMount() {
-    const { id } = this.props.match.params
-    const { play, playlist } = this.props
+    const {
+      play,
+      playlist,
+      match: {
+        params: { id }
+      }
+    } = this.props
     if (!play || !play.data) {
       playlist({ id })
     }

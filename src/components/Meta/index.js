@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import MetaTags, { ReactTitle } from 'react-meta-tags'
 
 import { name } from '../../../config'
@@ -6,6 +7,11 @@ import { name } from '../../../config'
 export default class Meta extends Component {
   constructor(props) {
     super(props)
+  }
+
+  static propTypes = {
+    title: PropTypes.string,
+    children: PropTypes.any
   }
 
   render() {

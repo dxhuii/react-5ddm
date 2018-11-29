@@ -33,7 +33,7 @@ import './style.scss'
   })
 )
 class List extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     const { stateId, id, mcid, year, area, wd, letter, lz, day, order, limit } = props
     this.state = {
@@ -52,11 +52,29 @@ class List extends Component {
     this.load = this.load.bind(this)
   }
 
+  static propTypes = {
+    stateId: PropTypes.any,
+    id: PropTypes.any,
+    mcid: PropTypes.any,
+    year: PropTypes.any,
+    area: PropTypes.string,
+    wd: PropTypes.string,
+    letter: PropTypes.string,
+    lz: PropTypes.any,
+    day: PropTypes.any,
+    order: PropTypes.string,
+    limit: PropTypes.any,
+    list: PropTypes.object,
+    listLoad: PropTypes.func,
+    scrollLoad: PropTypes.bool,
+    loading: PropTypes.bool
+  }
+
   static contextTypes = {
     router: PropTypes.object.isRequired
   }
 
-  static getDerivedStateFromProps (nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps, prevState) {
     if (
       nextProps.id === prevState.id &&
       nextProps.year === prevState.year &&
@@ -73,24 +91,24 @@ class List extends Component {
     return { id, mcid, year, area, wd, letter, lz, order }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { list, scrollLoad, stateId } = this.props
     if (!list.data) this.load()
     if (scrollLoad) ArriveFooter.add(stateId, this.load)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     const { scrollLoad, stateId } = this.props
     if (scrollLoad) ArriveFooter.remove(stateId)
   }
 
-  async load () {
+  async load() {
     const { listLoad } = this.props
     const { stateId, id, mcid, year, area, wd, letter, lz, day, order, limit } = this.state
     await listLoad({ stateId, id, mcid, year, area, wd, letter, lz, day, order, limit })
   }
 
-  render () {
+  render() {
     const {
       list: { data = [] },
       loading

@@ -1,8 +1,12 @@
 import 'braft-editor/dist/index.css'
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import BraftEditor from 'braft-editor'
 
 export default class Editor extends Component {
+  static propTypes = {
+    id: PropTypes.number
+  }
   state = {
     value: localStorage.getItem(`editor_${this.props.id}`) || ''
   }

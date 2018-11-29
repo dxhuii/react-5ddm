@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Loading from './Ui/Loading'
 
 let count = 0
@@ -20,32 +21,32 @@ export const asyncRouteComponent = ({ loader, Placeholder }) => {
 
   return class asyncComponent extends Component {
     // 加载组件
-    static load (callback = () => {}) {
+    static load(callback = () => {}) {
       return loader().then(ResolvedComponent => {
         Component = ResolvedComponent.default || ResolvedComponent
         callback(Component)
       })
     }
 
-    constructor () {
+    constructor() {
       super()
       this.updateState = this.updateState.bind(this)
       this.state = { Component }
     }
 
-    componentDidMount () {
+    componentDidMount() {
       // if (typeof window == 'undefined' || typeof document == 'undefined') return;
       asyncComponent.load().then(this.updateState)
     }
 
-    updateState () {
+    updateState() {
       if (this.state.Component !== Component) {
         count++
         this.setState({ Component })
       }
     }
 
-    render () {
+    render() {
       const { Component } = this.state
 
       if (Component) return <Component {...this.props} />
@@ -78,22 +79,26 @@ export const asyncRouteComponent = ({ loader, Placeholder }) => {
  * </Bundle>
  */
 export class AsyncComponent extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       mod: null
     }
   }
 
-  componentDidMount () {
+  static propTypes = {
+    children: PropTypes.any
+  }
+
+  componentDidMount() {
     this.load(this.props)
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.load !== this.props.load) this.load(nextProps)
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return prevState.mod && nextProps.load(nextProps)
   }
 
-  load (props) {
+  load(props) {
     this.setState({ mod: null })
     // 注意这里，使用Promise对象; mod.default导出默认
     props.load().then(mod => {
@@ -103,7 +108,7 @@ export class AsyncComponent extends Component {
     })
   }
 
-  render () {
+  render() {
     return this.state.mod ? this.props.children(this.state.mod) : null
   }
 }

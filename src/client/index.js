@@ -26,8 +26,7 @@ import '../utils/arrive-footer.js'
  **/
 import '../utils/load-demand'
 
-// 回到顶部
-import '../utils/scrollTop'
+import { getUserInfo } from '../store/reducers/user'
 
 // import runtime from 'serviceworker-webpack-plugin/lib/runtime'
 // if ('serviceWorker' in navigator) {
@@ -38,8 +37,6 @@ import '../utils/scrollTop'
 
 // 从页面中获取服务端生产redux数据，作为客户端redux初始值
 const store = configureStore(window.__initState__)
-
-import { getUserInfo } from '../store/reducers/user'
 
 let userinfo = getUserInfo(store.getState())
 
@@ -66,7 +63,9 @@ const run = async () => {
 
   ReactDOM.hydrate(
     <Provider store={store}>
-      <BrowserRouter>{RouterDom()}</BrowserRouter>
+      <BrowserRouter>
+        <RouterDom />
+      </BrowserRouter>
     </Provider>,
     document.getElementById('app')
   )

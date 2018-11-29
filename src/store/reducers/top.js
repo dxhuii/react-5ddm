@@ -1,9 +1,9 @@
 import merge from 'lodash/merge'
 
 export default function top(state = {}, action = {}) {
+  const { order, data, area } = action
   switch (action.type) {
     case 'GET_TOP':
-      const { order, data, area } = action
       state[`${order}-${area}`] = data
       return merge({}, state, {})
 

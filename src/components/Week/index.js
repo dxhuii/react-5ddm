@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
@@ -22,14 +23,24 @@ import './style.scss'
   })
 )
 class weekDay extends Component {
-  componentDidMount () {
+  static propTypes = {
+    week: PropTypes.object,
+    weekLoad: PropTypes.func,
+    id: PropTypes.any,
+    title: PropTypes.string,
+    link: PropTypes.string,
+    isJp: PropTypes.array,
+    type: PropTypes.number
+  }
+
+  componentDidMount() {
     const { week, weekLoad, id } = this.props
     if (week && !week.data) {
       weekLoad({ id })
     }
   }
 
-  getArea (weekData = []) {
+  getArea(weekData = []) {
     let cn = []
     let jp = []
     weekData.map(item => {
@@ -42,7 +53,7 @@ class weekDay extends Component {
     return [cn, jp]
   }
 
-  getEveryWeek (weekData, isCN) {
+  getEveryWeek(weekData, isCN) {
     // isCN  1 日本  其他为中国
     let data = {}
     let [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday] = [[], [], [], [], [], [], []]
@@ -75,7 +86,7 @@ class weekDay extends Component {
     return data
   }
 
-  render () {
+  render() {
     const {
       title,
       week: { data = [] },

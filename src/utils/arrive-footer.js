@@ -1,7 +1,7 @@
 // 到达页尾事件
-;(function() {
+(function () {
   // 如果是服务器，那么就不存在 window 和 document 全局变量，因此不继续执行
-  if (typeof window == 'undefined' || typeof document == 'undefined') {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
     return
   }
 
@@ -43,7 +43,7 @@
     },
     remove: name => {
       for (let i = 0, max = list.length; i < max; i++) {
-        if (list[i].name == name) {
+        if (list[i].name === name) {
           list.splice(i, 1)
           break
         }

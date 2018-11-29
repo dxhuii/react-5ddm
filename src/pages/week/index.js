@@ -5,7 +5,7 @@ import Meta from '../../components/Meta'
 import WeekDay from '../../components/Week'
 
 @Shell
-export default class Week extends PureComponent {
+class Week extends PureComponent {
   render() {
     return (
       <div className="row">
@@ -20,3 +20,5 @@ export default class Week extends PureComponent {
     )
   }
 }
+
+export default Week

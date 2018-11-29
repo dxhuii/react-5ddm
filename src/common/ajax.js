@@ -1,13 +1,12 @@
-import config from '../../config'
 import axios from 'axios'
 
 const AJAX = ({ url = '', method = 'get', data = {}, headers = {} }) => {
   let option = { url, method, headers }
 
-  if (method == 'get') {
+  if (method === 'get') {
     data._t = new Date().getTime()
     option.params = data
-  } else if (method == 'post') {
+  } else if (method === 'post') {
     option.data = data
   }
 
@@ -20,7 +19,7 @@ const AJAX = ({ url = '', method = 'get', data = {}, headers = {} }) => {
         return ['return none']
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       if (error && error.response && error.response.data) {
         return [error.response.data]
       } else {

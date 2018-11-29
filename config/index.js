@@ -67,7 +67,7 @@ let config = {
 config.head += config.favicon
 
 // 开发环境配置
-if (process.env.NODE_ENV == 'development') {
+if (process.env.NODE_ENV === 'development') {
   config.debug = true
   config.class_scoped_name = '[name]_[local]__[hash:base64:5]'
 }

@@ -9,35 +9,39 @@ import parseUrl from '../common/parse-url'
 const Shell = Component => {
   if (!Component.loadData) {
     Component.loadData = ({ store, match }) => {
-      return new Promise(async function (resolve, reject) {
+      return new Promise(async function(resolve, reject) {
         resolve({ code: 200 })
       })
     }
   }
 
   class Shell extends React.Component {
+    constructor(props) {
+      super(props)
+      const { search } = props.location
+      this.props.location.params = search ? parseUrl(search) : {}
+    }
+
     static defaultProps = {
       loadData: Component.loadData || null
     }
 
     // 组件加载完成
-    componentDidMount () {
+    componentDidMount() {
       // console.log('组件加载完成');
-      const { search } = this.props.location
-      this.props.location.params = search ? parseUrl(search) : {}
     }
 
     // 更新组件
-    componentDidUpdate () {
+    componentDidUpdate() {
       // console.log('组件加载更新了');
     }
 
     // 组件被卸载
-    componentWillUnmount () {
+    componentWillUnmount() {
       // console.log('组件加载被卸载');
     }
 
-    render () {
+    render() {
       return (
         <div>
           <Component {...this.props} />

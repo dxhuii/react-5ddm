@@ -3,9 +3,9 @@ import merge from 'lodash/merge'
 let initialState = {}
 
 export default function week(state = initialState, action = {}) {
+  const { id, data } = action
   switch (action.type) {
     case 'GET_WEEK':
-      const { id, data } = action
       state[id] = data
       return merge({}, state, {})
 

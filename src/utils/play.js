@@ -26,8 +26,8 @@ const youku = (pv, isP) => {
   return is9
     ? HTML(ykUrl(data.length === 3 ? data[2] : pv))
     : isP
-      ? iframe(ykIf(data.length === 3 ? data[2] : pv))
-      : ykUrl(data.length === 3 ? data[2] : pv)
+    ? iframe(ykIf(data.length === 3 ? data[2] : pv))
+    : ykUrl(data.length === 3 ? data[2] : pv)
 }
 const iqiyi = (pv, isP) => {
   let plus = isMobile() ? '&tvid=' : '&tvId='
@@ -75,8 +75,8 @@ const bilibili = (pv, isP) => {
     pv.indexOf('http') !== -1
       ? pv
       : data.length === 2
-        ? 'https://www.bilibili.com/video/av' + data[0] + '/?p=' + data[1]
-        : 'https://www.bilibili.com/video/av' + pv + '/'
+      ? 'https://www.bilibili.com/video/av' + data[0] + '/?p=' + data[1]
+      : 'https://www.bilibili.com/video/av' + pv + '/'
   return isP ? HTML(purl) : purl
 }
 const acfun = (pv, isP) => {

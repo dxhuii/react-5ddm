@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -17,7 +17,13 @@ import './style.scss'
     topLoad: bindActionCreators(topLoad, dispatch)
   })
 )
-export default class Top extends Component {
+class Top extends Component {
+  static propTypes = {
+    order: PropTypes.string,
+    area: PropTypes.string,
+    top: PropTypes.object,
+    topLoad: PropTypes.func
+  }
   componentDidMount() {
     const { order = 'addtime', area = '' } = this.props
     const { top, topLoad } = this.props
@@ -59,3 +65,5 @@ export default class Top extends Component {
     )
   }
 }
+
+export default Top

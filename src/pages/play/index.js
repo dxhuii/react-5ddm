@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -12,7 +13,7 @@ import Shell from '../../components/Shell'
 import Meta from '../../components/Meta'
 
 // 生成异步加载组件
-// import { AsyncComponent } from '../../components/generate-async-component'
+import { AsyncComponent } from '../../components/generate-async-component'
 import play from '../../utils/play'
 
 import './style.scss'
@@ -28,7 +29,7 @@ const { isJump, is9 } = play
     playerLoad: bindActionCreators(playerLoad, dispatch)
   })
 )
-export class Play extends Component {
+class Play extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -36,6 +37,12 @@ export class Play extends Component {
       type: '',
       outputHTML: ''
     }
+  }
+
+  static propTypes = {
+    player: PropTypes.object,
+    playerLoad: PropTypes.func,
+    match: PropTypes.object
   }
 
   componentDidMount() {
@@ -161,11 +168,9 @@ export class Play extends Component {
             <PlayList />
           </div>
         </div>
-        {/* <div styleName='editor'>
-          <AsyncComponent load={() => import('../../components/Editor')}>
-            {Component => <Component id={id}/>}
-          </AsyncComponent>
-        </div> */}
+        <div styleName="editor">
+          <AsyncComponent load={() => import('../../components/Editor')}>{Component => <Component id={+id} />}</AsyncComponent>
+        </div>
       </Fragment>
     )
   }
