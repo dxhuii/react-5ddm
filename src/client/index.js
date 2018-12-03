@@ -8,11 +8,6 @@ import Loadable from 'react-loadable'
 import configureStore from '../store'
 import createRouter from '../router'
 
-// 引入 bootstrap
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'popper.js'
-import 'bootstrap/dist/js/bootstrap.min.js'
-
 // 引入全局样式
 import '../pages/global.scss'
 

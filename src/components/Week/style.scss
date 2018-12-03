@@ -1,4 +1,4 @@
-.week{height: 510px;overflow-x: hidden;overflow-y: auto;margin-top: 25px;margin-bottom: -10px;
+.week{height: 510px;overflow-x: hidden;overflow-y: auto;margin-top: 25px;margin-bottom: -10px;display: block;
   &.weekCn{height: 306px;}
   li{position: relative;height: 77px;
     div{float: left;position: relative;margin-right: 10px;width: 77px;height: 77px;border-radius: 4px;overflow: hidden;box-shadow: 0 3px 14px 0 hsla(23,13%,76%,.4);z-index: 2;

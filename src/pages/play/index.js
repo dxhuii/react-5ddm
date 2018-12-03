@@ -12,8 +12,6 @@ import Detail from '../../components/Detail'
 import Shell from '../../components/Shell'
 import Meta from '../../components/Meta'
 
-// 生成异步加载组件
-import { AsyncComponent } from '../../components/generate-async-component'
 import play from '../../utils/play'
 
 import './style.scss'
@@ -167,9 +165,6 @@ class Play extends Component {
           <div className="col-4 mt-3">
             <PlayList />
           </div>
-        </div>
-        <div styleName="editor">
-          <AsyncComponent load={() => import('../../components/Editor')}>{Component => <Component id={+id} />}</AsyncComponent>
         </div>
       </Fragment>
     )

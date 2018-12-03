@@ -4,6 +4,9 @@
   display: flex;
   border-radius: 15px;
   border: 1px solid #e5e9ef;
+  min-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
   li{position: relative;flex: 1;height: 30px;text-align: center;color: #666;cursor: pointer;border-radius: 15px;
     em{font-size: 12px;margin-left: 5px;color: #ccc;}
     &.active{background: #f60;color: #fff;
@@ -39,3 +42,4 @@
       &:after{content: "\e61c";position: relative;top: -1px;}
     }
 }
+

@@ -19,7 +19,9 @@ class Home extends Component {
   render() {
     return (
       <Fragment>
-        <Swiper />
+        <div className="swiper">
+          <Swiper />
+        </div>
         <div className="row">
           <Meta title="首页" />
           <div className="col-12 col-lg-6 col-xl-9 mt-3">

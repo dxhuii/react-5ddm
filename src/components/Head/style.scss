@@ -1,13 +1,41 @@
-header{
+header {
   width: 100%;
   display: flex;
+  background-color: #f60;
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
   :global{
-    .navbar{
-      background-color: #fff;
+    .wp{
+      display: flex;
     }
   }
+  nav{
+    flex-grow:1;
+    background: #f90;
+    display: flex;
+  }
 }
-.test{
-  width: 100%;
-  background-color: #333 !important;
+
+.header-logo{
+  width: 100px;
+  height: 40px;
+  background: #f39;
+  flex-basis: 100px;
+}
+
+.header-tool{
+  width: 100px;
+  height: 40px;
+  background: #333;
+  flex-basis: 100px;
+}
+
+
+
+.header-search{
+  width: 200px;
+  height: 40px;
+  background-color: #000;
+  flex-basis: 200px;
 }
