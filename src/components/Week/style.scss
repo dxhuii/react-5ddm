@@ -1,3 +1,4 @@
+@import '../../pages/_mixin';
 .week{
   height: 510px;
   overflow-x: hidden;
@@ -41,10 +42,7 @@
       font-size: 12px;
       color: #444;
       margin-right: 50px;
-      display: flex;
-      box-orient: vertical;
-      line-clamp: 3;
-      overflow: hidden;
+      @include clamp(3)
     }
     p{
       position: absolute;

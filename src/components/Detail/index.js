@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -39,7 +39,6 @@ class Detail extends Component {
     userinfo: PropTypes.object,
     cmScore: PropTypes.object,
     hits: PropTypes.func,
-    subTitle: PropTypes.string,
     isMeta: PropTypes.any
   }
 
@@ -82,45 +81,63 @@ class Detail extends Component {
     const {
       info: { data = {}, loading },
       isMeta,
-      subTitle,
       userinfo: { userid }
     } = this.props
     const { id, cid, name, content, pic, actor, area, aliases, gold, filmtime, total, director, type, language } = data
     return (
-      <div styleName="detail">
+      <Fragment>
         {loading ? <div> loading... </div> : null}
         {isMeta ? (
           <Meta title={name}>
             <meta property="og:locale" content="zh_CN" />
             <meta property="og:type" content="videolist" />
-            <meta property="og:title" content={name} /> <meta property="og:description" content={content} />{' '}
+            <meta property="og:title" content={name} /> <meta property="og:description" content={content} />
             <meta property="og:image" content={pic} />
-            <meta property="og:url" content={`/subject/${id}`} /> <meta property="og:video" content={`/play/${id}/1`} />{' '}
+            <meta property="og:url" content={`/subject/${id}`} /> <meta property="og:video" content={`/play/${id}/1`} />
             <meta property="og:site_name" content={'9站'} />
             <meta name="description" content={content} /> <meta name="keywords" content={name} />
           </Meta>
         ) : null}
-        {/* <div styleName='blur' style={{backgroundImage: `url(${pic})`}}></div> */}
-        <div styleName="detail-con" className="clearfix">
-          <h1>
-            <Link to={`/subject/${data.id}`}> {name} </Link> {subTitle ? ` ${subTitle}` : null}
-          </h1>
-          {/* <div styleName="pic"><img src={pic} /></div> */}
-          <div styleName="info">
-            <p>{actor}</p>
-            <p>{area}</p>
-            <p>{aliases}</p>
-            <p>{total}</p>
-            <p>{filmtime}</p>
-            <p>{director}</p>
-            <p>{type}</p>
-            <p>{language}</p>
+        <div styleName="detail">
+          <div styleName="detail-blur" style={{ backgroundImage: `url(${pic})` }} />
+          <div styleName="detail-info__con" className="wp clearfix">
+            <div styleName="detail-info__pic">
+              <img src={pic} />
+            </div>
+            <div styleName="detail-info__info">
+              <h1>{name}</h1>
+              <p>{actor}</p>
+              <p>{area}</p>
+              <p>{aliases}</p>
+              <p>{total}</p>
+              <p>{filmtime}</p>
+              <p>{director}</p>
+              <p>{type}</p>
+              <p>{language}</p>
+            </div>
+            <div styleName="detail-info__score"> {gold} </div>
+            <div onClick={() => this.addMark('love', id, cid, userid)}> 收藏 </div>
+            <div onClick={() => this.addMark('remind', id, cid, userid)}> 订阅 </div>
           </div>
-          <div styleName="score"> {gold} </div>
         </div>
-        <div onClick={() => this.addMark('love', id, cid, userid)}> 收藏 </div>{' '}
-        <div onClick={() => this.addMark('remind', id, cid, userid)}> 订阅 </div>
-      </div>
+        <ul styleName="detail-nav" className="tac">
+          <li styleName="active">
+            <a>作品详情</a>
+          </li>
+          <li>
+            <a>新闻花絮</a>
+          </li>
+          <li>
+            <a>演员角色</a>
+          </li>
+          <li>
+            <a>分集剧情</a>
+          </li>
+          <li>
+            <a>播出时间</a>
+          </li>
+        </ul>
+      </Fragment>
     )
   }
 }

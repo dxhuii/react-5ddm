@@ -18,17 +18,19 @@
       padding: 0 30px;
       font-size: 18px;
       display: inline-block;
-      color: #999;
       border-bottom: 1px solid transparent;
-      &.active {
+      a {
+        padding: 20px 0;
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        bottom: -1px;
+        color: #999;
+      }
+      &.active, &:hover {
           margin-bottom: -1px;
-          color: #282828;
           a {
-            position: relative;
-            padding: 20px 0;
-            display: inline-block;
-            width: 100%;
-            bottom: -1px;
+            color: #282828;
             border-bottom: 1px solid #282822;
           }
       }
