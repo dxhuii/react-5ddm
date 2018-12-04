@@ -14,9 +14,12 @@ header {
   a {
     padding: 0 24px;
     display: inline-block;
-    &:hover, &.active{
+    &:hover {
       background-color: #282828;
       color: #fff;
+    }
+    &.active {
+      font-weight: bold;
     }
   }
   nav{

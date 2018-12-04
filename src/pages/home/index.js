@@ -52,7 +52,7 @@ class Home extends Component {
             </div>
           </div>
         </div>
-        <ul styleName="list-tab">
+        <ul styleName="list-tab" className="mt20">
           <li styleName={order === 'addtime' ? 'active' : ''} onClick={() => this.onSelect('addtime')}>
             <a>按最新</a>
           </li>
