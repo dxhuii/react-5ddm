@@ -47,32 +47,35 @@ module.exports = {
       // scss 文件解析
       {
         test: /\.scss$/,
-        use: [{
-          loader: `css/locals`,
-          options: {
-            modules: true,
-            localIdentName: config.class_scoped_name
-            // minimize: true,
-            // sourceMap: true
+        use: [
+          {
+            loader: `css/locals`,
+            options: {
+              modules: true,
+              localIdentName: config.class_scoped_name
+              // minimize: true,
+              // sourceMap: true
 
-            // camelCase: true,
-            // importLoaders: 1,
-            // modules: true,
-            // localIdentName: config.class_scoped_name
+              // camelCase: true,
+              // importLoaders: 1,
+              // modules: true,
+              // localIdentName: config.class_scoped_name
+            }
+          },
+          {
+            loader: `sass`
           }
-        },
-        {
-          loader: `sass`
-        }
         ]
       },
 
       // css 解析
       {
         test: /\.css$/,
-        use: [{
-          loader: `css/locals`
-        }]
+        use: [
+          {
+            loader: `css/locals`
+          }
+        ]
       }
     ]
   },

@@ -72,6 +72,17 @@ module.exports = {
           },
           {
             loader: `sass`
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                require('postcss-flexbugs-fixes'),
+                require('autoprefixer')({
+                  browsers: ['last 2 versions']
+                })
+              ]
+            }
           }
         ]
       },
@@ -79,11 +90,26 @@ module.exports = {
       // css 解析
       {
         test: /\.css$/,
-        use: ['css-hot-loader', {
-          loader: MiniCssExtractPlugin.loader
-        }, {
-          loader: `css`
-        }]
+        use: [
+          'css-hot-loader',
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: `css`
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                require('postcss-flexbugs-fixes'),
+                require('autoprefixer')({
+                  browsers: ['last 2 versions']
+                })
+              ]
+            }
+          }
+        ]
       },
 
       // 小于8K的图片，转 base64
