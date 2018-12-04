@@ -40,16 +40,16 @@ class Top extends Component {
     return (
       <div styleName="top">
         {loading ? <div>loading...</div> : null}
-        <h2>排行榜</h2>
-        <ul className="list-group">
+        <h2>
+          <i className="iconfont">&#xe613;</i>排行榜
+        </h2>
+        <ul>
           {data.map((item, index) => {
             const elem = (
-              <li className="list-group-item" key={item.id}>
-                <span className="badge badge-warning float-right">{item.glod}</span>
-                <span className={`badge badge-pill badge-${index > 2 ? 'secondary' : 'success'} float-left`}>{index + 1}</span>
-                <Link className="float-left" to={`/subject/${item.id}`}>
-                  {item.title}
-                </Link>
+              <li key={item.id}>
+                <span styleName={`top-li__num ${index <= 2 ? 'on' : ''}`}>{index + 1}</span>
+                <Link to={`/subject/${item.id}`}>{item.title}</Link>
+                <span styleName="top-li__score">{item.glod}</span>
               </li>
             )
             if (area === 'CN') {

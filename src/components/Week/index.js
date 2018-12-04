@@ -128,9 +128,9 @@ class weekDay extends Component {
         isJp={isJp}
       >
         {weekCn.map((week, index) => (
-          <ul className="row" styleName={type === 0 ? 'week weekCn' : 'week'} name={week} key={week}>
+          <ul styleName={type === 0 ? 'week weekCn' : 'week'} name={week} key={week}>
             {weekData[weekEng[index]].map(item => (
-              <li className="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-4 clearfix" key={item.id}>
+              <li key={item.id}>
                 <Link key={item.id} to={`/subject/${item.id}`}>
                   <div className="load-demand" data-load-demand={`<img src="${picHttps(item.pic)}" alt="${item.title}" />`} />
                   <h4>{item.title}</h4>

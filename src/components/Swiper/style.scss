@@ -6,10 +6,9 @@
     max-width: 100%;
     margin: 0 auto;
     display: block;
-    background: #EE3769;
+    background: #ddd;
     height: 300px;
     text-align: center;
-    border-radius: 10px;
   }
   .swipe-wrap {
     overflow: hidden;
@@ -26,5 +25,76 @@
     margin-top: 140px;
     color: white;
     font-weight: bold;
+  }
+}
+
+.swiper {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  &:hover{
+    .swiper-prev, .swiper-next{
+      display: block;
+    }
+  }
+}
+
+.swiper-prev, .swiper-next {
+  display: none;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, .2);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
+  i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: #fff;
+    opacity: .7;
+  }
+  &:hover {
+    i {
+      color: #ffd100;
+    }
+  }
+}
+
+.swiper-prev {
+  left: 20px;
+}
+
+.swiper-next {
+  right: 20px;
+}
+
+.page {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+  em {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    text-indent: -9999px;
+    background: rgba(0, 0, 0, .3);
+    cursor: pointer;
+    margin: 0 3px;
+  }
+}
+
+:global{
+  .page-em__on {
+    background: rgba(0, 0, 0, .7)!important;
   }
 }

@@ -31,7 +31,8 @@ class Head extends Component {
 
   static propTypes = {
     userinfo: PropTypes.object.isRequired,
-    signOut: PropTypes.func.isRequired
+    signOut: PropTypes.func.isRequired,
+    match: PropTypes.object
   }
 
   async signOut() {
@@ -53,46 +54,47 @@ class Head extends Component {
   }
 
   render() {
-    const { userinfo } = this.props
+    const {
+      userinfo,
+      match: { url }
+    } = this.props
     const { keyword, keywordCn } = this.state
     return (
       <header>
-        <div className="wp">
-          <NavLink styleName="header-logo" exact to="/">
-            React
-          </NavLink>
-          <nav>
-            <div styleName="header-search">
-              <form action={`/search/${keyword}`}>
-                <input name="cn" defaultValue={keywordCn} hidden />
-                <input required type="text" placeholder="Search" onChange={this.onChange} />
-                <button disabled={!keyword} type="submit">
-                  Search
-                </button>
-              </form>
-            </div>
-            <div styleName="header-tool">
-              <span>{userinfo.nickname}</span>
-              <a href="javascript:void(0)" onClick={this.signOut}>
-                退出
-              </a>
-            </div>
-            <div styleName="header-nav">
-              <NavLink exact to="/">
-                Home
-              </NavLink>
-              <NavLink exact to="/topics">
-                Topics
-              </NavLink>
-              <NavLink exact to="/week">
-                week
-              </NavLink>
-              <NavLink exact to="/list">
-                list
-              </NavLink>
-            </div>
-          </nav>
-        </div>
+        <NavLink styleName="header-logo" exact to="/">
+          React
+        </NavLink>
+        <nav>
+          <div styleName="header-nav">
+            <NavLink styleName={url === '/' ? 'active' : ''} exact to="/">
+              首页
+            </NavLink>
+            <NavLink styleName={url === '/topics' ? 'active' : ''} exact to="/topics">
+              话题
+            </NavLink>
+            <NavLink styleName={url === '/week' ? 'active' : ''} exact to="/week">
+              星期
+            </NavLink>
+            <NavLink styleName={url === '/list' ? 'active' : ''} exact to="/list">
+              列表
+            </NavLink>
+          </div>
+          <div styleName="header-search">
+            <form action={`/search/${keyword}`}>
+              <input name="cn" defaultValue={keywordCn} hidden />
+              <input required type="text" placeholder="Search" onChange={this.onChange} />
+              <button disabled={!keyword} type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+          <div styleName="header-tool">
+            <span>{userinfo.nickname}</span>
+            <a href="javascript:void(0)" onClick={this.signOut}>
+              退出
+            </a>
+          </div>
+        </nav>
       </header>
     )
   }

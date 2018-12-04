@@ -1,0 +1,37 @@
+.main{
+  display: flex;
+  flex-wrap: wrap;
+}
+.main-left {
+  width: 880px;
+  margin-right: 20px;
+}
+.main-right {
+  width: 300px;
+}
+
+.list-tab {
+  text-align: center;
+  margin-top: 50px;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  li {
+      padding: 0 30px;
+      font-size: 18px;
+      display: inline-block;
+      color: #999;
+      border-bottom: 1px solid transparent;
+      &.active {
+          margin-bottom: -1px;
+          color: #282828;
+          a {
+            position: relative;
+            padding: 20px 0;
+            display: inline-block;
+            width: 100%;
+            bottom: -1px;
+            border-bottom: 1px solid #282822;
+          }
+      }
+  }
+}

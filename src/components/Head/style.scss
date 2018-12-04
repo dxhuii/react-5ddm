@@ -1,41 +1,52 @@
 header {
-  width: 100%;
+  padding: 0 20px;
   display: flex;
-  background-color: #f60;
-  height: 40px;
-  line-height: 40px;
+  background-color: #ffd100;
+  height: 56px;
+  line-height: 56px;
   color: #fff;
-  :global{
-    .wp{
-      display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 999;
+  color: #282828;
+  a {
+    padding: 0 24px;
+    display: inline-block;
+    &:hover, &.active{
+      background-color: #282828;
+      color: #fff;
     }
   }
   nav{
     flex-grow:1;
-    background: #f90;
     display: flex;
   }
 }
 
-.header-logo{
+.header-logo {
   width: 100px;
-  height: 40px;
-  background: #f39;
+  line-height: 56px;
   flex-basis: 100px;
+  font-size: 24px;
+  text-align: center;
+  color: #282828;
+  background: none;
 }
 
-.header-tool{
-  width: 100px;
-  height: 40px;
-  background: #333;
-  flex-basis: 100px;
+.header-tool {
+  width: 107px;
+  flex-basis: 107px;
 }
 
-
-
-.header-search{
+.header-search {
   width: 200px;
-  height: 40px;
-  background-color: #000;
   flex-basis: 200px;
+  display: none;
+}
+
+.header-nav {
+  flex-grow:1;
+  line-height: 56px;
 }

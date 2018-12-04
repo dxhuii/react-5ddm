@@ -37,7 +37,7 @@ class Tabs extends PureComponent {
         <div styleName="title">
           <Link to={link}>
             {linkText}
-            <i className="iconfont icon-right" />
+            <i className="iconfont">&#xe65e;</i>
           </Link>
           <h2>
             {icon} {title}

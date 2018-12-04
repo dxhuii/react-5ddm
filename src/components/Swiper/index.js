@@ -11,8 +11,8 @@ export default class Swiper extends Component {
   }
   componentDidMount() {
     this.mySwipe = { ...this.swipe.instance }
-    const pager = document.querySelector('.pager')
-    this.bullets = pager.querySelectorAll('em')
+    const page = document.querySelector('#page')
+    this.bullets = page.querySelectorAll('em')
     const that = this
 
     for (let i = 0; i < this.bullets.length; i++) {
@@ -35,9 +35,9 @@ export default class Swiper extends Component {
   slideTab(index, bullets) {
     var i = bullets.length
     while (i--) {
-      bullets[i].className = bullets[i].className.replace('on', '')
+      bullets[i].className = bullets[i].className.replace('page-em__on', '')
     }
-    bullets[index].className = 'on'
+    bullets[index].className = 'page-em__on'
   }
 
   prev = () => {
@@ -54,7 +54,7 @@ export default class Swiper extends Component {
 
   render() {
     return (
-      <Fragment>
+      <div styleName="swiper">
         <Swipe
           ref={o => (this.swipe = o)}
           startSlide={0}
@@ -72,16 +72,18 @@ export default class Swiper extends Component {
           <SwipeItem onClick={this.handleClick.bind(this)}>Slide Two</SwipeItem>
           <SwipeItem onClick={this.handleClick.bind(this)}>Slide Three</SwipeItem>
         </Swipe>
-        <div style={{ textAlign: 'center', paddingTop: 20 }}>
-          <div className="pager">
-            <em className="on">1</em>
-            <em>2</em>
-            <em>3</em>
-          </div>
-          <button onClick={this.prev}>prev</button>
-          <button onClick={this.next}>next</button>
+        <div id="page" styleName="page">
+          <em className="page-em__on">1</em>
+          <em>2</em>
+          <em>3</em>
         </div>
-      </Fragment>
+        <div styleName="swiper-prev" onClick={this.prev}>
+          <i className="iconfont">&#xe8ff;</i>
+        </div>
+        <div styleName="swiper-next" onClick={this.next}>
+          <i className="iconfont">&#xe65e;</i>
+        </div>
+      </div>
     )
   }
 }
