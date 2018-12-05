@@ -58,4 +58,19 @@
   }
 }
 
-.player{margin: 0 -15px;}
+.player{
+  display: flex;
+}
+.player-left{
+  width: 880px;
+  margin-right: 20px;
+}
+.player-right{
+  width: 300px;
+  background-color: #000;
+}
+
+.player-box {
+  height: 495px;
+  background-color: #000;
+}

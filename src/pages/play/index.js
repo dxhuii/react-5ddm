@@ -8,7 +8,6 @@ import { playerLoad } from '../../store/actions/player'
 import { getPlayerList } from '../../store/reducers/player'
 
 import PlayList from '../../components/Play/PlayList'
-import Detail from '../../components/Detail'
 import Shell from '../../components/Shell'
 import Meta from '../../components/Meta'
 
@@ -138,21 +137,19 @@ class Play extends Component {
 
   render() {
     const {
-      player: { data = {}, loading },
-      match: {
-        params: { id }
-      }
+      player: { data = {}, loading }
     } = this.props
     const { title, subTitle, defaultPlay, playHtml, playData } = this.getData(data)
     return (
-      <Fragment>
+      <div className="wp mt20">
         {loading ? <div>loading...</div> : null}
         <Meta title={`${title} ${subTitle}`} />
-        <Detail subTitle={subTitle} />
-        <div className="row">
-          <div className="col-8 mt-3">
-            <div styleName="player">{playHtml || defaultPlay}</div>
-            {/* <div styleName='player' dangerouslySetInnerHTML={{__html: playHtml || defaultPlay}} /> */}
+        <div styleName="player">
+          <div styleName="player-left">
+            <div styleName="player-box">{playHtml || defaultPlay}</div>
+            {/* <div styleName='player-box' dangerouslySetInnerHTML={{__html: playHtml || defaultPlay}} /> */}
+          </div>
+          <div styleName="player-right">
             <ul styleName="playlist">
               {playData.map(item => (
                 <li key={item.type} onClick={() => this.onPlay(item.vid, item.type)}>
@@ -162,11 +159,9 @@ class Play extends Component {
               ))}
             </ul>
           </div>
-          <div className="col-4 mt-3">
-            <PlayList />
-          </div>
         </div>
-      </Fragment>
+        <PlayList />
+      </div>
     )
   }
 }

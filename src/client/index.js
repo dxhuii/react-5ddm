@@ -5,11 +5,11 @@ import { Provider } from 'react-redux'
 import { StaticRouter, matchPath } from 'react-router'
 import Loadable from 'react-loadable'
 
-import configureStore from '../store'
-import createRouter from '../router'
-
 // 引入全局样式
 import '../pages/global.scss'
+
+import configureStore from '../store'
+import createRouter from '../router'
 
 // ArriveFooter 监听抵达页尾的事件
 import '../utils/arrive-footer.js'
