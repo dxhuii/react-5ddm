@@ -5,9 +5,13 @@
   overflow-x: auto;
   overflow-y: hidden;
 }
+.playlist-boreder{
+  border-bottom: 1px solid #ddd;
+}
 .playlist-ul {
   position: relative;
-  li{
+  max-height: 145px;
+  li{ 
     padding: 10px;
     width: 100px;
     margin-right: 10px;
@@ -15,6 +19,16 @@
     border-radius: 5px;
     border: 1px solid #ddd;
     display: inline-block;
+    margin-right: 12.6px;
+    &:nth-child(9n){
+      margin-right: 0;
+    }
+    &:hover{
+      border-color: #f00!important;
+      a {
+        color: #f00;
+      }
+    }
     p {
       @include clamp(1);
     }
@@ -23,12 +37,12 @@
 
 .playlist-nav {
   position: relative;
-  border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
   li{
     width: 130px;
     display: inline-block;
     margin-right: 10px;
+    cursor: pointer;
     &.active{
       color: #f00;
     }

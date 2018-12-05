@@ -90,7 +90,7 @@ class PlayList extends Component {
       const title = data.split(' ')
       const name = data.split(/话|集/)
       num = title[0]
-      subName = trim(name[1])
+      subName = name[1] ? trim(name[1]) : ''
     }
 
     return (
@@ -114,7 +114,7 @@ class PlayList extends Component {
     const len = list.length
     const pageNum = len / pageSize
     const pageSurplus = len % pageSize // 除 pageSize 的余数
-    const num = pageSurplus !== 0 ? pageNum + 1 : pageNum // 余数不为 0 分页数 + 1
+    const num = parseInt(pageSurplus !== 0 ? pageNum + 1 : pageNum) // 余数不为 0 分页数 + 1
     let html = []
     if (len <= pageSize) {
       html.push(
@@ -126,7 +126,7 @@ class PlayList extends Component {
       for (let i = 1; i <= num; i++) {
         const pageStart = i === 1 ? 1 : pageSize * (i - 1) + 1
         const pageStart2 = i === 1 ? 0 : pageSize * (i - 1)
-        const pageEnd = i === 1 ? pageSize : pageSurplus !== 0 ? pageSize * i - (pageSize - pageSurplus) : pageSize * i // 余数不为 0 取剩余话数
+        const pageEnd = i === 1 ? pageSize : i === num && pageSurplus !== 0 ? pageSize * i - (pageSize - pageSurplus) : pageSize * i // 余数不为 0 取剩余话数
         html.push(
           <li
             key={i}
@@ -139,7 +139,7 @@ class PlayList extends Component {
       }
     }
 
-    // console.log(len / pageSize, html, pageSurplus)
+    // console.log(num, html, pageSurplus)
     return html.map(item => item)
   }
 
@@ -154,15 +154,15 @@ class PlayList extends Component {
     const len = parseInt(list.length / pageSize)
     const surplus = list.length % pageSize
     return (
-      <Fragment>
+      <div className="wp">
         {loading ? <div>loading...</div> : null}
-        <div styleName="playlist" className="mt20">
+        <div styleName="playlist playlist-boreder" className="mt20">
           <ul styleName="playlist-nav" style={{ width: `${(len + (surplus ? 1 : 0)) * 140}px` }}>
             {this.page()}
           </ul>
         </div>
         <div styleName="playlist" id="playlist">
-          <ul styleName="playlist-ul" style={{ width: `${dataSource.length * 132}px` }}>
+          <ul styleName="playlist-ul" /* style={{ width: `${dataSource.length * 132}px` }} */>
             {dataSource.map(item => (
               <li className={pid === item[1].toString() ? 'playlist-li__on' : ''} key={item[1]}>
                 {this.format(item[0], item[1], id)}
@@ -170,7 +170,7 @@ class PlayList extends Component {
             ))}
           </ul>
         </div>
-      </Fragment>
+      </div>
     )
   }
 }
