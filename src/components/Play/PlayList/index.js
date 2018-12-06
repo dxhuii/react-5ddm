@@ -51,29 +51,43 @@ class PlayList extends Component {
     if (!play || !play.data) {
       playlist({ id }).then(res => {
         const data = res[1]
-        this.setData(data)
+        this.setData(data, pid)
       })
     } else {
       const { data } = play
-      this.setData(data)
+      this.setData(data, pid)
     }
 
-    if (pid) {
-      this.current = document.querySelector('.playlist-li__on')
-      this.playlist = document.querySelector('#playlist')
-      const currentLeft = getOffset(this.current).left
-      const width = document.documentElement.clientWidth || document.body.clientWidth
-      this.playlist.scrollLeft = currentLeft - width / 3
-      console.log(this.current, getOffset(this.current).left, this.playlist, this.props)
-    }
+    // if (pid) {
+    //   this.current = document.querySelector('.playlist-li__on')
+    //   this.playlist = document.querySelector('#playlist')
+    //   const currentLeft = getOffset(this.current).left
+    //   const width = document.documentElement.clientWidth || document.body.clientWidth
+    //   this.playlist.scrollLeft = currentLeft - width / 3
+    //   console.log(this.current, getOffset(this.current).left, this.playlist, this.props)
+    // }
   }
 
-  setData(data) {
+  setData(data, pid) {
     const { pageSize } = this.state
     const list = (data.Data || {}).playurls || []
+    let start = 0
+    let end = pageSize
+    if (pid) {
+      const len = list.length
+      const num = parseInt(+pid / pageSize)
+      const surplus = +pid % pageSize
+      const yesSurplus = (num + 1) * pageSize
+      const noSurplus = num * pageSize
+      start = surplus !== 0 ? (+pid < pageSize ? 0 : noSurplus) : +pid < pageSize ? 0 : (num - 1) * pageSize
+      end = surplus !== 0 ? (yesSurplus > len ? len : yesSurplus) : num * pageSize
+    }
+    console.log(start, end, pageSize)
     this.setState({
       list,
-      dataSource: list.slice(0, pageSize)
+      start,
+      end,
+      dataSource: list.slice(start, end)
     })
   }
 
@@ -127,6 +141,7 @@ class PlayList extends Component {
         const pageStart = i === 1 ? 1 : pageSize * (i - 1) + 1
         const pageStart2 = i === 1 ? 0 : pageSize * (i - 1)
         const pageEnd = i === 1 ? pageSize : i === num && pageSurplus !== 0 ? pageSize * i - (pageSize - pageSurplus) : pageSize * i // 余数不为 0 取剩余话数
+        // console.log(start, pageStart2, end, pageEnd, 'page')
         html.push(
           <li
             key={i}
