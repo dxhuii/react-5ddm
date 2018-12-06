@@ -151,6 +151,17 @@ export default user => {
     },
 
     {
+      path: '/upload',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('../pages/upload'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter
+    },
+
+    {
       path: '**',
       head: Head,
       // component: asyncRouteComponent({

@@ -37,7 +37,7 @@ export function signIn({ username, password }) {
       }
 
       // 储存 cookie
-      ;[err, data] = await Ajax({
+      [err, data] = await Ajax({
         url: window.location.origin + '/sign/in',
         method: 'post',
         data: {
