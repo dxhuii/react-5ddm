@@ -9,13 +9,13 @@ let config = {
   host: 'localhost',
 
   // 接口地址
-  api: 'https://api.99496.com/',
+  API: 'https://api.99496.com/',
 
   // 服务端口
   port: 4000,
 
   // 登录token，cookie 的名称
-  auth_cookie_name: 'signin-cookie',
+  AUTH_COOKIE_NAME: 'signin',
 
   COOKIE_PREFIX: 'ikf_',
 

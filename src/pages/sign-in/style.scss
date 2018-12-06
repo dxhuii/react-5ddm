@@ -8,50 +8,33 @@
   background-color: #343a40;
 
   > form{
-    margin-top: 10%;
-    color:#fff;
-  }
-  
-  .icon{
-    background-image: url(./images/react-icon.png);
-    height: 120px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin:0 0 20px 0;
-  }
-}
-
-:global{
-
-  .form-signin {
-    width: 100%;
-    max-width: 330px;
     padding: 15px;
-    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    h1{
+      font-size: 36px;
+      color: #fff;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      margin-top: 20px;
+      border-radius: 20px;
+      padding: 0 15px;
+      height: 40px;
+      line-height: 40px;
+      border: none;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      height: 40px;
+      background-color: #ffd100;
+      font-size: 18px;
+      color: #282828;
+      border-radius: 20px;
+    }
   }
-  .form-signin .checkbox {
-    font-weight: 400;
-  }
-  .form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 16px;
-  }
-  .form-signin .form-control:focus {
-    z-index: 2;
-  }
-  .form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-  .form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-
 }

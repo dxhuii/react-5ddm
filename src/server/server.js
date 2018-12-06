@@ -21,7 +21,7 @@ import { initialStateJSON } from '../store/reducers'
 import { saveAccessToken, saveUserInfo } from '../store/actions/user'
 
 // 配置
-import { port, auth_cookie_name, api, redirectUrl } from '../../config'
+import { port, AUTH_COOKIE_NAME, COOKIE_PREFIX, API, redirectUrl } from '../../config'
 import sign from './sign'
 // import webpackHotMiddleware from './webpack-hot-middleware';
 
@@ -73,7 +73,7 @@ app.get('*', async (req, res) => {
     const url = path.split('/')
     const pinyin = url[2]
     // console.log(url.length, pinyin, url, path);
-    https.get(`${api}api.php?s=home-react-getVodId&pinyin=${pinyin}`, function(r) {
+    https.get(`${API}api.php?s=home-react-getVodId&pinyin=${pinyin}`, function(r) {
       // console.log('statusCode:', r.statusCode);
       // console.log('headers:', r.headers);
       r.on('data', function(d) {
@@ -96,7 +96,7 @@ app.get('*', async (req, res) => {
   let store = configureStore(JSON.parse(initialStateJSON))
 
   let user = null
-  let accessToken = req.cookies[auth_cookie_name] || ''
+  let accessToken = req.cookies[`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`] || ''
 
   // 验证 token 是否有效
   if (accessToken) {
