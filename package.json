@@ -76,10 +76,10 @@
     "postcss-loader": "^3.0.0",
     "postcss-scss": "^2.0.0",
     "prettier-eslint": "^8.8.2",
+    "progress-bar-webpack-plugin": "^1.11.0",
     "react-loadable": "^5.5.0",
     "rimraf": "^2.6.2",
     "sass-loader": "^7.1.0",
-    "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^1.1.1",
     "webpack": "^4.23.1",
     "webpack-cli": "^3.1.2",
@@ -87,6 +87,7 @@
     "webpack-hot-middleware": "^2.24.3",
     "webpack-manifest-plugin": "^2.0.4",
     "webpack-node-externals": "^1.7.2",
+    "webpack-parallel-uglify-plugin": "^1.1.0",
     "write-file-webpack-plugin": "^4.4.1"
   }
 }

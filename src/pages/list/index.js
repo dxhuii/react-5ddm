@@ -49,22 +49,18 @@ class SubjectList extends Component {
       location: { pathname },
       match: {
         params: { wd = '' }
-      },
-      location: {
-        params: { cn = '' }
       }
     } = this.props
     const isSearch = pathname.indexOf('search') !== -1
     return {
       wd,
-      cn,
       isSearch
     }
   }
 
   render() {
     const { id, mcid, area, year, letter, lz, day, order, limit } = this.state
-    const { wd, cn, isSearch } = this.isSearch()
+    const { wd, isSearch } = this.isSearch()
     const areaArr = ['全部', '大陆', '日本']
     const yearArr = ['全部', 2020, 2019, 2018, 2017, 2016, 2015]
     const letterArr = ['全部', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
@@ -74,7 +70,7 @@ class SubjectList extends Component {
     const typeName = this.getName(idArr, id)
     const mcidName = this.getName(mcidArr, mcid)
     const lzName = this.getName(lzArr, lz)
-    const keyword = decodeURIComponent(cn)
+    const keyword = decodeURIComponent(wd)
     return (
       <Fragment>
         {isSearch ? <h2>{keyword}</h2> : null}

@@ -9,8 +9,6 @@ import { getUserInfo } from '../../store/reducers/user'
 
 import './style.scss'
 
-import pinyin from 'pinyin'
-
 @connect(
   (state, props) => ({
     userinfo: getUserInfo(state)
@@ -46,11 +44,8 @@ class Head extends Component {
   }
 
   onChange = e => {
-    const keywordCn = e.target.value
-    const keyword = pinyin(keywordCn, {
-      style: pinyin.STYLE_NORMAL
-    }).join('')
-    this.setState({ keyword, keywordCn: keywordCn })
+    const keyword = e.target.value
+    this.setState({ keyword })
   }
 
   render() {
@@ -58,7 +53,7 @@ class Head extends Component {
       userinfo,
       match: { url }
     } = this.props
-    const { keyword, keywordCn } = this.state
+    const { keyword } = this.state
     return (
       <header>
         <NavLink styleName="header-logo" exact to="/">
@@ -81,7 +76,6 @@ class Head extends Component {
           </div>
           <div styleName="header-search">
             <form action={`/search/${keyword}`}>
-              <input name="cn" defaultValue={keywordCn} hidden />
               <input required type="text" placeholder="Search" onChange={this.onChange} />
               <button disabled={!keyword} type="submit">
                 Search

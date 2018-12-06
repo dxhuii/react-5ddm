@@ -1,7 +1,9 @@
 const webpack = require('webpack')
 const HtmlwebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
+const chalk = require('chalk')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 // const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const config = require('../index')
@@ -153,6 +155,11 @@ module.exports = {
       head: config.head,
       analysis_script: config.analysis_script
       // inject: false
+    }),
+
+    new ProgressBarPlugin({
+      format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
+      clear: false
     })
 
     // serviceworker 还在研究中
