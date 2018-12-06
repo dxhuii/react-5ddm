@@ -52,7 +52,7 @@
     "autoprefixer": "^9.4.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
-    "babel-plugin-react-css-modules": "^3.4.2",
+    "babel-plugin-react-css-modules": "^5.0.0",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.6.0",
     "css-hot-loader": "^1.4.2",
