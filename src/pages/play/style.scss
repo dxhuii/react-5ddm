@@ -7,9 +7,9 @@
   background-repeat: no-repeat;
   background: url(../../static/img/sprite_source.png) -240px -20px no-repeat;
   background-image: -webkit-image-set(url(../../static/img/sprite_source@2x.png) 2x);
-  &.other,&.pv,&.otherB,&.otherC, &.otherD,&.nodel,&.mad,&.cm,&.ed,&.bgm,&.op{
-    background-position: -240px -20px
-  }
+  // &.other,&.pv,&.otherB,&.otherC, &.otherD,&.nodel,&.mad,&.cm,&.ed,&.bgm,&.op{
+  //   background-position: -240px -20px
+  // }
   &.tudou {
     background-position: -40px 0
   }
@@ -52,9 +52,10 @@
   }
 }
 
-.playlist{display: flex;flex-wrap: wrap;
-  a{line-height: 28px;width: 33.3%;display: inline-block;
-    li{display: inline;}
+.playlist{
+  li{
+    line-height: 28px;
+    color: #333;
   }
 }
 
@@ -73,4 +74,26 @@
 .player-box {
   height: 495px;
   background-color: #000;
+  color: #333;
+}
+
+.player-info {
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  h1, h4{
+    display: inline;
+  }
+  h1 {
+    font-weight: bold;
+    &:hover{
+      a {
+        color: #f60;
+      }
+    }
+  }
+  h4{
+    color: #666;
+  }
 }

@@ -171,7 +171,7 @@ class PlayList extends Component {
     return (
       <div className="wp">
         {loading ? <div>loading...</div> : null}
-        <div styleName="playlist playlist-boreder" className="mt20">
+        <div styleName="playlist playlist-boreder">
           <ul styleName="playlist-nav" style={{ width: `${(len + (surplus ? 1 : 0)) * 140}px` }}>
             {this.page()}
           </ul>

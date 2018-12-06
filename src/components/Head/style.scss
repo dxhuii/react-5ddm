@@ -39,13 +39,38 @@ header {
 }
 
 .header-tool {
-  width: 107px;
-  flex-basis: 107px;
+  width: 135px;
+  flex-basis: 135px;
+  span {
+    padding-right: 24px;
+  }
 }
 
 .header-search {
-  width: 200px;
-  flex-basis: 200px;
+  width: 240px;
+  flex-basis: 240px;
+  background-color: #fff;
+  margin-top: 13px;
+  height: 30px;
+  border-radius: 15px;
+  margin-right: 20px;
+  overflow: hidden;
+  display: flex;
+  input {
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 15px;
+    border: none;
+    background: none;
+    float: left;
+  }
+  button {
+    width: 30px;
+    height: 30px;
+    text-align: right;
+    float: right;
+  }
 }
 
 .header-nav {

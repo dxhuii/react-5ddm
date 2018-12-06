@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-
+import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -137,7 +137,10 @@ class Play extends Component {
 
   render() {
     const {
-      player: { data = {}, loading }
+      player: { data = {}, loading },
+      match: {
+        params: { id }
+      }
     } = this.props
     const { title, subTitle, defaultPlay, playHtml, playData } = this.getData(data)
     return (
@@ -159,6 +162,12 @@ class Play extends Component {
               ))}
             </ul>
           </div>
+        </div>
+        <div styleName="player-info">
+          <h1>
+            <Link to={`/subject/${id}`}>{title}</Link>：
+          </h1>
+          <h4>{subTitle}</h4>
         </div>
         <PlayList />
       </div>

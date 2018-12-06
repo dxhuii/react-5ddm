@@ -76,13 +76,13 @@ class Head extends Component {
           </div>
           <div styleName="header-search">
             <form action={`/search/${keyword}`}>
-              <input required type="text" placeholder="Search" onChange={this.onChange} />
+              <input required type="text" placeholder="请输入关键词" onChange={this.onChange} />
               <button disabled={!keyword} type="submit">
-                Search
+                <i className="iconfont">&#xe78d;</i>
               </button>
             </form>
           </div>
-          <div styleName="header-tool">
+          <div styleName="header-tool" className="tar">
             <span>{userinfo.nickname}</span>
             <a href="javascript:void(0)" onClick={this.signOut}>
               退出
