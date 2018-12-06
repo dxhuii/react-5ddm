@@ -7,9 +7,9 @@
   background-repeat: no-repeat;
   background: url(../../static/img/sprite_source.png) -240px -20px no-repeat;
   background-image: -webkit-image-set(url(../../static/img/sprite_source@2x.png) 2x);
-  // &.other,&.pv,&.otherB,&.otherC, &.otherD,&.nodel,&.mad,&.cm,&.ed,&.bgm,&.op{
-  //   background-position: -240px -20px
-  // }
+  &.other,&.pv,&.otherB,&.otherC, &.otherD,&.nodel,&.mad,&.cm,&.ed,&.bgm,&.op{
+    background-position: -240px -20px
+  }
   &.tudou {
     background-position: -40px 0
   }
