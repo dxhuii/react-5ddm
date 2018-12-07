@@ -1,5 +1,5 @@
-import Ajax from '../../common/ajax'
-import config from '../../utils/config'
+import Ajax from '@/common/ajax'
+import config from '@/utils/config'
 
 export const hits = ({ id, sid }) => {
   return (dispatch, getState) => {

@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react'
 
 // 壳组件
-import Shell from '../../components/Shell'
-import Meta from '../../components/Meta'
+import Shell from '@/components/Shell'
+import Meta from '@/components/Meta'
 
-import WeekDay from '../../components/Week'
-import Top from '../../components/Top'
-import List from '../../components/List'
+import WeekDay from '@/components/Week'
+import Top from '@/components/Top'
+import List from '@/components/List'
 
-import Swiper from '../../components/Swiper'
+import Swiper from '@/components/Swiper'
 
 import './style.scss'
 

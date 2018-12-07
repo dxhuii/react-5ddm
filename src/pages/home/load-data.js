@@ -1,6 +1,6 @@
-import { weekLoad } from '../../store/actions/week'
-// import { topLoad } from '../../store/actions/top'
-// import { listLoad } from '../../store/actions/list'
+import { weekLoad } from '@/store/actions/week'
+// import { topLoad } from '@/store/actions/top'
+// import { listLoad } from '@/store/actions/list'
 
 export default ({ store, match }) => {
   return new Promise(async function(resolve, reject) {

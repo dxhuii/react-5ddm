@@ -1,5 +1,5 @@
 import express from 'express'
-import { auth_cookie_name, COOKIE_PREFIX } from '../../config'
+import { auth_cookie_name, COOKIE_PREFIX } from 'Config'
 
 // (安全实施) 服务端储存 token cookie 设置成httpOnly
 export default () => {

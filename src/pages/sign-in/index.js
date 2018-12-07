@@ -4,12 +4,12 @@ import { Route, Link, withRouter } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { signIn } from '../../store/actions/user'
+import { signIn } from '@/store/actions/user'
 
 import './style.scss'
 
-import Shell from '../../components/Shell'
-import Meta from '../../components/Meta'
+import Shell from '@/components/Shell'
+import Meta from '@/components/Meta'
 
 @withRouter
 @connect(

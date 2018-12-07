@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { listLoad } from '../../store/actions/list'
-import { getList } from '../../store/reducers/list'
+import { listLoad } from '@/store/actions/list'
+import { getList } from '@/store/reducers/list'
 
-import { picHttps } from '../../utils'
+import { picHttps } from '@/utils'
 
 import './style.scss'
 

@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
-import List from '../../components/List'
-import Shell from '../../components/Shell'
-import Meta from '../../components/Meta'
+import List from '@/components/List'
+import Shell from '@/components/Shell'
+import Meta from '@/components/Meta'
 
 import './style.scss'
 

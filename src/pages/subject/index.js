@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react'
 
-import PlayList from '../../components/Play/PlayList'
-import Detail from '../../components/Detail'
+import PlayList from '@/components/Play/PlayList'
+import Detail from '@/components/Detail'
 
-import Shell from '../../components/Shell'
+import Shell from '@/components/Shell'
 
 @Shell
 class Bangumi extends Component {
-  render () {
+  render() {
     return (
       <Fragment>
         <Detail key="detail" isMeta={true} />

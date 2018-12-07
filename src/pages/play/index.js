@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { playerLoad } from '../../store/actions/player'
-import { getPlayerList } from '../../store/reducers/player'
+import { playerLoad } from '@/store/actions/player'
+import { getPlayerList } from '@/store/reducers/player'
 
-import PlayList from '../../components/Play/PlayList'
-import Shell from '../../components/Shell'
-import Meta from '../../components/Meta'
+import PlayList from '@/components/Play/PlayList'
+import Shell from '@/components/Shell'
+import Meta from '@/components/Meta'
 
-import play from '../../utils/play'
+import play from '@/utils/play'
 
 import './style.scss'
 

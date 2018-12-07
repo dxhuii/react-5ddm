@@ -1,4 +1,4 @@
-import { weekLoad } from '../../store/actions/week'
+import { weekLoad } from '@/store/actions/week'
 
 export default ({ store, match }) => {
   return new Promise(async function(resolve, reject) {

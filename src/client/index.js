@@ -8,20 +8,20 @@ import Loadable from 'react-loadable'
 // 引入全局样式
 import '../pages/global.scss'
 
-import configureStore from '../store'
-import createRouter from '../router'
+import configureStore from '@/store'
+import createRouter from '@/router'
 
 // ArriveFooter 监听抵达页尾的事件
-import '../utils/arrive-footer.js'
+import '@/utils/arrive-footer.js'
 
 /**
  * 懒加载图片、Dom
  * 使用方式
  * 给dom添加class="load-demand"、data-load-demand="<div></div> or <img />"
  **/
-import '../utils/load-demand'
+import '@/utils/load-demand'
 
-import { getUserInfo } from '../store/reducers/user'
+import { getUserInfo } from '@/store/reducers/user'
 
 // import runtime from 'serviceworker-webpack-plugin/lib/runtime'
 // if ('serviceWorker' in navigator) {

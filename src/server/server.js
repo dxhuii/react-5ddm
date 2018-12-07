@@ -13,15 +13,15 @@ import { MetaTagsContext } from 'react-meta-tags'
 import Loadable from 'react-loadable'
 
 // 路由配置
-import configureStore from '../store'
+import configureStore from '@/store'
 // 路由组件
-import createRouter from '../router'
+import createRouter from '@/router'
 // 路由初始化的redux内容
-import { initialStateJSON } from '../store/reducers'
-import { saveAccessToken, saveUserInfo } from '../store/actions/user'
+import { initialStateJSON } from '@/store/reducers'
+import { saveAccessToken, saveUserInfo } from '@/store/actions/user'
 
 // 配置
-import { port, auth_cookie_name, api, redirectUrl } from '../../config'
+import { port, auth_cookie_name, api, redirectUrl } from 'Config'
 import sign from './sign'
 // import webpackHotMiddleware from './webpack-hot-middleware';
 

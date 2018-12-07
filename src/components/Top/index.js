@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { topLoad } from '../../store/actions/top'
-import { getTopList } from '../../store/reducers/top'
+import { topLoad } from '@/store/actions/top'
+import { getTopList } from '@/store/reducers/top'
 
 import './style.scss'
 

@@ -4,14 +4,14 @@ import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { detail } from '../../store/actions/detail'
-import { mark } from '../../store/actions/mark'
-import { score } from '../../store/actions/score'
-import { hits } from '../../store/actions/hits'
-import { getDetail, getScore } from '../../store/reducers/detail'
-import { getUserInfo } from '../../store/reducers/user'
+import { detail } from '@/store/actions/detail'
+import { mark } from '@/store/actions/mark'
+import { score } from '@/store/actions/score'
+import { hits } from '@/store/actions/hits'
+import { getDetail, getScore } from '@/store/reducers/detail'
+import { getUserInfo } from '@/store/reducers/user'
 
-import Meta from '../../components/Meta'
+import Meta from '@/components/Meta'
 
 import './style.scss'
 

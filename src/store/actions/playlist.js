@@ -1,6 +1,6 @@
-import Ajax from '../../common/ajax'
+import Ajax from '@/common/ajax'
 import { getPlayList } from '../reducers/playlist'
-import config from '../../utils/config'
+import config from '@/utils/config'
 
 export function playlist({ id }) {
   return (dispatch, getState) => {

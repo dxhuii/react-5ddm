@@ -1,5 +1,5 @@
-import Ajax from '../../common/ajax'
-import config from '../../utils/config'
+import Ajax from '@/common/ajax'
+import config from '@/utils/config'
 
 export function mark({ type, id, cid, uid }) {
   return (dispatch, getState) => {

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { playlist } from '../../../store/actions/playlist'
-import { getPlayList } from '../../../store/reducers/playlist'
+import { playlist } from '@/store/actions/playlist'
+import { getPlayList } from '@/store/reducers/playlist'
 
-import { getOffset, trim } from '../../../utils'
+import { getOffset, trim } from '@/utils'
 
 import './style.scss'
 @withRouter

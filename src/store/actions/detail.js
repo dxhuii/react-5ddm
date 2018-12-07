@@ -1,6 +1,6 @@
-import Ajax from '../../common/ajax'
+import Ajax from '@/common/ajax'
 import { getDetail } from '../reducers/detail'
-import config from '../../utils/config'
+import config from '@/utils/config'
 
 export function detail({ id }) {
   return (dispatch, getState) => {

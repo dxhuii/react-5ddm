@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { signOut } from '../../store/actions/user'
-import { getUserInfo } from '../../store/reducers/user'
+import { signOut } from '@/store/actions/user'
+import { getUserInfo } from '@/store/reducers/user'
 
 import './style.scss'
 
@@ -28,7 +28,7 @@ class Head extends Component {
   }
 
   static propTypes = {
-    userinfo: PropTypes.object.isRequired,
+    userinfo: PropTypes.any,
     signOut: PropTypes.func.isRequired,
     match: PropTypes.object
   }

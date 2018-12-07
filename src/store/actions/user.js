@@ -1,5 +1,5 @@
-import Ajax from '../../common/ajax'
-import config from '../../utils/config'
+import Ajax from '@/common/ajax'
+import config from '@/utils/config'
 
 // 储存accessToken到redux
 export function saveAccessToken({ accessToken }) {
@@ -37,7 +37,7 @@ export function signIn({ username, password }) {
       }
 
       // 储存 cookie
-      ;[err, data] = await Ajax({
+      [err, data] = await Ajax({
         url: window.location.origin + '/sign/in',
         method: 'post',
         data: {

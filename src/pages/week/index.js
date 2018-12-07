@@ -1,8 +1,8 @@
 import React, { PureComponent, Fragment } from 'react'
 
-import Shell from '../../components/Shell'
-import Meta from '../../components/Meta'
-import WeekDay from '../../components/Week'
+import Shell from '@/components/Shell'
+import Meta from '@/components/Meta'
+import WeekDay from '@/components/Week'
 
 @Shell
 class Week extends PureComponent {

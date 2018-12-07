@@ -3,16 +3,16 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import Loadable from 'react-loadable'
 
 // 生成异步加载组件
-import { AsyncComponent } from '../components/generate-async-component'
+import { AsyncComponent } from '@/components/generate-async-component'
 
-import Head from '../components/Head'
-import Loading from '../components/Ui/Loading'
+import Head from '@/components/Head'
+import Loading from '@/components/Ui/Loading'
 
-import HomeLoadData from '../pages/home/load-data'
-import PlayLoadData from '../pages/play/load-data'
-import SubjectLoadData from '../pages/subject/load-data'
-import WeekLoadData from '../pages/week/load-data'
-import ListLoadData from '../pages/list/load-data'
+import HomeLoadData from '@/pages/home/load-data'
+import PlayLoadData from '@/pages/play/load-data'
+import SubjectLoadData from '@/pages/subject/load-data'
+import WeekLoadData from '@/pages/week/load-data'
+import ListLoadData from '@/pages/list/load-data'
 
 /**
  * 创建路由
@@ -49,11 +49,8 @@ export default user => {
       path: '/',
       exact: true,
       head: Head,
-      // component: asyncRouteComponent({
-      //   loader: () => import('../pages/home')
-      // }),
       component: Loadable({
-        loader: () => import('../pages/home'),
+        loader: () => import('@/pages/home'),
         loading: () => <Loading />
       }),
       enter: triggerEnter,
@@ -65,7 +62,7 @@ export default user => {
       exact: true,
       head: Head,
       component: Loadable({
-        loader: () => import('../pages/week'),
+        loader: () => import('@/pages/week'),
         loading: () => <Loading />
       }),
       enter: triggerEnter,
@@ -76,11 +73,8 @@ export default user => {
       path: '/topics',
       exact: true,
       head: Head,
-      // component: asyncRouteComponent({
-      //   loader: () => import('../pages/topics')
-      // }),
       component: Loadable({
-        loader: () => import('../pages/topics'),
+        loader: () => import('@/pages/topics'),
         loading: () => <Loading />
       }),
       enter: requireAuth
@@ -89,12 +83,8 @@ export default user => {
     {
       path: '/sign-in',
       exact: true,
-      // head: Head,
-      // component: asyncRouteComponent({
-      // loader: () => import('../pages/sign-in')
-      // }),
       component: Loadable({
-        loader: () => import('../pages/sign-in'),
+        loader: () => import('@/pages/sign-in'),
         loading: () => <Loading />
       }),
       enter: requireTourists
@@ -105,7 +95,7 @@ export default user => {
       exact: true,
       head: Head,
       component: Loadable({
-        loader: () => import('../pages/subject'),
+        loader: () => import('@/pages/subject'),
         loading: () => <Loading />
       }),
       enter: triggerEnter,
@@ -117,7 +107,7 @@ export default user => {
       exact: true,
       head: Head,
       component: Loadable({
-        loader: () => import('../pages/play'),
+        loader: () => import('@/pages/play'),
         loading: () => <Loading />
       }),
       enter: triggerEnter,
@@ -129,7 +119,7 @@ export default user => {
       exact: true,
       head: Head,
       component: Loadable({
-        loader: () => import('../pages/list'),
+        loader: () => import('@/pages/list'),
         loading: () => <Loading />
       }),
       enter: triggerEnter,
@@ -140,11 +130,8 @@ export default user => {
       path: '/search/:wd',
       exact: true,
       head: Head,
-      // component: asyncRouteComponent({
-      //   loader: () => import('../pages/topics')
-      // }),
       component: Loadable({
-        loader: () => import('../pages/list'),
+        loader: () => import('@/pages/list'),
         loading: () => <Loading />
       }),
       enter: triggerEnter
@@ -153,11 +140,8 @@ export default user => {
     {
       path: '**',
       head: Head,
-      // component: asyncRouteComponent({
-      //   loader: () => import('../pages/not-found')
-      // }),
       component: Loadable({
-        loader: () => import('../pages/not-found'),
+        loader: () => import('@/pages/not-found'),
         loading: () => <Loading />
       }),
       enter: triggerEnter
@@ -179,7 +163,7 @@ export default user => {
           }
         })}
       </Switch>
-      <AsyncComponent load={() => import('../components/Footer')}>{Component => <Component />}</AsyncComponent>
+      <AsyncComponent load={() => import('@/components/Footer')}>{Component => <Component />}</AsyncComponent>
     </Fragment>
   )
 
