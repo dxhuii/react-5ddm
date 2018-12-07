@@ -4,6 +4,7 @@ const path = require('path')
 const chalk = require('chalk')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 // const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const config = require('../index')
@@ -159,6 +160,8 @@ module.exports = {
       analysis_script: config.analysis_script
       // inject: false
     }),
+
+    new BundleAnalyzerPlugin(),
 
     new ProgressBarPlugin({
       format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',

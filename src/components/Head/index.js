@@ -28,7 +28,7 @@ class Head extends Component {
   }
 
   static propTypes = {
-    userinfo: PropTypes.any,
+    userinfo: PropTypes.object.isRequired,
     signOut: PropTypes.func.isRequired,
     match: PropTypes.object
   }

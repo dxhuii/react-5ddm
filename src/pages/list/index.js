@@ -44,7 +44,6 @@ class SubjectList extends Component {
   }
 
   isSearch() {
-    console.log(this.props)
     const {
       location: { pathname },
       match: {
