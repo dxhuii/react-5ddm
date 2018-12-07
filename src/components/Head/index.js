@@ -73,6 +73,9 @@ class Head extends Component {
             <NavLink styleName={url === '/list' ? 'active' : ''} exact to="/list">
               列表
             </NavLink>
+            <NavLink styleName={url === '/upload' ? 'active' : ''} exact to="/upload">
+              上传
+            </NavLink>
           </div>
           <div styleName="header-search">
             <form action={`/search/${keyword}`}>

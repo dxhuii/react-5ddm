@@ -54,17 +54,15 @@ class SignIn extends Component {
 
   render() {
     return (
-      <div styleName="container" className="text-center">
-        <Meta title="React" />
-        <form className="form-signin" onSubmit={this.submit}>
-          <div styleName="icon" />
-          <h1 className="h3 mb-3 font-weight-normal">React</h1>
+      <div styleName="container" className="tec">
+        <Meta title="登录" />
+        <form onSubmit={this.submit}>
+          <h1>登录</h1>
           <input
             type="text"
             ref={c => {
               this.username = c
             }}
-            className="form-control mb-3"
             placeholder="请输入昵称"
           />
           <input
@@ -72,12 +70,9 @@ class SignIn extends Component {
             ref={c => {
               this.password = c
             }}
-            className="form-control mb-3"
             placeholder="请输入昵称"
           />
-          <button className="btn btn-lg btn-primary btn-block" type="submit">
-            登录
-          </button>
+          <button type="submit">登录</button>
         </form>
       </div>
     )
