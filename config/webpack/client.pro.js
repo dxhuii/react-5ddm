@@ -1,5 +1,6 @@
 const baseConfig = require('./client.base')
 const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 // const path = require('path');
 
@@ -20,6 +21,7 @@ const config = {
         }
       }
     }),
+    new BundleAnalyzerPlugin(),
     // new ManifestPlugin({ fileName: 'manifest.json' }),
     ...baseConfig.plugins
   ],

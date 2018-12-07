@@ -3,16 +3,17 @@ import FileUpload from '../../components/Upload'
 
 export default class Main extends React.Component {
   state = {
-    imgUlr: ''
+    imgUlr: []
   }
   render() {
+    const { imgUlr } = this.state
     return (
       <div style={{ padding: 30, fontSize: 30 }}>
         <FileUpload
           url="http://localhost:4000/sign/alioss"
           uploadEnd={data => {
             this.setState({
-              imgUlr: data
+              imgUlr: this.state.imgUlr.concat(data)
             })
           }}
           upload={(data, file, load) => {
@@ -21,7 +22,11 @@ export default class Main extends React.Component {
         >
           上传
         </FileUpload>
-        <div>{this.state.imgUlr ? <img src={this.state.imgUlr} alt="" /> : ''}</div>
+        <div>
+          {imgUlr.map((item, index) => (
+            <img key={index} src={item} />
+          ))}
+        </div>
       </div>
     )
   }

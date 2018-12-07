@@ -26,12 +26,9 @@ export default class Main extends Component {
     this.inputBox = inputBox
     input.click()
   }
-  doUpload = () => {
-    const file = this.input.files[0]
+
+  up = file => {
     const { url, upload } = this.props
-    this.inputBox.parentNode.removeChild(this.inputBox)
-    this.input = null
-    this.inputBox = null
     axios.get(url).then(rst => {
       console.log(rst.data, this.props)
       if (upload) {
@@ -40,6 +37,21 @@ export default class Main extends Component {
       }
       this.upLoadAlioss(Object.assign({}, rst.data, { file }))
     })
+  }
+
+  doUpload = () => {
+    console.log(this.input.files)
+    const file = this.input.files
+    this.inputBox.parentNode.removeChild(this.inputBox)
+    this.input = null
+    this.inputBox = null
+    if (file.length > 1) {
+      for (let i = 0; i < file.length; i++) {
+        this.up(file[i])
+      }
+    } else {
+      this.up(file[0])
+    }
   }
   upLoadAlioss = options => {
     const file = options.file
