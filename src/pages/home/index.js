@@ -37,7 +37,7 @@ class Home extends Component {
           <Swiper />
           <div className="mt20" styleName="main">
             <div styleName="main-left">
-              <WeekDay id="weekday" title="番剧" link="/" isJp={['', '月', '火', '水', '木', '金', '土', '日']} type={1} />
+              <WeekDay id="weekday" title="番剧" link="/week" isJp={['', '月', '火', '水', '木', '金', '土', '日']} type={1} />
             </div>
             <div styleName="main-right">
               <Top order="hits_month" area="JP" />
@@ -45,7 +45,7 @@ class Home extends Component {
           </div>
           <div className="mt20" styleName="main">
             <div styleName="main-left">
-              <WeekDay id="weekday" title="国创" link="/" type={0} />
+              <WeekDay id="weekday" title="国创" link="/week" type={0} />
             </div>
             <div styleName="main-right">
               <Top order="hits_month" area="CN" />

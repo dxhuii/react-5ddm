@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { listLoad } from '@/store/actions/list'
 import { getList } from '@/store/reducers/list'
 
-import { picHttps } from '@/utils'
+import { isNumber, picHttps } from '@/utils'
 
 import './style.scss'
 
@@ -124,8 +124,8 @@ class List extends Component {
                   <div className="load-demand" data-load-demand={`<img src="${picHttps(item.pic)}" alt="${item.title}" />`} />
                   <h3>{item.title}</h3>
                 </Link>
-                <Link to={`/subject/${item.id}/${item.pid}`}>
-                  {item.isDate ? <p style={{ color: '#f60' }}>{item.status}</p> : <p>{item.status}</p>}
+                <Link to={`/play/${item.id}/${item.pid}`}>
+                  {isNumber(item.status) ? <p style={item.isDate ? { color: '#f60' } : {}}>更新至{item.status}话</p> : <p>{item.status}</p>}
                 </Link>
               </li>
             ))}

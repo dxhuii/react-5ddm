@@ -1,0 +1,26 @@
+{
+    "workbench.iconTheme": "vscode-icons",
+    "javascript.implicitProjectConfig.experimentalDecorators": true,
+    "vsicons.dontShowNewVersionMessage": true,
+    "window.zoomLevel": 1,
+    "editor.tabSize": 2,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "prettier.jsxSingleQuote": true,
+    "prettier.eslintIntegration": true,
+    "editor.formatOnSave": true,
+    "prettier.disableLanguages": ["react"],
+    "prettier.stylelintIntegration": true,
+    "prettier.printWidth": 140,
+    "prettier.singleQuote": true,
+    "prettier.semi": false,
+    "eslint.options": {
+      "extensions": [".js", ".jsx"],
+      "plugins": ["html"]
+    },
+    "files.associations": {
+      "*.js": "javascript"
+    },
+    "emmet.triggerExpansionOnTab": true,
+    "eslint.autoFixOnSave": true,
+    "javascript.suggestionActions.enabled": false
+  }

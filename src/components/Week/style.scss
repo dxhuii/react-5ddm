@@ -1,6 +1,26 @@
 @import '../../pages/_mixin';
+.tab{
+  height: 30px;
+  line-height: 30px;
+  display: flex;
+  border-radius: 15px;
+  border: 1px solid #e5e9ef;
+  li{position: relative;flex: 1;height: 30px;text-align: center;color: #666;cursor: pointer;border-radius: 15px;
+    em{font-size: 12px;margin-left: 5px;color: #ccc;}
+    &.active{background: #f60;color: #fff;
+      em{color: #f90;}
+    }
+	}
+}
+.title{
+    h2{float: left;font-size: 24px;color: #444;margin-right: 30px;}
+    :global(.icon){display: inline-block;position: relative;top: -5px;width: 40px; height: 40px;vertical-align: middle;fill: currentColor;overflow: hidden;}
+    a{float: right;margin-left: 30px;margin-top: 1px;height: 30px;line-height: 28px;border: 1px solid #f60;border-radius: 5px;text-align: center;padding: 0 5px 0 15px;color: #f60;
+        &:hover{background: #f60;color: #fff;}
+    }
+}
 .week{
-  height: 510px;
+  height: 408px;
   overflow-x: hidden;
   overflow-y: auto;
   margin-top: 25px;
@@ -14,7 +34,7 @@
   li{
     position: relative;
     height: 77px;
-    width: 25%;
+    width: 216px;
     margin-bottom: 25px;
     div{
       float: left;

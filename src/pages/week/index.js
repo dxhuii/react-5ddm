@@ -11,10 +11,10 @@ class Week extends PureComponent {
       <Fragment>
         <Meta title="星期" keywords="星期, 番表" description="星期" />
         <div className="mt20 wp">
-          <WeekDay id="weekday" title="番剧" link="/" isJp={['', '月', '火', '水', '木', '金', '土', '日']} type={1} />
+          <WeekDay id="weekday" title="番剧" isJp={['', '月', '火', '水', '木', '金', '土', '日']} type={1} />
         </div>
         <div className="mt20 wp">
-          <WeekDay id="weekday" title="国创" link="/" type={0} />
+          <WeekDay id="weekday" title="国创" type={0} />
         </div>
       </Fragment>
     )

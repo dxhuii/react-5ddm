@@ -145,7 +145,6 @@ class Play extends Component {
     const { title, subTitle, defaultPlay, playHtml, playData } = this.getData(data)
     return (
       <div className="wp mt20">
-        {loading ? <div>loading...</div> : null}
         <Meta title={`${title} ${subTitle}`} />
         <div styleName="player">
           <div styleName="player-left">

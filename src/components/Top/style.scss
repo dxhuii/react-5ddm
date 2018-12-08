@@ -1,5 +1,7 @@
 .top{
-  h2{font-size: 24px;height: 38px;line-height: 40px;
+  h2{
+    margin-top: 3px;
+    font-size: 18px;
     i {
       font-size: 24px;
       color: #f60;
@@ -9,7 +11,7 @@
   ul {
     margin-top: 25px;
     li {
-      padding-bottom: 20px;
+      padding-bottom: 23px;
       display: flex;
       a {
         flex-grow: 1;

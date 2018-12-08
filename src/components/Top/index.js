@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { topLoad } from '@/store/actions/top'
 import { getTopList } from '@/store/reducers/top'
+import Loading from '@/components/Ui/Loading'
 
 import './style.scss'
 
@@ -39,11 +40,11 @@ class Top extends Component {
     } = this.props
     return (
       <div styleName="top">
-        {loading ? <div>loading...</div> : null}
         <h2>
           <i className="iconfont">&#xe613;</i>排行榜
         </h2>
         <ul>
+          {loading ? <Loading /> : null}
           {data.map((item, index) => {
             const elem = (
               <li key={item.id}>
