@@ -1,6 +1,13 @@
+.warp-bg{
+  background-color: #fff;
+}
+
 .main{
   display: flex;
   flex-wrap: wrap;
+  height: 440px;
+  overflow: hidden;
+  &.cn{height: 340px;}
 }
 .main-left {
   width: 880px;

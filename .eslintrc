@@ -18,6 +18,7 @@
   "rules": {
     "react/jsx-uses-react": 1,
     "no-console": "off",
+    "no-debugger": "off",
     "no-unused-vars": 0,
     "react/display-name": [{ "ignoreTranspilerName": false }]
   },

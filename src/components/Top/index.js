@@ -12,7 +12,7 @@ import './style.scss'
 @withRouter
 @connect(
   (state, props) => ({
-    top: getTopList(state, props.order || 'addtime', props.area || '')
+    top: getTopList(state, props.id, props.order, props.area, props.limit)
   }),
   dispatch => ({
     topLoad: bindActionCreators(topLoad, dispatch)
@@ -20,47 +20,39 @@ import './style.scss'
 )
 class Top extends Component {
   static propTypes = {
+    id: PropTypes.number,
+    limit: PropTypes.number,
     order: PropTypes.string,
     area: PropTypes.string,
     top: PropTypes.object,
     topLoad: PropTypes.func
   }
   componentDidMount() {
-    const { order = 'addtime', area = '' } = this.props
-    const { top, topLoad } = this.props
+    const { id, order, area, limit, top, topLoad } = this.props
     if (!top || !top.data) {
-      topLoad({ order, area })
+      topLoad({ id, order, area, limit })
     }
   }
 
   render() {
     const {
       top: { data = [], loading },
-      area = ''
+      area
     } = this.props
     return (
       <div styleName="top">
         <h2>
           <i className="iconfont">&#xe613;</i>排行榜
         </h2>
-        <ul>
+        <ul styleName={area === '大陆' ? 'cn' : ''}>
           {loading ? <Loading /> : null}
-          {data.map((item, index) => {
-            const elem = (
-              <li key={item.id}>
-                <span styleName={`top-li__num ${index <= 2 ? 'on' : ''}`}>{index + 1}</span>
-                <Link to={`/subject/${item.id}`}>{item.title}</Link>
-                <span styleName="top-li__score">{item.glod}</span>
-              </li>
-            )
-            if (area === 'CN') {
-              if (index < 7) {
-                return elem
-              }
-            } else {
-              return elem
-            }
-          })}
+          {data.map((item, index) => (
+            <li key={item.id}>
+              <span styleName={`top-li__num ${index <= 2 ? 'on' : ''}`}>{index + 1}</span>
+              <Link to={`/subject/${item.id}`}>{item.title}</Link>
+              <span styleName="top-li__score">{item.glod}</span>
+            </li>
+          ))}
         </ul>
       </div>
     )

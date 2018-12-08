@@ -14,13 +14,28 @@
 }
 .title{
     h2{float: left;font-size: 24px;color: #444;margin-right: 30px;}
-    :global(.icon){display: inline-block;position: relative;top: -5px;width: 40px; height: 40px;vertical-align: middle;fill: currentColor;overflow: hidden;}
     a{float: right;margin-left: 30px;margin-top: 1px;height: 30px;line-height: 28px;border: 1px solid #f60;border-radius: 5px;text-align: center;padding: 0 5px 0 15px;color: #f60;
-        &:hover{background: #f60;color: #fff;}
+      &:hover{background: #f60;color: #fff;}
+    }
+    .title-icon{
+      display: inline-block;
+      position: relative;
+      top: -5px;
+      width: 40px;
+      height: 40px;
+      vertical-align: middle;
+      fill: currentColor;
+      overflow: hidden;
+      background: url(../../static/img/time.svg) no-repeat;
+      background-size: 40px 40px;
+      &.cn {
+        background: url(../../static/img/china.svg) no-repeat;
+        background-size: 40px 40px;
+      }
     }
 }
 .week{
-  height: 408px;
+  height: 385px;
   overflow-x: hidden;
   overflow-y: auto;
   margin-top: 25px;
@@ -28,8 +43,23 @@
   display: flex;
   flex-flow: row wrap;
   align-content: flex-start;
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px
+  }
+  &::-webkit-scrollbar-button, &::-webkit-scrollbar-track {
+    display: none
+  }
+  &::-webkit-scrollbar-track-piece {
+    background: #ddd
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #e5e9ef;
+    border: 1px solid #ddd;
+    border-radius: 4px
+  }
   &.weekCn{
-    height: 306px;
+    height: 285px;
   }
   li{
     position: relative;

@@ -31,8 +31,8 @@ class Home extends Component {
   render() {
     const { order } = this.state
     return (
-      <Fragment>
-        <div className="wp mt20">
+      <div styleName="warp-bg">
+        <div className="wp pt20">
           <Meta title="首页" />
           <Swiper />
           <div className="mt20" styleName="main">
@@ -40,15 +40,15 @@ class Home extends Component {
               <WeekDay id="weekday" title="番剧" link="/week" isJp={['', '月', '火', '水', '木', '金', '土', '日']} type={1} />
             </div>
             <div styleName="main-right">
-              <Top order="hits_month" area="JP" />
+              <Top id={3} order="hits_month" area="日本" limit={10} />
             </div>
           </div>
-          <div className="mt20" styleName="main">
+          <div className="mt20" styleName="main cn">
             <div styleName="main-left">
               <WeekDay id="weekday" title="国创" link="/week" type={0} />
             </div>
             <div styleName="main-right">
-              <Top order="hits_month" area="CN" />
+              <Top id={3} order="hits_month" area="大陆" limit={7} />
             </div>
           </div>
         </div>
@@ -64,7 +64,7 @@ class Home extends Component {
           </li>
         </ul>
         <List stateId="weekList" id={3} day={365} order={order} limit={30} scrollLoad={true} />
-      </Fragment>
+      </div>
     )
   }
 }

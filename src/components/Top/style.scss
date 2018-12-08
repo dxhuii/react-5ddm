@@ -11,11 +11,16 @@
   ul {
     margin-top: 25px;
     li {
-      padding-bottom: 23px;
+      padding-bottom: 20.5px;
       display: flex;
       a {
         flex-grow: 1;
         margin-left: 10px;
+      }
+    }
+    &.cn {
+      li {
+        padding-bottom: 24px;
       }
     }
   }

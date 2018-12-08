@@ -83,19 +83,41 @@ class Detail extends Component {
       isMeta,
       userinfo: { userid }
     } = this.props
-    const { id, cid, name, content, pic, actor, area, aliases, gold, filmtime, total, director, type, language } = data
+    const {
+      id,
+      cid,
+      title,
+      content,
+      pic,
+      actor,
+      area,
+      aliases,
+      gold,
+      filmtime,
+      total,
+      director,
+      type,
+      language,
+      company,
+      keywords,
+      mcid,
+      original,
+      website,
+      updateDate,
+      tvcont
+    } = data
     return (
       <Fragment>
         {loading ? <div> loading... </div> : null}
         {isMeta ? (
-          <Meta title={name}>
+          <Meta title={title}>
             <meta property="og:locale" content="zh_CN" />
             <meta property="og:type" content="videolist" />
-            <meta property="og:title" content={name} /> <meta property="og:description" content={content} />
+            <meta property="og:title" content={title} /> <meta property="og:description" content={content} />
             <meta property="og:image" content={pic} />
             <meta property="og:url" content={`/subject/${id}`} /> <meta property="og:video" content={`/play/${id}/1`} />
             <meta property="og:site_name" content={'9站'} />
-            <meta name="description" content={content} /> <meta name="keywords" content={name} />
+            <meta name="description" content={content} /> <meta name="keywords" content={title} />
           </Meta>
         ) : null}
         <div styleName="detail">
@@ -105,13 +127,13 @@ class Detail extends Component {
               <img src={pic} />
             </div>
             <div styleName="detail-info__info">
-              <h1>{name}</h1>
-              <p>{actor}</p>
+              <h1>{title}</h1>
+              <p>{actor ? actor.map(item => <span key={item.title}>{item.title}</span>) : null}</p>
               <p>{area}</p>
               <p>{aliases}</p>
               <p>{total}</p>
               <p>{filmtime}</p>
-              <p>{director}</p>
+              <p>{director ? director.map(item => <span key={item.title}>{item.title}</span>) : null}</p>
               <p>{type}</p>
               <p>{language}</p>
             </div>
