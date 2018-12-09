@@ -91,58 +91,43 @@ class Play extends Component {
     )
   }
 
-  player(playList) {
-    let data = []
-    for (let e = 0; e < playList.length; e++) {
-      const d = (playList[e] || {}).playurls || []
-      d.length > 0 &&
-        this.playName(playList[e].playname) &&
-        data.push({ type: playList[e].playname, vid: d[1], name: this.playName(playList[e].playname), title: d[0], url: d[2] })
-    }
-    return data
-  }
-
   onPlay(play, type) {
     console.log(play, type)
     this.setState({ play, type })
   }
 
   getOther(data = []) {
-    return data.filter(item => item.type === 'other')
+    return data.filter(item => item.playName === 'other')
   }
 
   getData(data = {}) {
     const { play, type } = this.state
-    const datas = data.Data || []
-    const playData = this.player(datas)
-    const title = (data.Vod || [])[0]
-    const subTitle = ((datas[0] || {}).playurls || [])[0]
-    const other = this.getOther(playData)
+    const { title, subTitle, list = [] } = data
+    const other = this.getOther(list)
     const defaultPlay =
       other.length > 0 && !is9
-        ? isJump(other[0].vid, other[0].type, 1)
-        : playData.length > 0
-        ? isJump(playData[0].vid, playData[0].type, 1)
+        ? isJump(other[0].vid, other[0].playName, 1)
+        : list.length > 0
+        ? isJump(list[0].vid, list[0].playName, 1)
         : ''
     const playHtml = play ? isJump(play, type, 1) : ''
-    // console.log(playHtml, this.getOther(playData), defaultPlay)
     return {
       title,
       subTitle,
       defaultPlay,
       playHtml,
-      playData
+      list
     }
   }
 
   render() {
     const {
-      player: { data = {}, loading },
+      player: { data = {} },
       match: {
         params: { id }
       }
     } = this.props
-    const { title, subTitle, defaultPlay, playHtml, playData } = this.getData(data)
+    const { title, subTitle, defaultPlay, playHtml, list } = this.getData(data)
     return (
       <div className="wp mt20">
         <Meta title={`${title} ${subTitle}`} />
@@ -153,9 +138,9 @@ class Play extends Component {
           </div>
           <div styleName="player-right">
             <ul styleName="playlist">
-              {playData.map(item => (
-                <li key={item.type} onClick={() => this.onPlay(item.vid, item.type)}>
-                  <i styleName={`icon ${item.type}`} />
+              {list.map(item => (
+                <li key={item.playName} onClick={() => this.onPlay(item.vid, item.playName)}>
+                  <i styleName={`icon ${item.playName}`} />
                   {item.name}
                 </li>
               ))}

@@ -70,7 +70,7 @@ class PlayList extends Component {
 
   setData(data, pid) {
     const { pageSize } = this.state
-    const list = (data.Data || {}).playurls || []
+    const list = data || []
     let start = 0
     let end = pageSize
     if (pid) {
@@ -179,8 +179,8 @@ class PlayList extends Component {
         <div styleName="playlist" id="playlist">
           <ul styleName="playlist-ul" /* style={{ width: `${dataSource.length * 132}px` }} */>
             {dataSource.map(item => (
-              <li className={pid === item[1].toString() ? 'playlist-li__on' : ''} key={item[1]}>
-                {this.format(item[0], item[1], id)}
+              <li className={pid === item.episode.toString() ? 'playlist-li__on' : ''} key={item.episode}>
+                {this.format(item.title, item.episode, id)}
               </li>
             ))}
           </ul>

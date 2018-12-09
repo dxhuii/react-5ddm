@@ -5,8 +5,8 @@ export default {
     login: `${API}api.php?s=home-react-login`,
     addScore: `${API}api.php?s=home-react-addScore`, // 评分 val 分值 id 视频ID sid 视频大类
     getVodId: ({ pinyin }) => `${API}api.php?s=home-react-getVodId&pinyin=${pinyin}`, // 根据拼音获取视频ID
-    playlist: ({ id, pinyin }) => `${API}api.php?s=home-react-playlist${id ? `&id=${id}` : pinyin ? `&pinyin=${pinyin}` : ''}&react=1`, // 播放列表 id:视频id
-    player: ({ id, pid }) => `${API}api.php?s=home-react-playlist-id-${id}-pid-${pid}`, // 单集 id:视频id，pid，集数
+    playlist: ({ id, pinyin }) => `${API}api.php?s=home-react-play${id ? `&id=${id}` : pinyin ? `&pinyin=${pinyin}` : ''}&react=1`, // 播放列表 id:视频id
+    player: ({ id, pid }) => `${API}api.php?s=home-react-play-id-${id}-pid-${pid}`, // 单集 id:视频id，pid，集数
     detail: ({ id, pinyin }) => `${API}api.php?s=home-react-detail${id ? `&id=${id}` : pinyin ? `&pinyin=${pinyin}` : ''}`, // 视频详情
     week: ({ limit }) => `${API}api.php?s=home-react-Week&limit=${limit}`, // 每周追番
     search: ({ q, limit }) => `${API}api.php?s=home-react-SearchAssociation&q=${q}&limit=${limit}`, // 搜索
