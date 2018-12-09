@@ -35,7 +35,7 @@ const store = configureStore(window.__initState__)
 
 let userinfo = getUserInfo(store.getState())
 
-if (!userinfo || !userinfo.userid) userinfo = null
+if (!userinfo || !userinfo.userId) userinfo = null
 
 const run = async () => {
   const router = createRouter(userinfo)
