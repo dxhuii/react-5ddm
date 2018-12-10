@@ -86,7 +86,7 @@ class Head extends Component {
             </form>
           </div>
           <div styleName="header-tool" className="tar">
-            <span>{userinfo.nickName}</span>
+            <span>{userinfo.nickname}</span>
             <a href="javascript:void(0)" onClick={this.signOut}>
               退出
             </a>

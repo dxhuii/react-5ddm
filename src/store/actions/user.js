@@ -32,24 +32,24 @@ export function signIn({ username, password }) {
       if (data.rcode === 1) {
         dispatch({ type: 'SAVE_USERINFO', userinfo: data.data })
         resolve([null, data.data])
+
+        // 储存 cookie
+        ;[err, data] = await Ajax({
+          url: window.location.origin + '/sign/in',
+          method: 'post',
+          data: {
+            auth_sign: data.data.auth,
+            userinfo: data.data
+          }
+        })
+
+        if (data && data.success) {
+          resolve([null, true])
+        } else {
+          resolve(['sign error'])
+        }
       } else {
         resolve([data.msg])
-      }
-
-      // 储存 cookie
-      [err, data] = await Ajax({
-        url: window.location.origin + '/sign/in',
-        method: 'post',
-        data: {
-          auth_sign: data.data.auth,
-          userinfo: data.data
-        }
-      })
-
-      if (data && data.success) {
-        resolve([null, true])
-      } else {
-        resolve(['sign error'])
       }
     })
   }
