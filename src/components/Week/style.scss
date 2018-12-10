@@ -1,40 +1,75 @@
 @import '../../pages/_mixin';
-.tab{
+.tab {
   height: 30px;
   line-height: 30px;
   display: flex;
   border-radius: 15px;
   border: 1px solid #e5e9ef;
-  li{position: relative;flex: 1;height: 30px;text-align: center;color: #666;cursor: pointer;border-radius: 15px;
-    em{font-size: 12px;margin-left: 5px;color: #ccc;}
-    &.active{background: #f60;color: #fff;
-      em{color: #f90;}
+  li {
+    position: relative;
+    flex: 1;
+    height: 30px;
+    text-align: center;
+    color: #666;
+    cursor: pointer;
+    border-radius: 15px;
+    em {
+      font-size: 12px;
+      margin-left: 5px;
+      color: #ccc;
     }
-	}
-}
-.title{
-    h2{float: left;font-size: 24px;color: #444;margin-right: 30px;}
-    a{float: right;margin-left: 30px;margin-top: 1px;height: 30px;line-height: 28px;border: 1px solid #f60;border-radius: 5px;text-align: center;padding: 0 5px 0 15px;color: #f60;
-      &:hover{background: #f60;color: #fff;}
-    }
-    .title-icon{
-      display: inline-block;
-      position: relative;
-      top: -5px;
-      width: 40px;
-      height: 40px;
-      vertical-align: middle;
-      fill: currentColor;
-      overflow: hidden;
-      background: url(../../static/img/time.svg) no-repeat;
-      background-size: 40px 40px;
-      &.cn {
-        background: url(../../static/img/china.svg) no-repeat;
-        background-size: 40px 40px;
+    &.active {
+      background: #f60;
+      color: #fff;
+      em {
+        color: #f90;
       }
     }
+  }
 }
-.week{
+
+.title {
+  h2 {
+    float: left;
+    font-size: 24px;
+    color: #444;
+    margin-right: 30px;
+  }
+  a {
+    float: right;
+    margin-left: 30px;
+    margin-top: 1px;
+    height: 30px;
+    line-height: 28px;
+    border: 1px solid #f60;
+    border-radius: 5px;
+    text-align: center;
+    padding: 0 5px 0 15px;
+    color: #f60;
+    &:hover {
+      background: #f60;
+      color: #fff;
+    }
+  }
+  .title-icon {
+    display: inline-block;
+    position: relative;
+    top: -5px;
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    fill: currentColor;
+    overflow: hidden;
+    background: url(../../static/img/time.svg) no-repeat;
+    background-size: 40px 40px;
+    &.cn {
+      background: url(../../static/img/china.svg) no-repeat;
+      background-size: 40px 40px;
+    }
+  }
+}
+
+.week {
   height: 385px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -43,30 +78,43 @@
   display: flex;
   flex-flow: row wrap;
   align-content: flex-start;
-  &::-webkit-scrollbar {
-    width: 10px;
-    height: 10px
-  }
-  &::-webkit-scrollbar-button, &::-webkit-scrollbar-track {
+  &::-webkit-scrollbar-button,
+  &::-webkit-scrollbar-track {
     display: none
   }
-  &::-webkit-scrollbar-track-piece {
-    background: #ddd
+  /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+  &::-webkit-scrollbar {
+    width: 4px;
+    /*滚动条宽度*/
+    background: #eee;
+    border-radius: 2px;
   }
+  /*定义滚动条轨道 内阴影+圆角*/
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    /*滚动条的背景区域的圆角*/
+    background-color: transparent;
+    ;
+    /*滚动条的背景颜色*/
+  }
+  /*定义滑块 内阴影+圆角*/
   &::-webkit-scrollbar-thumb {
-    background: #e5e9ef;
-    border: 1px solid #ddd;
-    border-radius: 4px
+    border-radius: 10px;
+    /*滚动条的圆角*/
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #D8D8D8;
+    /*滚动条的背景颜色*/
   }
-  &.weekCn{
+  &.weekCn {
     height: 285px;
   }
-  li{
+  li {
     position: relative;
     height: 77px;
     width: 216px;
     margin-bottom: 25px;
-    div{
+    div {
       float: left;
       position: relative;
       margin-right: 10px;
@@ -74,9 +122,9 @@
       height: 77px;
       border-radius: 4px;
       overflow: hidden;
-      box-shadow: 0 3px 14px 0 hsla(23,13%,76%,.4);
+      box-shadow: 0 3px 14px 0 hsla(23, 13%, 76%, .4);
       z-index: 2;
-      img{
+      img {
         position: absolute;
         left: 0;
         top: 0;
@@ -88,13 +136,13 @@
         width: 77px;
       }
     }
-    h4{
+    h4 {
       font-size: 12px;
       color: #444;
       margin-right: 50px;
       @include clamp(3)
     }
-    p{
+    p {
       position: absolute;
       left: 87px;
       right: 0;
@@ -103,13 +151,13 @@
       line-height: 20px;
       font-size: 12px;
       color: #999;
-      a{
+      a {
         margin-left: 5px;
         display: inline-block;
         background-color: #eee;
         border-radius: 10px;
         padding: 0 10px;
-        &.today{
+        &.today {
           background-color: #f60;
           color: #fff;
         }

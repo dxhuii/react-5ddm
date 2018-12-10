@@ -105,3 +105,5 @@ getValue = val => {
 ```jsx
 <SimpleEditor getValue={this.getValue} />
 ```
+
+>  注：项目里面包含了对 vscode 的配置

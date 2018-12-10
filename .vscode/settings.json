@@ -22,6 +22,5 @@
   },
   "emmet.triggerExpansionOnTab": true,
   "eslint.autoFixOnSave": true,
-  "javascript.suggestionActions.enabled": false,
-  "editor.fontSize": 14
+  "javascript.suggestionActions.enabled": false
 }
