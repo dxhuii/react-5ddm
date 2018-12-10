@@ -1,17 +1,18 @@
 @import '../../../pages/_mixin';
-
-.playlist{
+.playlist {
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
 }
-.playlist-boreder{
+
+.playlist-boreder {
   border-bottom: 1px solid #ddd;
 }
+
 .playlist-ul {
   position: relative;
   max-height: 145px;
-  li{ 
+  li {
     padding: 10px;
     width: 120px;
     margin-right: 10px;
@@ -20,11 +21,11 @@
     border: 1px solid #ddd;
     display: inline-block;
     margin-right: 15px;
-    &:nth-child(9n){
+    &:nth-child(9n) {
       margin-right: 0;
     }
-    &:hover{
-      border-color: #f00!important;
+    &:hover {
+      border-color: #f00 !important;
       a {
         color: #f00;
       }
@@ -38,22 +39,20 @@
 .playlist-nav {
   position: relative;
   padding-bottom: 10px;
-  li{
+  li {
     width: 130px;
     display: inline-block;
     margin-right: 10px;
     cursor: pointer;
-    &.active{
+    &.active {
       color: #f00;
     }
   }
 }
 
-
-
 :global {
   .playlist-li__on {
-    border-color: #f00!important;
+    border-color: #f00 !important;
     a {
       color: #f00;
     }

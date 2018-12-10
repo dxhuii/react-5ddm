@@ -60,7 +60,7 @@
     vertical-align: middle;
     fill: currentColor;
     overflow: hidden;
-    background: url(../../static/img/time.svg) no-repeat;
+    background: url(../../static/img/acg.svg) no-repeat;
     background-size: 40px 40px;
     &.cn {
       background: url(../../static/img/china.svg) no-repeat;
@@ -95,7 +95,6 @@
     border-radius: 10px;
     /*滚动条的背景区域的圆角*/
     background-color: transparent;
-    ;
     /*滚动条的背景颜色*/
   }
   /*定义滑块 内阴影+圆角*/
