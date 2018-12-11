@@ -4,6 +4,8 @@ const path = require('path')
 const chalk = require('chalk')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 // const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const config = require('../index')
@@ -67,7 +69,27 @@ module.exports = {
           chunks: 'all'
         }
       }
-    }
+    },
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true, // set to true if you want JS source maps,
+        uglifyOptions: {
+          output: {
+            beautify: false, //不需要格式化
+            comments: false //不保留注释
+          },
+          compress: {
+            warnings: false, // 在UglifyJs删除没有用到的代码时不输出警告
+            drop_console: true, // 删除所有的 `console` 语句，可以兼容ie浏览器
+            collapse_vars: true, // 内嵌定义了但是只用到一次的变量
+            reduce_vars: true // 提取出出现多次但是没有定义成变量去引用的静态值
+          }
+        }
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
   },
 
   module: {
@@ -117,17 +139,47 @@ module.exports = {
         ]
       },
 
-      // 小于8K的图片，转 base64
       {
-        test: /\.(png|jpg|gif)$/,
-        loader: 'url?limit=8192'
+        test: /\.(png|jpe?g|gif|bmp|svg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              // 配置图片编译路径
+              limit: 8192, // 小于8k将图片转换成base64
+              name: '[name].[hash:8].[ext]',
+              outputPath: 'images/'
+            }
+          },
+          {
+            loader: 'image-webpack-loader', // 图片压缩
+            options: {
+              bypassOnDebug: true
+            }
+          }
+        ]
       },
 
-      // 小于8K的字体，转 base64
       {
-        test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file?limit=8192'
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 8192,
+          name: 'fonts/[name].[hash:8].[ext]'
+        }
       }
+
+      // // 小于8K的图片，转 base64
+      // {
+      //   test: /\.(png|jpg|gif)$/,
+      //   loader: 'url?limit=8192'
+      // },
+
+      // // 小于8K的字体，转 base64
+      // {
+      //   test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      //   loader: 'file?limit=8192'
+      // }
     ]
   },
 
