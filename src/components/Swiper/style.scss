@@ -7,7 +7,7 @@
     margin: 0 auto;
     display: block;
     background: #ddd;
-    height: 300px;
+    height: 220px;
     text-align: center;
   }
   .swipe-wrap {
@@ -47,9 +47,9 @@
 .swiper-next {
   display: none;
   position: absolute;
-  width: 50px;
-  height: 50px;
-  background: rgba(0, 0, 0, .2);
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, .5);
   border-radius: 50%;
   text-align: center;
   line-height: 50px;
@@ -62,7 +62,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 24px;
+    font-size: 20px;
     color: #fff;
     opacity: .7;
   }

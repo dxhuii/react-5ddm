@@ -1,20 +1,37 @@
-.warp-bg{
+.warp-bg {
   background-color: #fff;
 }
 
-.main{
+.main {
   display: flex;
   flex-wrap: wrap;
   height: 440px;
   overflow: hidden;
-  &.cn{height: 340px;}
+  &.cn {
+    height: 340px;
+  }
+  &.top {
+    height: 240px;
+  }
 }
+
 .main-left {
   width: 880px;
   margin-right: 20px;
 }
+
 .main-right {
   width: 300px;
+}
+
+.top-left {
+  width: 440px;
+  height: 220px;
+  margin-right: 20px;
+}
+
+.top-right {
+  width: 740px;
 }
 
 .list-tab {
@@ -22,24 +39,44 @@
   border-bottom: 1px solid #ddd;
   background-color: #fff;
   li {
-      padding: 0 30px;
-      font-size: 18px;
+    padding: 0 30px;
+    font-size: 18px;
+    display: inline-block;
+    border-bottom: 1px solid transparent;
+    a {
+      padding: 20px 0;
       display: inline-block;
-      border-bottom: 1px solid transparent;
+      position: relative;
+      width: 100%;
+      bottom: -1px;
+      color: #999;
+    }
+    &.active,
+    &:hover {
+      margin-bottom: -1px;
       a {
-        padding: 20px 0;
-        display: inline-block;
-        position: relative;
-        width: 100%;
-        bottom: -1px;
-        color: #999;
+        color: #282828;
+        border-bottom: 1px solid #282822;
       }
-      &.active, &:hover {
-          margin-bottom: -1px;
-          a {
-            color: #282828;
-            border-bottom: 1px solid #282822;
-          }
-      }
+    }
+  }
+}
+
+.recommend {
+  display: flex;
+  flex-wrap: wrap;
+  height: 220px;
+  overflow: hidden;
+  li {
+    width: 170px;
+    height: 100px;
+    margin-bottom: 20px;
+    background-color: #ddd;
+    margin-right: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
   }
 }

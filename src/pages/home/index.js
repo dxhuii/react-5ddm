@@ -32,9 +32,20 @@ class Home extends Component {
     const { order } = this.state
     return (
       <div styleName="warp-bg">
-        <div className="wp pt20">
+        <div className="wp">
           <Meta title="首页" />
-          <Swiper id="home" />
+          <div className="pt20" styleName="main top">
+            <div styleName="top-left">
+              <Swiper />
+            </div>
+            <div styleName="top-right">
+              <ul styleName="recommend">
+                {[1, 2, 3, 4, 5, 6, 7, 8].map(item => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
           <div className="mt20" styleName="main">
             <div styleName="main-left">
               <WeekDay title="番剧" link="/week" isJp={['', '月', '火', '水', '木', '金', '土', '日']} type={1} />
