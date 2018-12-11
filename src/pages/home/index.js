@@ -34,10 +34,10 @@ class Home extends Component {
       <div styleName="warp-bg">
         <div className="wp pt20">
           <Meta title="首页" />
-          <Swiper />
+          <Swiper id="home" />
           <div className="mt20" styleName="main">
             <div styleName="main-left">
-              <WeekDay id="weekday" title="番剧" link="/week" isJp={['', '月', '火', '水', '木', '金', '土', '日']} type={1} />
+              <WeekDay title="番剧" link="/week" isJp={['', '月', '火', '水', '木', '金', '土', '日']} type={1} />
             </div>
             <div styleName="main-right">
               <Top id={3} order="hits_month" area="日本" limit={10} />
@@ -45,7 +45,7 @@ class Home extends Component {
           </div>
           <div className="mt20" styleName="main cn">
             <div styleName="main-left">
-              <WeekDay id="weekday" title="国创" link="/week" type={0} />
+              <WeekDay title="国创" link="/week" type={0} />
             </div>
             <div styleName="main-right">
               <Top id={3} order="hits_month" area="大陆" limit={7} />

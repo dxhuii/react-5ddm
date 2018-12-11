@@ -4,8 +4,8 @@ import { Link, withRouter } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { weekLoad } from '@/store/actions/week'
-import { getWeekByListId } from '@/store/reducers/week'
+import { week } from '@/store/actions/week'
+import { getWeek } from '@/store/reducers/week'
 
 import { isNumber, picHttps } from '@/utils'
 
@@ -13,11 +13,11 @@ import './style.scss'
 
 @withRouter
 @connect(
-  (state, props) => ({
-    week: getWeekByListId(state, props.id)
+  state => ({
+    weekData: getWeek(state)
   }),
   dispatch => ({
-    weekLoad: bindActionCreators(weekLoad, dispatch)
+    week: bindActionCreators(week, dispatch)
   })
 )
 class weekDay extends Component {
@@ -29,8 +29,8 @@ class weekDay extends Component {
   }
 
   static propTypes = {
-    week: PropTypes.object,
-    weekLoad: PropTypes.func,
+    weekData: PropTypes.object,
+    week: PropTypes.func,
     id: PropTypes.any,
     title: PropTypes.string,
     link: PropTypes.string,
@@ -40,9 +40,9 @@ class weekDay extends Component {
   }
 
   componentDidMount() {
-    const { week, weekLoad, id } = this.props
-    if (week && !week.data) {
-      weekLoad({ id })
+    const { weekData, week, id } = this.props
+    if (!weekData.data) {
+      week({ id })
     }
   }
 
@@ -95,7 +95,7 @@ class weekDay extends Component {
   render() {
     const {
       title,
-      week: { data = [] },
+      weekData: { data = [] },
       link,
       isJp,
       type,

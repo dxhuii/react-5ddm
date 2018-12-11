@@ -1,14 +1,37 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import { withRouter } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { slide } from '@/store/actions/slide'
+import { getSlide } from '@/store/reducers/slide'
+
 import { Swipe, SwipeItem } from 'swipejs/react'
 import './style.scss'
 
-export default class Swiper extends Component {
+@withRouter
+@connect(
+  state => ({
+    slideData: getSlide(state)
+  }),
+  dispatch => ({
+    slide: bindActionCreators(slide, dispatch)
+  })
+)
+class Swiper extends Component {
   constructor(props) {
     super(props)
     this.state = {}
     this.mySwipe = {}
     this.bullets = []
   }
+
+  static propTypes = {
+    slideData: PropTypes.object,
+    slide: PropTypes.func
+  }
+
   componentDidMount() {
     this.mySwipe = { ...this.swipe.instance }
     const page = document.querySelector('#page')
@@ -21,6 +44,11 @@ export default class Swiper extends Component {
       elem.onclick = function() {
         that.mySwipe.slide(parseInt(this.getAttribute('data-tab'), 10), 500)
       }
+    }
+
+    const { slideData, slide } = this.props
+    if (!slideData.data) {
+      slide()
     }
   }
 
@@ -53,6 +81,9 @@ export default class Swiper extends Component {
   }
 
   render() {
+    const {
+      slideData: { loading, data = [] }
+    } = this.props
     return (
       <div styleName="swiper">
         <Swipe
@@ -68,14 +99,20 @@ export default class Swiper extends Component {
           callback={this.handleCallback}
           transitionEnd={this.onTransactionEnd}
         >
-          <SwipeItem onClick={this.handleClick}>Slide One</SwipeItem>
-          <SwipeItem onClick={this.handleClick.bind(this)}>Slide Two</SwipeItem>
-          <SwipeItem onClick={this.handleClick.bind(this)}>Slide Three</SwipeItem>
+          {data.map(item => (
+            <SwipeItem key={item.url} onClick={this.handleClick}>
+              <a href={item.url}>
+                <img src={item.pic} />
+              </a>
+            </SwipeItem>
+          ))}
         </Swipe>
         <div id="page" styleName="page">
-          <em className="page-em__on">1</em>
-          <em>2</em>
-          <em>3</em>
+          {data.map((item, index) => (
+            <em key={item.pic} className={index === 0 ? 'page-em__on' : ''}>
+              {index + 1}
+            </em>
+          ))}
         </div>
         <div styleName="swiper-prev" onClick={this.prev}>
           <i className="iconfont">&#xe8ff;</i>
@@ -87,3 +124,5 @@ export default class Swiper extends Component {
     )
   }
 }
+
+export default Swiper

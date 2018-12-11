@@ -1,4 +1,4 @@
-:global{
+:global {
   .swipe {
     overflow: hidden;
     visibility: hidden;
@@ -15,16 +15,19 @@
     position: relative;
   }
   .swipe-wrap div {
-    float:left;
-    width:100%;
+    float: left;
+    width: 100%;
     position: relative;
   }
-  
   .swipe-item {
     position: relative;
-    margin-top: 140px;
-    color: white;
-    font-weight: bold;
+    img {
+      display: block;
+      width: 100%;
+    }
+    a {
+      display: block;
+    }
   }
 }
 
@@ -32,14 +35,16 @@
   position: relative;
   border-radius: 10px;
   overflow: hidden;
-  &:hover{
-    .swiper-prev, .swiper-next{
+  &:hover {
+    .swiper-prev,
+    .swiper-next {
       display: block;
     }
   }
 }
 
-.swiper-prev, .swiper-next {
+.swiper-prev,
+.swiper-next {
   display: none;
   position: absolute;
   width: 50px;
@@ -93,8 +98,8 @@
   }
 }
 
-:global{
+:global {
   .page-em__on {
-    background: rgba(0, 0, 0, .7)!important;
+    background: rgba(0, 0, 0, .7) !important;
   }
 }

@@ -40,6 +40,8 @@ export default {
     hits: ({ id, sid = 1 }) => `${API}api.php?s=home-hits-show-id-${id}-sid-${sid}-type-insert`,
     newsDetail: ({ id }) => `${API}api.php?s=home-react-newsDetail-id-${id}`, // 新闻内容接口
     newsList: ({ id, letter = '', news = '', did = '', day = '', wd = '', name = '', page = '', limit = 30, order = 'addtime' }) =>
-      `${API}api.php?s=home-react-newsList-id-${id}-letter-${letter}-news-${news}-did-${did}-day-${day}-wd-${wd}-name-${name}-limit-${limit}-order-${order}-p-${page}` // 新闻列表接口
+      `${API}api.php?s=home-react-newsList-id-${id}-letter-${letter}-news-${news}-did-${did}-day-${day}-wd-${wd}-name-${name}-limit-${limit}-order-${order}-p-${page}`, // 新闻列表接口
+    slide: () => `${API}api.php?s=home-react-slide`,
+    config: name => `${API}api.php?s=home-react-config-name-${name}`
   }
 }

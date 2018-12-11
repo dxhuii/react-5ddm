@@ -11,7 +11,7 @@ import Loading from '@/components/Ui/Loading'
 import HomeLoadData from '@/pages/home/load-data'
 import PlayLoadData from '@/pages/play/load-data'
 import SubjectLoadData from '@/pages/subject/load-data'
-import WeekLoadData from '@/pages/week/load-data'
+import WeekData from '@/pages/week/load-data'
 import ListLoadData from '@/pages/list/load-data'
 
 /**
@@ -66,7 +66,7 @@ export default user => {
         loading: () => <Loading />
       }),
       enter: triggerEnter,
-      loadData: WeekLoadData
+      loadData: WeekData
     },
 
     {

@@ -1,9 +1,9 @@
 import merge from 'lodash/merge'
 
-export default function week(state = {}, action = {}) {
+export default function slide(state = {}, action = {}) {
   const { data } = action
   switch (action.type) {
-    case 'GET_WEEK':
+    case 'GET_SLIDE':
       state = data
       return merge({}, state, {})
 
@@ -12,6 +12,6 @@ export default function week(state = {}, action = {}) {
   }
 }
 
-export const getWeek = state => {
-  return state.week ? state.week : {}
+export const getSlide = state => {
+  return state.slide ? state.slide : {}
 }
