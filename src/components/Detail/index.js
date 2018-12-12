@@ -128,18 +128,22 @@ class Detail extends Component {
             </div>
             <div styleName="detail-info__info">
               <h1>{title}</h1>
-              <p>{actor ? actor.map(item => <span key={item.title}>{item.title}</span>) : null}</p>
-              <p>{area}</p>
               <p>{aliases}</p>
-              <p>{total}</p>
-              <p>{filmtime}</p>
+              {total ? <p>{total}</p> : null}
+              {filmtime ? <p>{filmtime} 开播</p> : null}
               <p>{director ? director.map(item => <span key={item.title}>{item.title}</span>) : null}</p>
               <p>{type}</p>
               <p>{language}</p>
+              <p>{actor ? actor.map(item => <span key={item.title}>{item.title}</span>) : null}</p>
+              <p>{area}</p>
             </div>
             <div styleName="detail-info__score"> {gold} </div>
-            <div onClick={() => this.addMark('love', id, cid, userid)}> 收藏 </div>
-            <div onClick={() => this.addMark('remind', id, cid, userid)}> 订阅 </div>
+            <div styleName="detail-love" onClick={() => this.addMark('love', id, cid, userid)}>
+              <i className="iconfont">&#xe66a;</i>收藏
+            </div>
+            <div styleName="detail-remind" onClick={() => this.addMark('remind', id, cid, userid)}>
+              <i className="iconfont">&#xe6bd;</i>追番
+            </div>
           </div>
         </div>
         <ul styleName="detail-nav" className="tac">

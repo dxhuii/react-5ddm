@@ -3,6 +3,7 @@
   src: local("Tahoma");
   unicode-range: U+30-39;
 }
+
 @font-face {
   font-family: "Chinese Quote";
   src: local("PingFang SC"), local("SimSun");
@@ -10,82 +11,305 @@
 }
 
 @font-face {
-  font-family: 'iconfont';  /* project id 447392 */
-  src: url('//at.alicdn.com/t/font_447392_lvcq96e1w58.eot');
-  src: url('//at.alicdn.com/t/font_447392_lvcq96e1w58.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_447392_lvcq96e1w58.woff') format('woff'),
-  url('//at.alicdn.com/t/font_447392_lvcq96e1w58.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_447392_lvcq96e1w58.svg#iconfont') format('svg');
+  font-family: 'iconfont';
+  /* project id 447392 */
+  src: url('//at.alicdn.com/t/font_447392_bgkpd5npuvh.eot');
+  src: url('//at.alicdn.com/t/font_447392_bgkpd5npuvh.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_447392_bgkpd5npuvh.woff') format('woff'), url('//at.alicdn.com/t/font_447392_bgkpd5npuvh.ttf') format('truetype'), url('//at.alicdn.com/t/font_447392_bgkpd5npuvh.svg#iconfont') format('svg');
 }
 
 .iconfont {
-  font-family:"iconfont" !important;
-  font-size:16px;
-  font-style:normal;
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-:global{
-  *{box-sizing: border-box;}
-  body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,img,hr{margin:0;padding:0;vertical-align:baseline;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,th,td,var,i{font-style:normal;font-weight:normal;}
-  ol,ul,li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}
-  sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}
-  input,textarea,select{*font-size:100%;}legend{color:#000;}button{background:none;border:none;}ins{text-decoration:none;}blockquote:before,blockquote:after,q:before, q:after{content:"";}blockquote,q{quotes:"" "";}
-  hr{color:#f5f2ee;background-color:#f5f2ee;border:none;height:1px;}
-  table {border-collapse: collapse;border-spacing: 0;}
-  html,body{text-size-adjust:none;text-rendering: optimizeLegibility;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;touch-action: none;}
-  body {font-size: 14px;font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;-webkit-font-smoothing: antialiased;}
-  button,a{cursor:pointer;}
-  input,button{outline:none;}
-  p{word-wrap:break-word;}
-  a{color:#333;text-decoration:none;transition:all .15s ease-out;}
-  a:hover{color:#282828;text-decoration:none;}
-  i{overflow:hidden;}
-  .clearfix:after{clear:both;content:".";display:block;height:0;visibility:hidden;}
-  .f14{font-size:14px;}.f16{font-size:16px;}.f18{font-size:18px;}
-  .cp{cursor:pointer;}.b{font-weight:700;}.w{white-space:nowrap;}.tal{text-align:left;}.tac{text-align:center;}
-  .tar{text-align:right;}.fr{float:right;}.db img{display:block;}
-  .fl{float:left;}.fr{float:right;}.pr{position:relative;}.pa{position:absolute;}.oh{overflow:hidden;}.hide{display:none;}
-  ::-moz-selection{background: #f60; color: #fff; text-shadow: none;}
-  ::selection {background: #f60; color: #fff; text-shadow: none;}
-  ::-webkit-input-placeholder{color:#666;}
-  ::-moz-placeholder{color:#666;}
-  :-moz-placeholder{color:#666;}
-  ::-ms-input-placeholder{color:#666;}
-  input:-moz-placeholder { color:#666; }
-  textarea:-moz-placeholder {color:#666;}
-  .wp{width: 1200px;margin: auto;}
-  .mt20{margin-top: 20px;}
-  .pt20{padding-top: 20px;}
-
-  body{
+:global {
+  * {
+    box-sizing: border-box;
+  }
+  body,
+  div,
+  dl,
+  dt,
+  dd,
+  ul,
+  ol,
+  li,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  pre,
+  code,
+  form,
+  fieldset,
+  legend,
+  input,
+  textarea,
+  p,
+  blockquote,
+  img,
+  hr {
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+  }
+  fieldset,
+  img {
+    border: 0;
+  }
+  address,
+  caption,
+  cite,
+  code,
+  dfn,
+  em,
+  th,
+  td,
+  var,
+  i {
+    font-style: normal;
+    font-weight: normal;
+  }
+  ol,
+  ul,
+  li {
+    list-style: none;
+  }
+  caption,
+  th {
+    text-align: left;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 100%;
+    font-weight: normal;
+  }
+  q:before,
+  q:after {
+    content: '';
+  }
+  abbr,
+  acronym {
+    border: 0;
+    font-variant: normal;
+  }
+  sup {
+    vertical-align: text-top;
+  }
+  sub {
+    vertical-align: text-bottom;
+  }
+  input,
+  textarea,
+  select {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  input,
+  textarea,
+  select {
+    *font-size: 100%;
+  }
+  legend {
+    color: #000;
+  }
+  button {
+    background: none;
+    border: none;
+  }
+  ins {
+    text-decoration: none;
+  }
+  blockquote:before,
+  blockquote:after,
+  q:before,
+  q:after {
+    content: "";
+  }
+  blockquote,
+  q {
+    quotes: "" "";
+  }
+  hr {
+    color: #f5f2ee;
+    background-color: #f5f2ee;
+    border: none;
+    height: 1px;
+  }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  html,
+  body {
+    text-size-adjust: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: none;
+  }
+  body {
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  button,
+  a {
+    cursor: pointer;
+  }
+  input,
+  button {
+    outline: none;
+  }
+  p {
+    word-wrap: break-word;
+  }
+  a {
+    color: #333;
+    text-decoration: none;
+    transition: all .15s ease-out;
+  }
+  a:hover {
+    color: #282828;
+    text-decoration: none;
+  }
+  i {
+    overflow: hidden;
+  }
+  .clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+  }
+  .f14 {
+    font-size: 14px;
+  }
+  .f16 {
+    font-size: 16px;
+  }
+  .f18 {
+    font-size: 18px;
+  }
+  .cp {
+    cursor: pointer;
+  }
+  .b {
+    font-weight: 700;
+  }
+  .w {
+    white-space: nowrap;
+  }
+  .tal {
+    text-align: left;
+  }
+  .tac {
+    text-align: center;
+  }
+  .tar {
+    text-align: right;
+  }
+  .fr {
+    float: right;
+  }
+  .db img {
+    display: block;
+  }
+  .fl {
+    float: left;
+  }
+  .fr {
+    float: right;
+  }
+  .pr {
+    position: relative;
+  }
+  .pa {
+    position: absolute;
+  }
+  .oh {
+    overflow: hidden;
+  }
+  .hide {
+    display: none;
+  }
+  ::-moz-selection {
+    background: #f60;
+    color: #fff;
+    text-shadow: none;
+  }
+  ::selection {
+    background: #f60;
+    color: #fff;
+    text-shadow: none;
+  }
+  ::-webkit-input-placeholder {
+    color: #666;
+  }
+  ::-moz-placeholder {
+    color: #666;
+  }
+  :-moz-placeholder {
+    color: #666;
+  }
+  ::-ms-input-placeholder {
+    color: #666;
+  }
+  input:-moz-placeholder {
+    color: #666;
+  }
+  textarea:-moz-placeholder {
+    color: #666;
+  }
+  .wp {
+    width: 1200px;
+    margin: auto;
+  }
+  .mt20 {
+    margin-top: 20px;
+  }
+  .pt20 {
+    padding-top: 20px;
+  }
+  body {
     padding-top: 55px;
     background-color: #f4f5f7;
   }
-  html{
-    &::-webkit-scrollbar{
+  html {
+    &::-webkit-scrollbar {
       width: 7px;
       height: 7px
     }
-    &::-webkit-scrollbar-thumb{
+    &::-webkit-scrollbar-thumb {
       border-radius: 1em;
-      background-color: rgba(50,50,50,0.3)
+      background-color: rgba(50, 50, 50, 0.3)
     }
-    &::-webkit-scrollbar-track{
-      box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3)
     }
-    &::-webkit-scrollbar-thumb{
-      background: rgba(100,100,100,0.8)
+    &::-webkit-scrollbar-thumb {
+      background: rgba(100, 100, 100, 0.8)
     }
-    &::-webkit-scrollbar-corner,&::-webkit-scrollbar-thumb:window-inactive{
-      background: rgba(100,100,100,0.4)
+    &::-webkit-scrollbar-corner,
+    &::-webkit-scrollbar-thumb:window-inactive {
+      background: rgba(100, 100, 100, 0.4)
     }
   }
   .iconfont {
-    font-family:"iconfont" !important;
-    font-size:16px;
-    font-style:normal;
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     display: inline-block;
