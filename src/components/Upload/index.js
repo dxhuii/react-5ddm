@@ -7,7 +7,9 @@ export default class Main extends Component {
     url: PropTypes.string,
     upload: PropTypes.func,
     uploadEnd: PropTypes.func,
-    children: PropTypes.any
+    children: PropTypes.any,
+    progress: PropTypes.func,
+    fileNum: PropTypes.func
   }
 
   clickUpload = () => {
@@ -27,54 +29,73 @@ export default class Main extends Component {
     input.click()
   }
 
-  up = file => {
+  up = (file, index) => {
     const { url, upload } = this.props
     axios.get(url).then(rst => {
       console.log(rst.data, this.props)
       if (upload) {
-        upload(rst.data, file, this.upLoadAlioss)
+        upload(rst.data, file, this.upLoadAlioss, index)
         return
       }
-      this.upLoadAlioss(Object.assign({}, rst.data, { file }))
+      this.upLoadAlioss(Object.assign({}, rst.data, { file }), index)
     })
+  }
+
+  setA = num => {
+    let a = []
+    for (let i = 0; i < num; i++) {
+      a.push(i)
+    }
+    return a
   }
 
   doUpload = () => {
     console.log(this.input.files)
     const file = this.input.files
+    this.props.fileNum(this.setA(file.length))
     this.inputBox.parentNode.removeChild(this.inputBox)
     this.input = null
     this.inputBox = null
     if (file.length > 1) {
       for (let i = 0; i < file.length; i++) {
-        this.up(file[i])
+        this.up(file[i], i)
       }
     } else {
-      this.up(file[0])
+      this.up(file[0], 0)
     }
   }
-  upLoadAlioss = options => {
+  upLoadAlioss = (options, index) => {
     const file = options.file
-    let curDate = new FormData()
+    const fd = new FormData()
+    const xhr = new XMLHttpRequest()
     const key = options.dir + new Date().getTime() + '_' + options.file.name
-    curDate.append('OSSAccessKeyId', options.accessid)
-    curDate.append('policy', options.policy)
-    curDate.append('Signature', options.signature)
-    curDate.append('key', key)
-    curDate.append('success_action_status', '200')
-    curDate.append('file', file)
-    console.log(curDate, options)
-    return axios({
-      url: options.host,
-      method: 'post',
-      data: curDate
-    })
-      .then(() => {
-        this.props.uploadEnd(options.host + '/' + key)
-      })
-      .catch(err => {
-        this.props.uploadEnd(false)
-      })
+
+    const progressFn = event => {
+      console.log(event)
+      this.props.progress((event.loaded / event.total) * 100, index)
+    }
+    const successFn = res => {
+      console.log(res)
+      this.props.uploadEnd(options.host + '/' + key)
+    }
+    const errorFn = res => {
+      console.log(res)
+      this.props.uploadEnd(false)
+    }
+
+    xhr.upload.addEventListener('progress', progressFn, false)
+    xhr.addEventListener('load', successFn, false)
+    xhr.addEventListener('error', errorFn, false)
+    xhr.addEventListener('abort', errorFn, false)
+    fd.append('OSSAccessKeyId', options.accessid)
+    fd.append('policy', options.policy)
+    fd.append('Signature', options.signature)
+    fd.append('key', key)
+    fd.append('success_action_status', '200')
+    fd.append('file', file)
+    xhr.open('POST', options.host, true)
+    xhr.send(fd)
+    console.log(fd, options)
   }
 
   render() {
