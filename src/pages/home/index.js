@@ -7,7 +7,8 @@ import Meta from '@/components/Meta'
 import WeekDay from '@/components/Week'
 import Top from '@/components/Top'
 import List from '@/components/List'
-
+import News from '@/components/News'
+import NewsYG from '@/components/News/yugao'
 import Swiper from '@/components/Swiper'
 
 import './style.scss'
@@ -52,6 +53,14 @@ class Home extends Component {
             </div>
             <div styleName="main-right">
               <Top id={3} order="hits_month" area="日本" limit={10} />
+            </div>
+          </div>
+          <div className="mt20" styleName="main news">
+            <div styleName="main-left">
+              <News />
+            </div>
+            <div styleName="main-right">
+              <NewsYG />
             </div>
           </div>
           <div className="mt20" styleName="main cn">

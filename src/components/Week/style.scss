@@ -3,6 +3,7 @@
   height: 30px;
   line-height: 30px;
   display: flex;
+  flex-grow: 1;
   border-radius: 15px;
   border: 1px solid #e5e9ef;
   li {
@@ -28,52 +29,11 @@
   }
 }
 
-.title {
-  h2 {
-    float: left;
-    font-size: 24px;
-    color: #444;
-    margin-right: 30px;
-  }
-  a {
-    float: right;
-    margin-left: 30px;
-    margin-top: 1px;
-    height: 30px;
-    line-height: 28px;
-    border: 1px solid #f60;
-    border-radius: 5px;
-    text-align: center;
-    padding: 0 5px 0 15px;
-    color: #f60;
-    &:hover {
-      background: #f60;
-      color: #fff;
-    }
-  }
-  .title-icon {
-    display: inline-block;
-    position: relative;
-    top: -5px;
-    width: 40px;
-    height: 40px;
-    vertical-align: middle;
-    fill: currentColor;
-    overflow: hidden;
-    background: url(../../static/img/acg.svg) no-repeat;
-    background-size: 40px 40px;
-    &.cn {
-      background: url(../../static/img/china.svg) no-repeat;
-      background-size: 40px 40px;
-    }
-  }
-}
-
 .week {
   height: 385px;
   overflow-x: hidden;
   overflow-y: auto;
-  margin-top: 25px;
+  margin-top: 15px;
   margin-bottom: -10px;
   display: flex;
   flex-flow: row wrap;

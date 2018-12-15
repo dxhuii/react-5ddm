@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 
 import { playerLoad } from '@/store/actions/player'
 import { getPlayerList } from '@/store/reducers/player'
+import { getUserInfo } from '@/store/reducers/user'
 
 import PlayList from '@/components/Play/PlayList'
 import Shell from '@/components/Shell'
@@ -20,6 +21,7 @@ const { isJump, is9 } = play
 @Shell
 @connect(
   (state, props) => ({
+    userinfo: getUserInfo(state),
     player: getPlayerList(state, props.match.params.id, props.match.params.pid)
   }),
   dispatch => ({
@@ -39,7 +41,8 @@ class Play extends Component {
   static propTypes = {
     player: PropTypes.object,
     playerLoad: PropTypes.func,
-    match: PropTypes.object
+    match: PropTypes.object,
+    userinfo: PropTypes.object
   }
 
   componentDidMount() {
@@ -122,6 +125,7 @@ class Play extends Component {
 
   render() {
     const {
+      userinfo,
       player: { data = {} },
       match: {
         params: { id }
@@ -133,8 +137,11 @@ class Play extends Component {
         <Meta title={`${title} ${subTitle}`} />
         <div styleName="player">
           <div styleName="player-left">
-            <div styleName="player-box">{playHtml || defaultPlay}</div>
-            {/* <div styleName='player-box' dangerouslySetInnerHTML={{__html: playHtml || defaultPlay}} /> */}
+            {userinfo.userid ? (
+              <div styleName="player-box" dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
+            ) : (
+              <div styleName="player-box">{playHtml || defaultPlay}</div>
+            )}
           </div>
           <div styleName="player-right">
             <ul styleName="playlist">

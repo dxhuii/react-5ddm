@@ -108,15 +108,9 @@ class weekDay extends Component {
     const weekData = this.getEveryWeek(weekType[type], type)
     return (
       <Fragment>
-        <div styleName="title">
-          {link ? (
-            <Link to={link}>
-              {linkText || '新番时间表'}
-              <i className="iconfont">&#xe65e;</i>
-            </Link>
-          ) : null}
+        <div className="title">
           <h2>
-            <i styleName={isJp ? 'title-icon' : 'title-icon cn'} /> {title}
+            <i className={isJp ? 'title-icon' : 'title-icon cn'} /> {title}
           </h2>
           <ul styleName="tab">
             {weekCn.map((item, index) => (
@@ -126,6 +120,12 @@ class weekDay extends Component {
               </li>
             ))}
           </ul>
+          {link ? (
+            <Link to={link}>
+              {linkText || '新番时间表'}
+              <i className="iconfont">&#xe65e;</i>
+            </Link>
+          ) : null}
         </div>
         <ul styleName={type === 0 ? 'week weekCn' : 'week'}>
           {weekData[weekEng[currentIndex]].map(item => (

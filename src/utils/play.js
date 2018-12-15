@@ -119,10 +119,19 @@ const isPlay = (type, pv) => {
 
 const ck = (type, pv) => {
   const flvsp = 'https://api.flvsp.com/?type='
-  if (type === 'bitqiu') {
-    return '//www.acgnz.cn/api/pan.php?url=http://193.112.131.234:8081/play/vbit?v=' + pv
+  const mdparse = 'https://www.acgnz.cn/mdparse/?type='
+  if (['qq', 'pptv', 'iqiyi', 'youku'].indexOf(type) !== -1) {
+    return mdparse + type + '&id=' + pv.split(/\/,|_/)[0]
+  } else if (type === 'sohu' || type === 'letv') {
+    return this.isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
+  } else if (type === 'bitqiu') {
+    return '//www.acgnz.cn/api/pan.php?url=vbit?v=' + pv
   } else if (type === 'yunpan') {
-    return '//www.acgnz.cn/api/pan.php?url=http://193.112.131.234:8081/play/va360?v=' + pv
+    return '//www.acgnz.cn/api/pan.php?url=va360?v=' + pv
+  } else if (type === 'bithls') {
+    return '//www.acgnz.cn/api/pan.php?url=vbithls?v=' + pv
+  } else if (type === 'bit') {
+    return '//www.acgnz.cn/api/bit.php?id=' + pv
   } else if (type === 'maoyun') {
     return 'https://mao.shuikaile.com/play.php?url=' + pv
   } else {

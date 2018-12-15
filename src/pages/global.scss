@@ -315,4 +315,53 @@
     display: inline-block;
     vertical-align: middle;
   }
+  .title {
+    display: flex;
+    h2 {
+      font-size: 24px;
+      color: #444;
+      margin-right: 30px;
+    }
+    a {
+      margin-left: 30px;
+      margin-top: 1px;
+      height: 30px;
+      line-height: 28px;
+      border: 1px solid #f60;
+      border-radius: 5px;
+      text-align: center;
+      padding: 0 5px 0 15px;
+      color: #f60;
+      &:hover {
+        background: #f60;
+        color: #fff;
+      }
+    }
+    .title-icon {
+      display: inline-block;
+      position: relative;
+      top: -5px;
+      width: 40px;
+      height: 40px;
+      vertical-align: middle;
+      fill: currentColor;
+      overflow: hidden;
+      background: url(../static/img/acg.svg) no-repeat;
+      background-size: 35px 40px;
+      &.cn {
+        background: url(../static/img/china.svg) no-repeat;
+        background-size: 35px 40px;
+      }
+      &.news {
+        background: url(../static/img/news.svg) no-repeat;
+        background-size: 35px 40px;
+        top: -2px;
+      }
+      &.yugao {
+        background: url(../static/img/yugao.svg) no-repeat;
+        background-size: 35px 40px;
+        top: -3px;
+      }
+    }
+  }
 }
