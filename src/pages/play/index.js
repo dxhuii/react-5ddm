@@ -105,15 +105,21 @@ class Play extends Component {
 
   getData(data = {}) {
     const { play, type } = this.state
+    const {
+      match: {
+        params: { id, pid }
+      }
+    } = this.props
     const { title, subTitle, list = [] } = data
     const other = this.getOther(list)
+    const danmu = `${id}_${pid}`
     const defaultPlay =
       other.length > 0 && !is9
-        ? isJump(other[0].vid, other[0].playName, 1)
+        ? isJump(other[0].vid, other[0].playName, 1, danmu)
         : list.length > 0
-        ? isJump(list[0].vid, list[0].playName, 1)
+        ? isJump(list[0].vid, list[0].playName, 1, danmu)
         : ''
-    const playHtml = play ? isJump(play, type, 1) : ''
+    const playHtml = play ? isJump(play, type, 1, danmu) : ''
     return {
       title,
       subTitle,

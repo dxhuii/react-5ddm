@@ -139,40 +139,29 @@ const ck = (type, pv) => {
   }
 }
 
-const jiexiUrl = pv => {
+const jiexiUrl = (pv, danmu) => {
   const style = isMobile() ? 'class="playheight" style="height: 320px;width:100%;"' : 'width="100%" height="495"'
-  return (
-    '<iframe src="' +
-    pv.replace('ikanfan.cn', 'acgnz.cn') +
-    '" ' +
-    style +
-    ' frameborder="0" scrolling="no" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>'
-  )
+  return `<iframe src="${pv.replace(
+    'ikanfan.cn',
+    'acgnz.cn'
+  )}&danmu=${danmu}" ${style} frameborder="0" scrolling="no" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
 }
 const iframe = pv => {
   const style = isMobile() ? 'class="playheight" style="height: 320px;width:100%;"' : 'width="100%" height="495"'
-  return (
-    '<iframe src="' +
-    pv +
-    '" ' +
-    style +
-    ' frameborder="0" scrolling=no  allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>'
-  )
+  return `<iframe src="${pv}" ${style} frameborder="0" scrolling=no  allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
 }
 const HTML = pv => {
-  const mobile = '<a class="html" href="' + pv + '">亲，请点我播放</a>'
+  const mobile = `<a class="html" href="${pv}">亲，请点我播放</a>`
   return isMobile()
     ? mobile
-    : '<div class="explaywrap" style="height:495px;"><a target="_blank" href="' +
-        pv +
-        '">亲，请点我播放</a><p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>'
+    : `<div class="explaywrap" style="height:495px;"><a target="_blank" href="${pv}">亲，请点我播放</a><p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
 }
-const isPlays = (playname, pv) => {
+const isPlays = (playname, pv, danmu) => {
   if (playname === 'full') {
-    return is9 ? '/' : jiexiUrl(pv.replace('http://', 'https://'))
+    return is9 ? '/' : jiexiUrl(`${pv.replace('http://', 'https://')}&danmu=${danmu}`)
   } else {
     if (pv.indexOf('.mp4') !== -1 || pv.indexOf('.m3u8') !== -1) {
-      return is9 ? '/' : jiexiUrl('//www.acgnz.cn/api/play.php?url=' + pv)
+      return is9 ? '/' : jiexiUrl(`//www.acgnz.cn/api/play.php?url=${pv}&danmu=${danmu}`)
     } else if (
       pv.indexOf('youku.com') === -1 &&
       pv.indexOf('iqiyi.com') === -1 &&
@@ -181,7 +170,7 @@ const isPlays = (playname, pv) => {
       pv.indexOf('qq.com') === -1 &&
       pv.indexOf('mgtv.com') === -1
     ) {
-      return is9 ? HTML(pv) : jiexiUrl('//www.acgnz.cn/mdparse/?id=' + pv)
+      return is9 ? HTML(pv) : jiexiUrl(`//www.acgnz.cn/mdparse/?id=${pv}`)
     } else {
       return HTML(pv)
     }
@@ -189,7 +178,7 @@ const isPlays = (playname, pv) => {
 }
 
 export default {
-  isJump: (vid, playname, isP) => {
+  isJump: (vid, playname, isP, danmu) => {
     let url = ''
     let name = playname
     let data = []
@@ -212,7 +201,7 @@ export default {
     if ((pv.indexOf('.mp4') !== -1 || pv.indexOf('.m3u8') !== -1 || playStyle) && is9) {
       url = HTML('/')
     } else if (isCk) {
-      url = isP ? isPlays(name, vid) : isPlay(name, vid)
+      url = isP ? isPlays(name, vid, danmu) : isPlay(name, vid)
     } else {
       switch (name) {
         case 'youku':
@@ -246,7 +235,7 @@ export default {
           url = acfun(pv, isP)
           break
         default:
-          url = isP ? jiexiUrl(ck(name, pv)) : ck(name, pv)
+          url = isP ? jiexiUrl(ck(name, pv), danmu) : ck(name, pv)
           break
       }
     }
