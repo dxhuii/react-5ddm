@@ -130,13 +130,7 @@ class PlayList extends Component {
     const pageSurplus = len % pageSize // 除 pageSize 的余数
     const num = parseInt(pageSurplus !== 0 ? pageNum + 1 : pageNum) // 余数不为 0 分页数 + 1
     let html = []
-    if (len <= pageSize) {
-      html.push(
-        <li key={0} styleName="active">
-          第1话 - 第{len}话
-        </li>
-      )
-    } else {
+    if (len > pageSize) {
       for (let i = 1; i <= num; i++) {
         const pageStart = i === 1 ? 1 : pageSize * (i - 1) + 1
         const pageStart2 = i === 1 ? 0 : pageSize * (i - 1)
@@ -171,10 +165,12 @@ class PlayList extends Component {
     return (
       <div className="wp">
         {loading ? <div>loading...</div> : null}
-        <div styleName="playlist playlist-boreder">
-          <ul styleName="playlist-nav" style={{ width: `${(len + (surplus ? 1 : 0)) * 140}px` }}>
-            {this.page()}
-          </ul>
+        <div styleName="playlist playlist-boreder" id="playNav">
+          {list.length > pageSize ? (
+            <ul styleName="playlist-nav" style={{ width: `${(len + (surplus ? 1 : 0)) * 140}px` }}>
+              {this.page()}
+            </ul>
+          ) : null}
         </div>
         <div styleName="playlist" id="playlist">
           <ul styleName="playlist-ul" /* style={{ width: `${dataSource.length * 132}px` }} */>
