@@ -57,15 +57,15 @@ class PlayList extends Component {
       const { data } = play
       this.setData(data, pid)
     }
+  }
 
-    // if (pid) {
-    //   this.current = document.querySelector('.playlist-li__on')
-    //   this.playlist = document.querySelector('#playlist')
-    //   const currentLeft = getOffset(this.current).left
-    //   const width = document.documentElement.clientWidth || document.body.clientWidth
-    //   this.playlist.scrollLeft = currentLeft - width / 3
-    //   console.log(this.current, getOffset(this.current).left, this.playlist, this.props)
-    // }
+  onDom() {
+    this.current = document.querySelector('#pageCurrent')
+    this.page = document.querySelector('#playNav')
+    const currentLeft = getOffset(this.current).left
+    const width = document.documentElement.clientWidth || document.body.clientWidth
+    this.page.scrollLeft = currentLeft - width / 3
+    console.log(this.current, getOffset(this.current).left, this.page, this.props)
   }
 
   setData(data, pid) {
@@ -83,12 +83,19 @@ class PlayList extends Component {
       end = surplus !== 0 ? (yesSurplus > len ? len : yesSurplus) : num * pageSize
     }
     console.log(start, end, pageSize)
-    this.setState({
-      list,
-      start,
-      end,
-      dataSource: list.slice(start, end)
-    })
+    this.setState(
+      {
+        list,
+        start,
+        end,
+        dataSource: list.slice(start, end)
+      },
+      () => {
+        if (this.state.list.length > pageSize) {
+          this.onDom()
+        }
+      }
+    )
   }
 
   onPrev() {}
@@ -140,6 +147,7 @@ class PlayList extends Component {
           <li
             key={i}
             onClick={() => this.pageJump(list, pageStart2, pageEnd)}
+            id={start === pageStart2 && pageEnd === end ? 'pageCurrent' : ''}
             styleName={start === pageStart2 && pageEnd === end ? 'active' : ''}
           >
             第{pageStart}话 - 第{pageEnd}话
@@ -165,13 +173,13 @@ class PlayList extends Component {
     return (
       <div className="wp">
         {loading ? <div>loading...</div> : null}
-        <div styleName="playlist playlist-boreder" id="playNav">
-          {list.length > pageSize ? (
+        {list.length > pageSize ? (
+          <div styleName="playlist playlist-boreder" id="playNav">
             <ul styleName="playlist-nav" style={{ width: `${(len + (surplus ? 1 : 0)) * 140}px` }}>
               {this.page()}
             </ul>
-          ) : null}
-        </div>
+          </div>
+        ) : null}
         <div styleName="playlist" id="playlist">
           <ul styleName="playlist-ul" /* style={{ width: `${dataSource.length * 132}px` }} */>
             {dataSource.map(item => (

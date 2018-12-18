@@ -32,7 +32,7 @@ class Home extends Component {
   render() {
     const { order } = this.state
     return (
-      <div styleName="warp-bg">
+      <div className="warp-bg">
         <div className="wp">
           <Meta title="首页" />
           <div className="pt20" styleName="main top">
