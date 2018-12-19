@@ -1,5 +1,6 @@
-.top{
-  h2{
+@import '../../pages/_mixin';
+.top {
+  h2 {
     margin-top: 3px;
     font-size: 18px;
     i {
@@ -15,6 +16,7 @@
       display: flex;
       a {
         flex-grow: 1;
+        @include clamp(1);
         margin-left: 10px;
       }
     }
@@ -46,7 +48,7 @@
   flex-basis: 20px;
   text-align: center;
   line-height: 20px;
-  &.on{
+  &.on {
     background-color: #f60;
     color: #fff;
   }

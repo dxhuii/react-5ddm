@@ -36,14 +36,19 @@ export const location = () => {
 
 // 获取元素position的位置
 export const getOffset = el => {
-  var _x = 0
-  var _y = 0
-  while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
-    _x += el.offsetLeft - el.scrollLeft
-    _y += el.offsetTop - el.scrollTop
-    el = el.offsetParent
+  let actualLeft = el.offsetLeft
+  let current = el.offsetParent
+  let elementScrollLeft = 0
+  while (current !== null) {
+    actualLeft += current.offsetLeft + current.clientLeft
+    current = current.offsetParent
   }
-  return { top: _y, left: _x }
+  if (document.compatMode == 'BackCompat') {
+    elementScrollLeft = document.body.scrollLeft
+  } else {
+    elementScrollLeft = document.documentElement.scrollLeft
+  }
+  return actualLeft - elementScrollLeft
 }
 
 // 去掉字符串前后空格
