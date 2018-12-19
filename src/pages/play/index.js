@@ -141,7 +141,7 @@ class Play extends Component {
     return (
       <div className="wp mt20">
         <Meta title={`${title} ${subTitle}`} />
-        <div styleName="player">
+        {/* <div styleName="player">
           <div styleName="player-left">
             {userinfo.userid ? (
               <div styleName="player-box" dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
@@ -165,7 +165,7 @@ class Play extends Component {
             <Link to={`/subject/${id}`}>{title}</Link>：
           </h1>
           <h4>{subTitle}</h4>
-        </div>
+        </div> */}
         <PlayList />
       </div>
     )

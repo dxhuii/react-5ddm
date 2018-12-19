@@ -9,10 +9,10 @@ import Shell from '@/components/Shell'
 class Bangumi extends Component {
   render() {
     return (
-      <Fragment>
+      <div className="warp-bg">
         <Detail key="detail" isMeta={true} />
         <PlayList key="playlist" />
-      </Fragment>
+      </div>
     )
   }
 }

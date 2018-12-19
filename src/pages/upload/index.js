@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import FileUpload from '../../components/Upload'
+import { publicPath } from 'Config' 
 
 import './style.scss'
 export default class Main extends Component {
@@ -17,7 +18,7 @@ export default class Main extends Component {
     return (
       <div style={{ padding: 30, fontSize: 30 }}>
         <FileUpload
-          url="http://localhost:4000/sign/alioss"
+          url={`${publicPath}/sign/alioss`}
           uploadEnd={data => {
             this.setState({
               imgUlr: this.state.imgUlr.concat(data)
