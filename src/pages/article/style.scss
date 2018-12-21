@@ -4,38 +4,53 @@
 
 .article-left {
   width: 880px;
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 .article-right {
   width: 300px;
+  margin-left: 20px;
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 .article-body {
-  padding: 20px;
   h1 {
-    font-size: 18px;
-    text-align: center;
+    font-size: 24px;
     line-height: 24px;
   }
 }
 
+.article-head {
+  padding: 30px 30px 16px;
+}
+
 .article-label {
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 20px;
-  margin: 20px 0;
+  color: #999;
+  margin-top: 20px;
   span {
     margin-right: 10px;
   }
 }
 
+.acticle-remark {
+  background-color: #f8f8f8;
+  padding: 28px 30px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
 .article-content {
   margin-bottom: -20px;
+  padding: 30px 30px 0;
   img {
     max-width: 100%;
+    height: auto;
     display: block;
   }
   p {
-    padding-bottom: 20px;
+    padding-bottom: 30px;
   }
 }
 
