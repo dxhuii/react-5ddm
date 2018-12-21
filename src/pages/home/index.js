@@ -57,7 +57,7 @@ class Home extends Component {
           </div>
           <div className="mt20" styleName="main news">
             <div styleName="main-left">
-              <News />
+              <News id="211,206,207,208,209,212,213,221" limit={12} />
             </div>
             <div styleName="main-right">
               <NewsYG />

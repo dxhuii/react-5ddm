@@ -1,9 +1,77 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { newsList } from '@/store/actions/news'
+import { getNews } from '@/store/reducers/news'
 
 import './style.scss'
 
-export default class News extends Component {
+@withRouter
+@connect(
+  (state, props) => ({
+    newsData: getNews(
+      state,
+      props.id,
+      props.news || '',
+      props.did || '',
+      props.name || '',
+      props.wd || '',
+      props.letter || '',
+      props.day || '',
+      props.order || '',
+      props.limit || 12
+    )
+  }),
+  dispatch => ({
+    newsList: bindActionCreators(newsList, dispatch)
+  })
+)
+class News extends Component {
+  static propTypes = {
+    id: PropTypes.any,
+    news: PropTypes.any,
+    did: PropTypes.any,
+    wd: PropTypes.string,
+    letter: PropTypes.string,
+    name: PropTypes.any,
+    day: PropTypes.any,
+    order: PropTypes.string,
+    limit: PropTypes.any,
+    newsList: PropTypes.func,
+    newsData: PropTypes.object
+  }
+
+  componentDidMount() {
+    const { id, news, did, name, wd, letter, day, order, limit, newsList, newsData } = this.props
+    console.log(newsData)
+    if (!newsData.data) {
+      newsList({ id, news, did, name, wd, letter, day, order, limit })
+    }
+  }
+
+  showData() {
+    const {
+      newsData: { data = [] }
+    } = this.props
+    return data.map(item => (
+      <li key={item.id}>
+        <div styleName="picbox">
+          <Link styleName="pic" to={`/artilce/${item.id}`}>
+            <img src={item.pic} />
+          </Link>
+          <Link styleName="type" to={`/news/${item.cid}`} title={item.name}>
+            {item.name}
+          </Link>
+        </div>
+        <h2>
+          <Link to={`/artilce/${item.id}`}>{item.title}</Link>
+        </h2>
+      </li>
+    ))
+  }
+
   render() {
     return (
       <Fragment>
@@ -27,165 +95,10 @@ export default class News extends Component {
             <i className="iconfont">&#xe65e;</i>
           </Link>
         </div>
-        <ul styleName="newslist">
-          <li>
-            <div styleName="picbox">
-              <a styleName="pic" href="/article/1805.html">
-                <img src="https://ws1.sinaimg.cn/large/61e74233ly1ffue11lhxhg20dw07tkfz.gif" />
-              </a>
-              <a styleName="type" href="/zixun/" title="资讯">
-                资讯
-              </a>
-            </div>
-            <h2>
-              <a href="/article/1805.html">【剧透慎点】《海贼王》869话 围城 简易文字情报</a>
-            </h2>
-          </li>
-          <li>
-            <div styleName="picbox">
-              <a styleName="pic" href="/article/1805.html">
-                <img src="https://ws1.sinaimg.cn/large/61e74233ly1ffue11lhxhg20dw07tkfz.gif" />
-              </a>
-              <a styleName="type" href="/zixun/" title="资讯">
-                资讯
-              </a>
-            </div>
-            <h2>
-              <a href="/article/1805.html">【剧透慎点】《海贼王》869话 围城 简易文字情报</a>
-            </h2>
-          </li>
-          <li>
-            <div styleName="picbox">
-              <a styleName="pic" href="/article/1805.html">
-                <img src="https://ws1.sinaimg.cn/large/61e74233ly1ffue11lhxhg20dw07tkfz.gif" />
-              </a>
-              <a styleName="type" href="/zixun/" title="资讯">
-                资讯
-              </a>
-            </div>
-            <h2>
-              <a href="/article/1805.html">【剧透慎点】《海贼王》869话 围城 简易文字情报</a>
-            </h2>
-          </li>
-          <li>
-            <div styleName="picbox">
-              <a styleName="pic" href="/article/1805.html">
-                <img src="https://ws1.sinaimg.cn/large/61e74233ly1ffue11lhxhg20dw07tkfz.gif" />
-              </a>
-              <a styleName="type" href="/zixun/" title="资讯">
-                资讯
-              </a>
-            </div>
-            <h2>
-              <a href="/article/1805.html">【剧透慎点】《海贼王》869话 围城 简易文字情报</a>
-            </h2>
-          </li>
-          <li>
-            <div styleName="picbox">
-              <a styleName="pic" href="/article/1805.html">
-                <img src="https://ws1.sinaimg.cn/large/61e74233ly1ffue11lhxhg20dw07tkfz.gif" />
-              </a>
-              <a styleName="type" href="/zixun/" title="资讯">
-                资讯
-              </a>
-            </div>
-            <h2>
-              <a href="/article/1805.html">【剧透慎点】《海贼王》869话 围城 简易文字情报</a>
-            </h2>
-          </li>
-          <li>
-            <div styleName="picbox">
-              <a styleName="pic" href="/article/1805.html">
-                <img src="https://ws1.sinaimg.cn/large/61e74233ly1ffue11lhxhg20dw07tkfz.gif" />
-              </a>
-              <a styleName="type" href="/zixun/" title="资讯">
-                资讯
-              </a>
-            </div>
-            <h2>
-              <a href="/article/1805.html">【剧透慎点】《海贼王》869话 围城 简易文字情报</a>
-            </h2>
-          </li>
-          <li>
-            <div styleName="picbox">
-              <a styleName="pic" href="/article/1805.html">
-                <img src="https://ws1.sinaimg.cn/large/61e74233ly1ffue11lhxhg20dw07tkfz.gif" />
-              </a>
-              <a styleName="type" href="/zixun/" title="资讯">
-                资讯
-              </a>
-            </div>
-            <h2>
-              <a href="/article/1805.html">【剧透慎点】《海贼王》869话 围城 简易文字情报</a>
-            </h2>
-          </li>
-          <li>
-            <div styleName="picbox">
-              <a styleName="pic" href="/article/1805.html">
-                <img src="https://ws1.sinaimg.cn/large/61e74233ly1ffue11lhxhg20dw07tkfz.gif" />
-              </a>
-              <a styleName="type" href="/zixun/" title="资讯">
-                资讯
-              </a>
-            </div>
-            <h2>
-              <a href="/article/1805.html">【剧透慎点】《海贼王》869话 围城 简易文字情报</a>
-            </h2>
-          </li>
-          <li>
-            <div styleName="picbox">
-              <a styleName="pic" href="/article/1805.html">
-                <img src="https://ws1.sinaimg.cn/large/61e74233ly1ffue11lhxhg20dw07tkfz.gif" />
-              </a>
-              <a styleName="type" href="/zixun/" title="资讯">
-                资讯
-              </a>
-            </div>
-            <h2>
-              <a href="/article/1805.html">【剧透慎点】《海贼王》869话 围城 简易文字情报</a>
-            </h2>
-          </li>
-          <li>
-            <div styleName="picbox">
-              <a styleName="pic" href="/article/1805.html">
-                <img src="https://ws1.sinaimg.cn/large/61e74233ly1ffue11lhxhg20dw07tkfz.gif" />
-              </a>
-              <a styleName="type" href="/zixun/" title="资讯">
-                资讯
-              </a>
-            </div>
-            <h2>
-              <a href="/article/1805.html">【剧透慎点】《海贼王》869话 围城 简易文字情报</a>
-            </h2>
-          </li>
-          <li>
-            <div styleName="picbox">
-              <a styleName="pic" href="/article/1805.html">
-                <img src="https://ws1.sinaimg.cn/large/61e74233ly1ffue11lhxhg20dw07tkfz.gif" />
-              </a>
-              <a styleName="type" href="/zixun/" title="资讯">
-                资讯
-              </a>
-            </div>
-            <h2>
-              <a href="/article/1805.html">【剧透慎点】《海贼王》869话 围城 简易文字情报</a>
-            </h2>
-          </li>
-          <li>
-            <div styleName="picbox">
-              <a styleName="pic" href="/article/1805.html">
-                <img src="https://ws1.sinaimg.cn/large/61e74233ly1ffue11lhxhg20dw07tkfz.gif" />
-              </a>
-              <a styleName="type" href="/zixun/" title="资讯">
-                资讯
-              </a>
-            </div>
-            <h2>
-              <a href="/article/1805.html">【剧透慎点】《海贼王》869话 围城 简易文字情报</a>
-            </h2>
-          </li>
-        </ul>
+        <ul styleName="newslist">{this.showData()}</ul>
       </Fragment>
     )
   }
 }
+
+export default News

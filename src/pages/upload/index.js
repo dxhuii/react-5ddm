@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FileUpload from '../../components/Upload'
-import { publicPath } from 'Config' 
+import Tooltip from '../../components/Tooltip'
+import { publicPath } from 'Config'
 
 import './style.scss'
 export default class Main extends Component {
@@ -30,7 +31,7 @@ export default class Main extends Component {
           progress={(data, index) => this.progress(data, index)}
           fileNum={data => this.setState({ file: data })}
         >
-          上传
+          <Tooltip text="你好你好你好你好你好你好">上传</Tooltip>
         </FileUpload>
         <ul styleName="img-list">
           {file.length > 0
@@ -41,6 +42,9 @@ export default class Main extends Component {
               ))
             : null}
           {(console.log(this.state), file)}
+          <Tooltip text="你好你好你好你好你好你好你好你好你好你好">
+            <h3>1111</h3>
+          </Tooltip>
           {imgUlr.map((item, index) => (
             <li key={index}>
               <img src={item} />

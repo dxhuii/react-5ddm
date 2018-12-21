@@ -13,6 +13,7 @@ import PlayLoadData from '@/pages/play/load-data'
 import SubjectLoadData from '@/pages/subject/load-data'
 import WeekData from '@/pages/week/load-data'
 import ListLoadData from '@/pages/list/load-data'
+import newsData from '@/pages/news/load-data'
 
 /**
  * 创建路由
@@ -124,6 +125,18 @@ export default user => {
       }),
       enter: triggerEnter,
       loadData: ListLoadData
+    },
+
+    {
+      path: '/news',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('@/pages/news'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter,
+      loadData: newsData
     },
 
     {
