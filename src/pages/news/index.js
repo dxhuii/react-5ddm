@@ -8,7 +8,6 @@ import News from '@/components/News'
 import NewsYG from '@/components/News/yugao'
 
 import './style.scss'
-
 @Shell
 class NewsIndex extends Component {
   constructor(props) {

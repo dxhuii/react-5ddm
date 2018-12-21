@@ -89,7 +89,7 @@ class Article extends Component {
                 <span>更新时间：{addtime}</span>
               </div>
               {playname ? (
-                <div styleName="article-video">{playHtml}</div>
+                <div styleName="article-video" dangerouslySetInnerHTML={{ __html: playHtml }} />
               ) : (
                 <div styleName="article-content" dangerouslySetInnerHTML={{ __html: content }} />
               )}
@@ -118,7 +118,7 @@ class Article extends Component {
               </div>
             </article>
           </div>
-          <div styleName="article-right" />
+          <div styleName="article-right">right</div>
         </div>
       </div>
     )
