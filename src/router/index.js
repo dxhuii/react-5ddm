@@ -14,6 +14,7 @@ import SubjectLoadData from '@/pages/subject/load-data'
 import WeekData from '@/pages/week/load-data'
 import ListLoadData from '@/pages/list/load-data'
 import newsData from '@/pages/news/load-data'
+import articleData from '@/pages/article/load-data'
 
 /**
  * 创建路由
@@ -137,6 +138,18 @@ export default user => {
       }),
       enter: triggerEnter,
       loadData: newsData
+    },
+
+    {
+      path: '/article/:id',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('@/pages/article'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter,
+      loadData: articleData
     },
 
     {

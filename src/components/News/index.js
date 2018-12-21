@@ -58,7 +58,7 @@ class News extends Component {
     return data.map(item => (
       <li key={item.id}>
         <div styleName="picbox">
-          <Link styleName="pic" to={`/artilce/${item.id}`}>
+          <Link styleName="pic" to={`/article/${item.id}`}>
             <img src={item.pic} />
           </Link>
           <Link styleName="type" to={`/news/${item.cid}`} title={item.name}>
@@ -66,7 +66,7 @@ class News extends Component {
           </Link>
         </div>
         <h2>
-          <Link to={`/artilce/${item.id}`}>{item.title}</Link>
+          <Link to={`/article/${item.id}`}>{item.title}</Link>
         </h2>
       </li>
     ))

@@ -12,5 +12,5 @@ export default function article(state = {}, action = {}) {
 }
 
 export const getArticle = (state, id) => {
-  return state.news[id] ? state.news[id] : {}
+  return state.article[id] ? state.article[id] : {}
 }
