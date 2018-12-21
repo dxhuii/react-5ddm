@@ -24,9 +24,7 @@ class PlayList extends Component {
     this.state = {
       pageSize: 18,
       start: 0,
-      end: 18,
-      list: [],
-      dataSource: []
+      end: 18
     }
     this.current = null
     this.playlist = null
@@ -61,20 +59,34 @@ class PlayList extends Component {
 
   onDom() {
     this.current = document.querySelector('#pageCurrent')
-    this.page = document.querySelector('#playNav')
-    const currentLeft = getOffset(this.current).left
-    const width = document.documentElement.clientWidth || document.body.clientWidth
-    this.page.scrollLeft = currentLeft - width / 3
-    console.log(this.current, getOffset(this.current).left, this.page, this.props)
+    this.pageNav = document.querySelector('#playNav')
+    this.pageNavUl = this.pageNav.querySelectorAll('ul')[0]
+    this.pageNavLi = this.pageNav.querySelectorAll('li')
+    this.liWidth = this.pageNavLi[0].clientWidth
+    this.navWidth = this.pageNav.clientWidth
+    this.ulWidth = this.pageNavUl.clientWidth
+    this.currentLeft = this.current.offsetLeft
+
+    if (this.pageNavLi.length > 8) {
+      const liWidth = this.liWidth
+      const navWidth = this.navWidth
+      const ulWidth = this.ulWidth
+      const currentLeft = this.currentLeft
+
+      if (ulWidth - currentLeft < 1200 - liWidth) {
+        this.pageNavUl.style.transform = `translateX(-${ulWidth - navWidth}px)`
+      } else {
+        this.pageNavUl.style.transform = `translateX(-${currentLeft - liWidth * 3}px)`
+      }
+    }
   }
 
   setData(data, pid) {
     const { pageSize } = this.state
-    const list = data || []
     let start = 0
     let end = pageSize
+    const len = data.length
     if (pid) {
-      const len = list.length
       const num = parseInt(+pid / pageSize)
       const surplus = +pid % pageSize
       const yesSurplus = (num + 1) * pageSize
@@ -85,22 +97,30 @@ class PlayList extends Component {
     console.log(start, end, pageSize)
     this.setState(
       {
-        list,
         start,
-        end,
-        dataSource: list.slice(start, end)
+        end
       },
       () => {
-        if (this.state.list.length > pageSize) {
+        if (len > pageSize) {
           this.onDom()
         }
       }
     )
   }
 
-  onPrev() {}
+  onPrev = () => {
+    this.pageNavUl.style.transition = 'transform .3s ease'
+    const num = parseInt(this.pageNavUl.style.transform.replace(/[^0-9]/gi, '')) || 0
+    const X = num < 130 ? 0 : -num + this.liWidth
+    this.pageNavUl.style.transform = `translateX(${X}px)`
+  }
 
-  onNext() {}
+  onNext = () => {
+    this.pageNavUl.style.transition = 'transform .3s ease'
+    const num = parseInt(this.pageNavUl.style.transform.replace(/[^0-9]/gi, '')) || 0
+    const X = num >= this.ulWidth - this.navWidth ? -this.ulWidth + this.navWidth : -num - this.liWidth
+    this.pageNavUl.style.transform = `translateX(${X}px)`
+  }
 
   format(data, item, id) {
     let num = ''
@@ -122,17 +142,19 @@ class PlayList extends Component {
     )
   }
 
-  pageJump = (data, start, end) => {
+  pageJump = (start, end) => {
     this.setState({
       start,
-      end,
-      dataSource: data.slice(start, end)
+      end
     })
   }
 
   page = () => {
-    const { list, pageSize, start, end } = this.state
-    const len = list.length
+    const {
+      play: { data = [] }
+    } = this.props
+    const { pageSize, start, end } = this.state
+    const len = data.length
     const pageNum = len / pageSize
     const pageSurplus = len % pageSize // 除 pageSize 的余数
     const num = parseInt(pageSurplus !== 0 ? pageNum + 1 : pageNum) // 余数不为 0 分页数 + 1
@@ -146,7 +168,7 @@ class PlayList extends Component {
         html.push(
           <li
             key={i}
-            onClick={() => this.pageJump(list, pageStart2, pageEnd)}
+            onClick={() => this.pageJump(pageStart2, pageEnd)}
             id={start === pageStart2 && pageEnd === end ? 'pageCurrent' : ''}
             styleName={start === pageStart2 && pageEnd === end ? 'active' : ''}
           >
@@ -162,23 +184,29 @@ class PlayList extends Component {
 
   render() {
     const {
-      play: { loading },
+      play: { loading, data = [] },
       match: {
         params: { id, pid }
       }
     } = this.props
-    const { list, dataSource, pageSize } = this.state
-    const len = parseInt(list.length / pageSize)
-    const surplus = list.length % pageSize
+    const { pageSize, start, end } = this.state
+    const len = parseInt(data.length / pageSize)
+    const surplus = data.length % pageSize
+    const dataSource = data.slice(start, end)
+
     return (
       <div className="wp">
         {loading ? <div>loading...</div> : null}
-        {list.length > pageSize ? (
-          <div styleName="playlist playlist-boreder" id="playNav">
-            <ul styleName="playlist-nav" style={{ width: `${(len + (surplus ? 1 : 0)) * 140}px` }}>
-              {this.page()}
-            </ul>
-          </div>
+        {data.length > pageSize ? (
+          <Fragment>
+            <div onClick={this.onPrev.bind(this)}>prev</div>
+            <div styleName="playlist playlist-boreder" id="playNav">
+              <ul styleName="playlist-nav" style={{ width: `${(len + (surplus ? 1 : 0)) * 140}px` }}>
+                {this.page()}
+              </ul>
+            </div>
+            <div onClick={this.onNext.bind(this)}>next</div>
+          </Fragment>
         ) : null}
         <div styleName="playlist" id="playlist">
           <ul styleName="playlist-ul" /* style={{ width: `${dataSource.length * 132}px` }} */>

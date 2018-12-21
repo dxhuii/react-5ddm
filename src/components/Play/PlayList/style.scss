@@ -1,8 +1,8 @@
 @import '../../../pages/_mixin';
 .playlist {
   width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
+  position: relative;
 }
 
 .playlist-boreder {

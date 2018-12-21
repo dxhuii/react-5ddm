@@ -132,8 +132,8 @@ const ck = (type, pv) => {
     return '//www.acgnz.cn/api/pan.php?url=vbithls?v=' + pv
   } else if (type === 'bit') {
     return '//www.acgnz.cn/api/bit.php?id=' + pv
-  } else if (type === 'maoyun') {
-    return 'https://mao.shuikaile.com/play.php?url=' + pv
+  } else if (type === 'cli') {
+    return '//www.acgnz.cn/api/cli.php?id=' + pv
   } else {
     return flvsp + type + '&id=' + pv
   }
