@@ -117,7 +117,31 @@ export default user => {
     },
 
     {
-      path: '/list',
+      path: '/dongman',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('@/pages/list'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter,
+      loadData: ListLoadData
+    },
+
+    {
+      path: '/dongman/:name',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('@/pages/list'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter,
+      loadData: ListLoadData
+    },
+
+    {
+      path: '/type/:name/:mcid/:area/:year/:letter/:lz/:order',
       exact: true,
       head: Head,
       component: Loadable({

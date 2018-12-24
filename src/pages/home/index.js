@@ -76,7 +76,7 @@ class Home extends Component {
           <li styleName={order === 'addtime' ? 'active' : ''} onClick={() => this.onSelect('addtime')}>
             <a>按最新</a>
           </li>
-          <li styleName={order === 'up' ? 'active' : ''} onClick={() => this.onSelect('up')}>
+          <li styleName={order === 'gold' ? 'active' : ''} onClick={() => this.onSelect('gold')}>
             <a>按评分</a>
           </li>
           <li styleName={order === 'hits' ? 'active' : ''} onClick={() => this.onSelect('hits')}>

@@ -42,6 +42,9 @@ export default {
     newsList: ({ id, letter = '', news = '', did = '', day = '', wd = '', name = '', page = 0, limit = 30, order = 'addtime' }) =>
       `${API}api.php?s=home-react-newsList-id-${id}-letter-${letter}-news-${news}-did-${did}-day-${day}-wd-${wd}-name-${name}-limit-${limit}-order-${order}-p-${page}`, // 新闻列表接口
     slide: () => `${API}api.php?s=home-react-slide`,
-    config: name => `${API}api.php?s=home-react-config-name-${name}`
+    /**
+     * name menu菜单 sns配置 user配置 pay支付配置 emot配置 list 各种列表
+     */
+    config: ({ name = '' }) => `${API}api.php?s=home-react-config${name ? `-name-${name}` : ''}`
   }
 }
