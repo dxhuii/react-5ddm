@@ -10,7 +10,7 @@ class Bangumi extends Component {
   render() {
     return (
       <div className="warp-bg">
-        <Detail key="detail" isMeta={true} />
+        {/* <Detail key="detail" isMeta={true} /> */}
         <PlayList key="playlist" />
       </div>
     )
