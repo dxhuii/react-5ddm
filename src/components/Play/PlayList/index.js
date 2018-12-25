@@ -82,16 +82,17 @@ class PlayList extends Component {
   setData(data, pid) {
     const { pageSize } = this.state
     const len = data.length
-    const pageLen = len / pageSize + (len % pageSize === 0 ? 0 : 1)
+    const pageLen = parseInt(len / pageSize) + (len % pageSize ? 1 : 0) // 总页数
     let start = 0
     let end = pageSize
-    if (pid) {
+    if (pid && +pid > pageSize) {
       const num = parseInt(+pid / pageSize)
       const surplus = +pid % pageSize
-      const yesSurplus = (num + 1) * pageSize
-      const noSurplus = num * pageSize
-      start = surplus !== 0 ? (+pid < pageSize ? 0 : noSurplus) : +pid < pageSize ? 0 : (num - 1) * pageSize
-      end = surplus !== 0 ? (yesSurplus > len ? len : yesSurplus) : num * pageSize
+      const noSurplus = num * pageSize // 无余数
+      const yesSurplus = noSurplus + pageSize // 有余数
+
+      start = surplus ? noSurplus : noSurplus - pageSize
+      end = surplus ? (yesSurplus > len ? len : yesSurplus) : noSurplus
     }
     this.setState(
       {
@@ -141,15 +142,15 @@ class PlayList extends Component {
     } = this.props
     const { pageSize, start, end } = this.state
     const len = data.length
-    const pageNum = len / pageSize
-    const pageSurplus = len % pageSize // 除 pageSize 的余数
-    const num = parseInt(pageSurplus !== 0 ? pageNum + 1 : pageNum) // 余数不为 0 分页数 + 1
+    const num = parseInt(len / pageSize)
+    const surplus = len % pageSize // 除 pageSize 的余数
+    const pageNum = surplus ? num + 1 : num // 余数不为 0 分页数 + 1
     let html = []
     if (len > pageSize) {
-      for (let i = 1; i <= num; i++) {
+      for (let i = 1; i <= pageNum; i++) {
         const pageFirst = i === 1 ? 1 : pageSize * (i - 1) + 1
         const pageStart = i === 1 ? 0 : pageSize * (i - 1)
-        const pageEnd = i === 1 ? pageSize : i === num && pageSurplus !== 0 ? pageSize * i - (pageSize - pageSurplus) : pageSize * i // 余数不为 0 取剩余话数
+        const pageEnd = i === 1 ? pageSize : i === pageNum && surplus ? pageSize * i - (pageSize - surplus) : pageSize * i // 余数不为 0 取剩余话数
         const isCurrent = start === pageStart && pageEnd === end // 判断是否为当前选中的集数
         html.push(
           <li
