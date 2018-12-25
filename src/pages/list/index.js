@@ -60,31 +60,8 @@ class SubjectList extends Component {
       configLoad({ name: 'list' })
     }
     if (name) {
-      let id = ''
+      const id = this.getTypeId(name)
       const type = name
-      switch (name) {
-        case 'tv':
-          id = 201
-          break
-        case 'ova':
-          id = 202
-          break
-        case 'juchang':
-          id = 203
-          break
-        case 'tebie':
-          id = 4
-          break
-        case 'zhenren':
-          id = 204
-          break
-        case 'qita':
-          id = 35
-          break
-        default:
-          id = 3
-          break
-      }
       this.setState(
         url.indexOf('type/') === -1
           ? { id, type }
@@ -102,6 +79,34 @@ class SubjectList extends Component {
     }
   }
 
+  getTypeId(name) {
+    let id
+    switch (name) {
+      case 'tv':
+        id = 201
+        break
+      case 'ova':
+        id = 202
+        break
+      case 'juchang':
+        id = 203
+        break
+      case 'tebie':
+        id = 4
+        break
+      case 'zhenren':
+        id = 204
+        break
+      case 'qita':
+        id = 35
+        break
+      default:
+        id = 3
+        break
+    }
+    return id
+  }
+
   getName(data, id) {
     for (let i of data) {
       if (i.id === id) {
@@ -115,33 +120,22 @@ class SubjectList extends Component {
       match: { url }
     } = this.props
     this.setState(
-      {
+      Object.assign({}, type === 'type' ? { id: this.getTypeId(value) } : {}, {
         [type]: value === '全部' ? '' : value,
         [`${type}Name`]: title || ''
-      },
+      }),
       () => {
         if (url.indexOf('type/') !== -1) {
-          const old = JSON.parse(localStorage.typeParams || JSON.stringify(this.state))
-          const keys = Object.keys(old)
-          let newData = this.state
-          for (let i = 0; i < keys.length; i++) {
-            if (newData[keys[i]] !== old[keys[i]] && newData[keys[i]] !== '') {
-              old[keys[i]] = newData[keys[i]]
-            }
-          }
-          localStorage.typeParams = JSON.stringify(old)
-          const { type, mcid, area, year, letter, lz, order } = old
-          this.setState({ type, mcid, area, year, letter, lz, order }, () => {
-            const path = `/type/${type}/${mcid || '-'}/${area || '-'}/${year || '-'}/${letter || '-'}/${lz || '-'}/${order}`
-            this.props.history.push(path)
-          })
+          const { type, mcid, area, year, letter, lz, order } = this.state
+          const path = `/type/${type || '-'}/${mcid || '-'}/${area || '-'}/${year || '-'}/${letter || '-'}/${lz || '-'}/${order}`
+          history.pushState(null, null, path)
         }
       }
     )
   }
 
   formatArray(data = []) {
-    let f = []
+    let f = [{ title: '全部', id: '' }]
     for (let i of data) {
       f.push({ title: i, id: i })
     }
@@ -164,10 +158,7 @@ class SubjectList extends Component {
 
   render() {
     const {
-      config: { data = {} },
-      match: {
-        params: { name }
-      }
+      config: { data = {} }
     } = this.props
     const {
       id,
@@ -188,8 +179,8 @@ class SubjectList extends Component {
       lzName
     } = this.state
     const { wd, isSearch } = this.isSearch()
-    const idArr = (data.menu || {}).son || []
-    const mcidArr = data.mcid || []
+    const idArr = [{ title: '全部', name: '' }].concat((data.menu || {}).son || [])
+    const mcidArr = [{ title: '全部', id: '' }].concat(data.mcid || [])
     const areaArr = this.formatArray(data.area)
     const yearArr = this.formatArray(data.year)
     const letterArr = this.formatArray(data.letter)
@@ -213,22 +204,20 @@ class SubjectList extends Component {
                 {letterName ? <li onClick={() => this.getParams('letter', '')}>{letterName}</li> : null}
               </ul>
             )}
-            {name ? null : (
-              <ul>
-                {idArr.map(item => (
-                  <li
-                    styleName={type === item.name ? 'cur' : ''}
-                    onClick={() => this.getParams('type', item.name, item.title)}
-                    key={item.name}
-                  >
-                    {item.title}
-                  </li>
-                ))}
-              </ul>
-            )}
+            <ul>
+              {idArr.map(item => (
+                <li
+                  styleName={type === item.name ? 'cur' : ''}
+                  onClick={() => this.getParams('type', item.name, item.title)}
+                  key={item.name}
+                >
+                  {item.title}
+                </li>
+              ))}
+            </ul>
             <ul>
               {mcidArr.map(item => (
-                <li styleName={mcid === item.id ? 'cur' : ''} onClick={() => this.getParams('mcid', item.id, item.title)} key={item.id}>
+                <li styleName={+mcid === item.id ? 'cur' : ''} onClick={() => this.getParams('mcid', item.id, item.title)} key={item.id}>
                   {item.title}
                 </li>
               ))}
