@@ -56,50 +56,13 @@ class PlayList extends Component {
     }
   }
 
-  onDom(len, pageSize) {
-    const pageLen = len / pageSize + (len % pageSize === 0 ? 0 : 1)
+  onDom() {
     this.navWidth = this.pageNav.clientWidth
     this.ulWidth = this.pageNavUl.clientWidth
-
-    this.setState({ pageLen })
-
-    // 页面数大于 8 页时调用
-    if (pageLen > 8) {
-      const liWidth = this.liWidth
-      const navWidth = this.navWidth
-      const ulWidth = this.ulWidth
-      const currentLeft = this.pageCurrent.offsetLeft
-      const isNeq1200 = ulWidth - currentLeft < 1200 - liWidth // 是否小于1200减每一页的宽
-      const X = isNeq1200 ? ulWidth - navWidth : currentLeft - liWidth * 3
-      this.pageNavUl.style.transform = `translateX(-${X}px)`
-    }
-  }
-
-  setData(data, pid) {
-    const { pageSize } = this.state
-    let start = 0
-    let end = pageSize
-    const len = data.length
-    if (pid) {
-      const num = parseInt(+pid / pageSize)
-      const surplus = +pid % pageSize
-      const yesSurplus = (num + 1) * pageSize
-      const noSurplus = num * pageSize
-      start = surplus !== 0 ? (+pid < pageSize ? 0 : noSurplus) : +pid < pageSize ? 0 : (num - 1) * pageSize
-      end = surplus !== 0 ? (yesSurplus > len ? len : yesSurplus) : num * pageSize
-    }
-    // console.log(start, end, pageSize)
-    this.setState(
-      {
-        start,
-        end
-      },
-      () => {
-        if (len > pageSize) {
-          this.onDom(len, pageSize)
-        }
-      }
-    )
+    const currentLeft = this.pageCurrent.offsetLeft
+    const isNeq1200 = this.ulWidth - currentLeft < 1200 - this.liWidth // 是否小于1200减一页的宽
+    const X = isNeq1200 ? this.ulWidth - this.navWidth : currentLeft - this.liWidth * 3
+    this.pageNavUl.style.transform = `translateX(-${X}px)`
   }
 
   onPrev = () => {
@@ -114,6 +77,35 @@ class PlayList extends Component {
     const num = parseInt(this.pageNavUl.style.transform.replace(/[^0-9]/gi, '')) || 0
     const X = num >= this.ulWidth - this.navWidth ? -this.ulWidth + this.navWidth : -num - this.liWidth
     this.pageNavUl.style.transform = `translateX(${X}px)`
+  }
+
+  setData(data, pid) {
+    const { pageSize } = this.state
+    const len = data.length
+    const pageLen = len / pageSize + (len % pageSize === 0 ? 0 : 1)
+    let start = 0
+    let end = pageSize
+    if (pid) {
+      const num = parseInt(+pid / pageSize)
+      const surplus = +pid % pageSize
+      const yesSurplus = (num + 1) * pageSize
+      const noSurplus = num * pageSize
+      start = surplus !== 0 ? (+pid < pageSize ? 0 : noSurplus) : +pid < pageSize ? 0 : (num - 1) * pageSize
+      end = surplus !== 0 ? (yesSurplus > len ? len : yesSurplus) : num * pageSize
+    }
+    this.setState(
+      {
+        start,
+        end,
+        pageLen
+      },
+      () => {
+        // 分页面数大于 8 页时调用
+        if (pageLen > 8) {
+          this.onDom()
+        }
+      }
+    )
   }
 
   format(data, item, id) {
