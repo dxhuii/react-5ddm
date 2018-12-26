@@ -22,9 +22,7 @@ import './style.scss'
 class Swiper extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
     this.mySwipe = {}
-    this.bullets = []
   }
 
   static propTypes = {
@@ -34,11 +32,11 @@ class Swiper extends Component {
 
   componentDidMount() {
     this.mySwipe = { ...this.swipe.instance }
-    this.bullets = this.page.querySelectorAll('em')
+    const bullets = this.page.querySelectorAll('em')
     const that = this
 
-    for (let i = 0; i < this.bullets.length; i++) {
-      var elem = this.bullets[i]
+    for (let i = 0; i < bullets.length; i++) {
+      var elem = bullets[i]
       elem.setAttribute('data-tab', i)
       elem.onclick = function() {
         that.mySwipe.slide(parseInt(this.getAttribute('data-tab'), 10), 500)
@@ -52,7 +50,8 @@ class Swiper extends Component {
   }
 
   handleCallback = index => {
-    this.slideTab(index, this.bullets)
+    const bullets = this.page.querySelectorAll('em')
+    this.slideTab(index, bullets)
   }
 
   onTransactionEnd = () => {
@@ -106,7 +105,7 @@ class Swiper extends Component {
             </SwipeItem>
           ))}
         </Swipe>
-        <div styleName="page" ref={e => this.page = e}>
+        <div styleName="page" ref={e => (this.page = e)}>
           {data.map((item, index) => (
             <em key={item.pic} className={index === 0 ? 'page-em__on' : ''}>
               {index + 1}
