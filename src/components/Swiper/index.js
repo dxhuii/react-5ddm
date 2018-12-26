@@ -34,8 +34,7 @@ class Swiper extends Component {
 
   componentDidMount() {
     this.mySwipe = { ...this.swipe.instance }
-    const page = document.querySelector('#page')
-    this.bullets = page.querySelectorAll('em')
+    this.bullets = this.page.querySelectorAll('em')
     const that = this
 
     for (let i = 0; i < this.bullets.length; i++) {
@@ -107,7 +106,7 @@ class Swiper extends Component {
             </SwipeItem>
           ))}
         </Swipe>
-        <div id="page" styleName="page">
+        <div styleName="page" ref={e => this.page = e}>
           {data.map((item, index) => (
             <em key={item.pic} className={index === 0 ? 'page-em__on' : ''}>
               {index + 1}
