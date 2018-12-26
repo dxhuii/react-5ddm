@@ -63,7 +63,7 @@ class Time extends Component {
               <h1>{title}</h1>
             </div>
             <div styleName="article-content" className="clearfix">
-              <img src={pic} />
+              <img src={pic} alt={`${title} 播出时间`} />
               <p>
                 播出时间：{filmtime ? `${filmtime}` : `${year}年`} {tvcont}
               </p>
