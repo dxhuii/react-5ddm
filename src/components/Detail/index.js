@@ -160,7 +160,7 @@ class Detail extends Component {
             <a>分集剧情</a>
           </li>
           <li>
-            <a>播出时间</a>
+            <Link to={`/time/${id}`}>播出时间</Link>
           </li>
         </ul>
       </Fragment>

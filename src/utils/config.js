@@ -45,6 +45,8 @@ export default {
     /**
      * name menu菜单 sns配置 user配置 pay支付配置 emot配置 list 各种列表
      */
-    config: ({ name = '' }) => `${API}api.php?s=home-react-config${name ? `-name-${name}` : ''}`
+    config: ({ name = '' }) => `${API}api.php?s=home-react-config${name ? `-name-${name}` : ''}`,
+    storylist: ({ id, limit = 20 }) => `${API}api.php?s=home-react-storylist-id-${id}-limit-${limit}`, // 剧情列表
+    storydetaillist: ({ id, limit = 3 }) => `${API}api.php?s=home-react-storydetaillist-id-${id}-limit-${limit}` // 剧情视频详情列表
   }
 }
