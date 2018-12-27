@@ -2,6 +2,8 @@ import { isMobile, location } from './index'
 
 const is9 = (location.host || '').indexOf('99496.com') !== -1 && !isMobile()
 
+const playH = 675
+
 const ykUrl = data => {
   return 'https://v.youku.com/v_show/id_' + data + '.html'
 }
@@ -109,7 +111,7 @@ const isPlay = (type, pv) => {
   if (type === 'full') {
     return pv.replace('http://', 'https://')
   } else {
-    if (pv.indexOf('.mp4') !== -1 || pv.indexOf('.m3u8') !== -1) {
+    if (/.mp4|.m3u8/.test(pv)) {
       return '//www.acgnz.cn/api/play.php?url=' + pv
     } else {
       return pv
@@ -120,7 +122,7 @@ const isPlay = (type, pv) => {
 const ck = (type, pv) => {
   const flvsp = 'https://api.flvsp.com/?type='
   const mdparse = 'https://www.acgnz.cn/mdparse/?type='
-  if (['qq', 'pptv', 'iqiyi', 'youku'].indexOf(type) !== -1) {
+  if (['qq', 'pptv', 'iqiyi'].indexOf(type) !== -1) {
     return mdparse + type + '&id=' + pv.split(/\/,|_/)[0]
   } else if (type === 'sohu' || type === 'letv') {
     return this.isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
@@ -132,44 +134,35 @@ const ck = (type, pv) => {
     return '//www.acgnz.cn/api/pan.php?url=vbithls?v=' + pv
   } else if (type === 'bit') {
     return '//www.acgnz.cn/api/bit.php?id=' + pv
-  } else if (type === 'cli') {
-    return '//www.acgnz.cn/api/cli.php?id=' + pv
   } else {
     return flvsp + type + '&id=' + pv
   }
 }
 
 const jiexiUrl = (pv, danmu) => {
-  const style = isMobile() ? 'class="playheight" style="height: 320px;width:100%;"' : 'width="100%" height="495"'
+  const style = isMobile() ? 'class="playheight" style="height: 320px;width:100%;"' : `width="100%" height="${playH}"`
   return `<iframe src="${pv.replace(
     'ikanfan.cn',
     'acgnz.cn'
   )}&danmu=${danmu}" ${style} frameborder="0" scrolling="no" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
 }
 const iframe = pv => {
-  const style = isMobile() ? 'class="playheight" style="height: 320px;width:100%;"' : 'width="100%" height="495"'
+  const style = isMobile() ? 'class="playheight" style="height: 320px;width:100%;"' : `width="100%" height="${playH}"`
   return `<iframe src="${pv}" ${style} frameborder="0" scrolling=no  allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
 }
 const HTML = pv => {
   const mobile = `<a class="html" href="${pv}">亲，请点我播放</a>`
   return isMobile()
     ? mobile
-    : `<div class="explaywrap" style="height:495px;"><a target="_blank" href="${pv}">亲，请点我播放</a><p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
+    : `<div class="explaywrap" style="height:${playH}px;"><a target="_blank" href="${pv}">亲，请点我播放</a><p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
 }
 const isPlays = (playname, pv, danmu) => {
   if (playname === 'full') {
     return is9 ? '/' : jiexiUrl(`${pv.replace('http://', 'https://')}&danmu=${danmu}`)
   } else {
-    if (pv.indexOf('.mp4') !== -1 || pv.indexOf('.m3u8') !== -1) {
+    if (/.mp4|.m3u8/.test(pv)) {
       return is9 ? '/' : jiexiUrl(`//www.acgnz.cn/api/play.php?url=${pv}&danmu=${danmu}`)
-    } else if (
-      pv.indexOf('youku.com') === -1 &&
-      pv.indexOf('iqiyi.com') === -1 &&
-      pv.indexOf('acfun.cn') === -1 &&
-      pv.indexOf('bilibili.com') === -1 &&
-      pv.indexOf('qq.com') === -1 &&
-      pv.indexOf('mgtv.com') === -1
-    ) {
+    } else if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com|qq.com|mgtv.com/.test(pv)) {
       return is9 ? HTML(pv) : jiexiUrl(`//www.acgnz.cn/mdparse/?id=${pv}`)
     } else {
       return HTML(pv)
@@ -188,17 +181,9 @@ export default {
       name = data[1]
       pv = data[0]
     }
-    const isCk =
-      vid.indexOf('.html') !== -1 ||
-      vid.indexOf('.shtml') !== -1 ||
-      vid.indexOf('.htm') !== -1 ||
-      vid.indexOf('https://') !== -1 ||
-      vid.indexOf('http://') !== -1 ||
-      vid.indexOf('.mp4') !== -1 ||
-      vid.indexOf('.m3u8') !== -1 ||
-      name === 'full'
-    const playStyle = ['acku', 'sina', 'letvsaas', 'weibo', 'miaopai', 'tudou', 'letvyun', 'bitqiu', 'yunpan'].indexOf(playname) !== -1
-    if ((pv.indexOf('.mp4') !== -1 || pv.indexOf('.m3u8') !== -1 || playStyle) && is9) {
+    const isCk = /.html|.shtml|.htm|https:\/\/|http:\/\/|.mp4|.m3u8/.test(pv) || name === 'full'
+    const playStyle = /acku|sina|letvsaas|weibo|miaopai|tudou|letvyun|bitqiu|yunpan|bit|bithls/.test(playname)
+    if ((/.mp4|.m3u8/.test(pv) || playStyle) && is9) {
       url = HTML('/')
     } else if (isCk) {
       url = isP ? isPlays(name, vid, danmu) : isPlay(name, vid)

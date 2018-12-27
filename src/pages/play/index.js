@@ -139,35 +139,35 @@ class Play extends Component {
     } = this.props
     const { title, subTitle, defaultPlay, playHtml, list } = this.getData(data)
     return (
-      <div className="wp mt20">
-        <Meta title={`${title} ${subTitle}`} />
+      <Fragment>
         <div styleName="player">
-          <div styleName="player-left">
+          <div className="wp pt20">
+            <Meta title={`${title} ${subTitle}`} />
             {userinfo.userid ? (
               <div styleName="player-box" dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
             ) : (
               <div styleName="player-box">{playHtml || defaultPlay}</div>
             )}
-          </div>
-          <div styleName="player-right">
-            <ul styleName="playlist">
-              {list.map(item => (
-                <li key={item.playName} onClick={() => this.onPlay(item.vid, item.playName)}>
-                  <i styleName={`icon ${item.playName}`} />
-                  {item.playTitle}
-                </li>
-              ))}
-            </ul>
+            <div styleName="player-info">
+              <h1>
+                <Link to={`/subject/${id}`}>{title}</Link>：
+              </h1>
+              <h4>{subTitle}</h4>
+              <ul styleName="playlist">
+                {list.map(item => (
+                  <li key={item.playName} onClick={() => this.onPlay(item.vid, item.playName)}>
+                    <i styleName={`icon ${item.playName}`} />
+                    {item.playTitle}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
-        <div styleName="player-info">
-          <h1>
-            <Link to={`/subject/${id}`}>{title}</Link>：
-          </h1>
-          <h4>{subTitle}</h4>
+        <div className="wp">
+          <PlayList />
         </div>
-        <PlayList />
-      </div>
+      </Fragment>
     )
   }
 }

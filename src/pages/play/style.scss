@@ -7,72 +7,73 @@
   background-repeat: no-repeat;
   background: url(../../static/img/sprite_source.png) -240px -20px no-repeat;
   background-image: -webkit-image-set(url(../../static/img/sprite_source@2x.png) 2x);
-  &.other,&.pv,&.otherB,&.otherC, &.otherD,&.nodel,&.mad,&.cm,&.ed,&.bgm,&.op{
+  &.other,
+  &.pv,
+  &.otherB,
+  &.otherC,
+  &.otherD,
+  &.nodel,
+  &.mad,
+  &.cm,
+  &.ed,
+  &.bgm,
+  &.op {
     background-position: -240px -20px
   }
   &.tudou {
     background-position: -40px 0
   }
-
   &.youku {
     background-position: -20px 0
   }
-
   &.iqiyi {
     background-position: -60px 0
   }
-
   &.sohu {
     background-position: -20px -20px
   }
-
   &.letvyun,
   &.letv {
     background-position: -140px 0
   }
-
   &.qq {
     background-position: 0 0
   }
-
   &.mgtv {
     background-position: -160px -20px
   }
-
   &.pptv {
     background-position: -80px 0
   }
-
   &.bilibili {
     background-position: -180px -20px
   }
-
   &.acfun {
     background-position: -200px -20px
   }
 }
 
-.playlist{
-  li{
+.playlist {
+  display: flex;
+  margin-left: 20px;
+  margin-top: 6px;
+  li {
     line-height: 28px;
-    color: #333;
+    color: #ccc;
+    margin-right: 20px;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 
-.player{
-  display: flex;
-}
-.player-left{
-  width: 880px;
-  margin-right: 20px;
-}
-.player-right{
-  width: 300px;
-  background-color: #000;
+.player {
+  background-color: #222;
 }
 
 .player-box {
-  height: 495px;
+  height: 675px;
+  width: 100%;
   background-color: #000;
   color: #333;
 }
@@ -80,20 +81,25 @@
 .player-info {
   height: 40px;
   line-height: 40px;
-  border-bottom: 1px solid #ddd;
   margin-bottom: 10px;
-  h1, h4{
+  display: flex;
+  color: #ccc;
+  h1,
+  h4 {
     display: inline;
   }
   h1 {
     font-weight: bold;
-    &:hover{
+    a {
+      color: #ccc
+    }
+    &:hover {
       a {
         color: #f60;
       }
     }
   }
-  h4{
-    color: #666;
+  h4 {
+    color: #ccc;
   }
 }
