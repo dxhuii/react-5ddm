@@ -12,6 +12,8 @@ import slide from './slide'
 import news from './news'
 import article from './article'
 import config from './config'
+import detailEp from './detailEp'
+import episode from './episode'
 
 let states = {
   user,
@@ -24,7 +26,9 @@ let states = {
   slide,
   news,
   article,
-  config
+  config,
+  detailEp,
+  episode
 }
 
 // 创建一个无数据的states，用于在服务端初始redux数据

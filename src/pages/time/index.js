@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { detail } from '@/store/actions/detail'
-import { getDetail, getScore } from '@/store/reducers/detail'
+import { getDetail } from '@/store/reducers/detail'
 
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
@@ -49,7 +49,7 @@ class Time extends Component {
     console.log(data)
     const { title, content, listNameBig, pic, actor, year, filmtime, director, mcid, updateDate, tvcont } = data
     return (
-      <div className="wp mt20 clearfix" styleName="article">
+      <div className="wp mt20 clearfix">
         <Meta title={title}>
           <meta name="keywords" content={`${title}播出时间,${listNameBig}${title}播出周期,${title}几点更新,${title}更新时间`} />
           <meta
@@ -57,7 +57,7 @@ class Time extends Component {
             content={`{$sitename}为你提供了包括${listNameBig}${title}播出时间、${title}周几更新以及${title}播出周期希望你能喜欢`}
           />
         </Meta>
-        <div styleName="article-left">
+        <div styleName="article-left" className="fl">
           <article styleName="article-body">
             <div styleName="article-head">
               <h1>{title}</h1>
@@ -107,7 +107,7 @@ class Time extends Component {
                 )}
                 在本网站播出，敬请关注！
               </p>
-              <p>
+              <p styleName='content'>
                 {title}简介：{content.replace(/<[^<>]+>/g, '')}
               </p>
               <p>
@@ -117,7 +117,9 @@ class Time extends Component {
             </div>
           </article>
         </div>
-        <div styleName="article-right">right</div>
+        <div styleName="article-right" className="fl">
+          right
+        </div>
       </div>
     )
   }

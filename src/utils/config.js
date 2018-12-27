@@ -47,6 +47,7 @@ export default {
      */
     config: ({ name = '' }) => `${API}api.php?s=home-react-config${name ? `-name-${name}` : ''}`,
     storylist: ({ id, limit = 20 }) => `${API}api.php?s=home-react-storylist-id-${id}-limit-${limit}`, // 剧情列表
-    storydetaillist: ({ id, limit = 3 }) => `${API}api.php?s=home-react-storydetaillist-id-${id}-limit-${limit}` // 剧情视频详情列表
+    detailEpList: ({ id, limit = 3 }) => `${API}api.php?s=home-react-storydetaillist-id-${id}-limit-${limit}`, // 剧情视频详情列表
+    storyDetail: ({ id, p = 1 }) => `${API}api.php?s=home-react-storyread-vid-${id}-p-${p}`
   }
 }

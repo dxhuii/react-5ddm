@@ -16,6 +16,7 @@ import ListLoadData from '@/pages/list/load-data'
 import newsData from '@/pages/news/load-data'
 import articleData from '@/pages/article/load-data'
 import timeData from '@/pages/time/load-data'
+import episodeData from '@/pages/episode/load-data'
 
 /**
  * 创建路由
@@ -198,6 +199,18 @@ export default user => {
         loading: () => <Loading />
       }),
       enter: triggerEnter
+    },
+
+    {
+      path: '/episode/:id/:p',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('@/pages/episode'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter,
+      loadData: episodeData
     },
 
     {
