@@ -1,11 +1,11 @@
 import Ajax from '@/common/ajax'
-import { getDetailEp } from '../reducers/detailEp'
+import { getEpisode } from '../reducers/episode'
 import config from '@/utils/config'
 
 export function episode({ id, p }) {
   return (dispatch, getState) => {
     return new Promise(async (resolve, reject) => {
-      let info = getDetailEp(getState(), id, p)
+      let info = getEpisode(getState(), id, p)
       info.loading = true
       if (!info.data) info.data = []
 

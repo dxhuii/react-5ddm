@@ -1,0 +1,22 @@
+.ep {
+  h2 {
+    font-size: 16px;
+  }
+}
+
+.eplist {
+  background: #fff;
+  padding: 20px 20px 10px;
+  border-radius: 10px;
+  li {
+    margin-bottom: 10px;
+    h4 {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    p {
+      color: #666;
+      margin-top: 5px;
+    }
+  }
+}

@@ -7,6 +7,8 @@ import { connect } from 'react-redux'
 import { detailEp } from '@/store/actions/detailEp'
 import { getDetailEp } from '@/store/reducers/detailEp'
 
+import './style.scss'
+
 @withRouter
 @connect(
   (state, props) => ({
@@ -20,7 +22,12 @@ class DetailEp extends Component {
   static propTypes = {
     match: PropTypes.object,
     detailEp: PropTypes.func,
-    info: PropTypes.object
+    info: PropTypes.object,
+    detail: PropTypes.object
+  }
+
+  static defaultProps = {
+    detail: {}
   }
 
   componentDidMount() {
@@ -38,10 +45,27 @@ class DetailEp extends Component {
 
   render() {
     const {
-      info: { data = [] }
+      info: { data = [] },
+      detail
     } = this.props
     console.log(data)
-    return <div>111</div>
+    return (
+      <div styleName="ep" className="mt20">
+        <h2>{detail.title}的剧情</h2>
+        <ul styleName="eplist" className="mt20">
+          {data.map(item => (
+            <li key={item.pid}>
+              <h4>
+                <Link to={`/episode/${item.vodid}/${item.pid}`}>
+                  {item.name} {item.title}
+                </Link>
+              </h4>
+              <p>{item.content}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
   }
 }
 

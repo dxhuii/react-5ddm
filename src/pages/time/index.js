@@ -50,7 +50,7 @@ class Time extends Component {
     const { title, content, listNameBig, pic, actor, year, filmtime, director, mcid, updateDate, tvcont } = data
     return (
       <div className="wp mt20 clearfix">
-        <Meta title={title}>
+        <Meta title={`${title}播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新`}>
           <meta name="keywords" content={`${title}播出时间,${listNameBig}${title}播出周期,${title}几点更新,${title}更新时间`} />
           <meta
             name="description"
@@ -107,7 +107,7 @@ class Time extends Component {
                 )}
                 在本网站播出，敬请关注！
               </p>
-              <p styleName='content'>
+              <p styleName="content">
                 {title}简介：{content.replace(/<[^<>]+>/g, '')}
               </p>
               <p>

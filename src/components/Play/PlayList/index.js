@@ -181,8 +181,8 @@ class PlayList extends Component {
     const dataSource = data.slice(start, end)
 
     return (
-      <div className="wp">
-        {loading ? <div>loading...</div> : null}
+      <Fragment>
+        {loading && data.length ? <div>loading...</div> : null}
         {data.length > pageSize ? (
           <Fragment>
             {pageLen > 8 ? (
@@ -207,7 +207,7 @@ class PlayList extends Component {
             ))}
           </ul>
         </div>
-      </div>
+      </Fragment>
     )
   }
 }
