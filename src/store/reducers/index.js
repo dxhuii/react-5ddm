@@ -12,7 +12,6 @@ import slide from './slide'
 import news from './news'
 import article from './article'
 import config from './config'
-import detailEp from './detailEp'
 import episode from './episode'
 
 let states = {
@@ -27,7 +26,6 @@ let states = {
   news,
   article,
   config,
-  detailEp,
   episode
 }
 

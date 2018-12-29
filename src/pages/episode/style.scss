@@ -9,6 +9,8 @@
   margin-left: 20px;
   background-color: #fff;
   border-radius: 10px;
+  padding-left: 20px;
+  padding-bottom: 30px;
 }
 
 .article-body {
@@ -38,7 +40,7 @@
 }
 
 .article-content {
-  padding: 30px 30px 30px;
+  padding: 10px 30px 30px;
   img {
     margin-right: 20px;
     width: 240px;
@@ -88,3 +90,40 @@
 .article-context {}
 
 .article-video {}
+
+.eplist {
+  display: flex;
+  flex-flow: wrap;
+  height: 132px;
+  overflow: hidden;
+  &.auto {
+    overflow: visible;
+    height: auto;
+  }
+  li {
+    width: 46px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 5px;
+    margin-right: 7px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    text-align: center;
+    &.active {
+      border-color: #f00;
+      a {
+        color: #f00;
+      }
+    }
+  }
+}
+
+.eplist-more {
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.go-detail {
+  margin-top: 15px;
+  display: block;
+}

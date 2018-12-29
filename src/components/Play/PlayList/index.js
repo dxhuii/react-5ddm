@@ -68,7 +68,7 @@ class PlayList extends Component {
   onPrev = () => {
     this.pageNavUl.style.transition = 'transform .3s ease'
     const num = parseInt(this.pageNavUl.style.transform.replace(/[^0-9]/gi, '')) || 0
-    const X = num < 130 ? 0 : -num + this.liWidth
+    const X = num < this.liWidth ? 0 : -num + this.liWidth
     this.pageNavUl.style.transform = `translateX(${X}px)`
   }
 

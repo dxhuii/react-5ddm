@@ -12,7 +12,6 @@ import { getDetail, getScore } from '@/store/reducers/detail'
 import { getUserInfo } from '@/store/reducers/user'
 
 import PlayList from '@/components/Play/PlayList'
-import DetailEp from '@/components/Episode/DetailEp'
 import Meta from '@/components/Meta'
 
 import Shell from '@/components/Shell'
@@ -109,7 +108,11 @@ class Bangumi extends Component {
       website,
       updateDate,
       tvcont,
-      storyId
+      storyId,
+      actorId,
+      storylist = [],
+      newsTextlist = [],
+      newsPiclist = []
     } = data
     return (
       <Fragment>
@@ -154,15 +157,21 @@ class Bangumi extends Component {
             <li styleName="active">
               <a>作品详情</a>
             </li>
-            <li>
-              <a>新闻花絮</a>
-            </li>
-            <li>
-              <a>演员角色</a>
-            </li>
-            <li>
-              <a>分集剧情</a>
-            </li>
+            {newsTextlist.length || newsPiclist.length ? (
+              <li>
+                <a>新闻花絮</a>
+              </li>
+            ) : null}
+            {actorId ? (
+              <li>
+                <a>演员角色</a>
+              </li>
+            ) : null}
+            {storyId ? (
+              <li>
+                <Link to={`/episode/${id}/1`}>分集剧情</Link>
+              </li>
+            ) : null}
             <li>
               <Link to={`/time/${id}`}>播出时间</Link>
             </li>
@@ -170,7 +179,23 @@ class Bangumi extends Component {
         </div>
         <div className="wp mt20">
           <PlayList key="playlist" />
-          {storyId ? <DetailEp detail={data} /> : null}
+          {storyId ? (
+            <div styleName="ep" className="mt20">
+              <h2>{title}的剧情</h2>
+              <ul styleName="eplist" className="mt20">
+                {storylist.map(item => (
+                  <li key={item.pid}>
+                    <h4>
+                      <Link to={`/episode/${id}/${item.pid}`}>
+                        {item.name} {item.title}
+                      </Link>
+                    </h4>
+                    <p>{item.content}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
       </Fragment>
     )
