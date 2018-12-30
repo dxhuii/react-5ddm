@@ -74,7 +74,7 @@ class Head extends Component {
               列表
             </NavLink>
             <NavLink styleName={url === '/news' ? 'active' : ''} exact to="/news">
-              列表
+              新闻
             </NavLink>
             <NavLink styleName={url === '/upload' ? 'active' : ''} exact to="/upload">
               上传

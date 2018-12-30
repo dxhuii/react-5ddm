@@ -20,10 +20,10 @@
       color: #ccc;
     }
     &.active {
-      background: #f60;
-      color: #fff;
+      background: #ffd100;
+      color: #282828;
       em {
-        color: #f90;
+        color: #999;
       }
     }
   }
@@ -104,10 +104,10 @@
     p {
       position: absolute;
       left: 87px;
-      right: 0;
+      right: 10px;
       bottom: 0;
-      height: 20px;
-      line-height: 20px;
+      height: 18px;
+      line-height: 14px;
       font-size: 12px;
       color: #999;
       a {
@@ -115,9 +115,9 @@
         display: inline-block;
         background-color: #eee;
         border-radius: 10px;
-        padding: 0 10px;
+        padding: 3px 10px;
         &.today {
-          background-color: #f60;
+          background-color: #ffba00;
           color: #fff;
         }
       }

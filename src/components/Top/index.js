@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { topLoad } from '@/store/actions/top'
+import { top } from '@/store/actions/top'
 import { getTopList } from '@/store/reducers/top'
 import Loading from '@/components/Ui/Loading'
 
@@ -12,39 +12,36 @@ import './style.scss'
 @withRouter
 @connect(
   (state, props) => ({
-    top: getTopList(state, props.id, props.order, props.area, props.limit)
+    topData: getTopList(state, props.name)
   }),
   dispatch => ({
-    topLoad: bindActionCreators(topLoad, dispatch)
+    top: bindActionCreators(top, dispatch)
   })
 )
 class Top extends Component {
   static propTypes = {
-    id: PropTypes.number,
-    limit: PropTypes.number,
-    order: PropTypes.string,
-    area: PropTypes.string,
-    top: PropTypes.object,
-    topLoad: PropTypes.func
+    name: PropTypes.string,
+    topData: PropTypes.object,
+    top: PropTypes.func
   }
   componentDidMount() {
-    const { id, order, area, limit, top, topLoad } = this.props
-    if (!top || !top.data) {
-      topLoad({ id, order, area, limit })
+    const { name, top, topData } = this.props
+    if (!topData || !topData.data) {
+      top({ name })
     }
   }
 
   render() {
     const {
-      top: { data = [], loading },
-      area
+      topData: { data = [], loading },
+      name
     } = this.props
     return (
       <div styleName="top">
         <h2>
           <i className="iconfont">&#xe613;</i>排行榜
         </h2>
-        <ul styleName={area === '大陆' ? 'cn' : ''}>
+        <ul styleName={name === 'indexTopCN' ? 'cn' : ''}>
           {loading ? <Loading /> : null}
           {data.map((item, index) => (
             <li key={item.id}>

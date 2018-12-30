@@ -9,10 +9,11 @@ import player from './player'
 import top from './top'
 import list from './list'
 import slide from './slide'
-import news from './news'
+import newsIndex from './newsIndex'
 import article from './article'
 import config from './config'
 import episode from './episode'
+import recommend from './recommend'
 
 let states = {
   user,
@@ -23,10 +24,11 @@ let states = {
   top,
   list,
   slide,
-  news,
+  newsIndex,
   article,
   config,
-  episode
+  episode,
+  recommend
 }
 
 // 创建一个无数据的states，用于在服务端初始redux数据

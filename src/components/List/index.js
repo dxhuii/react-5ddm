@@ -110,8 +110,7 @@ class List extends Component {
 
   render() {
     const {
-      list: { data = [] },
-      loading
+      list: { data = [], loading }
     } = this.props
     return (
       <div styleName="main-list">
@@ -125,7 +124,13 @@ class List extends Component {
                   <h3>{item.title}</h3>
                 </Link>
                 <Link to={`/play/${item.id}/${item.pid}`}>
-                  {isNumber(item.status) ? <p style={item.isDate ? { color: '#f60' } : {}}>更新至{item.status}话</p> : <p>{item.status}</p>}
+                  {isNumber(item.status) ? (
+                    <p>更新至{item.status}话</p>
+                  ) : item.isDate ? (
+                    <p styleName="today">{item.status}</p>
+                  ) : (
+                    <p>{item.status}</p>
+                  )}
                 </Link>
               </li>
             ))}

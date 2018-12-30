@@ -327,14 +327,15 @@
       margin-top: 1px;
       height: 30px;
       line-height: 28px;
-      border: 1px solid #f60;
       border-radius: 5px;
       text-align: center;
-      padding: 0 5px 0 15px;
-      color: #f60;
-      &:hover {
-        background: #f60;
-        color: #fff;
+      padding-left: 15px;
+      color: #d36f16;
+      i {
+        position: relative;
+        top: -1px;
+        font-size: 14px;
+        margin-left: 5px;
       }
     }
     .title-icon {

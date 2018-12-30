@@ -60,22 +60,3 @@
     }
   }
 }
-
-.recommend {
-  display: flex;
-  flex-wrap: wrap;
-  height: 220px;
-  overflow: hidden;
-  li {
-    width: 170px;
-    height: 100px;
-    margin-bottom: 20px;
-    background-color: #ddd;
-    margin-right: 20px;
-    border-radius: 10px;
-    overflow: hidden;
-    &:nth-child(4n) {
-      margin-right: 0;
-    }
-  }
-}

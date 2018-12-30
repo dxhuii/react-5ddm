@@ -3,51 +3,30 @@ import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { newsList } from '@/store/actions/news'
-import { getNews } from '@/store/reducers/news'
+import { newsIndex } from '@/store/actions/newsIndex'
+import { getNewsIndex } from '@/store/reducers/newsIndex'
 
 import './style.scss'
 
 @withRouter
 @connect(
   (state, props) => ({
-    newsData: getNews(
-      state,
-      props.id,
-      props.news || '',
-      props.did || '',
-      props.name || '',
-      props.wd || '',
-      props.letter || '',
-      props.day || '',
-      props.order || '',
-      props.limit || 12
-    )
+    newsData: getNewsIndex(state, 'newsPicList')
   }),
   dispatch => ({
-    newsList: bindActionCreators(newsList, dispatch)
+    newsIndex: bindActionCreators(newsIndex, dispatch)
   })
 )
 class News extends Component {
   static propTypes = {
-    id: PropTypes.any,
-    news: PropTypes.any,
-    did: PropTypes.any,
-    wd: PropTypes.string,
-    letter: PropTypes.string,
-    name: PropTypes.any,
-    day: PropTypes.any,
-    order: PropTypes.string,
-    limit: PropTypes.any,
-    newsList: PropTypes.func,
+    newsIndex: PropTypes.func,
     newsData: PropTypes.object
   }
 
   componentDidMount() {
-    const { id, news, did, name, wd, letter, day, order, limit, newsList, newsData } = this.props
-    console.log(newsData)
+    const { newsIndex, newsData } = this.props
     if (!newsData.data) {
-      newsList({ id, news, did, name, wd, letter, day, order, limit })
+      newsIndex({ name: 'newsPicList' })
     }
   }
 
@@ -90,7 +69,7 @@ class News extends Component {
             <li>美图</li>
             <li>短视频</li>
           </ul>
-          <Link to="/">
+          <Link to="/news">
             更多
             <i className="iconfont">&#xe65e;</i>
           </Link>

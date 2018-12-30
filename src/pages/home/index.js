@@ -10,6 +10,7 @@ import List from '@/components/List'
 import News from '@/components/News'
 import NewsYG from '@/components/News/yugao'
 import Swiper from '@/components/Swiper'
+import Recommend from '@/components/Recommend'
 
 import './style.scss'
 
@@ -40,11 +41,7 @@ class Home extends Component {
               <Swiper />
             </div>
             <div styleName="top-right">
-              <ul styleName="recommend">
-                {[1, 2, 3, 4, 5, 6, 7, 8].map(item => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
+              <Recommend />
             </div>
           </div>
           <div className="mt20" styleName="main">
@@ -52,7 +49,7 @@ class Home extends Component {
               <WeekDay title="番剧" link="/week" isJp={['', '月', '火', '水', '木', '金', '土', '日']} type={1} />
             </div>
             <div styleName="main-right">
-              <Top id={3} order="hits_month" area="日本" limit={10} />
+              <Top name="indexTopJP" />
             </div>
           </div>
           <div className="mt20" styleName="main news">
@@ -68,7 +65,7 @@ class Home extends Component {
               <WeekDay title="国创" link="/week" type={0} />
             </div>
             <div styleName="main-right">
-              <Top id={3} order="hits_month" area="大陆" limit={7} />
+              <Top name="indexTopCN" />
             </div>
           </div>
         </div>

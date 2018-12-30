@@ -36,6 +36,9 @@
       line-height: 16px;
       color: #999;
       overflow: hidden;
+      &.today {
+        color: #d36f16;
+      }
     }
     h3 {
       margin: 15px 0;
@@ -47,7 +50,7 @@
       white-space: normal;
       overflow: hidden;
       &:hover {
-        color: #f60;
+        color: #d36f16;
       }
     }
   }

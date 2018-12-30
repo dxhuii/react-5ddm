@@ -24,9 +24,11 @@
     img {
       display: block;
       width: 100%;
+      min-height: 100%;
     }
     a {
       display: block;
+      height: 220px;
     }
   }
 }
