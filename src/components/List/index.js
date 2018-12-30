@@ -125,7 +125,11 @@ class List extends Component {
                 </Link>
                 <Link to={`/play/${item.id}/${item.pid}`}>
                   {isNumber(item.status) ? (
-                    <p>更新至{item.status}话</p>
+                    item.isDate ? (
+                      <p styleName="today">更新至{item.status}话</p>
+                    ) : (
+                      <p>更新至{item.status}话</p>
+                    )
                   ) : item.isDate ? (
                     <p styleName="today">{item.status}</p>
                   ) : (

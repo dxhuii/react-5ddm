@@ -135,12 +135,18 @@ class weekDay extends Component {
                 <h4>{item.title}</h4>
               </Link>
               {isNumber(item.status) ? (
-                <p>
-                  更新至
-                  <Link styleName={item.isDate ? 'today' : ''} to={`/play/${item.id}/${item.pid}`}>
-                    {item.status}话
-                  </Link>
-                </p>
+                item.isDate ? (
+                  <p>
+                    更新至
+                    <Link styleName="today" to={`/play/${item.id}/${item.pid}`}>
+                      {item.status}话
+                    </Link>
+                  </p>
+                ) : (
+                  <p>
+                    更新至<Link to={`/play/${item.id}/${item.pid}`}>{item.status}话</Link>
+                  </p>
+                )
               ) : (
                 <p>
                   {item.isDate ? (
