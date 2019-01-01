@@ -1,7 +1,22 @@
+@import '../../pages/_mixin';
+.wp {
+  margin: 20px auto 0;
+  width: 1240px;
+}
+
 .detail {
   position: relative;
-  background-color: #666;
   overflow: hidden;
+  &::after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .3);
+    z-index: 2;
+    content: "";
+  }
 }
 
 .detail-blur {
@@ -10,17 +25,16 @@
   top: 0;
   right: 0;
   bottom: 0;
-  filter: blur(30px);
+  filter: blur(40px);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  opacity: .7;
-  z-index: 0;
+  z-index: 1;
 }
 
 .detail-info__con {
   position: relative;
-  z-index: 1;
+  z-index: 10;
   padding: 30px 0;
   color: #fff;
   display: flex;
@@ -30,12 +44,32 @@
   h1 {
     font-size: 24px;
     padding-bottom: 20px;
+    span {
+      margin-left: 20px;
+      display: inline-block;
+      vertical-align: top;
+      a {
+        font-size: 12px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+        height: 20px;
+        padding: 0 4px;
+        line-height: 20px;
+        color: #fff;
+        border: 1px solid #fff;
+        border-radius: 3px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
   }
 }
 
 .detail-info__pic {
   margin-right: 20px;
-  width: 240px;
+  width: 220px;
   border: 3px solid #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -46,8 +80,35 @@
 }
 
 .detail-info__info {
-  width: 300px;
-  width: 620px;
+  .detail-info_list {
+    width: 620px;
+    p {
+      margin-bottom: 10px;
+    }
+  }
+  .detail-box {
+    display: flex;
+  }
+  .play-num {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    li {
+      border-right: 1px solid rgba($color: #fff, $alpha: .7);
+      padding-right: 20px;
+      &:last-child {
+        border-right: none;
+      }
+      span {
+        display: block;
+      }
+    }
+  }
+  p {
+    &.text {
+      @include clamp(1);
+    }
+  }
 }
 
 .detail-info__score {
@@ -62,19 +123,19 @@
   text-align: center;
   align-items: center;
   border-radius: 5px;
-  color: #282828;
+  color: #fff;
   font-size: 14px;
   position: absolute;
   bottom: 30px;
-  background-color: #ffd100;
-  border: 1px solid #ffd100;
+  background-color: #0084FF;
+  border: 1px solid #0084FF;
   cursor: pointer;
   &:hover {
-    background-color: #ffe366;
-    border-color: #ffe366;
+    border-color: hsl(208.94117647058823, 100%, 45%);
+    background-color: hsl(208.94117647058823, 100%, 45%);
   }
   i {
-    font-size: 18px;
+    font-size: 16px;
     position: relative;
     top: -2px;
     margin-right: 7px;
@@ -82,66 +143,102 @@
 }
 
 .detail-love {
-  left: 260px;
+  left: 240px;
 }
 
 .detail-remind {
   margin-left: 10px;
-  left: 360px;
+  left: 336px;
 }
 
 .detail-nav {
-  text-align: center;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ebebeb;
   background-color: #fff;
-  margin-bottom: 20px;
   li {
-    padding: 0 30px;
-    font-size: 18px;
+    padding-right: 30px;
+    font-size: 16px;
     display: inline-block;
-    border-bottom: 1px solid transparent;
+    border-bottom: 2px solid transparent;
     a {
-      padding: 20px 0;
+      padding: 14px 0;
       display: inline-block;
       position: relative;
       width: 100%;
       bottom: -1px;
-      color: #999;
+      color: #233;
     }
     &.active,
     &:hover {
       margin-bottom: -1px;
+      font-weight: bold;
       a {
-        color: #282828;
-        border-bottom: 1px solid #282822;
+        border-bottom: 2px solid #0084FF;
       }
     }
   }
+}
+
+.playlistbox {
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+  border-radius: 5px;
+  padding: 10px 20px 20px;
+  width: 1240px;
+}
+
+.left,
+.box {
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+.left {
+  width: 920px;
+}
+
+.right {
+  width: 300px;
 }
 
 .playlist {
   padding-bottom: 20px;
 }
 
-.ep {
+.title {
   h2 {
     font-size: 16px;
   }
 }
 
+.ep {
+  margin-top: 10px;
+}
+
 .eplist {
-  background: #fff;
-  padding: 20px 20px 10px;
-  border-radius: 10px;
   li {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f6f6f6;
+    padding-bottom: 15px;
     h4 {
       font-size: 14px;
-      font-weight: bold;
     }
     p {
-      color: #666;
+      color: #8590A6;
       margin-top: 5px;
     }
+  }
+}
+
+.box {
+  padding-bottom: 20px;
+  .title {
+    margin-top: 10px;
+    padding-bottom: 10px;
+  }
+  p {
+    margin-top: 10px;
+    color: #8590A6;
   }
 }

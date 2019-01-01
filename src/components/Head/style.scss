@@ -1,16 +1,16 @@
 header {
-  padding: 0 20px;
   display: flex;
-  background-color: #ffd100;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+  background-clip: content-box;
   height: 56px;
   line-height: 56px;
-  color: #fff;
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
   z-index: 999;
-  color: #282828;
+  overflow: hidden;
   a {
     padding: 0 24px;
     display: inline-block;
@@ -19,11 +19,11 @@ header {
       color: #fff;
     }
     &.active {
-      font-weight: bold; 
+      font-weight: bold;
     }
   }
-  nav{
-    flex-grow:1;
+  nav {
+    flex-grow: 1;
     display: flex;
   }
 }
@@ -47,19 +47,21 @@ header {
 }
 
 .header-search {
-  width: 240px;
-  flex-basis: 240px;
-  background-color: #fff;
-  margin-top: 13px;
-  height: 30px;
-  border-radius: 15px;
+  width: 300px;
+  flex-basis: 300px;
+  background-color: #f6f6f6;
+  margin-top: 10px;
+  height: 36px;
+  border-radius: 3px;
   margin-right: 20px;
   overflow: hidden;
   display: flex;
+  border: 1px solid #ebebeb;
   input {
-    width: 200px;
-    height: 30px;
-    line-height: 30px;
+    width: 260px;
+    margin-top: 6px;
+    height: 24px;
+    line-height: 24px;
     padding-left: 15px;
     border: none;
     background: none;
@@ -68,12 +70,14 @@ header {
   button {
     width: 30px;
     height: 30px;
+    margin-top: 3px;
     text-align: right;
     float: right;
+    color: #8590A6;
   }
 }
 
 .header-nav {
-  flex-grow:1;
+  flex-grow: 1;
   line-height: 56px;
 }

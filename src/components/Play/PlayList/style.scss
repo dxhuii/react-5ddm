@@ -6,7 +6,8 @@
 }
 
 .playlist-boreder {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ebebeb;
+  padding-top: 10px;
 }
 
 .playlist-ul {
@@ -18,7 +19,7 @@
     margin-right: 10px;
     margin-top: 10px;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid #ebebeb;
     display: inline-block;
     margin-right: 15px;
     background-color: #fff;
@@ -27,9 +28,9 @@
     }
     &:hover,
     &.active {
-      border-color: #f00 !important;
+      border-color: #0084FF !important;
       a {
-        color: #f00;
+        color: #0084FF;
       }
     }
     p {
@@ -47,7 +48,7 @@
     margin-right: 10px;
     cursor: pointer;
     &.active {
-      color: #f00;
+      color: #0084FF;
     }
   }
 }

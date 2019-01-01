@@ -3,11 +3,6 @@
   h2 {
     margin-top: 3px;
     font-size: 18px;
-    i {
-      font-size: 24px;
-      color: #d36f16;
-      margin-right: 10px;
-    }
   }
   ul {
     margin-top: 25px;
@@ -32,24 +27,21 @@
   display: inline-block;
   height: 20px;
   line-height: 20px;
-  padding: 0 10px;
-  border-radius: 10px;
   text-align: right;
-  background-color: #ffd100;
-  color: #282828;
+  color: #8590A6;
 }
 
 .top-li__num {
   width: 20px;
   height: 20px;
   border-radius: 5px;
-  background-color: #ddd;
-  color: #282828;
+  background-color: #ccd0d7;
+  color: #fff;
   flex-basis: 20px;
   text-align: center;
   line-height: 20px;
   &.on {
-    background-color: #d36f16;
+    background-color: #f25d8e;
     color: #fff;
   }
 }

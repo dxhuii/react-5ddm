@@ -148,7 +148,7 @@ class weekDay extends Component {
                   </p>
                 )
               ) : (
-                <p>
+                <p styleName="no">
                   {item.isDate ? (
                     <Link styleName={item.isDate ? 'today' : ''} to={`/play/${item.id}/${item.pid}`}>
                       {item.status}

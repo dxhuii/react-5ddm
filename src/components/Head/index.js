@@ -82,7 +82,7 @@ class Head extends Component {
           </div>
           <div styleName="header-search">
             <form action={`/search/${keyword}`}>
-              <input required type="text" placeholder="请输入关键词" onChange={this.onChange} />
+              <input required type="text" placeholder="片名、导演、声优、原作..." onChange={this.onChange} />
               <button disabled={!keyword} type="submit">
                 <i className="iconfont">&#xe78d;</i>
               </button>

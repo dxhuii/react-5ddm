@@ -1,73 +1,69 @@
 @import '../../pages/_mixin';
 .h2 {
   margin-right: 10px !important;
+  flex-grow: 1;
+  font-size: 18px !important;
 }
 
 .newslist {
+  height: 390px;
   display: flex;
-  flex-flow: wrap;
-  &:after {
-    clear: both;
-    content: ".";
-    display: block;
-    height: 0;
-    visibility: hidden;
-  }
+  flex-wrap: wrap;
+  overflow: hidden;
   li {
     position: relative;
-    margin-top: 10px;
-    width: 200px;
-    margin-right: 26px;
+    width: 205px;
+    height: 115px;
+    margin-top: 15px;
+    background-color: #ddd;
+    margin-right: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      overflow: auto;
+      display: block;
+      width: 100%;
+      min-height: 100%;
+    }
+    .mark {
+      position: absolute;
+      top: 85px;
+      right: 0;
+      left: 0;
+      height: 30px;
+      line-height: 20px;
+      font-size: 12px;
+      padding: 10px 5px;
+      overflow: hidden;
+      transition: top .1s ease-in-out;
+      background: linear-gradient(transparent, rgba(0, 0, 0, .1) 20%, rgba(0, 0, 0, .2) 35%, rgba(0, 0, 0, .6) 65%, rgba(0, 0, 0, .9));
+      p {
+        @include clamp(4);
+        color: #fff;
+      }
+    }
     &:nth-child(4n) {
       margin-right: 0;
     }
-    &:after {
-      clear: both;
-      content: ".";
-      display: block;
-      height: 0;
-      visibility: hidden;
-    }
-    .picbox {
-      position: relative;
-      width: 200px;
-      height: 112px;
-      overflow: hidden;
-    }
-    a {
-      &.pic {
-        display: block;
-        width: 200px;
-        height: 112px;
-        img {
-          width: 200px;
-        }
-      }
-      &.type {
-        position: absolute;
-        right: 5px;
-        bottom: 5px;
-        padding: 3px 12px;
+    &:hover {
+      .mark {
+        top: 0;
+        height: 100%;
         background: rgba(0, 0, 0, .7);
-        font-size: 12px;
-        color: #fff;
-        border-radius: 3px;
       }
-    }
-    h2 {
-      margin-bottom: 5px;
-      margin-top: 10px;
-      color: #333;
-      height: 40px;
-      line-height: 20px;
-      @include clamp(2);
     }
   }
 }
 
 .newstxt {
   li {
-    margin-top: 15px;
+    margin-top: 20px;
     height: 20px;
     line-height: 20px;
     overflow: hidden;
@@ -118,10 +114,15 @@
 }
 
 .news-tab {
-  display: flex;flex-grow: 1;
+  display: flex;
+  flex-grow: 1;
   height: 30px;
   line-height: 30px;
   margin-top: 5px;
+  &.tab {
+    flex-grow: inherit;
+    margin-top: 0;
+  }
   li {
     background-color: #f5f5f5;
     color: #999;

@@ -51,9 +51,9 @@ class NewsYG extends Component {
     } = this.props
     return data.map(item => (
       <li key={item.id}>
-        <Link styleName={`type type-${this.getClass(item.cid)}`} to={`/news/${item.cid}`} title={item.name}>
+        {/* <Link styleName={`type type-${this.getClass(item.cid)}`} to={`/news/${item.cid}`} title={item.name}>
           {item.name}
-        </Link>
+        </Link> */}
         <Link to={`/article/${item.id}`}>{item.title}</Link>
       </li>
     ))
@@ -63,10 +63,8 @@ class NewsYG extends Component {
     return (
       <Fragment>
         <div className="title">
-          <h2 styleName="h2">
-            <i className="title-icon yugao" /> 预告
-          </h2>
-          <ul styleName="news-tab">
+          <h2 styleName="h2">预告</h2>
+          <ul styleName="news-tab tab">
             <li>OP</li>
             <li>ED</li>
             <li>CM</li>

@@ -36,17 +36,12 @@ class News extends Component {
     } = this.props
     return data.map(item => (
       <li key={item.id}>
-        <div styleName="picbox">
-          <Link styleName="pic" to={`/article/${item.id}`}>
-            <img src={item.pic} />
-          </Link>
-          <Link styleName="type" to={`/news/${item.cid}`} title={item.name}>
-            {item.name}
-          </Link>
-        </div>
-        <h2>
-          <Link to={`/article/${item.id}`}>{item.title}</Link>
-        </h2>
+        <Link to={`/article/${item.id}`}>
+          <img src={item.pic} alt={item.title} />
+          <div styleName="mark">
+            <p>{item.title}</p>
+          </div>
+        </Link>
       </li>
     ))
   }

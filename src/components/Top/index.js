@@ -38,9 +38,7 @@ class Top extends Component {
     } = this.props
     return (
       <div styleName="top">
-        <h2>
-          <i className="iconfont">&#xe613;</i>排行榜
-        </h2>
+        <h2>排行榜</h2>
         <ul styleName={name === 'indexTopCN' ? 'cn' : ''}>
           {loading ? <Loading /> : null}
           {data.map((item, index) => (
