@@ -146,9 +146,7 @@ class Bangumi extends Component {
                   {title}
                   <span>
                     <a>{listName}</a>
-                    {mcid.map(item => (
-                      <a key={item.id}>{item.title}</a>
-                    ))}
+                    {mcid.length > 0 ? mcid.map(item => <a key={item.id}>{item.title}</a>) : null}
                   </span>
                 </h1>
                 <div styleName="detail-box">
