@@ -361,4 +361,58 @@
   .warp-bg {
     background-color: #fff;
   }
+  .playicon {
+    float: left;
+    margin-top: 4px;
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background: url(../static/img/sprite_source.png) -240px -20px no-repeat;
+    background-image: -webkit-image-set(url(../static/img/sprite_source@2x.png) 2x);
+    &.other,
+    &.pv,
+    &.otherB,
+    &.otherC,
+    &.otherD,
+    &.nodel,
+    &.mad,
+    &.cm,
+    &.ed,
+    &.bgm,
+    &.op {
+      background-position: -240px -20px
+    }
+    &.tudou {
+      background-position: -40px 0
+    }
+    &.youku {
+      background-position: -20px 0
+    }
+    &.iqiyi {
+      background-position: -60px 0
+    }
+    &.sohu {
+      background-position: -20px -20px
+    }
+    &.letvyun,
+    &.letv {
+      background-position: -140px 0
+    }
+    &.qq {
+      background-position: 0 0
+    }
+    &.mgtv {
+      background-position: -160px -20px
+    }
+    &.pptv {
+      background-position: -80px 0
+    }
+    &.bilibili {
+      background-position: -180px -20px
+    }
+    &.acfun {
+      background-position: -200px -20px
+    }
+  }
 }

@@ -156,7 +156,7 @@ class Play extends Component {
               <ul styleName="playlist">
                 {list.map(item => (
                   <li key={item.playName} onClick={() => this.onPlay(item.vid, item.playName)}>
-                    <i styleName={`icon ${item.playName}`} />
+                    <i className={`playicon ${item.playName}`} />
                     {item.playTitle}
                   </li>
                 ))}

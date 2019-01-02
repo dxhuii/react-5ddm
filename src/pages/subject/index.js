@@ -85,7 +85,8 @@ class Bangumi extends Component {
   render() {
     const {
       info: { data = {}, loading },
-      userinfo: { userid }
+      userinfo: { userid },
+      cmScore
     } = this.props
     const {
       id,
@@ -119,6 +120,7 @@ class Bangumi extends Component {
       newsTextlist = [],
       newsPiclist = []
     } = data
+    console.log(cmScore, 'cmScore')
     return (
       <Fragment>
         <div className="warp-bg">
@@ -146,7 +148,7 @@ class Bangumi extends Component {
                   {title}
                   <span>
                     <a>{listName}</a>
-                    {mcid.length > 0 ? mcid.map(item => <a key={item.id}>{item.title}</a>) : null}
+                    {mcid.length > 0 ? mcid.map(item => (item.title ? <a key={item.id}>{item.title}</a> : '')) : null}
                   </span>
                 </h1>
                 <div styleName="detail-box">
@@ -175,7 +177,7 @@ class Bangumi extends Component {
                   <div styleName="detail-info__score"> {gold} </div>
                 </div>
               </div>
-              <div styleName="detail-love" onClick={() => this.addMark('love', id, cid, userid)}>
+              <div styleName="detail-love active" onClick={() => this.addMark('love', id, cid, userid)}>
                 <i className="iconfont">&#xe66a;</i>收藏
               </div>
               <div styleName="detail-remind" onClick={() => this.addMark('remind', id, cid, userid)}>
@@ -222,6 +224,35 @@ class Bangumi extends Component {
                 <div styleName="title">
                   <h2>预告片&OP&ED&BGM&MAD&CM&特典 · · · · · ·</h2>
                 </div>
+                <ul styleName="d-yugao">
+                  <li styleName="top">
+                    <span styleName="time">发布时间</span>
+                    <span styleName="name">视频名称</span>
+                    <span styleName="clarity">清晰度</span>
+                    <span styleName="play">播放</span>
+                    <span styleName="source">来源</span>
+                  </li>
+                  {newsTextlist.map(item => (
+                    <li key={item.id}>
+                      <span styleName="time">{item.addtime}</span>
+                      <span styleName="name">
+                        <Link to={`/article/${item.id}`} title={item.title}>
+                          {item.title}
+                        </Link>
+                        <em>{item.playtime}</em>
+                      </span>
+                      <span styleName="clarity">{item.clarity}</span>
+                      <span styleName="play">
+                        <Link to={`/article/${item.id}`} title={item.title}>
+                          <em>播放</em>
+                        </Link>
+                      </span>
+                      <span styleName="source">
+                        <i className={`playicon ${item.playname}`} />
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ) : null}
             {storyId ? (
