@@ -47,6 +47,7 @@ export default {
       `${API}api.php?s=home-react-newsList-id-${id}-letter-${letter}-news-${news}-did-${did}-day-${day}-wd-${wd}-name-${name}-limit-${limit}-order-${order}-p-${page}`, // 新闻列表接口
     newsPicList: () => `${API}api.php?s=home-react-newsList-id-211,206,205,207,208,209,212,213,221,222-limit-12-order-addtime-p-0`, // 首页新闻带图
     newsTextList: () => `${API}api.php?s=home-react-newsList-id-214,215,216,217,218,219,220,223-limit-10-order-addtime-p-0`, // 首页新闻文字
+    vodNewsList: (id, p) => `${API}api.php?s=home-react-newsList-id-44-did-${id}-limit-10-order-addtime-p-${p}`, // 视频关联新闻列表
     slide: () => `${API}api.php?s=home-react-slide`,
     /**
      * name menu菜单 sns配置 user配置 pay支付配置 emot配置 list 各种列表
