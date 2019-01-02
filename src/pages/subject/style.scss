@@ -183,14 +183,6 @@
   }
 }
 
-.playlistbox {
-  background-color: #fff;
-  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
-  border-radius: 5px;
-  padding: 10px 20px 20px;
-  width: 1240px;
-}
-
 .left,
 .box {
   background-color: #fff;
@@ -295,7 +287,8 @@
           line-height: 24px;
           border-radius: 3px;
           background-color: #4d9cec;
-          color: #fff
+          color: #fff;
+          margin-left: 0;
         }
         &:hover {
           em {
@@ -314,6 +307,60 @@
           float: none;
           display: inline-block
         }
+      }
+    }
+  }
+}
+.newslist {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  li {
+    position: relative;
+    width: 205px;
+    height: 115px;
+    margin-top: 15px;
+    background-color: #ddd;
+    margin-right: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      overflow: auto;
+      display: block;
+      width: 100%;
+      min-height: 100%;
+    }
+    .mark {
+      position: absolute;
+      top: 85px;
+      right: 0;
+      left: 0;
+      height: 30px;
+      line-height: 20px;
+      font-size: 12px;
+      padding: 10px 5px;
+      overflow: hidden;
+      transition: top .1s ease-in-out;
+      background: linear-gradient(transparent, rgba(0, 0, 0, .1) 20%, rgba(0, 0, 0, .2) 35%, rgba(0, 0, 0, .6) 65%, rgba(0, 0, 0, .9));
+      p {
+        @include clamp(4);
+        color: #fff;
+      }
+    }
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+    &:hover {
+      .mark {
+        top: 0;
+        height: 100%;
+        background: rgba(0, 0, 0, .7);
       }
     }
   }

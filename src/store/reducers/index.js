@@ -14,6 +14,7 @@ import article from './article'
 import config from './config'
 import episode from './episode'
 import recommend from './recommend'
+import detailActor from './actor'
 
 let states = {
   user,
@@ -28,7 +29,8 @@ let states = {
   article,
   config,
   episode,
-  recommend
+  recommend,
+  detailActor
 }
 
 // 创建一个无数据的states，用于在服务端初始redux数据

@@ -12,6 +12,7 @@ import { getDetail, getScore } from '@/store/reducers/detail'
 import { getUserInfo } from '@/store/reducers/user'
 
 import PlayList from '@/components/Play/PlayList'
+import DetailActor from '@/components/DetailActor'
 import Meta from '@/components/Meta'
 
 import Shell from '@/components/Shell'
@@ -213,14 +214,11 @@ class Bangumi extends Component {
             </div>
           </div>
         </div>
-
-        <div styleName="wp playlistbox">
-          <PlayList key="playlist" />
-        </div>
-        <div className="mt20" styleName="wp">
+        <PlayList key="playlist" />
+        <div className="mt20 clearfix" styleName="wp">
           <div styleName="left" className="fl">
             {newsTextlist.length > 0 ? (
-              <div>
+              <div className="pt15">
                 <div styleName="title">
                   <h2>预告片&OP&ED&BGM&MAD&CM&特典 · · · · · ·</h2>
                 </div>
@@ -255,7 +253,7 @@ class Bangumi extends Component {
                 </ul>
               </div>
             ) : null}
-            {storyId ? (
+            {storyId && storylist.length > 0 ? (
               <div styleName="ep">
                 <div styleName="title">
                   <h2>分集剧情</h2>
@@ -279,15 +277,33 @@ class Bangumi extends Component {
                 <div styleName="title">
                   <h2>新闻花絮</h2>
                 </div>
+                <ul styleName="newslist">
+                  {newsPiclist.map(item => (
+                    <li key={item.id}>
+                      <Link to={`/article/${item.id}`}>
+                        <img src={item.pic} alt={item.title} />
+                        <div styleName="mark">
+                          <p>{item.title}</p>
+                        </div>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ) : null}
+            <div className="mt20">
+              <div styleName="title">
+                <h2>相关动漫</h2>
+              </div>
+              {id ? <DetailActor actor={actor ? actor.map(item => item.title).join(',') : ''} no={id} /> : null}
+            </div>
           </div>
           <div styleName="right" className="fr">
             <div styleName="box">
               <div styleName="title">
                 <h2>角色声优</h2>
               </div>
-              {actor ? actor.map(item => <p key={item.title}>{item.title}</p>) : <p>暂无</p>}
+              {actor ? actor.map((item, index) => <p key={index}>{item.title}</p>) : <p>暂无</p>}
             </div>
             <div styleName="box" className="mt20">
               <div styleName="title">

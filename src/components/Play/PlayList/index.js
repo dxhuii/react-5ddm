@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+
 import { playlist } from '@/store/actions/playlist'
 import { getPlayList } from '@/store/reducers/playlist'
 
@@ -182,31 +183,35 @@ class PlayList extends Component {
 
     return (
       <Fragment>
-        {loading && data.length ? <div>loading...</div> : null}
-        {data.length > pageSize ? (
-          <Fragment>
-            {pageLen > 8 ? (
+        {data.length ? (
+          <div styleName="playlistbox">
+            {loading && data.length ? <div>loading...</div> : null}
+            {data.length > pageSize ? (
               <Fragment>
-                <div onClick={this.onPrev}>prev</div>
-                <div onClick={this.onNext}>next</div>
+                {pageLen > 8 ? (
+                  <Fragment>
+                    <div onClick={this.onPrev}>prev</div>
+                    <div onClick={this.onNext}>next</div>
+                  </Fragment>
+                ) : null}
+                <div styleName="playlist playlist-boreder" ref={e => (this.pageNav = e)}>
+                  <ul styleName="playlist-nav" ref={e => (this.pageNavUl = e)} style={{ width: `${(len + (surplus ? 1 : 0)) * 140}px` }}>
+                    {this.page()}
+                  </ul>
+                </div>
               </Fragment>
             ) : null}
-            <div styleName="playlist playlist-boreder" ref={e => (this.pageNav = e)}>
-              <ul styleName="playlist-nav" ref={e => (this.pageNavUl = e)} style={{ width: `${(len + (surplus ? 1 : 0)) * 140}px` }}>
-                {this.page()}
+            <div styleName="playlist">
+              <ul styleName="playlist-ul">
+                {dataSource.map(item => (
+                  <li styleName={+pid === +item.episode ? 'active' : ''} key={item.episode}>
+                    {this.format(item.title, item.episode, id)}
+                  </li>
+                ))}
               </ul>
             </div>
-          </Fragment>
+          </div>
         ) : null}
-        <div styleName="playlist">
-          <ul styleName="playlist-ul">
-            {dataSource.map(item => (
-              <li styleName={+pid === +item.episode ? 'active' : ''} key={item.episode}>
-                {this.format(item.title, item.episode, id)}
-              </li>
-            ))}
-          </ul>
-        </div>
       </Fragment>
     )
   }

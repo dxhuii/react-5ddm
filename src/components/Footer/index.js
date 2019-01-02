@@ -23,11 +23,18 @@ export default class Footer extends PureComponent {
     }, 30)
   }
 
-  render () {
+  render() {
     return (
-      <a styleName="top" onClick={this.top} href="javascript:;">
-        top
-      </a>
+      <footer styleName="footer" className="wp tac">
+        <p>
+          footer <br />
+          footer <br />
+          footer
+        </p>
+        <a styleName="top" onClick={this.top} href="javascript:;">
+          top
+        </a>
+      </footer>
     )
   }
 }
