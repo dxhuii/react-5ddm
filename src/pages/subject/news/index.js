@@ -11,7 +11,7 @@ import './style.scss'
 @withRouter
 @connect(
   (state, props) => ({
-    newsData: getNewsIndex(state, 'newsPicList')
+    newsData: getNewsIndex(state, props.match.params.id)
   }),
   dispatch => ({
     newsIndex: bindActionCreators(newsIndex, dispatch)
