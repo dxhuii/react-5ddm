@@ -80,7 +80,7 @@ class PlayList extends Component {
     this.pageNavUl.style.transform = `translateX(${X}px)`
   }
 
-  setData(data, pid) {
+  setData(data = [], pid) {
     const { pageSize } = this.state
     const len = data.length
     const pageLen = parseInt(len / pageSize) + (len % pageSize ? 1 : 0) // 总页数
