@@ -13,6 +13,7 @@ import { getUserInfo } from '@/store/reducers/user'
 
 import PlayList from '@/components/PlayList'
 import DetailActor from '@/components/DetailActor'
+import Comment from '@/components/Comment'
 import Load from '@/components/Ui/Load'
 import Meta from '@/components/Meta'
 
@@ -297,6 +298,12 @@ class Bangumi extends Component {
                 <h2>相关动漫</h2>
               </div>
               {id ? <DetailActor actor={actor ? actor.map(item => item.title).join(',') : ''} no={id} /> : null}
+            </div>
+            <div className="mt20">
+              <div styleName="title">
+                <h2>相关动漫</h2>
+              </div>
+              <Comment />
             </div>
           </div>
           <div styleName="right" className="fr">
