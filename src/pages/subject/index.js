@@ -11,7 +11,7 @@ import { hits } from '@/store/actions/hits'
 import { getDetail, getScore } from '@/store/reducers/detail'
 import { getUserInfo } from '@/store/reducers/user'
 
-import PlayList from '@/components/Play/PlayList'
+import PlayList from '@/components/PlayList'
 import DetailActor from '@/components/DetailActor'
 import Meta from '@/components/Meta'
 

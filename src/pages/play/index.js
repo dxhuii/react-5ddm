@@ -8,7 +8,7 @@ import { playerLoad } from '@/store/actions/player'
 import { getPlayerList } from '@/store/reducers/player'
 import { getUserInfo } from '@/store/reducers/user'
 
-import PlayList from '@/components/Play/PlayList'
+import PlayList from '@/components/PlayList'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
