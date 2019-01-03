@@ -13,6 +13,7 @@ import { getUserInfo } from '@/store/reducers/user'
 
 import PlayList from '@/components/PlayList'
 import DetailActor from '@/components/DetailActor'
+import Load from '@/components/Ui/Load'
 import Meta from '@/components/Meta'
 
 import Shell from '@/components/Shell'
@@ -103,12 +104,9 @@ class Bangumi extends Component {
       gold,
       filmtime,
       total,
-      director,
       language,
       company,
       keywords,
-      mcid = [],
-      original = [],
       website,
       updateDate,
       hits,
@@ -117,6 +115,9 @@ class Bangumi extends Component {
       year,
       storyId,
       actorId,
+      mcid = [],
+      original = [],
+      director = [],
       storylist = [],
       newsTextlist = [],
       newsPiclist = []
@@ -125,7 +126,7 @@ class Bangumi extends Component {
     return (
       <Fragment>
         <div className="warp-bg">
-          {loading ? <div> loading... </div> : null}
+          {loading ? <Load /> : null}
           <Meta title={`${title}${language ? `(${language})` : ''} - ${listName}${listNameBig}`}>
             <meta property="og:locale" content="zh_CN" />
             <meta property="og:type" content="videolist" />
@@ -310,7 +311,7 @@ class Bangumi extends Component {
                 <h2>STAFF</h2>
               </div>
               {original.length > 0 ? <p>原作：{original.map(item => item.title)}</p> : null}
-              {director ? (
+              {director.length > 0 ? (
                 <p>
                   导演：
                   {director.map(item => (
