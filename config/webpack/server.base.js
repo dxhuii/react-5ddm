@@ -61,14 +61,14 @@ module.exports = {
             loader: `css/locals`,
             options: {
               modules: true,
-              localIdentName: config.class_scoped_name
+              localIdentName: config.CLASS_SCOPED_NAME
               // minimize: true,
               // sourceMap: true
 
               // camelCase: true,
               // importLoaders: 1,
               // modules: true,
-              // localIdentName: config.class_scoped_name
+              // localIdentName: config.CLASS_SCOPED_NAME
             }
           },
           {

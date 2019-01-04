@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { article } from '@/store/actions/article'
 import { getArticle } from '@/store/reducers/article'
+import { hits } from '@/store/actions/hits'
 
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
@@ -22,13 +23,15 @@ const { isJump, is9 } = play
     articleData: getArticle(state, props.match.params.id)
   }),
   dispatch => ({
-    article: bindActionCreators(article, dispatch)
+    article: bindActionCreators(article, dispatch),
+    hits: bindActionCreators(hits, dispatch)
   })
 )
 class Article extends Component {
   static propTypes = {
     match: PropTypes.object,
     article: PropTypes.func,
+    hits: PropTypes.func,
     articleData: PropTypes.object
   }
 
@@ -38,11 +41,13 @@ class Article extends Component {
         params: { id }
       },
       article,
-      articleData
+      articleData,
+      hits
     } = this.props
     if (!articleData.data) {
       article({ id })
     }
+    hits({ id, sid: 2 })
   }
   render() {
     const {

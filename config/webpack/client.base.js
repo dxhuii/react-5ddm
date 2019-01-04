@@ -111,7 +111,7 @@ module.exports = {
             loader: `css`,
             options: {
               modules: true,
-              localIdentName: config.class_scoped_name,
+              localIdentName: config.CLASS_SCOPED_NAME,
               minimize: true,
               sourceMap: true,
               importLoaders: 1

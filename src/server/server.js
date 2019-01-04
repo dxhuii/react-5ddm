@@ -21,7 +21,7 @@ import { initialStateJSON } from '@/store/reducers'
 import { saveAccessToken, saveUserInfo } from '@/store/actions/user'
 
 // 配置
-import { port, AUTH_COOKIE_NAME, COOKIE_PREFIX, API, redirectUrl } from 'Config'
+import { port, AUTH_COOKIE_NAME, COOKIE_PREFIX, API, DOMAIN } from 'Config'
 import sign from './sign'
 // import webpackHotMiddleware from './webpack-hot-middleware';
 
@@ -81,12 +81,12 @@ app.get('*', async (req, res) => {
         if (data.data) {
           const reUrl =
             url.length === 4 && path.indexOf('.html') !== -1
-              ? `http:${redirectUrl}/play/${data.data}/${url[3].split('.')[0].split('-')[1]}`
-              : `http:${redirectUrl}/subject/${data.data}`
+              ? `http:${DOMAIN}/play/${data.data}/${url[3].split('.')[0].split('-')[1]}`
+              : `http:${DOMAIN}/subject/${data.data}`
           res.status(301)
           res.redirect(reUrl)
         } else {
-          res.redirect(redirectUrl)
+          res.redirect(DOMAIN)
         }
       })
     })

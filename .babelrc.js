@@ -12,7 +12,7 @@ module.exports = function(api) {
       [
         'react-css-modules',
         {
-          generateScopedName: config.class_scoped_name,
+          generateScopedName: config.CLASS_SCOPED_NAME,
           filetypes: {
             '.scss': {
               syntax: 'postcss-scss'

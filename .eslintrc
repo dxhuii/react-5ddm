@@ -7,7 +7,8 @@
     "after": true,
     "it": true,
     "ArriveFooter": true,
-    "__CLIENT__": true
+    "__CLIENT__": true,
+    "adsbygoogle": true
   },
   "parser": "babel-eslint",
   "env": {

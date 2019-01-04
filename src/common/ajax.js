@@ -19,7 +19,7 @@ const AJAX = ({ url = '', method = 'get', data = {}, headers = {} }) => {
         return ['return none']
       }
     })
-    .catch(function (error) {
+    .catch(function(error) {
       if (error && error.response && error.response.data) {
         return [error.response.data]
       } else {

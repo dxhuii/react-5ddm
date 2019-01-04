@@ -14,7 +14,8 @@ import { getUserInfo } from '@/store/reducers/user'
 import PlayList from '@/components/PlayList'
 import DetailActor from '@/components/DetailActor'
 import Comment from '@/components/Comment'
-import Load from '@/components/Ui/Load'
+import Share from '@/components/Share'
+import Loading from '@/components/Ui/Loading'
 import Meta from '@/components/Meta'
 
 import Shell from '@/components/Shell'
@@ -64,21 +65,12 @@ class Bangumi extends Component {
       hits
     } = this.props
     if (!info || !info.data) {
-      detail({
-        id
-      })
+      detail({ id })
     }
     if (!cmScore || !cmScore.data) {
-      getCm({
-        id,
-        sid,
-        uid: userid
-      })
+      getCm({ id, sid, uid: userid })
     }
-    hits({
-      id,
-      sid
-    })
+    hits({ id, sid })
   }
 
   addMark(type, id, cid, uid) {
@@ -123,11 +115,18 @@ class Bangumi extends Component {
       newsTextlist = [],
       newsPiclist = []
     } = data
+    const shareConfig = {
+      pic,
+      title: `${title}${language ? `(${language})` : ''} - ${listName}${listNameBig}`,
+      desc: content,
+      url: `/subject/${id}`
+    }
     console.log(cmScore, 'cmScore')
     return (
       <Fragment>
+        <Share data={shareConfig} />
         <div className="warp-bg">
-          {loading ? <Load /> : null}
+          {loading ? <Loading /> : null}
           <Meta title={`${title}${language ? `(${language})` : ''} - ${listName}${listNameBig}`}>
             <meta property="og:locale" content="zh_CN" />
             <meta property="og:type" content="videolist" />
