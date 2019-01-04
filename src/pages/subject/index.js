@@ -13,6 +13,9 @@ import { getUserInfo } from '@/store/reducers/user'
 
 import PlayList from '@/components/PlayList'
 import DetailActor from '@/components/DetailActor'
+import NewsText from '@/components/Subject/NewsText'
+import NewsPic from '@/components/Subject/NewsPic'
+import EpList from '@/components/Subject/EpList'
 import Comment from '@/components/Comment'
 import Share from '@/components/Share'
 import Loading from '@/components/Ui/Loading'
@@ -228,35 +231,7 @@ class Bangumi extends Component {
                 <div styleName="title">
                   <h2>预告片·OP·ED·BGM·MAD·CM·特典 · · · · · ·</h2>
                 </div>
-                <ul styleName="d-yugao">
-                  <li styleName="top">
-                    <span styleName="time">发布时间</span>
-                    <span styleName="name">视频名称</span>
-                    <span styleName="clarity">清晰度</span>
-                    <span styleName="play">播放</span>
-                    <span styleName="source">来源</span>
-                  </li>
-                  {newsTextlist.map(item => (
-                    <li key={item.id}>
-                      <span styleName="time">{item.addtime}</span>
-                      <span styleName="name">
-                        <Link to={`/article/${item.id}`} title={item.title}>
-                          {item.title}
-                        </Link>
-                        <em>{item.playtime}</em>
-                      </span>
-                      <span styleName="clarity">{item.clarity}</span>
-                      <span styleName="play">
-                        <Link to={`/article/${item.id}`} title={item.title}>
-                          <em>播放</em>
-                        </Link>
-                      </span>
-                      <span styleName="source">
-                        <i className={`playicon ${item.playname}`} />
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                <NewsText data={newsTextlist} />
               </div>
             ) : null}
             {storyId && storylist.length > 0 ? (
@@ -264,18 +239,7 @@ class Bangumi extends Component {
                 <div styleName="title">
                   <h2>分集剧情</h2>
                 </div>
-                <ul styleName="eplist" className="mt20">
-                  {storylist.map(item => (
-                    <li key={item.pid}>
-                      <h4>
-                        <Link to={`/episode/${id}/${item.pid}`}>
-                          {item.name} {item.title}
-                        </Link>
-                      </h4>
-                      <p>{item.content}</p>
-                    </li>
-                  ))}
-                </ul>
+                <EpList id={id} data={storylist} />
               </div>
             ) : null}
             {newsPiclist.length > 0 ? (
@@ -283,18 +247,7 @@ class Bangumi extends Component {
                 <div styleName="title">
                   <h2>新闻花絮</h2>
                 </div>
-                <ul styleName="newslist">
-                  {newsPiclist.map(item => (
-                    <li key={item.id}>
-                      <Link to={`/article/${item.id}`}>
-                        <img src={item.pic} alt={item.title} />
-                        <div styleName="mark">
-                          <p>{item.title}</p>
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                <NewsPic data={newsPiclist} />
               </div>
             ) : null}
             <div className="mt20">
@@ -305,7 +258,7 @@ class Bangumi extends Component {
             </div>
             <div className="mt20">
               <div styleName="title">
-                <h2>相关动漫</h2>
+                <h2>评论</h2>
               </div>
               <Comment />
             </div>
