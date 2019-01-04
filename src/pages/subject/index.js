@@ -81,7 +81,7 @@ class Bangumi extends Component {
     const {
       info: { data = {}, loading },
       userinfo: { userid },
-      cmScore
+      cmScore = {}
     } = this.props
     const {
       id,
@@ -121,7 +121,10 @@ class Bangumi extends Component {
       desc: content,
       url: `/subject/${id}`
     }
-    console.log(cmScore, 'cmScore')
+    const star = (cmScore.data || {}).star || {}
+    const comment = (cmScore.data || {}).comment || {}
+    const { loveid, remindid } = star
+    console.log(star, comment)
     return (
       <Fragment>
         <div className="warp-bg">
@@ -140,11 +143,11 @@ class Bangumi extends Component {
           </Meta>
           <div styleName="detail">
             <div styleName="detail-blur" style={{ backgroundImage: `url(${pic})` }} />
-            <div styleName="detail-info__con" className="wp clearfix">
-              <div styleName="detail-info__pic">
+            <div styleName="detail-con" className="wp clearfix">
+              <div styleName="detail-pic">
                 <img src={pic} />
               </div>
-              <div styleName="detail-info__info">
+              <div styleName="detail-info">
                 <h1>
                   {title}
                   <span>
@@ -152,41 +155,41 @@ class Bangumi extends Component {
                     {mcid.length > 0 ? mcid.map(item => (item.title ? <a key={item.id}>{item.title}</a> : '')) : null}
                   </span>
                 </h1>
-                <div styleName="detail-box">
-                  <div styleName="detail-info_list">
-                    {aliases ? <p styleName="text">别名：{aliases}</p> : null}
-                    <ul styleName="play-num">
-                      <li>
-                        热度
-                        <span>{hits}</span>
-                      </li>
-                    </ul>
-                    {filmtime || status || total ? (
-                      <p>
-                        {filmtime ? <span>{filmtime} 开播</span> : <span>{year}年</span>}
-                        {isNumber(status) ? <span>，更新至{status}话</span> : <span>，{status}</span>}
-                        {tvcont ? <span>，{tvcont}</span> : null}
-                        {total ? <span>，共{total}话</span> : null}
-                      </p>
-                    ) : null}
-                    <p>
-                      <span style={{ marginRight: 30 }}>语言：{language}</span>
-                      <span>地区：{area}</span>
-                    </p>
-                    <p>更新时间：{updateDate}</p>
+                {aliases ? <p styleName="text">别名：{aliases}</p> : null}
+                <ul styleName="detail-info__count">
+                  <li>
+                    热度
+                    <span>{hits}</span>
+                  </li>
+                </ul>
+                {filmtime || status || total ? (
+                  <p>
+                    {filmtime ? <span>{filmtime} 开播</span> : <span>{year}年</span>}
+                    {isNumber(status) ? <span>，更新至{status}话</span> : <span>，{status}</span>}
+                    {tvcont ? <span>，{tvcont}</span> : null}
+                    {total ? <span>，共{total}话</span> : null}
+                  </p>
+                ) : null}
+                <p>
+                  <span style={{ marginRight: 30 }}>语言：{language}</span>
+                  <span>地区：{area}</span>
+                </p>
+                <p>更新时间：{updateDate}</p>
+                <div styleName="detail-tool">
+                  <div styleName={`detail-tool__on ${remindid ? 'active' : ''}`} onClick={() => this.addMark('remind', id, cid, userid)}>
+                    <i className="iconfont">&#xe6bd;</i>
+                    {remindid ? '已追番' : '追番'}
                   </div>
-                  <div styleName="detail-info__score">
-                    {gold}
+                  <div styleName={`detail-tool__on ${loveid ? 'active' : ''}`} onClick={() => this.addMark('love', id, cid, userid)}>
+                    <i className="iconfont">&#xe66a;</i>
+                    {loveid ? '已收藏' : '收藏'}
+                  </div>
+                  <div styleName="detail-tool__share">
                     <Share data={shareConfig} />
                   </div>
                 </div>
               </div>
-              <div styleName="detail-love active" onClick={() => this.addMark('love', id, cid, userid)}>
-                <i className="iconfont">&#xe66a;</i>收藏
-              </div>
-              <div styleName="detail-remind" onClick={() => this.addMark('remind', id, cid, userid)}>
-                <i className="iconfont">&#xe6bd;</i>追番
-              </div>
+              <div styleName="detail-score">{gold}</div>
             </div>
           </div>
           <div styleName="detail-nav">
@@ -223,7 +226,7 @@ class Bangumi extends Component {
             {newsTextlist.length > 0 ? (
               <div className="pt15">
                 <div styleName="title">
-                  <h2>预告片&OP&ED&BGM&MAD&CM&特典 · · · · · ·</h2>
+                  <h2>预告片·OP·ED·BGM·MAD·CM·特典 · · · · · ·</h2>
                 </div>
                 <ul styleName="d-yugao">
                   <li styleName="top">

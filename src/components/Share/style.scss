@@ -53,16 +53,9 @@
   }
 }
 
-.icon-box {
-  text-align: center;
-  margin: 20px 0 20px 0;
-}
-
 .weibo,
 .qzone,
 .wechat,
-.facebook,
-.twitter,
 .tieba,
 .qq {
   display: inline-block;
@@ -88,14 +81,6 @@
 
 .wechat {
   background-image: url(../../static/img/wechat.png);
-}
-
-.facebook {
-  background-image: url(../../static/img/facebook.png);
-}
-
-.twitter {
-  background-image: url(../../static/img/twitter.png);
 }
 
 .qq {
