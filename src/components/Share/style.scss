@@ -71,6 +71,8 @@
   margin: 0 5px 0 5px;
   background-size: contain;
   cursor: pointer;
+  background-color: #fff;
+  border-radius: 50%;
   &:hover {
     opacity: .8;
   }
@@ -101,5 +103,5 @@
 }
 
 .tieba {
-  background-image: url(../../static/img/qq.png);
+  background-image: url(../../static/img/tieba.svg);
 }

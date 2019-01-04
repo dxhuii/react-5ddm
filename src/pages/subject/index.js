@@ -124,7 +124,6 @@ class Bangumi extends Component {
     console.log(cmScore, 'cmScore')
     return (
       <Fragment>
-        <Share data={shareConfig} />
         <div className="warp-bg">
           {loading ? <Loading /> : null}
           <Meta title={`${title}${language ? `(${language})` : ''} - ${listName}${listNameBig}`}>
@@ -176,7 +175,10 @@ class Bangumi extends Component {
                     </p>
                     <p>更新时间：{updateDate}</p>
                   </div>
-                  <div styleName="detail-info__score"> {gold} </div>
+                  <div styleName="detail-info__score">
+                    {gold}
+                    <Share data={shareConfig} />
+                  </div>
                 </div>
               </div>
               <div styleName="detail-love active" onClick={() => this.addMark('love', id, cid, userid)}>
