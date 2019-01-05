@@ -28,6 +28,8 @@
 :global {
   * {
     box-sizing: border-box;
+    backface-visibility: hidden;
+    /* 解决定时器运行时，图片有闪烁的问题 */
   }
   body,
   div,
@@ -269,6 +271,9 @@
   .mt20 {
     margin-top: 20px;
   }
+  .mt10 {
+    margin-top: 10px;
+  }
   .pt15 {
     padding-top: 15px;
   }
@@ -411,6 +416,41 @@
     }
     &.acfun {
       background-position: -200px -20px
+    }
+  }
+  .explaywrap {
+    position: relative;
+    width: 100%;
+    background: url(http://ww4.sinaimg.cn/large/a15b4afegw1f3jj0rv3uaj21z41esu0y) no-repeat;
+    background-size: cover;
+    text-align: center;
+    font-weight: 600;
+    a {
+      position: absolute;
+      top: auto !important;
+      right: auto !important;
+      bottom: 150px !important;
+      left: 50% !important;
+      transform: translateX(-50%);
+      padding: 0 30px;
+      display: inline-block;
+      height: 48px;
+      line-height: 48px;
+      color: #fff;
+      font-size: 20px;
+      border-radius: 5px;
+      background-color: #f60;
+      text-decoration: none
+    }
+    p {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      color: red;
+      font-weight: 600;
+      font-size: 42px;
+      text-shadow: 0 0 1px #f60;
+      -webkit-text-stroke: 1px #fff
     }
   }
 }

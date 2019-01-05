@@ -10,6 +10,7 @@ import { hits } from '@/store/actions/hits'
 
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
+import Share from '@/components/Share'
 
 import play from '@/utils/play'
 
@@ -35,6 +36,14 @@ class Article extends Component {
     articleData: PropTypes.object
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      full: false,
+      isfull: false
+    }
+  }
+
   componentDidMount() {
     const {
       match: {
@@ -49,11 +58,29 @@ class Article extends Component {
     }
     hits({ id, sid: 2 })
   }
+
+  isFull = () => {
+    this.setState({
+      full: !this.state.full
+    })
+  }
+
+  showFull = () => {
+    this.setState({
+      isfull: true
+    })
+  }
+
+  hideFull = () => {
+    this.setState({
+      isfull: false
+    })
+  }
+
   render() {
     const {
       articleData: { data = {} }
     } = this.props
-    console.log(data)
     const {
       title,
       id,
@@ -74,6 +101,13 @@ class Article extends Component {
       playurl = ''
     } = data
     const playHtml = isJump(playurl, playname, 1)
+    const { full, isfull } = this.state
+    const shareConfig = {
+      pic,
+      title: `${title} - ${name}`,
+      desc: remark,
+      url: `/article/${id}`
+    }
     return (
       <div className="wp mt20 clearfix">
         <Meta title={title}>
@@ -99,7 +133,14 @@ class Article extends Component {
 
             {/* {remark ? <div styleName="acticle-remark">{remark}</div> : null} */}
             {playname ? (
-              <div styleName="article-video" dangerouslySetInnerHTML={{ __html: playHtml }} />
+              <div styleName={`article-video ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
+                <div dangerouslySetInnerHTML={{ __html: playHtml }} />
+                {isfull ? (
+                  <a onMouseOver={this.showFull} onClick={this.isFull}>
+                    {full ? '退出全屏' : '网页全屏'}
+                  </a>
+                ) : null}
+              </div>
             ) : (
               <div styleName="article-content" dangerouslySetInnerHTML={{ __html: content }} />
             )}
@@ -108,21 +149,25 @@ class Article extends Component {
               {tag.length > 0 ? (
                 <div styleName="article-tool__tag">
                   {tag.map(item => (
-                    <span key={item}>#{item}</span>
+                    <Link to={`/search/${item}`} key={item}>
+                      #{item}
+                    </Link>
                   ))}
                 </div>
               ) : null}
-              <div styleName="article-tool__share" />
+              <div styleName="article-tool__share">
+                <Share data={shareConfig} />
+              </div>
             </div>
             <div styleName="article-context" className="mt20">
               {prev ? (
                 <p>
-                  <Link to={`/article/${prev.id}`}>{prev.title}</Link>
+                  上一篇：<Link to={`/article/${prev.id}`}>{prev.title}</Link>
                 </p>
               ) : null}
               {next ? (
                 <p>
-                  <Link to={`/article/${next.id}`}>{next.title}</Link>
+                  下一篇：<Link to={`/article/${next.id}`}>{next.title}</Link>
                 </p>
               ) : null}
             </div>

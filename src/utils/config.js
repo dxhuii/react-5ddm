@@ -37,6 +37,7 @@ export default {
       `${API}api.php?s=home-react-list-id-${id}-mcid-${mcid}-area-${area}-year-${year}-wd-${wd}-language-${language}-letter-${letter}-order-${order}-limit-${limit}-lz-${lz}-p-${page}`, // 列表接口
     topListIndexCN: () => `${API}api.php?s=home-react-list-id-3-area-%E5%A4%A7%E9%99%86-day-30-order-hits_month-limit-7-p-0`, // 首页国创排行
     topListIndexJP: () => `${API}api.php?s=home-react-list-id-3-area-%E6%97%A5%E6%9C%AC-day-30-order-hits_month-limit-10-p-0`, // 首页日本排行
+    topListAll: () => `${API}api.php?s=home-react-list-id-3-day-30-order-hits_month-limit-10-p-0`, // 排行
     actorsList: ({ actor = '', no }) => `${API}api.php?s=home-react-list-id-3${actor ? `-actor-${actor}` : ''}-no-${no}-limit-10-p-0`, // 首页日本排行
     recommendAnime: () => `${API}api.php?s=home-react-list-id-3-day-7-order-hits_week-limit-4--p-0`, // 首页最近7天热门动漫
     recommendNews: () =>
@@ -49,6 +50,7 @@ export default {
       `${API}api.php?s=home-react-newsList-id-${id}-letter-${letter}-news-${news}-did-${did}-day-${day}-wd-${wd}-name-${name}-limit-${limit}-order-${order}-p-${page}`, // 新闻列表接口
     newsPicList: () => `${API}api.php?s=home-react-newsList-id-211,206,205,207,208,209,212,213,221,222-limit-12-order-addtime-p-0`, // 首页新闻带图
     newsTextList: () => `${API}api.php?s=home-react-newsList-id-214,215,216,217,218,219,220,223-limit-10-order-addtime-p-0`, // 首页新闻文字
+    newsAll: () => `${API}api.php?s=home-react-newsList-id-44-day-30-limit-10-order-hits_month-p-0`, // 新闻文字
     vodNewsList: (id, p) => `${API}api.php?s=home-react-newsList-id-44-did-${id}-limit-10-order-addtime-p-${p}`, // 视频关联新闻列表
     slide: () => `${API}api.php?s=home-react-slide`,
     /**

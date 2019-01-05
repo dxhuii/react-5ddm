@@ -13,6 +13,8 @@ import { getUserInfo } from '@/store/reducers/user'
 
 import PlayList from '@/components/PlayList'
 import DetailActor from '@/components/DetailActor'
+import NewsYG from '@/components/News/yugao'
+import Top from '@/components/Top'
 import NewsText from '@/components/Subject/NewsText'
 import NewsPic from '@/components/Subject/NewsPic'
 import EpList from '@/components/Subject/EpList'
@@ -227,7 +229,7 @@ class Bangumi extends Component {
         <div className="mt20 clearfix" styleName="wp">
           <div styleName="left" className="fl">
             {newsTextlist.length > 0 ? (
-              <div className="pt15">
+              <div className="mt10">
                 <div styleName="title">
                   <h2>预告片·OP·ED·BGM·MAD·CM·特典 · · · · · ·</h2>
                 </div>
@@ -250,7 +252,7 @@ class Bangumi extends Component {
                 <NewsPic data={newsPiclist} />
               </div>
             ) : null}
-            <div className="mt20">
+            <div className={`${!(newsTextlist.length > 0 && storyId && newsPiclist.length > 0) ? 'mt10' : 'mt20'}`}>
               <div styleName="title">
                 <h2>相关动漫</h2>
               </div>
@@ -292,6 +294,12 @@ class Bangumi extends Component {
                   </a>
                 </p>
               ) : null}
+            </div>
+            <div styleName="box" className="mt20">
+              <Top name="topListAll" title="30天热门动漫" sty={{ padding: '10px 0' }} />
+            </div>
+            <div styleName="box" className="mt20">
+              <NewsYG name="newsAll" isCate={false} title="30天热门资讯" isType={true} sty={{ padding: '10px 0' }} />
             </div>
           </div>
         </div>

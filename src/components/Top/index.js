@@ -22,7 +22,9 @@ class Top extends Component {
   static propTypes = {
     name: PropTypes.string,
     topData: PropTypes.object,
-    top: PropTypes.func
+    top: PropTypes.func,
+    title: PropTypes.string,
+    sty: PropTypes.object
   }
   componentDidMount() {
     const { name, top, topData } = this.props
@@ -34,12 +36,14 @@ class Top extends Component {
   render() {
     const {
       topData: { data = [], loading },
-      name
+      name,
+      title,
+      sty
     } = this.props
     return (
-      <div styleName="top">
-        <h2>排行榜</h2>
-        <ul styleName={name === 'indexTopCN' ? 'cn' : ''}>
+      <div styleName="top" style={sty}>
+        <h2>{title || '排行榜'}</h2>
+        <ul styleName={name === 'topListIndexCN' ? 'cn' : ''}>
           {loading ? <Loading /> : null}
           {data.map((item, index) => (
             <li key={item.id}>

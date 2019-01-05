@@ -2,7 +2,7 @@ import { isMobile, location } from './index'
 
 const is9 = (location.host || '').indexOf('99496.com') !== -1 && !isMobile()
 
-const playH = 675
+const playH = '100%'
 
 const ykUrl = data => {
   return 'https://v.youku.com/v_show/id_' + data + '.html'
@@ -154,7 +154,7 @@ const HTML = pv => {
   const mobile = `<a class="html" href="${pv}">亲，请点我播放</a>`
   return isMobile()
     ? mobile
-    : `<div class="explaywrap" style="height:${playH}px;"><a target="_blank" href="${pv}">亲，请点我播放</a><p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
+    : `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">亲，请点我播放</a><p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
 }
 const isPlays = (playname, pv, danmu) => {
   if (playname === 'full') {

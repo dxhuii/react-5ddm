@@ -11,8 +11,17 @@ export function newsIndex({ name }) {
 
       dispatch({ type: 'GET_NEWS_INDEX_LIST', data: list, name })
 
+      let api = ''
+      if (name === 'newsPicList') {
+        api = config.api.newsPicList()
+      } else if (name === 'newsTextList') {
+        api = config.api.newsTextList()
+      } else if (name === 'newsAll') {
+        api = config.api.newsAll()
+      }
+
       let [err, data] = await Ajax({
-        url: name === 'newsPicList' ? config.api.newsPicList() : config.api.newsTextList(),
+        url: api,
         method: 'get'
       })
 

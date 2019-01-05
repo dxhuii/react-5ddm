@@ -6,12 +6,14 @@ import { connect } from 'react-redux'
 import { newsIndex } from '@/store/actions/newsIndex'
 import { getNewsIndex } from '@/store/reducers/newsIndex'
 
+import Loading from '@/components/Ui/Loading'
+
 import './style.scss'
 
 @withRouter
 @connect(
   (state, props) => ({
-    newsData: getNewsIndex(state, 'newsPicList')
+    newsData: getNewsIndex(state, props.name)
   }),
   dispatch => ({
     newsIndex: bindActionCreators(newsIndex, dispatch)
@@ -20,13 +22,14 @@ import './style.scss'
 class News extends Component {
   static propTypes = {
     newsIndex: PropTypes.func,
-    newsData: PropTypes.object
+    newsData: PropTypes.object,
+    name: PropTypes.string
   }
 
   componentDidMount() {
-    const { newsIndex, newsData } = this.props
+    const { newsIndex, newsData, name } = this.props
     if (!newsData.data) {
-      newsIndex({ name: 'newsPicList' })
+      newsIndex({ name })
     }
   }
 
@@ -47,6 +50,9 @@ class News extends Component {
   }
 
   render() {
+    const {
+      newsData: { loading }
+    } = this.props
     return (
       <Fragment>
         <div className="title">
@@ -69,7 +75,10 @@ class News extends Component {
             <i className="iconfont">&#xe65e;</i>
           </Link>
         </div>
-        <ul styleName="newslist">{this.showData()}</ul>
+        <ul styleName="newslist">
+          {loading ? <Loading /> : null}
+          {this.showData()}
+        </ul>
       </Fragment>
     )
   }

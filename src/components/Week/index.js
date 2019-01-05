@@ -7,6 +7,8 @@ import { connect } from 'react-redux'
 import { week } from '@/store/actions/week'
 import { getWeek } from '@/store/reducers/week'
 
+import Loading from '@/components/Ui/Loading'
+
 import { isNumber, picHttps } from '@/utils'
 
 import './style.scss'
@@ -95,7 +97,7 @@ class weekDay extends Component {
   render() {
     const {
       title,
-      weekData: { data = [] },
+      weekData: { data = [], loading },
       link,
       isJp,
       type,
@@ -128,6 +130,7 @@ class weekDay extends Component {
           ) : null}
         </div>
         <ul styleName={type === 0 ? 'week weekCn' : 'week'}>
+          {loading ? <Loading /> : null}
           {weekData[weekEng[currentIndex]].map(item => (
             <li key={item.id}>
               <Link key={item.id} to={`/subject/${item.id}`}>

@@ -9,6 +9,9 @@ import { getPlayerList } from '@/store/reducers/player'
 import { getUserInfo } from '@/store/reducers/user'
 
 import PlayList from '@/components/PlayList'
+import DetailActor from '@/components/DetailActor'
+import NewsYG from '@/components/News/yugao'
+import Top from '@/components/Top'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
@@ -34,7 +37,9 @@ class Play extends Component {
     this.state = {
       play: '',
       type: '',
-      outputHTML: ''
+      outputHTML: '',
+      full: false,
+      isfull: false
     }
   }
 
@@ -129,6 +134,24 @@ class Play extends Component {
     }
   }
 
+  isFull = () => {
+    this.setState({
+      full: !this.state.full
+    })
+  }
+
+  showFull = () => {
+    this.setState({
+      isfull: true
+    })
+  }
+
+  hideFull = () => {
+    this.setState({
+      isfull: false
+    })
+  }
+
   render() {
     const {
       userinfo,
@@ -137,14 +160,23 @@ class Play extends Component {
         params: { id }
       }
     } = this.props
+    const { full, isfull } = this.state
     const { title, subTitle, defaultPlay, playHtml, list } = this.getData(data)
+    const { listName, listNameBig, actor = '' } = data
     return (
       <Fragment>
         <div styleName="player">
-          <div className="wp pt20">
-            <Meta title={`${title} ${subTitle}`} />
+          <div styleName="wp" className="pt20">
+            <Meta title={`${title} ${subTitle}在线播放 - ${listName}${listNameBig}`} />
             {userinfo.userid ? (
-              <div styleName="player-box" dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
+              <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
+                <div dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
+                {isfull ? (
+                  <a onMouseOver={this.showFull} onClick={this.isFull}>
+                    {full ? '退出全屏' : '网页全屏'}
+                  </a>
+                ) : null}
+              </div>
             ) : (
               <div styleName="player-box">{playHtml || defaultPlay}</div>
             )}
@@ -164,8 +196,25 @@ class Play extends Component {
             </div>
           </div>
         </div>
-        <div className="wp">
-          <PlayList />
+        <PlayList />
+        <div className="mt20" />
+        <div className="clearfix" styleName="wp">
+          <div styleName="left" className="fl">
+            <div className="mt20">
+              <div styleName="title">
+                <h2>相关动漫</h2>
+              </div>
+              {id ? <DetailActor actor={actor} no={id} /> : null}
+            </div>
+          </div>
+          <div styleName="right" className="fr">
+            <div styleName="box">
+              <Top name="topListAll" title="30天热门动漫" sty={{ padding: '10px 0' }} />
+            </div>
+            <div styleName="box" className="mt20">
+              <NewsYG name="newsAll" isCate={false} title="30天热门资讯" isType={true} sty={{ padding: '10px 0' }} />
+            </div>
+          </div>
         </div>
       </Fragment>
     )

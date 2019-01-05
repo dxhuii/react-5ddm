@@ -49,15 +49,15 @@ class Home extends Component {
               <WeekDay title="番剧" link="/week" isJp={['', '月', '火', '水', '木', '金', '土', '日']} type={1} />
             </div>
             <div styleName="main-right">
-              <Top name="indexTopJP" />
+              <Top name="topListIndexJP" />
             </div>
           </div>
           <div className="mt20" styleName="main news">
             <div styleName="main-left">
-              <News id="211,206,207,208,209,212,213,221" limit={12} order={order} />
+              <News name="newsPicList" />
             </div>
             <div styleName="main-right">
-              <NewsYG />
+              <NewsYG name="newsTextList" isCate={true} />
             </div>
           </div>
           <div className="mt20" styleName="main cn">
@@ -65,7 +65,7 @@ class Home extends Component {
               <WeekDay title="国创" link="/week" type={0} />
             </div>
             <div styleName="main-right">
-              <Top name="indexTopCN" />
+              <Top name="topListIndexCN" />
             </div>
           </div>
         </div>

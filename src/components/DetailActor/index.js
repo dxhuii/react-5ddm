@@ -25,7 +25,7 @@ class Bangumi extends Component {
     info: PropTypes.object.isRequired,
     detailActor: PropTypes.func,
     actor: PropTypes.string,
-    no: PropTypes.number
+    no: PropTypes.any
   }
 
   componentDidMount() {

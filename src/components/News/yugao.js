@@ -6,12 +6,13 @@ import { connect } from 'react-redux'
 import { newsIndex } from '@/store/actions/newsIndex'
 import { getNewsIndex } from '@/store/reducers/newsIndex'
 
+import Loading from '@/components/Ui/Loading'
 import './style.scss'
 
 @withRouter
 @connect(
   (state, props) => ({
-    newsData: getNewsIndex(state, 'newsTextList')
+    newsData: getNewsIndex(state, props.name)
   }),
   dispatch => ({
     newsIndex: bindActionCreators(newsIndex, dispatch)
@@ -20,12 +21,17 @@ import './style.scss'
 class NewsYG extends Component {
   static propTypes = {
     newsIndex: PropTypes.func,
-    newsData: PropTypes.object
+    newsData: PropTypes.object,
+    name: PropTypes.string,
+    isType: PropTypes.bool,
+    isCate: PropTypes.bool,
+    title: PropTypes.string,
+    sty: PropTypes.object
   }
   componentDidMount() {
-    const { newsIndex, newsData } = this.props
+    const { newsIndex, newsData, name } = this.props
     if (!newsData.data) {
-      newsIndex({ name: 'newsTextList' })
+      newsIndex({ name })
     }
   }
 
@@ -47,32 +53,46 @@ class NewsYG extends Component {
 
   showData() {
     const {
-      newsData: { data = [] }
+      newsData: { data = [] },
+      isType
     } = this.props
     return data.map(item => (
       <li key={item.id}>
-        {/* <Link styleName={`type type-${this.getClass(item.cid)}`} to={`/news/${item.cid}`} title={item.name}>
-          {item.name}
-        </Link> */}
+        {isType ? (
+          <Link styleName={`type type-${this.getClass(item.cid)}`} to={`/news/${item.cid}`} title={item.name}>
+            {item.name}
+          </Link>
+        ) : null}
         <Link to={`/article/${item.id}`}>{item.title}</Link>
       </li>
     ))
   }
 
   render() {
+    const {
+      newsData: { loading },
+      title,
+      isCate,
+      sty
+    } = this.props
     return (
-      <Fragment>
+      <div style={sty}>
         <div className="title">
-          <h2 styleName="h2">预告</h2>
-          <ul styleName="news-tab tab">
-            <li>OP</li>
-            <li>ED</li>
-            <li>CM</li>
-            <li>BGM</li>
-          </ul>
+          <h2 styleName="h2">{title || '预告'}</h2>
+          {isCate ? (
+            <ul styleName="news-tab tab">
+              <li>OP</li>
+              <li>ED</li>
+              <li>CM</li>
+              <li>BGM</li>
+            </ul>
+          ) : null}
         </div>
-        <ul styleName="newstxt">{this.showData()}</ul>
-      </Fragment>
+        <ul styleName="newstxt">
+          {loading ? <Loading /> : null}
+          {this.showData()}
+        </ul>
+      </div>
     )
   }
 }

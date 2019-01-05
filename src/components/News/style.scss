@@ -10,6 +10,7 @@
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
+  position: relative;
   li {
     position: relative;
     width: 205px;
@@ -62,6 +63,7 @@
 }
 
 .newstxt {
+  position: relative;
   li {
     margin-top: 20px;
     height: 20px;

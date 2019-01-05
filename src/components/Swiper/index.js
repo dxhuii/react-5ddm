@@ -22,6 +22,9 @@ import './style.scss'
 class Swiper extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      current: 0
+    }
     this.mySwipe = {}
   }
 
@@ -32,17 +35,6 @@ class Swiper extends Component {
 
   componentDidMount() {
     this.mySwipe = { ...this.swipe.instance }
-    const bullets = this.page.querySelectorAll('em')
-    const that = this
-
-    for (let i = 0; i < bullets.length; i++) {
-      var elem = bullets[i]
-      elem.setAttribute('data-tab', i)
-      elem.onclick = function() {
-        that.mySwipe.slide(parseInt(this.getAttribute('data-tab'), 10), 500)
-      }
-    }
-
     const { slideData, slide } = this.props
     if (!slideData.data) {
       slide()
@@ -50,20 +42,11 @@ class Swiper extends Component {
   }
 
   handleCallback = index => {
-    const bullets = this.page.querySelectorAll('em')
-    this.slideTab(index, bullets)
+    this.setState({ current: index })
   }
 
   onTransactionEnd = () => {
     this.mySwipe.restart()
-  }
-
-  slideTab(index, bullets) {
-    var i = bullets.length
-    while (i--) {
-      bullets[i].className = bullets[i].className.replace('page-em__on', '')
-    }
-    bullets[index].className = 'page-em__on'
   }
 
   prev = () => {
@@ -74,14 +57,15 @@ class Swiper extends Component {
     this.mySwipe.next()
   }
 
-  handleClick = e => {
-    // Your own logic
+  onCur = index => {
+    this.mySwipe.slide(parseInt(index, 10), 300)
   }
 
   render() {
     const {
       slideData: { loading, data = [] }
     } = this.props
+    const { current } = this.state
     return (
       <div styleName="swiper">
         <Swipe
@@ -98,20 +82,28 @@ class Swiper extends Component {
           transitionEnd={this.onTransactionEnd}
         >
           {data.map(item => (
-            <SwipeItem key={item.url} onClick={this.handleClick}>
+            <SwipeItem key={item.url}>
               <a href={item.url}>
                 <img src={item.pic} />
+                <p>{item.title}</p>
               </a>
             </SwipeItem>
           ))}
         </Swipe>
         <div styleName="page" ref={e => (this.page = e)}>
           {data.map((item, index) => (
-            <em key={item.pic} className={index === 0 ? 'page-em__on' : ''}>
+            <em key={item.pic} styleName={index === current ? 'cur' : ''} onClick={() => this.onCur(index)}>
               {index + 1}
             </em>
           ))}
         </div>
+        <ul styleName="title">
+          {data.map((item, index) => (
+            <a key={index} href={item.url} styleName={index === current ? 'cur' : ''}>
+              <p>{item.title}</p>
+            </a>
+          ))}
+        </ul>
         <div styleName="swiper-prev" onClick={this.prev}>
           <i className="iconfont">&#xe8ff;</i>
         </div>

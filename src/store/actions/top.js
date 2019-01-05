@@ -11,8 +11,17 @@ export function top({ name }) {
 
       dispatch({ type: 'GET_TOP', data: top, name })
 
+      let api = ''
+      if (name === 'topListIndexCN') {
+        api = config.api.topListIndexCN()
+      } else if (name === 'topListIndexJP') {
+        api = config.api.topListIndexJP()
+      } else if (name === 'topListAll') {
+        api = config.api.topListAll()
+      }
+
       let [err, data] = await Ajax({
-        url: name === 'indexTopCN' ? config.api.topListIndexCN() : config.api.topListIndexJP(),
+        url: api,
         method: 'get'
       })
 

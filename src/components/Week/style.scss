@@ -31,6 +31,7 @@
 }
 
 .week {
+  position: relative;
   height: 385px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -98,12 +99,12 @@
     }
     h4 {
       font-size: 12px;
-      margin-right: 50px;
+      margin-right: 20px;
       @include clamp(3)
     }
     p {
       position: absolute;
-      left: 82px;
+      left: 85px;
       right: 10px;
       bottom: 0;
       height: 18px;

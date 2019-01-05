@@ -1,3 +1,8 @@
+.wp {
+  margin: 0 auto;
+  width: 1240px;
+}
+
 .playlist {
   display: flex;
   margin-left: 20px;
@@ -17,10 +22,33 @@
 }
 
 .player-box {
-  height: 675px;
+  height: 697.5px;
   width: 100%;
   background-color: #000;
   color: #333;
+  position: relative;
+  div {
+    width: 100%;
+    height: 100%;
+  }
+  a {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #fff;
+    text-shadow: 0 0 3px rgba($color: #000, $alpha: .5)
+  }
+}
+
+.play-full {
+  position: fixed;
+  left: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
 }
 
 .player-info {
@@ -47,4 +75,26 @@
   h4 {
     color: #ccc;
   }
+}
+
+.title {
+  h2 {
+    font-size: 16px;
+  }
+}
+
+.left,
+.box {
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+.left {
+  width: 920px;
+}
+
+.right {
+  width: 300px;
 }

@@ -9,6 +9,9 @@
     li {
       padding-bottom: 20.5px;
       display: flex;
+      &:last-child {
+        padding-bottom: 0;
+      }
       a {
         flex-grow: 1;
         @include clamp(1);
