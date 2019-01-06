@@ -15,6 +15,8 @@ import config from './config'
 import episode from './episode'
 import recommend from './recommend'
 import detailActor from './actor'
+import scroll from './scroll'
+import history from './history'
 
 let states = {
   user,
@@ -30,7 +32,9 @@ let states = {
   config,
   episode,
   recommend,
-  detailActor
+  detailActor,
+  scroll: scroll(),
+  history: history()
 }
 
 // 创建一个无数据的states，用于在服务端初始redux数据

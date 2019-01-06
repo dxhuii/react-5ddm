@@ -26,33 +26,19 @@ export default Component => {
       location: PropTypes.object,
       setScrollPosition: PropTypes.func,
       addVisitHistory: PropTypes.func,
-      saveScrollPosition: PropTypes.func,
-      componentWillUnmount: PropTypes.func,
-      componentDidMount: PropTypes.func
+      saveScrollPosition: PropTypes.func
+      // componentWillUnmount: PropTypes.func,
+      // componentDidMount: PropTypes.func
     }
 
     constructor(props) {
       super(props)
-      // const { search } = props.location
-      // this.props.location.params = search ? parseUrl(search) : {}
+      const { search } = props.location
+      this.props.location.params = search ? parseUrl(search) : {}
       this.state = {
         notFoundPgae: '',
         hasError: ''
       }
-    }
-
-    componentWillMount() {
-      const { pathname, search } = this.props.location
-      this.props.location.params = search ? parseUrl(search) : {}
-
-      /*
-      if (this.props.staticContext) {
-        const { code, text } = this.props.staticContext;
-        if (code == 404) {
-          this.state.notFoundPgae = text || '404 NOT FOUND'
-        }
-      }
-      */
     }
 
     // 组件加载完成
@@ -75,15 +61,15 @@ export default Component => {
     //   return prevState
     // }
 
-    componentWillReceiveProps(props) {
-      // 组件url发生变化
-      console.log(this.props, props, 'receive')
-      if (this.props.location.pathname + this.props.location.search != props.location.pathname + props.location.search) {
-        this.componentWillUnmount()
-        this.props = props
-        this.componentDidMount()
-      }
-    }
+    // componentWillReceiveProps(props) {
+    //   // 组件url发生变化
+    //   console.log(this.props, props, 'receive')
+    //   if (this.props.location.pathname + this.props.location.search != props.location.pathname + props.location.search) {
+    //     this.componentWillUnmount()
+    //     this.props = props
+    //     this.componentDidMount()
+    //   }
+    // }
 
     // 组件被卸载
     componentWillUnmount() {
