@@ -79,6 +79,9 @@ export const asyncRouteComponent = ({ loader, Placeholder }) => {
  * </Bundle>
  */
 export class AsyncComponent extends Component {
+  static propTypes = {
+    load: PropTypes.func
+  }
   constructor(props) {
     super(props)
     this.state = {

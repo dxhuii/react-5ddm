@@ -103,18 +103,6 @@ const acfun = pv => {
   return HTML(purl)
 }
 
-const isPlay = (type, pv) => {
-  if (type === 'full') {
-    return pv.replace('http://', 'https://')
-  } else {
-    if (/.mp4|.m3u8/.test(pv)) {
-      return `//www.acgnz.cn/api/play.php?url=${pv}`
-    } else {
-      return pv
-    }
-  }
-}
-
 const ck = (type, pv) => {
   const flvsp = 'https://api.flvsp.com/?type='
   const mdparse = 'https://www.acgnz.cn/mdparse/?type='
@@ -151,23 +139,6 @@ const HTML = pv => {
   return isMobile()
     ? mobile
     : `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">亲，请点我播放</a><p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
-}
-const isPlays = (playname, pv, danmu) => {
-  if (playname === 'full') {
-    return is9 ? '/' : jiexiUrl(`${pv.replace('http://', 'https://')}`, danmu)
-  } else {
-    if (/.mp4|.m3u8/.test(pv)) {
-      return is9 ? '/' : jiexiUrl(`//www.acgnz.cn/api/play.php?url=${pv}`, danmu)
-    } else if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com|qq.com|mgtv.com/.test(pv)) {
-      if (/bilibili|acfun|youku|tudou/.test(playname)) {
-        return jump(playname, pv, danmu)
-      } else {
-        return is9 ? HTML(pv) : jiexiUrl(rePlayUrl(playname, pv), danmu)
-      }
-    } else {
-      return HTML(pv)
-    }
-  }
 }
 
 const rePlayUrl = (playname, pv) => {
@@ -247,8 +218,34 @@ const jump = (name, pv, danmu) => {
   return url
 }
 
+const isPlays = (name, vid, danmu) => {
+  let playname = name
+  let data = []
+  let pv = vid
+  if (pv.indexOf('@@') !== -1) {
+    data = pv.split('@@')
+    playname = data[1]
+    pv = data[0]
+  }
+  if (playname === 'full') {
+    return is9 ? '/' : jiexiUrl(`${pv.replace('http://', 'https://')}`, danmu)
+  } else {
+    if (/.mp4|.m3u8/.test(pv)) {
+      return is9 ? '/' : jiexiUrl(`//www.acgnz.cn/api/play.php?url=${pv}`, danmu)
+    } else if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com|qq.com|mgtv.com/.test(pv)) {
+      if (/bilibili|acfun|youku|tudou/.test(playname)) {
+        return jump(playname, pv, danmu)
+      } else {
+        return is9 ? HTML(pv) : jiexiUrl(rePlayUrl(playname, pv), danmu)
+      }
+    } else {
+      return HTML(pv)
+    }
+  }
+}
+
 export default {
-  isJump: (vid, playname, danmu) => {
+  isJump: (playname, vid, danmu) => {
     let url = ''
     let name = playname
     let data = []

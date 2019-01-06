@@ -69,36 +69,6 @@ class Play extends Component {
     })
   }
 
-  playName(a) {
-    var b = []
-    return (
-      (b['tudou'] = '土豆'),
-      (b['youku'] = '优酷'),
-      (b['iqiyi'] = '爱奇艺'),
-      (b['letv'] = '乐视'),
-      (b['sohu'] = '搜狐'),
-      (b['pptv'] = '聚力'),
-      (b['qq'] = '腾讯'),
-      (b['letvyun'] = '乐视云'),
-      (b['bilibili'] = '哔哩哔哩'),
-      (b['acfun'] = 'A站'),
-      (b['mgtv'] = '芒果TV'),
-      (b['other'] = '其他'),
-      (b['pv'] = 'PV'),
-      (b['bgm'] = 'BGM'),
-      (b['ed'] = 'ED'),
-      (b['cm'] = 'CM'),
-      (b['op'] = 'OP'),
-      (b['mad'] = 'MAD'),
-      (b['other'] = '其他A'),
-      (b['otherB'] = '其他B'),
-      (b['otherC'] = '其他C'),
-      (b['otherD'] = '其他D'),
-      (b['nodel'] = '未删减'),
-      b[a]
-    )
-  }
-
   onPlay(play, type) {
     console.log(play, type)
     this.setState({ play, type })
@@ -120,11 +90,11 @@ class Play extends Component {
     const danmu = `${id}_${pid}`
     const defaultPlay =
       other.length > 0 && !is9
-        ? isJump(other[0].vid, other[0].playName, danmu)
+        ? isJump(other[0].playName, other[0].vid, danmu)
         : list.length > 0
-        ? isJump(list[0].vid, list[0].playName, danmu)
+        ? isJump(list[0].playName, list[0].vid, danmu)
         : ''
-    const playHtml = play ? isJump(play, type, danmu) : ''
+    const playHtml = play ? isJump(type, play, danmu) : ''
     return {
       title,
       subTitle,

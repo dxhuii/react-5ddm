@@ -100,7 +100,7 @@ class Article extends Component {
       playname = '',
       playurl = ''
     } = data
-    const playHtml = isJump(playurl, playname, 1)
+    const playHtml = isJump(playname, playurl, `article_${id}`)
     const { full, isfull } = this.state
     const shareConfig = {
       pic,
