@@ -1,6 +1,6 @@
 import { isMobile, location } from './index'
 
-const is9 = (location.host || '').indexOf('99496.com') !== -1 && !isMobile()
+const is9 = false //(location.host || '').indexOf('99496.com') !== -1 && !isMobile()
 
 const playH = '100%'
 
@@ -177,7 +177,7 @@ export default {
       name = data[1]
       pv = data[0]
     }
-    const isCk = /.html|.shtml|.htm|https:\/\/|http:\/\/|.mp4|.m3u8/.test(pv) || name === 'full'
+    const isCk = /.html|.shtml|.htm|https:\/\/|http:\/\/|.mp4|.m3u8/.test(pv) || name === 'full' || !is9
     const playStyle = /acku|sina|letvsaas|weibo|miaopai|tudou|letvyun|bitqiu|yunpan|bit|bithls/.test(name)
     if ((/.mp4|.m3u8/.test(pv) || playStyle) && is9) {
       url = HTML('/')
