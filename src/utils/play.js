@@ -159,11 +159,48 @@ const isPlays = (playname, pv, danmu) => {
     if (/.mp4|.m3u8/.test(pv)) {
       return is9 ? '/' : jiexiUrl(`//www.acgnz.cn/api/play.php?url=${pv}`, danmu)
     } else if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com|qq.com|mgtv.com/.test(pv)) {
-      return is9 ? HTML(pv) : jiexiUrl(`//www.acgnz.cn/mdparse/?id=${pv}`, danmu)
+      return is9 ? HTML(pv) : jiexiUrl(rePlayUrl(playname, pv), danmu)
     } else {
       return HTML(pv)
     }
   }
+}
+
+const rePlayUrl = (playname, pv) => {
+  var sVid = '',
+    sName = '',
+    data = []
+  if (pv.indexOf('@@') !== -1) {
+    data = pv.split('@@')
+    playname = data[1]
+    pv = data[0]
+  }
+  switch (playname) {
+    case 'letv':
+      data = pv.split(',')
+      sName = 'letv'
+      sVid = data[0]
+      break
+    case 'iqiyi':
+      sName = 'iqiyi'
+      sVid = pv.indexOf('&tvid=') != -1 ? pv.split('&tvid=')[1] + ',' + pv.split('&tvid=')[0] : pv
+      break
+    case 'sohu':
+      data = pv.split('_')
+      sVid = data.length === 2 ? data[0] : pv
+      sName = data.length === 2 ? (this.isMobile() ? 'mysohu' : 'sohu') : playname
+      break
+    case 'pptv':
+      data = pv.split(',')
+      data.length === 2 ? (sVid = data[0]) : (sVid = pv)
+      sName = playname
+      break
+    default:
+      sVid = pv
+      sName = playname
+      break
+  }
+  return ck(sName, sVid)
 }
 
 export default {
