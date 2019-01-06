@@ -3,8 +3,8 @@
   "DOMAIN": "//dev.99496.com",
   "AUTH_COOKIE_NAME": "signin",
   "COOKIE_PREFIX": "ikf_",
-  "PUBLIC_PATH": "//dev.99496.com/",
-  "FAVICON": "<link rel=\"icon\" href=\"//m.99496.com/favicon.ico\" />",
+  "PUBLIC_PATH": "//dev.99496.com/dist/client",
+  "FAVICON": "<link rel=\"icon\" href=\"favicon.ico\" />",
   "EMAIL": "***@gmail.com",
   "ICP": "",
   "AD": {
