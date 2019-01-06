@@ -159,7 +159,11 @@ const isPlays = (playname, pv, danmu) => {
     if (/.mp4|.m3u8/.test(pv)) {
       return is9 ? '/' : jiexiUrl(`//www.acgnz.cn/api/play.php?url=${pv}`, danmu)
     } else if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com|qq.com|mgtv.com/.test(pv)) {
-      return is9 ? HTML(pv) : jiexiUrl(rePlayUrl(playname, pv), danmu)
+      if (/bilibili|acfun|youku|tudou/.test(playname)) {
+        return jump(playname, pv, danmu)
+      } else {
+        return is9 ? HTML(pv) : jiexiUrl(rePlayUrl(playname, pv), danmu)
+      }
     } else {
       return HTML(pv)
     }
@@ -203,6 +207,46 @@ const rePlayUrl = (playname, pv) => {
   return ck(sName, sVid)
 }
 
+const jump = (name, pv, danmu) => {
+  let url = ''
+  switch (name) {
+    case 'youku':
+      url = youku(pv)
+      break
+    case 'tudou':
+      url = tudou(pv)
+      break
+    case 'iqiyi':
+      url = iqiyi(pv)
+      break
+    case 'viqiyi':
+      url = iqiyi(pv)
+      break
+    case 'letv':
+      url = letv(pv)
+      break
+    case 'sohu':
+      url = sohu(pv)
+      break
+    case 'pptv':
+      url = pptv(pv)
+      break
+    case 'qq':
+      url = qq(pv)
+      break
+    case 'bilibili':
+      url = bilibili(pv)
+      break
+    case 'acfun':
+      url = acfun(pv)
+      break
+    default:
+      url = jiexiUrl(ck(name, pv), danmu)
+      break
+  }
+  return url
+}
+
 export default {
   isJump: (vid, playname, danmu) => {
     let url = ''
@@ -221,41 +265,7 @@ export default {
     } else if (isCk) {
       url = isPlays(name, vid, danmu)
     } else {
-      switch (name) {
-        case 'youku':
-          url = youku(pv)
-          break
-        case 'tudou':
-          url = tudou(pv)
-          break
-        case 'iqiyi':
-          url = iqiyi(pv)
-          break
-        case 'viqiyi':
-          url = iqiyi(pv)
-          break
-        case 'letv':
-          url = letv(pv)
-          break
-        case 'sohu':
-          url = sohu(pv)
-          break
-        case 'pptv':
-          url = pptv(pv)
-          break
-        case 'qq':
-          url = qq(pv)
-          break
-        case 'bilibili':
-          url = bilibili(pv)
-          break
-        case 'acfun':
-          url = acfun(pv)
-          break
-        default:
-          url = jiexiUrl(ck(name, pv), danmu)
-          break
-      }
+      url = jump(name, vid, danmu)
     }
     return url
   },
