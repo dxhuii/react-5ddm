@@ -12,11 +12,10 @@ header {
   z-index: 999;
   overflow: hidden;
   a {
-    padding: 0 24px;
+    padding: 0 15px;
     display: inline-block;
     &:hover {
-      background-color: #282828;
-      color: #fff;
+      color: #175199;
     }
     &.active {
       font-weight: bold;
@@ -29,20 +28,21 @@ header {
 }
 
 .header-logo {
-  width: 100px;
+  width: 150px;
   line-height: 56px;
-  flex-basis: 100px;
-  font-size: 24px;
+  flex-basis: 150px;
+  font-size: 18px;
   text-align: center;
   color: #282828;
-  background: none;
+  background: url(../../static/img/logo.png) no-repeat;
+  background-size: 150px auto;
+  background-position: 0 4px;
+  margin-left: 10px;
 }
 
 .header-tool {
-  width: 135px;
-  flex-basis: 135px;
   span {
-    padding-right: 24px;
+    padding: 0 15px;
   }
 }
 
@@ -53,7 +53,6 @@ header {
   margin-top: 10px;
   height: 36px;
   border-radius: 3px;
-  margin-right: 20px;
   overflow: hidden;
   display: flex;
   border: 1px solid #ebebeb;

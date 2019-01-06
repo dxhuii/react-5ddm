@@ -20,6 +20,10 @@ import Meta from '@/components/Meta'
 )
 @Shell
 class SignIn extends Component {
+  static propTypes = {
+    signIn: PropTypes.func,
+    history: PropTypes.object
+  }
   constructor(props) {
     super(props)
     this.state = {}
@@ -45,7 +49,8 @@ class SignIn extends Component {
     let [err, success] = await signIn({ username: username.value, password: password.value })
     setTimeout(() => {
       if (success) {
-        window.location.href = '/topics'
+        // window.location.href = '/'
+        this.props.history.push('/')
       }
     }, 300)
 
@@ -73,6 +78,7 @@ class SignIn extends Component {
             placeholder="请输入昵称"
           />
           <button type="submit">登录</button>
+          <Link to="/">返回首页</Link>
         </form>
       </div>
     )

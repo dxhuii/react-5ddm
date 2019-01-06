@@ -120,11 +120,11 @@ class Play extends Component {
     const danmu = `${id}_${pid}`
     const defaultPlay =
       other.length > 0 && !is9
-        ? isJump(other[0].vid, other[0].playName, 1, danmu)
+        ? isJump(other[0].vid, other[0].playName, danmu)
         : list.length > 0
-        ? isJump(list[0].vid, list[0].playName, 1, danmu)
+        ? isJump(list[0].vid, list[0].playName, danmu)
         : ''
-    const playHtml = play ? isJump(play, type, 1, danmu) : ''
+    const playHtml = play ? isJump(play, type, danmu) : ''
     return {
       title,
       subTitle,
@@ -221,7 +221,7 @@ class Play extends Component {
   }
 }
 
-export default function(props) {
+const Plays = props => {
   const {
     match: {
       params: { pid }
@@ -229,3 +229,9 @@ export default function(props) {
   } = props
   return <Play {...props} key={pid} />
 }
+
+Plays.propTypes = {
+  match: PropTypes.object
+}
+
+export default Plays

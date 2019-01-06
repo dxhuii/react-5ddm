@@ -12,26 +12,22 @@ const ykIf = data => {
   return '//player.youku.com/embed/' + data + '?client_id=08fa721d0f5abf37'
 }
 
-const tudou = (pv, isP) => {
+const tudou = pv => {
   const data = pv.split(',')
   const len = data.length
   if (len === 1) {
-    youku(pv, isP)
+    youku(pv)
   } else if (len === 2) {
-    return isP ? HTML('/') : '/'
+    return HTML('/')
   } else if (len >= 3) {
-    youku(data[2], isP)
+    youku(data[2])
   }
 }
-const youku = (pv, isP) => {
+const youku = pv => {
   const data = pv.split(',')
-  return is9
-    ? HTML(ykUrl(data.length === 3 ? data[2] : pv))
-    : isP
-    ? iframe(ykIf(data.length === 3 ? data[2] : pv))
-    : ykUrl(data.length === 3 ? data[2] : pv)
+  return is9 ? HTML(ykUrl(data.length === 3 ? data[2] : pv)) : iframe(ykIf(data.length === 3 ? data[2] : pv))
 }
-const iqiyi = (pv, isP) => {
+const iqiyi = pv => {
   let plus = isMobile() ? '&tvid=' : '&tvId='
   let data = []
   let purl = ''
@@ -51,27 +47,27 @@ const iqiyi = (pv, isP) => {
   } else {
     purl = 'https://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=' + vid
   }
-  return is9 ? HTML(purl) : isP ? iframe(purl) : purl
+  return is9 ? HTML(purl) : iframe(purl)
 }
-const letv = (pv, isP) => {
+const letv = pv => {
   const data = pv.split(',')
   const len = data.length
   const purl = len === 2 ? '/' : 'https://www.le.com/ptv/vplay/' + data[0] + '.html'
-  return isP ? HTML(purl) : purl
+  return HTML(purl)
 }
-const sohu = (pv, isP) => {
+const sohu = pv => {
   const purl = 'https://tv.sohu.com/upload/static/share/share_play.html#' + pv.split('_')[0] + (isMobile() ? '' : '_9468532_0_9001_0')
-  return is9 ? HTML(purl) : isP ? iframe(purl) : purl
+  return is9 ? HTML(purl) : iframe(purl)
 }
-const pptv = (pv, isP) => {
+const pptv = pv => {
   const purl = 'https://' + (isMobile() ? 'm' : 'www') + '.pptv.com/show/' + pv.split(',')[0] + '.html'
-  return isP ? HTML(purl) : purl
+  return HTML(purl)
 }
-const qq = (pv, isP) => {
+const qq = pv => {
   const purl = 'https://v.qq.com/iframe/player.html?vid=' + pv + '&tiny=0&auto=1'
-  return is9 ? HTML(purl) : isP ? iframe(purl) : purl
+  return is9 ? HTML(purl) : iframe(purl)
 }
-const bilibili = (pv, isP) => {
+const bilibili = pv => {
   const data = pv.split(',')
   const purl =
     pv.indexOf('http') !== -1
@@ -79,9 +75,9 @@ const bilibili = (pv, isP) => {
       : data.length === 2
       ? 'https://www.bilibili.com/video/av' + data[0] + '/?p=' + data[1]
       : 'https://www.bilibili.com/video/av' + pv + '/'
-  return isP ? HTML(purl) : purl
+  return HTML(purl)
 }
-const acfun = (pv, isP) => {
+const acfun = pv => {
   let vid = ''
   let data = []
   if (pv.indexOf('ab') !== -1) {
@@ -104,7 +100,7 @@ const acfun = (pv, isP) => {
   const purl = isMobile()
     ? 'https://m.acfun.cn/v/?' + (pv.indexOf('ab') !== -1 ? 'ab' : 'ac') + '=' + vid
     : 'https://www.acfun.cn/v/' + (pv.indexOf('ab') !== -1 ? 'ab' : 'ac') + vid
-  return isP ? HTML(purl) : purl
+  return HTML(purl)
 }
 
 const isPlay = (type, pv) => {
@@ -112,7 +108,7 @@ const isPlay = (type, pv) => {
     return pv.replace('http://', 'https://')
   } else {
     if (/.mp4|.m3u8/.test(pv)) {
-      return '//www.acgnz.cn/api/play.php?url=' + pv
+      return `//www.acgnz.cn/api/play.php?url=${pv}`
     } else {
       return pv
     }
@@ -158,12 +154,12 @@ const HTML = pv => {
 }
 const isPlays = (playname, pv, danmu) => {
   if (playname === 'full') {
-    return is9 ? '/' : jiexiUrl(`${pv.replace('http://', 'https://')}&danmu=${danmu}`)
+    return is9 ? '/' : jiexiUrl(`${pv.replace('http://', 'https://')}`, danmu)
   } else {
     if (/.mp4|.m3u8/.test(pv)) {
-      return is9 ? '/' : jiexiUrl(`//www.acgnz.cn/api/play.php?url=${pv}&danmu=${danmu}`)
+      return is9 ? '/' : jiexiUrl(`//www.acgnz.cn/api/play.php?url=${pv}`, danmu)
     } else if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com|qq.com|mgtv.com/.test(pv)) {
-      return is9 ? HTML(pv) : jiexiUrl(`//www.acgnz.cn/mdparse/?id=${pv}`)
+      return is9 ? HTML(pv) : jiexiUrl(`//www.acgnz.cn/mdparse/?id=${pv}`, danmu)
     } else {
       return HTML(pv)
     }
@@ -171,7 +167,7 @@ const isPlays = (playname, pv, danmu) => {
 }
 
 export default {
-  isJump: (vid, playname, isP, danmu) => {
+  isJump: (vid, playname, danmu) => {
     let url = ''
     let name = playname
     let data = []
@@ -182,45 +178,45 @@ export default {
       pv = data[0]
     }
     const isCk = /.html|.shtml|.htm|https:\/\/|http:\/\/|.mp4|.m3u8/.test(pv) || name === 'full'
-    const playStyle = /acku|sina|letvsaas|weibo|miaopai|tudou|letvyun|bitqiu|yunpan|bit|bithls/.test(playname)
+    const playStyle = /acku|sina|letvsaas|weibo|miaopai|tudou|letvyun|bitqiu|yunpan|bit|bithls/.test(name)
     if ((/.mp4|.m3u8/.test(pv) || playStyle) && is9) {
       url = HTML('/')
     } else if (isCk) {
-      url = isP ? isPlays(name, vid, danmu) : isPlay(name, vid)
+      url = isPlays(name, vid, danmu)
     } else {
       switch (name) {
         case 'youku':
-          url = youku(pv, isP)
+          url = youku(pv)
           break
         case 'tudou':
-          url = tudou(pv, isP)
+          url = tudou(pv)
           break
         case 'iqiyi':
-          url = iqiyi(pv, isP)
+          url = iqiyi(pv)
           break
         case 'viqiyi':
-          url = iqiyi(pv, isP)
+          url = iqiyi(pv)
           break
         case 'letv':
-          url = letv(pv, isP)
+          url = letv(pv)
           break
         case 'sohu':
-          url = sohu(pv, isP)
+          url = sohu(pv)
           break
         case 'pptv':
-          url = pptv(pv, isP)
+          url = pptv(pv)
           break
         case 'qq':
-          url = qq(pv, isP)
+          url = qq(pv)
           break
         case 'bilibili':
-          url = bilibili(pv, isP)
+          url = bilibili(pv)
           break
         case 'acfun':
-          url = acfun(pv, isP)
+          url = acfun(pv)
           break
         default:
-          url = isP ? jiexiUrl(ck(name, pv), danmu) : ck(name, pv)
+          url = jiexiUrl(ck(name, pv), danmu)
           break
       }
     }

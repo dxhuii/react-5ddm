@@ -1,0 +1,16 @@
+{
+  "SITE_NAME": "9站",
+  "DOMAIN": "//dev.99496.com",
+  "AUTH_COOKIE_NAME": "signin",
+  "COOKIE_PREFIX": "ikf_",
+  "PUBLIC_PATH": "//dev.99496.com/",
+  "FAVICON": "<link rel=\"icon\" href=\"//m.99496.com/favicon.ico\" />",
+  "EMAIL": "***@gmail.com",
+  "ICP": "",
+  "AD": {
+    "aaa": "<a href=\"https://www.doorzo.com/?utm_source=bbs&utm_medium=banner&utm_campaign=ikf&utm_term=ikf1\" target=\"_blank\"><img src=\"https://ws1.sinaimg.cn/large/006bnWk0gy1fu4tqqe1bmj30xc02idgx.jpg\" style=\"display: block;\"></a>",
+    "bbb": "<a href=\"https://www.doorzo.com/?utm_source=bbs&utm_medium=banner&utm_campaign=ikf&utm_term=ikf3\" target=\"_blank\"><img src=\"https://ws1.sinaimg.cn/large/006bnWk0gy1fu4tqqbrndj308c046mxf.jpg\" style=\"display: block;\"></a>"
+  },
+  "API": "https://api.99496.com/",
+  "PORT": 4000
+}
