@@ -154,7 +154,7 @@ class Play extends Component {
 
   render() {
     const {
-      userinfo,
+      // userinfo,
       player: { data = {} },
       match: {
         params: { id }
@@ -168,7 +168,15 @@ class Play extends Component {
         <div styleName="player">
           <div styleName="wp" className="pt20">
             <Meta title={`${title} ${subTitle}在线播放 - ${listName}${listNameBig}`} />
-            {userinfo.userid ? (
+            <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
+              <div dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
+              {isfull ? (
+                <a onMouseOver={this.showFull} onClick={this.isFull}>
+                  {full ? '退出全屏' : '网页全屏'}
+                </a>
+              ) : null}
+            </div>
+            {/* {userinfo.userid ? (
               <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
                 <div dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
                 {isfull ? (
@@ -179,7 +187,7 @@ class Play extends Component {
               </div>
             ) : (
               <div styleName="player-box">{playHtml || defaultPlay}</div>
-            )}
+            )} */}
             <div styleName="player-info">
               <h1>
                 <Link to={`/subject/${id}`}>{title}</Link>：
