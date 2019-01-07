@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import React, { Component, Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -24,10 +24,6 @@ class SearchAuto extends Component {
     search: PropTypes.func
   }
 
-  static defaultProps = {
-    wd: ''
-  }
-
   constructor(props) {
     super(props)
     this.state = {
@@ -44,19 +40,37 @@ class SearchAuto extends Component {
     return { wd }
   }
 
+  highLightKeywords(data = []) {
+    const { wd } = this.state
+    // 正则匹配所有的文本
+    const re = new RegExp(wd, 'g')
+    for (let i = 0; i < data.length; i++) {
+      const title = data[i].title
+      if (re.test(data[i].title)) {
+        data[i].title = title.replace(re, '<span class="highlight">$&</span>')
+      }
+    }
+    return data
+  }
+
   render() {
     const {
       auto: { data = [] }
     } = this.props
-    console.log(this.props, data, 'auto')
     return (
-      <div styleName="search-auto">
-        {data.map(item => (
-          <Link key={item.id} to={`/subject/${item.id}`}>
-            {item.title}
-          </Link>
-        ))}
-      </div>
+      <Fragment>
+        {data.length > 0 ? (
+          <ul styleName="search-auto">
+            {this.highLightKeywords(data).map(item => (
+              <li key={item.id}>
+                <Link to={`/subject/${item.id}`}>
+                  <span dangerouslySetInnerHTML={{ __html: item.title }} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+      </Fragment>
     )
   }
 }
