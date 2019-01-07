@@ -10,7 +10,6 @@ header {
   top: 0;
   right: 0;
   z-index: 999;
-  overflow: hidden;
   a {
     padding: 0 15px;
     display: inline-block;
@@ -53,9 +52,9 @@ header {
   margin-top: 10px;
   height: 36px;
   border-radius: 3px;
-  overflow: hidden;
   display: flex;
   border: 1px solid #ebebeb;
+  position: relative;
   input {
     width: 260px;
     margin-top: 6px;

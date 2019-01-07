@@ -1,0 +1,11 @@
+.search-auto {
+  position: absolute;
+  top: 50px;
+  width: 300px;
+  left: 0;
+  background-color: #fff;
+  z-index: 99;
+  &::before {
+    content: '';
+  }
+}

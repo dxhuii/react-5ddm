@@ -46,9 +46,6 @@ export default Component => {
       const { pathname, search } = this.props.location
       this.props.setScrollPosition(pathname + search)
       this.props.addVisitHistory(pathname + search)
-      this.setState({
-        location: this.props.location
-      })
     }
 
     // static getDerivedStateFromProps(nextProps, prevState) {

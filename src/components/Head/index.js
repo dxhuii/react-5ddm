@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 
 import { signOut } from '@/store/actions/user'
 import { getUserInfo } from '@/store/reducers/user'
+import SearchAuto from '@/components/SearchAuto'
 
 import './style.scss'
 
@@ -21,8 +22,7 @@ class Head extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      keyword: '',
-      keywordCn: ''
+      wd: ''
     }
     this.signOut = this.signOut.bind(this)
   }
@@ -48,8 +48,8 @@ class Head extends Component {
   }
 
   onChange = e => {
-    const keyword = e.target.value
-    this.setState({ keyword })
+    const wd = e.target.value
+    this.setState({ wd })
   }
 
   render() {
@@ -57,10 +57,10 @@ class Head extends Component {
       userinfo,
       match: { url }
     } = this.props
-    const { keyword } = this.state
+    const { wd } = this.state
     return (
       <header>
-        <NavLink styleName="header-logo" exact to="/" title="9站" />
+        {/* <NavLink styleName="header-logo" exact to="/" title="9站" /> */}
         <nav>
           <div styleName="header-nav">
             <NavLink styleName={url === '/' ? 'active' : ''} exact to="/">
@@ -83,12 +83,13 @@ class Head extends Component {
             </NavLink> */}
           </div>
           <div styleName="header-search">
-            <form action={`/search/${keyword}`}>
+            <form action={`/search/${wd}`}>
               <input required type="text" placeholder="片名、导演、声优、原作..." onChange={this.onChange} />
-              <button disabled={!keyword} type="submit">
+              <button disabled={!wd} type="submit">
                 <i className="iconfont">&#xe78d;</i>
               </button>
             </form>
+            <SearchAuto wd={wd} />
           </div>
           <div styleName="header-tool" className="tar">
             {userinfo.nickname ? <span>{userinfo.nickname}</span> : null}

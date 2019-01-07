@@ -9,7 +9,7 @@ export default {
     player: ({ id, pid }) => `${API}api.php?s=home-react-play-id-${id}-pid-${pid}`, // 单集 id:视频id，pid，集数
     detail: ({ id, pinyin }) => `${API}api.php?s=home-react-detail${id ? `&id=${id}` : pinyin ? `&pinyin=${pinyin}` : ''}`, // 视频详情
     week: () => `${API}api.php?s=home-react-list-id-3-react-1-limit-1000`, // 每周追番
-    search: ({ q, limit }) => `${API}api.php?s=home-react-SearchAssociation&q=${q}&limit=${limit}`, // 搜索
+    search: ({ wd }) => `${API}api.php?s=home-react-list-id-3-wd-${wd}-order-hits_month-p-0`, // 联想搜索
     /**
      * 获取列表
      * $hits
