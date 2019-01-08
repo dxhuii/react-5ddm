@@ -26,6 +26,7 @@
     "qrcode.react": "^0.9.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-ga": "^2.5.6",
     "react-meta-tags": "^0.7.2",
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",

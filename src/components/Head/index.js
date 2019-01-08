@@ -86,7 +86,7 @@ class Head extends Component {
               星期
             </NavLink> */}
             <NavLink styleName={url === '/dongman' ? 'active' : ''} exact to="/dongman">
-              列表
+              动漫
             </NavLink>
             <NavLink styleName={url === '/news' ? 'active' : ''} exact to="/news">
               新闻

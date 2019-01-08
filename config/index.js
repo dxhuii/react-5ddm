@@ -1,6 +1,6 @@
 // 生产环境配置
 const site = require('./site.json')
-console.log(site)
+// console.log(site)
 let config = {
   // 正式环境
   debug: false,
@@ -35,6 +35,13 @@ let config = {
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
     ${site.FAVICON}
   `,
+
+  // 添加分析统计脚本
+  analysis_script: ``,
+
+  // google 分析
+  // UA-*****-1
+  GA: 'UA-63362690-1',
 
   // google广告
   GooleAdSense: {
