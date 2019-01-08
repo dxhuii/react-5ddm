@@ -95,7 +95,7 @@ class Bangumi extends Component {
       content,
       listName,
       listNameBig,
-      pic,
+      pic = '',
       actor,
       area,
       aliases,
@@ -149,9 +149,7 @@ class Bangumi extends Component {
           <div styleName="detail">
             <div styleName="detail-blur" style={{ backgroundImage: `url(${pic})` }} />
             <div styleName="detail-con" className="wp clearfix">
-              <div styleName="detail-pic">
-                <img src={pic} />
-              </div>
+              <div styleName="detail-pic">{pic ? <img src={pic} /> : null}</div>
               <div styleName="detail-info">
                 <h1>
                   {title}

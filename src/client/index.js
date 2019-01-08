@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { StaticRouter, matchPath } from 'react-router'
+import Loadable from 'react-loadable'
 import ReactGA from 'react-ga'
 
 // 引入全局样式
@@ -10,7 +11,6 @@ import '../pages/global.scss'
 
 import configureStore from '@/store'
 import createRouter from '@/router'
-import { GA, analysis_script } from 'Config'
 
 // ArriveFooter 监听抵达页尾的事件
 import '@/utils/arrive-footer.js'
@@ -24,6 +24,8 @@ import '@/utils/load-demand'
 
 import { getUserInfo } from '@/store/reducers/user'
 
+import { GA, analysis_script } from '../../config'
+
 // import runtime from 'serviceworker-webpack-plugin/lib/runtime'
 // if ('serviceWorker' in navigator) {
 //   const registration = runtime.register();
@@ -36,13 +38,15 @@ const store = configureStore(window.__initState__)
 
 let userinfo = getUserInfo(store.getState())
 
+if (!userinfo || !userinfo.userid) userinfo = null
+
 let logPageView = () => {}
 
 if (GA) {
   ReactGA.initialize(GA)
   logPageView = userinfo => {
     let option = { page: window.location.pathname }
-    if (userinfo && userinfo.userid) option.userId = userinfo.userid
+    if (userinfo && userinfo._id) option.userId = userinfo._id
     ReactGA.set(option)
     ReactGA.pageview(window.location.pathname)
   }
@@ -69,7 +73,9 @@ const run = async () => {
 
   ReactDOM.hydrate(
     <Provider store={store}>
-      <BrowserRouter>{RouterDom()}</BrowserRouter>
+      <BrowserRouter>
+        <RouterDom />
+      </BrowserRouter>
     </Provider>,
     document.getElementById('app')
   )
@@ -79,14 +85,6 @@ const run = async () => {
       module.hot.accept()
     }
   }
-
-  // 添加页面第三方统计分析脚本
-  // document.body.append(`<div style="display:none">${analysis_script}</div>`)
-
-  // 解决在 ios safari iframe 上touchMove 滚动后，外部的点击事件会无效的问题
-  document.addEventListener('touchmove', function(e) {
-    e.preventDefault()
-  })
 }
 
 run()
