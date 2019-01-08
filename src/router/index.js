@@ -77,7 +77,7 @@ export default (user, logPageView = () => {}) => {
           })}
         </Switch>
       </Fragment>
-      <AsyncComponent load={() => import('@/components/footer')}>{Component => <Component />}</AsyncComponent>
+      <AsyncComponent load={() => import('@/components/Footer')}>{Component => <Component />}</AsyncComponent>
     </Fragment>
   )
 

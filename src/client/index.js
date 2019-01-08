@@ -23,7 +23,6 @@ import '@/utils/arrive-footer.js'
 import '@/utils/load-demand'
 
 import { getUserInfo } from '@/store/reducers/user'
-debugger
 
 // import runtime from 'serviceworker-webpack-plugin/lib/runtime'
 // if ('serviceWorker' in navigator) {
