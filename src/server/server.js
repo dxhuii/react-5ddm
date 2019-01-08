@@ -10,7 +10,6 @@ import { StaticRouter, matchPath } from 'react-router'
 import { Provider } from 'react-redux'
 import MetaTagsServer from 'react-meta-tags/server'
 import { MetaTagsContext } from 'react-meta-tags'
-import Loadable from 'react-loadable'
 
 // 路由配置
 import configureStore from '@/store'
@@ -112,38 +111,63 @@ app.get('*', async (req, res) => {
 
   const router = createRouter(user)
 
-  let _route = null,
-    _match = null
+  const promises = []
+
+  let _route = null
 
   router.list.some(route => {
-    let match = matchPath(req.url.split('?')[0], route)
-    if (match && match.path) {
+    let match = matchPath(req.path, route)
+
+    if (match) {
       _route = route
-      _match = match
-      return true
+      match.search = req._parsedOriginalUrl.search || ''
+      // 需要在服务端加载的数据
+      if (route.loadData) {
+        promises.push(route.loadData({ store, match, res, req, user }))
+      }
     }
+
+    return match
   })
+
+  // 路由权限控制
+  switch (_route.enter) {
+    // 任何人
+    case 'everybody':
+      break
+    // 游客
+    case 'tourists':
+      if (user) {
+        res.status(403)
+        return res.redirect('/')
+      }
+      break
+    // 注册会员
+    case 'member':
+      if (!user) {
+        res.status(403)
+        return res.redirect('/sign-in')
+      }
+      break
+  }
 
   let context = {
     code: 200
     // url
   }
 
-  // console.log(_route.component);
-  // console.log(_route.component.loadData);
-
-  if (_route.loadData) {
-    context = await _route.loadData({ store, match: _match })
-    // console.log(context);
-  }
-
-  await _route.component.preload()
-
-  // await Loadable.preloadAll();
-
   // 获取路由dom
   const _Router = router.dom
   const metaTagsInstance = MetaTagsServer()
+
+  // await Loadable.preloadAll();
+  await _route.component.preload()
+
+  if (promises.length > 0) {
+    await Promise.all(promises).then(value => {
+      if (value && value[0]) context = value[0]
+    })
+  }
 
   let _mainContent = (
     <Provider store={store}>
