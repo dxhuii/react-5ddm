@@ -3,9 +3,47 @@
   top: 50px;
   width: 300px;
   left: 0;
+  line-height: 40px;
   background-color: #fff;
+  box-shadow: 0 2px 4px rgba(26, 26, 26, .3);
+  border-radius: 5px;
+  padding: 10px 15px;
+  border: 1px solid #eee;
   z-index: 99;
   &::before {
     content: '';
+    width: 0;
+    height: 0;
+    border-width: 0 12px 12px;
+    border-style: solid;
+    border-color: transparent transparent #fff;
+    left: 50%;
+    top: -10px;
+    z-index: 101;
+    transform: translateX(-50%);
+    position: absolute;
+  }
+  &::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-width: 0 12px 12px;
+    border-style: solid;
+    border-color: transparent transparent #eee;
+    left: 50%;
+    top: -11px;
+    z-index: 100;
+    transform: translateX(-50%);
+    position: absolute;
+  }
+  a {
+    padding: 0;
+    display: block;
+  }
+}
+
+:global {
+  .highlight {
+    color: #f00;
   }
 }

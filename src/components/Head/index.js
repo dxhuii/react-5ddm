@@ -8,6 +8,8 @@ import { signOut } from '@/store/actions/user'
 import { getUserInfo } from '@/store/reducers/user'
 import SearchAuto from '@/components/SearchAuto'
 
+import { trim } from '@/utils'
+
 import './style.scss'
 
 @connect(
@@ -22,7 +24,8 @@ class Head extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      wd: ''
+      wd: '',
+      isHide: true
     }
     this.signOut = this.signOut.bind(this)
   }
@@ -32,6 +35,10 @@ class Head extends Component {
     signOut: PropTypes.func.isRequired,
     match: PropTypes.object,
     history: PropTypes.object
+  }
+
+  componentDidMount() {
+    document.onclick = this.hide
   }
 
   async signOut() {
@@ -47,9 +54,15 @@ class Head extends Component {
     }
   }
 
+  hide = () => {
+    this.setState({
+      isHide: false
+    })
+  }
+
   onChange = e => {
-    const wd = e.target.value
-    this.setState({ wd })
+    const wd = trim(e.target.value)
+    this.setState({ wd, isHide: true })
   }
 
   render() {
@@ -57,7 +70,7 @@ class Head extends Component {
       userinfo,
       match: { url }
     } = this.props
-    const { wd } = this.state
+    const { wd, isHide } = this.state
     return (
       <header>
         {/* <NavLink styleName="header-logo" exact to="/" title="9站" /> */}
@@ -89,7 +102,7 @@ class Head extends Component {
                 <i className="iconfont">&#xe78d;</i>
               </button>
             </form>
-            <SearchAuto wd={wd} />
+            {isHide ? <SearchAuto wd={wd} /> : null}
           </div>
           <div styleName="header-tool" className="tar">
             {userinfo.nickname ? <span>{userinfo.nickname}</span> : null}
