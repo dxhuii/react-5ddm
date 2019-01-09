@@ -110,6 +110,17 @@ export default (user, logPageView = () => {}) => {
     },
 
     {
+      path: '/subject/:id/news',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('@/pages/subject/news'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter
+    },
+
+    {
       path: '/play/:id/:pid',
       exact: true,
       head: Head,

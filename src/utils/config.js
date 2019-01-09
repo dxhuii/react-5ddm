@@ -51,7 +51,7 @@ export default {
     newsPicList: () => `${API}api.php?s=home-react-newsList-id-211,206,205,207,208,209,212,213,221,222-limit-12-order-addtime-p-0`, // 首页新闻带图
     newsTextList: () => `${API}api.php?s=home-react-newsList-id-214,215,216,217,218,219,220,223-limit-10-order-addtime-p-0`, // 首页新闻文字
     newsAll: () => `${API}api.php?s=home-react-newsList-id-44-day-30-limit-10-order-hits_month-p-0`, // 新闻文字
-    vodNewsList: (id, p) => `${API}api.php?s=home-react-newsList-id-44-did-${id}-limit-10-order-addtime-p-${p}`, // 视频关联新闻列表
+    vodNewsList: ({ id, page }) => `${API}api.php?s=home-react-newsList-id-44-did-${id}-limit-10-order-addtime-p-${page}`, // 视频关联新闻列表
     slide: () => `${API}api.php?s=home-react-slide`,
     /**
      * name menu菜单 sns配置 user配置 pay支付配置 emot配置 list 各种列表

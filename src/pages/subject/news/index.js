@@ -1,33 +1,65 @@
 import React, { Component, Fragment } from 'react'
+
 import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { newsIndex } from '@/store/actions/newsIndex'
-import { getNewsIndex } from '@/store/reducers/newsIndex'
 
-import './style.scss'
+import { vodNews } from '@/store/actions/detail'
+import { getVodNews } from '@/store/reducers/detail'
 
 @withRouter
 @connect(
   (state, props) => ({
-    newsData: getNewsIndex(state, props.match.params.id)
+    newsData: getVodNews(state, props.match.params.id)
   }),
   dispatch => ({
-    newsIndex: bindActionCreators(newsIndex, dispatch)
+    vodNews: bindActionCreators(vodNews, dispatch)
   })
 )
-class VodeNews extends Component {
+class VodNews extends Component {
   static propTypes = {
-    newsIndex: PropTypes.func,
-    newsData: PropTypes.object
+    vodNews: PropTypes.func,
+    newsData: PropTypes.object,
+    id: PropTypes.any,
+    match: PropTypes.object,
+    scrollLoad: PropTypes.bool
+  }
+
+  constructor(props) {
+    super(props)
+    this.load = this.load.bind(this)
   }
 
   componentDidMount() {
-    const { newsIndex, newsData } = this.props
-    if (!newsData.data) {
-      newsIndex({ name: 'newsPicList' })
-    }
+    const {
+      newsData,
+      match: {
+        params: { id }
+      }
+    } = this.props
+    if (!newsData.data) this.load(false)
+    ArriveFooter.add(id, this.load)
+  }
+
+  componentWillUnmount() {
+    const {
+      match: {
+        params: { id }
+      }
+    } = this.props
+    ArriveFooter.remove(id)
+  }
+
+  async load(more) {
+    const {
+      vodNews,
+      match: {
+        params: { id }
+      }
+    } = this.props
+    await vodNews({ id, more })
   }
 
   showData() {
@@ -38,41 +70,30 @@ class VodeNews extends Component {
       <li key={item.id}>
         <Link to={`/article/${item.id}`}>
           <img src={item.pic} alt={item.title} />
-          <div styleName="mark">
+          {/* <div styleName="mark">
             <p>{item.title}</p>
-          </div>
+          </div> */}
         </Link>
       </li>
     ))
   }
 
   render() {
+    const {
+      newsData: { data = [] }
+    } = this.props
     return (
       <Fragment>
-        <div className="title">
-          <h2>
-            <i className="title-icon news" /> 新闻
-          </h2>
-          <ul styleName="news-tab">
-            <li>动画</li>
-            <li>漫画</li>
-            <li>八卦</li>
-            <li>简评</li>
-            <li>COS</li>
-            <li>产业</li>
-            <li>声优</li>
-            <li>美图</li>
-            <li>短视频</li>
-          </ul>
-          <Link to="/news">
-            更多
-            <i className="iconfont">&#xe65e;</i>
-          </Link>
-        </div>
-        <ul styleName="newslist">{this.showData()}</ul>
+        {data.length > 0
+          ? data.map(item => (
+              <div key={item.id} style={{ height: 300 }}>
+                {item.id}
+              </div>
+            ))
+          : null}
       </Fragment>
     )
   }
 }
 
-export default VodeNews
+export default VodNews
