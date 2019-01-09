@@ -68,7 +68,7 @@ class Head extends Component {
   render() {
     const {
       userinfo,
-      match: { url }
+      match: { url, params = {} }
     } = this.props
     const { wd, isHide } = this.state
     return (
@@ -97,7 +97,7 @@ class Head extends Component {
           </div>
           <div styleName="header-search">
             <form action={`/search/${wd}`}>
-              <input required type="text" placeholder="片名、导演、声优、原作..." onChange={this.onChange} />
+              <input required type="text" placeholder={params.wd || '片名、导演、声优、原作...'} onChange={this.onChange} />
               <button disabled={!wd} type="submit">
                 <i className="iconfont">&#xe78d;</i>
               </button>

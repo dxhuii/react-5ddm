@@ -7932,8 +7932,8 @@ react-dom@^16.7.0:
 
 react-ga@^2.5.6:
   version "2.5.6"
-  resolved "http://npm.boqii.com:80/react-ga/-/react-ga-2.5.6.tgz#5a2e2fa78ae298e5b0a4498210eeec631ef1b562"
-  integrity sha1-Wi4vp4rimOWwpEmCEO7sYx7xtWI=
+  resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.5.6.tgz#5a2e2fa78ae298e5b0a4498210eeec631ef1b562"
+  integrity sha512-g04dz6zrbdHRxVaURPWT3RUbjLflh74sS6dCuhGeZupj7ii+UEt9lwTjALb2ST2w+7wAmzG1YqYlNX4yvRXe1g==
 
 react-is@^16.3.2, react-is@^16.6.3:
   version "16.7.0"
