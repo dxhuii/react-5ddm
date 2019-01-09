@@ -9,6 +9,9 @@ export default function detail(state = {}, action = {}) {
     case 'GET_SCORE':
       state[`${id}_${sid}_${uid}`] = data
       return merge({}, state, {})
+    case 'GET_VOD_NEWS':
+      state[`vod_news_${id}`] = data
+      return merge({}, state, {})
     default:
       return state
   }
@@ -20,5 +23,10 @@ export const getDetail = (state, id) => {
 
 export const getScore = (state, id, sid, uid) => {
   const ids = `${id}_${sid}_${uid}`
+  return state.detail[ids] ? state.detail[ids] : {}
+}
+
+export const getVodNews = (state, id) => {
+  const ids = `vod_news_${id}`
   return state.detail[ids] ? state.detail[ids] : {}
 }

@@ -4,7 +4,6 @@
   "AUTH_COOKIE_NAME": "signin",
   "COOKIE_PREFIX": "ikf_",
   "PUBLIC_PATH": "//dev.99496.com/dist/client",
-  "FAVICON": "<link rel=\"icon\" href=\"/favicon.ico\" />",
   "EMAIL": "***@gmail.com",
   "ICP": "",
   "AD": {
