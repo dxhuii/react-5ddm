@@ -220,7 +220,7 @@ class Bangumi extends Component {
                 ) : null}
                 {storyId ? (
                   <li>
-                    <Link to={`/episode/${storyId}/1`}>分集剧情</Link>
+                    <Link to={`/episode/${storyId}`}>分集剧情</Link>
                   </li>
                 ) : null}
                 <li>

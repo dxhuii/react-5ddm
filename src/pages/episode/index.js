@@ -121,8 +121,8 @@ class Episode extends Component {
                 <Share data={shareConfig} />
               </div>
             </div>
-            {!p ? null : (
-              <div styleName="article-context">
+            {!p && storyNum <= 1 ? null : (
+              <div styleName="article-context" className="mt10">
                 {prev ? <Link to={`/episode/${id}/${prev}`}>上一集</Link> : null}
                 {next ? <Link to={`/episode/${id}/${next}`}>下一集</Link> : null}
               </div>
@@ -137,9 +137,11 @@ class Episode extends Component {
             </li>
             {this.showList(id, storyNum, p)}
           </ul>
-          <div onClick={this.epMore} styleName="eplist-more">
-            {epMore ? '收起' : '更多'}
-          </div>
+          {p > 19 ? (
+            <div onClick={this.epMore} styleName="eplist-more">
+              {epMore ? '收起' : '更多'}
+            </div>
+          ) : null}
           <Link styleName="go-detail" to={`/subject/${vid}`}>
             去 {vTitle}
           </Link>
