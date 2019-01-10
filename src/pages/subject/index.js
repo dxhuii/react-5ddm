@@ -53,7 +53,8 @@ class Bangumi extends Component {
     userinfo: PropTypes.object,
     cmScore: PropTypes.object,
     hits: PropTypes.func,
-    isMeta: PropTypes.any
+    isMeta: PropTypes.any,
+    mark: PropTypes.func
   }
 
   componentDidMount() {
@@ -78,8 +79,13 @@ class Bangumi extends Component {
     hits({ id, sid })
   }
 
-  addMark(type, id, cid, uid) {
+  async addMark(type, id, cid, uid) {
     console.log(type, id, cid, uid)
+    const { mark, getCm } = this.props
+    let [, data] = await mark({ type, id, cid, uid })
+    if (data.rcode === 1) {
+      getCm({ id, sid: 1, uid })
+    }
   }
 
   render() {
@@ -113,6 +119,7 @@ class Bangumi extends Component {
       year,
       storyId,
       actorId,
+      repairtitle,
       mcid = [],
       original = [],
       director = [],
@@ -134,7 +141,7 @@ class Bangumi extends Component {
       <Fragment>
         <div className="warp-bg">
           {loading ? <Loading /> : null}
-          <Meta title={`${title}${language ? `(${language})` : ''} - ${listName}${listNameBig}`}>
+          <Meta title={`${title}${repairtitle ? `_${repairtitle}` : ''} - ${listName}${listNameBig}`}>
             <meta property="og:locale" content="zh_CN" />
             <meta property="og:type" content="videolist" />
             <meta property="og:title" content={title} />
@@ -203,7 +210,7 @@ class Bangumi extends Component {
                 </li>
                 {newsTextlist.length || newsPiclist.length ? (
                   <li>
-                    <a>新闻花絮</a>
+                    <Link to={`/subject/${id}/news`}>新闻花絮</Link>
                   </li>
                 ) : null}
                 {actorId ? (
@@ -213,7 +220,7 @@ class Bangumi extends Component {
                 ) : null}
                 {storyId ? (
                   <li>
-                    <Link to={`/episode/${id}/1`}>分集剧情</Link>
+                    <Link to={`/episode/${storyId}/1`}>分集剧情</Link>
                   </li>
                 ) : null}
                 <li>
@@ -239,7 +246,7 @@ class Bangumi extends Component {
                 <div styleName="title">
                   <h2>分集剧情</h2>
                 </div>
-                <EpList id={id} data={storylist} />
+                <EpList id={storyId} data={storylist} />
               </div>
             ) : null}
             {newsPiclist.length > 0 ? (

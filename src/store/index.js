@@ -11,13 +11,13 @@ if (process.env.NODE_ENV == 'development' && __CLIENT__) middleware.push(createL
 export default function configureStore(initialState) {
   const store = createStore(rootReducer, initialState, compose(applyMiddleware(...middleware)))
 
-  // if (module.hot) {
-  //   // Enable Webpack hot module replacement for reducers
-  //   module.hot.accept('@/store/reducers', () => {
-  //     const nextRootReducer = require('@/store/reducers/index')
-  //     store.replaceReducer(nextRootReducer)
-  //   })
-  // }
+  if (module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept('@/store/reducers', () => {
+      const nextRootReducer = require('@/store/reducers/index')
+      store.replaceReducer(nextRootReducer)
+    })
+  }
 
   return store
 }

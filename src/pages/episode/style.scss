@@ -14,6 +14,7 @@
 }
 
 .article-body {
+  padding-bottom: 30px;
   h1 {
     font-size: 24px;
     line-height: 24px;
@@ -41,64 +42,52 @@
 
 .article-content {
   padding: 10px 30px 30px;
-  img {
-    margin-right: 20px;
-    width: 240px;
-    float: left;
-    height: auto;
-  }
-  p {
-    padding-bottom: 30px;
-  }
-  b {
-    margin: 0 3px;
-  }
-  .content {
-    line-height: 28px;
-  }
+  line-height: 2;
 }
 
 .article-tool {
   display: flex;
+  padding: 0 20px;
 }
 
 .article-tool__tag {
   flex-grow: 1;
-  span {
+  a {
     display: inline-block;
     padding: 0 10px;
     height: 24px;
     line-height: 24px;
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: rgba(0, 132, 255, .1);
+    color: #0084ff;
     font-size: 14px;
     margin-right: 10px;
     border-radius: 12px;
     &:last-child {
       margin-right: 0;
     }
+    &:hover {
+      background-color: rgba(0, 132, 255, .15);
+    }
   }
 }
 
 .article-tool__share {
-  width: 300px;
-  background-color: #f0f0f0;
-  height: 26px;
   margin-left: 10px;
 }
 
-.article-context {}
-
-.article-video {}
+.article-content {
+  padding: 30px 30px 0;
+  line-height: 2;
+}
 
 .eplist {
   display: flex;
   flex-flow: wrap;
-  height: 132px;
+  max-height: 132px;
   overflow: hidden;
   &.auto {
     overflow: visible;
-    height: auto;
+    max-height: inherit;
   }
   li {
     width: 46px;
@@ -107,15 +96,20 @@
     border-radius: 5px;
     margin-right: 7px;
     margin-top: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid #e8f1ff;
     text-align: center;
     &.active {
-      border-color: #f00;
+      border-color: #0084ff;
       a {
-        color: #f00;
+        color: #0084ff;
       }
     }
   }
+}
+
+.article-context {
+  padding: 0 20px 30px;
+  line-height: 30px;
 }
 
 .eplist-more {

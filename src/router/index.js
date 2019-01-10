@@ -216,6 +216,18 @@ export default (user, logPageView = () => {}) => {
     },
 
     {
+      path: '/episode/:id/',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('@/pages/episode'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter,
+      loadData: episodeData
+    },
+
+    {
       path: '/episode/:id/:p',
       exact: true,
       head: Head,

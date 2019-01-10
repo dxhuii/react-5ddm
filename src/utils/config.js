@@ -37,8 +37,8 @@ export default {
       `${API}api.php?s=home-react-list-id-${id}-mcid-${mcid}-area-${area}-year-${year}-wd-${wd}-language-${language}-letter-${letter}-order-${order}-limit-${limit}-lz-${lz}-p-${page}`, // 列表接口
     topListIndexCN: () => `${API}api.php?s=home-react-list-id-3-area-%E5%A4%A7%E9%99%86-day-30-order-hits_month-limit-7-p-0`, // 首页国创排行
     topListIndexJP: () => `${API}api.php?s=home-react-list-id-3-area-%E6%97%A5%E6%9C%AC-day-30-order-hits_month-limit-10-p-0`, // 首页日本排行
-    topListAll: () => `${API}api.php?s=home-react-list-id-3-day-30-order-hits_month-limit-10-p-0`, // 排行
-    actorsList: ({ actor = '', no }) => `${API}api.php?s=home-react-list-id-3${actor ? `-actor-${actor}` : ''}-no-${no}-limit-10-p-0`, // 首页日本排行
+    topListAll: () => `${API}api.php?s=home-react-list-id-3-day-30-order-hits_month-limit-10-p-0`, // 全站排行
+    actorsList: ({ actor = '', no }) => `${API}api.php?s=home-react-list-id-3${actor ? `-actor-${actor}` : ''}-no-${no}-limit-10-p-0`, // 详情页相关动漫
     recommendAnime: () => `${API}api.php?s=home-react-list-id-3-day-7-order-hits_week-limit-4--p-0`, // 首页最近7天热门动漫
     recommendNews: () =>
       `${API}api.php?s=home-react-newsList-id-211,206,205,207,208,209,212,213,221,222-day-30-limit-4-order-hits_week-p-0`, // 首页最近7天热门新闻
@@ -57,7 +57,7 @@ export default {
      * name menu菜单 sns配置 user配置 pay支付配置 emot配置 list 各种列表
      */
     config: ({ name = '' }) => `${API}api.php?s=home-react-config${name ? `-name-${name}` : ''}`,
-    storylist: ({ id, limit = 20 }) => `${API}api.php?s=home-react-storylist-id-${id}-limit-${limit}`, // 剧情列表
-    storyDetail: ({ id, p = 1 }) => `${API}api.php?s=home-react-storyread-vid-${id}-p-${p}`
+    storylist: ({ id, limit = 20, page }) => `${API}api.php?s=home-react-storylist-id-${id}-limit-${limit}-p-${page}`, // 剧情列表
+    storyDetail: ({ id, p }) => `${API}api.php?s=home-react-storyread-id-${id}-p-${p}`
   }
 }
