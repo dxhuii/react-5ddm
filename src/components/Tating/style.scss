@@ -1,0 +1,149 @@
+.starBox {
+  position: relative;
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 10px;
+  padding-left: 15px;
+  span {
+    position: absolute;
+    left: 130px;
+    top: 5px;
+  }
+  em {
+    display: inline-block;
+    width: 30px;
+  }
+}
+
+.starlist {
+  height: 16px;
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  overflow: hidden;
+  background: url(../../static/img/star_hollow_hover@2x.png) repeat-x;
+  background-size: 16px 16px;
+  cursor: pointer;
+  top: 3px;
+  a {
+    display: block;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    text-indent: -9999px;
+    position: absolute;
+    z-index: 5;
+    transition: none;
+    cursor: pointer;
+    &.star_1 {
+      left: 0;
+      &:hover {
+        width: 16px;
+      }
+    }
+    &.star_2 {
+      left: 16px;
+      &:hover {
+        width: 32px;
+      }
+    }
+    &.star_3 {
+      left: 32px;
+      &:hover {
+        width: 48px;
+      }
+    }
+    &.star_4 {
+      left: 48px;
+      &:hover {
+        width: 64px;
+      }
+    }
+    &.star_5 {
+      left: 64px;
+      &:hover {
+        width: 80px;
+      }
+    }
+    &:hover {
+      background: url(../../static/img/star_onmouseover@2x.png) repeat-x;
+      background-size: 16px 16px;
+      z-index: 3;
+      left: 0;
+    }
+  }
+}
+
+.star_current {
+  background: url(../../static/img/star_onmouseover@2x.png) repeat-x;
+  background-size: 16px 16px;
+  position: absolute;
+  height: 16px;
+  z-index: 5;
+  top: 3px;
+  left: 45px;
+}
+
+.noscore {
+  padding: 10px;
+  text-align: center;
+}
+
+.rating {
+  width: 170px;
+  padding-left: 15px;
+  border-left: 1px solid #eaeaea;
+}
+
+/* rating-show */
+
+.rating-show {
+  width: 180px;
+  font-size: 12px;
+  li {
+    height: 14px;
+    overflow: hidden;
+    float: left;
+    clear: both;
+    margin-top: 5px;
+    span {
+      float: left;
+      margin-right: 5px;
+      color: #999;
+    }
+    .progress {
+      float: left;
+      width: 100px;
+      height: 6px;
+      margin-top: 4px;
+      margin-right: 5px;
+      background: #f5f5f5;
+    }
+    .progress-bar {
+      width: 0;
+      height: 6px;
+      overflow: hidden;
+      display: block;
+      float: left;
+      background: #ffd596;
+    }
+    em {
+      line-height: 14px;
+      float: left;
+      font-size: 10px;
+      color: #999;
+    }
+  }
+}
+
+.rating-num {
+  strong {
+    float: left;
+    width: 30%;
+    font-size: 28px;
+  }
+  .people {
+    line-height: 2;
+    display: block;
+  }
+}

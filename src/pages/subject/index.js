@@ -20,6 +20,7 @@ import NewsPic from '@/components/Subject/NewsPic'
 import EpList from '@/components/Subject/EpList'
 import Comment from '@/components/Comment'
 import Share from '@/components/Share'
+import Tating from '@/components/Tating'
 import Loading from '@/components/Ui/Loading'
 import Meta from '@/components/Meta'
 
@@ -39,7 +40,7 @@ import './style.scss'
   dispatch => ({
     detail: bindActionCreators(detail, dispatch),
     mark: bindActionCreators(mark, dispatch),
-    getCm: bindActionCreators(score, dispatch),
+    score: bindActionCreators(score, dispatch),
     hits: bindActionCreators(hits, dispatch)
   })
 )
@@ -48,7 +49,7 @@ class Bangumi extends Component {
     match: PropTypes.object.isRequired,
     info: PropTypes.object.isRequired,
     detail: PropTypes.func.isRequired,
-    getCm: PropTypes.func.isRequired,
+    score: PropTypes.func.isRequired,
     sid: PropTypes.number,
     userinfo: PropTypes.object,
     cmScore: PropTypes.object,
@@ -64,7 +65,7 @@ class Bangumi extends Component {
       },
       info,
       detail,
-      getCm,
+      score,
       sid = 1,
       userinfo: { userid },
       cmScore,
@@ -74,17 +75,17 @@ class Bangumi extends Component {
       detail({ id })
     }
     if (!cmScore || !cmScore.data) {
-      getCm({ id, sid, uid: userid })
+      score({ id, sid, uid: userid })
     }
     hits({ id, sid })
   }
 
   async addMark(type, id, cid, uid) {
     console.log(type, id, cid, uid)
-    const { mark, getCm } = this.props
+    const { mark, score } = this.props
     let [, data] = await mark({ type, id, cid, uid })
     if (data.rcode === 1) {
-      getCm({ id, sid: 1, uid })
+      score({ id, sid: 1, uid })
     }
   }
 
@@ -136,7 +137,7 @@ class Bangumi extends Component {
     const star = (cmScore.data || {}).star || {}
     const comment = (cmScore.data || {}).comment || {}
     const { loveid, remindid } = star
-    console.log(star, comment)
+    const { curpingfen } = star
     return (
       <Fragment>
         <div className="warp-bg">
@@ -199,7 +200,9 @@ class Bangumi extends Component {
                   </div>
                 </div>
               </div>
-              <div styleName="detail-score">{gold}</div>
+              <div styleName="detail-score">
+                <Tating data={curpingfen} />
+              </div>
             </div>
           </div>
           <div styleName="detail-nav">
