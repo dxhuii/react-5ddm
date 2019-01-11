@@ -134,7 +134,7 @@ class weekDay extends Component {
           {weekData[weekEng[currentIndex]].map(item => (
             <li key={item.id}>
               <Link key={item.id} to={`/subject/${item.id}`}>
-                <div className="load-demand" data-load-demand={`<img src="${picHttps(item.pic)}" alt="${item.title}" />`} />
+                <div className="load-demand" data-load-demand={`<img src="${picHttps(item.smallPic || item.pic)}" alt="${item.title}" />`} />
                 <h4>{item.title}</h4>
               </Link>
               {isNumber(item.status) ? (

@@ -8,7 +8,11 @@ export const isObjectEqual = (obj1, obj2) => {
 
 // http 和 https 替换成 //
 export const picHttps = pic => {
-  return pic.replace('http://', '//').replace('https://', '//')
+  if (pic.indexOf('https') === -1) {
+    return pic.replace('http://', '//').replace('https://', '//')
+  } else {
+    return pic
+  }
 }
 
 export const isMobile = () => {
