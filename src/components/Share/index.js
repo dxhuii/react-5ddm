@@ -49,9 +49,9 @@ class Share extends Component {
     const enFrom = encodeURIComponent('来自' + name + ' ' + DOMAIN)
     const site = {
       qq: `https://connect.qq.com/widget/shareqq/index.html?url=${enUrl}&title=${enTitle}&desc=&summary=${enDesc}&pics=${enPic}&site=${enName}`,
-      weibo: `http://service.weibo.com/share/share.php?appkey=111884427&url=${enUrl}&title=${enTitle}&pic=${enPic}`,
+      weibo: `https://service.weibo.com/share/share.php?appkey=111884427&url=${enUrl}&title=${enTitle}&pic=${enPic}`,
       qzone: `https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${enUrl}&title=${enTitle}&desc=${enFrom}&summary=${enDesc}&pics=${enPic}&site=${enName}`,
-      tieba: `https://tieba.baidu.com/f/commit/share/openShareApi?url=${enUrl}&title=${enTitle}&desc=${enDesc}&comment=1`
+      tieba: `https://tieba.baidu.com/f/commit/share/openShareApi?title=${enTitle}&url=${enUrl}?to=tieba&pic=${enPic}&key=&sign=on&desc=${enDesc}&comment=&red_tag=u2625676433`
     }
     window.open(site[type], '_blank', 'width=770,height=620')
   }

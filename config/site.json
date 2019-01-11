@@ -1,6 +1,6 @@
 {
   "SITE_NAME": "9站",
-  "DOMAIN": "//dev.99496.com",
+  "DOMAIN": "https://dev.99496.com",
   "AUTH_COOKIE_NAME": "signin",
   "COOKIE_PREFIX": "ikf_",
   "PUBLIC_PATH": "//dev.99496.com/dist/client",
