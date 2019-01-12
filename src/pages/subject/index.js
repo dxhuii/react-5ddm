@@ -26,7 +26,7 @@ import Meta from '@/components/Meta'
 
 import Shell from '@/components/Shell'
 
-import { isNumber } from '@/utils'
+import { isNumber, formatPic } from '@/utils'
 
 import './style.scss'
 @Shell
@@ -134,6 +134,7 @@ class Bangumi extends Component {
       desc: content,
       url: `/subject/${id}`
     }
+    const rePic = formatPic(pic, 'orj360')
     const star = (cmScore.data || {}).star || {}
     const comment = (cmScore.data || {}).comment || {}
     const { loveid, remindid } = star
@@ -147,7 +148,7 @@ class Bangumi extends Component {
             <meta property="og:type" content="videolist" />
             <meta property="og:title" content={title} />
             <meta property="og:description" content={content} />
-            <meta property="og:image" content={pic} />
+            <meta property="og:image" content={rePic} />
             <meta property="og:url" content={`/subject/${id}`} />
             <meta property="og:video" content={`/play/${id}/1`} />
             <meta property="og:site_name" content={'9站'} />
@@ -155,9 +156,9 @@ class Bangumi extends Component {
             <meta name="keywords" content={keywords} />
           </Meta>
           <div styleName="detail">
-            <div styleName="detail-blur" style={{ backgroundImage: `url(${pic})` }} />
+            <div styleName="detail-blur" style={{ backgroundImage: `url(${rePic})` }} />
             <div styleName="detail-con" className="wp clearfix">
-              <div styleName="detail-pic">{pic ? <img src={pic} /> : null}</div>
+              <div styleName="detail-pic">{pic ? <img src={rePic} /> : null}</div>
               <div styleName="detail-info">
                 <h1>
                   {title}

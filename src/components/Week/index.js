@@ -9,7 +9,7 @@ import { getWeek } from '@/store/reducers/week'
 
 import Loading from '@/components/Ui/Loading'
 
-import { isNumber, picHttps } from '@/utils'
+import { isNumber, formatPic } from '@/utils'
 
 import './style.scss'
 
@@ -134,7 +134,10 @@ class weekDay extends Component {
           {weekData[weekEng[currentIndex]].map(item => (
             <li key={item.id}>
               <Link key={item.id} to={`/subject/${item.id}`}>
-                <div className="load-demand" data-load-demand={`<img src="${picHttps(item.smallPic || item.pic)}" alt="${item.title}" />`} />
+                <div
+                  className="load-demand"
+                  data-load-demand={`<img src="${formatPic(item.smallPic || item.pic, 'thumb150')}" alt="${item.title}" />`}
+                />
                 <h4>{item.title}</h4>
               </Link>
               {isNumber(item.status) ? (

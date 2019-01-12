@@ -8,6 +8,8 @@ import { getNewsIndex } from '@/store/reducers/newsIndex'
 
 import Loading from '@/components/Ui/Loading'
 
+import { formatPic } from '@/utils'
+
 import './style.scss'
 
 @withRouter
@@ -40,7 +42,7 @@ class News extends Component {
     return data.map(item => (
       <li key={item.id}>
         <Link to={`/article/${item.id}`}>
-          <img src={item.pic} alt={item.title} />
+          <img src={formatPic(item.pic, 'orj360')} alt={item.title} />
           <div styleName="mark">
             <p>{item.title}</p>
           </div>

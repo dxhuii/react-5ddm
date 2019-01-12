@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
+import { formatPic } from '@/utils'
+
 import './style.scss'
 
 const NewsPic = props => {
@@ -10,7 +12,7 @@ const NewsPic = props => {
       {props.data.map(item => (
         <li key={item.id}>
           <Link to={`/article/${item.id}`}>
-            <img src={item.pic} alt={item.title} />
+            <img src={formatPic(item.pic, 'orj360')} alt={item.title} />
             <div styleName="mark">
               <p>{item.title}</p>
             </div>

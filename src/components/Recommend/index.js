@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import { recommend } from '@/store/actions/recommend'
 import { getRecommend } from '@/store/reducers/recommend'
 
+import { formatPic } from '@/utils'
+
 import './style.scss'
 
 @withRouter
@@ -41,7 +43,7 @@ class Recommend extends Component {
     return data.map(item => (
       <li key={item.id}>
         <Link to={link(item.id)}>
-          <img src={item.pic} alt={item.title} />
+          <img src={formatPic(item.pic, 'orj360')} alt={item.title} />
           <div styleName="mark">
             <p>{item.title}</p>
           </div>

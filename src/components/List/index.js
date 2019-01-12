@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { listLoad } from '@/store/actions/list'
 import { getList } from '@/store/reducers/list'
 
-import { isNumber, picHttps } from '@/utils'
+import { isNumber, formatPic } from '@/utils'
 
 import './style.scss'
 
@@ -120,7 +120,7 @@ class List extends Component {
             {data.map(item => (
               <li key={item.id}>
                 <Link to={`/subject/${item.id}`}>
-                  <div className="load-demand" data-load-demand={`<img src="${picHttps(item.pic)}" alt="${item.title}" />`} />
+                  <div className="load-demand" data-load-demand={`<img src="${formatPic(item.pic, 'orj360')}" alt="${item.title}" />`} />
                   <h3>{item.title}</h3>
                 </Link>
                 <Link to={`/play/${item.id}/${item.pid}`}>

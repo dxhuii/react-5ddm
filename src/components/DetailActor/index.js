@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { detailActor } from '@/store/actions/actor'
 import { getDetailActor } from '@/store/reducers/actor'
 
-import { isNumber, picHttps } from '@/utils'
+import { isNumber, formatPic } from '@/utils'
 
 import './style.scss'
 
@@ -50,7 +50,7 @@ class Bangumi extends Component {
           {data.map(item => (
             <li key={item.id}>
               <Link to={`/subject/${item.id}`}>
-                <div className="load-demand" data-load-demand={`<img src="${picHttps(item.pic)}" alt="${item.title}" />`} />
+                <div className="load-demand" data-load-demand={`<img src="${formatPic(item.pic, 'orj360')}" alt="${item.title}" />`} />
                 <h3>{item.title}</h3>
               </Link>
               <Link to={`/play/${item.id}/${item.pid}`}>

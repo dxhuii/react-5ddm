@@ -6,13 +6,16 @@ export const isObjectEqual = (obj1, obj2) => {
   return equal
 }
 
-// http 和 https 替换成 //
-export const picHttps = pic => {
-  if (pic.indexOf('https') === -1) {
-    return pic.replace('http://', '//').replace('https://', '//')
-  } else {
-    return pic
-  }
+/**
+ * @type
+ * thumb150 宽高为 150 正方形
+ * orj360 宽为360
+ * thumb300 宽高为 300 正方形
+ */
+
+export const formatPic = (pic, type) => {
+  const rePic = pic.replace('http://', '//').replace('https://', '//')
+  return rePic.replace(/large|mw1024/, type)
 }
 
 export const isMobile = () => {
