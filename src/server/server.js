@@ -72,7 +72,8 @@ app.get('*', async (req, res) => {
     const url = path.split('/')
     const pinyin = url[2]
     // console.log(url.length, pinyin, url, path);
-    https.get(`${API}api.php?s=home-react-getVodId&pinyin=${pinyin}`, function(r) {
+    // 根据拼音获取视频ID
+    https.get(`${API}getVodId&pinyin=${pinyin}`, function(r) {
       // console.log('statusCode:', r.statusCode);
       // console.log('headers:', r.headers);
       r.on('data', function(d) {

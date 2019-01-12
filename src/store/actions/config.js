@@ -12,8 +12,11 @@ export function configLoad({ name = '' }) {
       dispatch({ type: 'GET_CONFIG', data: list, name })
 
       let [err, data] = await Ajax({
-        url: config.api.config({ name }),
-        method: 'get'
+        url: config.api.config,
+        method: 'get',
+        data: {
+          name
+        }
       })
 
       if (data && data.status) {

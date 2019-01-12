@@ -12,8 +12,12 @@ export function playerLoad({ id, pid }) {
       dispatch({ type: 'GET_PLAYER', id, data: player, pid })
 
       let [err, data] = await Ajax({
-        url: config.api.player({ id, pid }),
-        method: 'get'
+        url: config.api.player,
+        method: 'get',
+        data: {
+          id,
+          pid
+        }
       })
 
       if (data && data.status) {

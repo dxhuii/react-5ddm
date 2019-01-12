@@ -12,8 +12,13 @@ export function recommend({ name }) {
       dispatch({ type: 'GET_RECOMMEND', data: list, name })
 
       let [err, data] = await Ajax({
-        url: name === 'indexRecommendAnime' ? config.api.recommendAnime() : config.api.recommendNews(),
-        method: 'get'
+        url: name === 'indexRecommendAnime' ? config.api.list : config.api.newslist,
+        method: 'get',
+        data: Object.assign(
+          {},
+          { limit: 4, order: 'hits_week', p: 0 },
+          name === 'indexRecommendAnime' ? { day: 7 } : { day: 30, id: '211,206,205,207,208,209,212,213,221,222' }
+        )
       })
 
       if (data && data.status) {

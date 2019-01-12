@@ -12,6 +12,7 @@ let config = {
 
   // 接口地址
   API: site.API,
+  APIHOME: site.APIHOME,
 
   // 服务端口
   port: site.PORT,

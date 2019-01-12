@@ -43,7 +43,7 @@ class Recommend extends Component {
     return data.map(item => (
       <li key={item.id}>
         <Link to={link(item.id)}>
-          <img src={formatPic(item.pic, 'orj360')} alt={item.title} />
+          <div className="load-demand" data-load-demand={`<img src="${formatPic(item.pic, 'orj360')}" alt="${item.title}" />`} />
           <div styleName="mark">
             <p>{item.title}</p>
           </div>

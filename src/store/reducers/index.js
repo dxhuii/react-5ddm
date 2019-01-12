@@ -18,6 +18,7 @@ import detailActor from './actor'
 import scroll from './scroll'
 import history from './history'
 import search from './search'
+import articleVod from './articleVod'
 
 let states = {
   user,
@@ -35,6 +36,7 @@ let states = {
   recommend,
   detailActor,
   search,
+  articleVod,
   scroll: scroll(),
   history: history()
 }

@@ -12,7 +12,7 @@ export function slide() {
       dispatch({ type: 'GET_SLIDE', data: slide })
 
       let [err, data] = await Ajax({
-        url: config.api.slide(),
+        url: config.api.slide,
         method: 'get'
       })
 

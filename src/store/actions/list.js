@@ -14,8 +14,21 @@ export function listLoad({ stateId, id, mcid = '', year = '', area = '', wd = ''
       dispatch({ type: 'GET_LIST', data: list, stateId, id, mcid, year, area, wd, letter, lz, day, order, limit })
 
       let [err, data] = await Ajax({
-        url: config.api.typelist({ page: list.page, stateId, id, mcid, year, area, wd, letter, lz, day, order, limit }),
-        method: 'get'
+        url: config.api.list,
+        method: 'get',
+        data: {
+          id,
+          mcid,
+          year,
+          area,
+          wd,
+          letter,
+          lz,
+          day,
+          order,
+          limit,
+          page: list.page
+        }
       })
 
       if (data && data.status) {

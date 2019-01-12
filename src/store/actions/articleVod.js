@@ -1,23 +1,21 @@
 import Ajax from '@/common/ajax'
-import { getDetailActor } from '../reducers/actor'
+import { getArticleVod } from '../reducers/articleVod'
 import config from '@/utils/config'
 
-export function detailActor({ actor, no }) {
+export function articleVod({ ids }) {
   return (dispatch, getState) => {
     return new Promise(async (resolve, reject) => {
-      let info = getDetailActor(getState(), actor, no)
+      let info = getArticleVod(getState(), ids)
       info.loading = true
       if (!info.data) info.data = []
 
-      dispatch({ type: 'GET_DETAIL_ACTOR', actor, no, data: info })
+      dispatch({ type: 'GET_ARTICLE_VOD', ids, data: info })
 
       let [err, data] = await Ajax({
         url: config.api.list,
         method: 'get',
         data: {
-          actor,
-          no,
-          limit: 10,
+          ids,
           p: 0
         }
       })
@@ -25,7 +23,7 @@ export function detailActor({ actor, no }) {
       if (data && data.status) {
         info.loading = false
         info.data = data.data
-        dispatch({ type: 'GET_DETAIL_ACTOR', actor, no, data: info })
+        dispatch({ type: 'GET_ARTICLE_VOD', ids, data: info })
         resolve([null, info.data])
       } else {
         resolve(['detail failed'])

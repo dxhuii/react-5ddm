@@ -11,8 +11,13 @@ export function search({ wd }) {
       dispatch({ type: 'GET_SEARCH', data: list, wd })
 
       let [err, data] = await Ajax({
-        url: config.api.search({ wd }),
-        method: 'get'
+        url: config.api.list,
+        method: 'get',
+        data: {
+          wd,
+          order: 'hits_month',
+          p: 0
+        }
       })
 
       if (data && data.status) {

@@ -12,8 +12,12 @@ export function episode({ id, p }) {
       dispatch({ type: 'GET_EPISCODE', id, p, data: info })
 
       let [err, data] = await Ajax({
-        url: config.api.storyDetail({ id, p }),
-        method: 'get'
+        url: config.api.storyDetail,
+        method: 'get',
+        data: {
+          id,
+          p
+        }
       })
 
       if (data && data.status) {

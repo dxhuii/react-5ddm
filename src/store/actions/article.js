@@ -12,8 +12,11 @@ export function article({ id }) {
       dispatch({ type: 'GET_NEWS_ARTICLE', data: list, id })
 
       let [err, data] = await Ajax({
-        url: config.api.newsDetail({ id }),
-        method: 'get'
+        url: config.api.newsDetail,
+        method: 'get',
+        data: {
+          id
+        }
       })
 
       if (data && data.status) {

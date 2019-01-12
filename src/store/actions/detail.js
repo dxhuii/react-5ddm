@@ -12,8 +12,11 @@ export function detail({ id }) {
       dispatch({ type: 'GET_DETAIL', id, data: info })
 
       let [err, data] = await Ajax({
-        url: config.api.detail({ id }),
-        method: 'get'
+        url: config.api.detail,
+        method: 'get',
+        data: {
+          id
+        }
       })
 
       if (data && data.status) {
@@ -40,8 +43,13 @@ export function vodNews({ id }) {
       dispatch({ type: 'GET_VOD_NEWS', id, data: info })
 
       let [err, data] = await Ajax({
-        url: config.api.vodNewsList({ id, page: info.page }),
-        method: 'get'
+        url: config.api.newslist,
+        method: 'get',
+        data: {
+          did: id,
+          id: 44,
+          page: info.page
+        }
       })
 
       if (data && data.status) {

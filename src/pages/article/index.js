@@ -11,6 +11,9 @@ import { hits } from '@/store/actions/hits'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 import Share from '@/components/Share'
+import NewsYG from '@/components/News/yugao'
+import Top from '@/components/Top'
+import ArticleVod from './Vod'
 
 import play from '@/utils/play'
 
@@ -174,7 +177,13 @@ class Article extends Component {
           </article>
         </div>
         <div styleName="article-right" className="fr" style={cid === 205 ? { display: 'none' } : {}}>
-          right
+          {vodid ? <ArticleVod ids={vodid} /> : null}
+          <div styleName="box">
+            <Top name="topListAll" title="30天热门动漫" sty={{ padding: '10px 0' }} />
+          </div>
+          <div styleName="box" className="mt20">
+            <NewsYG name="newsAll" isCate={false} title="30天热门资讯" isType={true} sty={{ padding: '10px 0' }} />
+          </div>
         </div>
       </div>
     )

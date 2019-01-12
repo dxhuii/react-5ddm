@@ -11,18 +11,19 @@ export function top({ name }) {
 
       dispatch({ type: 'GET_TOP', data: top, name })
 
-      let api = ''
+      let api = {}
       if (name === 'topListIndexCN') {
-        api = config.api.topListIndexCN()
+        api = { area: '%E5%A4%A7%E9%99%86', limit: 7 }
       } else if (name === 'topListIndexJP') {
-        api = config.api.topListIndexJP()
+        api = { area: '%E6%97%A5%E6%9C%AC', limit: 10 }
       } else if (name === 'topListAll') {
-        api = config.api.topListAll()
+        api = { limit: 10 }
       }
 
       let [err, data] = await Ajax({
-        url: api,
-        method: 'get'
+        url: config.api.list,
+        method: 'get',
+        data: Object.assign({}, api, { day: 30, order: 'hits_month' })
       })
 
       if (data && data.status) {

@@ -12,8 +12,12 @@ export function playlist({ id }) {
       dispatch({ type: 'GET_PLAY_LIST', id, data: play })
 
       let [err, data] = await Ajax({
-        url: config.api.playlist({ id }),
-        method: 'get'
+        url: config.api.playlist,
+        method: 'get',
+        data: {
+          id,
+          react: 1
+        }
       })
 
       if (data && data.status) {

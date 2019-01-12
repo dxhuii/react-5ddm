@@ -12,8 +12,13 @@ export function score({ id, sid, uid }) {
       dispatch({ type: 'GET_SCORE', data: info, id, sid, uid })
 
       let [err, data] = await Ajax({
-        url: config.api.score({ id, sid, uid }),
-        method: 'get'
+        url: config.api.score,
+        method: 'get',
+        data: {
+          id,
+          sid,
+          uid
+        }
       })
 
       if (data && data.status) {

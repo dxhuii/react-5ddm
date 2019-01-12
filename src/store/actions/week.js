@@ -11,8 +11,13 @@ export function week() {
       dispatch({ type: 'GET_WEEK', data: week })
 
       let [err, data] = await Ajax({
-        url: config.api.week({ limit: 1000 }),
-        method: 'get'
+        url: config.api.list,
+        method: 'get',
+        data: {
+          react: 1,
+          limit: 1000,
+          p: 0
+        }
       })
 
       if (data && data.status) {
