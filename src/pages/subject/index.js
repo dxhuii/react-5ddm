@@ -201,7 +201,9 @@ class Bangumi extends Component {
                   </div>
                 </div>
               </div>
-              <div styleName="detail-score">{curpingfen ? <Tating data={curpingfen} /> : null}</div>
+              <div styleName="detail-score">
+                <Tating data={curpingfen} />
+              </div>
             </div>
           </div>
           <div styleName="detail-nav">
