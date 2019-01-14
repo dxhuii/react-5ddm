@@ -2,57 +2,34 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { StaticRouter, matchPath } from 'react-router'
-import Loadable from 'react-loadable'
+import { matchPath } from 'react-router'
 import ReactGA from 'react-ga'
 
 // 引入全局样式
-import '../pages/global.scss'
+import '../app/pages/global.scss'
 
 import configureStore from '@/store'
 import createRouter from '@/router'
-
-// ArriveFooter 监听抵达页尾的事件
-import '@/utils/arrive-footer.js'
-
-/**
- * 懒加载图片、Dom
- * 使用方式
- * 给dom添加class="load-demand"、data-load-demand="<div></div> or <img />"
- **/
-import '@/utils/load-demand'
-
 import { getUserInfo } from '@/store/reducers/user'
 
-import { GA, analysis_script } from '../../config'
+import { GA } from 'Config'
+;(async function() {
+  // 从页面中获取服务端生产redux数据，作为客户端redux初始值
+  const store = configureStore(window.__initState__)
+  let userinfo = getUserInfo(store.getState())
+  if (!userinfo || !userinfo.userid) userinfo = null
+  let logPageView = () => {}
 
-// import runtime from 'serviceworker-webpack-plugin/lib/runtime'
-// if ('serviceWorker' in navigator) {
-//   const registration = runtime.register();
-// } else {
-//   console.log("Don't support serviceWorker")
-// }
-
-// 从页面中获取服务端生产redux数据，作为客户端redux初始值
-const store = configureStore(window.__initState__)
-
-let userinfo = getUserInfo(store.getState())
-
-if (!userinfo || !userinfo.userid) userinfo = null
-
-let logPageView = () => {}
-
-if (GA) {
-  ReactGA.initialize(GA)
-  logPageView = userinfo => {
-    let option = { page: window.location.pathname }
-    if (userinfo && userinfo._id) option.userId = userinfo._id
-    ReactGA.set(option)
-    ReactGA.pageview(window.location.pathname)
+  if (GA) {
+    ReactGA.initialize(GA)
+    logPageView = userinfo => {
+      let option = { page: window.location.pathname }
+      if (userinfo && userinfo._id) option.userId = userinfo._id
+      ReactGA.set(option)
+      ReactGA.pageview(window.location.pathname)
+    }
   }
-}
 
-const run = async () => {
   const router = createRouter(userinfo, logPageView)
   const RouterDom = router.dom
 
@@ -67,9 +44,7 @@ const run = async () => {
   })
 
   // 预先加载首屏的js（否则会出现，loading 一闪的情况）
-  // if (_route && _route.component && _route.component.preload && _route.loadData) {
   await _route.component.preload()
-  // }
 
   ReactDOM.hydrate(
     <Provider store={store}>
@@ -85,6 +60,9 @@ const run = async () => {
       module.hot.accept()
     }
   }
-}
 
-run()
+  // 解决在 ios safari iframe 上touchMove 滚动后，外部的点击事件会无效的问题
+  document.addEventListener('touchmove', function(e) {
+    e.preventDefault()
+  })
+})()

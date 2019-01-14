@@ -33,7 +33,18 @@ module.exports = {
   target: 'web',
 
   entry: {
-    app: ['@babel/polyfill', './src/client/index.js']
+    app: [
+      '@babel/polyfill',
+      './src/client/index.js',
+      // ArriveFooter 监听抵达页尾的事件
+      './src/app/utils/arrive-footer.js',
+      /**
+       * 懒加载图片、Dom
+       * 使用方式
+       * 给dom添加class="load-demand"、data-load-demand="<div></div> or <img />"
+       **/
+      './src/app/utils/load-demand'
+    ]
   },
 
   output: {
@@ -44,7 +55,7 @@ module.exports = {
 
   resolve: {
     alias: {
-      '@': path.resolve('src'),
+      '@': path.resolve('src/app'),
       Config: path.resolve('config/index')
     }
   },
@@ -204,7 +215,7 @@ module.exports = {
     // 主要是打包后的添加的css、js静态文件路径添加到模版中
     new HtmlwebpackPlugin({
       filename: path.resolve(__dirname, '../../dist/server/index.ejs'),
-      template: 'src/views/index.html',
+      template: 'src/app/views/index.html',
       metaDom: '<%- meta %>',
       htmlDom: '<%- html %>',
       reduxState: '<%- reduxState %>',
@@ -218,7 +229,7 @@ module.exports = {
       clear: false
     }),
 
-    new CopyWebpackPlugin([{ from: 'src/static/favicon.ico', to: 'favicon.ico' }])
+    new CopyWebpackPlugin([{ from: 'src/app/static/favicon.ico', to: 'favicon.ico' }])
 
     // serviceworker 还在研究中
     // new ServiceWorkerWebpackPlugin({
