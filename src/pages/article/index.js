@@ -47,7 +47,7 @@ class Article extends Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const {
       match: {
         params: { id }

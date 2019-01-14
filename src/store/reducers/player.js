@@ -1,10 +1,10 @@
 import merge from 'lodash/merge'
 
 export default function player(state = {}, action = {}) {
-  const { id, data, pid } = action
+  const { name, data } = action
   switch (action.type) {
     case 'GET_PLAYER':
-      state[`${id}-${pid}`] = data
+      state[name] = data
       return merge({}, state, {})
 
     default:
@@ -13,5 +13,6 @@ export default function player(state = {}, action = {}) {
 }
 
 export const getPlayerList = (state, id, pid) => {
-  return state.player[`${id}-${pid}`] ? state.player[`${id}-${pid}`] : {}
+  const name = `${id}-${pid}`
+  return state.player[name] ? state.player[name] : {}
 }

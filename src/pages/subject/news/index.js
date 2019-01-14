@@ -39,7 +39,7 @@ class VodNews extends Component {
         params: { id }
       }
     } = this.props
-    if (!newsData.data) this.load(false)
+    if (!newsData.data) this.load()
     ArriveFooter.add(id, this.load)
   }
 
@@ -52,14 +52,14 @@ class VodNews extends Component {
     ArriveFooter.remove(id)
   }
 
-  async load(more) {
+  async load() {
     const {
       vodNews,
       match: {
         params: { id }
       }
     } = this.props
-    await vodNews({ id, more })
+    await vodNews({ id })
   }
 
   showData() {

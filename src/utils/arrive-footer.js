@@ -1,5 +1,5 @@
 // 到达页尾事件
-(function () {
+(function() {
   // 如果是服务器，那么就不存在 window 和 document 全局变量，因此不继续执行
   if (typeof window === 'undefined' || typeof document === 'undefined') {
     return
@@ -15,7 +15,7 @@
   const scroll = e => {
     let scrollTop = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset || 0
     let scrollHeight = document.body.scrollHeight || document.documentElement.scrollTop
-    if (scrollTop + clientHeight >= scrollHeight - 50) {
+    if (scrollTop + clientHeight >= scrollHeight - 100) {
       let timestamp = new Date().getTime()
 
       list.map(val => {

@@ -21,6 +21,7 @@
     "no-console": "off",
     "no-debugger": "off",
     "no-unused-vars": 0,
+    "standard/no-callback-literal": [0, ["cb", "callback"]],
     "react/display-name": [{ "ignoreTranspilerName": false }]
   },
   "parserOptions": {

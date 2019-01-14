@@ -1,16 +1,16 @@
 import merge from 'lodash/merge'
 
 export default function articleVod(state = {}, action = {}) {
-  const { ids, data } = action
+  const { name, data } = action
   switch (action.type) {
     case 'GET_ARTICLE_VOD':
-      state[ids] = data
+      state[name] = data
       return merge({}, state, {})
     default:
       return state
   }
 }
 
-export const getArticleVod = (state, ids) => {
-  return state.articleVod[ids] ? state.articleVod[ids] : {}
+export const getArticleVod = (state, name) => {
+  return state.articleVod[name] ? state.articleVod[name] : {}
 }

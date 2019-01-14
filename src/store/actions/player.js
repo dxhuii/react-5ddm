@@ -1,33 +1,15 @@
-import Ajax from '@/common/ajax'
-import { getPlayerList } from '../reducers/player'
-import config from '@/utils/config'
+import loadData from '@/utils/loadData'
 
 export function playerLoad({ id, pid }) {
   return (dispatch, getState) => {
-    return new Promise(async (resolve, reject) => {
-      let player = getPlayerList(getState(), id, pid)
-      player.loading = true
-      if (!player.data) player.data = []
-
-      dispatch({ type: 'GET_PLAYER', id, data: player, pid })
-
-      let [err, data] = await Ajax({
-        url: config.api.player,
-        method: 'get',
-        data: {
-          id,
-          pid
-        }
-      })
-
-      if (data && data.status) {
-        player.loading = false
-        player.data = data.data
-        dispatch({ type: 'GET_PLAYER', id, data: player, pid })
-        resolve([null, player.data])
-      } else {
-        resolve(['detail failed'])
-      }
+    return loadData({
+      dispatch,
+      getState,
+      name: `${id}-${pid}`,
+      reducerName: 'player',
+      actionType: 'GET_PLAYER',
+      api: 'player',
+      params: { id, pid }
     })
   }
 }

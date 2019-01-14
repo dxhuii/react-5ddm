@@ -1,32 +1,15 @@
-import Ajax from '@/common/ajax'
-import { getConfig } from '../reducers/config'
-import config from '@/utils/config'
+import loadData from '@/utils/loadData'
 
 export function configLoad({ name = '' }) {
   return (dispatch, getState) => {
-    return new Promise(async (resolve, reject) => {
-      let list = getConfig(getState(), name)
-      list.loading = true
-      if (!list.data) list.data = []
-
-      dispatch({ type: 'GET_CONFIG', data: list, name })
-
-      let [err, data] = await Ajax({
-        url: config.api.config,
-        method: 'get',
-        data: {
-          name
-        }
-      })
-
-      if (data && data.status) {
-        list.loading = false
-        list.data = data.data
-        dispatch({ type: 'GET_CONFIG', data: list, name })
-        resolve([null, list.data])
-      } else {
-        resolve(['detail failed'])
-      }
+    return loadData({
+      dispatch,
+      getState,
+      name: name,
+      reducerName: 'config',
+      actionType: 'GET_CONFIG',
+      api: 'config',
+      params: { name }
     })
   }
 }

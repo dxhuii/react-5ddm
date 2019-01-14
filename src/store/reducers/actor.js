@@ -1,10 +1,10 @@
 import merge from 'lodash/merge'
 
 export default function detailActor(state = {}, action = {}) {
-  const { actor, no, data } = action
+  const { data, name } = action
   switch (action.type) {
     case 'GET_DETAIL_ACTOR':
-      state[`${actor}-${no}`] = data
+      state[name] = data
       return merge({}, state, {})
     default:
       return state
