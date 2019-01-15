@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { signOut } from '@/store/actions/user'
-import { getProfile } from '@/store/reducers/user'
+import { getUserInfo } from '@/store/reducers/user'
 import SearchAuto from '@/components/SearchAuto'
 
 import { trim } from '@/utils'
@@ -14,7 +14,7 @@ import './style.scss'
 
 @connect(
   (state, props) => ({
-    userinfo: getProfile(state)
+    userinfo: getUserInfo(state)
   }),
   dispatch => ({
     signOut: bindActionCreators(signOut, dispatch)
@@ -71,7 +71,6 @@ class Head extends Component {
       match: { url, params = {} }
     } = this.props
     const { wd, isHide } = this.state
-    console.log(userinfo, 'userinfo')
     return (
       <header>
         {/* <NavLink styleName="header-logo" exact to="/" title="9站" /> */}

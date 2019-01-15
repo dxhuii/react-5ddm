@@ -27,9 +27,4 @@ export default function user(state = initialState, action = {}) {
 export const getAccessToken = state => state.user.accessToken
 
 // 获取用户信息
-export const getUserInfo = state => state.user.userinfo || {}
-
-// 获取用户信息
-export const getProfile = state => {
-  return state.user ? state.user : {}
-}
+export const getUserInfo = state => state.user || {}
