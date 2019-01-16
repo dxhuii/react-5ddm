@@ -1,19 +1,5 @@
 import Ajax from '@/common/ajax'
 import config from '@/utils/config'
-import loadData from '@/utils/loadData'
-
-// 储存accessToken到redux
-export function saveAccessToken({ accessToken }) {
-  return dispatch => {
-    dispatch({ type: 'SAVE_ACCESS_TOKEN', accessToken })
-  }
-}
-
-export function saveUserInfo({ userinfo }) {
-  return dispatch => {
-    dispatch({ type: 'SAVE_USERINFO', userinfo })
-  }
-}
 
 export function loadUserInfo({ uid }) {
   return (dispatch, getState) => {
@@ -21,59 +7,57 @@ export function loadUserInfo({ uid }) {
       let [err, data] = await Ajax({
         url: config.api.getuserinfo,
         method: 'get',
-        data: {
-          uid
-        }
+        data: { uid }
       })
 
       if (err) {
         resolve([err])
       } else {
-        dispatch({ type: 'GET_USER_INFO', data: data })
+        dispatch({ type: 'SAVE_USER_INFO', data: data })
         resolve([null, data])
       }
     })
   }
 }
 
-export function signIn({ username, password }) {
-  return dispatch => {
-    return new Promise(async (resolve, reject) => {
-      // 这里写你的登录请求，登录成功以后，将token储存到cookie，使用httpOnly(比较安全)
-      // your code ...
-      let [err, data] = await Ajax({
-        url: config.api.login,
+export function saveCookie(params, name) {
+  return new Promise(async (resolve, reject) => {
+    // 这里写你的登录请求，登录成功以后，将token储存到cookie，使用httpOnly(比较安全)
+    // your code ...
+    let [err, data] = await Ajax({
+      url: config.api[name],
+      method: 'post',
+      data: params
+    })
+
+    if (data.rcode === 1) {
+      // 储存 cookie
+      [err, data] = await Ajax({
+        url: window.location.origin + '/sign/in',
         method: 'post',
-        data: {
-          username,
-          password,
-          isJson: true
-        }
+        data: { userid: data.data }
       })
 
-      if (data.rcode === 1) {
-        dispatch({ type: 'SAVE_USERINFO', userinfo: data.data })
-        resolve([null, data.data])
-
-        // 储存 cookie
-        ;[err, data] = await Ajax({
-          url: window.location.origin + '/sign/in',
-          method: 'post',
-          data: {
-            auth_sign: data.data.auth,
-            userinfo: data.data
-          }
-        })
-
-        if (data && data.success) {
-          resolve([null, true])
-        } else {
-          resolve(['sign error'])
-        }
+      if (data && data.success) {
+        resolve([null, true])
       } else {
-        resolve([data.msg])
+        resolve(['sign error'])
       }
-    })
+    } else {
+      resolve([data])
+    }
+  })
+}
+
+export function signIn({ username, password }) {
+  return dispatch => {
+    return saveCookie({ username, password }, 'login')
+  }
+}
+
+export function signUp({ username, password, email }) {
+  return dispatch => {
+    return saveCookie({ username, password, email }, 'reg')
   }
 }
 

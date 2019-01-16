@@ -3,36 +3,21 @@ import FileUpload from '../../components/Upload'
 import Tooltip from '../../components/Tooltip'
 import { publicPath } from 'Config'
 
-import Modal from '@/components/Modal'
-import Sign from '@/components/Sign'
-
 import './style.scss'
 export default class Main extends Component {
   state = {
     imgUlr: [],
     progress_0: 0,
-    file: [],
-    visible: false,
-    type: 'signIn'
+    file: []
   }
+
   progress = (data, index) => {
     console.log(data)
     this.setState({ [`progress_${index}`]: data })
   }
-  showModal = type => {
-    this.setState({
-      type,
-      visible: true
-    })
-  }
 
-  closeModal = () => {
-    this.setState({
-      visible: false
-    })
-  }
   render() {
-    const { imgUlr, file, type, visible } = this.state
+    const { imgUlr, file } = this.state
     return (
       <div style={{ padding: 30, fontSize: 30 }}>
         <FileUpload
@@ -58,21 +43,12 @@ export default class Main extends Component {
                 </div>
               ))
             : null}
-          {(console.log(this.state), file)}
-          <Tooltip text="你好你好你好你好你好你好你好你好你好你好">
-            <h3>1111</h3>
-          </Tooltip>
           {imgUlr.map((item, index) => (
             <li key={index}>
               <img src={item} />
             </li>
           ))}
         </ul>
-        <a onClick={() => this.showModal('signIn')}>登录</a>
-        <a onClick={() => this.showModal('signUp')}>注册</a>
-        <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
-          <Sign type={type} />
-        </Modal>
       </div>
     )
   }

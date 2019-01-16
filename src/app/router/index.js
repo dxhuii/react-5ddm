@@ -84,7 +84,7 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/topics'),
         loading: () => <Loading />
       }),
-      enter: requireAuth
+      enter: triggerEnter
     },
 
     {

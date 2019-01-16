@@ -7,8 +7,8 @@ export default () => {
   const router = express.Router()
 
   router.post('/in', (req, res) => {
-    const userinfo = req.body.userinfo
-    res.cookie(`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`, userinfo.userid, { path: '/', httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 })
+    const userid = req.body.userid
+    res.cookie(`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`, userid, { path: '/', httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 })
     res.send({ success: true })
   })
 

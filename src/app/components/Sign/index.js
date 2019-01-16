@@ -6,38 +6,22 @@ import SignUp from './SignUp'
 
 class Sign extends Component {
   static propTypes = {
-    type: PropTypes.string
+    isSign: PropTypes.string,
+    onType: PropTypes.func
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      type: 'signIn'
-    }
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.type === prevState.type) {
-      return null
-    }
-    const { type } = nextProps
-    return { type }
-  }
-
-  onType = type => {
-    this.setState({
-      type
-    })
+  onType = (e, isSign) => {
+    e.stopPropagation()
+    this.props.onType(isSign)
   }
 
   render() {
-    const { type } = this.state
-    console.log(type, 'type')
+    const { isSign } = this.props
     return (
       <Fragment>
-        {type === 'signIn' ? <SignIn /> : <SignUp />}
-        <a onClick={() => this.onType('signIn')}>登录</a>
-        <a onClick={() => this.onType('signUp')}>注册</a>
+        {isSign === 'signIn' ? <SignIn /> : <SignUp />}
+        <a onClick={e => this.onType(e, 'signIn')}>登录</a>
+        <a onClick={e => this.onType(e, 'signUp')}>注册</a>
       </Fragment>
     )
   }

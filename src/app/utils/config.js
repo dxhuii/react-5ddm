@@ -3,6 +3,7 @@ import { API, APIHOME } from 'Config'
 export default {
   api: {
     login: `${API}login`,
+    reg: `${API}reg`,
     addScore: `${API}addScore`, // 评分 val 分值 id 视频ID sid 视频大类
     playlist: `${API}play`, // 播放列表 id:视频id
     player: `${API}play`, // 单集 id:视频id，pid，集数
