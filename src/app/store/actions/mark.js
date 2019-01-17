@@ -1,7 +1,7 @@
 import Ajax from '@/common/ajax'
 import config from '@/utils/config'
 
-export function mark({ type, id, cid, uid }) {
+export function like({ type, id, cid, uid }) {
   return (dispatch, getState) => {
     return new Promise(async (resolve, reject) => {
       let [err, data] = await Ajax({
@@ -11,6 +11,23 @@ export function mark({ type, id, cid, uid }) {
           id,
           cid,
           uid
+        }
+      })
+
+      resolve([err, data])
+    })
+  }
+}
+
+export function mark({ id, val }) {
+  return (dispatch, getState) => {
+    return new Promise(async (resolve, reject) => {
+      let [err, data] = await Ajax({
+        url: config.api.mark,
+        method: 'get',
+        data: {
+          id,
+          val
         }
       })
 

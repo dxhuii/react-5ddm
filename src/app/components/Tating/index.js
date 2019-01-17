@@ -1,11 +1,29 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { withRouter, Link } from 'react-router-dom'
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import { mark } from '@/store/actions/mark'
 
 import './style.scss'
 
+@withRouter
+@connect(
+  (state, props) => ({}),
+  dispatch => ({
+    mark: bindActionCreators(mark, dispatch)
+  })
+)
 class Tating extends Component {
   static propTypes = {
-    data: PropTypes.object
+    data: PropTypes.object,
+    mark: PropTypes.func,
+    score: PropTypes.func,
+    id: PropTypes.number,
+    sid: PropTypes.number,
+    uid: PropTypes.number
   }
 
   static defaultProps = {
@@ -15,17 +33,22 @@ class Tating extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      starWith: 0,
+      starWith: 16,
       star: 0,
       starText: ['很差', '较差', '还行', '推荐', '力荐']
     }
   }
 
-  onStar(index) {
+  async onStar(index) {
     this.setState({
       starWith: index * 16,
       star: index
     })
+    const { mark, score, id, sid, uid } = this.props
+    let [err, data] = await mark({ id, val: index })
+    if (data.rcode === 1) {
+      score({ id, sid, uid })
+    }
   }
 
   starClass(pfnum) {
@@ -68,8 +91,8 @@ class Tating extends Component {
           <div styleName="rating" className="pr">
             <h4>评分</h4>
             <div styleName="rating-num">
-              <strong>{pinfen}</strong>
-              <span className="bigstar45" />
+              <strong>{pinfen === '10.0' ? 10 : pinfen}</strong>
+              <span className={this.starClass(parseFloat(pinfen) * 5)} />
               <span styleName="people">
                 <em>{total}</em>人评价
               </span>

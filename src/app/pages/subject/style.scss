@@ -157,8 +157,13 @@
 .detail-score {
   position: absolute;
   right: 0;
-  width: 180px;
+  top: 50%;
+  width: 200px;
+  padding: 20px 10px;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, .3);
   color: #fff;
+  border-radius: 10px;
 }
 
 .detail-nav {

@@ -91,8 +91,7 @@
 
 .rating {
   width: 170px;
-  padding-left: 15px;
-  border-left: 1px solid #eaeaea;
+  padding-left: 10px;
 }
 
 /* rating-show */
@@ -109,7 +108,6 @@
     span {
       float: left;
       margin-right: 5px;
-      color: #999;
     }
     .progress {
       float: left;
@@ -131,7 +129,6 @@
       line-height: 14px;
       float: left;
       font-size: 10px;
-      color: #999;
     }
   }
 }

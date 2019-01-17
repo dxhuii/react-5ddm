@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { detail, score } from '@/store/actions/detail'
-import { mark } from '@/store/actions/mark'
+import { like } from '@/store/actions/mark'
 import { hits } from '@/store/actions/hits'
 import { getDetail, getScore } from '@/store/reducers/detail'
 import { getUserInfo } from '@/store/reducers/user'
@@ -38,7 +38,7 @@ import './style.scss'
   }),
   dispatch => ({
     detail: bindActionCreators(detail, dispatch),
-    mark: bindActionCreators(mark, dispatch),
+    like: bindActionCreators(like, dispatch),
     score: bindActionCreators(score, dispatch),
     hits: bindActionCreators(hits, dispatch)
   })
@@ -54,7 +54,7 @@ class Bangumi extends Component {
     cmScore: PropTypes.object,
     hits: PropTypes.func,
     isMeta: PropTypes.any,
-    mark: PropTypes.func
+    like: PropTypes.func
   }
 
   componentDidMount() {
@@ -81,8 +81,8 @@ class Bangumi extends Component {
 
   async addMark(type, id, cid, uid) {
     console.log(type, id, cid, uid)
-    const { mark, score } = this.props
-    let [, data] = await mark({ type, id, cid, uid })
+    const { like, score } = this.props
+    let [, data] = await like({ type, id, cid, uid })
     if (data.rcode === 1) {
       score({ id, sid: 1, uid })
     }
@@ -92,7 +92,8 @@ class Bangumi extends Component {
     const {
       info: { data = {}, loading },
       userinfo: { userid },
-      cmScore = {}
+      cmScore = {},
+      score
     } = this.props
     const {
       id,
@@ -182,8 +183,8 @@ class Bangumi extends Component {
                   </p>
                 ) : null}
                 <p>
-                  <span style={{ marginRight: 30 }}>语言：{language}</span>
-                  <span>地区：{area}</span>
+                  {language ? <span style={{ marginRight: 30 }}>语言：{language}</span> : null}
+                  {area ? <span>地区：{area}</span> : null}
                 </p>
                 <p>更新时间：{updateDate}</p>
                 <div styleName="detail-tool">
@@ -201,7 +202,7 @@ class Bangumi extends Component {
                 </div>
               </div>
               <div styleName="detail-score">
-                <Tating data={curpingfen} />
+                <Tating data={curpingfen} id={id} uid={userid} sid={1} score={score} />
               </div>
             </div>
           </div>

@@ -8,7 +8,7 @@ export function listLoad({ stateId, id, mcid = '', year = '', area = '', wd = ''
       name: `${stateId}${id}${mcid}${year}${area}${wd}${letter}${lz}${day}${order}${limit}`,
       reducerName: 'list',
       actionType: 'GET_LIST',
-      api: 'list',
+      api: 'listNoId',
       params: {
         id,
         mcid,
