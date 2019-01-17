@@ -40,6 +40,7 @@
   display: flex;
   flex-flow: row wrap;
   align-content: flex-start;
+  backface-visibility: hidden;
   &::-webkit-scrollbar-button,
   &::-webkit-scrollbar-track {
     display: none
