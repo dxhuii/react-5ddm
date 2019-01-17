@@ -1,0 +1,29 @@
+.article-tool {
+  display: flex;
+  padding: 0 20px;
+}
+
+.article-tool__tag {
+  flex-grow: 1;
+  a {
+    display: inline-block;
+    padding: 0 10px;
+    height: 24px;
+    line-height: 24px;
+    background-color: rgba(0, 132, 255, .1);
+    color: #0084ff;
+    font-size: 14px;
+    margin-right: 10px;
+    border-radius: 12px;
+    &:last-child {
+      margin-right: 0;
+    }
+    &:hover {
+      background-color: rgba(0, 132, 255, .15);
+    }
+  }
+}
+
+.article-tool__share {
+  margin-left: 10px;
+}

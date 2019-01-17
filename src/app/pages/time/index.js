@@ -10,6 +10,9 @@ import { getDetail } from '@/store/reducers/detail'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
+import SideBar from '@/components/SideBar'
+import TagShare from '@/components/TagShare'
+
 import './style.scss'
 
 @Shell
@@ -47,7 +50,13 @@ class Time extends Component {
       info: { data = {} }
     } = this.props
     console.log(data)
-    const { title, content, listNameBig, pic, actor, year, filmtime, director, mcid, updateDate, tvcont } = data
+    const { id, title, content, listNameBig, pic, actor, year, filmtime, director, mcid, updateDate, tvcont } = data
+    const shareConfig = {
+      pic,
+      title: `${title}播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新`,
+      desc: content,
+      url: `/time/${id}`
+    }
     return (
       <div className="wp mt20 clearfix">
         <Meta title={`${title}播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新`}>
@@ -59,11 +68,11 @@ class Time extends Component {
         </Meta>
         <div styleName="article-left" className="fl">
           <article styleName="article-body">
-            <div styleName="article-head">
-              <h1>{title}</h1>
-            </div>
+            <h1>{title}</h1>
             <div styleName="article-content" className="clearfix">
-              <img src={pic} alt={`${title} 播出时间`} />
+              <Link to={`/subject/${id}`}>
+                <img src={pic} alt={`${title} 播出时间`} />
+              </Link>
               <p>
                 播出时间：{filmtime ? `${filmtime}` : `${year}年`} {tvcont}
               </p>
@@ -115,10 +124,11 @@ class Time extends Component {
                 {updateDate}
               </p>
             </div>
+            <TagShare tag={[title]} config={shareConfig} />
           </article>
         </div>
-        <div styleName="article-right" className="fl">
-          right
+        <div styleName="article-right" className="fr">
+          <SideBar />
         </div>
       </div>
     )

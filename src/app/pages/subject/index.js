@@ -12,8 +12,7 @@ import { getUserInfo } from '@/store/reducers/user'
 
 import PlayList from '@/components/PlayList'
 import DetailActor from '@/components/DetailActor'
-import NewsYG from '@/components/News/yugao'
-import Top from '@/components/Top'
+import SideBar from '@/components/SideBar'
 import NewsText from '@/components/Subject/NewsText'
 import NewsPic from '@/components/Subject/NewsPic'
 import EpList from '@/components/Subject/EpList'
@@ -304,11 +303,8 @@ class Bangumi extends Component {
                 </p>
               ) : null}
             </div>
-            <div styleName="box" className="mt20">
-              <Top name="topListAll" title="30天热门动漫" sty={{ padding: '10px 0' }} />
-            </div>
-            <div styleName="box" className="mt20">
-              <NewsYG name="newsAll" isCate={false} title="30天热门资讯" isType={true} sty={{ padding: '10px 0' }} />
+            <div className="mt20">
+              <SideBar />
             </div>
           </div>
         </div>
