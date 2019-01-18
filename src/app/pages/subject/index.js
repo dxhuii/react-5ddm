@@ -10,17 +10,17 @@ import { hits } from '@/store/actions/hits'
 import { getDetail, getScore } from '@/store/reducers/detail'
 import { getUserInfo } from '@/store/reducers/user'
 
-import PlayList from '@/components/PlayList'
-import DetailActor from '@/components/DetailActor'
-import NewsYG from '@/components/News/yugao'
-import Top from '@/components/Top'
-import NewsText from '@/components/Subject/NewsText'
-import NewsPic from '@/components/Subject/NewsPic'
-import EpList from '@/components/Subject/EpList'
-import Comment from '@/components/Comment'
-import Share from '@/components/Share'
-import Tating from '@/components/Tating'
 import Loading from '@/components/Ui/Loading'
+import Comment from '@/components/Comment'
+import DetailActor from '@/components/DetailActor'
+import EpList from '@/components/Subject/EpList'
+import NewsPic from '@/components/Subject/NewsPic'
+import NewsText from '@/components/Subject/NewsText'
+import NewsYG from '@/components/News/yugao'
+import PlayList from '@/components/PlayList'
+import Share from '@/components/Share'
+import Top from '@/components/Top'
+import Tating from '@/components/Tating'
 import Meta from '@/components/Meta'
 
 import Shell from '@/components/Shell'
@@ -289,8 +289,8 @@ class Bangumi extends Component {
               {director.length > 0 ? (
                 <p>
                   导演：
-                  {director.map(item => (
-                    <span key={item.title}>{item.title}</span>
+                  {director.map((item, index) => (
+                    <span key={`${item.title}_${index}`}>{item.title}</span>
                   ))}
                 </p>
               ) : null}
