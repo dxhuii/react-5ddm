@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -10,10 +10,8 @@ import { hits } from '@/store/actions/hits'
 
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
-import Share from '@/components/Share'
-import NewsYG from '@/components/News/yugao'
-import Top from '@/components/Top'
-import ArticleVod from './Vod'
+import SideBar from '@/components/SideBar'
+import TagShare from '@/components/TagShare'
 
 import play from '@/utils/play'
 
@@ -148,20 +146,7 @@ class Article extends Component {
               <div styleName="article-content" dangerouslySetInnerHTML={{ __html: content }} />
             )}
 
-            <div styleName="article-tool" className="mt20">
-              {tag.length > 0 ? (
-                <div styleName="article-tool__tag">
-                  {tag.map(item => (
-                    <Link to={`/search/${item}`} key={item}>
-                      #{item}
-                    </Link>
-                  ))}
-                </div>
-              ) : null}
-              <div styleName="article-tool__share">
-                <Share data={shareConfig} />
-              </div>
-            </div>
+            <TagShare tag={tag} config={shareConfig} />
             <div styleName="article-context" className="mt20">
               {prev ? (
                 <p>
@@ -176,15 +161,11 @@ class Article extends Component {
             </div>
           </article>
         </div>
-        <div styleName="article-right" className="fr" style={cid === 205 ? { display: 'none' } : {}}>
-          {vodid ? <ArticleVod ids={vodid} /> : null}
-          <div styleName="box">
-            <Top name="topListAll" title="30天热门动漫" sty={{ padding: '10px 0' }} />
+        {cid === 205 ? null : (
+          <div styleName="article-right" className="fr">
+            <SideBar vodid={vodid} />
           </div>
-          <div styleName="box" className="mt20">
-            <NewsYG name="newsAll" isCate={false} title="30天热门资讯" isType={true} sty={{ padding: '10px 0' }} />
-          </div>
-        </div>
+        )}
       </div>
     )
   }

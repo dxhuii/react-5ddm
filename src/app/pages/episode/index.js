@@ -11,7 +11,9 @@ import { hits } from '@/store/actions/hits'
 import Detail from '@/components/Detail'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
-import Share from '@/components/Share'
+
+import SideBar from '@/components/SideBar'
+import TagShare from '@/components/TagShare'
 
 import './style.scss'
 
@@ -105,22 +107,13 @@ class Episode extends Component {
         </Meta>
         <div styleName="article-left" className="fl">
           <article styleName="article-body">
-            <div styleName="article-head">
-              <h1>
-                <Link to={`/subject/${vid}`}>{vTitle}</Link> {name} {title}
-              </h1>
-            </div>
+            <h1>
+              <Link to={`/subject/${vid}`}>{vTitle}</Link> {name} {title}
+            </h1>
             <div styleName="article-content" className="clearfix">
               {((!p ? vContent : content) || '').replace('&nbsp; ', '').replace('&nbsp; ', '')}
             </div>
-            <div styleName="article-tool" className="mt20">
-              <div styleName="article-tool__tag">
-                <Link to={`/subject/${vid}`}>#{vTitle}</Link>
-              </div>
-              <div styleName="article-tool__share">
-                <Share data={shareConfig} />
-              </div>
-            </div>
+            <TagShare tag={[vTitle]} config={shareConfig} />
             {!p && storyNum <= 1 ? null : (
               <div styleName="article-context" className="mt10">
                 {prev ? <Link to={`/episode/${id}/${prev}`}>上一集</Link> : null}
@@ -129,22 +122,27 @@ class Episode extends Component {
             )}
           </article>
         </div>
-        <div styleName="article-right" className="fl">
-          <Detail title={vTitle} pic={pic} gold={gold} vid={vid} />
-          <ul styleName={`eplist ${epMore ? 'auto' : ''}`}>
-            <li styleName={!p ? 'active' : ''}>
-              <Link to={`/episode/${id}`}>全部</Link>
-            </li>
-            {this.showList(id, storyNum, p)}
-          </ul>
-          {p > 19 ? (
-            <div onClick={this.epMore} styleName="eplist-more">
-              {epMore ? '收起' : '更多'}
-            </div>
-          ) : null}
-          <Link styleName="go-detail" to={`/subject/${vid}`}>
-            去 {vTitle}
-          </Link>
+        <div styleName="article-right" className="fr">
+          <div styleName="box">
+            <Detail title={vTitle} pic={pic} gold={gold} vid={vid} />
+            <ul styleName={`eplist ${epMore ? 'auto' : ''}`}>
+              <li styleName={!p ? 'active' : ''}>
+                <Link to={`/episode/${id}`}>全部</Link>
+              </li>
+              {this.showList(id, storyNum, p)}
+            </ul>
+            {p > 19 ? (
+              <div onClick={this.epMore} styleName="eplist-more">
+                {epMore ? '收起' : '更多'}
+              </div>
+            ) : null}
+            <Link styleName="go-detail" to={`/subject/${vid}`}>
+              去 {vTitle}
+            </Link>
+          </div>
+          <div className="mt20">
+            <SideBar />
+          </div>
         </div>
       </div>
     )

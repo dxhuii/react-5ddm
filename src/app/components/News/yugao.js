@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
@@ -46,6 +46,12 @@ class NewsYG extends Component {
         break
       case 217:
         type = 3
+        break
+      case 211:
+        type = 4
+        break
+      case 205:
+        type = 7
         break
     }
     return type

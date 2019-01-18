@@ -13,13 +13,12 @@ import { getUserInfo } from '@/store/reducers/user'
 import Loading from '@/components/Ui/Loading'
 import Comment from '@/components/Comment'
 import DetailActor from '@/components/DetailActor'
+import SideBar from '@/components/SideBar'
 import EpList from '@/components/Subject/EpList'
 import NewsPic from '@/components/Subject/NewsPic'
 import NewsText from '@/components/Subject/NewsText'
-import NewsYG from '@/components/News/yugao'
 import PlayList from '@/components/PlayList'
 import Share from '@/components/Share'
-import Top from '@/components/Top'
 import Tating from '@/components/Tating'
 import Meta from '@/components/Meta'
 
@@ -304,11 +303,8 @@ class Bangumi extends Component {
                 </p>
               ) : null}
             </div>
-            <div styleName="box" className="mt20">
-              <Top name="topListAll" title="30天热门动漫" sty={{ padding: '10px 0' }} />
-            </div>
-            <div styleName="box" className="mt20">
-              <NewsYG name="newsAll" isCate={false} title="30天热门资讯" isType={true} sty={{ padding: '10px 0' }} />
+            <div className="mt20">
+              <SideBar />
             </div>
           </div>
         </div>
