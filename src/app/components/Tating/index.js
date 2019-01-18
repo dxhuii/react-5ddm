@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -35,12 +35,7 @@ class Tating extends Component {
     this.state = {
       starWith: 16,
       star: 0,
-      starText: ['很差', '较差', '还行', '推荐', '力荐'],
-      width0: 0,
-      width1: 0,
-      width2: 0,
-      width3: 0,
-      width4: 0
+      starText: ['很差', '较差', '还行', '推荐', '力荐']
     }
   }
 
@@ -84,64 +79,39 @@ class Tating extends Component {
     return pfclass
   }
 
-  engine = (number, type) => {
-    let timer
-    let that = this
-    const step = 1
-    cancelAnimationFrame(timer)
-    timer = requestAnimationFrame(function fn() {
-      const w = that.state[`width${type}`]
-      if (w < number) {
-        that.setState({
-          [`width${type}`]: w + step > number ? number : w + step
-        })
-        timer = requestAnimationFrame(fn)
-      } else {
-        cancelAnimationFrame(timer)
-      }
-    })
-  }
-
   show(data, text) {
-    const { a, b, c, d, e, pinfen, pinfenb } = data
-    const total = a + b + c + d + e
-    const calc = val => ((val / total) * 100).toFixed(2)
-    const progressBar = (val, index) => {
-      {
-        this.engine(calc(val), index)
-      }
-      return <div styleName="progress-bar" style={{ width: this.state[`width${index}`] }} />
-    }
-    const scoreArr = [a, b, c, d, e]
-    return (
-      <Fragment>
-        {pinfenb > 0 && total > 0 ? (
-          <div styleName="rating" className="pr">
-            <h4>评分</h4>
-            <div styleName="rating-num">
-              <strong>{pinfen === '10.0' ? 10 : pinfen}</strong>
-              <span className={this.starClass(parseFloat(pinfen) * 5)} />
-              <span styleName="people">
-                <em>{total}</em>人评价
-              </span>
-            </div>
-            <ul styleName="rating-show" className="clearfix">
-              {scoreArr.map((item, index) => (
-                <li key={index}>
-                  <span>{text[scoreArr.length - (index + 1)]}</span>
-                  <div styleName="progress" title={`${calc(item)}%`}>
-                    {progressBar(item, index)}
-                  </div>
-                  <em>{item}人</em>
-                </li>
-              ))}
-            </ul>
+    const { a, b, c, d, e, pinfen } = data
+    if (pinfen > 0) {
+      const total = a + b + c + d + e
+      const calc = val => `${((val / total) * 100).toFixed(2)}%`
+      const progressBar = val => <div styleName="progress-bar" style={{ width: calc(val) }} />
+      const scoreArr = [a, b, c, d, e]
+      return (
+        <div styleName="rating" className="pr">
+          <h4>评分</h4>
+          <div styleName="rating-num">
+            <strong>{pinfen === '10.0' ? 10 : pinfen}</strong>
+            <span className={this.starClass(parseFloat(pinfen) * 5)} />
+            <span styleName="people">
+              <em>{total}</em>人评价
+            </span>
           </div>
-        ) : (
-          <div styleName="noscore">还没有评分</div>
-        )}
-      </Fragment>
-    )
+          <ul styleName="rating-show" className="clearfix">
+            {scoreArr.map((item, index) => (
+              <li key={index}>
+                <span>{text[scoreArr.length - (index + 1)]}</span>
+                <div styleName="progress" title={calc(item)}>
+                  {progressBar(item)}
+                </div>
+                <em>{item}人</em>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    } else {
+      return <div styleName="noscore">还没有评分</div>
+    }
   }
 
   move(index) {

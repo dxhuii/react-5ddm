@@ -134,10 +134,9 @@ class Bangumi extends Component {
       url: `/subject/${id}`
     }
     const rePic = formatPic(pic, 'orj360')
-    const star = (cmScore.data || {}).star || {}
-    const comment = (cmScore.data || {}).comment || {}
-    const { loveid, remindid } = star
-    const { curpingfen } = star
+    const csData = cmScore.data || {}
+    const { loveid, remindid, star, comment = [] } = csData
+    console.log(cmScore, 'comment')
     return (
       <Fragment>
         <div className="warp-bg">
@@ -200,9 +199,9 @@ class Bangumi extends Component {
                   </div>
                 </div>
               </div>
-              {curpingfen ? (
+              {star ? (
                 <div styleName="detail-score">
-                  <Tating data={curpingfen} id={id} uid={userid} sid={1} score={score} />
+                  <Tating data={star} id={id} uid={userid} sid={1} score={score} />
                 </div>
               ) : null}
             </div>
