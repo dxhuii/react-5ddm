@@ -35,7 +35,12 @@ class Tating extends Component {
     this.state = {
       starWith: 16,
       star: 0,
-      starText: ['很差', '较差', '还行', '推荐', '力荐']
+      starText: ['很差', '较差', '还行', '推荐', '力荐'],
+      width0: 0,
+      width1: 0,
+      width2: 0,
+      width3: 0,
+      width4: 0
     }
   }
 
@@ -79,11 +84,34 @@ class Tating extends Component {
     return pfclass
   }
 
+  engine = (number, type) => {
+    let timer
+    let that = this
+    const step = 1
+    cancelAnimationFrame(timer)
+    timer = requestAnimationFrame(function fn() {
+      const w = that.state[`width${type}`]
+      if (w < number) {
+        that.setState({
+          [`width${type}`]: w + step > number ? number : w + step
+        })
+        timer = requestAnimationFrame(fn)
+      } else {
+        cancelAnimationFrame(timer)
+      }
+    })
+  }
+
   show(data, text) {
     const { a, b, c, d, e, pinfen, pinfenb } = data
     const total = a + b + c + d + e
-    const calc = val => `${((val / total) * 100).toFixed(2)}%`
-    const progressBar = val => <div styleName="progress-bar" style={{ width: calc(val) }} />
+    const calc = val => ((val / total) * 100).toFixed(2)
+    const progressBar = (val, index) => {
+      {
+        this.engine(calc(val), index)
+      }
+      return <div styleName="progress-bar" style={{ width: this.state[`width${index}`] }} />
+    }
     const scoreArr = [a, b, c, d, e]
     return (
       <Fragment>
@@ -101,8 +129,8 @@ class Tating extends Component {
               {scoreArr.map((item, index) => (
                 <li key={index}>
                   <span>{text[scoreArr.length - (index + 1)]}</span>
-                  <div styleName="progress" title={calc(item)}>
-                    {progressBar(item)}
+                  <div styleName="progress" title={`${calc(item)}%`}>
+                    {progressBar(item, index)}
                   </div>
                   <em>{item}人</em>
                 </li>
