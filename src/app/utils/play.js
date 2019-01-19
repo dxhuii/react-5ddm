@@ -109,7 +109,7 @@ const ck = (type, pv) => {
   if (['qq', 'pptv', 'iqiyi'].indexOf(type) !== -1) {
     return mdparse + type + '&id=' + pv.split(/\/,|_/)[0]
   } else if (type === 'sohu' || type === 'letv') {
-    return this.isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
+    return isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
   } else if (type === 'bitqiu') {
     return '//www.acgnz.cn/api/pan.php?url=vbit?v=' + pv
   } else if (type === 'yunpan') {
