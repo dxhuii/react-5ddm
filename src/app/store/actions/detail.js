@@ -37,7 +37,7 @@ export function score({ id, sid, uid }) {
     return loadData({
       dispatch,
       getState,
-      name: `${id}_${sid}_${uid}`,
+      name: `score_${id}`,
       reducerName: 'detail',
       actionType: 'GET_SCORE',
       api: 'score',

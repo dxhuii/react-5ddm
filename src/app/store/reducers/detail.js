@@ -1,7 +1,7 @@
 import merge from 'lodash/merge'
 
 export default function detail(state = {}, action = {}) {
-  const { id, sid, uid, name, data } = action
+  const { name, data } = action
   switch (action.type) {
     case 'GET_DETAIL':
       state[name] = data
@@ -21,8 +21,8 @@ export const getDetail = (state, name) => {
   return state.detail[name] ? state.detail[name] : {}
 }
 
-export const getScore = (state, id, sid, uid) => {
-  const ids = `${id}_${sid}_${uid}`
+export const getScore = (state, id) => {
+  const ids = `score_${id}`
   return state.detail[ids] ? state.detail[ids] : {}
 }
 
