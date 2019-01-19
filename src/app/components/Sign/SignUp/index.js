@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { signUp } from '@/store/actions/user'
 
-import '../SignIn/style.scss'
+import '../style.scss'
 
 @withRouter
 @connect(
@@ -63,40 +63,37 @@ class SignIn extends Component {
 
   render() {
     return (
-      <div styleName="container">
-        <form onSubmit={this.submit}>
-          <h1>注册</h1>
-          <input
-            type="text"
-            ref={c => {
-              this.username = c
-            }}
-            placeholder="请输入昵称"
-          />
-          <input
-            type="text"
-            ref={c => {
-              this.email = c
-            }}
-            placeholder="请输入Email"
-          />
-          <input
-            type="password"
-            ref={c => {
-              this.password = c
-            }}
-            placeholder="请输入密码"
-          />
-          <input
-            type="password"
-            ref={c => {
-              this.rePassword = c
-            }}
-            placeholder="再输入一次密码"
-          />
-          <button type="submit">注册</button>
-        </form>
-      </div>
+      <form onSubmit={this.submit}>
+        <input
+          type="text"
+          ref={c => {
+            this.username = c
+          }}
+          placeholder="请输入账号"
+        />
+        <input
+          type="text"
+          ref={c => {
+            this.email = c
+          }}
+          placeholder="请输入Email"
+        />
+        <input
+          type="password"
+          ref={c => {
+            this.password = c
+          }}
+          placeholder="请输入密码"
+        />
+        <input
+          type="password"
+          ref={c => {
+            this.rePassword = c
+          }}
+          placeholder="再输入一次密码"
+        />
+        <button type="submit">注册</button>
+      </form>
     )
   }
 }
