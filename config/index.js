@@ -72,6 +72,7 @@ let config = {
 // 开发环境配置
 if (process.env.NODE_ENV === 'development') {
   config.debug = true
+  config.port = 4000
   config.CLASS_SCOPED_NAME = '[name]_[local]__[hash:base64:5]'
   config.DOMAIN = '//localhost:4000'
   config.public_path = 'http://localhost:4000'
