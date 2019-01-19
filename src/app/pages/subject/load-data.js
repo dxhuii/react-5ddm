@@ -1,10 +1,11 @@
-import { detail } from '@/store/actions/detail'
+import { detail, score } from '@/store/actions/detail'
 import { playlist } from '@/store/actions/playlist'
 
-export default ({ store, match }) => {
+export default ({ store, match, user }) => {
   return new Promise(async function(resolve, reject) {
     const { id } = match.params
     await detail({ id })(store.dispatch, store.getState)
+    await score({ id, sid: 1, uid: user.userid })(store.dispatch, store.getState)
     await playlist({ id })(store.dispatch, store.getState)
     resolve({ code: 200 })
   })
