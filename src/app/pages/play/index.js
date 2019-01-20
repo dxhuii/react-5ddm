@@ -61,6 +61,11 @@ class Play extends Component {
     if (!player || !player.data) {
       playerLoad({ id, pid })
     }
+    document.onkeyup = event => {
+      if (event.which == '27') {
+        this.isFull()
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -137,7 +142,13 @@ class Play extends Component {
       <Fragment>
         <div styleName="player">
           <div styleName="wp" className="pt20">
-            <Meta title={`${title} ${subTitle}在线播放 - ${listName}${listNameBig}`} />
+            <Meta title={`${title} ${subTitle}在线播放 - ${listName}${listNameBig}`}>
+              <meta name="keywords" content={`${title}${subTitle},${title}在线观看,动画${title}`} />
+              <meta
+                name="description"
+                content={`9站为您提供${listName}${listNameBig}${title}${subTitle}在线观看。喜欢${title}${subTitle}，就推荐给小伙伴们吧！`}
+              />
+            </Meta>
             <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
               <div dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
               {isfull ? (

@@ -58,6 +58,11 @@ class Article extends Component {
       article({ id })
     }
     hits({ id, sid: 2 })
+    document.onkeyup = event => {
+      if (event.which == '27') {
+        this.isFull()
+      }
+    }
   }
 
   isFull = () => {
@@ -142,10 +147,8 @@ class Article extends Component {
                   </a>
                 ) : null}
               </div>
-            ) : (
-              <div styleName="article-content" dangerouslySetInnerHTML={{ __html: content }} />
-            )}
-
+            ) : null}
+            <div styleName="article-content" dangerouslySetInnerHTML={{ __html: content }} />
             <TagShare tag={tag} config={shareConfig} />
             <div styleName="article-context" className="mt20">
               {prev ? (

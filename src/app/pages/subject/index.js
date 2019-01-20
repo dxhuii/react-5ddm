@@ -98,7 +98,7 @@ class Bangumi extends Component {
       id,
       cid,
       title,
-      content,
+      content = '',
       listName,
       listNameBig,
       pic = '',
@@ -108,7 +108,7 @@ class Bangumi extends Component {
       gold,
       filmtime,
       total,
-      language,
+      language = '',
       company,
       keywords,
       website,
@@ -120,6 +120,7 @@ class Bangumi extends Component {
       storyId,
       actorId,
       repairtitle,
+      vod_pantitle,
       mcid = [],
       original = [],
       director = [],
@@ -127,31 +128,46 @@ class Bangumi extends Component {
       newsTextlist = [],
       newsPiclist = []
     } = data
-    const shareConfig = {
-      pic,
-      title: `${title}${language ? `(${language})` : ''} - ${listName}${listNameBig}`,
-      desc: content,
-      url: `/subject/${id}`
-    }
     const rePic = formatPic(pic, 'orj360')
     const csData = cmScore.data || {}
     const { loveid, remindid, star, comment = [] } = csData
     console.log(cmScore, 'comment')
+    const reContent = `${content.substring(0, 120)}${content.length > 120 ? '...' : ''}`
+    const shareConfig = {
+      pic,
+      title: `${title}${language ? `(${language})` : ''} - ${listName}${listNameBig}`,
+      desc: reContent,
+      url: `/subject/${id}`
+    }
     return (
       <Fragment>
         <div className="warp-bg">
           {loading ? <Loading /> : null}
-          <Meta title={`${title}${repairtitle ? `_${repairtitle}` : ''} - ${listName}${listNameBig}`}>
+          <Meta
+            title={`${title}全集在线观看${repairtitle && repairtitle !== '讨论帖' ? `_${repairtitle}` : ''}${
+              vod_pantitle ? '_百度云盘下载' : ''
+            } - ${listName}${listNameBig}`}
+          >
+            <meta name="description" content={`《${title}》讲述${reContent}`} />
+            <meta
+              name="keywords"
+              content={`${title},${title}动漫,${title}下载${
+                vod_pantitle ? `,${title}百度云盘下载` : ''
+              },${title}全集,${title}动画片,${title}在线观看${keywords ? `,${keywords}` : ''}`}
+            />
             <meta property="og:locale" content="zh_CN" />
             <meta property="og:type" content="videolist" />
             <meta property="og:title" content={title} />
-            <meta property="og:description" content={content} />
+            <meta property="og:description" content={reContent} />
             <meta property="og:image" content={rePic} />
             <meta property="og:url" content={`/subject/${id}`} />
             <meta property="og:video" content={`/play/${id}/1`} />
             <meta property="og:site_name" content={'9站'} />
-            <meta name="description" content={content} />
-            <meta name="keywords" content={keywords} />
+            <meta property="og:video:actor" content={actor} />
+            <meta property="og:video:area" content={area} />
+            <meta property="og:video:class" content={`${listName}${mcid.length > 0 ? mcid.map(item => item.title).join(',') : ''}`} />
+            <meta property="og:video:language" content={language} />
+            <meta property="og:video:update_date" content={updateDate} />
           </Meta>
           <div styleName="detail">
             <div styleName="detail-blur" style={{ backgroundImage: `url(${rePic})` }} />
@@ -243,6 +259,16 @@ class Bangumi extends Component {
                   <h2>预告片·OP·ED·BGM·MAD·CM·特典 · · · · · ·</h2>
                 </div>
                 <NewsText data={newsTextlist} />
+              </div>
+            ) : null}
+            {content ? (
+              <div className="mt10">
+                <div styleName="title">
+                  <h2>简介</h2>
+                </div>
+                <div styleName="detail-content" className="mt10">
+                  {content}
+                </div>
               </div>
             ) : null}
             {storyId && storylist.length > 0 ? (

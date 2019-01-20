@@ -106,7 +106,7 @@ const acfun = pv => {
 const ck = (type, pv) => {
   const flvsp = 'https://api.flvsp.com/?type='
   const mdparse = 'https://www.acgnz.cn/mdparse/?type='
-  if (['qq', 'pptv', 'iqiyi'].indexOf(type) !== -1) {
+  if (['pptv', 'iqiyi'].indexOf(type) !== -1) {
     return mdparse + type + '&id=' + pv.split(/\/,|_/)[0]
   } else if (type === 'sohu') {
     return isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
@@ -160,7 +160,7 @@ const rePlayUrl = (playname, pv) => {
       break
     case 'iqiyi':
       sName = 'iqiyi'
-      sVid = pv.indexOf('&tvid=') != -1 ? pv.split('&tvid=')[1] + ',' + pv.split('&tvid=')[0] : pv
+      sVid = (pv.indexOf('&tvid=') != -1 ? pv.split('&tvid=')[1] + ',' + pv.split('&tvid=')[0] : pv).split(',')[0]
       break
     case 'sohu':
       data = pv.split('_')
