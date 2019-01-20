@@ -7,6 +7,8 @@ import { connect } from 'react-redux'
 
 import { mark } from '@/store/actions/mark'
 
+import Toast from '@/components/Toast'
+
 import './style.scss'
 
 @withRouter
@@ -48,6 +50,7 @@ class Tating extends Component {
     let [err, data] = await mark({ id, val: index })
     if (data.rcode === 1) {
       score({ id, sid, uid })
+      Toast.success('评分成功')
     }
   }
 

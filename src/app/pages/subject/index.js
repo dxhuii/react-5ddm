@@ -20,7 +20,11 @@ import NewsText from '@/components/Subject/NewsText'
 import PlayList from '@/components/PlayList'
 import Share from '@/components/Share'
 import Tating from '@/components/Tating'
+import Modal from '@/components/Modal'
+import Sign from '@/components/Sign'
 import Meta from '@/components/Meta'
+
+import Toast from '@/components/Toast'
 
 import Shell from '@/components/Shell'
 
@@ -56,6 +60,14 @@ class Bangumi extends Component {
     like: PropTypes.func
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      visible: false,
+      isSign: 'signIn'
+    }
+  }
+
   componentDidMount() {
     const {
       match: {
@@ -80,14 +92,49 @@ class Bangumi extends Component {
 
   async addMark(type, id, cid, uid) {
     console.log(type, id, cid, uid)
-    const { like, score } = this.props
-    let [, data] = await like({ type, id, cid, uid })
-    if (data.rcode === 1) {
-      score({ id, sid: 1, uid })
+
+    const {
+      like,
+      score,
+      userinfo: { userid },
+      cmScore
+    } = this.props
+    const csData = cmScore.data || {}
+    const { loveid, remindid } = csData
+    if (userid) {
+      let [, data] = await like({ type, id, cid, uid })
+      if (data.rcode === 1) {
+        score({ id, sid: 1, uid })
+        Toast.success(type === 'remind' ? (remindid ? '取消追番' : '追番成功') : loveid ? '取消收藏' : '收藏成功')
+      }
+    } else {
+      this.setState({
+        visible: true
+      })
     }
   }
 
+  showModal = () => {
+    this.setState({
+      visible: true
+    })
+  }
+
+  onType = isSign => {
+    this.setState({
+      isSign,
+      visible: true
+    })
+  }
+
+  closeModal = () => {
+    this.setState({
+      visible: false
+    })
+  }
+
   render() {
+    const { visible, isSign } = this.state
     const {
       info: { data = {}, loading },
       userinfo: { userid },
@@ -131,7 +178,7 @@ class Bangumi extends Component {
     const rePic = formatPic(pic, 'orj360')
     const csData = cmScore.data || {}
     const { loveid, remindid, star, comment = [] } = csData
-    console.log(cmScore, 'comment')
+    // console.log(cmScore, 'comment')
     const reContent = `${content.substring(0, 120)}${content.length > 120 ? '...' : ''}`
     const shareConfig = {
       pic,
@@ -163,11 +210,13 @@ class Bangumi extends Component {
             <meta property="og:url" content={`/subject/${id}`} />
             <meta property="og:video" content={`/play/${id}/1`} />
             <meta property="og:site_name" content={'9站'} />
+            <meta property="og:video:score" content={gold} />
             <meta property="og:video:actor" content={actor} />
             <meta property="og:video:area" content={area} />
             <meta property="og:video:class" content={`${listName}${mcid.length > 0 ? mcid.map(item => item.title).join(',') : ''}`} />
             <meta property="og:video:language" content={language} />
             <meta property="og:video:update_date" content={updateDate} />
+            <meta property="og:video:content_type" content="6" />
           </Meta>
           <div styleName="detail">
             <div styleName="detail-blur" style={{ backgroundImage: `url(${rePic})` }} />
@@ -335,6 +384,9 @@ class Bangumi extends Component {
             </div>
           </div>
         </div>
+        <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
+          <Sign isSign={isSign} onType={val => this.onType(val)} />
+        </Modal>
       </Fragment>
     )
   }

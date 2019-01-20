@@ -11,7 +11,6 @@ export default function detailActor(state = {}, action = {}) {
   }
 }
 
-export const getDetailActor = (state, actor, no) => {
-  const ids = `${actor}-${no}`
-  return state.detailActor[ids] ? state.detailActor[ids] : {}
+export const getDetailActor = (state, no) => {
+  return state.detailActor[no] ? state.detailActor[no] : {}
 }

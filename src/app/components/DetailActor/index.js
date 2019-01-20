@@ -14,7 +14,7 @@ import './style.scss'
 @withRouter
 @connect(
   (state, props) => ({
-    info: getDetailActor(state, props.actor, props.no)
+    info: getDetailActor(state, props.no, props.actor)
   }),
   dispatch => ({
     detailActor: bindActionCreators(detailActor, dispatch)

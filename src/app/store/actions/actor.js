@@ -5,7 +5,7 @@ export function detailActor({ actor, no }) {
     return loadData({
       dispatch,
       getState,
-      name: `${actor}-${no}`,
+      name: no,
       reducerName: 'detailActor',
       actionType: 'GET_DETAIL_ACTOR',
       api: 'list',

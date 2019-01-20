@@ -1,5 +1,6 @@
 import Ajax from '@/common/ajax'
 import config from '@/utils/config'
+import Toast from '@/components/Toast'
 
 export function loadUserInfo({ uid }) {
   return (dispatch, getState) => {
@@ -44,7 +45,7 @@ export function saveCookie(params, name) {
         resolve(['sign error'])
       }
     } else {
-      resolve([data])
+      Toast.error(data.msg)
     }
   })
 }
