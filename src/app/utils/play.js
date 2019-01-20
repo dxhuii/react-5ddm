@@ -108,7 +108,7 @@ const ck = (type, pv) => {
   const mdparse = 'https://www.acgnz.cn/mdparse/?type='
   if (['qq', 'pptv', 'iqiyi'].indexOf(type) !== -1) {
     return mdparse + type + '&id=' + pv.split(/\/,|_/)[0]
-  } else if (type === 'sohu' || type === 'letv') {
+  } else if (type === 'sohu') {
     return isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
   } else if (type === 'bitqiu') {
     return '//www.acgnz.cn/api/pan.php?url=vbit?v=' + pv
@@ -118,6 +118,8 @@ const ck = (type, pv) => {
     return '//www.acgnz.cn/api/pan.php?url=vbithls?v=' + pv
   } else if (type === 'bit') {
     return '//www.acgnz.cn/api/bit.php?id=' + pv
+  } else if (type === 'qqq') {
+    return '//www.acgnz.cn/api/qqquan.php?id=' + pv
   } else {
     return flvsp + type + '&id=' + pv
   }
@@ -256,7 +258,7 @@ export default {
       pv = data[0]
     }
     const isCk = /.html|.shtml|.htm|https:\/\/|http:\/\/|.mp4|.m3u8/.test(pv) || name === 'full' || !is9
-    const playStyle = /acku|sina|letvsaas|weibo|miaopai|tudou|letvyun|bitqiu|yunpan|bit|bithls/.test(name)
+    const playStyle = /acku|sina|letvsaas|weibo|miaopai|tudou|letvyun|bitqiu|yunpan|bit|bithls|qqq/.test(name)
     if ((/.mp4|.m3u8/.test(pv) || playStyle) && is9) {
       url = HTML('/')
     } else if (isCk) {
