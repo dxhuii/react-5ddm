@@ -329,7 +329,7 @@ class Bangumi extends Component {
               </div>
             ) : null}
             {newsPiclist.length > 0 ? (
-              <div>
+              <div className="mt10">
                 <div styleName="title">
                   <h2>新闻花絮</h2>
                 </div>
