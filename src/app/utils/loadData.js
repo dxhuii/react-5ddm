@@ -31,11 +31,13 @@ export default ({
     if (!Reflect.has(list, 'data')) list.data = []
 
     // 添加页面page
-    if (!Reflect.has(list, 'page') && isPage) {
-      list.page = 1
-    } else if (isPage) {
-      // 如果以及存在筛选条件，那么下次请求，进行翻页
-      list.page += 1
+    if (isPage) {
+      if (!Reflect.has(list, 'page')) {
+        list.page = 1
+      } else {
+        // 如果以及存在筛选条件，那么下次请求，进行翻页
+        list.page += 1
+      }
     }
 
     list.loading = true
@@ -59,7 +61,7 @@ export default ({
     list.params = params
     list.loading = false
 
-    list.more = (data.count === list.data.length || data.count === 0) && isPage
+    if (isPage) list.more = data.count === list.data.length || data.count === 0
 
     if (actionType) dispatch({ type: actionType, name, data: list })
 

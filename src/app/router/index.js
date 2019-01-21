@@ -17,6 +17,7 @@ import newsData from '@/pages/news/load-data'
 import articleData from '@/pages/article/load-data'
 import timeData from '@/pages/time/load-data'
 import episodeData from '@/pages/episode/load-data'
+import monthData from '@/pages/month/load-data'
 
 /**
  * 创建路由
@@ -237,6 +238,18 @@ export default (user, logPageView = () => {}) => {
       }),
       enter: triggerEnter,
       loadData: episodeData
+    },
+
+    {
+      path: '/month/:month',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('@/pages/month'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter,
+      loadData: monthData
     },
 
     {

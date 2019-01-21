@@ -22,6 +22,7 @@ export default {
      */
     list: `${API}list-id-3`, // 列表接口
     listNoId: `${API}list`, // 列表接口
+    month: `${API}month-id-3`, // 月份追番表
     newslist: `${API}newsList`, // 新闻列表接口
     // id: 视频ID cid: 分类ID
     love: `${API}love`, // 收藏

@@ -1,0 +1,49 @@
+.box {
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+.year {
+  display: flex;
+  li {
+    position: relative;
+    height: 36px;
+    line-height: 36px;
+    width: 63px;
+    text-align: center;
+    cursor: pointer;
+    span {
+      display: block;
+    }
+    &.cur {
+      color: #0084ff;
+      background-color: #fff;
+      margin-bottom: -1px;
+      span {
+        border-bottom: 1px solid #0084ff;
+      }
+    }
+  }
+  border-bottom: 1px solid #ebebeb;
+}
+
+.month {
+  display: flex;
+  background-color: #fff;
+  padding: 10px 0;
+  text-align: center;
+  a {
+    margin: 0 15px;
+    width: 70px;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 5px;
+    &.cur {
+      color: #fff;
+      background-color: #0084ff;
+    }
+  }
+}
