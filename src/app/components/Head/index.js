@@ -111,7 +111,7 @@ class Head extends Component {
               <NavLink styleName={url === '/top' ? 'active' : ''} exact to="/top">
                 排行榜
               </NavLink>
-              <NavLink styleName={url === '/month' ? 'active' : ''} exact to="/month">
+              <NavLink styleName={url.indexOf('/month') !== -1 ? 'active' : ''} exact to="/month/201901">
                 新番表
               </NavLink>
               <NavLink styleName={url === '/new' ? 'active' : ''} exact to="/new">
