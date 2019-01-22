@@ -12,7 +12,7 @@ export default function list(state = {}, action = {}) {
   }
 }
 
-export const getList = (state, stateId, id, mcid, year, area, wd, letter, lz, day, order, limit) => {
-  const ids = `${stateId}${id}${mcid}${year}${area}${wd}${letter}${lz}${day}${order}${limit}`
+export const getList = (state, id, mcid, year, area, wd, letter, lz, order) => {
+  const ids = `${id}${mcid}${year}${area}${wd}${letter}${lz}${order}`
   return state.list[ids] ? state.list[ids] : {}
 }

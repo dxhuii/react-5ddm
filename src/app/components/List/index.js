@@ -10,22 +10,23 @@ import Item from './Item'
 
 import './style.scss'
 
+function isEmpty(val, type) {
+  return val === '' || val === '-' ? (type ? 'addtime' : '') : val
+}
+
 @withRouter
 @connect(
   (state, props) => ({
     list: getList(
       state,
-      props.stateId || '',
-      props.id || '',
-      props.mcid || '',
-      props.year || '',
-      props.area || '',
-      props.wd || '',
-      props.letter || '',
-      props.lz || '',
-      props.day || '',
-      props.order || '',
-      props.limit || ''
+      props.id,
+      isEmpty(props.mcid),
+      isEmpty(props.year),
+      isEmpty(props.area),
+      isEmpty(props.wd),
+      isEmpty(props.letter),
+      isEmpty(props.lz),
+      isEmpty(props.order, 1)
     )
   }),
   dispatch => ({
@@ -35,9 +36,8 @@ import './style.scss'
 class List extends Component {
   constructor(props) {
     super(props)
-    const { stateId, id, mcid, year, area, wd, letter, lz, day, order, limit } = props
+    const { id, mcid, year, area, wd, letter, lz, order } = props
     this.state = {
-      stateId,
       id,
       mcid,
       year,
@@ -45,15 +45,12 @@ class List extends Component {
       wd,
       letter,
       lz,
-      day,
-      order,
-      limit
+      order
     }
     this.load = this.load.bind(this)
   }
 
   static propTypes = {
-    stateId: PropTypes.any,
     id: PropTypes.any,
     mcid: PropTypes.any,
     year: PropTypes.any,
@@ -61,9 +58,7 @@ class List extends Component {
     wd: PropTypes.string,
     letter: PropTypes.string,
     lz: PropTypes.any,
-    day: PropTypes.any,
     order: PropTypes.string,
-    limit: PropTypes.any,
     list: PropTypes.object,
     listLoad: PropTypes.func,
     scrollLoad: PropTypes.bool,
@@ -91,20 +86,20 @@ class List extends Component {
   }
 
   componentDidMount() {
-    const { list, scrollLoad, stateId } = this.props
+    const { list, scrollLoad, id } = this.props
     if (!list.data) this.load()
-    if (scrollLoad) ArriveFooter.add(stateId, this.load)
+    if (scrollLoad) ArriveFooter.add(id, this.load)
   }
 
   componentWillUnmount() {
-    const { scrollLoad, stateId } = this.props
-    if (scrollLoad) ArriveFooter.remove(stateId)
+    const { scrollLoad, id } = this.props
+    if (scrollLoad) ArriveFooter.remove(id)
   }
 
   async load() {
     const { listLoad } = this.props
-    const { stateId, id, mcid, year, area, wd, letter, lz, day, order, limit } = this.state
-    await listLoad({ stateId, id, mcid, year, area, wd, letter, lz, day, order, limit })
+    const { id, mcid, year, area, wd, letter, lz, order } = this.state
+    await listLoad({ id, mcid, year, area, wd, letter, lz, order })
   }
 
   render() {

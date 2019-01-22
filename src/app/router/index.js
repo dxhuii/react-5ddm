@@ -18,6 +18,8 @@ import articleData from '@/pages/article/load-data'
 import timeData from '@/pages/time/load-data'
 import episodeData from '@/pages/episode/load-data'
 import monthData from '@/pages/month/load-data'
+import topData from '@/pages/top/load-data'
+import newData from '@/pages/new/load-data'
 
 /**
  * 创建路由
@@ -250,6 +252,30 @@ export default (user, logPageView = () => {}) => {
       }),
       enter: triggerEnter,
       loadData: monthData
+    },
+
+    {
+      path: '/top',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('@/pages/top'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter,
+      loadData: topData
+    },
+
+    {
+      path: '/new',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('@/pages/new'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter,
+      loadData: newData
     },
 
     {

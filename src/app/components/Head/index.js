@@ -102,21 +102,21 @@ class Head extends Component {
               <NavLink styleName={url === '/' ? 'active' : ''} exact to="/">
                 首页
               </NavLink>
-              {/* <NavLink styleName={url === '/topics' ? 'active' : ''} exact to="/topics">
-              话题
-            </NavLink> */}
-              {/* <NavLink styleName={url === '/week' ? 'active' : ''} exact to="/week">
-              星期
-            </NavLink> */}
               <NavLink styleName={url === '/dongman' ? 'active' : ''} exact to="/dongman">
                 动漫
               </NavLink>
               <NavLink styleName={url === '/news' ? 'active' : ''} exact to="/news">
                 新闻
               </NavLink>
-              {/* <NavLink styleName={url === '/upload' ? 'active' : ''} exact to="/upload">
-              上传
-            </NavLink> */}
+              <NavLink styleName={url === '/top' ? 'active' : ''} exact to="/top">
+                排行榜
+              </NavLink>
+              <NavLink styleName={url === '/month' ? 'active' : ''} exact to="/month">
+                新番表
+              </NavLink>
+              <NavLink styleName={url === '/new' ? 'active' : ''} exact to="/new">
+                最近更新
+              </NavLink>
             </div>
             <div styleName="header-search">
               <form action={`/search/${wd}`}>

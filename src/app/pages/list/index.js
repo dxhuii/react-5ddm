@@ -32,9 +32,7 @@ class SubjectList extends Component {
       area: '',
       year: '',
       letter: '',
-      limit: 30,
       order: 'addtime',
-      day: 365,
       id: 3
     }
   }
@@ -160,25 +158,8 @@ class SubjectList extends Component {
     const {
       config: { data = {} }
     } = this.props
-    const {
-      id,
-      type,
-      mcid,
-      area,
-      year,
-      letter,
-      lz,
-      day,
-      order,
-      limit,
-      idName,
-      mcidName,
-      areaName,
-      yearName,
-      letterName,
-      lzName
-    } = this.state
-    const { wd, isSearch } = this.isSearch()
+    const { id, type, mcid, area, year, letter, lz, order, idName, mcidName, areaName, yearName, letterName, lzName } = this.state
+    const { wd = '', isSearch } = this.isSearch()
     const idArr = [{ title: '全部', name: '' }].concat((data.menu || {}).son || [])
     const mcidArr = [{ title: '全部', id: '' }].concat(data.mcid || [])
     const areaArr = this.formatArray(data.area)
@@ -259,20 +240,7 @@ class SubjectList extends Component {
             </ul>
           </div>
         </div>
-        <List
-          stateId="list"
-          id={id}
-          mcid={mcid}
-          year={year}
-          area={area}
-          wd={wd || ''}
-          letter={letter}
-          lz={lz}
-          day={day}
-          order={order}
-          limit={limit}
-          scrollLoad={true}
-        />
+        <List id={id} mcid={mcid} year={year} area={area} wd={wd} letter={letter} lz={lz} order={order} scrollLoad={true} />
       </Fragment>
     )
   }

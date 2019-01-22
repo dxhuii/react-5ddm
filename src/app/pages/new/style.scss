@@ -1,0 +1,39 @@
+@import '../../pages/_mixin';
+.newlist {
+  li {
+    display: flex;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ebebeb;
+    &:first-child {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    &:last-child {
+      border-bottom: none;
+    }
+    span {
+      display: inline-block;
+      &:nth-child(1) {
+        flex-grow: 1;
+        @include clamp(1);
+        color: #aaa;
+      }
+      &:nth-child(2) {
+        width: 100px;
+        text-align: center;
+      }
+      &:nth-child(3) {
+        width: 300px;
+        text-align: center;
+        a {
+          margin: 0 5px;
+        }
+      }
+      &:nth-child(4) {
+        text-align: right;
+        width: 150px;
+      }
+    }
+  }
+}

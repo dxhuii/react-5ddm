@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-import merge from 'lodash/merge'
 
 import user from './user'
 import week from './week'
@@ -20,6 +19,7 @@ import history from './history'
 import search from './search'
 import articleVod from './articleVod'
 import month from './month'
+import page from './page'
 
 let states = {
   user,
@@ -39,17 +39,10 @@ let states = {
   search,
   articleVod,
   month,
+  page,
   scroll: scroll(),
   history: history()
 }
-
-// 创建一个无数据的states，用于在服务端初始redux数据
-let _states = {}
-for (let i in states) {
-  _states[i] = merge({}, states[i](), {})
-}
-_states = JSON.stringify(_states)
-export const initialStateJSON = _states
 
 // reducer
 export default combineReducers(states)
