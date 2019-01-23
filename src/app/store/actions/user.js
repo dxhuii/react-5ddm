@@ -56,9 +56,9 @@ export function signIn({ username, password }) {
   }
 }
 
-export function signUp({ username, password, email }) {
+export function signUp({ username, password, email, validate }) {
   return dispatch => {
-    return saveCookie({ username, password, email }, 'reg')
+    return saveCookie({ username, password, email, validate }, 'reg')
   }
 }
 

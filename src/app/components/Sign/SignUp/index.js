@@ -67,17 +67,18 @@ class SignIn extends Component {
         window.location.reload()
         return false
       }, 300)
+    } else {
+      this.changeCode()
     }
   }
 
   changeCode = () => {
-    const timeStamp = new Date().getTime()
-    const rand = timeStamp + Math.random()
+    const rand = Math.random()
     this.setState({ rand })
   }
 
   render() {
-    const verify = `${config.api.verify}?rand=${this.state.rand}`
+    const verify = `${config.api.verify}?tm=${this.state.rand}`
     return (
       <form onSubmit={this.submit}>
         <input
