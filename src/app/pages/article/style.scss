@@ -1,16 +1,3 @@
-.article-left {
-  width: 880px;
-  background-color: #fff;
-  border-radius: 10px;
-  &.manhua {
-    width: 100%;
-  }
-}
-
-.article-right {
-  width: 300px;
-}
-
 .article-body {
   h1 {
     font-size: 24px;
@@ -82,11 +69,4 @@
   width: 100%;
   height: 100%;
   z-index: 9999;
-}
-
-.box {
-  background-color: #fff;
-  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
-  border-radius: 5px;
-  padding: 10px 20px;
 }

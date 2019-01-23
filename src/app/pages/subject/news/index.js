@@ -9,6 +9,8 @@ import { connect } from 'react-redux'
 import { vodNews } from '@/store/actions/detail'
 import { getVodNews } from '@/store/reducers/detail'
 
+import SideBar from '@/components/SideBar'
+
 @withRouter
 @connect(
   (state, props) => ({
@@ -84,13 +86,20 @@ class VodNews extends Component {
     } = this.props
     return (
       <Fragment>
-        {data.length > 0
-          ? data.map(item => (
-              <div key={item.id} style={{ height: 300 }}>
-                {item.id}
-              </div>
-            ))
-          : null}
+        <div className="wp clearfix">
+          <div className="left fl">
+            {data.length > 0
+              ? data.map(item => (
+                  <div key={item.id} style={{ height: 300 }}>
+                    {item.id}
+                  </div>
+                ))
+              : null}
+          </div>
+          <div className="right fr">
+            <SideBar />
+          </div>
+        </div>
       </Fragment>
     )
   }

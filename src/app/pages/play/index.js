@@ -10,8 +10,7 @@ import { getUserInfo } from '@/store/reducers/user'
 
 import PlayList from '@/components/PlayList'
 import DetailActor from '@/components/DetailActor'
-import NewsYG from '@/components/News/yugao'
-import Top from '@/components/Top'
+import SideBar from '@/components/SideBar'
 import Share from '@/components/Share'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
@@ -174,7 +173,7 @@ class Play extends Component {
     return (
       <Fragment>
         <div styleName="player">
-          <div styleName="wp" className="pt20">
+          <div className="wp pt20">
             <Meta title={`${title} ${subTitle}在线播放 - ${listName}${listNameBig}`}>
               <meta name="keywords" content={`${title}${subTitle},${title}在线观看,动画${title}`} />
               <meta
@@ -214,17 +213,17 @@ class Play extends Component {
                   </Link>
                 ))}
               </div>
-              <ul styleName="playlist">
+              {/* <ul styleName="playlist">
                 {list.map(item => (
                   <li key={item.playName} onClick={() => this.onPlay(item.vid, item.playName)}>
                     <i className={`playicon ${item.playName}`} />
                     {item.playTitle}
                   </li>
                 ))}
-              </ul>
+              </ul> */}
               <Share data={shareConfig} />
             </div>
-            <div>
+            {/* <div>
               <div>
                 <i className="iconfont">&#xe607;</i>
                 {up}
@@ -235,13 +234,13 @@ class Play extends Component {
               </div>
               {prev ? <Link to={`/play/${id}/${prev}`}>上一集</Link> : null}
               {next ? <Link to={`/play/${id}/${next}`}>下一集</Link> : null}
-            </div>
+            </div> */}
           </div>
         </div>
         <PlayList />
         <div className="mt20" />
-        <div className="clearfix" styleName="wp">
-          <div styleName="left" className="fl">
+        <div className="wp clearfix">
+          <div className="fl left box">
             <div className="mt20">
               <div styleName="title">
                 <h2>相关动漫</h2>
@@ -249,13 +248,8 @@ class Play extends Component {
               {id ? <DetailActor actor={actor} no={id} /> : null}
             </div>
           </div>
-          <div styleName="right" className="fr">
-            <div styleName="box">
-              <Top name="topListAll" title="30天热门动漫" sty={{ padding: '10px 0' }} />
-            </div>
-            <div styleName="box" className="mt20">
-              <NewsYG name="newsAll" isCate={false} title="30天热门资讯" isType={true} sty={{ padding: '10px 0' }} />
-            </div>
+          <div className="right fr">
+            <SideBar />
           </div>
         </div>
       </Fragment>

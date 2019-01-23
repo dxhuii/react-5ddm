@@ -1,8 +1,3 @@
-.wp {
-  margin: 0 auto;
-  width: 1240px;
-}
-
 .player {
   background-color: #222;
 }
@@ -98,20 +93,4 @@
     color: #ccc;
     border-radius: 12px;
   }
-}
-
-.left,
-.box {
-  background-color: #fff;
-  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
-  border-radius: 5px;
-  padding: 10px 20px;
-}
-
-.left {
-  width: 920px;
-}
-
-.right {
-  width: 300px;
 }

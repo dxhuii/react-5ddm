@@ -7,6 +7,9 @@ import Share from '@/components/Share'
 import './style.scss'
 
 export default class TagShare extends PureComponent {
+  static defaultProps = {
+    tag: []
+  }
   static propTypes = {
     tag: PropTypes.array,
     config: PropTypes.object
@@ -15,15 +18,13 @@ export default class TagShare extends PureComponent {
     const { tag, config } = this.props
     return (
       <div styleName="article-tool">
-        {tag.length > 0 ? (
-          <div styleName="article-tool__tag">
-            {tag.map(item => (
-              <Link to={`/search/${item}`} key={item}>
-                #{item}
-              </Link>
-            ))}
-          </div>
-        ) : null}
+        <div styleName="article-tool__tag">
+          {tag.map(item => (
+            <Link to={`/search/${item}`} key={item}>
+              #{item}
+            </Link>
+          ))}
+        </div>
         <div styleName="article-tool__share">
           <Share data={config} />
         </div>

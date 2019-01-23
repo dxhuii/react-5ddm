@@ -198,22 +198,6 @@
   color: #666;
 }
 
-.left,
-.box {
-  background-color: #fff;
-  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
-  border-radius: 5px;
-  padding: 10px 20px;
-}
-
-.left {
-  width: 920px;
-}
-
-.right {
-  width: 300px;
-}
-
 .playlist {
   padding-bottom: 20px;
 }
@@ -228,14 +212,16 @@
   margin-top: 10px;
 }
 
-.box {
-  padding-bottom: 20px;
-  .title {
-    margin-top: 10px;
-    padding-bottom: 10px;
-  }
-  p {
-    margin-top: 10px;
-    color: #8590A6;
+:global {
+  .box {
+    padding-bottom: 20px;
+    .title {
+      margin-top: 10px;
+      padding-bottom: 10px;
+    }
+    p {
+      margin-top: 10px;
+      color: #8590A6;
+    }
   }
 }

@@ -536,4 +536,15 @@
     border-radius: 5px;
     padding: 10px 20px;
   }
+  .left {
+    width: 920px;
+    background-color: #fff;
+    border-radius: 10px;
+    &.manhua {
+      width: 100%;
+    }
+  }
+  .right {
+    width: 300px;
+  }
 }

@@ -127,7 +127,7 @@ class Article extends Component {
           <meta name="description" content={remark} />
           <meta name="keywords" content={keywords} />
         </Meta>
-        <div styleName={`article-left ${cid === 205 ? 'manhua' : ''}`} className="fl">
+        <div className={`fl left ${cid === 205 ? 'manhua' : ''}`}>
           <article styleName="article-body">
             <div styleName="article-head">
               <h1>{title}</h1>
@@ -165,7 +165,7 @@ class Article extends Component {
           </article>
         </div>
         {cid === 205 ? null : (
-          <div styleName="article-right" className="fr">
+          <div className="fr right">
             <SideBar vodid={vodid} />
           </div>
         )}

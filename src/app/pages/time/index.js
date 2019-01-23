@@ -66,7 +66,7 @@ class Time extends Component {
             content={`{$sitename}为你提供了包括${listNameBig}${title}播出时间、${title}周几更新以及${title}播出周期希望你能喜欢`}
           />
         </Meta>
-        <div styleName="article-left" className="fl">
+        <div className="fl left">
           <article styleName="article-body">
             <h1>{title}</h1>
             <div styleName="article-content" className="clearfix">
@@ -127,7 +127,7 @@ class Time extends Component {
             <TagShare tag={[title]} config={shareConfig} />
           </article>
         </div>
-        <div styleName="article-right" className="fr">
+        <div className="fr right">
           <SideBar />
         </div>
       </div>

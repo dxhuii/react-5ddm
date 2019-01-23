@@ -105,7 +105,7 @@ class Episode extends Component {
           <meta name="keywords" content={`${vTitle}剧情,${vTitle}${name}剧情, ${vTitle}${name}${title}剧情`} />
           <meta name="description" content={`${vTitle}${name}${title}剧情介绍：${content}`} />
         </Meta>
-        <div styleName="article-left" className="fl">
+        <div className="fl left">
           <article styleName="article-body">
             <h1>
               <Link to={`/subject/${vid}`}>{vTitle}</Link> {name} {title}
@@ -122,7 +122,7 @@ class Episode extends Component {
             )}
           </article>
         </div>
-        <div styleName="article-right" className="fr">
+        <div className="fr right">
           <div styleName="box">
             <Detail title={vTitle} pic={pic} gold={gold} vid={vid} />
             <ul styleName={`eplist ${epMore ? 'auto' : ''}`}>
