@@ -4,23 +4,42 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { listLoad } from '@/store/actions/list'
 import { configLoad } from '@/store/actions/config'
 import { getConfig } from '@/store/reducers/config'
+import { getList } from '@/store/reducers/list'
 
-import List from '@/components/List'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
+import Item from '@/components/List/Item'
+
 import './style.scss'
+
+function isEmpty(val, type) {
+  return val === undefined || val === '' || val === '-' ? (type ? 'addtime' : '') : val
+}
 
 @Shell
 @withRouter
 @connect(
   (state, props) => ({
-    config: getConfig(state, 'list')
+    config: getConfig(state, 'list'),
+    list: getList(
+      state,
+      props.match.params.id || 3,
+      isEmpty(props.match.params.mcid),
+      isEmpty(props.match.params.year),
+      isEmpty(props.match.params.area),
+      isEmpty(props.match.params.wd),
+      isEmpty(props.match.params.letter),
+      isEmpty(props.match.params.lz),
+      isEmpty(props.match.params.order, 1)
+    )
   }),
   dispatch => ({
-    configLoad: bindActionCreators(configLoad, dispatch)
+    configLoad: bindActionCreators(configLoad, dispatch),
+    listLoad: bindActionCreators(listLoad, dispatch)
   })
 )
 class SubjectList extends Component {
@@ -28,14 +47,15 @@ class SubjectList extends Component {
     super(props)
     const {
       match: {
-        params: { name, mcid, area, year, letter, lz, order = 'addtime' },
+        params: { id = 3, name, mcid, area, year, letter, lz, order = 'addtime' },
         url
       }
     } = props
+    let params = {}
     if (name) {
       const id = this.getTypeId(name)
       const type = name
-      const params = Object.assign(
+      params = Object.assign(
         {},
         url.indexOf('type/') === -1
           ? { id, type }
@@ -51,22 +71,65 @@ class SubjectList extends Component {
             },
         {}
       )
-      this.state = params
+    } else {
+      params = {
+        id
+      }
     }
+    this.state = Object.assign({}, params, {
+      data: []
+    })
+    this.load = this.load.bind(this)
   }
 
   static propTypes = {
     location: PropTypes.object,
     match: PropTypes.object,
     configLoad: PropTypes.func,
+    listLoad: PropTypes.func,
     config: PropTypes.object,
-    history: PropTypes.object
+    history: PropTypes.object,
+    list: PropTypes.object
   }
 
   componentDidMount() {
-    const { config, configLoad } = this.props
+    const {
+      config,
+      configLoad,
+      match: {
+        params: { id }
+      }
+    } = this.props
     if (!config.data) {
       configLoad({ name: 'list' })
+    }
+    this.load()
+    ArriveFooter.add(id, this.load)
+  }
+
+  componentWillUnmount() {
+    const {
+      match: {
+        params: { id }
+      }
+    } = this.props
+    ArriveFooter.remove(id)
+  }
+
+  async load() {
+    const { listLoad } = this.props
+    const { id, mcid, year, area, wd = '', letter, lz, order } = this.state
+    const reMcid = isEmpty(mcid)
+    const reYear = isEmpty(year)
+    const reArea = isEmpty(area)
+    const reLetter = isEmpty(letter)
+    const reLz = isEmpty(lz)
+    const reOrder = isEmpty(order, 1)
+    let [, data] = await listLoad({ id, mcid: reMcid, year: reYear, area: reArea, wd, letter: reLetter, lz: reLz, order: reOrder })
+    if (data.data) {
+      this.setState({
+        data: data.data
+      })
     }
   }
 
@@ -121,6 +184,7 @@ class SubjectList extends Component {
           const path = `/type/${type || '-'}/${mcid || '-'}/${area || '-'}/${year || '-'}/${letter || '-'}/${lz || '-'}/${order}/`
           history.pushState(null, null, path)
         }
+        this.load()
       }
     )
   }
@@ -149,15 +213,17 @@ class SubjectList extends Component {
 
   render() {
     const {
-      config: { data = {} }
+      list: { loading },
+      config
     } = this.props
-    const { id, type, mcid, area, year, letter, lz, order, idName, mcidName, areaName, yearName, letterName, lzName } = this.state
+    const conf = config.data || {}
+    const { data, type, mcid, area, year, letter, lz, order, idName, mcidName, areaName, yearName, letterName, lzName } = this.state
     const { wd = '', isSearch } = this.isSearch()
-    const idArr = [{ title: '全部', name: '' }].concat((data.menu || {}).son || [])
-    const mcidArr = [{ title: '全部', id: '' }].concat(data.mcid || [])
-    const areaArr = this.formatArray(data.area)
-    const yearArr = this.formatArray(data.year)
-    const letterArr = this.formatArray(data.letter)
+    const idArr = [{ title: '全部', name: '' }].concat((conf.menu || {}).son || [])
+    const mcidArr = [{ title: '全部', id: '' }].concat(conf.mcid || [])
+    const areaArr = this.formatArray(conf.area)
+    const yearArr = this.formatArray(conf.year)
+    const letterArr = this.formatArray(conf.letter)
     const lzArr = [{ title: '全部', id: '' }, { title: '连载', id: 1 }, { title: '完结', id: 2 }]
     const orderArr = [{ title: '最新', id: 'addtime' }, { title: '评分', id: 'gold' }, { title: '热门', id: 'hits' }]
     const keyword = decodeURIComponent(wd)
@@ -233,7 +299,9 @@ class SubjectList extends Component {
             </ul>
           </div>
         </div>
-        <List id={id} mcid={mcid} year={year} area={area} wd={wd} letter={letter} lz={lz} order={order} scrollLoad={true} />
+        <div className="wp">
+          <Item data={data} />
+        </div>
       </Fragment>
     )
   }

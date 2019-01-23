@@ -70,7 +70,6 @@ class List extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log('1111')
     if (
       nextProps.id === prevState.id &&
       nextProps.year === prevState.year &&
@@ -82,6 +81,7 @@ class List extends Component {
     ) {
       return null
     }
+    console.log(nextProps, '11111')
     const { id, mcid, year, area, wd, letter, lz, order } = nextProps
     return { id, mcid, year, area, wd, letter, lz, order }
   }

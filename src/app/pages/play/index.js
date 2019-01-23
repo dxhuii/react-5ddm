@@ -182,14 +182,14 @@ class Play extends Component {
                 content={`9站为您提供${listName}${listNameBig}${title}${subTitle}在线观看。喜欢${title}${subTitle}，就推荐给小伙伴们吧！`}
               />
             </Meta>
-            {/* <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
+            <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
               <div dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
               {isfull ? (
                 <a onMouseOver={this.showFull} onClick={this.isFull}>
                   {full ? '退出全屏' : '网页全屏'}
                 </a>
               ) : null}
-            </div> */}
+            </div>
             {/* {userinfo.userid ? (
               <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
                 <div dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
@@ -240,7 +240,7 @@ class Play extends Component {
         </div>
         <PlayList />
         <div className="mt20" />
-        {/* <div className="clearfix" styleName="wp">
+        <div className="clearfix" styleName="wp">
           <div styleName="left" className="fl">
             <div className="mt20">
               <div styleName="title">
@@ -257,7 +257,7 @@ class Play extends Component {
               <NewsYG name="newsAll" isCate={false} title="30天热门资讯" isType={true} sty={{ padding: '10px 0' }} />
             </div>
           </div>
-        </div> */}
+        </div>
       </Fragment>
     )
   }
