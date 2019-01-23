@@ -206,21 +206,21 @@ class Play extends Component {
                 <Link to={`/subject/${id}`}>{title}</Link>：
               </h1>
               <h4>{subTitle}</h4>
-              <div styleName="mcid">
+              {/* <div styleName="mcid">
                 {mcid.map(item => (
                   <Link key={item.id} to={`/type/${this.getName(listId)}/${item.id}/-/-/-/-/-/`}>
                     {item.title}
                   </Link>
                 ))}
-              </div>
-              {/* <ul styleName="playlist">
+              </div> */}
+              <ul styleName="playlist">
                 {list.map(item => (
                   <li key={item.playName} onClick={() => this.onPlay(item.vid, item.playName)}>
                     <i className={`playicon ${item.playName}`} />
                     {item.playTitle}
                   </li>
                 ))}
-              </ul> */}
+              </ul>
               <Share data={shareConfig} />
             </div>
             {/* <div>
