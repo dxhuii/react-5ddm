@@ -11,7 +11,7 @@ import Item from './Item'
 import './style.scss'
 
 function isEmpty(val, type) {
-  return val === '' || val === '-' ? (type ? 'addtime' : '') : val
+  return val === undefined || val === '' || val === '-' ? (type ? 'addtime' : '') : val
 }
 
 @withRouter
@@ -70,6 +70,7 @@ class List extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    console.log('1111')
     if (
       nextProps.id === prevState.id &&
       nextProps.year === prevState.year &&
@@ -98,8 +99,14 @@ class List extends Component {
 
   async load() {
     const { listLoad } = this.props
-    const { id, mcid, year, area, wd, letter, lz, order } = this.state
-    await listLoad({ id, mcid, year, area, wd, letter, lz, order })
+    const { id, mcid, year, area, wd = '', letter, lz, order } = this.state
+    const reMcid = isEmpty(mcid)
+    const reYear = isEmpty(year)
+    const reArea = isEmpty(area)
+    const reLetter = isEmpty(letter)
+    const reLz = isEmpty(lz)
+    const reOrder = isEmpty(order, 1)
+    await listLoad({ id, mcid: reMcid, year: reYear, area: reArea, wd, letter: reLetter, lz: reLz, order: reOrder })
   }
 
   render() {

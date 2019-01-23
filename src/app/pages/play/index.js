@@ -12,6 +12,7 @@ import PlayList from '@/components/PlayList'
 import DetailActor from '@/components/DetailActor'
 import NewsYG from '@/components/News/yugao'
 import Top from '@/components/Top'
+import Share from '@/components/Share'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
@@ -127,17 +128,49 @@ class Play extends Component {
     })
   }
 
+  getName(id) {
+    let name = ''
+    switch (id) {
+      case 201:
+        name = 'tv'
+        break
+      case 202:
+        name = 'ova'
+        break
+      case 203:
+        name = 'juchang'
+        break
+      case 4:
+        name = 'tebie'
+        break
+      case 204:
+        name = 'zhenren'
+        break
+      case 35:
+        name = 'qita'
+        break
+      default:
+        name = 'list'
+        break
+    }
+    return name
+  }
+
   render() {
     const {
       // userinfo,
       player: { data = {} },
       match: {
-        params: { id }
+        params: { id, pid }
       }
     } = this.props
     const { full, isfull } = this.state
     const { title, subTitle, defaultPlay, playHtml, list } = this.getData(data)
-    const { listName, listNameBig, actor = '' } = data
+    const { listName, listId, listNameBig, actor = '', up, down, prev, next, mcid = [] } = data
+    const shareConfig = {
+      title: `${title} ${subTitle}在线播放 - ${listName}${listNameBig}`,
+      url: `/play/${id}/${pid}`
+    }
     return (
       <Fragment>
         <div styleName="player">
@@ -149,14 +182,14 @@ class Play extends Component {
                 content={`9站为您提供${listName}${listNameBig}${title}${subTitle}在线观看。喜欢${title}${subTitle}，就推荐给小伙伴们吧！`}
               />
             </Meta>
-            <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
+            {/* <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
               <div dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
               {isfull ? (
                 <a onMouseOver={this.showFull} onClick={this.isFull}>
                   {full ? '退出全屏' : '网页全屏'}
                 </a>
               ) : null}
-            </div>
+            </div> */}
             {/* {userinfo.userid ? (
               <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
                 <div dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
@@ -174,6 +207,13 @@ class Play extends Component {
                 <Link to={`/subject/${id}`}>{title}</Link>：
               </h1>
               <h4>{subTitle}</h4>
+              <div styleName="mcid">
+                {mcid.map(item => (
+                  <Link key={item.id} to={`/type/${this.getName(listId)}/${item.id}/-/-/-/-/-/`}>
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
               <ul styleName="playlist">
                 {list.map(item => (
                   <li key={item.playName} onClick={() => this.onPlay(item.vid, item.playName)}>
@@ -182,12 +222,25 @@ class Play extends Component {
                   </li>
                 ))}
               </ul>
+              <Share data={shareConfig} />
+            </div>
+            <div>
+              <div>
+                <i className="iconfont">&#xe607;</i>
+                {up}
+              </div>
+              <div>
+                <i className="iconfont">&#xe606;</i>
+                {down}
+              </div>
+              {prev ? <Link to={`/play/${id}/${prev}`}>上一集</Link> : null}
+              {next ? <Link to={`/play/${id}/${next}`}>下一集</Link> : null}
             </div>
           </div>
         </div>
         <PlayList />
         <div className="mt20" />
-        <div className="clearfix" styleName="wp">
+        {/* <div className="clearfix" styleName="wp">
           <div styleName="left" className="fl">
             <div className="mt20">
               <div styleName="title">
@@ -204,7 +257,7 @@ class Play extends Component {
               <NewsYG name="newsAll" isCate={false} title="30天热门资讯" isType={true} sty={{ padding: '10px 0' }} />
             </div>
           </div>
-        </div>
+        </div> */}
       </Fragment>
     )
   }

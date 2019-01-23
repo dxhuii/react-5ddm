@@ -6,6 +6,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { signUp } from '@/store/actions/user'
 
+import config from '@/utils/config'
+
 import '../style.scss'
 
 @withRouter
@@ -22,14 +24,16 @@ class SignIn extends Component {
   }
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      rand: 0
+    }
     this.submit = this.submit.bind(this)
   }
 
   async submit(event) {
     event.preventDefault()
 
-    const { username, password, email, rePassword } = this
+    const { username, password, email, rePassword, validate } = this
     const { signUp } = this.props
 
     if (!username.value) {
@@ -52,7 +56,12 @@ class SignIn extends Component {
       return false
     }
 
-    let [err, success] = await signUp({ username: username.value, password: password.value, email: email.value })
+    if (validate.value !== validate.value) {
+      password.focus()
+      return false
+    }
+
+    let [err, success] = await signUp({ username: username.value, password: password.value, email: email.value, validate: validate.value })
     if (success) {
       setTimeout(() => {
         window.location.reload()
@@ -61,7 +70,14 @@ class SignIn extends Component {
     }
   }
 
+  changeCode = () => {
+    const timeStamp = new Date().getTime()
+    const rand = timeStamp + Math.random()
+    this.setState({ rand })
+  }
+
   render() {
+    const verify = `${config.api.verify}?rand=${this.state.rand}`
     return (
       <form onSubmit={this.submit}>
         <input
@@ -92,6 +108,14 @@ class SignIn extends Component {
           }}
           placeholder="再输入一次密码"
         />
+        <input
+          type="text"
+          ref={c => {
+            this.validate = c
+          }}
+          placeholder="请输入验证"
+        />
+        <img src={verify} onClick={this.changeCode} />
         <button type="submit">注册</button>
       </form>
     )

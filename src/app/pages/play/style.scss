@@ -3,20 +3,6 @@
   width: 1240px;
 }
 
-.playlist {
-  display: flex;
-  margin-left: 20px;
-  margin-top: 6px;
-  li {
-    line-height: 28px;
-    color: #ccc;
-    margin-right: 20px;
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-}
-
 .player {
   background-color: #222;
 }
@@ -77,9 +63,40 @@
   }
 }
 
+.playlist {
+  display: flex;
+  margin-top: 6px;
+  flex-grow: 1;
+  li {
+    line-height: 28px;
+    color: #ccc;
+    margin-right: 20px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
 .title {
   h2 {
     font-size: 16px;
+  }
+}
+
+.mcid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a {
+    margin: 0 5px;
+    border: 2px solid #999;
+    display: inline-block;
+    height: 24px;
+    line-height: 22px;
+    font-size: 12px;
+    padding: 0 10px;
+    color: #ccc;
+    border-radius: 12px;
   }
 }
 

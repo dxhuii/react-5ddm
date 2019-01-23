@@ -3,7 +3,6 @@ import React, { Component, Fragment } from 'react'
 // 壳组件
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
-
 import WeekDay from '@/components/Week'
 import Top from '@/components/Top'
 import List from '@/components/List'
@@ -80,7 +79,7 @@ class Home extends Component {
             <a>按热度</a>
           </li>
         </ul>
-        <List stateId="weekList" id={3} day={365} order={order} limit={30} scrollLoad={true} />
+        <List id={3} day={365} order={order} limit={30} scrollLoad={true} />
       </div>
     )
   }

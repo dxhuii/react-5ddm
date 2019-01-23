@@ -30,7 +30,7 @@ function getTypeId(name) {
 }
 
 function isEmpty(val, type) {
-  return val === '' || val === '-' ? (type ? 'addtime' : '') : val
+  return val === undefined || val === '' || val === '-' ? (type ? 'addtime' : '') : val
 }
 
 export default ({ store, match }) => {

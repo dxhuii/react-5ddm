@@ -26,14 +26,32 @@ import './style.scss'
 class SubjectList extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      lz: '',
-      mcid: '',
-      area: '',
-      year: '',
-      letter: '',
-      order: 'addtime',
-      id: 3
+    const {
+      match: {
+        params: { name, mcid, area, year, letter, lz, order = 'addtime' },
+        url
+      }
+    } = props
+    if (name) {
+      const id = this.getTypeId(name)
+      const type = name
+      const params = Object.assign(
+        {},
+        url.indexOf('type/') === -1
+          ? { id, type }
+          : {
+              id,
+              type,
+              mcid,
+              area,
+              year,
+              letter,
+              lz,
+              order
+            },
+        {}
+      )
+      this.state = params
     }
   }
 
@@ -46,34 +64,9 @@ class SubjectList extends Component {
   }
 
   componentDidMount() {
-    const {
-      config,
-      configLoad,
-      match: {
-        params: { name, mcid, area, year, letter, lz, order },
-        url
-      }
-    } = this.props
+    const { config, configLoad } = this.props
     if (!config.data) {
       configLoad({ name: 'list' })
-    }
-    if (name) {
-      const id = this.getTypeId(name)
-      const type = name
-      this.setState(
-        url.indexOf('type/') === -1
-          ? { id, type }
-          : {
-              id,
-              type,
-              mcid,
-              area,
-              year,
-              letter,
-              lz,
-              order
-            }
-      )
     }
   }
 
@@ -125,7 +118,7 @@ class SubjectList extends Component {
       () => {
         if (url.indexOf('type/') !== -1) {
           const { type, mcid, area, year, letter, lz, order } = this.state
-          const path = `/type/${type || '-'}/${mcid || '-'}/${area || '-'}/${year || '-'}/${letter || '-'}/${lz || '-'}/${order}`
+          const path = `/type/${type || '-'}/${mcid || '-'}/${area || '-'}/${year || '-'}/${letter || '-'}/${lz || '-'}/${order}/`
           history.pushState(null, null, path)
         }
       }

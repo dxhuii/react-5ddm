@@ -1,33 +1,32 @@
 // 生产环境配置
-const site = require('./site.json')
+const SITE = require('./site.json')
 // console.log(site)
 let config = {
   // 正式环境
   debug: false,
 
-  name: site.SITE_NAME,
+  name: SITE.SITE_NAME,
 
   // 域名完整地址
-  DOMAIN: site.DOMAIN,
+  DOMAIN: SITE.DOMAIN,
 
   // 接口地址
-  API: site.API,
-  APIHOME: site.APIHOME,
+  API: SITE.API,
 
   // 服务端口
-  port: site.PORT,
+  port: SITE.PORT,
 
   // 登录token，cookie 的名称
-  AUTH_COOKIE_NAME: site.AUTH_COOKIE_NAME,
+  AUTH_COOKIE_NAME: SITE.AUTH_COOKIE_NAME,
 
-  COOKIE_PREFIX: site.COOKIE_PREFIX,
+  COOKIE_PREFIX: SITE.COOKIE_PREFIX,
 
   // https://github.com/css-modules/css-modules
   CLASS_SCOPED_NAME: '[hash:base64:8]',
 
   // 前端打包后，静态资源路径前缀
   // 生成效果如：//dev.99496.com/app.bundle.js
-  publicPath: site.PUBLIC_PATH,
+  publicPath: SITE.PUBLIC_PATH,
 
   // 添加内容到模版的head中
   head: `
@@ -63,14 +62,14 @@ let config = {
     */
   },
   // 联系我们的邮箱地址
-  EMAIL: site.EMAIL,
+  EMAIL: SITE.EMAIL,
 
   // 备案号
-  ICP: site.ICP
+  ICP: SITE.ICP
 }
 
 // 开发环境配置
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV == 'development') {
   config.debug = true
   config.port = 4000
   config.CLASS_SCOPED_NAME = '[name]_[local]__[hash:base64:5]'
