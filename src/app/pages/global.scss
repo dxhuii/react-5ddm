@@ -160,12 +160,6 @@
   html {
     font-size: 14px;
     font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
-    overflow: auto;
-    /* 解决定时器运行时，图片有闪烁的问题 */
-    backface-visibility: hidden;
-    /*解决ios上滑动不流畅*/
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     -webkit-overflow-scrolling: touch;
   }
   button,
