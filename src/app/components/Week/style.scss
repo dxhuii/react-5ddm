@@ -1,12 +1,23 @@
 @import '../../pages/_mixin';
-.tab {
+.week-tab {
+  position: relative;
   height: 32px;
   line-height: 32px;
-  display: flex;
   flex-grow: 1;
+  span {
+    display: none;
+  }
+}
+
+.tab {
+  height: 32px;
+  display: flex;
   border-radius: 16px;
   border: 2px solid #ebebeb;
   padding: 1px;
+  &.show {
+    display: inline-block;
+  }
   li {
     position: relative;
     flex: 1;
@@ -127,6 +138,60 @@
           background-color: rgba(0, 132, 255, .1);
           color: #0084ff;
         }
+      }
+    }
+  }
+}
+
+@media (min-width: 0px) and (max-width: 1200px) {
+  .tab {
+    display: none;
+    height: auto;
+    &.show {
+      position: absolute;
+      right: -10px;
+      top: 36px;
+      z-index: 10;
+      border: none;
+      padding: 10px;
+      li {
+        border-radius: 5px;
+        width: 60px;
+      }
+    }
+  }
+  .week-tab {
+    text-align: right;
+    span {
+      display: inline-block;
+      cursor: pointer;
+      background: #0084ff;
+      color: #fff;
+      width: 60px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      border-radius: 5px;
+    }
+  }
+  .week {
+    height: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+    &.weekCn {
+      height: auto;
+    }
+    li {
+      width: 49%;
+      margin-right: 2%;
+      margin-bottom: 0;
+      margin-top: 15px;
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+      h4 {
+        margin-right: 0;
       }
     }
   }

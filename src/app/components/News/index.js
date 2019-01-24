@@ -61,17 +61,20 @@ class News extends Component {
           <h2>
             <i className="title-icon news" /> 新闻
           </h2>
-          <ul styleName="news-tab">
-            <li>动画</li>
-            <li>漫画</li>
-            <li>八卦</li>
-            <li>简评</li>
-            <li>COS</li>
-            <li>产业</li>
-            <li>声优</li>
-            <li>美图</li>
-            <li>短视频</li>
-          </ul>
+          <div styleName="tab">
+            <span>分类</span>
+            <ul styleName="news-tab">
+              <li>动画</li>
+              <li>漫画</li>
+              <li>八卦</li>
+              <li>简评</li>
+              <li>COS</li>
+              <li>产业</li>
+              <li>声优</li>
+              <li>美图</li>
+              <li>短视频</li>
+            </ul>
+          </div>
           <Link to="/news">
             更多
             <i className="iconfont">&#xe65e;</i>

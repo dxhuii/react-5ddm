@@ -7,7 +7,7 @@
     margin: 0 auto;
     display: block;
     background: #ddd;
-    height: 220px;
+    height: 230px;
     text-align: center;
   }
   .swipe-wrap {
@@ -28,7 +28,7 @@
     }
     a {
       display: block;
-      height: 220px;
+      height: 230px;
     }
   }
 }
@@ -121,6 +121,19 @@
     margin: 0 3px;
     &.cur {
       background: #0084FF;
+    }
+  }
+}
+
+@media (min-width: 0px) and (max-width: 1200px) {
+  :global {
+    .swipe {
+      height: 150px;
+    }
+    .swipe-item {
+      a {
+        height: 150px;
+      }
     }
   }
 }

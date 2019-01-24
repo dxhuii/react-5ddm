@@ -115,12 +115,18 @@
   }
 }
 
-.news-tab {
-  display: flex;
+.tab {
+  margin-top: 5px;
   flex-grow: 1;
   height: 30px;
   line-height: 30px;
-  margin-top: 5px;
+  span {
+    display: none;
+  }
+}
+
+.news-tab {
+  display: flex;
   &.tab {
     flex-grow: inherit;
     margin-top: 0;
@@ -136,6 +142,42 @@
     &:hover {
       background-color: #ddd;
       color: #666;
+    }
+  }
+}
+
+@media (min-width: 0px) and (max-width: 1200px) {
+  .tab {
+    text-align: right;
+    margin-top: 0;
+    span {
+      display: inline-block;
+      cursor: pointer;
+      background: #0084ff;
+      color: #fff;
+      width: 60px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      border-radius: 5px;
+    }
+    .news-tab {
+      display: none;
+    }
+  }
+  .newslist {
+    height: 375px;
+    li {
+      width: 49%;
+      margin-right: 2%;
+      margin-top: 10px;
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+      &:nth-child(2),
+      &:first-child {
+        margin-top: 5px;
+      }
     }
   }
 }

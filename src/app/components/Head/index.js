@@ -30,6 +30,8 @@ class Head extends Component {
       wd: '',
       isHide: true,
       visible: false,
+      showMenu: false,
+      showSearch: false,
       isSign: 'signIn'
     }
   }
@@ -87,17 +89,29 @@ class Head extends Component {
     })
   }
 
+  onShowMenu = () => {
+    this.setState({
+      showMenu: !this.state.showMenu
+    })
+  }
+
+  onShowSearch = () => {
+    this.setState({
+      showSearch: !this.state.showSearch
+    })
+  }
+
   render() {
     const {
       userinfo,
       match: { url, params = {} }
     } = this.props
-    const { wd, isHide, isSign, visible } = this.state
+    const { wd, isHide, isSign, visible, showMenu, showSearch } = this.state
     return (
       <Fragment>
         <header>
-          {/* <NavLink styleName="header-logo" exact to="/" title="9站" /> */}
-          <nav>
+          <NavLink styleName="header-logo" exact to="/" title="9站" />
+          <nav styleName={showMenu ? 'show' : ''}>
             <div styleName="header-nav">
               <NavLink styleName={url === '/' ? 'active' : ''} exact to="/">
                 首页
@@ -118,29 +132,35 @@ class Head extends Component {
                 最近更新
               </NavLink>
             </div>
-            <div styleName="header-search">
-              <form action={`/search/${wd}`}>
-                <input required type="text" placeholder={params.wd || '片名、导演、声优、原作...'} onChange={this.onChange} />
-                <button disabled={!wd} type="submit">
-                  <i className="iconfont">&#xe78d;</i>
-                </button>
-              </form>
-              {isHide ? <SearchAuto wd={wd} /> : null}
-            </div>
-            <div styleName="header-tool" className="tar">
-              {userinfo.nickname ? <span>{userinfo.nickname}</span> : null}
-              {userinfo.userid ? (
-                <a href="javascript:void(0)" onClick={this.signOut}>
-                  退出
-                </a>
-              ) : (
-                <Fragment>
-                  <a onClick={() => this.onType('signIn')}>登录</a>
-                  <a onClick={() => this.onType('signUp')}>注册</a>
-                </Fragment>
-              )}
-            </div>
           </nav>
+          <div styleName={`header-search ${showSearch ? 'show' : ''}`}>
+            <form action={`/search/${wd}`}>
+              <input required type="text" placeholder={params.wd || '片名、导演、声优、原作...'} onChange={this.onChange} />
+              <button disabled={!wd} type="submit">
+                <i className="iconfont">&#xe78d;</i>
+              </button>
+            </form>
+            {isHide ? <SearchAuto wd={wd} /> : null}
+          </div>
+          <div styleName="header-tool" className="tar">
+            {userinfo.nickname ? <span>{userinfo.nickname}</span> : null}
+            {userinfo.userid ? (
+              <a href="javascript:void(0)" onClick={this.signOut}>
+                退出
+              </a>
+            ) : (
+              <Fragment>
+                <a onClick={this.onShowSearch} styleName="on-search">
+                  搜索
+                </a>
+                <a onClick={() => this.onType('signIn')}>登录</a>
+                <a onClick={() => this.onType('signUp')}>注册</a>
+                <a onClick={this.onShowMenu} styleName="on-menu">
+                  菜单
+                </a>
+              </Fragment>
+            )}
+          </div>
         </header>
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
           <Sign isSign={isSign} onType={val => this.onType(val)} />

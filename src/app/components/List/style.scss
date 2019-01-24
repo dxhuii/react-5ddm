@@ -59,3 +59,25 @@
 .main-list {
   background-color: #f7f7f7;
 }
+
+@media (min-width: 0px) and (max-width: 1200px) {
+  .d-item {
+    padding-top: 15px;
+    li {
+      width: 32%;
+      margin: 0 2% 15px 0;
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+      div {
+        height: 170px;
+      }
+      h3 {
+        margin: 10px 0;
+      }
+      p {
+        margin-top: 0;
+      }
+    }
+  }
+}

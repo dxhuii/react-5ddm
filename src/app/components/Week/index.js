@@ -26,7 +26,8 @@ class weekDay extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentIndex: 0
+      currentIndex: 0,
+      onWeekShow: false
     }
   }
 
@@ -94,6 +95,12 @@ class weekDay extends Component {
     return data
   }
 
+  onWeek = () => {
+    this.setState({
+      onWeekShow: !this.state.onWeekShow
+    })
+  }
+
   render() {
     const {
       title,
@@ -103,7 +110,7 @@ class weekDay extends Component {
       type,
       linkText
     } = this.props
-    const { currentIndex } = this.state
+    const { currentIndex, onWeekShow } = this.state
     const weekCn = ['最新', '一', '二', '三', '四', '五', '六', '日']
     const weekEng = ['Zero', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     const weekType = this.getArea(data)
@@ -114,14 +121,17 @@ class weekDay extends Component {
           <h2>
             <i className={isJp ? 'title-icon' : 'title-icon cn'} /> {title}
           </h2>
-          <ul styleName="tab">
-            {weekCn.map((item, index) => (
-              <li key={index} onClick={() => this.setState({ currentIndex: index })} styleName={index === currentIndex ? 'active' : ''}>
-                {`${index !== 0 ? '周' : ''}${item}`}
-                {isJp && index !== 0 ? <em>{isJp[index]}</em> : ''}
-              </li>
-            ))}
-          </ul>
+          <div styleName="week-tab">
+            <span onClick={this.onWeek}>最新</span>
+            <ul styleName={`tab ${onWeekShow ? 'show' : ''}`} className={`${onWeekShow ? 'box' : ''}`}>
+              {weekCn.map((item, index) => (
+                <li key={index} onClick={() => this.setState({ currentIndex: index })} styleName={index === currentIndex ? 'active' : ''}>
+                  {`${index !== 0 ? '周' : ''}${item}`}
+                  {isJp && index !== 0 ? <em>{isJp[index]}</em> : ''}
+                </li>
+              ))}
+            </ul>
+          </div>
           {link ? (
             <Link to={link}>
               {linkText || '新番时间表'}

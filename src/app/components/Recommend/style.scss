@@ -2,12 +2,12 @@
 .recommend {
   display: flex;
   flex-wrap: wrap;
-  height: 220px;
+  height: 230px;
   overflow: hidden;
   li {
     position: relative;
-    width: 170px;
-    height: 100px;
+    width: 180px;
+    height: 105px;
     margin-bottom: 20px;
     background-color: #ddd;
     margin-right: 20px;
@@ -27,7 +27,7 @@
     }
     .mark {
       position: absolute;
-      top: 70px;
+      top: 75px;
       right: 0;
       left: 0;
       height: 30px;
@@ -50,6 +50,31 @@
         top: 0;
         height: 100%;
         background: rgba(0, 0, 0, .7);
+      }
+    }
+  }
+}
+
+@media (min-width: 0px) and (max-width: 1200px) {
+  .recommend {
+    height: auto;
+    margin-top: 10px;
+    li {
+      width: 49%;
+      margin-right: 2%;
+      height: 110px;
+      margin-bottom: 10px;
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+      &:nth-child(3),
+      &:nth-child(4),
+      &:nth-child(7),
+      &:nth-child(8) {
+        display: none;
+      }
+      .mark {
+        top: 80px;
       }
     }
   }

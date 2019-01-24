@@ -23,16 +23,21 @@ header {
   nav {
     flex-grow: 1;
     display: flex;
+    &.show {
+      display: inline-block;
+    }
   }
+}
+
+.on-search,
+.on-menu {
+  display: none;
 }
 
 .header-logo {
   width: 150px;
   line-height: 56px;
   flex-basis: 150px;
-  font-size: 18px;
-  text-align: center;
-  color: #282828;
   background: url(../../static/img/logo.png) no-repeat;
   background-size: 150px auto;
   background-position: 0 4px;
@@ -73,9 +78,60 @@ header {
     float: right;
     color: #8590A6;
   }
+  &.show {
+    display: inline-block;
+  }
 }
 
 .header-nav {
   flex-grow: 1;
   line-height: 56px;
+}
+
+@media (min-width: 0px) and (max-width: 1200px) {
+  header {
+    height: 48px;
+    line-height: 48px;
+    nav {
+      display: none;
+      &.show {
+        position: absolute;
+        top: 47px;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+        height: 30px;
+        border-radius: 0 0 5px 5px;
+        overflow-y: hidden;
+        overflow-x: auto;
+        z-index: 10;
+      }
+    }
+  }
+  .header-nav {
+    line-height: 30px;
+  }
+  .header-search {
+    display: none;
+    &.show {
+      position: absolute;
+      top: 35px;
+      width: 100%;
+      background-color: #fff;
+      box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+    }
+  }
+  .header-tool {
+    flex-grow: 1;
+  }
+  .header-logo {
+    width: 120px;
+    background-size: 120px auto;
+    background-position: 0 5px;
+  }
+  .on-search,
+  .on-menu {
+    display: inline;
+  }
 }

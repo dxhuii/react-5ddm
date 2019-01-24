@@ -300,8 +300,8 @@ class Bangumi extends Component {
           </div>
         </div>
         <PlayList key="playlist" />
-        <div className="mt20 clearfix" styleName="wp">
-          <div className="fl box left">
+        <div className="mt20 clearfix wp">
+          <div className="fl box pb20 left">
             {newsTextlist.length > 0 ? (
               <div className="mt10">
                 <div styleName="title">
@@ -350,13 +350,13 @@ class Bangumi extends Component {
             </div>
           </div>
           <div className="fr right">
-            <div className="box">
+            <div className="box pb20">
               <div styleName="title">
                 <h2>角色声优</h2>
               </div>
               {actor ? actor.map((item, index) => <p key={index}>{item.title}</p>) : <p>暂无</p>}
             </div>
-            <div className="box mt20">
+            <div className="box pb20 mt20">
               <div styleName="title">
                 <h2>STAFF</h2>
               </div>
