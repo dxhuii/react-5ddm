@@ -28,6 +28,8 @@
 :global {
   * {
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   body,
   div,
@@ -44,14 +46,12 @@
   h5,
   h6,
   pre,
-  code,
   form,
   fieldset,
   legend,
   input,
   textarea,
   p,
-  blockquote,
   img,
   hr {
     margin: 0;
@@ -62,15 +62,9 @@
   img {
     border: 0;
   }
-  address,
-  caption,
-  cite,
-  code,
-  dfn,
   em,
   th,
   td,
-  var,
   i {
     font-style: normal;
     font-weight: normal;
@@ -93,21 +87,6 @@
     font-size: 100%;
     font-weight: normal;
   }
-  q:before,
-  q:after {
-    content: '';
-  }
-  abbr,
-  acronym {
-    border: 0;
-    font-variant: normal;
-  }
-  sup {
-    vertical-align: text-top;
-  }
-  sub {
-    vertical-align: text-bottom;
-  }
   input,
   textarea,
   select {
@@ -115,30 +94,12 @@
     font-size: inherit;
     font-weight: inherit;
   }
-  input,
-  textarea,
-  select {
-    *font-size: 100%;
-  }
   legend {
     color: #000;
   }
   button {
     background: none;
     border: none;
-  }
-  ins {
-    text-decoration: none;
-  }
-  blockquote:before,
-  blockquote:after,
-  q:before,
-  q:after {
-    content: "";
-  }
-  blockquote,
-  q {
-    quotes: "" "";
   }
   hr {
     color: #f5f2ee;
@@ -160,6 +121,7 @@
   html {
     font-size: 14px;
     font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+    overflow: auto;
     -webkit-overflow-scrolling: touch;
   }
   button,
@@ -548,11 +510,6 @@
     width: 300px;
   }
   @media (min-width: 0px) and (max-width: 1200px) {
-    html,
-    body {
-      overflow-x: hidden;
-      overflow-y: scroll;
-    }
     body {
       padding-top: 48px;
     }

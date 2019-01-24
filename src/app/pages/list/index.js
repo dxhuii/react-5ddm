@@ -232,71 +232,125 @@ class SubjectList extends Component {
         {isSearch ? <h2>{keyword}</h2> : null}
         <Meta title={isSearch ? `你搜索的是${keyword}` : '动漫列表'} />
         <div styleName="filter">
-          <div className="wp">
+          <div className="wp clearfix">
             {(type || mcid || area || year || letter || lz) && (
-              <ul>
-                已选：
-                {idName ? <li onClick={() => this.getParams('type', '')}>{idName}</li> : null}
-                {mcidName ? <li onClick={() => this.getParams('mcid', '')}>{mcidName}</li> : null}
-                {lzName ? <li onClick={() => this.getParams('lz', '')}>{lzName}</li> : null}
-                {areaName ? <li onClick={() => this.getParams('area', '')}>{areaName}</li> : null}
-                {yearName ? <li onClick={() => this.getParams('year', '')}>{yearName}</li> : null}
-                {letterName ? <li onClick={() => this.getParams('letter', '')}>{letterName}</li> : null}
-              </ul>
+              <dl>
+                <dt>已选</dt>
+                <dd>
+                  {idName ? <li onClick={() => this.getParams('type', '')}>{idName}</li> : null}
+                  {mcidName ? <li onClick={() => this.getParams('mcid', '')}>{mcidName}</li> : null}
+                  {lzName ? <li onClick={() => this.getParams('lz', '')}>{lzName}</li> : null}
+                  {areaName ? <li onClick={() => this.getParams('area', '')}>{areaName}</li> : null}
+                  {yearName ? <li onClick={() => this.getParams('year', '')}>{yearName}</li> : null}
+                  {letterName ? <li onClick={() => this.getParams('letter', '')}>{letterName}</li> : null}
+                </dd>
+              </dl>
             )}
-            <ul>
-              {idArr.map(item => (
-                <li
-                  styleName={type === item.name ? 'cur' : ''}
-                  onClick={() => this.getParams('type', item.name, item.title)}
-                  key={item.name}
-                >
-                  {item.title}
-                </li>
-              ))}
-            </ul>
-            <ul>
-              {mcidArr.map(item => (
-                <li styleName={+mcid === item.id ? 'cur' : ''} onClick={() => this.getParams('mcid', item.id, item.title)} key={item.id}>
-                  {item.title}
-                </li>
-              ))}
-            </ul>
-            <ul>
-              {lzArr.map(item => (
-                <li styleName={lz === item.id ? 'cur' : ''} onClick={() => this.getParams('lz', item.id, item.title)} key={item.id}>
-                  {item.title}
-                </li>
-              ))}
-            </ul>
-            <ul>
-              {areaArr.map(item => (
-                <li styleName={area === item.id ? 'cur' : ''} onClick={() => this.getParams('area', item.id, item.title)} key={item.id}>
-                  {item.title}
-                </li>
-              ))}
-            </ul>
-            <ul>
-              {yearArr.map(item => (
-                <li styleName={year === item.id ? 'cur' : ''} onClick={() => this.getParams('year', item.id, item.title)} key={item.id}>
-                  {item.title}
-                </li>
-              ))}
-            </ul>
-            <ul>
-              {letterArr.map(item => (
-                <li styleName={letter === item.id ? 'cur' : ''} onClick={() => this.getParams('letter', item.id, item.title)} key={item.id}>
-                  {item.title}
-                </li>
-              ))}
-            </ul>
-            <ul>
-              {orderArr.map(item => (
-                <li styleName={order === item.id ? 'cur' : ''} onClick={() => this.getParams('order', item.id, item.title)} key={item.id}>
-                  {item.title}
-                </li>
-              ))}
-            </ul>
+            <dl className="clearfix">
+              <dt>分类</dt>
+              <dd>
+                {idArr.map(item => (
+                  <a
+                    styleName={type === item.name ? 'cur' : ''}
+                    onClick={() => this.getParams('type', item.name, item.title)}
+                    key={item.name}
+                    href="javascript:;"
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </dd>
+            </dl>
+            <dl className="clearfix">
+              <dt>类型</dt>
+              <dd>
+                {mcidArr.map(item => (
+                  <a
+                    styleName={+mcid === item.id ? 'cur' : ''}
+                    onClick={() => this.getParams('mcid', item.id, item.title)}
+                    key={item.id}
+                    href="javascript:;"
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </dd>
+            </dl>
+            <dl className="clearfix">
+              <dt>连载</dt>
+              <dd>
+                {lzArr.map(item => (
+                  <a
+                    styleName={lz === item.id ? 'cur' : ''}
+                    onClick={() => this.getParams('lz', item.id, item.title)}
+                    key={item.id}
+                    href="javascript:;"
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </dd>
+            </dl>
+            <dl className="clearfix">
+              <dt>地区</dt>
+              <dd>
+                {areaArr.map(item => (
+                  <a
+                    styleName={area === item.id ? 'cur' : ''}
+                    onClick={() => this.getParams('area', item.id, item.title)}
+                    key={item.id}
+                    href="javascript:;"
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </dd>
+            </dl>
+            <dl className="clearfix">
+              <dt>年份</dt>
+              <dd>
+                {yearArr.map(item => (
+                  <a
+                    styleName={year === item.id ? 'cur' : ''}
+                    onClick={() => this.getParams('year', item.id, item.title)}
+                    key={item.id}
+                    href="javascript:;"
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </dd>
+            </dl>
+            <dl className="clearfix">
+              <dt>字母</dt>
+              <dd>
+                {letterArr.map(item => (
+                  <a
+                    styleName={letter === item.id ? 'cur' : ''}
+                    onClick={() => this.getParams('letter', item.id, item.title)}
+                    key={item.id}
+                    href="javascript:;"
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </dd>
+            </dl>
+            <dl className="clearfix">
+              <dt>排序</dt>
+              <dd>
+                {orderArr.map(item => (
+                  <a
+                    styleName={order === item.id ? 'cur' : ''}
+                    onClick={() => this.getParams('order', item.id, item.title)}
+                    key={item.id}
+                    href="javascript:;"
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </dd>
+            </dl>
           </div>
         </div>
         <div className="wp">

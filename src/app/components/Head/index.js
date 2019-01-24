@@ -143,6 +143,9 @@ class Head extends Component {
             {isHide ? <SearchAuto wd={wd} /> : null}
           </div>
           <div styleName="header-tool" className="tar">
+            <a onClick={this.onShowSearch} styleName="on-search">
+              搜索
+            </a>
             {userinfo.nickname ? <span>{userinfo.nickname}</span> : null}
             {userinfo.userid ? (
               <a href="javascript:void(0)" onClick={this.signOut}>
@@ -150,16 +153,13 @@ class Head extends Component {
               </a>
             ) : (
               <Fragment>
-                <a onClick={this.onShowSearch} styleName="on-search">
-                  搜索
-                </a>
                 <a onClick={() => this.onType('signIn')}>登录</a>
                 <a onClick={() => this.onType('signUp')}>注册</a>
-                <a onClick={this.onShowMenu} styleName="on-menu">
-                  菜单
-                </a>
               </Fragment>
             )}
+            <a onClick={this.onShowMenu} styleName="on-menu">
+              菜单
+            </a>
           </div>
         </header>
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
