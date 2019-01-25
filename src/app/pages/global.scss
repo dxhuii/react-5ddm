@@ -119,7 +119,7 @@
   body {
     font-size: 14px;
     font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
-    overflow-x: hidden;
+    overflow: auto;
     text-rendering: optimizeLegibility;
     -webkit-overflow-scrolling: touch;
   }

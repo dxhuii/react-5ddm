@@ -56,12 +56,12 @@ class SignIn extends Component {
       return false
     }
 
-    if (validate.value !== validate.value) {
-      password.focus()
-      return false
-    }
+    // if (validate.value !== validate.value) {
+    //   password.focus()
+    //   return false
+    // }
 
-    let [err, success] = await signUp({ username: username.value, password: password.value, email: email.value, validate: validate.value })
+    let [err, success] = await signUp({ username: username.value, password: password.value, email: email.value })
     if (success) {
       setTimeout(() => {
         window.location.reload()
