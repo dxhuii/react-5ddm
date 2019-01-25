@@ -1,6 +1,7 @@
 .d-item {
   display: flex;
   flex-wrap: wrap;
+  margin: 0 -10px;
   padding-top: 20px;
   li {
     position: relative;
@@ -83,6 +84,7 @@
 
 @media (min-width: 0px) and (max-width: 399px) {
   .d-item {
+    margin: 0;
     li {
       div {
         height: 135px;
