@@ -124,6 +124,10 @@ header {
   }
   .header-tool {
     flex-grow: 1;
+    a,
+    span {
+      padding: 0 10px;
+    }
   }
   .header-logo {
     width: 120px;

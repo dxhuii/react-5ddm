@@ -28,7 +28,7 @@ import Toast from '@/components/Toast'
 
 import Shell from '@/components/Shell'
 
-import { isNumber, formatPic } from '@/utils'
+import { isNumber, formatPic, isMobile } from '@/utils'
 
 import './style.scss'
 @Shell
@@ -223,14 +223,14 @@ class Bangumi extends Component {
             <div styleName="detail-con" className="wp clearfix">
               <div styleName="detail-pic">{pic ? <img src={rePic} /> : null}</div>
               <div styleName="detail-info">
-                <h1>
-                  {title}
+                <div styleName="detial-title">
+                  <h1>{title}</h1>
                   <span>
                     <a>{listName}</a>
                     {mcid.length > 0 ? mcid.map(item => (item.title ? <a key={item.id}>{item.title}</a> : '')) : null}
                   </span>
-                </h1>
-                {aliases ? <p styleName="text">别名：{aliases}</p> : null}
+                </div>
+                {aliases ? <p>别名：{aliases}</p> : null}
                 <ul styleName="detail-info__count">
                   <li>
                     热度
@@ -239,8 +239,8 @@ class Bangumi extends Component {
                 </ul>
                 {filmtime || status || total ? (
                   <p>
-                    {filmtime ? <span>{filmtime} 开播</span> : <span>{year}年</span>}
-                    {isNumber(status) ? <span>，更新至{status}话</span> : <span>，{status}</span>}
+                    {filmtime ? <span>{filmtime} 播出</span> : <span>{year}年</span>}
+                    {isNumber(status) ? <span> 更新至{status}话</span> : <span> {status}</span>}
                     {tvcont ? <span>，{tvcont}</span> : null}
                     {total ? <span>，共{total}话</span> : null}
                   </p>
@@ -258,6 +258,9 @@ class Bangumi extends Component {
                   <div styleName={`detail-tool__on ${loveid ? 'active' : ''}`} onClick={() => this.addMark('love', id, cid, userid)}>
                     <i className="iconfont">&#xe66a;</i>
                     {loveid ? '已收藏' : '收藏'}
+                  </div>
+                  <div styleName="detail-tool__on share" onClick={this.onShare}>
+                    <i className="iconfont">&#xe655;</i>分享
                   </div>
                   <div styleName="detail-tool__share">
                     <Share data={shareConfig} />

@@ -53,3 +53,20 @@
     }
   }
 }
+
+@media (min-width: 0px) and (max-width: 1200px) {
+  .newslist {
+    height: auto;
+    li {
+      width: 49%;
+      margin-right: 2%;
+      margin-top: 10px;
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+      p {
+        margin-top: 0;
+      }
+    }
+  }
+}

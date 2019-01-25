@@ -120,6 +120,7 @@
     font-size: 14px;
     font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
     overflow-x: hidden;
+    text-rendering: optimizeLegibility;
     -webkit-overflow-scrolling: touch;
   }
   button,
@@ -507,7 +508,7 @@
   .right {
     width: 300px;
   }
-  @media (min-width: 0px) and (max-width: 1200px) {
+  @media (min-width: 0) and (max-width: 1200px) {
     body {
       padding-top: 48px;
     }
@@ -541,6 +542,37 @@
           background-size: 27px 32px;
         }
       }
+    }
+    .left {
+      width: 100%;
+    }
+    .right {
+      display: none;
+    }
+    .box {
+      padding: 10px;
+    }
+    .explaywrap {
+      background: #000;
+      a {
+        background: #333;
+        height: 36px;
+        line-height: 36px;
+        font-size: 16px;
+        color: #aaa;
+      }
+      p {
+        font-size: 24px;
+        text-shadow: none;
+        color: #999;
+        -webkit-text-stroke: inherit;
+        bottom: 50px;
+      }
+    }
+  }
+  @media (min-width: 0px) and (max-width: 399px) {
+    body {
+      font-size: 12px;
     }
   }
 }

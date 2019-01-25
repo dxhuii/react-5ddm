@@ -1,3 +1,4 @@
+@import '../../pages/_mixin';
 .player {
   background-color: #222;
 }
@@ -38,6 +39,12 @@
   margin-bottom: 10px;
   display: flex;
   color: #ccc;
+}
+
+.player-title {
+  @include clamp(1);
+  flex-grow: 1;
+  margin-left: 10px;
   h1,
   h4 {
     display: inline;
@@ -92,5 +99,39 @@
     padding: 0 10px;
     color: #ccc;
     border-radius: 12px;
+  }
+}
+
+.m-play-name {
+  display: none;
+}
+
+@media (min-width: 0px) and (max-width: 1200px) {
+  .player {
+    :global {
+      .pt20 {
+        padding-top: 0;
+      }
+      .wp {
+        padding: 0;
+      }
+    }
+  }
+  .player-box {
+    height: 240px;
+  }
+  .player-share,
+  .playlist {
+    display: none;
+  }
+  .player-info {
+    padding: 0 10px;
+  }
+  .m-play-name {
+    display: inline-block;
+    i {
+      position: relative;
+      top: 5px;
+    }
   }
 }

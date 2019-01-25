@@ -143,7 +143,7 @@
   }
 }
 
-@media (min-width: 0px) and (max-width: 1200px) {
+@media (min-width: 0) and (max-width: 1200px) {
   .tab {
     display: none;
     height: auto;
@@ -192,6 +192,16 @@
       }
       h4 {
         margin-right: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 0px) and (max-width: 399px) {
+  .week {
+    li {
+      p {
+        display: none;
       }
     }
   }

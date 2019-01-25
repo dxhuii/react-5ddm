@@ -72,3 +72,9 @@
 .is-visible .cd-popup-container {
   transform: translate(-50%, 0)
 }
+
+@media (min-width: 0) and (max-width: 1200px) {
+  .cd-popup-container {
+    width: 90%;
+  }
+}

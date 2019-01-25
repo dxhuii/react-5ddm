@@ -1,3 +1,4 @@
+@import '../../pages/_mixin';
 .d-item {
   display: flex;
   flex-wrap: wrap;
@@ -48,10 +49,58 @@
       font-size: 16px;
       font-weight: blod;
       color: #333;
-      white-space: normal;
-      overflow: hidden;
+      @include clamp(1);
       &:hover {
         color: #0084ff;
+      }
+    }
+  }
+}
+
+@media (min-width: 0) and (max-width: 1200px) {
+  .d-item {
+    padding-top: 15px;
+    width: 100%;
+    margin-left: 0;
+    li {
+      width: 32%;
+      margin: 0 2% 15px 0;
+      &:nth-child(5n) {
+        margin-right: 2%;
+      }
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+      &:last-child {
+        display: none;
+      }
+      div {
+        height: 150px;
+      }
+      h3 {
+        margin: 10px 0;
+        font-size: 14px;
+      }
+      p {
+        margin-top: 0;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (min-width: 0px) and (max-width: 413px) {
+  .d-item {
+    li {
+      div {
+        height: 135px;
+      }
+      h3 {
+        font-size: 12px;
+        margin: 5px 0;
+      }
+      p {
+        font-size: 12px;
       }
     }
   }

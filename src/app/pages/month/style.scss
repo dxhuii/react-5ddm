@@ -1,12 +1,6 @@
-.box {
-  background-color: #fff;
-  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
-  border-radius: 5px;
-  padding: 10px 20px;
-}
-
 .year {
   display: flex;
+  flex-flow: wrap;
   li {
     position: relative;
     height: 36px;
@@ -34,6 +28,9 @@
   background-color: #fff;
   padding: 10px 0;
   text-align: center;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
   a {
     margin: 0 15px;
     width: 70px;
@@ -44,6 +41,19 @@
     &.cur {
       color: #fff;
       background-color: #0084ff;
+    }
+  }
+}
+
+@media (min-width: 0) and (max-width: 1200px) {
+  .month {
+    a {
+      padding: 0 10px;
+    }
+  }
+  .year {
+    li {
+      width: 16.6%;
     }
   }
 }

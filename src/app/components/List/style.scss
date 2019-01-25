@@ -1,7 +1,6 @@
 .d-item {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -1%;
   padding-top: 20px;
   li {
     position: relative;
@@ -77,6 +76,23 @@
       }
       p {
         margin-top: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 0px) and (max-width: 399px) {
+  .d-item {
+    li {
+      div {
+        height: 135px;
+      }
+      h3 {
+        font-size: 12px;
+        margin: 5px 0;
+      }
+      p {
+        font-size: 12px;
       }
     }
   }

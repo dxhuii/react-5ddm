@@ -90,4 +90,13 @@
   .main-right {
     display: none;
   }
+  .list-tab {
+    li {
+      padding: 0 20px;
+      font-size: 16px;
+      a {
+        padding: 10px 0;
+      }
+    }
+  }
 }

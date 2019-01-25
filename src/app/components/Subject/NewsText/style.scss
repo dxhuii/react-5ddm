@@ -39,6 +39,7 @@
       }
       &.play {
         width: 60px;
+        text-align: center;
         em {
           display: inline-block;
           padding: 0 10px;
@@ -65,6 +66,30 @@
           margin-right: 0;
           float: none;
           display: inline-block
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 0px) and (max-width: 1200px) {
+  .d-yugao {
+    li {
+      span {
+        &.time,
+        &.source {
+          display: none;
+        }
+        &.clarity {
+          width: 23%;
+          @include clamp(1);
+        }
+        &.play {
+          width: 15%;
+        }
+        &.name {
+          width: 60%;
+          padding-left: 2%;
         }
       }
     }

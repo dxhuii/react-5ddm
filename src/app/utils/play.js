@@ -126,21 +126,16 @@ const ck = (type, pv) => {
 }
 
 const jiexiUrl = (pv, danmu) => {
-  const style = isMobile() ? 'class="playheight" style="height: 320px;width:100%;"' : `width="100%" height="${playH}"`
   return `<iframe src="${pv.replace(
     'ikanfan.cn',
     'acgnz.cn'
-  )}&danmu=${danmu}" ${style} frameborder="0" scrolling="no" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
+  )}&danmu=${danmu}" width="100%" height="${playH}" frameborder="0" scrolling="no" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
 }
 const iframe = pv => {
-  const style = isMobile() ? 'class="playheight" style="height: 320px;width:100%;"' : `width="100%" height="${playH}"`
-  return `<iframe src="${pv}" ${style} frameborder="0" scrolling=no  allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
+  return `<iframe src="${pv}" width="100%" height="${playH}" frameborder="0" scrolling=no  allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
 }
 const HTML = pv => {
-  const mobile = `<a class="html" href="${pv}">亲，请点我播放</a>`
-  return isMobile()
-    ? mobile
-    : `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">亲，请点我播放</a><p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
+  return `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">亲，请点我播放</a><p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
 }
 
 const rePlayUrl = (playname, pv) => {

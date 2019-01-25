@@ -87,6 +87,7 @@ class NewPage extends PureComponent {
                 <li key={item.id}>
                   <span>
                     <Link to={`/subject/${item.id}`}>{item.title}</Link> / <Link to={`/play/${item.id}/${item.pid}`}>{item.lastname}</Link>
+                    {item.isDate ? <em>new</em> : null}
                   </span>
                   <span>
                     <Link to={`/type/${this.getName(item.listId)}/-/-/-/-/-/-/`}>{item.listName}</Link>
@@ -98,7 +99,7 @@ class NewPage extends PureComponent {
                       </Link>
                     ))}
                   </span>
-                  <span>{item.time}</span>
+                  <span styleName={item.isDate ? 'red' : ''}>{item.time}</span>
                 </li>
               ))}
             </ul>

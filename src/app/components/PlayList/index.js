@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { playlist } from '@/store/actions/playlist'
 import { getPlayList } from '@/store/reducers/playlist'
 
-import { trim } from '@/utils'
+import { trim, isMobile } from '@/utils'
 
 import './style.scss'
 @withRouter
@@ -26,7 +26,8 @@ class PlayList extends Component {
       pageSize: 18,
       pageLen: 0,
       start: 0,
-      end: 18
+      end: 18,
+      isReverse: false
     }
     this.liWidth = 130
   }
@@ -169,6 +170,12 @@ class PlayList extends Component {
     return html.map(item => item)
   }
 
+  onReverse = () => {
+    this.setState({
+      isReverse: !this.state.isReverse
+    })
+  }
+
   render() {
     const {
       play: { loading, data = [] },
@@ -176,18 +183,17 @@ class PlayList extends Component {
         params: { id, pid }
       }
     } = this.props
-    const { pageSize, start, end, pageLen } = this.state
+    const { pageSize, start, end, pageLen, isReverse } = this.state
     const len = parseInt(data.length / pageSize)
     const surplus = data.length % pageSize
     const dataSource = data.slice(start, end)
-
     return (
       <Fragment>
         {data.length ? (
           <div styleName="playlistbox">
             {loading && data.length ? <div>loading...</div> : null}
             {data.length > pageSize ? (
-              <Fragment>
+              <div styleName="play-page">
                 {pageLen > 8 ? (
                   <Fragment>
                     <div onClick={this.onPrev}>prev</div>
@@ -199,13 +205,26 @@ class PlayList extends Component {
                     {this.page()}
                   </ul>
                 </div>
-              </Fragment>
+              </div>
             ) : null}
             <div styleName="playlist">
               <ul styleName="playlist-ul">
                 {dataSource.map(item => (
                   <li styleName={+pid === +item.episode ? 'active' : ''} key={item.episode}>
                     {this.format(item.title, item.episode, id)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div styleName="moblie-list">
+              <div styleName="moblie-title">
+                <h2>分集</h2>
+                <span onClick={this.onReverse}>{isReverse ? '倒序' : '正序'}</span>
+              </div>
+              <ul ref={e => (this.moblieList = e)}>
+                {(isReverse ? data.reverse() : data).map(item => (
+                  <li key={item.episode}>
+                    <Link to={`/play/${id}/${item.episode}`}>{item.title}</Link>
                   </li>
                 ))}
               </ul>

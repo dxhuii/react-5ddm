@@ -99,13 +99,20 @@ class Play extends Component {
         : list.length > 0
         ? isJump(list[0].playName, list[0].vid, danmu)
         : ''
+    const mDefaultPlay =
+      other.length > 0 && !is9
+        ? { playName: other[0].playName, vid: other[0].vid, playTitle: other[0].playTitle }
+        : list.length > 0
+        ? { playName: list[0].playName, vid: list[0].vid, playTitle: list[0].playTitle }
+        : ''
     const playHtml = play ? isJump(type, play, danmu) : ''
     return {
       title,
       subTitle,
       defaultPlay,
       playHtml,
-      list
+      list,
+      mDefaultPlay
     }
   }
 
@@ -164,7 +171,7 @@ class Play extends Component {
       }
     } = this.props
     const { full, isfull } = this.state
-    const { title, subTitle, defaultPlay, playHtml, list } = this.getData(data)
+    const { title, subTitle, defaultPlay, playHtml, list, mDefaultPlay = {} } = this.getData(data)
     const { listName, listId, listNameBig, actor = '', up, down, prev, next, mcid = [] } = data
     const shareConfig = {
       title: `${title} ${subTitle}在线播放 - ${listName}${listNameBig}`,
@@ -202,10 +209,12 @@ class Play extends Component {
               <div styleName="player-box">{playHtml || defaultPlay}</div>
             )} */}
             <div styleName="player-info">
-              <h1>
-                <Link to={`/subject/${id}`}>{title}</Link>：
-              </h1>
-              <h4>{subTitle}</h4>
+              <div styleName="player-title">
+                <h1>
+                  <Link to={`/subject/${id}`}>{title}</Link>：
+                </h1>
+                <h4>{subTitle}</h4>
+              </div>
               {/* <div styleName="mcid">
                 {mcid.map(item => (
                   <Link key={item.id} to={`/type/${this.getName(listId)}/${item.id}/-/-/-/-/-/`}>
@@ -221,7 +230,13 @@ class Play extends Component {
                   </li>
                 ))}
               </ul>
-              <Share data={shareConfig} />
+              <div styleName="m-play-name">
+                <i className={`playicon ${mDefaultPlay.playName}`} />
+                {mDefaultPlay.playTitle}
+              </div>
+              <div styleName="player-share">
+                <Share data={shareConfig} />
+              </div>
             </div>
             {/* <div>
               <div>

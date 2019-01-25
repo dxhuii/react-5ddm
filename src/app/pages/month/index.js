@@ -98,8 +98,8 @@ class Month extends PureComponent {
         </Meta>
         {loading ? <div>loading</div> : null}
         <div className="wp mt20">
-          <div styleName="box">
-            <ul styleName="year">
+          <div className="box">
+            <ul styleName="year" className="clearfix">
               {this.year(nowYear - 18).map(item => (
                 <li key={item} styleName={year === item ? 'cur' : ''} onClick={() => this.onYear(item)}>
                   <span>{item}</span>
@@ -114,7 +114,7 @@ class Month extends PureComponent {
               ))}
             </div>
           </div>
-          <div styleName="box" className="mt20">
+          <div className="box mt20">
             共 <b>{data.length}</b> 条
           </div>
           <Item data={data} />

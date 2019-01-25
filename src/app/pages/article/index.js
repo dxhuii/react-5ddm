@@ -136,8 +136,6 @@ class Article extends Component {
                 <span>更新时间：{addtime}</span>
               </div>
             </div>
-
-            {/* {remark ? <div styleName="acticle-remark">{remark}</div> : null} */}
             {playname ? (
               <div styleName={`article-video ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
                 <div dangerouslySetInnerHTML={{ __html: playHtml }} />

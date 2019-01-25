@@ -27,3 +27,13 @@
 .article-tool__share {
   margin-left: 10px;
 }
+
+@media (min-width: 0) and (max-width: 1200px) {
+  .article-tool {
+    display: inline-block;
+  }
+  .article-tool__share {
+    margin-top: 10px;
+    margin-left: 0;
+  }
+}

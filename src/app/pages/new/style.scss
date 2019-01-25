@@ -11,13 +11,20 @@
     }
     &:last-child {
       border-bottom: none;
+      margin-bottom: 0;
+    }
+    .red {
+      color: #f00;
     }
     span {
       display: inline-block;
+      em {
+        color: #f00;
+        margin-left: 5px;
+      }
       &:nth-child(1) {
         flex-grow: 1;
         @include clamp(1);
-        color: #aaa;
       }
       &:nth-child(2) {
         width: 100px;
@@ -33,6 +40,20 @@
       &:nth-child(4) {
         text-align: right;
         width: 150px;
+      }
+    }
+  }
+}
+
+@media (min-width: 0) and (max-width: 1200px) {
+  .newlist {
+    li {
+      span {
+        &:nth-child(2),
+        &:nth-child(3),
+        &:nth-child(4) {
+          display: none;
+        }
       }
     }
   }

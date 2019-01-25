@@ -62,3 +62,43 @@
     }
   }
 }
+
+.play-page {}
+
+.moblie-list {
+  display: none;
+}
+
+@media (min-width: 0px) and (max-width: 1200px) {
+  .playlistbox {
+    width: auto;
+    margin: 10px 10px 0;
+    padding: 10px;
+    .play-page,
+    .playlist {
+      display: none;
+    }
+  }
+  .moblie-list {
+    display: block;
+    .moblie-title {
+      display: flex;
+      h2 {
+        font-weight: bold;
+        font-size: 14px;
+        flex-grow: 1;
+      }
+    }
+    li {
+      border: 1px solid #ebebeb;
+      padding: 0 10px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  }
+  .playlist-ul {
+    max-height: inherit;
+  }
+}
