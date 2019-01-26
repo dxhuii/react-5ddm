@@ -22,17 +22,6 @@
   }
 }
 
-.play-full {
-  position: fixed;
-  left: 0;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-}
-
 .player-info {
   height: 40px;
   line-height: 40px;
@@ -43,8 +32,7 @@
 
 .player-title {
   @include clamp(1);
-  flex-grow: 1;
-  margin-left: 10px;
+  margin-right: 10px;
   h1,
   h4 {
     display: inline;
@@ -106,6 +94,18 @@
   display: none;
 }
 
+.play-full {
+  position: fixed;
+  left: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
+  z-index: 9999;
+}
+
 @media (min-width: 0px) and (max-width: 1200px) {
   .player {
     :global {
@@ -118,7 +118,7 @@
     }
   }
   .player-box {
-    height: 240px;
+    height: 233px;
   }
   .player-share,
   .playlist {
@@ -133,5 +133,14 @@
       position: relative;
       top: 5px;
     }
+  }
+  .player-title {
+    flex-grow: 1;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 399px) {
+  .player-box {
+    height: 203px;
   }
 }

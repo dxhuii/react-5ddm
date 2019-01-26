@@ -9,6 +9,7 @@ export default () => {
   router.post('/in', (req, res) => {
     const userid = req.body.userid
     res.cookie(`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`, userid, { path: '/', httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 })
+    res.cookie(`plain_user_auth`, userid, { path: '/', httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 30 })
     res.send({ success: true })
   })
 

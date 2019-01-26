@@ -91,11 +91,14 @@
     }
     li {
       border: 1px solid #ebebeb;
-      padding: 0 10px;
-      height: 30px;
-      line-height: 30px;
+      height: 32px;
+      line-height: 32px;
       border-radius: 5px;
       margin-top: 10px;
+      a {
+        padding: 0 10px;
+        display: block;
+      }
     }
   }
   .playlist-ul {

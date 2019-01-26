@@ -37,6 +37,7 @@
       transition: top .1s ease-in-out;
       background: linear-gradient(transparent, rgba(0, 0, 0, .1) 20%, rgba(0, 0, 0, .2) 35%, rgba(0, 0, 0, .6) 65%, rgba(0, 0, 0, .9));
       p {
+        margin-top: 0;
         @include clamp(4);
         color: #fff;
       }
@@ -63,9 +64,6 @@
       margin-top: 10px;
       &:nth-child(2n) {
         margin-right: 0;
-      }
-      p {
-        margin-top: 0;
       }
     }
   }
