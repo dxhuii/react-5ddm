@@ -56,12 +56,12 @@ class SignIn extends Component {
       return false
     }
 
-    // if (validate.value !== validate.value) {
-    //   password.focus()
-    //   return false
-    // }
+    if (validate.value !== validate.value) {
+      password.focus()
+      return false
+    }
 
-    let [err, success] = await signUp({ username: username.value, password: password.value, email: email.value })
+    let [err, success] = await signUp({ username: username.value, password: password.value, email: email.value, validate: validate.value })
     if (success) {
       setTimeout(() => {
         window.location.reload()
@@ -109,14 +109,14 @@ class SignIn extends Component {
           }}
           placeholder="再输入一次密码"
         />
-        {/* <input
+        <input
           type="text"
           ref={c => {
             this.validate = c
           }}
           placeholder="请输入验证"
         />
-        <img src={verify} onClick={this.changeCode} /> */}
+        <img src={verify} onClick={this.changeCode} />
         <button type="submit">注册</button>
       </form>
     )
