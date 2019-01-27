@@ -28,7 +28,8 @@ class SignIn extends Component {
     super(props)
     this.state = {
       rand: 0,
-      imgCode: ''
+      base64img: '',
+      imgKey: ''
     }
     this.submit = this.submit.bind(this)
   }
@@ -42,8 +43,10 @@ class SignIn extends Component {
     let [err, data] = await getCode()
     console.log(data, 'code')
     if (data.code === 0) {
+      const { base64img, imgkey } = data.data
       this.setState({
-        imgCode: data.data.base64img
+        base64img,
+        imgkey
       })
     }
   }
@@ -78,23 +81,23 @@ class SignIn extends Component {
       return false
     }
 
-    let [err, success] = await signUp({ username: username.value, password: password.value, email: email.value, validate: validate.value })
+    let [err, success] = await signUp({
+      username: username.value,
+      password: password.value,
+      email: email.value,
+      validate: validate.value,
+      key: this.state.imgkey
+    })
     if (success) {
       setTimeout(() => {
         window.location.reload()
         return false
       }, 300)
-    } else {
-      this.changeCode()
     }
   }
 
-  changeCode = () => {
-    this.getVerify()
-  }
-
   render() {
-    const { imgCode } = this.state
+    const { base64img } = this.state
     return (
       <form onSubmit={this.submit}>
         <input
@@ -125,14 +128,16 @@ class SignIn extends Component {
           }}
           placeholder="再输入一次密码"
         />
-        <input
-          type="text"
-          ref={c => {
-            this.validate = c
-          }}
-          placeholder="请输入验证"
-        />
-        <img src={imgCode} onClick={this.changeCode} />
+        <div styleName="validate">
+          <input
+            type="text"
+            ref={c => {
+              this.validate = c
+            }}
+            placeholder="请输入验证"
+          />
+          <img src={base64img} onClick={this.getVerify} />
+        </div>
         <button type="submit">注册</button>
       </form>
     )

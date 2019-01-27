@@ -49,6 +49,16 @@
   }
 }
 
+.validate {
+  position: relative;
+  img {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    width: 100px;
+  }
+}
+
 .user-reg {
   text-align: center;
   color: #999;
