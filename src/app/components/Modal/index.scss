@@ -33,6 +33,8 @@
   background: #fff;
   border-radius: .25em .25em .4em .4em;
   text-align: center;
+  opacity: 0;
+  visibility: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, .2);
   transform: translate(-50%, -50%);
   backface-visibility: hidden;
@@ -71,6 +73,13 @@
 
 .is-visible .cd-popup-container {
   transform: translate(-50%, 0)
+}
+
+.cd-popup.is-visible {
+  .cd-popup-container {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 @media (min-width: 0) and (max-width: 1200px) {

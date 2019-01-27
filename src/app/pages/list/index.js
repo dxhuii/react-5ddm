@@ -11,6 +11,7 @@ import { getList } from '@/store/reducers/list'
 
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
+import Loading from '@/components/Ui/Loading'
 
 import Item from '@/components/List/Item'
 
@@ -47,7 +48,7 @@ class SubjectList extends Component {
     super(props)
     const {
       match: {
-        params: { id = 3, name, mcid, area, year, letter, lz, order = 'addtime' },
+        params: { id = 3, name, mcid, area, year, letter, lz, wd = '', order = 'addtime' },
         url
       }
     } = props
@@ -73,7 +74,8 @@ class SubjectList extends Component {
       )
     } else {
       params = {
-        id
+        id,
+        wd
       }
     }
     this.state = Object.assign({}, params, {
@@ -229,8 +231,18 @@ class SubjectList extends Component {
     const keyword = decodeURIComponent(wd)
     return (
       <Fragment>
-        {isSearch ? <h2>{keyword}</h2> : null}
-        <Meta title={isSearch ? `你搜索的是${keyword}` : '动漫列表'} />
+        {loading ? <Loading /> : null}
+        <Meta
+          title={
+            isSearch
+              ? `你搜索的是《${keyword}》`
+              : `动漫列表${idName ? `_${idName}动漫_${idName}动漫排行榜` : ''}${
+                  mcidName ? `_${mcidName}动漫_好看的${mcidName}动漫_最新${mcidName}动画片大全_${mcidName}动漫排行榜` : ''
+                }${areaName ? `_${areaName}${idName}大全_${areaName}${idName}排行榜` : ''}${yearName ? `_${yearName}的动漫` : ''}${
+                  letterName ? `_字母${letterName}开头的动漫` : ''
+                }`
+          }
+        />
         <div styleName="filter">
           <div className="wp clearfix">
             {(type || mcid || area || year || letter || lz) && (
@@ -349,6 +361,11 @@ class SubjectList extends Component {
                     {item.title}
                   </a>
                 ))}
+                {isSearch ? (
+                  <span>
+                    你搜索的是：<b>{keyword}</b>
+                  </span>
+                ) : null}
               </dd>
             </dl>
           </div>

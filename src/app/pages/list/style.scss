@@ -20,6 +20,10 @@
           color: #0084ff;
         }
       }
+      span {
+        flex-grow: 1;
+        text-align: right;
+      }
     }
   }
 }
