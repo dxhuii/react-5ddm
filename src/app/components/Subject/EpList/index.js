@@ -10,7 +10,7 @@ const EpList = props => {
       {props.data.map(item => (
         <li key={item.pid}>
           <h4>
-            <Link to={`/episode/${props.id}/${item.pid}`}>
+            <Link to={`/episode/${props.id}/${item.pid ? item.pid : 1}`}>
               {item.name} {item.title}
             </Link>
           </h4>
