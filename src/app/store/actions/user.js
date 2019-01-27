@@ -21,6 +21,23 @@ export function loadUserInfo({ uid }) {
   }
 }
 
+export function getCode() {
+  return (dispatch, getState) => {
+    return new Promise(async (resolve, reject) => {
+      let [err, data] = await Ajax({
+        url: config.api.verify,
+        method: 'get'
+      })
+
+      if (err) {
+        resolve([err])
+      } else {
+        resolve([null, data])
+      }
+    })
+  }
+}
+
 export function saveCookie(params, name) {
   return new Promise(async (resolve, reject) => {
     // 这里写你的登录请求，登录成功以后，将token储存到cookie，使用httpOnly(比较安全)
@@ -56,9 +73,9 @@ export function signIn({ username, password }) {
   }
 }
 
-export function signUp({ username, password, email }) {
+export function signUp({ username, password, email, validate }) {
   return dispatch => {
-    return saveCookie({ username, password, email }, 'reg')
+    return saveCookie({ username, password, email, validate }, 'reg')
   }
 }
 

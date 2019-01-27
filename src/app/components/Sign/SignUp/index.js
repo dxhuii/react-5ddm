@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { signUp } from '@/store/actions/user'
+import { signUp, getCode } from '@/store/actions/user'
 
 import config from '@/utils/config'
 
@@ -14,22 +14,39 @@ import '../style.scss'
 @connect(
   (state, props) => ({}),
   dispatch => ({
-    signUp: bindActionCreators(signUp, dispatch)
+    signUp: bindActionCreators(signUp, dispatch),
+    getCode: bindActionCreators(getCode, dispatch)
   })
 )
 class SignIn extends Component {
   static propTypes = {
     signUp: PropTypes.func,
-    history: PropTypes.object
+    history: PropTypes.object,
+    getCode: PropTypes.func
   }
   constructor(props) {
     super(props)
     this.state = {
-      rand: 0
+      rand: 0,
+      imgCode: ''
     }
     this.submit = this.submit.bind(this)
   }
 
+  componentDidMount() {
+    this.getVerify()
+  }
+
+  getVerify = async () => {
+    const { getCode } = this.props
+    let [err, data] = await getCode()
+    console.log(data, 'code')
+    if (data.code === 0) {
+      this.setState({
+        imgCode: data.data.base64img
+      })
+    }
+  }
   async submit(event) {
     event.preventDefault()
 
@@ -56,12 +73,12 @@ class SignIn extends Component {
       return false
     }
 
-    // if (validate.value !== validate.value) {
-    //   password.focus()
-    //   return false
-    // }
+    if (validate.value !== validate.value) {
+      password.focus()
+      return false
+    }
 
-    let [err, success] = await signUp({ username: username.value, password: password.value, email: email.value })
+    let [err, success] = await signUp({ username: username.value, password: password.value, email: email.value, validate: validate.value })
     if (success) {
       setTimeout(() => {
         window.location.reload()
@@ -73,12 +90,11 @@ class SignIn extends Component {
   }
 
   changeCode = () => {
-    const rand = Math.random()
-    this.setState({ rand })
+    this.getVerify()
   }
 
   render() {
-    // const verify = `${config.api.verify}?tm=${this.state.rand}`
+    const { imgCode } = this.state
     return (
       <form onSubmit={this.submit}>
         <input
@@ -109,14 +125,14 @@ class SignIn extends Component {
           }}
           placeholder="再输入一次密码"
         />
-        {/* <input
+        <input
           type="text"
           ref={c => {
             this.validate = c
           }}
           placeholder="请输入验证"
         />
-        <img src={verify} onClick={this.changeCode} /> */}
+        <img src={imgCode} onClick={this.changeCode} />
         <button type="submit">注册</button>
       </form>
     )
