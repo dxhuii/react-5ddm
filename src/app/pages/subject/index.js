@@ -349,7 +349,7 @@ class Bangumi extends Component {
               <div styleName="title">
                 <h2>评论</h2>
               </div>
-              <Comment />
+              <Comment data={comment} />
             </div>
           </div>
           <div className="fr right">

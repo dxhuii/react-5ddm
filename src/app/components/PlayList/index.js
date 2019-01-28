@@ -24,7 +24,6 @@ class PlayList extends Component {
     super(props)
     this.state = {
       pageSize: 18,
-      pageLen: 0,
       start: 0,
       end: 18,
       isReverse: false
@@ -99,8 +98,7 @@ class PlayList extends Component {
     this.setState(
       {
         start,
-        end,
-        pageLen
+        end
       },
       () => {
         // 分页面数大于 8 页时调用
@@ -183,7 +181,7 @@ class PlayList extends Component {
         params: { id, pid }
       }
     } = this.props
-    const { pageSize, start, end, pageLen, isReverse } = this.state
+    const { pageSize, start, end, isReverse } = this.state
     const len = parseInt(data.length / pageSize)
     const surplus = data.length % pageSize
     const dataSource = data.slice(start, end)
@@ -194,7 +192,7 @@ class PlayList extends Component {
             {loading && data.length ? <div>loading...</div> : null}
             {data.length > pageSize ? (
               <div styleName="play-page">
-                {pageLen > 8 ? (
+                {data.length > 144 ? (
                   <Fragment>
                     <div onClick={this.onPrev}>prev</div>
                     <div onClick={this.onNext}>next</div>

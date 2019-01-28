@@ -6,8 +6,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { signUp, getCode } from '@/store/actions/user'
 
-import config from '@/utils/config'
-
 import '../style.scss'
 
 @withRouter
@@ -41,7 +39,6 @@ class SignIn extends Component {
   getVerify = async () => {
     const { getCode } = this.props
     let [err, data] = await getCode()
-    console.log(data, 'code')
     if (data.code === 0) {
       const { base64img, imgkey } = data.data
       this.setState({
