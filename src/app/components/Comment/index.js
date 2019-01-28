@@ -16,10 +16,10 @@ class Comment extends PureComponent {
     const { data = [] } = this.props
     return (
       <div styleName="comment">
-        <div styleName="comment-form">
+        {/* <div styleName="comment-form">
           <textarea cols="4" />
           <button>评论</button>
-        </div>
+        </div> */}
         <div styleName="comment-list">
           {data.length < 0 ? (
             <div styleName="comment-empty" className="tac">
