@@ -45,7 +45,7 @@ class Ads extends Component {
     } = this.props
     const content = data.content
     const mContent = (adsMData.data || {}).content
-    const ads = isMobile ? <div dangerouslySetInnerHTML={{ __html: content }} /> : mContent ? <div>m</div> : null
+    const ads = !isMobile ? <div dangerouslySetInnerHTML={{ __html: content }} /> : mContent ? <div>m</div> : null
     return ads
   }
 }
