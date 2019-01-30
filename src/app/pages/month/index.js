@@ -11,6 +11,7 @@ import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
 import Item from '@/components/List/Item'
+import Loading from '@/components/Ui/Loading'
 
 import './style.scss'
 
@@ -96,7 +97,7 @@ class Month extends PureComponent {
             content={`您想知道${year}年${m}月有哪些新番动漫播出吗，你想了解最新的动漫新番表 ，${m}月份最新动漫观看指南，${m}月播出的动漫资讯信息，请关注本站。`}
           />
         </Meta>
-        {loading ? <div>loading</div> : null}
+        {loading ? <Loading /> : null}
         <div className="wp mt20">
           <div className="box">
             <ul styleName="year" className="clearfix">

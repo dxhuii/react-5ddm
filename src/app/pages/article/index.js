@@ -164,7 +164,7 @@ class Article extends Component {
         </div>
         {cid === 205 ? null : (
           <div className="fr right">
-            <SideBar vodid={vodid} />
+            <SideBar vodid={+vodid} />
           </div>
         )}
       </div>

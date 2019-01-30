@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { ads } from '@/store/actions/ads'
 import { getAds } from '@/store/reducers/ads'
 
-import { isMobile } from 'Config'
+import { isMobile } from '@/utils'
 
 @withRouter
 @connect(
@@ -45,7 +45,7 @@ class Ads extends Component {
     } = this.props
     const content = data.content
     const mContent = (adsMData.data || {}).content
-    const ads = !isMobile ? <div dangerouslySetInnerHTML={{ __html: content }} /> : mContent ? <div>m</div> : null
+    const ads = !isMobile() ? <div dangerouslySetInnerHTML={{ __html: content }} /> : mContent ? <div>m</div> : null
     return ads
   }
 }

@@ -1,8 +1,17 @@
 import React, { PureComponent } from 'react'
+import { isMobile } from '@/utils'
 
 import './style.scss'
 
 export default class Footer extends PureComponent {
+  componentDidMount() {
+    if (isMobile()) {
+      let script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.src = 'https://ssl.51shanchayou.com/image/4704'
+      this.ads.appendChild(script)
+    }
+  }
   top = () => {
     if (typeof window === 'undefined' || typeof document === 'undefined') {
       return
@@ -26,6 +35,7 @@ export default class Footer extends PureComponent {
   render() {
     return (
       <footer styleName="footer" className="wp tac">
+        {isMobile() ? <div ref={e => (this.ads = e)} /> : null}
         <p>
           footer <br />
           footer <br />
