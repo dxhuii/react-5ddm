@@ -41,6 +41,7 @@ export default {
     storylist: ({ id, limit = 20, page }) => `${apiReact}storylist-id-${id}-limit-${limit}-p-${page}`, // 剧情列表
     storyDetail: `${apiReact}storyread`, // 获取剧情详情
     getuserinfo: `${apiReact}getuserinfo`, // 获取用户信息 参数 id  val评分值
-    verify: `${apiReact}verify-${Math.random()}` // 验证码
+    verify: `${apiReact}verify-${Math.random()}`, // 验证码
+    ads: `${apiReact}getAds` // 广告
   }
 }

@@ -10,6 +10,7 @@ import News from '@/components/News'
 import NewsYG from '@/components/News/yugao'
 import Swiper from '@/components/Swiper'
 import Recommend from '@/components/Recommend'
+import Ads from '@/components/Ads'
 
 import './style.scss'
 
@@ -43,6 +44,7 @@ class Home extends Component {
               <Recommend />
             </div>
           </div>
+          <Ads id={20} />
           <div className="mt20" styleName="main">
             <div styleName="main-left">
               <WeekDay title="番剧" link="/week" isJp={['', '月', '火', '水', '木', '金', '土', '日']} type={1} />
@@ -51,6 +53,7 @@ class Home extends Component {
               <Top name="topListIndexJP" />
             </div>
           </div>
+          <Ads id={21} />
           <div className="mt20" styleName="main news">
             <div styleName="main-left">
               <News name="newsPicList" />

@@ -21,6 +21,7 @@ import PlayList from '@/components/PlayList'
 import Share from '@/components/Share'
 import Tating from '@/components/Tating'
 import Modal from '@/components/Modal'
+import Ads from '@/components/Ads'
 import Sign from '@/components/Sign'
 import Meta from '@/components/Meta'
 
@@ -303,6 +304,9 @@ class Bangumi extends Component {
           </div>
         </div>
         <PlayList key="playlist" />
+        <div className="wp">
+          <Ads id={22} />
+        </div>
         <div className="mt20 clearfix wp">
           <div className="fl box pb20 left">
             {newsTextlist.length > 0 ? (
@@ -386,6 +390,9 @@ class Bangumi extends Component {
               <SideBar />
             </div>
           </div>
+        </div>
+        <div className="wp">
+          <Ads id={21} />
         </div>
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
           <Sign isSign={isSign} onType={val => this.onType(val)} />

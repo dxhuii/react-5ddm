@@ -286,6 +286,19 @@
     display: inline-block;
     vertical-align: middle;
   }
+  .d-badge {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    padding: 0 10px;
+    background-color: rgba(0, 0, 0, .5);
+    color: #fff;
+    font-size: 12px;
+    border-radius: 10px;
+    height: 20px;
+    line-height: 20px;
+    font-style: normal
+  }
   .title {
     display: flex;
     h2 {
@@ -515,6 +528,9 @@
     .wp {
       width: 100%;
       padding: 0 10px;
+      &.ads {
+        padding: 0;
+      }
     }
     .pt20 {
       padding-top: 10px;

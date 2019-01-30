@@ -12,6 +12,7 @@ import PlayList from '@/components/PlayList'
 import DetailActor from '@/components/DetailActor'
 import SideBar from '@/components/SideBar'
 import Share from '@/components/Share'
+import Ads from '@/components/Ads'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
@@ -253,6 +254,9 @@ class Play extends Component {
           </div>
         </div>
         <PlayList />
+        <div className="wp">
+          <Ads id={21} />
+        </div>
         <div className="mt20" />
         <div className="wp clearfix">
           <div className="fl left box">
@@ -266,6 +270,9 @@ class Play extends Component {
           <div className="right fr">
             <SideBar />
           </div>
+        </div>
+        <div className="wp">
+          <Ads id={22} />
         </div>
       </Fragment>
     )

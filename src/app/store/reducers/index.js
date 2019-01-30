@@ -20,6 +20,7 @@ import search from './search'
 import articleVod from './articleVod'
 import month from './month'
 import page from './page'
+import ads from './ads'
 
 let states = {
   user,
@@ -40,6 +41,7 @@ let states = {
   articleVod,
   month,
   page,
+  ads,
   scroll: scroll(),
   history: history()
 }
