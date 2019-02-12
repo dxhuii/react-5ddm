@@ -5,6 +5,8 @@ let config = {
   // 正式环境
   debug: false,
 
+  is9: false,
+
   name: SITE.SITE_NAME,
 
   // 域名完整地址

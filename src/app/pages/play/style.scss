@@ -25,7 +25,6 @@
 .player-info {
   height: 40px;
   line-height: 40px;
-  margin-bottom: 10px;
   display: flex;
   color: #ccc;
 }
@@ -73,13 +72,37 @@
   }
 }
 
+.play-tool {
+  display: flex;
+  height: 34px;
+  line-height: 24px;
+  padding-bottom: 10px;
+}
+
+.digg {
+  color: #ccc;
+  margin-right: 10px;
+  cursor: pointer;
+  i {
+    margin-right: 5px;
+  }
+}
+
+.play-next {
+  a {
+    color: #ccc;
+    margin-left: 10px;
+  }
+}
+
 .mcid {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
+  flex-grow: 1;
   a {
     margin: 0 5px;
-    border: 2px solid #999;
+    border: 2px solid rgba($color: #fff, $alpha: .3);
     display: inline-block;
     height: 24px;
     line-height: 22px;
@@ -106,6 +129,10 @@
   z-index: 9999;
 }
 
+.player-share {
+  margin-top: -3px;
+}
+
 @media (min-width: 0px) and (max-width: 1200px) {
   .player {
     :global {
@@ -121,17 +148,26 @@
     height: 233px;
   }
   .player-share,
-  .playlist {
+  .playlist,
+  .play-next {
     display: none;
   }
-  .player-info {
+  .player-info,
+  .play-tool {
     padding: 0 10px;
+  }
+  .player-info {
+    height: 30px;
+    line-height: 30px;
+  }
+  .play-tool {
+    align-items: center;
   }
   .m-play-name {
     display: inline-block;
     i {
       position: relative;
-      top: 5px;
+      top: 1px;
     }
   }
   .player-title {

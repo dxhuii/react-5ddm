@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { playerLoad } from '@/store/actions/player'
+import { digg } from '@/store/actions/mark'
 import { getPlayerList } from '@/store/reducers/player'
 import { getUserInfo } from '@/store/reducers/user'
 
@@ -15,10 +16,12 @@ import Share from '@/components/Share'
 import Ads from '@/components/Ads'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
+import Toast from '@/components/Toast'
 
 import play from '@/utils/play'
 
 import './style.scss'
+import { isMobile } from '@/utils'
 
 const { isJump, is9 } = play
 
@@ -29,7 +32,8 @@ const { isJump, is9 } = play
     player: getPlayerList(state, props.match.params.id, props.match.params.pid)
   }),
   dispatch => ({
-    playerLoad: bindActionCreators(playerLoad, dispatch)
+    playerLoad: bindActionCreators(playerLoad, dispatch),
+    digg: bindActionCreators(digg, dispatch)
   })
 )
 class Play extends Component {
@@ -48,7 +52,8 @@ class Play extends Component {
     player: PropTypes.object,
     playerLoad: PropTypes.func,
     match: PropTypes.object,
-    userinfo: PropTypes.object
+    userinfo: PropTypes.object,
+    digg: PropTypes.func
   }
 
   componentDidMount() {
@@ -91,17 +96,17 @@ class Play extends Component {
         params: { id, pid }
       }
     } = this.props
-    const { title, subTitle, list = [] } = data
+    const { title, subTitle, list = [], copyright } = data
     const other = this.getOther(list)
     const danmu = `${id}_${pid}`
     const defaultPlay =
-      other.length > 0 && !is9
+      other.length > 0 && !is9 && copyright !== 'vip'
         ? isJump(other[0].playName, other[0].vid, danmu)
         : list.length > 0
         ? isJump(list[0].playName, list[0].vid, danmu)
         : ''
     const mDefaultPlay =
-      other.length > 0 && !is9
+      other.length > 0 && !is9 && copyright !== 'vip'
         ? { playName: other[0].playName, vid: other[0].vid, playTitle: other[0].playTitle }
         : list.length > 0
         ? { playName: list[0].playName, vid: list[0].vid, playTitle: list[0].playTitle }
@@ -163,9 +168,20 @@ class Play extends Component {
     return name
   }
 
+  async onDigg(type, id) {
+    const { digg } = this.props
+    let [, res] = await digg({ type, id })
+    if (res.rcode === 1) {
+      const num = res.data.split(':')
+      this.up.querySelectorAll('span')[0].innerText = num[0]
+      this.down.querySelectorAll('span')[0].innerText = num[1]
+      Toast.success(res.msg)
+    }
+  }
+
   render() {
     const {
-      // userinfo,
+      userinfo: { userid },
       player: { data = {} },
       match: {
         params: { id, pid }
@@ -173,10 +189,16 @@ class Play extends Component {
     } = this.props
     const { full, isfull } = this.state
     const { title, subTitle, defaultPlay, playHtml, list, mDefaultPlay = {} } = this.getData(data)
-    const { listName, listId, listNameBig, actor = '', up, down, prev, next, mcid = [] } = data
+    const { listName, listId, listNameBig, actor = '', up, down, prev, next, mcid = [], copyright } = data
     const shareConfig = {
       title: `${title} ${subTitle}在线播放 - ${listName}${listNameBig}`,
       url: `/play/${id}/${pid}`
+    }
+    if ((copyright === 'stop' && !userid && is9) || !isMobile) {
+      if (typeof window === 'undefined') {
+        return
+      }
+      window.location.href = '/404'
     }
     return (
       <Fragment>
@@ -189,15 +211,7 @@ class Play extends Component {
                 content={`9站为您提供${listName}${listNameBig}${title}${subTitle}在线观看。喜欢${title}${subTitle}，就推荐给小伙伴们吧！`}
               />
             </Meta>
-            <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
-              <div dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
-              {isfull ? (
-                <a onMouseOver={this.showFull} onClick={this.isFull}>
-                  {full ? '退出全屏' : '网页全屏'}
-                </a>
-              ) : null}
-            </div>
-            {/* {userinfo.userid ? (
+            {(userid && copyright !== 'vip') || !is9 ? (
               <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
                 <div dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
                 {isfull ? (
@@ -208,7 +222,7 @@ class Play extends Component {
               </div>
             ) : (
               <div styleName="player-box">{playHtml || defaultPlay}</div>
-            )} */}
+            )}
             <div styleName="player-info">
               <div styleName="player-title">
                 <h1>
@@ -216,13 +230,6 @@ class Play extends Component {
                 </h1>
                 <h4>{subTitle}</h4>
               </div>
-              {/* <div styleName="mcid">
-                {mcid.map(item => (
-                  <Link key={item.id} to={`/type/${this.getName(listId)}/${item.id}/-/-/-/-/-/`}>
-                    {item.title}
-                  </Link>
-                ))}
-              </div> */}
               <ul styleName="playlist">
                 {list.map(item => (
                   <li key={item.playName} onClick={() => this.onPlay(item.vid, item.playName)}>
@@ -235,22 +242,33 @@ class Play extends Component {
                 <i className={`playicon ${mDefaultPlay.playName}`} />
                 {mDefaultPlay.playTitle}
               </div>
+              <div styleName="play-next">
+                {prev ? <Link to={`/play/${id}/${prev}`}>上一集</Link> : null}
+                {next ? <Link to={`/play/${id}/${next}`}>下一集</Link> : null}
+              </div>
+            </div>
+            <div styleName="play-tool">
+              <div styleName="digg" onClick={() => this.onDigg('up', id)} ref={e => (this.up = e)}>
+                <i className="iconfont">&#xe607;</i>
+                <span>{up}</span>
+              </div>
+              <div styleName="digg" onClick={() => this.onDigg('down', id)} ref={e => (this.down = e)}>
+                <i className="iconfont">&#xe606;</i>
+                <span>{down}</span>
+              </div>
+              <div styleName="mcid">
+                {mcid.map(item => {
+                  return item.title ? (
+                    <Link key={item.id} to={`/type/${this.getName(listId)}/${item.id}/-/-/-/-/-/`}>
+                      {item.title}
+                    </Link>
+                  ) : null
+                })}
+              </div>
               <div styleName="player-share">
                 <Share data={shareConfig} />
               </div>
             </div>
-            {/* <div>
-              <div>
-                <i className="iconfont">&#xe607;</i>
-                {up}
-              </div>
-              <div>
-                <i className="iconfont">&#xe606;</i>
-                {down}
-              </div>
-              {prev ? <Link to={`/play/${id}/${prev}`}>上一集</Link> : null}
-              {next ? <Link to={`/play/${id}/${next}`}>下一集</Link> : null}
-            </div> */}
           </div>
         </div>
         <PlayList />

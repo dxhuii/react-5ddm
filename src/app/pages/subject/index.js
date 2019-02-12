@@ -30,6 +30,7 @@ import Toast from '@/components/Toast'
 import Shell from '@/components/Shell'
 
 import { isNumber, formatPic, isMobile } from '@/utils'
+import { is9 } from 'Config'
 
 import './style.scss'
 @Shell
@@ -169,6 +170,7 @@ class Bangumi extends Component {
       actorId,
       repairtitle,
       vod_pantitle,
+      copyright,
       mcid = [],
       original = [],
       director = [],
@@ -179,13 +181,18 @@ class Bangumi extends Component {
     const rePic = formatPic(pic, 'orj360')
     const csData = cmScore.data || {}
     const { loveid, remindid, star, comment = [] } = csData
-    // console.log(cmScore, 'comment')
     const reContent = `${content.substring(0, 120)}${content.length > 120 ? '...' : ''}`
     const shareConfig = {
       pic,
       title: `${title}${language ? `(${language})` : ''} - ${listName}${listNameBig}`,
       desc: reContent,
       url: `/subject/${id}`
+    }
+    if ((copyright === 'stop' && !userid && is9) || !isMobile) {
+      if (typeof window === 'undefined') {
+        return
+      }
+      window.location.href = '/404'
     }
     return (
       <Fragment>
@@ -303,7 +310,11 @@ class Bangumi extends Component {
             </div>
           </div>
         </div>
-        <PlayList key="playlist" />
+        {is9 && copyright === 'banquan' ? (
+          <div styleName="copyright">根据国家相关部门规定，本动画不准上架，请支持正版观看，谢谢</div>
+        ) : (
+          <PlayList key="playlist" />
+        )}
         <div className="wp">
           <Ads id={22} />
         </div>

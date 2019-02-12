@@ -1,6 +1,5 @@
-import { isMobile, location } from './index'
-
-const is9 = false //(location.host || '').indexOf('99496.com') !== -1 && !isMobile()
+import { isMobile } from './index'
+import { is9 } from 'Config'
 
 const playH = '100%'
 

@@ -2,15 +2,10 @@
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <!-- 自定义 head -->
-    <%= htmlWebpackPlugin.options.head %>
-    <!-- 自定义 meta -->
-    <%= htmlWebpackPlugin.options.metaDom %>
+    <%= htmlWebpackPlugin.options.head %> <%= htmlWebpackPlugin.options.metaDom %>
   </head>
   <body>
-    <!-- app 视图 -->
     <div id="app"><%= htmlWebpackPlugin.options.htmlDom %></div>
-    <!-- redux -->
     <script>
       window.__initState__ = <%= htmlWebpackPlugin.options.reduxState %>
     </script>

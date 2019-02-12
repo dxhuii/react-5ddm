@@ -24,3 +24,16 @@ export function mark({ id, val }) {
     })
   }
 }
+
+export function digg({ id, type, sid = 1 }) {
+  return (dispatch, getState) => {
+    return Post({
+      api: 'digg',
+      params: {
+        id,
+        type,
+        sid
+      }
+    })
+  }
+}
