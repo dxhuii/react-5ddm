@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import QRCode from 'qrcode.react'
 
-import { DOMAIN, name } from 'Config'
+import { DOMAIN, NAME } from 'Config'
 import weixin from '@/utils/weixin'
 
 import './style.scss'
@@ -45,8 +45,8 @@ class Share extends Component {
     const enTitle = encodeURIComponent(title)
     const enPic = encodeURIComponent(pic)
     const enDesc = encodeURIComponent(desc)
-    const enName = encodeURIComponent(name)
-    const enFrom = encodeURIComponent('来自' + name + ' ' + DOMAIN)
+    const enName = encodeURIComponent(NAME)
+    const enFrom = encodeURIComponent('来自' + NAME + ' ' + DOMAIN)
     const site = {
       qq: `https://connect.qq.com/widget/shareqq/index.html?url=${enUrl}&title=${enTitle}&desc=&summary=${enDesc}&pics=${enPic}&site=${enName}`,
       weibo: `https://service.weibo.com/share/share.php?appkey=111884427&url=${enUrl}&title=${enTitle}&pic=${enPic}`,

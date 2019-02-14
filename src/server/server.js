@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser'
 import compress from 'compression'
 
 // 配置
-import { port, DOMAIN, API } from 'Config'
+import { PORT, DOMAIN, API } from 'Config'
 
 import render from './render'
 
@@ -79,5 +79,5 @@ app.get('*', async function(req, res) {
   res.end()
 })
 
-app.listen(port)
-console.log('server started on port ' + port)
+app.listen(PORT)
+console.log('server started on port ' + PORT)

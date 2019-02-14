@@ -30,7 +30,7 @@ import Toast from '@/components/Toast'
 import Shell from '@/components/Shell'
 
 import { isNumber, formatPic, isMobile } from '@/utils'
-import { is9 } from 'Config'
+import { IS9 } from 'Config'
 
 import './style.scss'
 @Shell
@@ -188,7 +188,7 @@ class Bangumi extends Component {
       desc: reContent,
       url: `/subject/${id}`
     }
-    if ((copyright === 'stop' && !userid && is9) || !isMobile) {
+    if ((copyright === 'stop' && !userid && IS9) || !isMobile) {
       if (typeof window === 'undefined') {
         return
       }
@@ -310,7 +310,7 @@ class Bangumi extends Component {
             </div>
           </div>
         </div>
-        {is9 && copyright === 'banquan' ? (
+        {IS9 && copyright === 'banquan' ? (
           <div styleName="copyright">根据国家相关部门规定，本动画不准上架，请支持正版观看，谢谢</div>
         ) : (
           <PlayList key="playlist" />

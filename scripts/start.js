@@ -22,7 +22,7 @@ const compilerPromise = compiler => {
 }
 
 const app = express()
-const WEBPACK_PORT = config.port + 1
+const WEBPACK_PORT = config.PORT + 1
 
 const start = async () => {
   rimraf.sync('./dist')

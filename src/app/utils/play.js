@@ -1,5 +1,5 @@
 import { isMobile } from './index'
-import { is9 } from 'Config'
+import { IS9 } from 'Config'
 
 const playH = '100%'
 
@@ -24,7 +24,7 @@ const tudou = pv => {
 }
 const youku = pv => {
   const data = pv.split(',')
-  return is9 ? HTML(ykUrl(data.length === 3 ? data[2] : pv)) : iframe(ykIf(data.length === 3 ? data[2] : pv))
+  return IS9 ? HTML(ykUrl(data.length === 3 ? data[2] : pv)) : iframe(ykIf(data.length === 3 ? data[2] : pv))
 }
 const iqiyi = pv => {
   let plus = isMobile() ? '&tvid=' : '&tvId='
@@ -46,7 +46,7 @@ const iqiyi = pv => {
   } else {
     purl = 'https://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=' + vid
   }
-  return is9 ? HTML(purl) : iframe(purl)
+  return IS9 ? HTML(purl) : iframe(purl)
 }
 const letv = pv => {
   const data = pv.split(',')
@@ -56,7 +56,7 @@ const letv = pv => {
 }
 const sohu = pv => {
   const purl = 'https://tv.sohu.com/upload/static/share/share_play.html#' + pv.split('_')[0] + (isMobile() ? '' : '_9468532_0_9001_0')
-  return is9 ? HTML(purl) : iframe(purl)
+  return IS9 ? HTML(purl) : iframe(purl)
 }
 const pptv = pv => {
   const purl = 'https://' + (isMobile() ? 'm' : 'www') + '.pptv.com/show/' + pv.split(',')[0] + '.html'
@@ -64,7 +64,7 @@ const pptv = pv => {
 }
 const qq = pv => {
   const purl = 'https://v.qq.com/iframe/player.html?vid=' + pv + '&tiny=0&auto=1'
-  return is9 ? HTML(purl) : iframe(purl)
+  return IS9 ? HTML(purl) : iframe(purl)
 }
 const bilibili = pv => {
   const data = pv.split(',')
@@ -224,15 +224,15 @@ const isPlays = (name, vid, danmu) => {
     pv = data[0]
   }
   if (playname === 'full') {
-    return is9 ? '/' : jiexiUrl(`${pv.replace('http://', 'https://')}`, danmu)
+    return IS9 ? '/' : jiexiUrl(`${pv.replace('http://', 'https://')}`, danmu)
   } else {
     if (/.mp4|.m3u8/.test(pv)) {
-      return is9 ? '/' : jiexiUrl(`//www.acgnz.cn/api/play.php?url=${pv}`, danmu)
+      return IS9 ? '/' : jiexiUrl(`//www.acgnz.cn/api/play.php?url=${pv}`, danmu)
     } else if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com|qq.com|mgtv.com/.test(pv)) {
       if (/bilibili|acfun|youku|tudou/.test(playname)) {
         return jump(playname, pv, danmu)
       } else {
-        return is9 ? HTML(pv) : jiexiUrl(rePlayUrl(playname, pv), danmu)
+        return IS9 ? HTML(pv) : jiexiUrl(rePlayUrl(playname, pv), danmu)
       }
     } else {
       return HTML(pv)
@@ -251,9 +251,9 @@ export default {
       name = data[1]
       pv = data[0]
     }
-    const isCk = /.html|.shtml|.htm|https:\/\/|http:\/\/|.mp4|.m3u8/.test(pv) || name === 'full' || !is9
+    const isCk = /.html|.shtml|.htm|https:\/\/|http:\/\/|.mp4|.m3u8/.test(pv) || name === 'full' || !IS9
     const playStyle = /acku|sina|letvsaas|weibo|miaopai|tudou|letvyun|bitqiu|yunpan|bit|bithls|qqq/.test(name)
-    if ((/.mp4|.m3u8/.test(pv) || playStyle) && is9) {
+    if ((/.mp4|.m3u8/.test(pv) || playStyle) && IS9) {
       url = HTML('/')
     } else if (isCk) {
       url = isPlays(name, vid, danmu)
@@ -262,5 +262,5 @@ export default {
     }
     return url
   },
-  is9
+  IS9
 }

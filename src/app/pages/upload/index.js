@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import FileUpload from '../../components/Upload'
 import Tooltip from '../../components/Tooltip'
-import { publicPath } from 'Config'
+import { PUBLIC_PATH } from 'Config'
 
 import './style.scss'
 export default class Main extends Component {
@@ -21,7 +21,7 @@ export default class Main extends Component {
     return (
       <div style={{ padding: 30, fontSize: 30 }}>
         <FileUpload
-          url={`${publicPath}/sign/alioss`}
+          url={`${PUBLIC_PATH}/sign/alioss`}
           uploadEnd={data => {
             this.setState({
               imgUlr: this.state.imgUlr.concat(data)

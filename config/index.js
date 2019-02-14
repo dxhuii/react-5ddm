@@ -1,37 +1,35 @@
 // 生产环境配置
-const SITE = require('./site.json')
-// console.log(site)
 let config = {
   // 正式环境
   debug: false,
 
-  is9: false,
+  IS9: false,
 
-  name: SITE.SITE_NAME,
+  NAME: '9站',
 
   // 域名完整地址
-  DOMAIN: SITE.DOMAIN,
+  DOMAIN: 'https://dev.99496.com',
 
   // 接口地址
-  API: SITE.API,
+  API: 'https://api.99496.com/',
 
   // 服务端口
-  port: SITE.PORT,
+  PORT: 6666,
 
   // 登录token，cookie 的名称
-  AUTH_COOKIE_NAME: SITE.AUTH_COOKIE_NAME,
+  AUTH_COOKIE_NAME: 'signin',
 
-  COOKIE_PREFIX: SITE.COOKIE_PREFIX,
+  COOKIE_PREFIX: 'ikf_',
 
   // https://github.com/css-modules/css-modules
   CLASS_SCOPED_NAME: '[hash:base64:8]',
 
   // 前端打包后，静态资源路径前缀
   // 生成效果如：//dev.99496.com/app.bundle.js
-  publicPath: SITE.PUBLIC_PATH,
+  PUBLIC_PATH: '//dev.99496.com/dist/client',
 
   // 添加内容到模版的head中
-  head: `
+  HEAD: `
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
@@ -39,7 +37,7 @@ let config = {
   `,
 
   // 添加分析统计脚本
-  analysis_script: ``,
+  ANALYSIS_SCRIPT: ``,
 
   // google 分析
   // UA-*****-1
@@ -64,19 +62,19 @@ let config = {
     */
   },
   // 联系我们的邮箱地址
-  EMAIL: SITE.EMAIL,
+  EMAIL: 'dxhuii@qq.com',
 
   // 备案号
-  ICP: SITE.ICP
+  ICP: ''
 }
 
 // 开发环境配置
 if (process.env.NODE_ENV == 'development') {
   config.debug = true
-  config.port = 4000
+  config.PORT = 4000
   config.CLASS_SCOPED_NAME = '[name]_[local]__[hash:base64:5]'
   config.DOMAIN = '//localhost:4000'
-  config.public_path = 'http://localhost:4000'
+  config.PUBLIC_PATH = 'http://localhost:4000'
 }
 
 module.exports = config

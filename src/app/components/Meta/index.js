@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import MetaTags, { ReactTitle } from 'react-meta-tags'
 
-import { name } from 'Config'
+import { NAME } from 'Config'
 
 export default class Meta extends Component {
   constructor(props) {
@@ -19,8 +19,8 @@ export default class Meta extends Component {
 
     let _title = ''
 
-    _title += title || name
-    if (title) _title += ` - ${name}`
+    _title += title || NAME
+    if (title) _title += ` - ${NAME}`
 
     return (
       <Fragment>

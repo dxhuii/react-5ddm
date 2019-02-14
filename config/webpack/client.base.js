@@ -50,7 +50,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../../dist/client'),
     filename: devMode ? '[name].bundle.js' : '[name].[hash].js',
-    publicPath: config.publicPath + '/'
+    publicPath: config.PUBLIC_PATH + '/'
   },
 
   resolve: {
@@ -219,8 +219,8 @@ module.exports = {
       metaDom: '<%- meta %>',
       htmlDom: '<%- html %>',
       reduxState: '<%- reduxState %>',
-      head: config.head,
-      analysis_script: config.analysis_script
+      head: config.HEAD,
+      analysis_script: config.ANALYSIS_SCRIPT
       // inject: false
     }),
 

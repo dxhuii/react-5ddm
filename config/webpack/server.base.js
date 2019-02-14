@@ -30,7 +30,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../../dist/server'),
     filename: 'server.js',
-    publicPath: config.publicPath + '/'
+    publicPath: config.PUBLIC_PATH + '/'
   },
 
   resolve: {
