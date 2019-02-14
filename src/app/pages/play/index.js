@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 
 import { playerLoad } from '@/store/actions/player'
 import { digg } from '@/store/actions/mark'
+import { hits } from '@/store/actions/hits'
 import { addplaylog } from '@/store/actions/history'
 import { getPlayerList } from '@/store/reducers/player'
 import { getUserInfo } from '@/store/reducers/user'
@@ -36,7 +37,8 @@ const { isJump, is9 } = play
   dispatch => ({
     playerLoad: bindActionCreators(playerLoad, dispatch),
     digg: bindActionCreators(digg, dispatch),
-    addplaylog: bindActionCreators(addplaylog, dispatch)
+    addplaylog: bindActionCreators(addplaylog, dispatch),
+    hits: bindActionCreators(hits, dispatch)
   })
 )
 class Play extends Component {
@@ -52,10 +54,11 @@ class Play extends Component {
   }
 
   static propTypes = {
-    player: PropTypes.object,
     playerLoad: PropTypes.func,
     digg: PropTypes.func,
     addplaylog: PropTypes.func,
+    hits: PropTypes.func,
+    player: PropTypes.object,
     match: PropTypes.object,
     userinfo: PropTypes.object
   }
@@ -64,6 +67,7 @@ class Play extends Component {
     const {
       player,
       playerLoad,
+      hits,
       match: {
         params: { id, pid }
       }
@@ -71,6 +75,7 @@ class Play extends Component {
     if (!player || !player.data) {
       playerLoad({ id, pid })
     }
+    hits({ id, sid: 1 })
     document.onkeyup = event => {
       if (event.which == '27') {
         this.isFull()

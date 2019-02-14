@@ -86,6 +86,7 @@ class History extends Component {
     } else {
       localStorage.historyData = ''
     }
+    this.showHistory()
   }
 
   render() {
