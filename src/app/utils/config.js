@@ -38,7 +38,7 @@ export default {
      * name menu菜单 sns配置 user配置 pay支付配置 emot配置 list 各种列表
      */
     config: `${apiReact}config`, // 网站各种配置
-    storylist: ({ id, limit = 20, page }) => `${apiReact}storylist-id-${id}-limit-${limit}-p-${page}`, // 剧情列表
+    storylist: `${apiReact}storylist`, // 剧情列表 902
     storyDetail: `${apiReact}storyread`, // 获取剧情详情
     getuserinfo: `${apiReact}getuserinfo`, // 获取用户信息 参数 id  val评分值
     verify: `${apiReact}verify-${Math.random()}`, // 验证码

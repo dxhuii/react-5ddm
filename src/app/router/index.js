@@ -279,6 +279,17 @@ export default (user, logPageView = () => {}) => {
     },
 
     {
+      path: '/episodelist',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('@/pages/episodelist'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter
+    },
+
+    {
       path: '/upload',
       exact: true,
       head: Head,

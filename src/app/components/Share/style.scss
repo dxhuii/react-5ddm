@@ -57,7 +57,9 @@
 .qzone,
 .wechat,
 .tieba,
-.qq {
+.qq,
+.facebook,
+.twitter {
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -89,4 +91,12 @@
 
 .tieba {
   background-image: url(../../static/img/tieba.svg);
+}
+
+.facebook {
+  background-image: url(../../static/img/facebook.png);
+}
+
+.twitter {
+  background-image: url(../../static/img/twitter.png);
 }

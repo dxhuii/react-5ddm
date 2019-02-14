@@ -6,6 +6,9 @@ export default function episode(state = {}, action = {}) {
     case 'GET_EPISCODE':
       state[name] = data
       return merge({}, state, {})
+    case 'GET_EPISCODE_LIST':
+      state[name] = data
+      return merge({}, state, {})
     default:
       return state
   }
@@ -14,4 +17,8 @@ export default function episode(state = {}, action = {}) {
 export const getEpisode = (state, id, p) => {
   const ids = `${id}${p ? `-${p}` : ''}`
   return state.episode[ids] ? state.episode[ids] : {}
+}
+
+export const getEpisodeList = (state, id) => {
+  return state.episode[id] ? state.episode[id] : {}
 }

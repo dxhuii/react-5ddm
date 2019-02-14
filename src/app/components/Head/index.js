@@ -107,7 +107,7 @@ class Head extends Component {
       match: { url, params = {} }
     } = this.props
     const { wd, isHide, isSign, visible, showMenu, showSearch } = this.state
-    console.log(url)
+    // console.log(url)
     return (
       <Fragment>
         <header>

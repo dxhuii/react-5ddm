@@ -13,3 +13,18 @@ export function episode({ id, p }) {
     })
   }
 }
+
+export function episodeList() {
+  return (dispatch, getState) => {
+    return loadData({
+      dispatch,
+      getState,
+      name: 'episodelist',
+      reducerName: 'episode',
+      actionType: 'GET_EPISCODE_LIST',
+      api: 'storylist',
+      params: { id: 902 },
+      isPage: true
+    })
+  }
+}

@@ -51,7 +51,9 @@ class Share extends Component {
       qq: `https://connect.qq.com/widget/shareqq/index.html?url=${enUrl}&title=${enTitle}&desc=&summary=${enDesc}&pics=${enPic}&site=${enName}`,
       weibo: `https://service.weibo.com/share/share.php?appkey=111884427&url=${enUrl}&title=${enTitle}&pic=${enPic}`,
       qzone: `https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${enUrl}&title=${enTitle}&desc=${enFrom}&summary=${enDesc}&pics=${enPic}&site=${enName}`,
-      tieba: `https://tieba.baidu.com/f/commit/share/openShareApi?title=${enTitle}&url=${enUrl}?to=tieba&pic=${enPic}&key=&sign=on&desc=${enDesc}&comment=&red_tag=u2625676433`
+      tieba: `https://tieba.baidu.com/f/commit/share/openShareApi?title=${enTitle}&url=${enUrl}?to=tieba&pic=${enPic}&key=&sign=on&desc=${enDesc}&comment=&red_tag=u2625676433`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?s=100&p[title]=${enTitle}p[summary]=${enDesc}&p[url]=${enUrl}&p[images]=${enPic}`,
+      twitter: `https://twitter.com/intent/tweet?text=${enTitle}&url=${enUrl}`
     }
     window.open(site[type], '_blank', 'width=770,height=620')
   }
@@ -84,6 +86,8 @@ class Share extends Component {
         <i styleName="tieba" onClick={() => this.goShare('tieba')} />
         <i styleName="qzone" onClick={() => this.goShare('qzone')} />
         <i styleName="qq" onClick={() => this.goShare('qq')} />
+        <i styleName="facebook" onClick={() => this.goShare('facebook')} />
+        <i styleName="twitter" onClick={() => this.goShare('twitter')} />
         <Fragment>
           {showQrcode ? (
             <div

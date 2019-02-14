@@ -128,7 +128,7 @@ class SubjectList extends Component {
     const reLz = isEmpty(lz)
     const reOrder = isEmpty(order, 1)
     let [, data] = await listLoad({ id, mcid: reMcid, year: reYear, area: reArea, wd, letter: reLetter, lz: reLz, order: reOrder })
-    if (data.data) {
+    if (data) {
       this.setState({
         data: data.data
       })
