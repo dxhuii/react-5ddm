@@ -7,6 +7,7 @@ import { ads } from '@/store/actions/ads'
 import { getAds } from '@/store/reducers/ads'
 
 import { isMobile } from '@/utils'
+import { ISAD } from 'Config'
 
 @withRouter
 @connect(
@@ -38,15 +39,22 @@ class Ads extends Component {
     }
   }
 
+  showAd() {
+    if (ISAD) {
+      const {
+        adsData: { data = {} },
+        adsMData
+      } = this.props
+      const content = data.content
+      const mContent = (adsMData.data || {}).content
+      return !isMobile() ? <div dangerouslySetInnerHTML={{ __html: content }} /> : mContent ? <div>m</div> : null
+    } else {
+      return null
+    }
+  }
+
   render() {
-    const {
-      adsData: { data = {} },
-      adsMData
-    } = this.props
-    const content = data.content
-    const mContent = (adsMData.data || {}).content
-    const ads = !isMobile() ? <div dangerouslySetInnerHTML={{ __html: content }} /> : mContent ? <div>m</div> : null
-    return ads
+    return this.showAd()
   }
 }
 

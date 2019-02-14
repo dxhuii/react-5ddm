@@ -5,6 +5,8 @@ let config = {
 
   IS9: false,
 
+  ISAD: false,
+
   NAME: '9站',
 
   // 域名完整地址
