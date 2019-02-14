@@ -12,7 +12,6 @@ export const hits = ({ id, sid }) => {
           sid
         }
       })
-
       resolve([err, data])
     })
   }

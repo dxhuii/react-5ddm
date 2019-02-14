@@ -8,6 +8,7 @@ import { signOut } from '@/store/actions/user'
 import { getUserInfo } from '@/store/reducers/user'
 
 import SearchAuto from '@/components/SearchAuto'
+import History from '@/components/History'
 import Modal from '@/components/Modal'
 import Sign from '@/components/Sign'
 
@@ -103,7 +104,7 @@ class Head extends Component {
 
   render() {
     const {
-      userinfo,
+      userinfo: { userid, nickname },
       match: { url, params = {} }
     } = this.props
     const { wd, isHide, isSign, visible, showMenu, showSearch } = this.state
@@ -147,8 +148,8 @@ class Head extends Component {
             <a onClick={this.onShowSearch} styleName="on-search">
               搜索
             </a>
-            {userinfo.nickname ? <span>{userinfo.nickname}</span> : null}
-            {userinfo.userid ? (
+            {nickname ? <span>{nickname}</span> : null}
+            {userid ? (
               <a href="javascript:void(0)" onClick={this.signOut}>
                 退出
               </a>
@@ -161,7 +162,11 @@ class Head extends Component {
             <a onClick={this.onShowMenu} styleName="on-menu">
               菜单
             </a>
+            <a onClick={this.onShowMenu} styleName="on-menu">
+              记录
+            </a>
           </div>
+          <History userid={userid} match={this.props.match} />
         </header>
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
           <Sign isSign={isSign} onType={val => this.onType(val)} />

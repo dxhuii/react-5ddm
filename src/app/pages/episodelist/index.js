@@ -20,7 +20,7 @@ import SideBar from '@/components/SideBar'
     episodeList: bindActionCreators(episodeList, dispatch)
   })
 )
-class VodNews extends Component {
+class EpisodeList extends Component {
   static propTypes = {
     episodeList: PropTypes.func,
     list: PropTypes.object
@@ -71,4 +71,4 @@ class VodNews extends Component {
   }
 }
 
-export default VodNews
+export default EpisodeList

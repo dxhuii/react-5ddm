@@ -1,0 +1,50 @@
+@import '../../pages/_mixin';
+.history {
+  position: absolute;
+  z-index: 999;
+  .title {
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+    h2 {
+      flex-grow: 1;
+      font-size: 16px;
+    }
+    span {
+      color: #666;
+    }
+  }
+}
+
+.list {
+  display: block;
+  width: 400px;
+  li {
+    height: 58px;
+    line-height: 58px;
+    display: flex;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    &:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    a {
+      padding: 0;
+      margin-left: 10px;
+    }
+    .title {
+      flex-grow: 1;
+      max-width: 270px;
+      display: inline-block;
+      line-height: 24px;
+      a {
+        display: block;
+        margin-left: 0;
+        @include clamp(1);
+      }
+    }
+  }
+}

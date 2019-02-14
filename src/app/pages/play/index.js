@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 
 import { playerLoad } from '@/store/actions/player'
 import { digg } from '@/store/actions/mark'
+import { addplaylog } from '@/store/actions/history'
 import { getPlayerList } from '@/store/reducers/player'
 import { getUserInfo } from '@/store/reducers/user'
 
@@ -14,14 +15,15 @@ import DetailActor from '@/components/DetailActor'
 import SideBar from '@/components/SideBar'
 import Share from '@/components/Share'
 import Ads from '@/components/Ads'
-import Shell from '@/components/Shell'
-import Meta from '@/components/Meta'
 import Toast from '@/components/Toast'
 
+import Shell from '@/components/Shell'
+import Meta from '@/components/Meta'
+
+import { isMobile } from '@/utils'
 import play from '@/utils/play'
 
 import './style.scss'
-import { isMobile } from '@/utils'
 
 const { isJump, is9 } = play
 
@@ -33,7 +35,8 @@ const { isJump, is9 } = play
   }),
   dispatch => ({
     playerLoad: bindActionCreators(playerLoad, dispatch),
-    digg: bindActionCreators(digg, dispatch)
+    digg: bindActionCreators(digg, dispatch),
+    addplaylog: bindActionCreators(addplaylog, dispatch)
   })
 )
 class Play extends Component {
@@ -51,9 +54,10 @@ class Play extends Component {
   static propTypes = {
     player: PropTypes.object,
     playerLoad: PropTypes.func,
+    digg: PropTypes.func,
+    addplaylog: PropTypes.func,
     match: PropTypes.object,
-    userinfo: PropTypes.object,
-    digg: PropTypes.func
+    userinfo: PropTypes.object
   }
 
   componentDidMount() {
@@ -78,6 +82,53 @@ class Play extends Component {
     this.setState({
       play: ''
     })
+  }
+
+  async addHistory() {
+    const {
+      userinfo: { userid },
+      match: {
+        params: { id, pid }
+      },
+      player: { data = {} },
+      addplaylog
+    } = this.props
+    const { title, subTitle, count = 0 } = data
+    if (userid && title) {
+      let [, data] = await addplaylog({
+        uid: userid,
+        vod_id: id,
+        vod_pid: pid,
+        vod_sid: 0,
+        vod_name: title,
+        url_name: subTitle,
+        vod_maxnum: count
+      })
+      console.log(data)
+    } else if (title) {
+      let dataList = JSON.parse(localStorage.historyData || '[]')
+      if (dataList.length > 0) {
+        for (let i = 0; i < dataList.length; i++) {
+          const obj = JSON.parse(dataList[i])
+          if (parseInt(obj.vid) === parseInt(id)) {
+            dataList.splice(i, 1)
+          }
+        }
+      }
+      if (dataList.length > 10) {
+        dataList.pop()
+      }
+      dataList.unshift(
+        JSON.stringify({
+          vid: id,
+          pid,
+          title,
+          name: subTitle,
+          next: +pid < count ? +pid + 1 : 0
+        })
+      )
+      localStorage.historyData = JSON.stringify([...new Set([...dataList])])
+    }
   }
 
   onPlay(play, type) {
@@ -200,6 +251,7 @@ class Play extends Component {
       }
       window.location.href = '/404'
     }
+    this.addHistory() // 增加观看记录
     return (
       <Fragment>
         <div styleName="player">
