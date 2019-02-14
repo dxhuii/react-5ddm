@@ -28,7 +28,8 @@ class History extends Component {
     data: PropTypes.object,
     location: PropTypes.object,
     match: PropTypes.object,
-    userid: PropTypes.any
+    userid: PropTypes.any,
+    isShow: PropTypes.bool
   }
 
   constructor(props) {
@@ -89,10 +90,10 @@ class History extends Component {
 
   render() {
     const { historyList } = this.state
-    const { userid } = this.props
+    const { userid, isShow } = this.props
     // console.log(historyList)
     return (
-      <div styleName="history" className="box">
+      <div styleName="history" className="box" style={{ display: isShow ? 'block' : 'none' }}>
         <div styleName="title">
           <h2>观看记录</h2>
           <span onClick={this.emptyhistory}>清空记录</span>
@@ -100,7 +101,7 @@ class History extends Component {
         <ul styleName="list">
           {historyList.map((item, index) => (
             <li key={index}>
-              <span styleName="title">
+              <span>
                 <Link to={`/subject/${item.vid}`}>{item.title}</Link>
                 <Link to={`/subject/${item.vid}/${item.pid}`}>{item.name}</Link>
               </span>
@@ -116,16 +117,12 @@ class History extends Component {
 }
 
 const Historys = props => {
-  const {
-    match: {
-      params: { pid }
-    }
-  } = props
+  const { pid } = props
   return <History {...props} key={pid} />
 }
 
 Historys.propTypes = {
-  match: PropTypes.object
+  pid: PropTypes.any
 }
 
 export default Historys

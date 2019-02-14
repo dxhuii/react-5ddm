@@ -2,10 +2,12 @@
 .history {
   position: absolute;
   z-index: 999;
+  right: 0;
   .title {
     display: flex;
-    height: 30px;
+    height: 40px;
     line-height: 30px;
+    border-bottom: 1px solid #eee;
     h2 {
       flex-grow: 1;
       font-size: 16px;
@@ -19,6 +21,7 @@
 .list {
   display: block;
   width: 400px;
+  margin-top: 10px;
   li {
     height: 58px;
     line-height: 58px;
@@ -32,18 +35,22 @@
       border-bottom: none;
     }
     a {
-      padding: 0;
       margin-left: 10px;
+      white-space: nowrap;
     }
-    .title {
+    span {
       flex-grow: 1;
-      max-width: 270px;
       display: inline-block;
       line-height: 24px;
       a {
         display: block;
         margin-left: 0;
+        white-space: inherit;
         @include clamp(1);
+        &:last-child {
+          color: #666;
+          font-size: 12px;
+        }
       }
     }
   }

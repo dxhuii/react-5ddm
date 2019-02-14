@@ -33,6 +33,7 @@ class Head extends Component {
       visible: false,
       showMenu: false,
       showSearch: false,
+      showHis: false,
       isSign: 'signIn'
     }
   }
@@ -102,12 +103,18 @@ class Head extends Component {
     })
   }
 
+  onShowHis = () => {
+    this.setState({
+      showHis: !this.state.showHis
+    })
+  }
+
   render() {
     const {
       userinfo: { userid, nickname },
       match: { url, params = {} }
     } = this.props
-    const { wd, isHide, isSign, visible, showMenu, showSearch } = this.state
+    const { wd, isHide, isSign, visible, showMenu, showSearch, showHis } = this.state
     // console.log(url)
     return (
       <Fragment>
@@ -148,6 +155,7 @@ class Head extends Component {
             <a onClick={this.onShowSearch} styleName="on-search">
               搜索
             </a>
+            <a onClick={this.onShowHis}>记录</a>
             {nickname ? <span>{nickname}</span> : null}
             {userid ? (
               <a href="javascript:void(0)" onClick={this.signOut}>
@@ -162,12 +170,9 @@ class Head extends Component {
             <a onClick={this.onShowMenu} styleName="on-menu">
               菜单
             </a>
-            <a onClick={this.onShowMenu} styleName="on-menu">
-              记录
-            </a>
           </div>
-          <History userid={userid} match={this.props.match} />
         </header>
+        <History userid={userid} pid={params.pid} isShow={showHis} />
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
           <Sign isSign={isSign} onType={val => this.onType(val)} />
         </Modal>
