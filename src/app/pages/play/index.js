@@ -82,11 +82,10 @@ class Play extends Component {
       let [, data] = await playerLoad({ id, pid })
       if (data) {
         this.addHistory() // 增加观看记录
-        this.getData(data.data)
+        this.getData()
       }
     } else {
-      const { data } = player
-      this.getData(data)
+      this.getData()
       this.addHistory() // 增加观看记录
     }
 
@@ -151,19 +150,19 @@ class Play extends Component {
   }
 
   onPlay(play, type) {
-    console.log(play, type)
-    this.setState({ play, type })
+    this.setState({ play, type }, () => this.getData())
   }
 
   getOther(data = []) {
     return data.filter(item => item.playName === 'other')
   }
 
-  getData(data = {}) {
+  getData() {
     const {
       match: {
         params: { id, pid }
-      }
+      },
+      player: { data = {} }
     } = this.props
     const { play, type } = this.state
     const { title, subTitle, list = [], copyright } = data
