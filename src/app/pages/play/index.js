@@ -21,8 +21,8 @@ import Toast from '@/components/Toast'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
-import { isMobile } from '@/utils'
 import { ISPLAY, IS9 } from 'Config'
+import { isMobile } from '@/utils'
 import play from '@/utils/play'
 
 import './style.scss'
@@ -48,7 +48,11 @@ class Play extends Component {
     this.state = {
       play: '',
       type: '',
-      outputHTML: '',
+      title: '',
+      subTitle: '',
+      playHtml: '',
+      mInfo: {},
+      list: [],
       full: false,
       isfull: false
     }
@@ -78,8 +82,11 @@ class Play extends Component {
       let [, data] = await playerLoad({ id, pid })
       if (data) {
         this.addHistory() // 增加观看记录
+        this.getData(data.data)
       }
     } else {
+      const { data } = player
+      this.getData(data)
       this.addHistory() // 增加观看记录
     }
 
@@ -153,36 +160,35 @@ class Play extends Component {
   }
 
   getData(data = {}) {
-    const { play, type } = this.state
     const {
       match: {
         params: { id, pid }
       }
     } = this.props
+    const { play, type } = this.state
     const { title, subTitle, list = [], copyright } = data
     const other = this.getOther(list)
     const danmu = `${id}_${pid}`
-    const defaultPlay =
-      other.length > 0 && !IS9 && (copyright !== 'vip' || ISPLAY || isMobile())
-        ? isJump(other[0].playName, other[0].vid, danmu)
-        : list.length > 0
-        ? isJump(list[0].playName, list[0].vid, danmu)
-        : ''
-    const mDefaultPlay =
-      other.length > 0 && !IS9 && (copyright !== 'vip' || ISPLAY || isMobile())
-        ? { playName: other[0].playName, vid: other[0].vid, playTitle: other[0].playTitle }
-        : list.length > 0
-        ? { playName: list[0].playName, vid: list[0].vid, playTitle: list[0].playTitle }
-        : ''
-    const playHtml = play ? isJump(type, play, danmu) : ''
-    return {
+    const isA = other.length > 0 && !IS9 && (copyright !== 'vip' || isMobile() || ISPLAY)
+    const defaultPlay = isA
+      ? isJump(other[0].playName, other[0].vid, danmu)
+      : list.length > 0
+      ? isJump(list[0].playName, list[0].vid, danmu)
+      : ''
+    const mInfo = isA
+      ? { playName: other[0].playName, vid: other[0].vid, playTitle: other[0].playTitle }
+      : list.length > 0
+      ? { playName: list[0].playName, vid: list[0].vid, playTitle: list[0].playTitle }
+      : ''
+    const playHtml = play ? isJump(type, play, danmu) : defaultPlay
+    console.log(play, playHtml, isA, 'getdata')
+    this.setState({
       title,
       subTitle,
-      defaultPlay,
       playHtml,
       list,
-      mDefaultPlay
-    }
+      mInfo
+    })
   }
 
   isFull = () => {
@@ -250,14 +256,13 @@ class Play extends Component {
         params: { id, pid }
       }
     } = this.props
-    const { full, isfull } = this.state
-    const { title, subTitle, defaultPlay, playHtml, list, mDefaultPlay = {} } = this.getData(data)
+    const { full, isfull, title, subTitle, playHtml, list, mInfo } = this.state
     const { listName, listId, listNameBig, actor = '', up, down, prev, next, mcid = [], copyright } = data
     const shareConfig = {
       title: `${title} ${subTitle}在线播放 - ${listName}${listNameBig}`,
       url: `/play/${id}/${pid}`
     }
-    if ((copyright === 'stop' && !userid && IS9 && !ISPLAY && !isMobile()) || !isMobile) {
+    if (copyright === 'stop' && !userid && IS9 && !ISPLAY && !isMobile()) {
       if (typeof window === 'undefined') {
         return
       }
@@ -274,18 +279,14 @@ class Play extends Component {
                 content={`9站为您提供${listName}${listNameBig}${title}${subTitle}在线观看。喜欢${title}${subTitle}，就推荐给小伙伴们吧！`}
               />
             </Meta>
-            {(userid && copyright !== 'vip') || !IS9 || ISPLAY || isMobile() ? (
-              <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
-                <div dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
-                {isfull ? (
-                  <a onMouseOver={this.showFull} onClick={this.isFull}>
-                    {full ? '退出全屏' : '网页全屏'}
-                  </a>
-                ) : null}
-              </div>
-            ) : (
-              <div styleName="player-box">{playHtml || defaultPlay}</div>
-            )}
+            <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
+              <div dangerouslySetInnerHTML={{ __html: playHtml }} />
+              {isfull ? (
+                <a onMouseOver={this.showFull} onClick={this.isFull}>
+                  {full ? '退出全屏' : '网页全屏'}
+                </a>
+              ) : null}
+            </div>
             <div styleName="player-info">
               <div styleName="player-title">
                 <h1>
@@ -302,8 +303,8 @@ class Play extends Component {
                 ))}
               </ul>
               <div styleName="m-play-name">
-                <i className={`playicon ${mDefaultPlay.playName}`} />
-                {mDefaultPlay.playTitle}
+                <i className={`playicon ${mInfo.playName}`} />
+                {mInfo.playTitle}
               </div>
               <div styleName="play-next">
                 {prev ? <Link to={`/play/${id}/${prev}`}>上一集</Link> : null}
