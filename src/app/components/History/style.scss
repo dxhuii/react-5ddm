@@ -2,7 +2,9 @@
 .history {
   position: absolute;
   z-index: 999;
-  right: 0;
+  right: 8px;
+  height: 600px;
+  top: 61px;
   .title {
     display: flex;
     height: 40px;
@@ -22,6 +24,9 @@
   display: block;
   width: 400px;
   margin-top: 10px;
+  height: calc(100% - 50px);
+  overflow-x: hidden;
+  overflow-y: auto;
   li {
     height: 58px;
     line-height: 58px;
@@ -36,6 +41,7 @@
     }
     a {
       margin-left: 10px;
+      padding: 0;
       white-space: nowrap;
     }
     span {
@@ -53,5 +59,15 @@
         }
       }
     }
+  }
+}
+
+@media (min-width: 0px) and (max-width: 1200px) {
+  .history {
+    top: 53px;
+    margin: 0 10px;
+  }
+  .list {
+    width: 100%;
   }
 }

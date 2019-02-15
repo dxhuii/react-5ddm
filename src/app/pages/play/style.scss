@@ -165,6 +165,7 @@
   }
   .m-play-name {
     display: inline-block;
+    white-space: nowrap;
     i {
       position: relative;
       top: 1px;

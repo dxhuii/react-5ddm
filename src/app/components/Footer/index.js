@@ -1,17 +1,18 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { isMobile } from '@/utils'
+
+import Ads from '@/components/Ads'
 
 import './style.scss'
 
 export default class Footer extends PureComponent {
-  componentDidMount() {
-    if (isMobile()) {
-      let script = document.createElement('script')
-      script.type = 'text/javascript'
-      script.src = 'https://ssl.51shanchayou.com/image/4704'
-      this.ads.appendChild(script)
+  path = () => {
+    if (typeof window === 'undefined') {
+      return
     }
+    return window.location.pathname
   }
+
   top = () => {
     if (typeof window === 'undefined' || typeof document === 'undefined') {
       return
@@ -34,17 +35,25 @@ export default class Footer extends PureComponent {
 
   render() {
     return (
-      <footer styleName="footer" className="wp tac">
-        {isMobile() ? <div ref={e => (this.ads = e)} /> : null}
-        <p>
-          footer <br />
-          footer <br />
-          footer
-        </p>
-        <a styleName="top" onClick={this.top} href="javascript:;">
-          top
-        </a>
-      </footer>
+      <Fragment>
+        {isMobile() ? (
+          <div className="mt20">
+            <Ads id={24} url={this.path()} />
+          </div>
+        ) : (
+          <Ads id={25} url={this.path()} />
+        )}
+        <footer styleName="footer" className="wp tac mt20">
+          <p>
+            footer <br />
+            footer <br />
+            footer
+          </p>
+          <a styleName="top" onClick={this.top} href="javascript:;">
+            <i className="iconfont">&#xe900;</i>
+          </a>
+        </footer>
+      </Fragment>
     )
   }
 }

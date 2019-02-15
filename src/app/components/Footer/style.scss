@@ -1,7 +1,6 @@
 .footer {
-  margin-top: 20px;
   padding: 20px 0 30px;
-  border-top: 1px solid #e8f1ff;
+  border-top: 1px solid #ebebeb;
   line-height: 30px;
 }
 
@@ -9,13 +8,15 @@
   position: fixed;
   right: 10px;
   bottom: 150px;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
   text-align: center;
-  font-size: 20px;
-  background-color: #ddd;
-  color: #333;
+  background-color: #666;
+  color: #fff;
   border-radius: 10px;
   z-index: 999;
+  i {
+    font-size: 18px;
+  }
 }

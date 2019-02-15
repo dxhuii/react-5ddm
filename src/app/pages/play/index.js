@@ -63,7 +63,7 @@ class Play extends Component {
     userinfo: PropTypes.object
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const {
       player,
       playerLoad,
@@ -72,10 +72,16 @@ class Play extends Component {
         params: { id, pid }
       }
     } = this.props
-    if (!player || !player.data) {
-      playerLoad({ id, pid })
-    }
     hits({ id, sid: 1 })
+    if (!player || !player.data) {
+      let [, data] = await playerLoad({ id, pid })
+      if (data) {
+        this.addHistory() // 增加观看记录
+      }
+    } else {
+      this.addHistory() // 增加观看记录
+    }
+
     document.onkeyup = event => {
       if (event.which == '27') {
         this.isFull()
@@ -256,7 +262,6 @@ class Play extends Component {
       }
       window.location.href = '/404'
     }
-    this.addHistory() // 增加观看记录
     return (
       <Fragment>
         <div styleName="player">
@@ -329,9 +334,7 @@ class Play extends Component {
           </div>
         </div>
         <PlayList />
-        <div className="wp">
-          <Ads id={21} />
-        </div>
+        <div className="wp">{isMobile() ? <Ads id={26} /> : <Ads id={21} />}</div>
         <div className="mt20" />
         <div className="wp clearfix">
           <div className="fl left box">

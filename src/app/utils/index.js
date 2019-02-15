@@ -40,3 +40,19 @@ export const location = () => {
 export const trim = str => {
   return str.replace(/(^\s*)|(\s*$)/g, '')
 }
+
+// 提取字符串第一次出现的数字
+export const firstNumber = str => {
+  const isN = /pv|PV|SP|sp|全集|总集/.exec(str) || []
+  if (isN.index === 0) {
+    return str
+  } else {
+    const reg = /\d+/g
+    const arr = str.match(reg)
+    if (arr) {
+      return arr[0]
+    } else {
+      return str
+    }
+  }
+}

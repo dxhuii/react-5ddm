@@ -5,7 +5,7 @@ let config = {
 
   IS9: false,
 
-  ISAD: false,
+  ISAD: true,
 
   NAME: '9站',
 

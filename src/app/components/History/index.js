@@ -46,9 +46,10 @@ class History extends Component {
   async showHistory() {
     const { userid, playlog, data } = this.props
     let historyList = []
+    let count = 0
     if (userid) {
       if (!data.data) {
-        let [, data] = await playlog({ userid })
+        let [, data] = await playlog({ uid: userid })
         if (data) {
           historyList = data.data
         }

@@ -171,8 +171,8 @@ class Head extends Component {
               菜单
             </a>
           </div>
+          <History userid={userid} pid={params.pid} isShow={showHis} />
         </header>
-        <History userid={userid} pid={params.pid} isShow={showHis} />
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
           <Sign isSign={isSign} onType={val => this.onType(val)} />
         </Modal>

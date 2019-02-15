@@ -315,9 +315,7 @@ class Bangumi extends Component {
         ) : (
           <PlayList key="playlist" />
         )}
-        <div className="wp">
-          <Ads id={22} />
-        </div>
+        <div className="wp">{isMobile() ? <Ads id={26} /> : <Ads id={22} />}</div>
         <div className="mt20 clearfix wp">
           <div className="fl box pb20 left">
             {newsTextlist.length > 0 ? (
@@ -402,9 +400,7 @@ class Bangumi extends Component {
             </div>
           </div>
         </div>
-        <div className="wp">
-          <Ads id={21} />
-        </div>
+        <div className="wp">{!isMobile() && <Ads id={21} />}</div>
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
           <Sign isSign={isSign} onType={val => this.onType(val)} />
         </Modal>

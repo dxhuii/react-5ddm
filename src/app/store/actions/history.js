@@ -51,10 +51,10 @@ export const delplaylog = ({ id, uid }) => {
     return new Promise(async resolve => {
       let [err, data] = await Ajax({
         url: config.api.delplaylog,
-        method: 'post',
+        method: 'get',
         data: {
-          uid,
-          id
+          id,
+          uid
         }
       })
       resolve([err, data])
@@ -67,7 +67,7 @@ export const emptyhistory = ({ uid }) => {
     return new Promise(async resolve => {
       let [err, data] = await Ajax({
         url: config.api.emptyhistory,
-        method: 'post',
+        method: 'get',
         data: {
           uid
         }

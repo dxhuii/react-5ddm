@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { playlist } from '@/store/actions/playlist'
 import { getPlayList } from '@/store/reducers/playlist'
 
-import { trim, isMobile } from '@/utils'
+import { trim, firstNumber, isMobile } from '@/utils'
 
 import './style.scss'
 @withRouter
@@ -26,7 +26,8 @@ class PlayList extends Component {
       pageSize: 18,
       start: 0,
       end: 18,
-      isReverse: false
+      isReverse: false,
+      isAll: false
     }
     this.liWidth = 130
   }
@@ -174,6 +175,12 @@ class PlayList extends Component {
     })
   }
 
+  isAll = () => {
+    this.setState({
+      isAll: !this.state.isAll
+    })
+  }
+
   render() {
     const {
       play: { loading, data = [] },
@@ -181,7 +188,7 @@ class PlayList extends Component {
         params: { id, pid }
       }
     } = this.props
-    const { pageSize, start, end, isReverse } = this.state
+    const { pageSize, start, end, isReverse, isAll } = this.state
     const len = parseInt(data.length / pageSize)
     const surplus = data.length % pageSize
     const dataSource = data.slice(start, end)
@@ -193,10 +200,15 @@ class PlayList extends Component {
             {data.length > pageSize ? (
               <div styleName="play-page">
                 {data.length > 144 ? (
-                  <Fragment>
-                    <div onClick={this.onPrev}>prev</div>
-                    <div onClick={this.onNext}>next</div>
-                  </Fragment>
+                  <div styleName="play-prev-next">
+                    <div styleName="pn" onClick={this.onPrev}>
+                      <i className="iconfont">&#xe8ff;</i>
+                    </div>
+                    <div styleName="pn" onClick={this.onNext}>
+                      <i className="iconfont">&#xe65e;</i>
+                    </div>
+                    <div onClick={this.isAll}>全部集数</div>
+                  </div>
                 ) : null}
                 <div styleName="playlist playlist-boreder" ref={e => (this.pageNav = e)}>
                   <ul styleName="playlist-nav" ref={e => (this.pageNavUl = e)} style={{ width: `${(len + (surplus ? 1 : 0)) * 140}px` }}>
@@ -214,15 +226,20 @@ class PlayList extends Component {
                 ))}
               </ul>
             </div>
-            <div styleName="moblie-list">
+            <div styleName={`moblie-list ${isAll ? 'showAll' : ''}`}>
               <div styleName="moblie-title">
                 <h2>分集</h2>
-                <span onClick={this.onReverse}>{isReverse ? '倒序' : '正序'}</span>
+                {isMobile() ? <span onClick={this.onReverse}>{isReverse ? '倒序' : '正序'}</span> : null}
+                {isAll ? (
+                  <i className="iconfont" onClick={this.isAll}>
+                    &#xe610;
+                  </i>
+                ) : null}
               </div>
-              <ul ref={e => (this.moblieList = e)}>
+              <ul>
                 {(isReverse ? data.reverse() : data).map(item => (
-                  <li key={item.episode}>
-                    <Link to={`/play/${id}/${item.episode}`}>{item.title}</Link>
+                  <li styleName={+pid === +item.episode ? 'active' : ''} key={item.episode}>
+                    <Link to={`/play/${id}/${item.episode}`}>{firstNumber(item.title)}</Link>
                   </li>
                 ))}
               </ul>
