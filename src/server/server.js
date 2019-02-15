@@ -40,29 +40,43 @@ const https = require('https')
 
 app.get('*', async function(req, res) {
   const path = req.path
+  const reg = /\d+/g
+  const arr = path.match(reg)
+  const url = path.split('/')
+  console.log(arr, url, 'arr')
   // 兼容老的URL跳转
-  if (path.indexOf('bangumi') !== -1) {
-    const url = path.split('/')
+  if (/bangumi/.test(path)) {
     const pinyin = url[2]
-    // console.log(url.length, pinyin, url, path);
     // 根据拼音获取视频ID
-    https.get(`${API}getVodId&pinyin=${pinyin}`, function(r) {
-      // console.log('statusCode:', r.statusCode);
-      // console.log('headers:', r.headers);
-      r.on('data', function(d) {
-        const data = JSON.parse(d)
-        if (data.data) {
-          const reUrl =
-            url.length === 4 && path.indexOf('.html') !== -1
-              ? `http:${DOMAIN}/play/${data.data}/${url[3].split('.')[0].split('-')[1]}`
-              : `http:${DOMAIN}/subject/${data.data}`
-          res.status(301)
-          res.redirect(reUrl)
-        } else {
-          res.redirect(DOMAIN)
-        }
+    if (pinyin) {
+      https.get(`${API}api.php?s=home-react-getVodId&pinyin=${pinyin}`, function(r) {
+        r.on('data', function(d) {
+          const data = JSON.parse(d || '{}')
+          if (data.data) {
+            const reUrl = url.length === 4 && /.html/.test(path) ? `/play/${data.data}/${arr[1]}` : `/subject/${data.data}`
+            res.status(301)
+            res.redirect(reUrl)
+          } else {
+            res.redirect(DOMAIN)
+          }
+        })
       })
-    })
+      return
+    }
+  } else if ((/news/.test(path) || /article/.test(path)) && /.html/.test(path)) {
+    const reUrl = `/article/${arr[0]}`
+    res.status(301)
+    res.redirect(reUrl)
+    return
+  } else if (/plot/.test(path)) {
+    const reUrl = url.length === 3 ? '/ep' : `/episode/${url[2]}/${url[3]}`
+    res.status(301)
+    res.redirect(reUrl)
+    return
+  } else if (/\/ac/.test(path)) {
+    const reUrl = /.html/.test(path) ? `/play/${arr[0]}/${arr[2]}` : `/subject/${arr[0]}`
+    res.status(301)
+    res.redirect(reUrl)
     return
   }
 

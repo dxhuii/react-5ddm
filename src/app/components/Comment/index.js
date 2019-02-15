@@ -12,7 +12,6 @@ class Comment extends PureComponent {
     data: PropTypes.array
   }
   render() {
-    console.log(this.props)
     const { data = [] } = this.props
     return (
       <div styleName="comment">
