@@ -41,6 +41,10 @@
   }
 }
 
+.index-week {
+  position: relative;
+}
+
 .week {
   position: relative;
   height: 385px;
@@ -81,6 +85,9 @@
   }
   &.weekCn {
     height: 285px;
+  }
+  &.auto {
+    height: auto;
   }
   li {
     position: relative;

@@ -49,7 +49,7 @@ class Home extends Component {
           <div>{isMobile() ? null : <Ads id={20} />}</div>
           <div className="mt20" styleName="main">
             <div styleName="main-left">
-              <WeekDay title="番剧" link="/week" isJp={['', '月', '火', '水', '木', '金', '土', '日']} type={1} />
+              <WeekDay title="番剧" link="/week/1" isJp={['', '月', '火', '水', '木', '金', '土', '日']} type={1} />
             </div>
             <div styleName="main-right">
               <Top name="topListIndexJP" />
@@ -66,7 +66,7 @@ class Home extends Component {
           </div>
           <div className="mt20" styleName="main cn">
             <div styleName="main-left">
-              <WeekDay title="国创" link="/week" type={0} />
+              <WeekDay title="国创" link="/week/0" type={0} />
             </div>
             <div styleName="main-right">
               <Top name="topListIndexCN" />

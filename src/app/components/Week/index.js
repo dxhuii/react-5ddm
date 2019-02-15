@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 
@@ -8,8 +8,7 @@ import { week } from '@/store/actions/week'
 import { getWeek } from '@/store/reducers/week'
 
 import Loading from '@/components/Ui/Loading'
-
-import { isNumber, formatPic } from '@/utils'
+import Item from '@/components/Week/Item'
 
 import './style.scss'
 
@@ -116,7 +115,7 @@ class weekDay extends Component {
     const weekType = this.getArea(data)
     const weekData = this.getEveryWeek(weekType[type], type)
     return (
-      <Fragment>
+      <div styleName="index-week">
         <div className="title">
           <h2>
             <i className={isJp ? 'title-icon' : 'title-icon cn'} /> {title}
@@ -139,45 +138,9 @@ class weekDay extends Component {
             </Link>
           ) : null}
         </div>
-        <ul styleName={type === 0 ? 'week weekCn' : 'week'}>
-          {loading ? <Loading /> : null}
-          {weekData[weekEng[currentIndex]].map(item => (
-            <li key={item.id}>
-              <Link key={item.id} to={`/subject/${item.id}`}>
-                <div
-                  className="load-demand"
-                  data-load-demand={`<img src="${formatPic(item.smallPic || item.pic, 'thumb150')}" alt="${item.title}" />`}
-                />
-                <h4>{item.title}</h4>
-              </Link>
-              {isNumber(item.status) ? (
-                item.isDate ? (
-                  <p>
-                    更新至
-                    <Link styleName="today" to={`/play/${item.id}/${item.pid}`}>
-                      {item.status}话
-                    </Link>
-                  </p>
-                ) : (
-                  <p>
-                    更新至<Link to={`/play/${item.id}/${item.pid}`}>{item.status}话</Link>
-                  </p>
-                )
-              ) : (
-                <p styleName="no">
-                  {item.isDate ? (
-                    <Link styleName={item.isDate ? 'today' : ''} to={`/play/${item.id}/${item.pid}`}>
-                      {item.status}
-                    </Link>
-                  ) : (
-                    <Link to={`/play/${item.id}/${item.pid}`}>{item.status}</Link>
-                  )}
-                </p>
-              )}
-            </li>
-          ))}
-        </ul>
-      </Fragment>
+        {loading ? <Loading /> : null}
+        <Item data={weekData[weekEng[currentIndex]]} type={type} />
+      </div>
     )
   }
 }

@@ -68,7 +68,7 @@ export default (user, logPageView = () => {}) => {
     },
 
     {
-      path: '/week',
+      path: '/week/:id',
       exact: true,
       head: Head,
       component: Loadable({

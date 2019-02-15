@@ -1,0 +1,29 @@
+@import '../../pages/_mixin';
+.list {
+  display: flex;
+  li {
+    flex: 1;
+    h4 {
+      @include clamp(2);
+    }
+    img {
+      width: 70px;
+      display: block;
+    }
+  }
+}
+
+.weeklist {
+  display: flex;
+  ul {
+    flex: 1;
+  }
+}
+
+.active {
+  color: #f00;
+}
+
+.today {
+  color: #0084ff;
+}
