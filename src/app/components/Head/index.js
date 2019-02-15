@@ -131,6 +131,9 @@ class Head extends Component {
               <NavLink styleName={url === '/news' ? 'active' : ''} exact to="/news">
                 新闻
               </NavLink>
+              <NavLink styleName={url === '/ep' ? 'active' : ''} exact to="/ep">
+                剧情
+              </NavLink>
               <NavLink styleName={url === '/top' ? 'active' : ''} exact to="/top">
                 排行榜
               </NavLink>

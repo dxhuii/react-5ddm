@@ -11,6 +11,10 @@ import { getEpisodeList } from '@/store/reducers/episode'
 
 import SideBar from '@/components/SideBar'
 
+import Shell from '@/components/Shell'
+import Meta from '@/components/Meta'
+
+@Shell
 @withRouter
 @connect(
   (state, props) => ({
@@ -52,6 +56,7 @@ class EpisodeList extends Component {
     } = this.props
     return (
       <Fragment>
+        <Meta title="剧情首页" />
         <div className="wp mt20 clearfix">
           <div className="left fl">
             {data.length > 0

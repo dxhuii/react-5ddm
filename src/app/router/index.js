@@ -279,7 +279,7 @@ export default (user, logPageView = () => {}) => {
     },
 
     {
-      path: '/episodelist',
+      path: '/ep',
       exact: true,
       head: Head,
       component: Loadable({
