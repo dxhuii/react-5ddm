@@ -163,13 +163,13 @@ class Play extends Component {
     const other = this.getOther(list)
     const danmu = `${id}_${pid}`
     const defaultPlay =
-      other.length > 0 && !IS9 && (copyright !== 'vip' || ISPLAY)
+      other.length > 0 && !IS9 && (copyright !== 'vip' || ISPLAY || isMobile())
         ? isJump(other[0].playName, other[0].vid, danmu)
         : list.length > 0
         ? isJump(list[0].playName, list[0].vid, danmu)
         : ''
     const mDefaultPlay =
-      other.length > 0 && !IS9 && (copyright !== 'vip' || ISPLAY)
+      other.length > 0 && !IS9 && (copyright !== 'vip' || ISPLAY || isMobile())
         ? { playName: other[0].playName, vid: other[0].vid, playTitle: other[0].playTitle }
         : list.length > 0
         ? { playName: list[0].playName, vid: list[0].vid, playTitle: list[0].playTitle }
@@ -257,7 +257,7 @@ class Play extends Component {
       title: `${title} ${subTitle}在线播放 - ${listName}${listNameBig}`,
       url: `/play/${id}/${pid}`
     }
-    if ((copyright === 'stop' && !userid && IS9 && !ISPLAY) || !isMobile) {
+    if ((copyright === 'stop' && !userid && IS9 && !ISPLAY && !isMobile()) || !isMobile) {
       if (typeof window === 'undefined') {
         return
       }
@@ -274,7 +274,7 @@ class Play extends Component {
                 content={`9站为您提供${listName}${listNameBig}${title}${subTitle}在线观看。喜欢${title}${subTitle}，就推荐给小伙伴们吧！`}
               />
             </Meta>
-            {(userid && copyright !== 'vip') || !IS9 || ISPLAY ? (
+            {(userid && copyright !== 'vip') || !IS9 || ISPLAY || isMobile() ? (
               <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
                 <div dangerouslySetInnerHTML={{ __html: playHtml || defaultPlay }} />
                 {isfull ? (
