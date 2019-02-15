@@ -1,5 +1,5 @@
 import { isMobile } from './index'
-import { IS9, ISPLAY } from 'Config'
+import { IS9 } from 'Config'
 
 const playH = '100%'
 
@@ -159,7 +159,7 @@ const rePlayUrl = (playname, pv) => {
     case 'sohu':
       data = pv.split('_')
       sVid = data.length === 2 ? data[0] : pv
-      sName = data.length === 2 ? (this.isMobile() ? 'mysohu' : 'sohu') : playname
+      sName = data.length === 2 ? (isMobile() ? 'mysohu' : 'sohu') : playname
       break
     case 'pptv':
       data = pv.split(',')
