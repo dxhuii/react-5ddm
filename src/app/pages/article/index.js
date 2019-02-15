@@ -17,7 +17,7 @@ import play from '@/utils/play'
 
 import './style.scss'
 
-const { isJump, is9 } = play
+const { isJump } = play
 @Shell
 @withRouter
 @connect(

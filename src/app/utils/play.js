@@ -1,5 +1,5 @@
 import { isMobile } from './index'
-import { IS9 } from 'Config'
+import { IS9, ISPLAY } from 'Config'
 
 const playH = '100%'
 
@@ -261,6 +261,5 @@ export default {
       url = jump(name, vid, danmu)
     }
     return url
-  },
-  IS9
+  }
 }

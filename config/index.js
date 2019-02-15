@@ -5,6 +5,8 @@ let config = {
 
   IS9: false,
 
+  ISPLAY: false,
+
   ISAD: true,
 
   NAME: '9站',
