@@ -165,7 +165,7 @@ class Play extends Component {
       player: { data = {} }
     } = this.props
     const { play, type } = this.state
-    const { title, subTitle, list = [], copyright } = data
+    const { list = [], copyright } = data
     const other = this.getOther(list)
     const danmu = `${id}_${pid}`
     const isA = other.length > 0 && !IS9 && (copyright !== 'vip' || isMobile() || ISPLAY)
@@ -182,8 +182,6 @@ class Play extends Component {
     const playHtml = play ? isJump(type, play, danmu) : defaultPlay
     console.log(play, playHtml, isA, 'getdata')
     this.setState({
-      title,
-      subTitle,
       playHtml,
       list,
       mInfo
@@ -255,9 +253,10 @@ class Play extends Component {
         params: { id, pid }
       }
     } = this.props
-    const { full, isfull, title, subTitle, playHtml, list, mInfo } = this.state
-    const { listName, listId, listNameBig, actor = '', up, down, prev, next, mcid = [], copyright } = data
+    const { full, isfull, playHtml, list, mInfo } = this.state
+    const { listName, listId, listNameBig, pic, title, subTitle, actor = '', up, down, prev, next, mcid = [], copyright } = data
     const shareConfig = {
+      pic,
       title: `${title} ${subTitle}在线播放 - ${listName}${listNameBig}`,
       url: `/play/${id}/${pid}`
     }
