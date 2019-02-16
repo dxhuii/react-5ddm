@@ -42,6 +42,21 @@ header {
   background-size: 150px auto;
   background-position: 0 4px;
   margin-left: 10px;
+  &.dddm {
+    width: 130px;
+    flex-basis: 130px;
+    background-image: url(../../static/img/dd.svg);
+    background-size: 120px auto;
+    background-position: 0 10px;
+  }
+  /*5ddm*/
+  &.ddm {
+    width: 120px;
+    flex-basis: 120px;
+    background-image: url(../../static/img/5d.svg);
+    background-size: 110px auto;
+    background-position: 0 15px;
+  }
 }
 
 .header-tool {

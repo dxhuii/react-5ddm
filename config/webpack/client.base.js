@@ -33,18 +33,7 @@ module.exports = {
   target: 'web',
 
   entry: {
-    app: [
-      '@babel/polyfill',
-      './src/client/index.js',
-      // ArriveFooter 监听抵达页尾的事件
-      './src/app/utils/arrive-footer.js',
-      /**
-       * 懒加载图片、Dom
-       * 使用方式
-       * 给dom添加class="load-demand"、data-load-demand="<div></div> or <img />"
-       **/
-      './src/app/utils/load-demand'
-    ]
+    app: ['@babel/polyfill', './src/client/index.js']
   },
 
   output: {
@@ -229,7 +218,11 @@ module.exports = {
       clear: false
     }),
 
-    new CopyWebpackPlugin([{ from: 'src/app/static/favicon.ico', to: 'favicon.ico' }])
+    new CopyWebpackPlugin([
+      { from: 'src/app/static/favicon.ico', to: 'favicon.ico' },
+      { from: 'src/app/static/5d_favicon.ico', to: '5d_favicon.ico' },
+      { from: 'src/app/static/dd_favicon.ico', to: 'dd_favicon.ico' }
+    ])
 
     // serviceworker 还在研究中
     // new ServiceWorkerWebpackPlugin({

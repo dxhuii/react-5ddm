@@ -13,6 +13,7 @@ import Modal from '@/components/Modal'
 import Sign from '@/components/Sign'
 
 import { trim } from '@/utils'
+import { DOMAIN_NAME, NAME } from 'Config'
 
 import './style.scss'
 
@@ -119,7 +120,7 @@ class Head extends Component {
     return (
       <Fragment>
         <header>
-          <NavLink styleName="header-logo" exact to="/" title="9站" />
+          <NavLink styleName={`header-logo ${DOMAIN_NAME === 'dddm.tv' ? 'dddm' : DOMAIN_NAME === '5ddm.com' ? 'ddm' : ''}`} exact to="/" title={NAME} />
           <nav styleName={showMenu ? 'show' : ''}>
             <div styleName="header-nav">
               <NavLink styleName={url === '/' ? 'active' : ''} exact to="/">

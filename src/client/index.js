@@ -8,6 +8,15 @@ import ReactGA from 'react-ga'
 // 引入全局样式
 import '../app/pages/global.scss'
 
+// ArriveFooter 监听抵达页尾的事件
+import '@/utils/arrive-footer.js'
+/**
+ * 懒加载图片、Dom
+ * 使用方式
+ * 给dom添加class="load-demand"、data-load-demand="<div></div> or <img />"
+ **/
+import '@/utils/load-demand'
+
 import configureStore from '@/store'
 import createRouter from '@/router'
 import { getUserInfo } from '@/store/reducers/user'
