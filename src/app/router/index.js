@@ -20,6 +20,8 @@ import episodeData from '@/pages/episode/load-data'
 import monthData from '@/pages/month/load-data'
 import topData from '@/pages/top/load-data'
 import newData from '@/pages/new/load-data'
+import episodelistData from '@/pages/episodelist/load-data'
+import detailNewstData from '@/pages/subject/news/load-data'
 
 /**
  * 创建路由
@@ -120,7 +122,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/subject/news'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter
+      enter: triggerEnter,
+      loadData: detailNewstData
     },
 
     {
@@ -298,7 +301,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/episodelist'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter
+      enter: triggerEnter,
+      loadData: episodelistData
     },
 
     {

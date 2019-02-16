@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { bindActionCreators } from 'redux'
@@ -12,6 +12,10 @@ import { getVodNews } from '@/store/reducers/detail'
 import SideBar from '@/components/SideBar'
 import Item from '@/components/News/Item'
 
+import Shell from '@/components/Shell'
+import Meta from '@/components/Meta'
+
+@Shell
 @withRouter
 @connect(
   (state, props) => ({
@@ -74,6 +78,7 @@ class VodNews extends Component {
     } = this.props
     return (
       <Fragment>
+        <Meta title="视频新闻列表" />
         <div className="wp clearfix mt20">
           <div className="left box fl">
             <Item data={data} />
