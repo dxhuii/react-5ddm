@@ -10,6 +10,7 @@ import { vodNews } from '@/store/actions/detail'
 import { getVodNews } from '@/store/reducers/detail'
 
 import SideBar from '@/components/SideBar'
+import Item from '@/components/News/Item'
 
 @withRouter
 @connect(
@@ -64,40 +65,21 @@ class VodNews extends Component {
     await vodNews({ id })
   }
 
-  showData() {
-    const {
-      newsData: { data = [] }
-    } = this.props
-    return data.map(item => (
-      <li key={item.id}>
-        <Link to={`/article/${item.id}`}>
-          <img src={item.pic} alt={item.title} />
-          {/* <div styleName="mark">
-            <p>{item.title}</p>
-          </div> */}
-        </Link>
-      </li>
-    ))
-  }
-
   render() {
     const {
-      newsData: { data = [] }
+      newsData: { data = [] },
+      match: {
+        params: { id }
+      }
     } = this.props
     return (
       <Fragment>
-        <div className="wp clearfix">
-          <div className="left fl">
-            {data.length > 0
-              ? data.map(item => (
-                  <div key={item.id} style={{ height: 300 }}>
-                    {item.id}
-                  </div>
-                ))
-              : null}
+        <div className="wp clearfix mt20">
+          <div className="left box fl">
+            <Item data={data} />
           </div>
           <div className="right fr">
-            <SideBar />
+            <SideBar vodid={+id} />
           </div>
         </div>
       </Fragment>

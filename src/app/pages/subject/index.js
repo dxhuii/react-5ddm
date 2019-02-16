@@ -30,7 +30,7 @@ import Toast from '@/components/Toast'
 import Shell from '@/components/Shell'
 
 import { isNumber, formatPic, isMobile } from '@/utils'
-import { IS9 } from 'Config'
+import { IS9, DOMAIN_NAME } from 'Config'
 
 import './style.scss'
 @Shell
@@ -200,7 +200,7 @@ class Bangumi extends Component {
           {loading ? <Loading /> : null}
           <Meta
             title={`${title}全集在线观看${repairtitle && repairtitle !== '讨论帖' ? `_${repairtitle}` : ''}${
-              vod_pantitle ? '_百度云盘下载' : ''
+              vod_pantitle || DOMAIN_NAME === 'dddm.tv' ? '_百度云盘下载' : ''
             } - ${listName}${listNameBig}`}
           >
             <meta name="description" content={`《${title}》讲述${reContent}`} />

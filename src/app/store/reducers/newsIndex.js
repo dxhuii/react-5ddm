@@ -11,6 +11,7 @@ export default function newsIndex(state = {}, action = {}) {
   }
 }
 
-export const getNewsIndex = (state, name) => {
-  return state.newsIndex[name] ? state.newsIndex[name] : {}
+export const getNewsIndex = (state, name, id) => {
+  const ids = name === 'newslist' && id !== 44 ? id : name
+  return state.newsIndex[ids] ? state.newsIndex[ids] : {}
 }

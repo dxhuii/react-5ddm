@@ -1,8 +1,40 @@
 .news-nav {
   width: 160px;
+  h2 {
+    font-size: 18px;
+    margin: 0 -20px;
+    padding: 0 20px 15px;
+    border-bottom: 1px solid #ebebeb;
+  }
+  ul {
+    li {
+      margin: 0 -20px;
+      font-size: 16px;
+      border-bottom: 1px solid #ebebeb;
+      &:last-child {
+        border-bottom: none;
+      }
+      a {
+        padding: 15px 20px;
+        display: block;
+        color: #666;
+        &:hover {
+          display: block;
+          background-color: #ebebeb;
+        }
+      }
+      &.active {
+        a {
+          background-color: #0084ff;
+          color: #fff;
+        }
+      }
+    }
+  }
 }
 
 .news-left {
   width: 740px;
   margin-left: 20px;
+  padding-top: 15px;
 }

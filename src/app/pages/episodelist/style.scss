@@ -1,0 +1,40 @@
+@import '../../pages/_mixin';
+.list {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 0 20px 20px;
+  li {
+    width: 25%;
+    margin-top: 20px;
+    padding-right: 20px;
+    position: relative;
+    h4 {
+      line-height: 22px;
+      @include clamp(2);
+    }
+    :global {
+      .load-demand {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        overflow: hidden;
+        float: left;
+        margin-right: 10px;
+        border-radius: 5px;
+        img {
+          display: block;
+          width: 100%;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+    p {
+      position: absolute;
+      left: 90px;
+      bottom: 0;
+      color: #666;
+    }
+  }
+}

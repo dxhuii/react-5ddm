@@ -11,7 +11,7 @@ let config = {
 
   NAME: '9站',
 
-  DOMAIN_NAME: 'dddm.tv',
+  DOMAIN_NAME: '99496.com',
 
   // 域名完整地址
   DOMAIN: 'https://dev.99496.com',

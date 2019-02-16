@@ -19,8 +19,8 @@ export default class TagShare extends PureComponent {
     return (
       <div styleName="article-tool">
         <div styleName="article-tool__tag">
-          {tag.map(item => (
-            <Link to={`/search/${item}`} key={item}>
+          {tag.map((item, index) => (
+            <Link to={`/search/${item}`} key={index}>
               #{item}
             </Link>
           ))}

@@ -116,33 +116,33 @@ class Head extends Component {
       match: { url, params = {} }
     } = this.props
     const { wd, isHide, isSign, visible, showMenu, showSearch, showHis } = this.state
-    // console.log(url)
+    const logo = `header-logo ${DOMAIN_NAME === 'dddm.tv' ? 'dddm' : DOMAIN_NAME === '5ddm.com' ? 'ddm' : ''}`
     return (
       <Fragment>
         <header>
-          <NavLink styleName={`header-logo ${DOMAIN_NAME === 'dddm.tv' ? 'dddm' : DOMAIN_NAME === '5ddm.com' ? 'ddm' : ''}`} exact to="/" title={NAME} />
+          <NavLink styleName={logo} exact to="/" title={NAME} />
           <nav styleName={showMenu ? 'show' : ''}>
             <div styleName="header-nav">
               <NavLink styleName={url === '/' ? 'active' : ''} exact to="/">
                 首页
               </NavLink>
-              <NavLink styleName={url === '/dongman' ? 'active' : ''} exact to="/dongman">
+              <NavLink styleName={/dongman|subject|play/.test(url) ? 'active' : ''} exact to="/dongman">
                 动漫
               </NavLink>
-              <NavLink styleName={url === '/news' ? 'active' : ''} exact to="/news">
+              <NavLink styleName={/news/.test(url) ? 'active' : ''} exact to="/news">
                 新闻
               </NavLink>
-              <NavLink styleName={url === '/ep' ? 'active' : ''} exact to="/ep">
+              <NavLink styleName={/ep/.test(url) ? 'active' : ''} exact to="/ep">
                 剧情
               </NavLink>
               <NavLink styleName={url === '/top' ? 'active' : ''} exact to="/top">
                 排行榜
               </NavLink>
-              <NavLink styleName={url.indexOf('/month') !== -1 ? 'active' : ''} exact to="/month/201901">
-                新番表
-              </NavLink>
               <NavLink styleName={url === '/new' ? 'active' : ''} exact to="/new">
                 最近更新
+              </NavLink>
+              <NavLink styleName={/month/.test(url) ? 'active' : ''} exact to="/month/201901">
+                新番表
               </NavLink>
             </div>
           </nav>

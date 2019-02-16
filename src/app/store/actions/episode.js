@@ -23,7 +23,7 @@ export function episodeList() {
       reducerName: 'episode',
       actionType: 'GET_EPISCODE_LIST',
       api: 'storylist',
-      params: { id: 902 },
+      params: { id: 902, limit: 100 },
       isPage: true
     })
   }

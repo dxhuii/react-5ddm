@@ -184,6 +184,18 @@ export default (user, logPageView = () => {}) => {
     },
 
     {
+      path: '/news/:name',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('@/pages/news'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter,
+      loadData: newsData
+    },
+
+    {
       path: '/article/:id',
       exact: true,
       head: Head,

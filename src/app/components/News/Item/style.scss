@@ -1,0 +1,55 @@
+@import '../../../pages/_mixin';
+.list {
+  li {
+    margin-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ebebeb;
+    display: flex;
+    :global {
+      .load-demand {
+        width: 200px;
+        position: relative;
+        overflow: hidden;
+        margin-right: 20px;
+        height: 110px;
+        float: left;
+        img {
+          width: 100%;
+          display: block;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+    .info {
+      width: 100%;
+      h3 {
+        height: 48px;
+        font-size: 18px;
+        line-height: 24px;
+        @include clamp(2);
+      }
+      .tag {
+        margin-top: 4px;
+        height: 30px;
+      }
+      p {
+        color: #999;
+        height: 18px;
+        line-height: 18px;
+        span {
+          margin-right: 10px;
+        }
+        .share {
+          float: right;
+          margin-right: 0;
+          i {
+            float: left;
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+}

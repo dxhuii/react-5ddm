@@ -10,9 +10,12 @@ import { episodeList } from '@/store/actions/episode'
 import { getEpisodeList } from '@/store/reducers/episode'
 
 import SideBar from '@/components/SideBar'
+import { formatPic, isNumber } from '@/utils'
 
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
+
+import './style.scss'
 
 @Shell
 @withRouter
@@ -59,13 +62,20 @@ class EpisodeList extends Component {
         <Meta title="剧情首页" />
         <div className="wp mt20 clearfix">
           <div className="left fl">
-            {data.length > 0
-              ? data.map(item => (
-                  <div key={item.id} style={{ height: 300 }}>
-                    {item.storyId}
-                  </div>
-                ))
-              : null}
+            <ul styleName="list">
+              {data.map(item => (
+                <li key={item.storyId}>
+                  <Link to={`/episode/${item.storyId}`}>
+                    <div
+                      className="load-demand"
+                      data-load-demand={`<img src="${formatPic(item.pic, 'thumb150')}" alt="${item.title}" />`}
+                    />
+                    <h4>{item.title}</h4>
+                    <p>{isNumber(item.continu) ? `更新至${item.continu}话` : item.continu}</p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="right fr">
             <SideBar />

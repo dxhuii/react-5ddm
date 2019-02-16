@@ -25,6 +25,7 @@ export function vodNews({ id }) {
       api: 'newslist',
       params: {
         did: id,
+        limit: 20,
         id: 44
       },
       isPage: true
