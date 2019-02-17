@@ -178,7 +178,7 @@ class SubjectList extends Component {
     this.setState(
       Object.assign({}, type === 'type' ? { id: this.getTypeId(value) } : {}, {
         [type]: value === '全部' ? '' : value,
-        [`${type}Name`]: title || ''
+        [`${type}Name`]: title === '全部' ? '' : title || ''
       }),
       () => {
         if (url.indexOf('type/') !== -1) {
@@ -219,14 +219,14 @@ class SubjectList extends Component {
       config
     } = this.props
     const conf = config.data || {}
-    const { data, type, mcid, area, year, letter, lz, order, idName, mcidName, areaName, yearName, letterName, lzName } = this.state
+    const { data, type, mcid, area, year, letter, lz, order, typeName, mcidName, areaName, yearName, letterName, lzName } = this.state
     const { wd = '', isSearch } = this.isSearch()
     const idArr = [{ title: '全部', name: '' }].concat((conf.menu || {}).son || [])
     const mcidArr = [{ title: '全部', id: '' }].concat(conf.mcid || [])
     const areaArr = this.formatArray(conf.area)
     const yearArr = this.formatArray(conf.year)
     const letterArr = this.formatArray(conf.letter)
-    const lzArr = [{ title: '全部', id: '' }, { title: '连载', id: 1 }, { title: '完结', id: 2 }]
+    // const lzArr = [{ title: '全部', id: '' }, { title: '连载', id: 1 }, { title: '完结', id: 2 }]
     const orderArr = [{ title: '最新', id: 'addtime' }, { title: '评分', id: 'gold' }, { title: '热门', id: 'hits' }]
     const keyword = decodeURIComponent(wd)
     return (
@@ -236,9 +236,9 @@ class SubjectList extends Component {
           title={
             isSearch
               ? `你搜索的是《${keyword}》`
-              : `动漫列表${idName ? `_${idName}动漫_${idName}动漫排行榜` : ''}${
+              : `动漫列表${typeName ? `_${typeName}动漫_${typeName}动漫排行榜` : ''}${
                   mcidName ? `_${mcidName}动漫_好看的${mcidName}动漫_最新${mcidName}动画片大全_${mcidName}动漫排行榜` : ''
-                }${areaName ? `_${areaName}${idName}大全_${areaName}${idName}排行榜` : ''}${yearName ? `_${yearName}的动漫` : ''}${
+                }${areaName ? `_${areaName}${typeName}大全_${areaName}${typeName}排行榜` : ''}${yearName ? `_${yearName}的动漫` : ''}${
                   letterName ? `_字母${letterName}开头的动漫` : ''
                 }`
           }
@@ -249,12 +249,12 @@ class SubjectList extends Component {
               <dl>
                 <dt>已选</dt>
                 <dd>
-                  {idName ? <li onClick={() => this.getParams('type', '')}>{idName}</li> : null}
-                  {mcidName ? <li onClick={() => this.getParams('mcid', '')}>{mcidName}</li> : null}
-                  {lzName ? <li onClick={() => this.getParams('lz', '')}>{lzName}</li> : null}
-                  {areaName ? <li onClick={() => this.getParams('area', '')}>{areaName}</li> : null}
-                  {yearName ? <li onClick={() => this.getParams('year', '')}>{yearName}</li> : null}
-                  {letterName ? <li onClick={() => this.getParams('letter', '')}>{letterName}</li> : null}
+                  {typeName ? <a onClick={() => this.getParams('type', '')}>{typeName}</a> : null}
+                  {mcidName ? <a onClick={() => this.getParams('mcid', '')}>{mcidName}</a> : null}
+                  {/* {lzName ? <a onClick={() => this.getParams('lz', '')}>{lzName}</a> : null} */}
+                  {areaName ? <a onClick={() => this.getParams('area', '')}>{areaName}</a> : null}
+                  {yearName ? <a onClick={() => this.getParams('year', '')}>{yearName}</a> : null}
+                  {letterName ? <a onClick={() => this.getParams('letter', '')}>{letterName}</a> : null}
                 </dd>
               </dl>
             )}
@@ -278,7 +278,7 @@ class SubjectList extends Component {
               <dd>
                 {mcidArr.map(item => (
                   <a
-                    styleName={+mcid === item.id ? 'cur' : ''}
+                    styleName={mcid === item.id ? 'cur' : ''}
                     onClick={() => this.getParams('mcid', item.id, item.title)}
                     key={item.id}
                     href="javascript:;"
@@ -288,7 +288,7 @@ class SubjectList extends Component {
                 ))}
               </dd>
             </dl>
-            <dl className="clearfix">
+            {/* <dl className="clearfix">
               <dt>连载</dt>
               <dd>
                 {lzArr.map(item => (
@@ -302,7 +302,7 @@ class SubjectList extends Component {
                   </a>
                 ))}
               </dd>
-            </dl>
+            </dl> */}
             <dl className="clearfix">
               <dt>地区</dt>
               <dd>

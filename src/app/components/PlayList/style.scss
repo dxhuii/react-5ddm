@@ -158,6 +158,9 @@
   display: flex;
   z-index: 99;
   background: linear-gradient(90deg, rgba(255, 255, 255, .2) 0%, #fff 15%, #fff 90%);
+  div{
+    cursor: pointer;
+  }
   .pn {
     width: 20px;
     height: 20px;

@@ -254,7 +254,8 @@ class Play extends Component {
       }
     } = this.props
     const { full, isfull, playHtml, list, mInfo } = this.state
-    const { listName, listId, listNameBig, pic, title, subTitle, actor = '', up, down, prev, next, mcid = [], copyright } = data
+    const { listName, listId, listNameBig, pic, title, pan, subTitle, actor = '', up, down, prev, next, mcid = [], copyright } = data
+    console.log(pan)
     const shareConfig = {
       pic,
       title: `${title} ${subTitle}在线播放 - ${listName}${listNameBig}`,
@@ -326,6 +327,11 @@ class Play extends Component {
                     </Link>
                   ) : null
                 })}
+                {(pan && !IS9) || userid ? (
+                  <a href={pan} target="_blank" rel="noopener noreferrer">
+                    网盘下载
+                  </a>
+                ) : null}
               </div>
               <div styleName="player-share">
                 <Share data={shareConfig} />

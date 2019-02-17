@@ -148,6 +148,16 @@ header {
     width: 120px;
     background-size: 120px auto;
     background-position: 0 5px;
+    &.dddm {
+      width: 110px;
+      background-size: 100px auto;
+    }
+    /*5ddm*/
+    &.ddm {
+      width: 110px;
+      background-size: 100px auto;
+      background-position: 0 11px;
+    }
   }
   .on-search,
   .on-menu {

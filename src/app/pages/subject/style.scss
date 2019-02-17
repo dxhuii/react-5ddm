@@ -84,6 +84,7 @@
   width: 960px;
   p {
     margin-bottom: 10px;
+    max-width: 760px;
     @include clamp(1);
   }
 }
@@ -175,6 +176,7 @@
     font-size: 16px;
     display: inline-block;
     border-bottom: 2px solid transparent;
+    position: relative;
     a {
       padding: 14px 0;
       display: inline-block;
@@ -189,6 +191,35 @@
       font-weight: bold;
       a {
         border-bottom: 2px solid #0084FF;
+      }
+    }
+    div {
+      position: absolute;
+      right: -70px;
+      top: -10px;
+      background-color: #0084FF;
+      width: 85px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      color: #fff;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+      &:before {
+        content: '';
+        position: absolute;
+        right: 100%;
+        bottom: 0px;
+        width: 10px;
+        height: 10px;
+        border-width: 0;
+        border-style: solid;
+        border-color: transparent;
+        border-top-width: 7px;
+        border-top-color: currentColor;
+        border-radius: 20px 0 0 0;
+        color: #0088ff;
       }
     }
   }

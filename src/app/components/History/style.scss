@@ -3,7 +3,7 @@
   position: absolute;
   z-index: 999;
   right: 8px;
-  height: 600px;
+  max-height: 600px;
   top: 61px;
   .title {
     display: flex;
@@ -24,7 +24,7 @@
   display: block;
   width: 400px;
   margin-top: 10px;
-  height: calc(100% - 50px);
+  max-height: calc(100% - 50px);
   overflow-x: hidden;
   overflow-y: auto;
   li {

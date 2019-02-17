@@ -135,6 +135,51 @@ class Bangumi extends Component {
     })
   }
 
+  showPan(pan, uid) {
+    if (pan) {
+      return (IS9 && uid) || !IS9 ? (
+        <li>
+          <a href={pan} target="_blank" rel="noopener noreferrer">
+            网盘下载
+          </a>
+        </li>
+      ) : (
+        <li>
+          网盘下载
+          <div onClick={this.showModal}>登录后可用</div>
+        </li>
+      )
+    }
+  }
+
+  getName(id) {
+    let name = ''
+    switch (id) {
+      case 201:
+        name = 'tv'
+        break
+      case 202:
+        name = 'ova'
+        break
+      case 203:
+        name = 'juchang'
+        break
+      case 4:
+        name = 'tebie'
+        break
+      case 204:
+        name = 'zhenren'
+        break
+      case 35:
+        name = 'qita'
+        break
+      default:
+        name = 'list'
+        break
+    }
+    return name
+  }
+
   render() {
     const { visible, isSign } = this.state
     const {
@@ -162,13 +207,14 @@ class Bangumi extends Component {
       keywords,
       website,
       updateDate,
-      hits,
+      // hits,
       tvcont,
       status,
       year,
       storyId,
       actorId,
       repairtitle,
+      pan,
       vod_pantitle,
       copyright,
       mcid = [],
@@ -234,16 +280,24 @@ class Bangumi extends Component {
                 <div styleName="detial-title">
                   <h1>{title}</h1>
                   <span>
-                    <a>{listName}</a>
-                    {mcid.length > 0 ? mcid.map(item => (item.title ? <a key={item.id}>{item.title}</a> : '')) : null}
+                    <Link to={`/type/${this.getName(cid)}/-/-/-/-/-/-/`}>{listName}</Link>
+                    {mcid.length > 0
+                      ? mcid.map(item =>
+                          item.title ? (
+                            <Link key={item.id} to={`/type/${this.getName(cid)}/${item.id}/-/-/-/-/-/`}>
+                              {item.title}
+                            </Link>
+                          ) : null
+                        )
+                      : null}
                   </span>
                 </div>
                 {aliases ? <p>别名：{aliases}</p> : null}
                 <ul styleName="detail-info__count">
-                  <li>
+                  {/* <li>
                     热度
                     <span>{hits}</span>
-                  </li>
+                  </li> */}
                 </ul>
                 {filmtime || status || total ? (
                   <p>
@@ -306,6 +360,7 @@ class Bangumi extends Component {
                 <li>
                   <Link to={`/time/${id}`}>播出时间</Link>
                 </li>
+                {this.showPan(pan, userid)}
               </ul>
             </div>
           </div>

@@ -46,6 +46,13 @@
     background-size: 150px auto;
     background-position: center 4px;
     margin-left: 10px;
+    &.dddm {
+      background-image: url(../../static/img/dd.svg);
+    }
+    /*5ddm*/
+    &.ddm {
+      background-image: url(../../static/img/5d.svg);
+    }
   }
 }
 
