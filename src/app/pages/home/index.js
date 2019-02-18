@@ -9,12 +9,11 @@ import Swiper from '@/components/Swiper'
 import Recommend from '@/components/Recommend'
 import Ads from '@/components/Ads'
 
+import { isMobile } from '@/utils'
+import './style.scss'
 // 壳组件
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
-
-import { isMobile } from '@/utils'
-import './style.scss'
 
 @Shell
 class Home extends Component {
