@@ -22,6 +22,8 @@
  * WW 文网文
  */
 
+const DOMAIN_NAME = '99496.com'
+
 const conf = {
   debug: false,
   API: 'https://api.99496.com/',
@@ -97,10 +99,10 @@ const ddm = {
 
 let config = {},
   ico = ''
-if (config.DOMAIN_NAME === 'dddm.tv') {
+if (DOMAIN_NAME === 'dddm.tv') {
   config = Object.assign({}, conf, dddm)
   ico = 'dd_'
-} else if (config.DOMAIN_NAME === '5ddm.com') {
+} else if (DOMAIN_NAME === '5ddm.com') {
   config = Object.assign({}, conf, ddm)
   ico = '5d_'
 } else {
