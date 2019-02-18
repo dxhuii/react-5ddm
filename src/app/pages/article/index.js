@@ -12,8 +12,10 @@ import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 import SideBar from '@/components/SideBar'
 import TagShare from '@/components/TagShare'
+import Ads from '@/components/Ads'
 
 import play from '@/utils/play'
+import { isMobile } from '@/utils'
 
 import './style.scss'
 
@@ -85,7 +87,8 @@ class Article extends Component {
 
   render() {
     const {
-      articleData: { data = {} }
+      articleData: { data = {} },
+      match: { url }
     } = this.props
     const {
       title,
@@ -148,6 +151,11 @@ class Article extends Component {
             ) : null}
             <div styleName="article-content" dangerouslySetInnerHTML={{ __html: content }} />
             <TagShare tag={tag} config={shareConfig} />
+            {isMobile() && (
+              <div className="mt20">
+                <Ads id={26} url={url} />
+              </div>
+            )}
             <div styleName="article-context" className="mt20">
               {prev ? (
                 <p>

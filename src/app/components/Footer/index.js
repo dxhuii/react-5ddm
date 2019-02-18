@@ -57,12 +57,10 @@ export default class Footer extends PureComponent {
   render() {
     return (
       <Fragment>
-        {isMobile() ? (
+        {isMobile() && (
           <div className="mt20">
             <Ads id={24} url={this.path()} />
           </div>
-        ) : (
-          <Ads id={25} url={this.path()} />
         )}
         <footer styleName="footer" className="wp tac mt20">
           <p>

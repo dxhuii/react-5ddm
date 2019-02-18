@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <%= htmlWebpackPlugin.options.head %> <%= htmlWebpackPlugin.options.metaDom %>
+  </head>
+  <body>
+    <div id="app"><%= htmlWebpackPlugin.options.htmlDom %></div>
+    <script>
+      window.__initState__ = <%= htmlWebpackPlugin.options.reduxState %>
+    </script>
+    <!--[if lt IE 10]>
+      <style type="text/css">
+        body {
+          padding: 0;
+          margin: 0;
+        }
+        .no-supper {
+          width: 100%;
+          min-height: 100px;
+          text-align: center;
+          line-height: 100px;
+          background-color: #ffbd91;
+          color: #000;
+          position: fixed;
+          top: 100%;
+          margin-top: -100px;
+          z-index: 999;
+        }
+        .no-supper a {
+          color: #45a7ff;
+        }
+      </style>
+      <div class="no-supper">
+        您的浏览器版本较低，可能存在安全风险，请升级到最新IE浏览器。亦可下载
+        <a href="https://chrome.google.com/" target="_blank">Google Chrome</a>
+      </div>
+    <![endif]-->
+    <script src="//cos.mdb6.com/dddm/qq.js"></script>
+  </body>
+</html>

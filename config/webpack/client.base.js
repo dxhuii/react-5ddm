@@ -204,12 +204,11 @@ module.exports = {
     // 主要是打包后的添加的css、js静态文件路径添加到模版中
     new HtmlwebpackPlugin({
       filename: path.resolve(__dirname, '../../dist/server/index.ejs'),
-      template: 'src/app/views/index.html',
+      template: `src/app/views/index${config.DOMAIN_NAME === 'dddm.tv' ? '_dddm' : ''}.html`,
       metaDom: '<%- meta %>',
       htmlDom: '<%- html %>',
       reduxState: '<%- reduxState %>',
-      head: config.HEAD,
-      analysis_script: config.ANALYSIS_SCRIPT
+      head: config.HEAD
       // inject: false
     }),
 

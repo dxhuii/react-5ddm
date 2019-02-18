@@ -250,7 +250,8 @@ class Play extends Component {
       userinfo: { userid },
       player: { data = {} },
       match: {
-        params: { id, pid }
+        params: { id, pid },
+        url
       }
     } = this.props
     const { full, isfull, playHtml, list, mInfo } = this.state
@@ -340,7 +341,15 @@ class Play extends Component {
           </div>
         </div>
         <PlayList />
-        <div className="wp">{isMobile() ? <Ads id={26} /> : <Ads id={21} />}</div>
+        <div className="wp">
+          {isMobile() ? (
+            <div className="mt20">
+              <Ads id={26} url={url} />
+            </div>
+          ) : (
+            <Ads id={22} />
+          )}
+        </div>
         <div className="mt20" />
         <div className="wp clearfix">
           <div className="fl left box">
