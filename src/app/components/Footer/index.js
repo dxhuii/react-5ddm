@@ -18,6 +18,12 @@ export default class Footer extends PureComponent {
       var s = document.getElementsByTagName('script')[0]
       s.parentNode.insertBefore(hm, s)
     })()
+    ;(function() {
+      var bp = document.createElement('script')
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+      var s = document.getElementsByTagName('script')[0]
+      s.parentNode.insertBefore(bp, s)
+    })()
   }
 
   createAd(url) {
