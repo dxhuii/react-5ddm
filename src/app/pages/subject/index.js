@@ -184,6 +184,7 @@ class Bangumi extends Component {
     const { visible, isSign } = this.state
     const {
       info: { data = {}, loading },
+      match: { url },
       userinfo: { userid },
       cmScore = {},
       score
@@ -370,7 +371,7 @@ class Bangumi extends Component {
         ) : (
           <PlayList key="playlist" />
         )}
-        <div className="wp">{isMobile() ? <Ads id={26} /> : <Ads id={22} />}</div>
+        <div className="wp">{isMobile() ? <Ads id={26} url={url} /> : <Ads id={22} />}</div>
         <div className="mt20 clearfix wp">
           <div className="fl box pb20 left">
             {newsTextlist.length > 0 ? (
