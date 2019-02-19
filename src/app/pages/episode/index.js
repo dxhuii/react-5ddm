@@ -95,6 +95,7 @@ class Episode extends Component {
       desc: content,
       url: !p ? `/episode/${id}` : `/episode/${id}/${p}`
     }
+    const reName = !p ? '' : name
     return (
       <div className="wp mt20 clearfix">
         <Meta
@@ -102,8 +103,8 @@ class Episode extends Component {
             !p ? `${vTitle}剧情(共${storyNum}集)_${vTitle}全集剧情` : `${vTitle}${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情`
           }`}
         >
-          <meta name="keywords" content={`${vTitle}剧情,${vTitle}${name}剧情, ${vTitle}${name}${title}剧情`} />
-          <meta name="description" content={`${vTitle}${name}${title}剧情介绍：${content}`} />
+          <meta name="keywords" content={`${vTitle}剧情,${vTitle}${reName}剧情, ${vTitle}${reName}${title}剧情`} />
+          <meta name="description" content={`${vTitle}${reName}${title}剧情介绍：${!p ? vContent : content}`} />
         </Meta>
         <div className="fl left">
           <article styleName="article-body">
@@ -116,7 +117,7 @@ class Episode extends Component {
             <TagShare tag={[vTitle]} config={shareConfig} />
             {!p && storyNum <= 1 ? null : (
               <div styleName="article-context" className="mt10">
-                {prev ? <Link to={`/episode/${id}/${prev}`}>上一集</Link> : null}
+                {prev && prev > 0 ? <Link to={`/episode/${id}/${prev}`}>上一集</Link> : null}
                 {next ? <Link to={`/episode/${id}/${next}`}>下一集</Link> : null}
               </div>
             )}

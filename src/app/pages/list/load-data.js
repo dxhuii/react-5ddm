@@ -43,18 +43,20 @@ export default ({ store, match }) => {
     const reLetter = isEmpty(letter)
     const reLz = isEmpty(lz)
     const reOrder = isEmpty(order, 1)
-    await listLoad({
-      id,
-      wd,
-      mcid: reMcid,
-      year: reYear,
-      area: reArea,
-      letter: reLetter,
-      lz: reLz,
-      order: reOrder
-    })(store.dispatch, store.getState)
-    await configLoad({ name: 'list' })(store.dispatch, store.getState)
-
-    resolve({ code: 200 })
+    Promise.all([
+      listLoad({
+        id,
+        wd,
+        mcid: reMcid,
+        year: reYear,
+        area: reArea,
+        letter: reLetter,
+        lz: reLz,
+        order: reOrder
+      })(store.dispatch, store.getState),
+      configLoad({ name: 'list' })(store.dispatch, store.getState)
+    ]).then(() => {
+      resolve({ code: 200 })
+    })
   })
 }

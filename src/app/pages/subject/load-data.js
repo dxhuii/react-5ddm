@@ -5,9 +5,12 @@ export default ({ store, match, user = {} }) => {
   return new Promise(async function(resolve, reject) {
     const { id } = match.params
     const { userid } = user
-    await detail({ id })(store.dispatch, store.getState)
-    await score({ id, sid: 1, uid: userid || 0 })(store.dispatch, store.getState)
-    await playlist({ id })(store.dispatch, store.getState)
-    resolve({ code: 200 })
+    Promise.all([
+      detail({ id })(store.dispatch, store.getState),
+      score({ id, sid: 1, uid: userid || 0 })(store.dispatch, store.getState),
+      playlist({ id })(store.dispatch, store.getState)
+    ]).then(() => {
+      resolve({ code: 200 })
+    })
   })
 }

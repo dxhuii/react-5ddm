@@ -67,9 +67,11 @@ const reNewsCateId = name => {
 
 export default ({ store, match }) => {
   return new Promise(async function(resolve, reject) {
-    await newsIndex({ name: 'newslist', id: reNewsCateId(match.params.name) })(store.dispatch, store.getState)
-    await configLoad({ name: 'menu' })(store.dispatch, store.getState)
-
-    resolve({ code: 200 })
+    Promise.all([
+      newsIndex({ name: 'newslist', id: reNewsCateId(match.params.name) })(store.dispatch, store.getState),
+      configLoad({ name: 'menu' })(store.dispatch, store.getState)
+    ]).then(() => {
+      resolve({ code: 200 })
+    })
   })
 }
