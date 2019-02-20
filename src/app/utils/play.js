@@ -1,7 +1,20 @@
 import { isMobile } from './index'
 import { IS9 } from 'Config'
 
+const isP = IS9 && !isMobile
+
 const playH = '100%'
+
+const iframe = url => {
+  return `<iframe src="${url}" width="100%" height="${playH}" frameborder="0" scrolling=no  allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
+}
+const HTML = url => {
+  return `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${url}">亲，请点我播放</a><p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
+}
+
+const flash = url => {
+  return `<embed src="${url}" width="100%" height="${playH}" bgcolor="#000000" quality="high" allowfullscreen="true" allowscriptaccess="always" id="fitvid931810">`
+}
 
 const ykUrl = data => {
   return 'https://v.youku.com/v_show/id_' + data + '.html'
@@ -24,7 +37,7 @@ const tudou = pv => {
 }
 const youku = pv => {
   const data = pv.split(',')
-  return IS9 ? HTML(ykUrl(data.length === 3 ? data[2] : pv)) : iframe(ykIf(data.length === 3 ? data[2] : pv))
+  return isP ? HTML(ykUrl(data.length === 3 ? data[2] : pv)) : iframe(ykIf(data.length === 3 ? data[2] : pv))
 }
 const iqiyi = pv => {
   let plus = isMobile() ? '&tvid=' : '&tvId='
@@ -41,12 +54,13 @@ const iqiyi = pv => {
     data = pv.split('_')
     vid = data[1] + plus + data[0]
   }
+  // 5edbc91ba157d0acdb1f3a036959f2b0&tvId=1952779500
   if (isMobile()) {
     purl = 'https://m.iqiyi.com/shareplay.html?vid=' + vid + '&coop=coop_117_9949&cid=qc_105102_300452&bd=1&autoplay=1&fullscreen=1'
   } else {
-    purl = 'https://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=' + vid
+    purl = `https://www.iqiyi.com/common/flashplayer/20181107/1549af8f6df.swf?menu=false&autoplay=true&cid=qc_100001_100100&flashP2PCoreUrl=http://www.iqiyi.com/common/flashplayer/20170406/15562a1b82aa.swf&=undefined&&definitionID=${vid}&isPurchase=0&cnId=4&coop=ugc_openapi_wanyouwang&cid=qc_100001_300089&bd=1&autoChainPlay=1&showRecommend=0&source=&purl=&autoplay=true` //'https://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=' + vid
   }
-  return IS9 ? HTML(purl) : iframe(purl)
+  return isP ? HTML(purl) : flash(purl)
 }
 const letv = pv => {
   const data = pv.split(',')
@@ -56,7 +70,7 @@ const letv = pv => {
 }
 const sohu = pv => {
   const purl = 'https://tv.sohu.com/upload/static/share/share_play.html#' + pv.split('_')[0] + (isMobile() ? '' : '_9468532_0_9001_0')
-  return IS9 ? HTML(purl) : iframe(purl)
+  return isP ? HTML(purl) : iframe(purl)
 }
 const pptv = pv => {
   const purl = 'https://' + (isMobile() ? 'm' : 'www') + '.pptv.com/show/' + pv.split(',')[0] + '.html'
@@ -64,7 +78,7 @@ const pptv = pv => {
 }
 const qq = pv => {
   const purl = 'https://v.qq.com/iframe/player.html?vid=' + pv + '&tiny=0&auto=1'
-  return IS9 ? HTML(purl) : iframe(purl)
+  return isP ? HTML(purl) : iframe(purl)
 }
 const bilibili = pv => {
   const data = pv.split(',')
@@ -129,12 +143,6 @@ const jiexiUrl = (pv, danmu) => {
     'ikanfan.cn',
     'acgnz.cn'
   )}&danmu=${danmu}" width="100%" height="${playH}" frameborder="0" scrolling="no" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
-}
-const iframe = pv => {
-  return `<iframe src="${pv}" width="100%" height="${playH}" frameborder="0" scrolling=no  allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
-}
-const HTML = pv => {
-  return `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">亲，请点我播放</a><p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
 }
 
 const rePlayUrl = (playname, pv) => {
@@ -214,7 +222,7 @@ const jump = (name, pv, danmu) => {
   return url
 }
 
-const isPlays = (name, vid, danmu) => {
+const isPlay = (name, vid, danmu) => {
   let playname = name
   let data = []
   let pv = vid
@@ -224,15 +232,15 @@ const isPlays = (name, vid, danmu) => {
     pv = data[0]
   }
   if (playname === 'full') {
-    return IS9 ? '/' : jiexiUrl(`${pv.replace('http://', 'https://')}`, danmu)
+    return isP ? HTML('/') : jiexiUrl(`${pv.replace('http://', 'https://')}`, danmu)
   } else {
     if (/.mp4|.m3u8/.test(pv)) {
-      return IS9 ? '/' : jiexiUrl(`//www.acgnz.cn/api/play.php?url=${pv}`, danmu)
+      return isP ? HTML('/') : jiexiUrl(`//www.acgnz.cn/api/play.php?url=${pv}`, danmu)
     } else if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com|qq.com|mgtv.com/.test(pv)) {
       if (/bilibili|acfun|youku|tudou/.test(playname)) {
         return jump(playname, pv, danmu)
       } else {
-        return IS9 ? HTML(pv) : jiexiUrl(rePlayUrl(playname, pv), danmu)
+        return isP ? HTML(pv) : jiexiUrl(rePlayUrl(playname, pv), danmu)
       }
     } else {
       return HTML(pv)
@@ -240,26 +248,24 @@ const isPlays = (name, vid, danmu) => {
   }
 }
 
-export default {
-  isJump: (playname, vid, danmu) => {
-    let url = ''
-    let name = playname
-    let data = []
-    let pv = vid
-    if (pv.indexOf('@@') !== -1) {
-      data = pv.split('@@')
-      name = data[1]
-      pv = data[0]
-    }
-    const isCk = /.html|.shtml|.htm|https:\/\/|http:\/\/|.mp4|.m3u8/.test(pv) || name === 'full' || !IS9
-    const playStyle = /acku|sina|letvsaas|weibo|miaopai|tudou|letvyun|bitqiu|yunpan|bit|bithls|qqq/.test(name)
-    if ((/.mp4|.m3u8/.test(pv) || playStyle) && IS9) {
-      url = HTML('/')
-    } else if (isCk) {
-      url = isPlays(name, vid, danmu)
-    } else {
-      url = jump(name, vid, danmu)
-    }
-    return url
+export default (playname, vid, danmu, uid) => {
+  let url = ''
+  let name = playname
+  let data = []
+  let pv = vid
+  if (pv.indexOf('@@') !== -1) {
+    data = pv.split('@@')
+    name = data[1]
+    pv = data[0]
   }
+  const isCk = /.html|.shtml|.htm|https:\/\/|http:\/\/|.mp4|.m3u8/.test(pv) || name === 'full' || !isP
+  const playStyle = /acku|sina|letvsaas|weibo|miaopai|bitqiu|yunpan|bithls|qqq/.test(name)
+  if (((/.mp4|.m3u8/.test(pv) || playStyle) && isP && !uid) || ['bit', 'letvyun', 'bithls'].indexOf(name) !== -1) {
+    url = HTML('/')
+  } else if (isCk) {
+    url = isPlay(name, vid, danmu)
+  } else {
+    url = jump(name, vid, danmu)
+  }
+  return url
 }

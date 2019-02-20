@@ -23,11 +23,9 @@ import Meta from '@/components/Meta'
 
 import { ISPLAY, IS9 } from 'Config'
 import { isMobile } from '@/utils'
-import play from '@/utils/play'
+import playing from '@/utils/play'
 
 import './style.scss'
-
-const { isJump } = play
 
 @Shell
 @connect(
@@ -162,6 +160,7 @@ class Play extends Component {
       match: {
         params: { id, pid }
       },
+      userinfo: { userid },
       player: { data = {} }
     } = this.props
     const { play, type } = this.state
@@ -169,21 +168,17 @@ class Play extends Component {
     const other = this.getOther(list)
     const danmu = `${id}_${pid}`
     const isA = other.length > 0 && !IS9 && (copyright !== 'vip' || isMobile() || ISPLAY)
-    const defaultPlay = isA
-      ? isJump(other[0].playName, other[0].vid, danmu)
-      : list.length > 0
-      ? isJump(list[0].playName, list[0].vid, danmu)
-      : ''
-    const mInfo = isA
-      ? { playName: other[0].playName, vid: other[0].vid, playTitle: other[0].playTitle }
-      : list.length > 0
-      ? { playName: list[0].playName, vid: list[0].vid, playTitle: list[0].playTitle }
-      : ''
-    const playHtml = play ? isJump(type, play, danmu) : defaultPlay
+    const { playName, vid, playTitle } = isA ? other[0] : list[0]
+    let playHtml = ''
+    if (play) {
+      playHtml = playing(type, play, danmu)
+    } else {
+      playHtml = playing(playName, vid, danmu, userid)
+    }
+    const mInfo = { playName, vid, playTitle }
     console.log(play, playHtml, isA, 'getdata')
     this.setState({
       playHtml,
-      list,
       mInfo
     })
   }
@@ -254,9 +249,24 @@ class Play extends Component {
         url
       }
     } = this.props
-    const { full, isfull, playHtml, list, mInfo } = this.state
-    const { listName, listId, listNameBig, pic, title, pan, subTitle, actor = '', up, down, prev, next, mcid = [], copyright } = data
-    console.log(pan)
+    const { full, isfull, playHtml, mInfo } = this.state
+    const {
+      listName,
+      listId,
+      listNameBig,
+      list = [],
+      pic,
+      title,
+      pan,
+      subTitle,
+      actor = '',
+      up,
+      down,
+      prev,
+      next,
+      mcid = [],
+      copyright
+    } = data
     const shareConfig = {
       pic,
       title: `${title} ${subTitle}在线播放 - ${listName}${listNameBig}`,

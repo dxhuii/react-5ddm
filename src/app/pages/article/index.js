@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { article } from '@/store/actions/article'
 import { getArticle } from '@/store/reducers/article'
 import { hits } from '@/store/actions/hits'
+import { getUserInfo } from '@/store/reducers/user'
 
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
@@ -14,16 +15,15 @@ import SideBar from '@/components/SideBar'
 import TagShare from '@/components/TagShare'
 import Ads from '@/components/Ads'
 
-import play from '@/utils/play'
+import playing from '@/utils/play'
 import { isMobile } from '@/utils'
 
 import './style.scss'
-
-const { isJump } = play
 @Shell
 @withRouter
 @connect(
   (state, props) => ({
+    userinfo: getUserInfo(state),
     articleData: getArticle(state, props.match.params.id)
   }),
   dispatch => ({
@@ -36,7 +36,8 @@ class Article extends Component {
     match: PropTypes.object,
     article: PropTypes.func,
     hits: PropTypes.func,
-    articleData: PropTypes.object
+    articleData: PropTypes.object,
+    userinfo: PropTypes.object
   }
 
   constructor(props) {
@@ -88,6 +89,7 @@ class Article extends Component {
   render() {
     const {
       articleData: { data = {} },
+      userinfo: { userid },
       match: { url }
     } = this.props
     const {
@@ -109,7 +111,7 @@ class Article extends Component {
       playname = '',
       playurl = ''
     } = data
-    const playHtml = isJump(playname, playurl, `article_${id}`)
+    const playHtml = playing(playname, playurl, `article_${id}`, userid)
     const { full, isfull } = this.state
     const shareConfig = {
       pic,
