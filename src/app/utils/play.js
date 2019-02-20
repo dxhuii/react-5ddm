@@ -119,8 +119,8 @@ const acfun = pv => {
 const ck = (type, pv) => {
   const flvsp = 'https://api.flvsp.com/?type='
   const mdparse = 'https://www.acgnz.cn/mdparse/?type='
-  if (['pptv', 'iqiyi'].indexOf(type) !== -1) {
-    return mdparse + type + '&id=' + pv.split(/\/,|_/)[0]
+  if (type === 'pptv') {
+    return mdparse + type + '&id=' + pv
   } else if (type === 'sohu') {
     return isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
   } else if (type === 'bitqiu') {
@@ -159,10 +159,6 @@ const rePlayUrl = (playname, pv) => {
       data = pv.split(',')
       sName = 'letv'
       sVid = data[0]
-      break
-    case 'iqiyi':
-      sName = 'iqiyi'
-      sVid = (pv.indexOf('&tvid=') != -1 ? pv.split('&tvid=')[1] + ',' + pv.split('&tvid=')[0] : pv).split(',')[0]
       break
     case 'sohu':
       data = pv.split('_')
@@ -237,7 +233,7 @@ const isPlay = (name, vid, danmu) => {
     if (/.mp4|.m3u8/.test(pv)) {
       return isP ? HTML('/') : jiexiUrl(`//www.acgnz.cn/api/play.php?url=${pv}`, danmu)
     } else if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com|qq.com|mgtv.com/.test(pv)) {
-      if (/bilibili|acfun|youku|tudou/.test(playname)) {
+      if (/bilibili|acfun|youku|tudou|iqiyi/.test(playname)) {
         return jump(playname, pv, danmu)
       } else {
         return isP ? HTML(pv) : jiexiUrl(rePlayUrl(playname, pv), danmu)
@@ -260,7 +256,7 @@ export default (playname, vid, danmu, uid) => {
   }
   const isCk = /.html|.shtml|.htm|https:\/\/|http:\/\/|.mp4|.m3u8/.test(pv) || name === 'full' || !isP
   const playStyle = /acku|sina|letvsaas|weibo|miaopai|bitqiu|yunpan|bithls|qqq/.test(name)
-  if (((/.mp4|.m3u8/.test(pv) || playStyle) && isP && !uid) || ['bit', 'letvyun', 'bithls'].indexOf(name) !== -1) {
+  if (((/.mp4|.m3u8/.test(pv) || playStyle) && isP && !uid) || ['bit', 'letvyun'].indexOf(name) !== -1) {
     url = HTML('/')
   } else if (isCk) {
     url = isPlay(name, vid, danmu)
