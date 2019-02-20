@@ -357,7 +357,7 @@ class Play extends Component {
               <Ads id={26} url={url} />
             </div>
           ) : (
-            <Ads id={22} />
+            <Ads id={21} />
           )}
         </div>
         <div className="mt20" />

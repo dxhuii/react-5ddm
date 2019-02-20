@@ -118,12 +118,13 @@ const acfun = pv => {
 
 const ck = (type, pv) => {
   const flvsp = 'https://api.flvsp.com/?type='
-  const mdparse = 'https://www.acgnz.cn/mdparse/?type='
-  if (type === 'pptv') {
-    return mdparse + type + '&id=' + pv
-  } else if (type === 'sohu') {
-    return isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
-  } else if (type === 'bitqiu') {
+  // const mdparse = 'https://www.acgnz.cn/mdparse/?type='
+  // if (type === 'pptv') {
+  //   return mdparse + type + '&id=' + pv
+  // } else if (type === 'sohu') {
+  //   return isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
+  // } else
+  if (type === 'bitqiu') {
     return '//www.acgnz.cn/api/pan.php?url=vbit?v=' + pv
   } else if (type === 'yunpan') {
     return '//www.acgnz.cn/api/pan.php?url=va360?v=' + pv
