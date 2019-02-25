@@ -60,7 +60,7 @@ const iqiyi = pv => {
   } else {
     purl = `https://www.iqiyi.com/common/flashplayer/20181107/1549af8f6df.swf?menu=false&autoplay=true&cid=qc_100001_100100&flashP2PCoreUrl=http://www.iqiyi.com/common/flashplayer/20170406/15562a1b82aa.swf&=undefined&&definitionID=${vid}&isPurchase=0&cnId=4&coop=ugc_openapi_wanyouwang&cid=qc_100001_300089&bd=1&autoChainPlay=1&showRecommend=0&source=&purl=&autoplay=true` //'https://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=' + vid
   }
-  return isP ? HTML(purl) : flash(purl)
+  return isP ? HTML(purl) : isMobile() ? iframe(purl) : flash(purl)
 }
 const letv = pv => {
   const data = pv.split(',')
@@ -118,12 +118,13 @@ const acfun = pv => {
 
 const ck = (type, pv) => {
   const flvsp = 'https://api.flvsp.com/?type='
-  const mdparse = 'https://www.acgnz.cn/mdparse/?type='
-  if (type === 'pptv') {
-    return mdparse + type + '&id=' + pv
-  } else if (type === 'sohu') {
-    return isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
-  } else if (type === 'bitqiu') {
+  // const mdparse = 'https://www.acgnz.cn/mdparse/?type='
+  // if (type === 'pptv') {
+  //   return mdparse + type + '&id=' + pv
+  // } else if (type === 'sohu') {
+  //   return isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
+  // } else
+  if (type === 'bitqiu') {
     return '//www.acgnz.cn/api/pan.php?url=vbit?v=' + pv
   } else if (type === 'yunpan') {
     return '//www.acgnz.cn/api/pan.php?url=va360?v=' + pv
