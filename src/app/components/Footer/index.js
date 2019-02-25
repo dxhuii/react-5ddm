@@ -29,7 +29,7 @@ export default class Footer extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.destroyIframe()
+    // this.destroyIframe()
   }
 
   createAd(url) {
