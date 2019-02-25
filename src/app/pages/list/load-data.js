@@ -1,5 +1,7 @@
 import { listLoad } from '@/store/actions/list'
 import { configLoad } from '@/store/actions/config'
+import cache from '@/utils/cache'
+const { getCache, addCache } = cache
 
 function getTypeId(name) {
   let id
@@ -43,6 +45,22 @@ export default ({ store, match }) => {
     const reLetter = isEmpty(letter)
     const reLz = isEmpty(lz)
     const reOrder = isEmpty(order, 1)
+
+    const data = getCache('list')
+    if (data) {
+      store.dispatch({
+        type: 'GET_LIST',
+        name: `${id}${reMcid}${reYear}${reArea}${wd}${reLetter}${reLz}${reOrder}`,
+        data: data[0][1]
+      })
+      store.dispatch({
+        type: 'GET_CONFIG',
+        name: 'list',
+        data: data[1][1]
+      })
+      resolve({ code: 200 })
+      return
+    }
     Promise.all([
       listLoad({
         id,
@@ -55,7 +73,8 @@ export default ({ store, match }) => {
         order: reOrder
       })(store.dispatch, store.getState),
       configLoad({ name: 'list' })(store.dispatch, store.getState)
-    ]).then(() => {
+    ]).then(data => {
+      addCache('list', data)
       resolve({ code: 200 })
     })
   })

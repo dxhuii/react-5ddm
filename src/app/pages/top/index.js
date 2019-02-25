@@ -60,7 +60,6 @@ class TopPage extends PureComponent {
     const weekData = week.data || []
     const monthData = month.data || []
     const allData = all.data || []
-    console.log(this.props)
     return (
       <Fragment>
         <Meta title="动漫排行榜 动漫热播榜" />

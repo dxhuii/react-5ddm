@@ -10,6 +10,7 @@ import Recommend from '@/components/Recommend'
 import Ads from '@/components/Ads'
 
 import { isMobile } from '@/utils'
+import { NAME } from 'Config'
 import './style.scss'
 // 壳组件
 import Shell from '@/components/Shell'
@@ -36,7 +37,13 @@ class Home extends Component {
     return (
       <div className="warp-bg">
         <div className="wp">
-          <Meta title="首页" />
+          <Meta title="首页">
+            <meta name="keywords" content={`${NAME.split('_').join(',')}`} />
+            <meta
+              name="description"
+              content={`${NAME}致力于为所有动漫迷们免费提供最新最快的高清动画下载及在线观看资源，它是专业日本动漫下载视听领域的综合网站。`}
+            />
+          </Meta>
           <div className="pt20" styleName="main top">
             <div styleName="top-left">
               <Swiper />

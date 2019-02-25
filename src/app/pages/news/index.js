@@ -145,7 +145,6 @@ class NewsIndex extends Component {
       config
     } = this.props
     const newsMenu = ((config.data || [])[1] || {}).son || []
-    console.log(config, newsMenu, this.props.match)
     return (
       <div className="wp mt20 clearfix">
         <Meta title="新闻首页" />

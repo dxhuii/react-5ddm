@@ -49,7 +49,6 @@ class Time extends Component {
     const {
       info: { data = {} }
     } = this.props
-    console.log(data)
     const { id, title, content, listNameBig, pic, actor, year, filmtime, director, mcid, updateDate, tvcont } = data
     const shareConfig = {
       pic,
