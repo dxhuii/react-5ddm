@@ -43,7 +43,6 @@ app.get('*', async function(req, res) {
   const reg = /\d+/g
   const arr = path.match(reg)
   const url = path.split('/')
-  console.log(arr, url, 'arr')
   // 兼容老的URL跳转
   if (/bangumi/.test(path)) {
     const pinyin = url[2]
@@ -53,7 +52,7 @@ app.get('*', async function(req, res) {
         r.on('data', function(d) {
           const data = JSON.parse(d || '{}')
           if (data.data) {
-            const reUrl = url.length === 4 && /.html/.test(path) ? `/play/${data.data}/${arr[1]}` : `/subject/${data.data}`
+            const reUrl = url.length === 4 && /.html/.test(path) ? `/play/${data.data}/${arr[arr.length - 1]}` : `/subject/${data.data}`
             res.status(301)
             res.redirect(reUrl)
           } else {
