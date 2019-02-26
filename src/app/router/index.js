@@ -65,8 +65,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/home'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: HomeLoadData
+      enter: triggerEnter
+      // loadData: HomeLoadData
     },
 
     {
@@ -77,8 +77,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/week'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: WeekData
+      enter: triggerEnter
+      // loadData: WeekData
     },
 
     {
@@ -110,8 +110,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/subject'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: SubjectLoadData
+      enter: triggerEnter
+      // loadData: SubjectLoadData
     },
 
     {
@@ -122,8 +122,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/subject/news'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: detailNewstData
+      enter: triggerEnter
+      // loadData: detailNewstData
     },
 
     {
@@ -134,8 +134,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/play'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: PlayLoadData
+      enter: triggerEnter
+      // loadData: PlayLoadData
     },
 
     {
@@ -146,8 +146,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/list'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: ListLoadData
+      enter: triggerEnter
+      // loadData: ListLoadData
     },
 
     {
@@ -158,8 +158,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/list'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: ListLoadData
+      enter: triggerEnter
+      // loadData: ListLoadData
     },
 
     {
@@ -170,8 +170,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/list'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: ListLoadData
+      enter: triggerEnter
+      // loadData: ListLoadData
     },
 
     {
@@ -182,8 +182,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/news'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: newsData
+      enter: triggerEnter
+      // loadData: newsData
     },
 
     {
@@ -194,8 +194,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/news'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: newsData
+      enter: triggerEnter
+      // loadData: newsData
     },
 
     {
@@ -206,8 +206,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/article'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: articleData
+      enter: triggerEnter
+      // loadData: articleData
     },
 
     {
@@ -218,8 +218,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/time'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: timeData
+      enter: triggerEnter
+      // loadData: timeData
     },
 
     {
@@ -229,8 +229,8 @@ export default (user, logPageView = () => {}) => {
       component: Loadable({
         loader: () => import('@/pages/list'),
         loading: () => <Loading />
-      }),
-      enter: triggerEnter
+      })
+      // enter: triggerEnter
     },
 
     {
@@ -241,8 +241,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/episode'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: episodeData
+      enter: triggerEnter
+      // loadData: episodeData
     },
 
     {
@@ -253,8 +253,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/episode'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: episodeData
+      enter: triggerEnter
+      // loadData: episodeData
     },
 
     {
@@ -265,8 +265,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/month'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: monthData
+      enter: triggerEnter
+      // loadData: monthData
     },
 
     {
@@ -277,8 +277,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/top'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: topData
+      enter: triggerEnter
+      // loadData: topData
     },
 
     {
@@ -289,8 +289,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/new'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: newData
+      enter: triggerEnter
+      // loadData: newData
     },
 
     {
@@ -301,8 +301,8 @@ export default (user, logPageView = () => {}) => {
         loader: () => import('@/pages/episodelist'),
         loading: () => <Loading />
       }),
-      enter: triggerEnter,
-      loadData: episodelistData
+      enter: triggerEnter
+      // loadData: episodelistData
     },
 
     {
