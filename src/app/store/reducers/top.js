@@ -1,13 +1,18 @@
 import merge from 'lodash/merge'
 
-export default function top(state = {}, action = {}) {
-  const { data, name } = action
-  switch (action.type) {
-    case 'GET_TOP':
-      state[name] = data
-      return merge({}, state, {})
-    default:
-      return state
+export default function() {
+  let initialState = {}
+  return function top(state = initialState, action = {}) {
+    const { data, name } = action
+    switch (action.type) {
+      case 'GET_TOP':
+        state[name] = data
+        return merge({}, state, {})
+      case 'CLEAN':
+        return {}
+      default:
+        return state
+    }
   }
 }
 

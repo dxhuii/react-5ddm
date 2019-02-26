@@ -1,14 +1,19 @@
 import merge from 'lodash/merge'
 
-export default function search(state = {}, action = {}) {
-  const { data, name } = action
-  switch (action.type) {
-    case 'GET_SEARCH':
-      state[name] = data
-      return merge({}, state, {})
+export default function() {
+  let initialState = {}
+  return function search(state = initialState, action = {}) {
+    const { data, name } = action
+    switch (action.type) {
+      case 'GET_SEARCH':
+        state[name] = data
+        return merge({}, state, {})
+      case 'CLEAN':
+        return {}
 
-    default:
-      return state
+      default:
+        return state
+    }
   }
 }
 

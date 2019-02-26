@@ -1,19 +1,24 @@
 import merge from 'lodash/merge'
 
-export default function detail(state = {}, action = {}) {
-  const { name, data } = action
-  switch (action.type) {
-    case 'GET_DETAIL':
-      state[name] = data
-      return merge({}, state, {})
-    case 'GET_SCORE':
-      state[name] = data
-      return merge({}, state, {})
-    case 'GET_VOD_NEWS':
-      state[name] = data
-      return merge({}, state, {})
-    default:
-      return state
+export default function() {
+  let initialState = {}
+  return function detail(state = initialState, action = {}) {
+    const { name, data } = action
+    switch (action.type) {
+      case 'GET_DETAIL':
+        state[name] = data
+        return merge({}, state, {})
+      case 'GET_SCORE':
+        state[name] = data
+        return merge({}, state, {})
+      case 'GET_VOD_NEWS':
+        state[name] = data
+        return merge({}, state, {})
+      case 'CLEAN':
+        return {}
+      default:
+        return state
+    }
   }
 }
 

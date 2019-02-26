@@ -1,14 +1,19 @@
 import merge from 'lodash/merge'
 
-export default function slide(state = {}, action = {}) {
-  const { data } = action
-  switch (action.type) {
-    case 'GET_SLIDE':
-      state = data
-      return merge({}, state, {})
+export default function() {
+  let initialState = {}
+  return function slide(state = initialState, action = {}) {
+    const { data } = action
+    switch (action.type) {
+      case 'GET_SLIDE':
+        state = data
+        return merge({}, state, {})
+      case 'CLEAN':
+        return {}
 
-    default:
-      return state
+      default:
+        return state
+    }
   }
 }
 

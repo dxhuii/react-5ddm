@@ -1,14 +1,19 @@
 import merge from 'lodash/merge'
 
-export default function list(state = {}, action = {}) {
-  const { data, name } = action
-  switch (action.type) {
-    case 'GET_LIST':
-      state[name] = data
-      return merge({}, state, {})
+export default function() {
+  let initialState = {}
+  return function list(state = initialState, action = {}) {
+    const { data, name } = action
+    switch (action.type) {
+      case 'GET_LIST':
+        state[name] = data
+        return merge({}, state, {})
+      case 'CLEAN':
+        return {}
 
-    default:
-      return state
+      default:
+        return state
+    }
   }
 }
 

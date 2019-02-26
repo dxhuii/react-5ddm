@@ -1,13 +1,18 @@
 import merge from 'lodash/merge'
 
-export default function recommend(state = {}, action = {}) {
-  const { data, name } = action
-  switch (action.type) {
-    case 'GET_RECOMMEND':
-      state[name] = data
-      return merge({}, state, {})
-    default:
-      return state
+export default function() {
+  let initialState = {}
+  return function recommend(state = initialState, action = {}) {
+    const { data, name } = action
+    switch (action.type) {
+      case 'GET_RECOMMEND':
+        state[name] = data
+        return merge({}, state, {})
+      case 'CLEAN':
+        return {}
+      default:
+        return state
+    }
   }
 }
 

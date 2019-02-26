@@ -22,29 +22,30 @@ import month from './month'
 import page from './page'
 import ads from './ads'
 
-let states = {
-  user,
-  week,
-  detail,
-  playlist,
-  player,
-  top,
-  list,
-  slide,
-  newsIndex,
-  article,
-  config,
-  episode,
-  recommend,
-  detailActor,
-  search,
-  articleVod,
-  month,
-  page,
-  ads,
-  scroll: scroll(),
-  history: history()
-}
+export default function() {
+  const states = {
+    user: user(),
+    week: week(),
+    detail: detail(),
+    playlist: playlist(),
+    player: player(),
+    top: top(),
+    list: list(),
+    slide: slide(),
+    newsIndex: newsIndex(),
+    article: article(),
+    config: config(),
+    episode: episode(),
+    recommend: recommend(),
+    detailActor: detailActor(),
+    search: search(),
+    articleVod: articleVod(),
+    month: month(),
+    page: page(),
+    ads: ads(),
+    scroll: scroll(),
+    history: history()
+  }
 
-// reducer
-export default combineReducers(states)
+  return combineReducers(states)
+}

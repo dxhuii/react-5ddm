@@ -81,7 +81,6 @@ class List extends Component {
     ) {
       return null
     }
-    console.log(nextProps, '11111')
     const { id, mcid, year, area, wd, letter, lz, order } = nextProps
     return { id, mcid, year, area, wd, letter, lz, order }
   }

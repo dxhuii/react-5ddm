@@ -33,7 +33,18 @@ module.exports = {
   target: 'web',
 
   entry: {
-    app: ['@babel/polyfill', './src/client/index.js']
+    app: [
+      '@babel/polyfill',
+      // ArriveFooter 监听抵达页尾的事件
+      './src/app/utils/arrive-footer.js',
+      /**
+       * 懒加载图片、Dom
+       * 使用方式
+       * 给dom添加class="load-demand"、data-load-demand="<div></div> or <img />"
+       **/
+      './src/app/utils/load-demand.js',
+      './src/client/index.js'
+    ]
   },
 
   output: {

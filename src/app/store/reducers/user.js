@@ -1,13 +1,18 @@
 import merge from 'lodash/merge'
 
-export default function user(state = {}, action = {}) {
-  switch (action.type) {
-    case 'SAVE_USER_INFO':
-      state = action.data
-      return merge({}, state, {})
+export default function() {
+  let initialState = {}
+  return function user(state = initialState, action = {}) {
+    switch (action.type) {
+      case 'SAVE_USER_INFO':
+        state = action.data
+        return merge({}, state, {})
+      case 'CLEAN':
+        return {}
 
-    default:
-      return state
+      default:
+        return state
+    }
   }
 }
 

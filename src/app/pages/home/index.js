@@ -26,7 +26,6 @@ class Home extends Component {
   }
 
   onSelect = order => {
-    console.log(order, 1)
     this.setState({
       order
     })
