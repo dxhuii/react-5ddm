@@ -147,10 +147,10 @@ class NewsIndex extends Component {
     const newsMenu = ((config.data || [])[1] || {}).son || []
     return (
       <div className="wp mt20 clearfix">
-        <Meta title="新闻首页" />
+        <Meta title="动漫新闻_动漫资讯_新番情报_动漫先行图_漫画情报" />
         <div styleName="news-nav" className="box fl">
           <h2>
-            <Link to="/news">{NAME}专栏</Link>
+            <Link to="/news">专栏</Link>
           </h2>
           <ul>
             {newsMenu.map(item => (
