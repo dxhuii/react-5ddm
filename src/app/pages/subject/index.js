@@ -250,7 +250,7 @@ class Bangumi extends Component {
               vod_pantitle || DOMAIN_NAME === 'dddm.tv' ? '_百度云盘下载' : ''
             } - ${listName}${listNameBig}`}
           >
-            <meta name="description" content={`《${title}》讲述${reContent}`} />
+            <meta name="description" content={`${title}动画全集由${reContent}`} />
             <meta
               name="keywords"
               content={`${title},${title}动漫,${title}下载${
