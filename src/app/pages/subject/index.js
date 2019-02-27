@@ -266,7 +266,7 @@ class Bangumi extends Component {
             <meta property="og:video" content={`/play/${id}/1`} />
             <meta property="og:site_name" content={'9站'} />
             <meta property="og:video:score" content={gold} />
-            <meta property="og:video:actor" content={actor} />
+            <meta property="og:video:actor" content={actor ? actor.map(item => item.title).join(',') : ''} />
             <meta property="og:video:area" content={area} />
             <meta property="og:video:class" content={`${listName}${mcid.length > 0 ? mcid.map(item => item.title).join(',') : ''}`} />
             <meta property="og:video:language" content={language} />
