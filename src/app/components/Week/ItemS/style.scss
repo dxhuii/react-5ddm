@@ -1,0 +1,34 @@
+@import '../../../pages/_mixin';
+.weeks {
+  flex: 1;
+  li {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+    div {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto;
+      img {
+        width: 120px;
+        display: block;
+        border-radius: 10px;
+      }
+    }
+    h4 {
+      margin: 10px auto 0;
+      line-height: 24px;
+      max-width: 90%;
+      color: #233;
+      @include clamp(1)
+    }
+  }
+  a {
+    color: #999;
+  }
+  .today {
+    a {
+      color: #0084ff;
+    }
+  }
+}

@@ -2,7 +2,8 @@
 .list {
   display: flex;
   li {
-    flex: 1;
+    width: 14.285%;
+    text-align: center;
     h4 {
       @include clamp(2);
     }
@@ -15,9 +16,6 @@
 
 .weeklist {
   display: flex;
-  ul {
-    flex: 1;
-  }
 }
 
 .active {

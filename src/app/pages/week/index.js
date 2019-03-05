@@ -8,7 +8,7 @@ import { week } from '@/store/actions/week'
 import { getWeek } from '@/store/reducers/week'
 
 import Loading from '@/components/Ui/Loading'
-import Item from '@/components/Week/Item'
+import ItemS from '@/components/Week/ItemS'
 
 import './style.scss'
 
@@ -103,22 +103,18 @@ class Week extends PureComponent {
           <meta name="description" content={`${title}新番时间表`} />
         </Meta>
         {loading ? <Loading /> : null}
-        <div style={{ width: 1240, overflowX: 'auto' }}>
-          <div style={{ width: 2000 }}>
-            <ul styleName="list">
-              {weekCn.map((item, index) => (
-                <li key={item} styleName={today === index ? 'active' : ''}>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <ul styleName="weeklist">
-              {weekEng.map((obj, index) => (
-                <Item key={obj} data={weekData[weekEng[index]]} type={2} />
-              ))}
-            </ul>
-          </div>
-        </div>
+        <ul styleName="list">
+          {weekCn.map((item, index) => (
+            <li key={item} styleName={today === index ? 'active' : ''}>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <ul styleName="weeklist">
+          {weekEng.map((obj, index) => (
+            <ItemS key={obj} data={weekData[weekEng[index]]} type={2} />
+          ))}
+        </ul>
       </div>
     )
   }
