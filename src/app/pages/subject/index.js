@@ -250,7 +250,7 @@ class Bangumi extends Component {
               vod_pantitle || DOMAIN_NAME === 'dddm.tv' ? '_百度云盘下载' : ''
             } - ${listName}${listNameBig}`}
           >
-            <meta name="description" content={`《${title}》讲述${reContent}`} />
+            <meta name="description" content={`${title}动画全集由${reContent}`} />
             <meta
               name="keywords"
               content={`${title},${title}动漫,${title}下载${
@@ -266,7 +266,7 @@ class Bangumi extends Component {
             <meta property="og:video" content={`/play/${id}/1`} />
             <meta property="og:site_name" content={'9站'} />
             <meta property="og:video:score" content={gold} />
-            <meta property="og:video:actor" content={actor} />
+            <meta property="og:video:actor" content={actor ? actor.map(item => item.title).join(',') : ''} />
             <meta property="og:video:area" content={area} />
             <meta property="og:video:class" content={`${listName}${mcid.length > 0 ? mcid.map(item => item.title).join(',') : ''}`} />
             <meta property="og:video:language" content={language} />
