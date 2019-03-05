@@ -70,6 +70,28 @@ export default (user, logPageView = () => {}) => {
     },
 
     {
+      path: '/week',
+      exact: true,
+      head: Head,
+      component: Loadable({
+        loader: () => import('@/pages/week'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter,
+      loadData: WeekData
+    },
+
+    {
+      path: '/week/out',
+      exact: true,
+      component: Loadable({
+        loader: () => import('@/pages/week/out'),
+        loading: () => <Loading />
+      }),
+      enter: triggerEnter
+    },
+
+    {
       path: '/week/:id',
       exact: true,
       head: Head,

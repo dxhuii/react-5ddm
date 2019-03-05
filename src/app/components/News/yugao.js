@@ -87,10 +87,18 @@ class NewsYG extends Component {
           <h2 styleName="h2">{title || '预告'}</h2>
           {isCate ? (
             <ul styleName="news-tab tab">
-              <li>OP</li>
-              <li>ED</li>
-              <li>CM</li>
-              <li>BGM</li>
+              <li>
+                <Link to="/news/op">OP</Link>
+              </li>
+              <li>
+                <Link to="/news/ed">ED</Link>
+              </li>
+              <li>
+                <Link to="/news/cm">CM</Link>
+              </li>
+              <li>
+                <Link to="/news/bgm">BGM</Link>
+              </li>
             </ul>
           ) : null}
         </div>

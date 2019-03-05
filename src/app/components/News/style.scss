@@ -140,9 +140,16 @@
     height: 30px;
     margin-left: 5px;
     font-size: 12px;
+    a {
+      margin-left: 0;
+      padding-left: 0;
+      color: #999;
+    }
     &:hover {
       background-color: #ddd;
-      color: #666;
+      a {
+        color: #666;
+      }
     }
   }
 }

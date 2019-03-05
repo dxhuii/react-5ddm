@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -8,9 +8,9 @@ import { week } from '@/store/actions/week'
 import { getWeek } from '@/store/reducers/week'
 
 import Loading from '@/components/Ui/Loading'
-import Item from '@/components/Week/Item'
+import Item from '@/components/Week/Item/out'
 
-import './style.scss'
+import './out.scss'
 
 @withRouter
 @connect(
@@ -25,8 +25,7 @@ class weekDay extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentIndex: 0,
-      onWeekShow: false
+      currentIndex: 0
     }
   }
 
@@ -34,35 +33,17 @@ class weekDay extends Component {
     weekData: PropTypes.object,
     week: PropTypes.func,
     id: PropTypes.any,
-    title: PropTypes.string,
-    link: PropTypes.string,
-    isJp: PropTypes.array,
-    type: PropTypes.number,
-    linkText: PropTypes.string
+    type: PropTypes.number
   }
 
   componentDidMount() {
-    const { weekData, week, id } = this.props
+    const { weekData, week } = this.props
     if (!weekData.data) {
-      week({ id })
+      week()
     }
   }
 
-  getArea(weekData = []) {
-    let cn = []
-    let jp = []
-    weekData.map(item => {
-      if (item.area === '日本') {
-        jp.push(item)
-      } else if (item.area === '大陆') {
-        cn.push(item)
-      }
-    })
-    return [cn, jp]
-  }
-
-  getEveryWeek(weekData, isCN) {
-    // isCN  1 日本  其他为中国
+  getEveryWeek(weekData) {
     let data = {}
     let [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday] = [[], [], [], [], [], [], []]
     weekData.map(item => {
@@ -83,7 +64,7 @@ class weekDay extends Component {
         Sunday.push(item)
       }
     })
-    data.Zero = isCN ? weekData.slice(0, 20) : weekData.slice(0, 16)
+    data.Zero = weekData.slice(0, 20)
     data.Monday = Monday
     data.Tuesday = Tuesday
     data.Wednesday = Wednesday
@@ -94,55 +75,30 @@ class weekDay extends Component {
     return data
   }
 
-  onWeek = () => {
-    this.setState({
-      onWeekShow: !this.state.onWeekShow
-    })
-  }
-
   render() {
     const {
-      title,
-      weekData: { data = [], loading },
-      link,
-      isJp,
-      type,
-      linkText
+      weekData: { data = [], loading }
     } = this.props
-    const { currentIndex, onWeekShow } = this.state
+    const { currentIndex } = this.state
     const weekCn = ['最新', '一', '二', '三', '四', '五', '六', '日']
     const weekEng = ['Zero', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    const weekType = this.getArea(data)
-    const weekData = type === -1 ? this.getEveryWeek(data) : this.getEveryWeek(weekType[type], type)
+    const weekData = this.getEveryWeek(data)
     return (
-      <div styleName="index-week">
+      <Fragment>
         <div className="title">
-          {type !== -1 && (
-            <h2>
-              <i className={isJp ? 'title-icon' : 'title-icon cn'} /> {title}
-            </h2>
-          )}
           <div styleName="week-tab">
-            <span onClick={this.onWeek}>最新</span>
-            <ul styleName={`tab ${onWeekShow ? 'show' : ''}`} className={`${onWeekShow ? 'box' : ''}`}>
+            <ul styleName="tab">
               {weekCn.map((item, index) => (
                 <li key={index} onClick={() => this.setState({ currentIndex: index })} styleName={index === currentIndex ? 'active' : ''}>
                   {`${index !== 0 ? '周' : ''}${item}`}
-                  {isJp && index !== 0 ? <em>{isJp[index]}</em> : ''}
                 </li>
               ))}
             </ul>
           </div>
-          {link ? (
-            <Link to={link}>
-              {linkText || '新番时间表'}
-              <i className="iconfont">&#xe65e;</i>
-            </Link>
-          ) : null}
         </div>
         {loading ? <Loading /> : null}
-        <Item data={weekData[weekEng[currentIndex]]} type={type} />
-      </div>
+        <Item data={weekData[weekEng[currentIndex]]} />
+      </Fragment>
     )
   }
 }

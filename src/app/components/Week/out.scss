@@ -1,0 +1,141 @@
+@import '../../pages/_mixin';
+.week-tab {
+  position: relative;
+  height: 32px;
+  line-height: 32px;
+  flex-grow: 1;
+  span {
+    display: none;
+  }
+}
+
+.tab {
+  height: 32px;
+  display: flex;
+  border-radius: 16px;
+  border: 2px solid #ebebeb;
+  padding: 1px;
+  &.show {
+    display: inline-block;
+  }
+  li {
+    position: relative;
+    flex: 1;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 13px;
+    em {
+      font-size: 12px;
+      margin-left: 5px;
+      color: #ccc;
+    }
+    &.active {
+      background: #0084ff;
+      color: #fff;
+      em {
+        color: #ddd;
+      }
+    }
+  }
+}
+
+.week {
+  position: relative;
+  height: 408px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-top: 15px;
+  margin-bottom: -10px;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  backface-visibility: hidden;
+  &::-webkit-scrollbar-button,
+  &::-webkit-scrollbar-track {
+    display: none
+  }
+  /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+  &::-webkit-scrollbar {
+    width: 4px;
+    /*滚动条宽度*/
+    background: #eee;
+    border-radius: 2px;
+  }
+  /*定义滚动条轨道 内阴影+圆角*/
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    border-radius: 10px;
+    /*滚动条的背景区域的圆角*/
+    background-color: transparent;
+    /*滚动条的背景颜色*/
+  }
+  /*定义滑块 内阴影+圆角*/
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    /*滚动条的圆角*/
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #ebebeb;
+    /*滚动条的背景颜色*/
+  }
+  li {
+    position: relative;
+    height: 77px;
+    width: 226px;
+    margin-bottom: 25px;
+    div {
+      float: left;
+      position: relative;
+      margin-right: 10px;
+      width: 77px;
+      height: 77px;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px 0 hsla(23, 13%, 76%, .4);
+      z-index: 2;
+      img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        overflow: auto;
+        display: block;
+        width: 77px;
+      }
+    }
+    h4 {
+      font-size: 12px;
+      margin-right: 20px;
+      @include clamp(3)
+    }
+    p {
+      position: absolute;
+      left: 85px;
+      right: 10px;
+      bottom: 0;
+      height: 18px;
+      line-height: 14px;
+      font-size: 12px;
+      &.no {
+        a {
+          margin-left: 0;
+        }
+      }
+      a {
+        margin-left: 5px;
+        display: inline-block;
+        background-color: #f6f6f6;
+        color: #8590A6;
+        border-radius: 10px;
+        padding: 3px 10px;
+        &.today {
+          background-color: rgba(0, 132, 255, .1);
+          color: #0084ff;
+        }
+      }
+    }
+  }
+}

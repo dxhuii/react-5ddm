@@ -25,3 +25,14 @@
 .today {
   color: #0084ff;
 }
+
+.week-out {
+  margin-top: -55px;
+  background-color: #fff;
+}
+
+@media (min-width: 0) and (max-width: 1200px) {
+  .week-out {
+    margin-top: -48px;
+  }
+}

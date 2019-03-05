@@ -64,15 +64,33 @@ class News extends Component {
           <div styleName="tab">
             <span>分类</span>
             <ul styleName="news-tab">
-              <li>动画</li>
-              <li>漫画</li>
-              <li>八卦</li>
-              <li>简评</li>
-              <li>COS</li>
-              <li>产业</li>
-              <li>声优</li>
-              <li>美图</li>
-              <li>短视频</li>
+              <li>
+                <Link to="/news/donghua">动画</Link>
+              </li>
+              <li>
+                <Link to="/news/manhua">漫画</Link>
+              </li>
+              <li>
+                <Link to="/news/bagua">八卦</Link>
+              </li>
+              <li>
+                <Link to="/news/jianping">简评</Link>
+              </li>
+              <li>
+                <Link to="/news/cosplay">COS</Link>
+              </li>
+              <li>
+                <Link to="/news/chanye">产业</Link>
+              </li>
+              <li>
+                <Link to="/news/cast">声优</Link>
+              </li>
+              <li>
+                <Link to="/news/pic">美图</Link>
+              </li>
+              <li>
+                <Link to="/news/video">短视频</Link>
+              </li>
             </ul>
           </div>
           <Link to="/news">

@@ -52,7 +52,7 @@ class Week extends PureComponent {
     return [cn, jp]
   }
 
-  getEveryWeek(weekData, isCN) {
+  getEveryWeek(weekData) {
     // isCN  1 日本  其他为中国
     let data = {}
     let [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday] = [[], [], [], [], [], [], []]
@@ -93,9 +93,9 @@ class Week extends PureComponent {
     const weekCn = ['一', '二', '三', '四', '五', '六', '日']
     const weekEng = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     const weekType = this.getArea(data)
-    const weekData = this.getEveryWeek(weekType[id], id)
+    const weekData = id === '0' || id === '1' ? this.getEveryWeek(weekType[id], id) : this.getEveryWeek(data)
     const today = new Date().getDay() - 1
-    const title = id ? '日本' : '国产'
+    const title = id === '1' ? '国产' : id === '0' ? '日本' : ''
     return (
       <div className="wp mt20">
         <Meta title={`${title}新番时间表`}>
