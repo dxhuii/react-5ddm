@@ -239,30 +239,42 @@ module.exports = {
       importWorkboxFrom: 'local',
       skipWaiting: true,
       clientsClaim: true,
+      exclude: [/\.(png|jpe?g|gif|svg|webp|ejs)$/i, /\.map$/, /^manifest.*\\.js(?:on)?$/],
       runtimeCaching: [
+        {
+          urlPattern: /\.(?:png|jpg|jpeg|svg|webp)$/,
+          handler: 'cacheFirst',
+          options: {
+            cacheName: 'CDN_IMAGE_CACHE',
+            expiration: {
+              maxEntries: 20
+            }
+          }
+        },
         {
           // To match cross-origin requests, use a RegExp that matches
           // the start of the origin:
-          urlPattern: new RegExp('^https://api'),
+          urlPattern: /^https:\/\/api.99496.com\//,
           handler: 'staleWhileRevalidate',
           options: {
             // Configure which responses are considered cacheable.
+            cacheName: 'API_CACHE',
             cacheableResponse: {
               statuses: [200]
             }
           }
         },
         {
-          urlPattern: new RegExp('^https://cos'),
-          // Apply a network-first strategy.
-          handler: 'networkFirst',
-          options: {
-            // Fall back to the cache after 2 seconds.
-            networkTimeoutSeconds: 2,
-            cacheableResponse: {
-              statuses: [200]
-            }
-          }
+          urlPattern: /^https:\/\/cos.mdb6.com\//,
+          handler: 'networkFirst'
+        },
+        {
+          urlPattern: /sinaimg.cn\//,
+          handler: 'networkFirst'
+        },
+        {
+          urlPattern: /^https:\/\/u.mdb6.com\//,
+          handler: 'networkFirst'
         }
       ]
     })
