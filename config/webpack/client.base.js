@@ -239,66 +239,7 @@ module.exports = {
       cacheId: config.SWNAME,
       importWorkboxFrom: 'local',
       skipWaiting: true,
-      clientsClaim: true,
-      exclude: [/\.(ejs)$/i, /\.map$/, /^manifest.*\\.js(?:on)?$/],
-      runtimeCaching: [
-        {
-          urlPattern: /\.(?:png|jpg|jpeg|svg|webp)$/,
-          handler: 'cacheFirst',
-          options: {
-            cacheName: 'CDN_IMAGE_CACHE',
-            expiration: {
-              maxEntries: 20
-            }
-          }
-        },
-        {
-          // To match cross-origin requests, use a RegExp that matches
-          // the start of the origin:
-          urlPattern: /^https:\/\/api.99496.com\//,
-          handler: 'staleWhileRevalidate',
-          options: {
-            // Configure which responses are considered cacheable.
-            cacheName: 'API_CACHE',
-            cacheableResponse: {
-              statuses: [200]
-            }
-          }
-        },
-        {
-          urlPattern: /^https:\/\/cos.mdb6.com\//,
-          handler: 'networkFirst',
-          options: {
-            // Fall back to the cache after 2 seconds.
-            networkTimeoutSeconds: 2,
-            cacheableResponse: {
-              statuses: [200]
-            }
-          }
-        },
-        {
-          urlPattern: /sinaimg.cn\//,
-          handler: 'networkFirst',
-          options: {
-            // Fall back to the cache after 2 seconds.
-            networkTimeoutSeconds: 2,
-            cacheableResponse: {
-              statuses: [200]
-            }
-          }
-        },
-        {
-          urlPattern: /^https:\/\/u.mdb6.com\//,
-          handler: 'networkFirst',
-          options: {
-            // Fall back to the cache after 2 seconds.
-            networkTimeoutSeconds: 2,
-            cacheableResponse: {
-              statuses: [200]
-            }
-          }
-        }
-      ]
+      clientsClaim: true
     })
 
     // serviceworker 还在研究中
