@@ -13,7 +13,21 @@ import createRouter from '@/router'
 import { getUserInfo } from '@/store/reducers/user'
 
 import { GA, PUBLIC_PATH } from 'Config'
-;(async function() {
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register(`${PUBLIC_PATH}/service-worker.js`)
+      .then(registration => {
+        console.log('SW registered: ', registration)
+      })
+      .catch(registrationError => {
+        console.log('SW registration failed: ', registrationError)
+      })
+  })
+}
+
+(async function() {
   // 从页面中获取服务端生产redux数据，作为客户端redux初始值
   const store = configureStore(window.__initState__)
   let userinfo = getUserInfo(store.getState())
@@ -28,19 +42,6 @@ import { GA, PUBLIC_PATH } from 'Config'
       ReactGA.set(option)
       ReactGA.pageview(window.location.pathname)
     }
-  }
-
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker
-        .register(`${PUBLIC_PATH}/service-worker.js`)
-        .then(registration => {
-          console.log('SW registered: ', registration)
-        })
-        .catch(registrationError => {
-          console.log('SW registration failed: ', registrationError)
-        })
-    })
   }
 
   const router = createRouter(userinfo, logPageView)

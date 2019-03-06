@@ -236,6 +236,7 @@ module.exports = {
     ]),
 
     new WorkboxPlugin.GenerateSW({
+      cacheId: config.SWNAME,
       importWorkboxFrom: 'local',
       skipWaiting: true,
       clientsClaim: true,
@@ -266,15 +267,36 @@ module.exports = {
         },
         {
           urlPattern: /^https:\/\/cos.mdb6.com\//,
-          handler: 'networkFirst'
+          handler: 'networkFirst',
+          options: {
+            // Fall back to the cache after 2 seconds.
+            networkTimeoutSeconds: 2,
+            cacheableResponse: {
+              statuses: [200]
+            }
+          }
         },
         {
           urlPattern: /sinaimg.cn\//,
-          handler: 'networkFirst'
+          handler: 'networkFirst',
+          options: {
+            // Fall back to the cache after 2 seconds.
+            networkTimeoutSeconds: 2,
+            cacheableResponse: {
+              statuses: [200]
+            }
+          }
         },
         {
           urlPattern: /^https:\/\/u.mdb6.com\//,
-          handler: 'networkFirst'
+          handler: 'networkFirst',
+          options: {
+            // Fall back to the cache after 2 seconds.
+            networkTimeoutSeconds: 2,
+            cacheableResponse: {
+              statuses: [200]
+            }
+          }
         }
       ]
     })

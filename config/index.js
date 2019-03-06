@@ -51,7 +51,8 @@ const defalut = {
   EMAIL: 'dxhuii@qq.com',
   ICP: '沪ICP备16032125号-1',
   WW: '沪网文(2017)1295-032号',
-  BEIAN: true
+  BEIAN: true,
+  SWNAME: 'sw-9z'
 }
 /**
  * dddm.tv
@@ -72,7 +73,8 @@ const dddm = {
   EMAIL: 'dddmtv@outlook.com',
   ICP: '',
   WW: '',
-  BEIAN: false
+  BEIAN: false,
+  SWNAME: 'sw-dddm'
 }
 /**
  * 5ddm.com
@@ -94,7 +96,8 @@ const ddm = {
   EMAIL: 'ddm_com@outlook.com',
   ICP: '',
   WW: '',
-  BEIAN: false
+  BEIAN: false,
+  SWNAME: 'sw-5ddm'
 }
 
 let config = {},
