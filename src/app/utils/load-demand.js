@@ -47,7 +47,7 @@
     for (var i = 0, max = elements.length; i < max; i++) {
       if (elements[i].innerHTML) continue
 
-      let content = elements[i].getAttribute('data-load-demand')
+      let content = encodeURIComponent(elements[i].getAttribute('data-load-demand'))
 
       if (content == '') continue
 

@@ -8,6 +8,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 const config = require('../index')
 const devMode = process.env.NODE_ENV === 'development'
@@ -232,7 +233,39 @@ module.exports = {
       { from: 'src/app/static/favicon.ico', to: 'favicon.ico' },
       { from: 'src/app/static/5d_favicon.ico', to: '5d_favicon.ico' },
       { from: 'src/app/static/dd_favicon.ico', to: 'dd_favicon.ico' }
-    ])
+    ]),
+
+    new WorkboxPlugin.GenerateSW({
+      importWorkboxFrom: 'local',
+      skipWaiting: true,
+      clientsClaim: true,
+      runtimeCaching: [
+        {
+          // To match cross-origin requests, use a RegExp that matches
+          // the start of the origin:
+          urlPattern: new RegExp('^https://api'),
+          handler: 'staleWhileRevalidate',
+          options: {
+            // Configure which responses are considered cacheable.
+            cacheableResponse: {
+              statuses: [200]
+            }
+          }
+        },
+        {
+          urlPattern: new RegExp('^https://cos'),
+          // Apply a network-first strategy.
+          handler: 'networkFirst',
+          options: {
+            // Fall back to the cache after 2 seconds.
+            networkTimeoutSeconds: 2,
+            cacheableResponse: {
+              statuses: [200]
+            }
+          }
+        }
+      ]
+    })
 
     // serviceworker 还在研究中
     // new ServiceWorkerWebpackPlugin({

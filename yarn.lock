@@ -1096,6 +1096,13 @@
     pirates "^4.0.0"
     source-map-support "^0.5.9"
 
+"@babel/runtime@^7.0.0":
+  version "7.3.4"
+  resolved "http://npm.boqii.com:80/@babel%2fruntime/-/runtime-7.3.4.tgz#73d12ba819e365fcf7fd152aed56d6df97d21c83"
+  integrity sha1-c9ErqBnjZfz3/RUq7VbW35fSHIM=
+  dependencies:
+    regenerator-runtime "^0.12.0"
+
 "@babel/runtime@^7.2.0":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.2.0.tgz#b03e42eeddf5898e00646e4c840fa07ba8dcad7f"
@@ -1684,6 +1691,13 @@ babel-eslint@^10.0.1:
     eslint-scope "3.7.1"
     eslint-visitor-keys "^1.0.0"
 
+babel-extract-comments@^1.0.0:
+  version "1.0.0"
+  resolved "http://npm.boqii.com:80/babel-extract-comments/-/babel-extract-comments-1.0.0.tgz#0a2aedf81417ed391b85e18b4614e693a0351a21"
+  integrity sha1-Cirt+BQX7TkbheGLRhTmk6A1GiE=
+  dependencies:
+    babylon "^6.18.0"
+
 babel-loader@^8.0.4:
   version "8.0.5"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.0.5.tgz#225322d7509c2157655840bba52e46b6c2f2fe33"
@@ -1712,6 +1726,19 @@ babel-plugin-react-css-modules@^5.0.0:
     postcss-modules-scope "^1.1.0"
     postcss-modules-values "^1.3.0"
 
+babel-plugin-syntax-object-rest-spread@^6.8.0:
+  version "6.13.0"
+  resolved "http://npm.boqii.com:80/babel-plugin-syntax-object-rest-spread/-/babel-plugin-syntax-object-rest-spread-6.13.0.tgz#fd6536f2bce13836ffa3a5458c4903a597bb3bf5"
+  integrity sha1-/WU28rzhODb/o6VFjEkDpZe7O/U=
+
+babel-plugin-transform-object-rest-spread@^6.26.0:
+  version "6.26.0"
+  resolved "http://npm.boqii.com:80/babel-plugin-transform-object-rest-spread/-/babel-plugin-transform-object-rest-spread-6.26.0.tgz#0f36692d50fef6b7e2d4b3ac1478137a963b7b06"
+  integrity sha1-DzZpLVD+9rfi1LOsFHgTepY7ewY=
+  dependencies:
+    babel-plugin-syntax-object-rest-spread "^6.8.0"
+    babel-runtime "^6.26.0"
+
 babel-polyfill@6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-polyfill/-/babel-polyfill-6.23.0.tgz#8364ca62df8eafb830499f699177466c3b03499d"
@@ -1728,6 +1755,11 @@ babel-runtime@^6.22.0, babel-runtime@^6.26.0:
   dependencies:
     core-js "^2.4.0"
     regenerator-runtime "^0.11.0"
+
+babylon@^6.18.0:
+  version "6.18.0"
+  resolved "http://npm.boqii.com:80/babylon/-/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
+  integrity sha1-ry87iPpvXB5MY00aD46sT1WzleM=
 
 balanced-match@^1.0.0:
   version "1.0.0"
@@ -4269,6 +4301,15 @@ fs-constants@^1.0.0:
   resolved "https://registry.yarnpkg.com/fs-constants/-/fs-constants-1.0.0.tgz#6be0de9be998ce16af8afc24497b9ee9b7ccd9ad"
   integrity sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==
 
+fs-extra@^4.0.2:
+  version "4.0.3"
+  resolved "http://npm.boqii.com:80/fs-extra/-/fs-extra-4.0.3.tgz#0d852122e5bc5beb453fb028e9c0c9bf36340c94"
+  integrity sha1-DYUhIuW8W+tFP7Ao6cDJvzY0DJQ=
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
+
 fs-extra@^7.0.0:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-7.0.1.tgz#4f189c44aa123b895f722804f55ea23eadc348e9"
@@ -4367,6 +4408,11 @@ get-caller-file@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.3.tgz#f978fa4c90d1dfe7ff2d6beda2a515e713bdcf4a"
   integrity sha512-3t6rVToeoZfYSGd8YoLFR2DJkiQrIiUrGcjvFX2mDw3bn6k2OtwHN0TNCLbBO+w8qTvimhDkv+LSscbJY1vE6w==
+
+get-own-enumerable-property-symbols@^3.0.0:
+  version "3.0.0"
+  resolved "http://npm.boqii.com:80/get-own-enumerable-property-symbols/-/get-own-enumerable-property-symbols-3.0.0.tgz#b877b49a5c16aefac3655f2ed2ea5b684df8d203"
+  integrity sha1-uHe0mlwWrvrDZV8u0upbaE340gM=
 
 get-proxy@^2.0.0:
   version "2.1.0"
@@ -4729,6 +4775,11 @@ hmac-drbg@^1.0.0:
     hash.js "^1.0.3"
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
+
+hoek@4.x.x:
+  version "4.2.1"
+  resolved "http://npm.boqii.com:80/hoek/-/hoek-4.2.1.tgz#9634502aa12c445dd5a7c5734b572bb8738aacbb"
+  integrity sha1-ljRQKqEsRF3Vp8VzS1cruHOKrLs=
 
 hoist-non-react-statics@^2.5.0:
   version "2.5.5"
@@ -5439,7 +5490,7 @@ is-number@^3.0.0:
   dependencies:
     kind-of "^3.0.2"
 
-is-obj@^1.0.0:
+is-obj@^1.0.0, is-obj@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/is-obj/-/is-obj-1.0.1.tgz#3e4729ac1f5fde025cd7d83a896dab9f4f67db0f"
   integrity sha1-PkcprB9f3gJc19g6iW2rn09n2w8=
@@ -5502,6 +5553,11 @@ is-regex@^1.0.4:
   dependencies:
     has "^1.0.1"
 
+is-regexp@^1.0.0:
+  version "1.0.0"
+  resolved "http://npm.boqii.com:80/is-regexp/-/is-regexp-1.0.0.tgz#fd2d883545c46bac5a633e7b9a09e87fa2cb5069"
+  integrity sha1-/S2INUXEa6xaYz57mgnof6LLUGk=
+
 is-resolvable@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/is-resolvable/-/is-resolvable-1.1.0.tgz#fb18f87ce1feb925169c9a407c19318a3206ed88"
@@ -5561,6 +5617,13 @@ isarray@1.0.0, isarray@^1.0.0, isarray@~1.0.0:
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
   integrity sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=
 
+isemail@3.x.x:
+  version "3.2.0"
+  resolved "http://npm.boqii.com:80/isemail/-/isemail-3.2.0.tgz#59310a021931a9fb06bbb51e155ce0b3f236832c"
+  integrity sha1-WTEKAhkxqfsGu7UeFVzgs/I2gyw=
+  dependencies:
+    punycode "2.x.x"
+
 isexe@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
@@ -5590,6 +5653,15 @@ isurl@^1.0.0-alpha5:
   dependencies:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
+
+joi@^11.1.1:
+  version "11.4.0"
+  resolved "http://npm.boqii.com:80/joi/-/joi-11.4.0.tgz#f674897537b625e9ac3d0b7e1604c828ad913ccb"
+  integrity sha1-9nSJdTe2JemsPQt+FgTIKK2RPMs=
+  dependencies:
+    hoek "4.x.x"
+    isemail "3.x.x"
+    topo "2.x.x"
 
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.5.0"
@@ -5664,6 +5736,13 @@ json-stable-stringify-without-jsonify@^1.0.1:
   resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
   integrity sha1-nbe1lJatPzz+8wp1FC0tkwrXJlE=
 
+json-stable-stringify@^1.0.1:
+  version "1.0.1"
+  resolved "http://npm.boqii.com:80/json-stable-stringify/-/json-stable-stringify-1.0.1.tgz#9a759d39c5f2ff503fd5300646ed445f88c4f9af"
+  integrity sha1-mnWdOcXy/1A/1TAGRu1EX4jE+a8=
+  dependencies:
+    jsonify "~0.0.0"
+
 json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
@@ -5699,6 +5778,11 @@ jsonfile@^4.0.0:
   integrity sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=
   optionalDependencies:
     graceful-fs "^4.1.6"
+
+jsonify@~0.0.0:
+  version "0.0.0"
+  resolved "http://npm.boqii.com:80/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
+  integrity sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=
 
 jsprim@^1.2.2:
   version "1.4.1"
@@ -5873,6 +5957,11 @@ lodash._getnative@^3.0.0:
   resolved "https://registry.yarnpkg.com/lodash._getnative/-/lodash._getnative-3.9.1.tgz#570bc7dede46d61cdcde687d65d3eecbaa3aaff5"
   integrity sha1-VwvH3t5G1hzc3mh9ZdPuy6o6r/U=
 
+lodash._reinterpolate@~3.0.0:
+  version "3.0.0"
+  resolved "http://npm.boqii.com:80/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
+  integrity sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=
+
 lodash.assign@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.assign/-/lodash.assign-4.2.0.tgz#0d99f3ccd7a6d261d19bdaeb9245005d285808e7"
@@ -5941,6 +6030,21 @@ lodash.tail@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.tail/-/lodash.tail-4.1.1.tgz#d2333a36d9e7717c8ad2f7cacafec7c32b444664"
   integrity sha1-0jM6NtnncXyK0vfKyv7HwytERmQ=
+
+lodash.template@^4.4.0:
+  version "4.4.0"
+  resolved "http://npm.boqii.com:80/lodash.template/-/lodash.template-4.4.0.tgz#e73a0385c8355591746e020b99679c690e68fba0"
+  integrity sha1-5zoDhcg1VZF0bgILmWecaQ5o+6A=
+  dependencies:
+    lodash._reinterpolate "~3.0.0"
+    lodash.templatesettings "^4.0.0"
+
+lodash.templatesettings@^4.0.0:
+  version "4.1.0"
+  resolved "http://npm.boqii.com:80/lodash.templatesettings/-/lodash.templatesettings-4.1.0.tgz#2b4d4e95ba440d915ff08bc899e4553666713316"
+  integrity sha1-K01OlbpEDZFf8IvImeRVNmZxMxY=
+  dependencies:
+    lodash._reinterpolate "~3.0.0"
 
 lodash.unescape@4.0.1:
   version "4.0.1"
@@ -7685,6 +7789,11 @@ prettier@^1.7.0:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.15.3.tgz#1feaac5bdd181237b54dbe65d874e02a1472786a"
   integrity sha512-gAU9AGAPMaKb3NNSUUuhhFAS7SCO4ALTN4nRIn6PJ075Qd28Yn2Ig2ahEJWdJwJmlEBTUfC7mMUSFy8MwsOCfg==
 
+pretty-bytes@^4.0.2:
+  version "4.0.2"
+  resolved "http://npm.boqii.com:80/pretty-bytes/-/pretty-bytes-4.0.2.tgz#b2bf82e7350d65c6c33aa95aaa5a4f6327f61cd9"
+  integrity sha1-sr+C5zUNZcbDOqlaqlpPYyf2HNk=
+
 pretty-error@^2.0.2:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/pretty-error/-/pretty-error-2.1.1.tgz#5f4f87c8f91e5ae3f3ba87ab4cf5e03b1a17f1a3"
@@ -7823,15 +7932,15 @@ punycode@1.3.2:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
   integrity sha1-llOgNvt8HuQjQvIyXM7v6jkmxI0=
 
+punycode@2.x.x, punycode@^2.1.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
+  integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
+
 punycode@^1.2.4, punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
   integrity sha1-wNWmOycYgArY4esPpSachN1BhF4=
-
-punycode@^2.1.0:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
-  integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
 q@^1.1.2:
   version "1.5.1"
@@ -9040,6 +9149,15 @@ string_decoder@~1.1.1:
   dependencies:
     safe-buffer "~5.1.0"
 
+stringify-object@^3.2.2:
+  version "3.3.0"
+  resolved "http://npm.boqii.com:80/stringify-object/-/stringify-object-3.3.0.tgz#703065aefca19300d3ce88af4f5b3956d7556629"
+  integrity sha1-cDBlrvyhkwDTzoivT1s5VtdVZik=
+  dependencies:
+    get-own-enumerable-property-symbols "^3.0.0"
+    is-obj "^1.0.1"
+    is-regexp "^1.0.0"
+
 strip-ansi@^3.0.0, strip-ansi@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf"
@@ -9065,6 +9183,14 @@ strip-bom@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/strip-bom/-/strip-bom-3.0.0.tgz#2334c18e9c759f7bdd56fdef7e9ae3d588e68ed3"
   integrity sha1-IzTBjpx1n3vdVv3vfprj1YjmjtM=
+
+strip-comments@^1.0.2:
+  version "1.0.2"
+  resolved "http://npm.boqii.com:80/strip-comments/-/strip-comments-1.0.2.tgz#82b9c45e7f05873bee53f37168af930aa368679d"
+  integrity sha1-grnEXn8FhzvuU/NxaK+TCqNoZ50=
+  dependencies:
+    babel-extract-comments "^1.0.0"
+    babel-plugin-transform-object-rest-spread "^6.26.0"
 
 strip-dirs@^2.0.0:
   version "2.1.0"
@@ -9343,6 +9469,13 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     extend-shallow "^3.0.2"
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
+
+topo@2.x.x:
+  version "2.0.2"
+  resolved "http://npm.boqii.com:80/topo/-/topo-2.0.2.tgz#cd5615752539057c0dc0491a621c3bc6fbe1d182"
+  integrity sha1-zVYVdSU5BXwNwEkaYhw7xvvh0YI=
+  dependencies:
+    hoek "4.x.x"
 
 toposort@^1.0.0:
   version "1.0.7"
@@ -10016,6 +10149,141 @@ wordwrap@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"
   integrity sha1-J1hIEIkUVqQXHI0CJkQa3pDLyus=
+
+workbox-background-sync@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-background-sync/-/workbox-background-sync-4.0.0.tgz#231988ea3813a06825e887860b2e702e1db824e7"
+  integrity sha1-IxmI6jgToGgl6IeGCy5wLh24JOc=
+  dependencies:
+    workbox-core "^4.0.0"
+
+workbox-broadcast-update@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-broadcast-update/-/workbox-broadcast-update-4.0.0.tgz#2ff32dcdbba16a5bf44d1312527363e19b7749d1"
+  integrity sha1-L/Mtzbuhalv0TRMSUnNj4Zt3SdE=
+  dependencies:
+    workbox-core "^4.0.0"
+
+workbox-build@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-build/-/workbox-build-4.0.0.tgz#60747daf8831f82c0e3da6124dda854971049637"
+  integrity sha1-YHR9r4gx+CwOPaYSTdqFSXEEljc=
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    common-tags "^1.4.0"
+    fs-extra "^4.0.2"
+    glob "^7.1.2"
+    joi "^11.1.1"
+    lodash.template "^4.4.0"
+    pretty-bytes "^4.0.2"
+    stringify-object "^3.2.2"
+    strip-comments "^1.0.2"
+    workbox-background-sync "^4.0.0"
+    workbox-broadcast-update "^4.0.0"
+    workbox-cacheable-response "^4.0.0"
+    workbox-core "^4.0.0"
+    workbox-expiration "^4.0.0"
+    workbox-google-analytics "^4.0.0"
+    workbox-navigation-preload "^4.0.0"
+    workbox-precaching "^4.0.0"
+    workbox-range-requests "^4.0.0"
+    workbox-routing "^4.0.0"
+    workbox-strategies "^4.0.0"
+    workbox-streams "^4.0.0"
+    workbox-sw "^4.0.0"
+    workbox-window "^4.0.0"
+
+workbox-cacheable-response@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-cacheable-response/-/workbox-cacheable-response-4.0.0.tgz#3ac3e5a01d29a0005cf6ff9560cfe0502c8358a8"
+  integrity sha1-OsPloB0poABc9v+VYM/gUCyDWKg=
+  dependencies:
+    workbox-core "^4.0.0"
+
+workbox-core@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-core/-/workbox-core-4.0.0.tgz#3b4aa11c9d739361ed8916b7611abc3b6fefed8b"
+  integrity sha1-O0qhHJ1zk2HtiRa3YRq8O2/v7Ys=
+
+workbox-expiration@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-expiration/-/workbox-expiration-4.0.0.tgz#098f804df178b6212e1e208be072e6f54026eec0"
+  integrity sha1-CY+ATfF4tiEuHiCL4HLm9UAm7sA=
+  dependencies:
+    workbox-core "^4.0.0"
+
+workbox-google-analytics@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-google-analytics/-/workbox-google-analytics-4.0.0.tgz#51c98cc471e5b35c7f86b3aff1d74a28036707e2"
+  integrity sha1-UcmMxHHls1x/hrOv8ddKKANnB+I=
+  dependencies:
+    workbox-background-sync "^4.0.0"
+    workbox-core "^4.0.0"
+    workbox-routing "^4.0.0"
+    workbox-strategies "^4.0.0"
+
+workbox-navigation-preload@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-navigation-preload/-/workbox-navigation-preload-4.0.0.tgz#96255fb2f060f0b1306755cce87ca27202e830ba"
+  integrity sha1-liVfsvBg8LEwZ1XM6HyicgLoMLo=
+  dependencies:
+    workbox-core "^4.0.0"
+
+workbox-precaching@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-precaching/-/workbox-precaching-4.0.0.tgz#941624d0135d9df3d88929a9de7e20bda0e8d771"
+  integrity sha1-lBYk0BNdnfPYiSmp3n4gvaDo13E=
+  dependencies:
+    workbox-core "^4.0.0"
+
+workbox-range-requests@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-range-requests/-/workbox-range-requests-4.0.0.tgz#9fffba4a7a070c747ed766cbf3063978a855e749"
+  integrity sha1-n/+6SnoHDHR+12bL8wY5eKhV50k=
+  dependencies:
+    workbox-core "^4.0.0"
+
+workbox-routing@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-routing/-/workbox-routing-4.0.0.tgz#96c078287494b9d279afd44739da97d3d4d782cb"
+  integrity sha1-lsB4KHSUudJ5r9RHOdqX09TXgss=
+  dependencies:
+    workbox-core "^4.0.0"
+
+workbox-strategies@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-strategies/-/workbox-strategies-4.0.0.tgz#4837dece455dfbb64830c3adbdc93816d22c9ca0"
+  integrity sha1-SDfezkVd+7ZIMMOtvck4FtIsnKA=
+  dependencies:
+    workbox-core "^4.0.0"
+
+workbox-streams@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-streams/-/workbox-streams-4.0.0.tgz#64c92874a2a27fc37230a15c220f7c61ea04775a"
+  integrity sha1-ZMkodKKif8NyMKFcIg98YeoEd1o=
+  dependencies:
+    workbox-core "^4.0.0"
+
+workbox-sw@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-sw/-/workbox-sw-4.0.0.tgz#7cd07470ee79d4caaf829c2ee97c29651d508027"
+  integrity sha1-fNB0cO551Mqvgpwu6XwpZR1QgCc=
+
+workbox-webpack-plugin@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-webpack-plugin/-/workbox-webpack-plugin-4.0.0.tgz#8c976e7569392ac810c5115d5131ba029b311caf"
+  integrity sha1-jJdudWk5KsgQxRFdUTG6ApsxHK8=
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    json-stable-stringify "^1.0.1"
+    workbox-build "^4.0.0"
+
+workbox-window@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.boqii.com:80/workbox-window/-/workbox-window-4.0.0.tgz#a4d6404c96cc65d4882f79331d4e812c10f912a6"
+  integrity sha1-pNZATJbMZdSIL3kzHU6BLBD5EqY=
+  dependencies:
+    workbox-core "^4.0.0"
 
 worker-farm@^1.3.1, worker-farm@^1.5.2:
   version "1.6.0"

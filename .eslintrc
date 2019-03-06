@@ -8,7 +8,9 @@
     "it": true,
     "ArriveFooter": true,
     "__CLIENT__": true,
-    "adsbygoogle": true
+    "adsbygoogle": true,
+    "importScripts": true,
+    "workbox": true
   },
   "parser": "babel-eslint",
   "env": {
