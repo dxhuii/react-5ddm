@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 
 import { isNumber, formatPic } from '@/utils'
 
@@ -19,34 +18,39 @@ export default class Item extends PureComponent {
       <ul styleName="week">
         {data.map(item => (
           <li key={item.id}>
-            <Link key={item.id} to={`/subject/${item.id}`}>
+            <a target="_blank" rel="noopener noreferrer" href={`https://www.dddm.tv/subject/${item.id}`} key={item.id}>
               <div
                 className="load-demand"
                 data-load-demand={`<img src="${formatPic(item.smallPic || item.pic, 'thumb150')}" alt="${item.title}" />`}
               />
               <h4>{item.title}</h4>
-            </Link>
+            </a>
             {isNumber(item.status) ? (
               item.isDate ? (
                 <p>
                   更新至
-                  <Link styleName="today" to={`/play/${item.id}/${item.pid}`}>
+                  <a styleName="today" target="_blank" rel="noopener noreferrer" href={`https://www.dddm.tv/play/${item.id}/${item.pid}`}>
                     {item.status}话
-                  </Link>
+                  </a>
                 </p>
               ) : (
                 <p>
-                  更新至<Link to={`/play/${item.id}/${item.pid}`}>{item.status}话</Link>
+                  更新至
+                  <a target="_blank" rel="noopener noreferrer" href={`https://www.dddm.tv/play/${item.id}/${item.pid}`}>
+                    {item.status}话
+                  </a>
                 </p>
               )
             ) : (
               <p styleName="no">
                 {item.isDate ? (
-                  <Link styleName={item.isDate ? 'today' : ''} to={`/play/${item.id}/${item.pid}`}>
+                  <a styleName="today" target="_blank" rel="noopener noreferrer" href={`https://www.dddm.tv/play/${item.id}/${item.pid}`}>
                     {item.status}
-                  </Link>
+                  </a>
                 ) : (
-                  <Link to={`/play/${item.id}/${item.pid}`}>{item.status}</Link>
+                  <a target="_blank" rel="noopener noreferrer" href={`https://www.dddm.tv/play/${item.id}/${item.pid}`}>
+                    {item.status}
+                  </a>
                 )}
               </p>
             )}
