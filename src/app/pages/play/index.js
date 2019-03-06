@@ -21,7 +21,7 @@ import Toast from '@/components/Toast'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
-import { ISPLAY, IS9 } from 'Config'
+import { ISPLAY, IS9, DOMAIN_NAME } from 'Config'
 import { isMobile } from '@/utils'
 import playing from '@/utils/play'
 
@@ -351,6 +351,11 @@ class Play extends Component {
           </div>
         </div>
         <PlayList />
+        {DOMAIN_NAME === 'dddm.tv' && (
+          <div className="wp mt20 box">
+            <iframe src="//www.zhaimoe.com/portal/page/index/id/35.html" width="100%" height="100%" frameBorder="0" scrolling="no" />
+          </div>
+        )}
         <div className="wp">
           {isMobile() ? (
             <div className="mt20">

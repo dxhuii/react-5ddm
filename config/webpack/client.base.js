@@ -240,7 +240,7 @@ module.exports = {
       importWorkboxFrom: 'local',
       skipWaiting: true,
       clientsClaim: true,
-      exclude: [/\.(png|jpe?g|gif|svg|webp|ejs)$/i, /\.map$/, /^manifest.*\\.js(?:on)?$/],
+      exclude: [/\.(ejs)$/i, /\.map$/, /^manifest.*\\.js(?:on)?$/],
       runtimeCaching: [
         {
           urlPattern: /\.(?:png|jpg|jpeg|svg|webp)$/,
