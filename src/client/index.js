@@ -12,7 +12,7 @@ import configureStore from '@/store'
 import createRouter from '@/router'
 import { getUserInfo } from '@/store/reducers/user'
 
-import { GA } from 'Config'
+import { GA, PUBLIC_PATH } from 'Config'
 ;(async function() {
   // 从页面中获取服务端生产redux数据，作为客户端redux初始值
   const store = configureStore(window.__initState__)
@@ -33,7 +33,7 @@ import { GA } from 'Config'
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
-        .register('/service-worker.js')
+        .register(`${PUBLIC_PATH}/service-worker.js`)
         .then(registration => {
           console.log('SW registered: ', registration)
         })
