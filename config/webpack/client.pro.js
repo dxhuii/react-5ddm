@@ -2,10 +2,11 @@ const baseConfig = require('./client.base')
 const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const WorkboxPlugin = require('workbox-webpack-plugin')
+const config = require('../index')
 
 // const path = require('path');
 
-const config = {
+const webpackConfig = {
   ...baseConfig,
   plugins: [
     new WebpackParallelUglifyPlugin({
@@ -48,4 +49,4 @@ const config = {
   mode: 'production'
 }
 
-module.exports = config
+module.exports = webpackConfig
