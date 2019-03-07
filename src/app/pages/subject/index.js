@@ -30,7 +30,7 @@ import Toast from '@/components/Toast'
 import Shell from '@/components/Shell'
 
 import { isNumber, formatPic, isMobile } from '@/utils'
-import { IS9, DOMAIN_NAME } from 'Config'
+import { IS9, DOMAIN_NAME, ISPLAY } from 'Config'
 
 import './style.scss'
 @Shell
@@ -235,7 +235,7 @@ class Bangumi extends Component {
       desc: reContent,
       url: `/subject/${id}`
     }
-    if ((copyright === 'stop' && !userid && IS9) || !isMobile) {
+    if ((copyright === 'stop' && !userid && !ISPLAY) || !isMobile) {
       if (typeof window === 'undefined') {
         return
       }

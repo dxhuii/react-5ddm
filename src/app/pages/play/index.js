@@ -272,7 +272,7 @@ class Play extends Component {
       title: `${title} ${subTitle}在线播放 - ${listName}${listNameBig}`,
       url: `/play/${id}/${pid}`
     }
-    if (copyright === 'stop' && !userid && IS9 && !ISPLAY && !isMobile()) {
+    if (copyright === 'stop' && !userid && !ISPLAY && !isMobile()) {
       if (typeof window === 'undefined') {
         return
       }
