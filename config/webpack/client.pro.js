@@ -44,7 +44,7 @@ const webpackConfig = {
         {
           // To match cross-origin requests, use a RegExp that matches
           // the start of the origin:
-          urlPattern: new RegExp('^https://api'),
+          urlPattern: new RegExp('^https://api.99496.com/'),
           handler: 'staleWhileRevalidate',
           options: {
             // Configure which responses are considered cacheable.
@@ -54,14 +54,12 @@ const webpackConfig = {
           }
         },
         {
-          urlPattern: new RegExp('^https://cos'),
-          // Apply a network-first strategy.
-          handler: 'networkFirst',
+          // 匹配跨域请求，使用以origin开头的正则:
+          urlPattern: new RegExp('^https://cos.mdb6.com/'),
+          handler: 'staleWhileRevalidate',
           options: {
-            // Fall back to the cache after 2 seconds.
-            networkTimeoutSeconds: 2,
             cacheableResponse: {
-              statuses: [200]
+              statuses: [0, 200]
             }
           }
         }
