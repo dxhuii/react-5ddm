@@ -19,10 +19,7 @@ export default class Item extends PureComponent {
         {data.map(item => (
           <li key={item.id}>
             <a target="_blank" rel="noopener noreferrer" href={`https://www.dddm.tv/subject/${item.id}`} key={item.id}>
-              <div
-                className="load-demand"
-                data-load-demand={`<img src="${formatPic(item.smallPic || item.pic, 'thumb150')}" alt="${item.title}" />`}
-              />
+              <div><img src={formatPic(item.smallPic || item.pic, 'thumb150')} alt={item.title} /></div>
               <h4>{item.title}</h4>
             </a>
             {isNumber(item.status) ? (

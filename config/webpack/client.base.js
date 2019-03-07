@@ -8,7 +8,6 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin')
 
 const config = require('../index')
 const devMode = process.env.NODE_ENV === 'development'
@@ -233,14 +232,7 @@ module.exports = {
       { from: 'src/app/static/favicon.ico', to: 'favicon.ico' },
       { from: 'src/app/static/5d_favicon.ico', to: '5d_favicon.ico' },
       { from: 'src/app/static/dd_favicon.ico', to: 'dd_favicon.ico' }
-    ]),
-
-    new WorkboxPlugin.GenerateSW({
-      cacheId: config.SWNAME,
-      importWorkboxFrom: 'local',
-      skipWaiting: true,
-      clientsClaim: true
-    })
+    ])
 
     // serviceworker 还在研究中
     // new ServiceWorkerWebpackPlugin({

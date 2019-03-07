@@ -17,7 +17,7 @@ import { GA, PUBLIC_PATH } from 'Config'
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
-      .register(`${PUBLIC_PATH}/service-worker.js`)
+      .register('/service-worker.js')
       .then(registration => {
         console.log('SW registered: ', registration)
       })

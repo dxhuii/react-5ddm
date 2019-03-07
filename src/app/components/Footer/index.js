@@ -99,13 +99,12 @@ export default class Footer extends PureComponent {
                 ) : null}
                 {WW ? WW : null}
               </p>
-              {/* <div ref={e => (this.iframe = e)} style={{ position: 'absolute', left: -99999, top: -99999 }} /> */}
             </footer>
+            <a styleName="top" onClick={this.top} href="javascript:;">
+              <i className="iconfont">&#xe900;</i>
+            </a>
           </Fragment>
         )}
-        <a styleName="top" onClick={this.top} href="javascript:;">
-          <i className="iconfont">&#xe900;</i>
-        </a>
         <div ref={e => (this.cnzz = e)} />
       </Fragment>
     )
