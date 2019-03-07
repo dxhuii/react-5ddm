@@ -1,7 +1,7 @@
 const baseConfig = require('./client.base')
 const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const WorkboxPlugin = require('workbox-webpack-plugin')
+const { GenerateSW } = require('workbox-webpack-plugin')
 const config = require('../index')
 
 // const path = require('path');
@@ -24,44 +24,24 @@ const webpackConfig = {
       }
     }),
     new BundleAnalyzerPlugin(),
-    new WorkboxPlugin.GenerateSW({
+    new GenerateSW({
       cacheId: config.SWNAME,
       importWorkboxFrom: 'local',
+      precacheManifestFilename: './precache-manifest.[manifestHash].js',
       exclude: [/\.(png|jpe?g|gif|svg|webp|ejs)$/i, /\.map$/, /^manifest.*\\.js(?:on)?$/],
       skipWaiting: true,
       clientsClaim: true,
       runtimeCaching: [
         {
-          urlPattern: /\.(?:png|jpg|jpeg|svg|webp)$/,
-          handler: 'cacheFirst',
-          options: {
-            cacheName: 'images',
-            expiration: {
-              maxEntries: 20
-            }
-          }
-        },
-        {
           // To match cross-origin requests, use a RegExp that matches
           // the start of the origin:
-          urlPattern: new RegExp('^https://api.99496.com/'),
-          handler: 'staleWhileRevalidate',
-          options: {
-            // Configure which responses are considered cacheable.
-            cacheableResponse: {
-              statuses: [200]
-            }
-          }
+          urlPattern: /^https:\/\/api.99496.com\//,
+          handler: 'networkFirst'
         },
         {
           // 匹配跨域请求，使用以origin开头的正则:
-          urlPattern: new RegExp('^https://cos.mdb6.com/'),
-          handler: 'staleWhileRevalidate',
-          options: {
-            cacheableResponse: {
-              statuses: [0, 200]
-            }
-          }
+          urlPattern: /^https:\/\/cos.mdb6.com\//,
+          handler: 'networkFirst'
         }
       ]
     }),
