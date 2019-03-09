@@ -352,8 +352,8 @@ class Play extends Component {
         </div>
         <PlayList />
         {DOMAIN_NAME === 'dddm.tv' && (
-          <div className="wp mt20 box">
-            <iframe src="//www.zhaimoe.com/portal/page/index/id/35.html" width="100%" height="100%" frameBorder="0" scrolling="no" />
+          <div className="wp mt20 box zhaimoe">
+            <iframe src="//www.zhaimoe.com/portal/page/index/id/35.html" width="1200" height="100%" frameBorder="0" scrolling="no" />
           </div>
         )}
         <div className="wp">

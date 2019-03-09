@@ -133,6 +133,10 @@
   margin-top: -3px;
 }
 
+.zhaimoe {
+  width: 100%;
+}
+
 @media (min-width: 0px) and (max-width: 1200px) {
   .player {
     :global {
@@ -173,6 +177,11 @@
   }
   .player-title {
     flex-grow: 1;
+  }
+  .zhaimoe {
+    width: calc(100% - 20px);
+    margin: 10px;
+    overflow-x: auto;
   }
 }
 
