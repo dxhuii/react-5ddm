@@ -7,7 +7,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-// const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+const OfflinePlugin = require('offline-plugin')
 
 const config = require('../index')
 const devMode = process.env.NODE_ENV === 'development'
@@ -211,6 +211,13 @@ module.exports = {
       filename: devMode ? '[name].css' : '[name].[hash].css'
     }),
 
+    new OfflinePlugin({
+      autoUpdate: 1000 * 60 * 5,
+      ServiceWorker: {
+        publicPath: '/sw.js'
+      }
+    }),
+
     // 创建视图模版文件，给server使用
     // 主要是打包后的添加的css、js静态文件路径添加到模版中
     new HtmlwebpackPlugin({
@@ -232,11 +239,7 @@ module.exports = {
       { from: 'src/app/static/favicon.ico', to: 'favicon.ico' },
       { from: 'src/app/static/5d_favicon.ico', to: '5d_favicon.ico' },
       { from: 'src/app/static/dd_favicon.ico', to: 'dd_favicon.ico' }
+      // { from: 'config/manifest.json', to: 'manifest.json' }
     ])
-
-    // serviceworker 还在研究中
-    // new ServiceWorkerWebpackPlugin({
-    //   entry: path.join(__dirname, 'client/sw.js'),
-    // })
   ]
 }

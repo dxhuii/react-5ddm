@@ -14,18 +14,8 @@ import { getUserInfo } from '@/store/reducers/user'
 
 import { GA } from 'Config'
 
-// if ('serviceWorker' in navigator) {
-//   window.addEventListener('load', () => {
-//     navigator.serviceWorker
-//       .register('/service-worker.js')
-//       .then(registration => {
-//         console.log('SW registered: ', registration)
-//       })
-//       .catch(registrationError => {
-//         console.log('SW registration failed: ', registrationError)
-//       })
-//   })
-// }
+import * as OfflinePluginRuntime from 'offline-plugin/runtime'
+OfflinePluginRuntime.install()
 
 ;(async function() {
   // 从页面中获取服务端生产redux数据，作为客户端redux初始值
