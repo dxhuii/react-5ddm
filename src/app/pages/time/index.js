@@ -13,6 +13,8 @@ import Meta from '@/components/Meta'
 import SideBar from '@/components/SideBar'
 import TagShare from '@/components/TagShare'
 
+import { NAME } from 'Config'
+
 import './style.scss'
 
 @Shell
@@ -52,7 +54,7 @@ class Time extends Component {
     const { id, title, content, listNameBig, pic, actor, year, filmtime, director, mcid, updateDate, tvcont } = data
     const shareConfig = {
       pic,
-      title: `${title}播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新`,
+      title: `#${title}#播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新 - #${NAME.split('_').join('##')}#`,
       desc: content,
       url: `/time/${id}`
     }

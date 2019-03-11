@@ -21,7 +21,7 @@ import Toast from '@/components/Toast'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
-import { ISPLAY, IS9, DOMAIN_NAME } from 'Config'
+import { ISPLAY, IS9, DOMAIN_NAME, NAME } from 'Config'
 import { isMobile } from '@/utils'
 import playing from '@/utils/play'
 
@@ -269,7 +269,7 @@ class Play extends Component {
     } = data
     const shareConfig = {
       pic,
-      title: `${title} ${subTitle}在线播放 - ${listName}${listNameBig}`,
+      title: `#${title}# ${subTitle}在线播放 - ${listName}${listNameBig} - #${NAME.split('_').join('##')}#`,
       url: `/play/${id}/${pid}`
     }
     if (copyright === 'stop' && !userid && !ISPLAY && !isMobile()) {
@@ -286,7 +286,7 @@ class Play extends Component {
               <meta name="keywords" content={`${title}${subTitle},${title}在线观看,动画${title}`} />
               <meta
                 name="description"
-                content={`9站为您提供${listName}${listNameBig}${title}${subTitle}在线观看。喜欢${title}${subTitle}，就推荐给小伙伴们吧！`}
+                content={`${NAME}为您提供${listName}${listNameBig}${title}${subTitle}在线观看。喜欢${title}${subTitle}，就推荐给小伙伴们吧！`}
               />
             </Meta>
             <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
@@ -352,7 +352,7 @@ class Play extends Component {
         </div>
         <PlayList />
         {DOMAIN_NAME === 'dddm.tv' && (
-          <div className="wp mt20 box zhaimoe">
+          <div className="wp mt20 box" styleName="zhaimoe">
             <iframe src="//www.zhaimoe.com/portal/page/index/id/35.html" width="1200" height="100%" frameBorder="0" scrolling="no" />
           </div>
         )}
@@ -379,9 +379,11 @@ class Play extends Component {
             <SideBar />
           </div>
         </div>
-        <div className="wp">
-          <Ads id={22} />
-        </div>
+        {!isMobile() && (
+          <div className="wp">
+            <Ads id={22} />
+          </div>
+        )}
       </Fragment>
     )
   }

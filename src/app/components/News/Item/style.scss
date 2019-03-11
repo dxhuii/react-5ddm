@@ -53,3 +53,35 @@
     }
   }
 }
+
+@media (min-width: 0) and (max-width: 1200px) {
+  .list {
+    li {
+      :global {
+        .load-demand {
+          width: 140px;
+          margin-right: 10px;
+          height: 80px;
+        }
+      }
+      .info {
+        h3 {
+          font-size: 14px;
+          line-height: 20px;
+          height: 40px;
+        }
+        .tag {
+          display: none;
+        }
+        p {
+          margin-top: 20px;
+          span {
+            &:last-child {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

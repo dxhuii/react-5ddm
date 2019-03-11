@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { articleVod } from '@/store/actions/articleVod'
 import { getArticleVod } from '@/store/reducers/articleVod'
+
+import Detail from '@/components/Detail'
 
 @withRouter
 @connect(
@@ -31,9 +33,27 @@ class ArticleVod extends Component {
   }
 
   render() {
-    // const { ids, data } = this.props
-    // console.log(ids, data)
-    return <div className="wp mt20 clearfix">111</div>
+    const {
+      data: { data = [] }
+    } = this.props
+    return (
+      <Fragment>
+        {data.map((item, index) => (
+          <div className={`box ${index > 0 ? 'mt20' : ''}`} key={item.id}>
+            <Detail
+              title={item.title}
+              pic={item.pic}
+              gold={item.glod}
+              vid={item.id}
+              pid={item.pid}
+              status={item.status}
+              year={item.year}
+              mcid={item.mcid}
+            />
+          </div>
+        ))}
+      </Fragment>
+    )
   }
 }
 

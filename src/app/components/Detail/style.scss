@@ -1,8 +1,26 @@
+@import '../../pages/_mixin';
 .detail-mini {
-  padding: 10px 0 10px;
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
   img {
-    width: 150px;
-    display: block;
+    width: 100px;
+    margin-right: 20px;
+  }
+}
+
+.detail-info {
+  p {
+    margin-top: 0 !important;
     margin-bottom: 10px;
+  }
+  a {
+    color: #0084ff;
+  }
+  b {
+    color: #999;
+  }
+  .clamp {
+    @include clamp(1);
   }
 }

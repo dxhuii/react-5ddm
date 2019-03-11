@@ -17,6 +17,7 @@ import Ads from '@/components/Ads'
 
 import playing from '@/utils/play'
 import { isMobile } from '@/utils'
+import { NAME } from 'Config'
 
 import './style.scss'
 @Shell
@@ -115,7 +116,7 @@ class Article extends Component {
     const { full, isfull } = this.state
     const shareConfig = {
       pic,
-      title: `${title} - ${name}`,
+      title: `${title} - ${name} - #${NAME.split('_').join('##')}#`,
       desc: remark,
       url: `/article/${id}`
     }
@@ -128,7 +129,7 @@ class Article extends Component {
           <meta property="og:description" content={remark} />
           <meta property="og:image" content={pic} />
           <meta property="og:url" content={`/article/${id}`} />
-          <meta property="og:site_name" content="9站" />
+          <meta property="og:site_name" content={NAME} />
           <meta name="description" content={remark} />
           <meta name="keywords" content={keywords} />
         </Meta>
@@ -174,7 +175,7 @@ class Article extends Component {
         </div>
         {cid === 205 ? null : (
           <div className="fr right">
-            <SideBar vodid={+vodid} />
+            <SideBar vodid={vodid} />
           </div>
         )}
       </div>

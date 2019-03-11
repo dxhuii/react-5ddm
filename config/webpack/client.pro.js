@@ -1,10 +1,7 @@
 const baseConfig = require('./client.base')
 const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-// const { GenerateSW } = require('workbox-webpack-plugin')
-// const config = require('../index')
-
-// const path = require('path');
+const OfflinePlugin = require('offline-plugin')
 
 const webpackConfig = {
   ...baseConfig,
@@ -24,27 +21,12 @@ const webpackConfig = {
       }
     }),
     new BundleAnalyzerPlugin(),
-    // new GenerateSW({
-    //   cacheId: config.SWNAME,
-    //   importWorkboxFrom: 'local',
-    //   precacheManifestFilename: './precache-manifest.[manifestHash].js',
-    //   exclude: [/\.(png|jpe?g|gif|svg|webp|ejs)$/i, /\.map$/, /^manifest.*\\.js(?:on)?$/],
-    //   skipWaiting: true,
-    //   clientsClaim: true,
-    //   runtimeCaching: [
-    //     {
-    //       // To match cross-origin requests, use a RegExp that matches
-    //       // the start of the origin:
-    //       urlPattern: /^https:\/\/api.99496.com\//,
-    //       handler: 'networkFirst'
-    //     },
-    //     {
-    //       // 匹配跨域请求，使用以origin开头的正则:
-    //       urlPattern: /^https:\/\/cos.mdb6.com\//,
-    //       handler: 'networkFirst'
-    //     }
-    //   ]
-    // }),
+    new OfflinePlugin({
+      autoUpdate: 1000 * 60 * 5,
+      ServiceWorker: {
+        publicPath: '/sw.js'
+      }
+    }),
     // new ManifestPlugin({ fileName: 'manifest.json' }),
     ...baseConfig.plugins
   ],

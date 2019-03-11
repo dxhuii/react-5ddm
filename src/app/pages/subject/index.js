@@ -30,7 +30,7 @@ import Toast from '@/components/Toast'
 import Shell from '@/components/Shell'
 
 import { isNumber, formatPic, isMobile } from '@/utils'
-import { IS9, DOMAIN_NAME, ISPLAY } from 'Config'
+import { IS9, DOMAIN_NAME, ISPLAY, NAME } from 'Config'
 
 import './style.scss'
 @Shell
@@ -231,7 +231,7 @@ class Bangumi extends Component {
     const reContent = `${content.substring(0, 120)}${content.length > 120 ? '...' : ''}`
     const shareConfig = {
       pic,
-      title: `${title}${language ? `(${language})` : ''} - ${listName}${listNameBig}`,
+      title: `#${title}#${language ? `(${language})` : ''} - ${listName}${listNameBig} - #${NAME.split('_').join('##')}#`,
       desc: reContent,
       url: `/subject/${id}`
     }
@@ -264,7 +264,7 @@ class Bangumi extends Component {
             <meta property="og:image" content={rePic} />
             <meta property="og:url" content={`/subject/${id}`} />
             <meta property="og:video" content={`/play/${id}/1`} />
-            <meta property="og:site_name" content={'9站'} />
+            <meta property="og:site_name" content={NAME} />
             <meta property="og:video:score" content={gold} />
             <meta property="og:video:actor" content={actor ? actor.map(item => item.title).join(',') : ''} />
             <meta property="og:video:area" content={area} />

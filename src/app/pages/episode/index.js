@@ -15,6 +15,8 @@ import Meta from '@/components/Meta'
 import SideBar from '@/components/SideBar'
 import TagShare from '@/components/TagShare'
 
+import { NAME } from 'Config'
+
 import './style.scss'
 
 @Shell
@@ -88,10 +90,12 @@ class Episode extends Component {
       }
     } = this.props
     const { epMore } = this.state
-    const { title, name, content, prev, next, vid, id, vTitle, gold, pic, storyNum, vContent, actor } = data
+    const { title, name, content, prev, next, vid, id, vTitle, gold, pic, storyNum, vContent, actor, year, status, mcid, pid } = data
     const shareConfig = {
       pic,
-      title: !p ? `${vTitle}剧情(共${storyNum}集)_${vTitle}全集剧情` : `${vTitle}${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情`,
+      title: !p
+        ? `#${vTitle}#剧情(共${storyNum}集)_${vTitle}全集剧情`
+        : `#${vTitle}#${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情 - #${NAME.split('_').join('##')}#`,
       desc: content,
       url: !p ? `/episode/${id}` : `/episode/${id}/${p}`
     }
@@ -124,8 +128,8 @@ class Episode extends Component {
           </article>
         </div>
         <div className="fr right">
-          <div styleName="box">
-            <Detail title={vTitle} pic={pic} gold={gold} vid={vid} />
+          <div className="box">
+            <Detail title={vTitle} pic={pic} gold={gold} vid={vid} year={year} status={status} mcid={mcid} pid={pid} />
             <ul styleName={`eplist ${epMore ? 'auto' : ''}`}>
               <li styleName={!p ? 'active' : ''}>
                 <Link to={`/episode/${id}`}>全部</Link>

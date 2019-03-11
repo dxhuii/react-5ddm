@@ -7,7 +7,6 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const OfflinePlugin = require('offline-plugin')
 
 const config = require('../index')
 const devMode = process.env.NODE_ENV === 'development'
@@ -209,13 +208,6 @@ module.exports = {
     // 提取css插件
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css'
-    }),
-
-    new OfflinePlugin({
-      autoUpdate: 1000 * 60 * 5,
-      ServiceWorker: {
-        publicPath: '/sw.js'
-      }
     }),
 
     // 创建视图模版文件，给server使用

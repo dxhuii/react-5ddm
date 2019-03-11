@@ -38,3 +38,12 @@
     }
   }
 }
+
+@media (min-width: 0) and (max-width: 1200px) {
+  .list {
+    padding: 0 10px 10px;
+    li {
+      width: 50%;
+    }
+  }
+}
