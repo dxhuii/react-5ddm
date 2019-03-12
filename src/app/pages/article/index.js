@@ -14,12 +14,15 @@ import Meta from '@/components/Meta'
 import SideBar from '@/components/SideBar'
 import TagShare from '@/components/TagShare'
 import Ads from '@/components/Ads'
+import convertHTML from '@/components/HtmlText'
 
 import playing from '@/utils/play'
 import { isMobile } from '@/utils'
 import { NAME } from 'Config'
 
 import './style.scss'
+
+console.log(convertHTML)
 @Shell
 @withRouter
 @connect(
@@ -152,7 +155,7 @@ class Article extends Component {
                 ) : null}
               </div>
             ) : null}
-            <div styleName="article-content" dangerouslySetInnerHTML={{ __html: content }} />
+            <div styleName="article-content" dangerouslySetInnerHTML={{ __html: convertHTML(content) }} />
             <TagShare tag={tag} config={shareConfig} />
             {isMobile() && (
               <div className="mt20">
