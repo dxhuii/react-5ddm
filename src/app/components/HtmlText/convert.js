@@ -1,7 +1,8 @@
+/* eslint-disable */
 // 从html字符串中，获取所有图片地址
 const abstractImagesFromHTML = str => {
-  let imgReg = /<img(.*?)>/g
-  let srcReg = /src=['"]?([^'"]*)['"]?/i
+  let imgReg = /<img [^>]*src=['"]([^'"]+)([^>]*>)/gi
+  let srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i
   let result = []
 
   let imgs = str.match(imgReg)
@@ -16,16 +17,16 @@ const abstractImagesFromHTML = str => {
   return result
 }
 
-// function randomString(len) {
-//   len = len || 32;
-//   var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
-//   var maxPos = $chars.length;
-//   var pwd = '';
-//   for (let i = 0; i < len; i++) {
-//     pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
-//   }
-//   return pwd;
-// }
+function randomString(len) {
+  len = len || 32
+  var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678' /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+  var maxPos = $chars.length
+  var pwd = ''
+  for (let i = 0; i < len; i++) {
+    pwd += $chars.charAt(Math.floor(Math.random() * maxPos))
+  }
+  return pwd
+}
 
 /*
 // 单曲
@@ -43,7 +44,7 @@ https://music.163.com/#/album?id=34420299
 
 // 解析网页中的网易音乐地址
 function music163(html) {
-  let re = /(http:\/\/music\.163\.com|https:\/\/music\.163\.com|music\.163\.com)\/#\/(.*?)(?=\s|http|https|\)|>|\]|\}|<|$)/gi
+  let re = /(http:\/\/music\.163\.com|https:\/\/music\.163\.com|music\.163\.com)\/\#\/(.*?)(?=\s|http|https|\)|\>|\]|\}|\<|$)/gi
 
   let musics = html.match(re)
 
@@ -95,7 +96,7 @@ function music163(html) {
  * <iframe height=498 width=510 src='http://player.youku.com/embed/XMzkyMzA5MDg0MA==' frameborder=0 'allowfullscreen'></iframe>
  */
 function youku(html) {
-  let re = /(http:\/\/v\.youku\.com|https:\/\/v\.youku\.com|v\.youku\.com)\/v_show\/id_(.*?)(?=\s|http|https|\)|>|\]|\}|<|$)/gi
+  let re = /(http:\/\/v\.youku\.com|https:\/\/v\.youku\.com|v\.youku\.com)\/v\_show\/id\_(.*?)(?=\s|http|https|\)|\>|\]|\}|\<|$)/gi
 
   let arr = html.match(re)
 
@@ -124,7 +125,7 @@ https://www.bilibili.com/video/av36317487/?spm_id_from=333.334.b_63686965665f726
 <iframe src="//player.bilibili.com/player.html?aid=36317487&cid=63759446&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 */
 function bilibili(html) {
-  let re = /(https:\/\/www\.bilibili\.com|https:\/\/bilibili\.com|http:\/\/www.bilibili\.com|http:\/\/bilibili\.com|www\.bilibili\.com|bilibili\.com)\/video\/av(.*?)(?=\s|http|https|\)|>|\]|\}|<|$)/gi
+  let re = /(https:\/\/www\.bilibili\.com|https:\/\/bilibili\.com|http:\/\/www.bilibili\.com|http:\/\/bilibili\.com|www\.bilibili\.com|bilibili\.com)\/video\/av(.*?)(?=\s|http|https|\)|\>|\]|\}|\<|$)/gi
 
   let arr = html.match(re)
 
@@ -155,7 +156,7 @@ function bilibili(html) {
  * <iframe width="560" height="315" src="https://www.youtube.com/embed/c_WCKfQCQuk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
  */
 function youtube(html) {
-  let re = /(https:\/\/www\.youtube\.com|https:\/\/youtube\.com|http:\/\/www.youtube\.com|http:\/\/youtube\.com|www\.youtube\.com|youtube\.com)\/watch\?v=(.*?)(?=\s|http|https|\)|>|\]|\}|<|$)/gi
+  let re = /(https:\/\/www\.youtube\.com|https:\/\/youtube\.com|http:\/\/www.youtube\.com|http:\/\/youtube\.com|www\.youtube\.com|youtube\.com)\/watch\?v\=(.*?)(?=\s|http|https|\)|\>|\]|\}|\<|$)/gi
 
   let arr = html.match(re)
 
@@ -196,7 +197,7 @@ function youtube(html) {
  * <iframe frameborder="0" src="https://v.qq.com/txp/iframe/player.html?vid=h0028rgy2x5" allowFullScreen="true"></iframe>
  */
 function vqq(html) {
-  let re = /(https:\/\/v\.|http:\/\/v\.|v\.)qq\.com\/x\/cover\/(.*?)(?=\s|http|https|\)|>|\]|\}|<|$)/gi
+  let re = /(https:\/\/v\.|http:\/\/v\.|v\.)qq\.com\/x\/cover\/(.*?)(?=\s|http|https|\)|\>|\]|\}|\<|$)/gi
 
   let arr = html.match(re)
 
@@ -229,103 +230,95 @@ function vqq(html) {
   return html
 }
 
-// const link = (str) => {
+const link = str => {
+  if (!str) return ''
 
-//   if (!str) return '';
+  str = str.replace('&nbsp;', ' ')
 
-//   str = str.replace('&nbsp;', ' ');
+  let imgReg = /(<a(.*?)>(.*?)<\/a>|<img(.*?)>)/gi
 
-//   let imgReg = /(<a(.*?)>(.*?)<\/a>|<img(.*?)>)/gi;
+  let aList = []
+  let arr = str.match(imgReg)
 
-//   let aList = [];
-//   let arr = str.match(imgReg);
+  // console.log(arr);
 
-//   // console.log(arr);
+  if (arr && arr.length > 0) {
+    str.match(imgReg).map(item => {
+      let id = '#' + randomString(18) + '#'
 
-//   if (arr && arr.length > 0) {
-//     str.match(imgReg).map(item=>{
-//       let id = '#'+randomString(18)+'#';
+      aList.push({
+        id,
+        value: item
+      })
 
-//       aList.push({
-//         id,
-//         value: item
-//       });
+      str = str.replace(item, id)
+    })
+  }
 
-//       str = str.replace(item, id);
-//     });
-//   }
+  let linkReg = /(http:\/\/>http:\/\/|http:\/\/|https:\/\/|www\.|magnet\:\?xt\=)(.*?)(?=\s|http|https|\)|\>|\]|\}|\<|\"|\'|$)/gi
 
-//   let linkReg = /(http:\/\/>http:\/\/|http:\/\/|https:\/\/|www\.|magnet\:\?xt\=)(.*?)(?=\s|http|https|\)|\>|\]|\}|\<|\"|\'|$)/gi;
+  let links = str.match(linkReg)
 
-//   let links = str.match(linkReg);
+  // console.log(links);
 
-//   // console.log(links);
+  if (links && links.length > 0) {
+    function sortNumber(a, b) {
+      return b.length - a.length
+    }
 
-//   if (links && links.length > 0) {
+    links = links.sort(sortNumber)
 
-//     function sortNumber(a,b) {
-//       return b.length - a.length;
-//     }
+    let _links = []
 
-//     links = links.sort(sortNumber);
+    links.map(item => {
+      /*
+      switch (true) {
+        case item.indexOf('youtube.com') != -1:
+          return;
+        case item.indexOf('youku.com') != -1:
+          return;
+        case item.indexOf('bilibli.com') != -1:
+          return;
+        case item.indexOf('music.163.com') != -1:
+          return;
+        // case item.indexOf('v.qq.com') != -1:
+          // return;
+      }
+      */
 
-//     let _links = [];
+      let id = '#' + randomString(18) + '#'
 
-//     links.map(item=>{
+      _links.push({
+        id,
+        value: item
+      })
+      str = str.replace(item, id)
+    })
 
-//       /*
-//       switch (true) {
-//         case item.indexOf('youtube.com') != -1:
-//           return;
-//         case item.indexOf('youku.com') != -1:
-//           return;
-//         case item.indexOf('bilibli.com') != -1:
-//           return;
-//         case item.indexOf('music.163.com') != -1:
-//           return;
-//         // case item.indexOf('v.qq.com') != -1:
-//           // return;
-//       }
-//       */
+    _links.map(item => {
+      // if (Device.isMobileDevice()) {
+      // str = str.replace(item.id, `<a href=${item.value} rel="nofollow">${item.value}</a>`);
+      // } else {
 
-//       let id = '#'+randomString(18)+'#';
+      let href = item.value.indexOf('http') == -1 ? 'http:' + item.value : item.value
 
-//       _links.push({
-//         id,
-//         value: item
-//       })
-//       str = str.replace(item, id);
-//     });
+      str = str.replace(item.id, `<a href=${href} target="_blank" rel="nofollow">${item.value}</a>`)
+      // }
+    })
+  }
 
-//     _links.map(item=>{
+  if (aList.length > 0) {
+    aList.map(item => {
+      str = str.replace(item.id, item.value)
+    })
+  }
 
-//       // if (Device.isMobileDevice()) {
-//         // str = str.replace(item.id, `<a href=${item.value} rel="nofollow">${item.value}</a>`);
-//       // } else {
-
-//         let href = item.value.indexOf('http') == -1 ? 'http:'+item.value : item.value;
-
-//         str = str.replace(item.id, `<a href=${href} target="_blank" rel="nofollow">${item.value}</a>`);
-//       // }
-
-//     })
-
-//   }
-
-//   if (aList.length > 0) {
-//     aList.map(item=>{
-//       str = str.replace(item.id, item.value);
-//     })
-//   }
-
-//   return str;
-
-// }
+  return str
+}
 
 const image = html => {
-  debugger
   // 图片处理
-  let re = /<img src="(.*?)">/g
+  let re = /<img [^>]*src=['"]([^'"]+)([^>]*>)/gi
 
   let imgs = [...new Set(html.match(re))]
 
@@ -357,15 +350,14 @@ const image = html => {
 export default html => {
   // let re = /(<(.*?)>(.*?)<\/(.*?)>|<(.*?)>)/gi;
   // html = html.match(re).join('');
+
   html = music163(html)
   html = youku(html)
   html = bilibili(html)
   html = youtube(html)
   html = vqq(html)
-  // html = link(html);
+  html = link(html)
   html = image(html)
-
-  console.log(html)
 
   return html
 }

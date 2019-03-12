@@ -461,7 +461,7 @@ window.webPictureViewer = (function() {
       }
 
       var img = self.imagesInfo[self.currentImgIndex]
-      self.images[self.currentImgIndex].className = ''
+      if (self.images[self.currentImgIndex]) self.images[self.currentImgIndex].className = ''
       img._scale = img.scale
 
       if (event.touches.length > 1) {
@@ -823,7 +823,7 @@ window.webPictureViewer = (function() {
 
           var img = self.images[key]
 
-          var s = img.width > 800 ? 800 / img.width : 1
+          var s = img.width > 1500 ? 1500 / img.width : 1
 
           self.imagesInfo[key] = {
             width: parseInt(img.width * s),

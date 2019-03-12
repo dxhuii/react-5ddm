@@ -21,8 +21,6 @@ import { isMobile } from '@/utils'
 import { NAME } from 'Config'
 
 import './style.scss'
-
-console.log(convertHTML)
 @Shell
 @withRouter
 @connect(
@@ -110,8 +108,8 @@ class Article extends Component {
       prev,
       next,
       vodid,
-      newsid,
-      content,
+      // newsid,
+      content = '',
       playname = '',
       playurl = ''
     } = data
