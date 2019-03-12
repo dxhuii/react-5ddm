@@ -17,6 +17,7 @@ import { GA } from 'Config'
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 if (process.env.NODE_ENV === 'development') {
   OfflinePluginRuntime.install()
+  OfflinePluginRuntime.applyUpdate()
 }
 
 (async function() {
