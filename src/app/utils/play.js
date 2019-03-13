@@ -227,7 +227,7 @@ const isPlay = (name, vid, danmu) => {
     pv = data[0]
   }
   if (playname === 'full') {
-    return isP ? HTML('/') : jiexiUrl(`${pv.replace('http://', 'https://')}`, danmu)
+    return isP ? HTML('/') : jiexiUrl(pv.replace('http://', 'https://'), danmu)
   } else {
     if (/.mp4|.m3u8/.test(pv)) {
       return isP ? HTML('/') : jiexiUrl(`//www.acgnz.cn/api/play.php?url=${pv}`, danmu)
@@ -255,7 +255,7 @@ export default (playname, vid, danmu, uid) => {
   }
   const isCk = /.html|.shtml|.htm|https:\/\/|http:\/\/|.mp4|.m3u8/.test(pv) || name === 'full' || !isP
   const playStyle = /acku|sina|letvsaas|weibo|miaopai|bitqiu|yunpan|bithls|qqq/.test(name)
-  if (((/.mp4|.m3u8/.test(pv) || playStyle) && isP && !uid) || ['bit', 'letvyun'].indexOf(name) !== -1) {
+  if (((/.mp4|.m3u8/.test(pv) || playStyle) && isP && !uid) || ['bit', 'letvyun', 'pmbit'].indexOf(name) !== -1) {
     url = HTML('/')
   } else if (isCk) {
     url = isPlay(name, vid, danmu)
