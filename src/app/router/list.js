@@ -13,6 +13,11 @@ import newsData from '@/pages/news/load-data'
 import articleData from '@/pages/article/load-data'
 import timeData from '@/pages/time/load-data'
 import episodeData from '@/pages/episode/load-data'
+import monthData from '@/pages/month/load-data'
+import topData from '@/pages/top/load-data'
+import newData from '@/pages/new/load-data'
+import episodelistData from '@/pages/episodelist/load-data'
+import detailNewstData from '@/pages/subject/news/load-data'
 
 export default [
   {
@@ -23,8 +28,8 @@ export default [
       loader: () => import('@/pages/home'),
       loading: () => <Loading />
     }),
-    enter: 'everybody',
-    loadData: HomeLoadData
+    loadData: HomeLoadData,
+    enter: 'everybody'
   },
 
   {
@@ -35,8 +40,31 @@ export default [
       loader: () => import('@/pages/week'),
       loading: () => <Loading />
     }),
-    enter: 'everybody',
-    loadData: WeekData
+
+    loadData: WeekData,
+    enter: 'everybody'
+  },
+
+  {
+    path: '/week/out',
+    exact: true,
+    component: Loadable({
+      loader: () => import('@/pages/week/out'),
+      loading: () => <Loading />
+    }),
+    enter: 'everybody'
+  },
+
+  {
+    path: '/week/:id',
+    exact: true,
+    head: Head,
+    component: Loadable({
+      loader: () => import('@/pages/week'),
+      loading: () => <Loading />
+    }),
+    loadData: WeekData,
+    enter: 'everybody'
   },
 
   {
@@ -68,8 +96,8 @@ export default [
       loader: () => import('@/pages/subject'),
       loading: () => <Loading />
     }),
-    enter: 'everybody',
-    loadData: SubjectLoadData
+    loadData: SubjectLoadData,
+    enter: 'everybody'
   },
 
   {
@@ -80,6 +108,7 @@ export default [
       loader: () => import('@/pages/subject/news'),
       loading: () => <Loading />
     }),
+    loadData: detailNewstData,
     enter: 'everybody'
   },
 
@@ -91,8 +120,8 @@ export default [
       loader: () => import('@/pages/play'),
       loading: () => <Loading />
     }),
-    enter: 'everybody',
-    loadData: PlayLoadData
+    loadData: PlayLoadData,
+    enter: 'everybody'
   },
 
   {
@@ -103,8 +132,8 @@ export default [
       loader: () => import('@/pages/list'),
       loading: () => <Loading />
     }),
-    enter: 'everybody',
-    loadData: ListLoadData
+    loadData: ListLoadData,
+    enter: 'everybody'
   },
 
   {
@@ -115,8 +144,8 @@ export default [
       loader: () => import('@/pages/list'),
       loading: () => <Loading />
     }),
-    enter: 'everybody',
-    loadData: ListLoadData
+    loadData: ListLoadData,
+    enter: 'everybody'
   },
 
   {
@@ -127,8 +156,8 @@ export default [
       loader: () => import('@/pages/list'),
       loading: () => <Loading />
     }),
-    enter: 'everybody',
-    loadData: ListLoadData
+    loadData: ListLoadData,
+    enter: 'everybody'
   },
 
   {
@@ -139,8 +168,20 @@ export default [
       loader: () => import('@/pages/news'),
       loading: () => <Loading />
     }),
-    enter: 'everybody',
-    loadData: newsData
+    loadData: newsData,
+    enter: 'everybody'
+  },
+
+  {
+    path: '/news/:name',
+    exact: true,
+    head: Head,
+    component: Loadable({
+      loader: () => import('@/pages/news'),
+      loading: () => <Loading />
+    }),
+    loadData: newsData,
+    enter: 'everybody'
   },
 
   {
@@ -151,8 +192,8 @@ export default [
       loader: () => import('@/pages/article'),
       loading: () => <Loading />
     }),
-    enter: 'everybody',
-    loadData: articleData
+    loadData: articleData,
+    enter: 'everybody'
   },
 
   {
@@ -163,8 +204,8 @@ export default [
       loader: () => import('@/pages/time'),
       loading: () => <Loading />
     }),
-    enter: 'everybody',
-    loadData: timeData
+    loadData: timeData,
+    enter: 'everybody'
   },
 
   {
@@ -179,15 +220,15 @@ export default [
   },
 
   {
-    path: '/episode/:id/',
+    path: '/episode/:id',
     exact: true,
     head: Head,
     component: Loadable({
       loader: () => import('@/pages/episode'),
       loading: () => <Loading />
     }),
-    enter: 'everybody',
-    loadData: episodeData
+    loadData: episodeData,
+    enter: 'everybody'
   },
 
   {
@@ -198,8 +239,56 @@ export default [
       loader: () => import('@/pages/episode'),
       loading: () => <Loading />
     }),
-    enter: 'everybody',
-    loadData: episodeData
+    loadData: episodeData,
+    enter: 'everybody'
+  },
+
+  {
+    path: '/month/:month',
+    exact: true,
+    head: Head,
+    component: Loadable({
+      loader: () => import('@/pages/month'),
+      loading: () => <Loading />
+    }),
+    loadData: monthData,
+    enter: 'everybody'
+  },
+
+  {
+    path: '/top',
+    exact: true,
+    head: Head,
+    component: Loadable({
+      loader: () => import('@/pages/top'),
+      loading: () => <Loading />
+    }),
+    loadData: topData,
+    enter: 'everybody'
+  },
+
+  {
+    path: '/new',
+    exact: true,
+    head: Head,
+    component: Loadable({
+      loader: () => import('@/pages/new'),
+      loading: () => <Loading />
+    }),
+    loadData: newData,
+    enter: 'everybody'
+  },
+
+  {
+    path: '/ep',
+    exact: true,
+    head: Head,
+    component: Loadable({
+      loader: () => import('@/pages/episodelist'),
+      loading: () => <Loading />
+    }),
+    loadData: episodelistData,
+    enter: 'everybody'
   },
 
   {
