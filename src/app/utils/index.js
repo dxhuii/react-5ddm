@@ -7,7 +7,7 @@ export const isNumber = val => typeof val === 'number'
  * thumb300 宽高为 300 正方形
  */
 
-export const formatPic = (pic, type) => {
+export const formatPic = (pic = '', type) => {
   if (/.gif/.test(pic)) return pic
   const rePic = pic.replace('http://', '//').replace('https://', '//')
   return rePic.replace(/large|mw1024/, type)
