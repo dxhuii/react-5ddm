@@ -184,4 +184,17 @@ class Article extends Component {
   }
 }
 
-export default Article
+const Articles = props => {
+  const {
+    match: {
+      params: { id }
+    }
+  } = props
+  return <Article {...props} key={id} />
+}
+
+Articles.propTypes = {
+  match: PropTypes.object
+}
+
+export default Articles

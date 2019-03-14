@@ -120,4 +120,17 @@ class Week extends PureComponent {
   }
 }
 
-export default Week
+const Weeks = props => {
+  const {
+    match: {
+      params: { id }
+    }
+  } = props
+  return <Week {...props} key={id} />
+}
+
+Weeks.propTypes = {
+  match: PropTypes.object
+}
+
+export default Weeks

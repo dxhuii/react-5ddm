@@ -88,10 +88,7 @@ class Month extends PureComponent {
     return (
       <Fragment>
         <Meta title={`${year}年${m}月播出的新番动漫_${m}月新番_动漫新番表_新番表`}>
-          <meta
-            name="keywords"
-            content={`${year}年${m}月播出的新番动漫,${m}月新番,动漫新番表,${m}月最新动漫,${year}年${m}月的动漫,新番表`}
-          />
+          <meta name="keywords" content={`${year}年${m}月播出的新番动漫,${m}月新番,动漫新番表,${m}月最新动漫,${year}年${m}月的动漫,新番表`} />
           <meta
             name="description"
             content={`您想知道${year}年${m}月有哪些新番动漫播出吗，你想了解最新的动漫新番表 ，${m}月份最新动漫观看指南，${m}月播出的动漫资讯信息，请关注本站。`}
@@ -125,4 +122,17 @@ class Month extends PureComponent {
   }
 }
 
-export default Month
+const Months = props => {
+  const {
+    match: {
+      params: { month }
+    }
+  } = props
+  return <Month {...props} key={month} />
+}
+
+Months.propTypes = {
+  match: PropTypes.object
+}
+
+export default Months

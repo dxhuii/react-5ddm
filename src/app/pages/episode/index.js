@@ -94,20 +94,14 @@ class Episode extends Component {
     const shareTitle = ` - #${NAME.split('_').join('##')}# @99496动漫网`
     const shareConfig = {
       pic,
-      title: !p
-        ? `#${vTitle}#剧情(共${storyNum}集)_${vTitle}全集剧情${shareTitle}`
-        : `#${vTitle}#${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情${shareTitle}`,
+      title: !p ? `#${vTitle}#剧情(共${storyNum}集)_${vTitle}全集剧情${shareTitle}` : `#${vTitle}#${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情${shareTitle}`,
       desc: content,
       url: !p ? `/episode/${id}` : `/episode/${id}/${p}`
     }
     const reName = !p ? '' : name
     return (
       <div className="wp mt20 clearfix">
-        <Meta
-          title={`${
-            !p ? `${vTitle}剧情(共${storyNum}集)_${vTitle}全集剧情` : `${vTitle}${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情`
-          }`}
-        >
+        <Meta title={`${!p ? `${vTitle}剧情(共${storyNum}集)_${vTitle}全集剧情` : `${vTitle}${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情`}`}>
           <meta name="keywords" content={`${vTitle}剧情,${vTitle}${reName}剧情, ${vTitle}${reName}${title}剧情`} />
           <meta name="description" content={`${vTitle}${reName}${title}剧情介绍：${!p ? vContent : content}`} />
         </Meta>
@@ -155,4 +149,17 @@ class Episode extends Component {
   }
 }
 
-export default Episode
+const Episodes = props => {
+  const {
+    match: {
+      params: { p }
+    }
+  } = props
+  return <Episode {...props} key={p} />
+}
+
+Episodes.propTypes = {
+  match: PropTypes.object
+}
+
+export default Episodes

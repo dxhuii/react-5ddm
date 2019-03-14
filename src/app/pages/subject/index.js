@@ -467,4 +467,17 @@ class Bangumi extends Component {
   }
 }
 
-export default Bangumi
+const Bangumis = props => {
+  const {
+    match: {
+      params: { id }
+    }
+  } = props
+  return <Bangumi {...props} key={id} />
+}
+
+Bangumis.propTypes = {
+  match: PropTypes.object
+}
+
+export default Bangumis
