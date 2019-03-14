@@ -269,7 +269,7 @@ class Play extends Component {
     } = data
     const shareConfig = {
       pic,
-      title: `#${title}# ${subTitle}在线播放 - ${listName}${listNameBig} - #${NAME.split('_').join('##')}#`,
+      title: `#${title}# ${subTitle}在线播放 - ${listName}${listNameBig} - #${NAME.split('_').join('##')}# @99496动漫网`,
       url: `/play/${id}/${pid}`
     }
     if (copyright === 'stop' && !userid && !ISPLAY && !isMobile()) {

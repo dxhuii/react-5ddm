@@ -117,7 +117,7 @@ class Article extends Component {
     const { full, isfull } = this.state
     const shareConfig = {
       pic,
-      title: `${title} - ${name} - #${NAME.split('_').join('##')}#`,
+      title: `${title} - ${name} - #${NAME.split('_').join('##')}# @99496动漫网`,
       desc: remark,
       url: `/article/${id}`
     }

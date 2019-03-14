@@ -54,7 +54,7 @@ class Time extends Component {
     const { id, title, content, listNameBig, pic, actor, year, filmtime, director, mcid, updateDate, tvcont } = data
     const shareConfig = {
       pic,
-      title: `#${title}#播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新 - #${NAME.split('_').join('##')}#`,
+      title: `#${title}#播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新 - #${NAME.split('_').join('##')}# @99496动漫网`,
       desc: content,
       url: `/time/${id}`
     }
@@ -62,10 +62,7 @@ class Time extends Component {
       <div className="wp mt20 clearfix">
         <Meta title={`${title}播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新`}>
           <meta name="keywords" content={`${title}播出时间,${listNameBig}${title}播出周期,${title}几点更新,${title}更新时间`} />
-          <meta
-            name="description"
-            content={`{$sitename}为你提供了包括${listNameBig}${title}播出时间、${title}周几更新以及${title}播出周期希望你能喜欢`}
-          />
+          <meta name="description" content={`{$sitename}为你提供了包括${listNameBig}${title}播出时间、${title}周几更新以及${title}播出周期希望你能喜欢`} />
         </Meta>
         <div className="fl left">
           <article styleName="article-body">

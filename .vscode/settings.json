@@ -10,7 +10,7 @@
   "editor.formatOnSave": true,
   "prettier.disableLanguages": ["react"],
   "prettier.stylelintIntegration": true,
-  "prettier.printWidth": 140,
+  "prettier.printWidth": 180,
   "prettier.singleQuote": true,
   "prettier.semi": false,
   "eslint.options": {

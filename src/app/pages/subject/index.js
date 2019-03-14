@@ -231,7 +231,7 @@ class Bangumi extends Component {
     const reContent = `${content.substring(0, 120)}${content.length > 120 ? '...' : ''}`
     const shareConfig = {
       pic,
-      title: `#${title}#${language ? `(${language})` : ''} - ${listName}${listNameBig} - #${NAME.split('_').join('##')}#`,
+      title: `#${title}#${language ? `(${language})` : ''} - ${listName}${listNameBig} - #${NAME.split('_').join('##')}# @99496动漫网`,
       desc: reContent,
       url: `/subject/${id}`
     }
@@ -253,9 +253,9 @@ class Bangumi extends Component {
             <meta name="description" content={`${title}动画全集由${reContent}`} />
             <meta
               name="keywords"
-              content={`${title},${title}动漫,${title}下载${
-                vod_pantitle ? `,${title}百度云盘下载` : ''
-              },${title}全集,${title}动画片,${title}在线观看${keywords ? `,${keywords}` : ''}`}
+              content={`${title},${title}动漫,${title}下载${vod_pantitle ? `,${title}百度云盘下载` : ''},${title}全集,${title}动画片,${title}在线观看${
+                keywords ? `,${keywords}` : ''
+              }`}
             />
             <meta property="og:locale" content="zh_CN" />
             <meta property="og:type" content="videolist" />
@@ -294,12 +294,10 @@ class Bangumi extends Component {
                   </span>
                 </div>
                 {aliases ? <p>别名：{aliases}</p> : null}
-                <ul styleName="detail-info__count">
-                  {/* <li>
+                <ul styleName="detail-info__count">{/* <li>
                     热度
                     <span>{hits}</span>
-                  </li> */}
-                </ul>
+                  </li> */}</ul>
                 {filmtime || status || total ? (
                   <p>
                     {filmtime ? <span>{filmtime} 播出</span> : <span>{year}年</span>}
@@ -366,11 +364,7 @@ class Bangumi extends Component {
             </div>
           </div>
         </div>
-        {IS9 && copyright === 'banquan' ? (
-          <div styleName="copyright">根据国家相关部门规定，本动画不准上架，请支持正版观看，谢谢</div>
-        ) : (
-          <PlayList key="playlist" />
-        )}
+        {IS9 && copyright === 'banquan' ? <div styleName="copyright">根据国家相关部门规定，本动画不准上架，请支持正版观看，谢谢</div> : <PlayList key="playlist" />}
         <div className="wp">
           {isMobile() ? (
             <div className="mt20">
