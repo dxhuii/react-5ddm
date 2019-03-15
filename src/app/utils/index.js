@@ -29,13 +29,6 @@ export const isMobile = () => {
   }
 }
 
-export const location = () => {
-  if (typeof window === 'undefined') {
-    return {}
-  }
-  return window.location
-}
-
 // 去掉字符串前后空格
 export const trim = str => {
   return str.replace(/(^\s*)|(\s*$)/g, '')
