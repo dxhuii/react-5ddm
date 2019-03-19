@@ -27,6 +27,8 @@ import playing from '@/utils/play'
 
 import './style.scss'
 
+const isP = IS9 && !isMobile()
+
 @Shell
 @connect(
   (state, props) => ({
@@ -167,7 +169,7 @@ class Play extends Component {
     const { list = [], copyright } = data
     const other = this.getOther(list)
     const danmu = `${id}_${pid}`
-    const isA = other.length > 0 && !IS9 && (copyright !== 'vip' || isMobile() || ISPLAY)
+    const isA = other.length > 0 && !isP && (copyright !== 'vip' || isMobile() || ISPLAY)
     const { playName, vid, playTitle } = isA ? other[0] : list[0]
     let playHtml = ''
     if (play) {
@@ -319,7 +321,7 @@ class Play extends Component {
                     </Link>
                   ) : null
                 })}
-                {(pan && !IS9) || userid ? (
+                {(pan && !isP) || userid ? (
                   <a href={pan} target="_blank" rel="noopener noreferrer">
                     网盘下载
                   </a>

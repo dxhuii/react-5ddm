@@ -1,7 +1,7 @@
 import { isMobile } from './index'
-import { IS9 } from 'Config'
+import { IS9, DOMAIN_NAME } from 'Config'
 
-const isP = IS9 && !isMobile
+const isP = IS9 && !isMobile()
 
 const playH = '100%'
 
@@ -17,7 +17,8 @@ const HTML = (pv, isLogin) => {
   } else {
     url = 'https://www.dddm.tv/play/' + href[4] + '/' + href[5]
   }
-  return `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">亲，请点我播放</a><a class="jump" href="${url}">或者点这里试一下</a><p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
+  const reUrl = DOMAIN_NAME === '5ddm.com' && isLogin === 'vip' ? '' : DOMAIN_NAME === 'dddm.tv' && isLogin !== 'vip' ? '' : `<a class="jump" href="${url}">或者点这里试一下</a>`
+  return `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">亲，请点我播放</a>${reUrl}<p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
 }
 
 const flash = url => {
