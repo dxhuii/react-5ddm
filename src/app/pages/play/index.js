@@ -171,9 +171,9 @@ class Play extends Component {
     const { playName, vid, playTitle } = isA ? other[0] : list[0]
     let playHtml = ''
     if (play) {
-      playHtml = playing(type, play, danmu)
+      playHtml = playing(type, play, danmu, userid, copyright)
     } else {
-      playHtml = playing(playName, vid, danmu, userid)
+      playHtml = playing(playName, vid, danmu, userid, copyright)
     }
     const mInfo = { playName, vid, playTitle }
     console.log(play, playHtml, isA, 'getdata')
@@ -250,23 +250,7 @@ class Play extends Component {
       }
     } = this.props
     const { full, isfull, playHtml, mInfo } = this.state
-    const {
-      listName,
-      listId,
-      listNameBig,
-      list = [],
-      pic,
-      title,
-      pan,
-      subTitle,
-      actor = '',
-      up,
-      down,
-      prev,
-      next,
-      mcid = [],
-      copyright
-    } = data
+    const { listName, listId, listNameBig, list = [], pic, title, pan, subTitle, actor = '', up, down, prev, next, mcid = [], copyright } = data
     const shareConfig = {
       pic,
       title: `#${title}# ${subTitle}在线播放 - ${listName}${listNameBig} - #${NAME.split('_').join('##')}# @99496动漫网`,
@@ -284,10 +268,7 @@ class Play extends Component {
           <div className="wp pt20">
             <Meta title={`${title} ${subTitle}在线播放 - ${listName}${listNameBig}`}>
               <meta name="keywords" content={`${title}${subTitle},${title}在线观看,动画${title}`} />
-              <meta
-                name="description"
-                content={`${NAME}为您提供${listName}${listNameBig}${title}${subTitle}在线观看。喜欢${title}${subTitle}，就推荐给小伙伴们吧！`}
-              />
+              <meta name="description" content={`${NAME}为您提供${listName}${listNameBig}${title}${subTitle}在线观看。喜欢${title}${subTitle}，就推荐给小伙伴们吧！`} />
             </Meta>
             <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
               <div dangerouslySetInnerHTML={{ __html: playHtml }} />
