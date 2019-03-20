@@ -156,6 +156,9 @@ class Head extends Component {
             {isHide ? <SearchAuto wd={wd} /> : null}
           </div>
           <div styleName="header-tool" className="tar">
+            <NavLink styleName={`on-home ${url === '/' ? 'active' : ''}`} exact to="/">
+              首页
+            </NavLink>
             <a onClick={this.onShowSearch} styleName="on-search">
               搜索
             </a>

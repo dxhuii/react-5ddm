@@ -30,6 +30,7 @@ header {
 }
 
 .on-search,
+.on-home,
 .on-menu {
   display: none;
 }
@@ -141,7 +142,7 @@ header {
     flex-grow: 1;
     a,
     span {
-      padding: 0 10px;
+      padding: 0 7px;
     }
   }
   .header-logo {
@@ -160,6 +161,7 @@ header {
     }
   }
   .on-search,
+  .on-home,
   .on-menu {
     display: inline;
   }
