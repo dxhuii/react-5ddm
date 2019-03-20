@@ -371,7 +371,7 @@ class Bangumi extends Component {
             <Ads id={22} />
           )}
         </div>
-        <div className="mt20 clearfix wp">
+        <div className="mt20 clearfix wp" styleName="detail-bottom">
           <div className="fl box pb20 left">
             {newsTextlist.length > 0 ? (
               <div className="mt10">
