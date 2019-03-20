@@ -235,6 +235,9 @@
 .detail-content {
   line-height: 2;
   color: #666;
+  p {
+    margin-top: 0 !important;
+  }
 }
 
 .playlist {
@@ -302,14 +305,11 @@
       @include clamp(1);
     }
   }
-  .detail-info__count {
-    display: none;
-  }
-  .detail-score {
-    display: none;
-  }
+  .detail-info__count,
+  .detail-update,
+  .detail-score,
   .detail-tool__share {
-    display: none;
+    display: none !important;
   }
   .detail-tool {
     left: calc(30% + 14px);

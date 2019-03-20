@@ -30,7 +30,7 @@ import Toast from '@/components/Toast'
 import Shell from '@/components/Shell'
 
 import { isNumber, formatPic, isMobile } from '@/utils'
-import { IS9, DOMAIN_NAME, ISPLAY, NAME } from 'Config'
+import { IS9, DOMAIN_NAME, ISPLAY, NAME, DOMAIN } from 'Config'
 
 import './style.scss'
 @Shell
@@ -294,10 +294,7 @@ class Bangumi extends Component {
                   </span>
                 </div>
                 {aliases ? <p>别名：{aliases}</p> : null}
-                <ul styleName="detail-info__count">{/* <li>
-                    热度
-                    <span>{hits}</span>
-                  </li> */}</ul>
+                <ul styleName="detail-info__count">{/* <li>热度<span>{hits}</span></li> */}</ul>
                 {filmtime || status || total ? (
                   <p>
                     {filmtime ? <span>{filmtime} 播出</span> : <span>{year}年</span>}
@@ -310,7 +307,7 @@ class Bangumi extends Component {
                   {language ? <span style={{ marginRight: 30 }}>语言：{language}</span> : null}
                   {area ? <span>地区：{area}</span> : null}
                 </p>
-                <p>更新时间：{updateDate}</p>
+                <p styleName="detail-update">更新时间：{updateDate}</p>
                 <div styleName="detail-tool">
                   <div styleName={`detail-tool__on ${remindid ? 'active' : ''}`} onClick={() => this.addMark('remind', id, cid, userid)}>
                     <i className="iconfont">&#xe6bd;</i>
@@ -391,6 +388,9 @@ class Bangumi extends Component {
                 </div>
                 <div styleName="detail-content" className="mt10">
                   {content}
+                  <p>
+                    《{title}》动漫的网址：{DOMAIN}/subject/{id}
+                  </p>
                 </div>
               </div>
             ) : null}

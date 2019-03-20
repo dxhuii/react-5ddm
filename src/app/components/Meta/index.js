@@ -11,16 +11,16 @@ export default class Meta extends Component {
 
   static propTypes = {
     title: PropTypes.string,
-    children: PropTypes.any
+    children: PropTypes.any,
+    url: PropTypes.string
   }
 
   render() {
-    const { title } = this.props
+    const { title, url } = this.props
 
     let _title = ''
-
     _title += title || NAME
-    if (title) _title += ` - ${NAME}`
+    if (title) url ? title : (_title += ` - ${NAME}`)
 
     return (
       <Fragment>

@@ -40,7 +40,7 @@ const defalut = {
   ISPLAY: false,
   ISAD: true,
   NAME: '9站',
-  DOMAIN_NAME: '99496.com',
+  DESCRIBE: '_99496动漫 - 小而美的动漫网站',
   DOMAIN: 'https://dev.99496.com',
   PORT: 6666,
   COOKIE_PREFIX: 'ikf_',
@@ -51,8 +51,7 @@ const defalut = {
   EMAIL: 'dxhuii@qq.com',
   ICP: '沪ICP备16032125号-1',
   WW: '沪网文(2017)1295-032号',
-  BEIAN: true,
-  SWNAME: 'sw-9z'
+  BEIAN: true
 }
 /**
  * dddm.tv
@@ -61,8 +60,8 @@ const dddm = {
   IS9: false,
   ISPLAY: false,
   ISAD: true,
-  NAME: '丁丁动漫_嘀嘀动漫',
-  DOMAIN_NAME: 'dddm.tv',
+  NAME: '丁丁动漫',
+  DESCRIBE: '_一个可以在线看的动漫网站',
   DOMAIN: 'https://www.dddm.tv',
   PORT: 8888,
   COOKIE_PREFIX: 'dddm_',
@@ -73,8 +72,7 @@ const dddm = {
   EMAIL: 'dddmtv@outlook.com',
   ICP: '',
   WW: '',
-  BEIAN: false,
-  SWNAME: 'sw-dddm'
+  BEIAN: false
 }
 /**
  * 5ddm.com
@@ -85,7 +83,7 @@ const ddm = {
   ISPLAY: true,
   ISAD: false,
   NAME: '5D动漫_5站',
-  DOMAIN_NAME: '5ddm.com',
+  DESCRIBE: ' - 无广告免费的动漫网站',
   DOMAIN: 'https://www.5ddm.com',
   PORT: 7777,
   COOKIE_PREFIX: 'ddm_',
@@ -96,8 +94,30 @@ const ddm = {
   EMAIL: 'ddm_com@outlook.com',
   ICP: '',
   WW: '',
-  BEIAN: false,
-  SWNAME: 'sw-5ddm'
+  BEIAN: false
+}
+
+/**
+ * kanfan.net
+ *
+ */
+const kanfan = {
+  IS9: false,
+  ISPLAY: true,
+  ISAD: false,
+  NAME: '看番',
+  DESCRIBE: ' - 您的追番网站',
+  DOMAIN: 'https://www.kanfan.net',
+  PORT: 9999,
+  COOKIE_PREFIX: 'kanfan_',
+  PUBLIC_PATH: '//cos.mdb6.com/kanfan',
+  BAIDU_STAT: '9449f42e45055b4f70ad84574c4c65c8',
+  CNZZ_STAT: '1276171240',
+  GA: 'UA-7957076-8',
+  EMAIL: 'kanfan_net@outlook.com',
+  ICP: '',
+  WW: '',
+  BEIAN: false
 }
 
 let config = {},
@@ -108,6 +128,9 @@ if (DOMAIN_NAME === 'dddm.tv') {
 } else if (DOMAIN_NAME === '5ddm.com') {
   config = Object.assign({}, conf, ddm)
   ico = '5d_'
+} else if (DOMAIN_NAME === 'kanfan.net') {
+  config = Object.assign({}, conf, kanfan)
+  ico = 'kanfan_'
 } else {
   config = Object.assign({}, conf, defalut)
 }
