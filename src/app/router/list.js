@@ -75,7 +75,7 @@ export default [
       loader: () => import('@/pages/topics'),
       loading: () => <Loading />
     }),
-    enter: 'member'
+    enter: 'everybody'
   },
 
   {
