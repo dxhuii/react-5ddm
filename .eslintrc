@@ -12,6 +12,7 @@
     "importScripts": true,
     "workbox": true
   },
+  "plugins": ["react-hooks"],
   "parser": "babel-eslint",
   "env": {
     "es6": true,
@@ -25,7 +26,9 @@
     "no-unused-vars": 0,
     "react/no-render-return-value": "off",
     "standard/no-callback-literal": [0, ["cb", "callback"]],
-    "react/display-name": [{ "ignoreTranspilerName": false }]
+    "react/display-name": [{ "ignoreTranspilerName": false }],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   },
   "parserOptions": {
     "ecmaVersion": 7,
