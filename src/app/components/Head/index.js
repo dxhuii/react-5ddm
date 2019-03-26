@@ -118,7 +118,7 @@ class Head extends Component {
     } = this.props
     const { wd, isHide, isSign, visible, showMenu, showSearch, showHis } = this.state
     const logo = `header-logo ${DOMAIN_NAME === 'dddm.tv' ? 'dddm' : DOMAIN_NAME === '5ddm.com' ? 'ddm' : ''}`
-    const isNot = !(url === '/' || /dongman|subject|play/.test(url))
+    const isNot = !(url === '/' || /dongman|subject|play|search/.test(url))
     return (
       <Fragment>
         <header>

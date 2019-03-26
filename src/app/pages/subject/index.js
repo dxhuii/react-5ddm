@@ -253,9 +253,7 @@ class Bangumi extends Component {
             <meta name="description" content={`${title}动画全集由${reContent}`} />
             <meta
               name="keywords"
-              content={`${title},${title}动漫,${title}下载${vod_pantitle ? `,${title}百度云盘下载` : ''},${title}全集,${title}动画片,${title}在线观看${
-                keywords ? `,${keywords}` : ''
-              }`}
+              content={`${title},${title}动漫,${title}下载${vod_pantitle ? `,${title}百度云盘下载` : ''},${title}全集,${title}动画片,${title}在线观看${keywords ? `,${keywords}` : ''}`}
             />
             <meta property="og:locale" content="zh_CN" />
             <meta property="og:type" content="videolist" />
@@ -365,6 +363,7 @@ class Bangumi extends Component {
         <div className="wp">
           {isMobile() ? (
             <div className="mt20">
+              <Ads id={48} url={url} />
               <Ads id={26} url={url} />
             </div>
           ) : (
@@ -458,7 +457,7 @@ class Bangumi extends Component {
             </div>
           </div>
         </div>
-        <div className="wp">{!isMobile() && <Ads id={21} />}</div>
+        <div className="wp">{isMobile() ? <Ads id={49} url={url} /> : <Ads id={21} />}</div>
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
           <Sign isSign={isSign} onType={val => this.onType(val)} />
         </Modal>
