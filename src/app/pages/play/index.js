@@ -334,6 +334,7 @@ class Play extends Component {
           </div>
         </div>
         <PlayList />
+        {isMobile() && <Ads id={48} url={url} />}
         {DOMAIN_NAME === 'dddm.tv' && (
           <div className="wp mt20 box" styleName="zhaimoe">
             <iframe src="//www.zhaimoe.com/portal/page/index/id/35.html" width="1200" height="100%" frameBorder="0" scrolling="no" />
@@ -362,7 +363,9 @@ class Play extends Component {
             <SideBar />
           </div>
         </div>
-        {!isMobile() && (
+        {isMobile() ? (
+          <Ads id={49} url={url} />
+        ) : (
           <div className="wp">
             <Ads id={22} />
           </div>

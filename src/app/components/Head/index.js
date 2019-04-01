@@ -11,8 +11,9 @@ import SearchAuto from '@/components/SearchAuto'
 import History from '@/components/History'
 import Modal from '@/components/Modal'
 import Sign from '@/components/Sign'
+import Ads from '@/components/Ads'
 
-import { trim } from '@/utils'
+import { trim, isMobile } from '@/utils'
 import { DOMAIN_NAME, NAME } from 'Config'
 
 import './style.scss'
@@ -117,6 +118,7 @@ class Head extends Component {
     } = this.props
     const { wd, isHide, isSign, visible, showMenu, showSearch, showHis } = this.state
     const logo = `header-logo ${DOMAIN_NAME === 'dddm.tv' ? 'dddm' : DOMAIN_NAME === '5ddm.com' ? 'ddm' : ''}`
+    const isNot = !(url === '/' || /dongman|subject|play|search/.test(url))
     return (
       <Fragment>
         <header>
@@ -183,6 +185,17 @@ class Head extends Component {
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
           <Sign isSign={isSign} onType={val => this.onType(val)} />
         </Modal>
+        {isMobile()
+          ? isNot && (
+              <div className="mt20">
+                <Ads id={42} url={url} />
+              </div>
+            )
+          : isNot && (
+              <div className="wp mt20">
+                <Ads id={39} url={url} />
+              </div>
+            )}
       </Fragment>
     )
   }

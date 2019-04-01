@@ -10,6 +10,9 @@ const iframe = url => {
 }
 
 const HTML = (pv, isLogin) => {
+  if (typeof navigator === 'undefined') {
+    return
+  }
   let url = ''
   const href = window.location.href.split('/')
   if (isLogin === 'vip') {
@@ -91,8 +94,7 @@ const qq = (pv, isLogin) => {
 }
 const bilibili = (pv, isLogin) => {
   const data = pv.split(',')
-  const purl =
-    pv.indexOf('http') !== -1 ? pv : data.length === 2 ? 'https://www.bilibili.com/video/av' + data[0] + '/?p=' + data[1] : 'https://www.bilibili.com/video/av' + pv + '/'
+  const purl = pv.indexOf('http') !== -1 ? pv : data.length === 2 ? 'https://www.bilibili.com/video/av' + data[0] + '/?p=' + data[1] : 'https://www.bilibili.com/video/av' + pv + '/'
   return HTML(purl, isLogin)
 }
 const acfun = (pv, isLogin) => {
@@ -115,9 +117,7 @@ const acfun = (pv, isLogin) => {
       vid = pv
     }
   }
-  const purl = isMobile()
-    ? 'https://m.acfun.cn/v/?' + (pv.indexOf('ab') !== -1 ? 'ab' : 'ac') + '=' + vid
-    : 'https://www.acfun.cn/v/' + (pv.indexOf('ab') !== -1 ? 'ab' : 'ac') + vid
+  const purl = isMobile() ? 'https://m.acfun.cn/v/?' + (pv.indexOf('ab') !== -1 ? 'ab' : 'ac') + '=' + vid : 'https://www.acfun.cn/v/' + (pv.indexOf('ab') !== -1 ? 'ab' : 'ac') + vid
   return HTML(purl, isLogin)
 }
 

@@ -14,6 +14,8 @@ import Meta from '@/components/Meta'
 import Loading from '@/components/Ui/Loading'
 
 import Item from '@/components/List/Item'
+import Ads from '@/components/Ads'
+import { isMobile } from '@/utils'
 
 import './style.scss'
 
@@ -216,6 +218,7 @@ class SubjectList extends Component {
   render() {
     const {
       list: { loading },
+      match: { url },
       config
     } = this.props
     const conf = config.data || {}
@@ -236,11 +239,9 @@ class SubjectList extends Component {
           title={
             isSearch
               ? `你搜索的是《${keyword}》`
-              : `动漫列表${typeName ? `_${typeName}动漫_${typeName}动漫排行榜` : ''}${
-                  mcidName ? `_${mcidName}动漫_好看的${mcidName}动漫_最新${mcidName}动画片大全_${mcidName}动漫排行榜` : ''
-                }${areaName ? `_${areaName}${typeName}大全_${areaName}${typeName}排行榜` : ''}${yearName ? `_${yearName}的动漫` : ''}${
-                  letterName ? `_字母${letterName}开头的动漫` : ''
-                }`
+              : `动漫列表${typeName ? `_${typeName}动漫_${typeName}动漫排行榜` : ''}${mcidName ? `_${mcidName}动漫_好看的${mcidName}动漫_最新${mcidName}动画片大全_${mcidName}动漫排行榜` : ''}${
+                  areaName ? `_${areaName}${typeName}大全_${areaName}${typeName}排行榜` : ''
+                }${yearName ? `_${yearName}的动漫` : ''}${letterName ? `_字母${letterName}开头的动漫` : ''}`
           }
         />
         <div styleName="filter">
@@ -262,12 +263,7 @@ class SubjectList extends Component {
               <dt>分类</dt>
               <dd>
                 {idArr.map(item => (
-                  <a
-                    styleName={type === item.name ? 'cur' : ''}
-                    onClick={() => this.getParams('type', item.name, item.title)}
-                    key={item.name}
-                    href="javascript:;"
-                  >
+                  <a styleName={type === item.name ? 'cur' : ''} onClick={() => this.getParams('type', item.name, item.title)} key={item.name} href="javascript:;">
                     {item.title}
                   </a>
                 ))}
@@ -277,12 +273,7 @@ class SubjectList extends Component {
               <dt>类型</dt>
               <dd>
                 {mcidArr.map(item => (
-                  <a
-                    styleName={mcid === item.id ? 'cur' : ''}
-                    onClick={() => this.getParams('mcid', item.id, item.title)}
-                    key={item.id}
-                    href="javascript:;"
-                  >
+                  <a styleName={mcid === item.id ? 'cur' : ''} onClick={() => this.getParams('mcid', item.id, item.title)} key={item.id} href="javascript:;">
                     {item.title}
                   </a>
                 ))}
@@ -307,12 +298,7 @@ class SubjectList extends Component {
               <dt>地区</dt>
               <dd>
                 {areaArr.map(item => (
-                  <a
-                    styleName={area === item.id ? 'cur' : ''}
-                    onClick={() => this.getParams('area', item.id, item.title)}
-                    key={item.id}
-                    href="javascript:;"
-                  >
+                  <a styleName={area === item.id ? 'cur' : ''} onClick={() => this.getParams('area', item.id, item.title)} key={item.id} href="javascript:;">
                     {item.title}
                   </a>
                 ))}
@@ -322,12 +308,7 @@ class SubjectList extends Component {
               <dt>年份</dt>
               <dd>
                 {yearArr.map(item => (
-                  <a
-                    styleName={year === item.id ? 'cur' : ''}
-                    onClick={() => this.getParams('year', item.id, item.title)}
-                    key={item.id}
-                    href="javascript:;"
-                  >
+                  <a styleName={year === item.id ? 'cur' : ''} onClick={() => this.getParams('year', item.id, item.title)} key={item.id} href="javascript:;">
                     {item.title}
                   </a>
                 ))}
@@ -337,12 +318,7 @@ class SubjectList extends Component {
               <dt>字母</dt>
               <dd>
                 {letterArr.map(item => (
-                  <a
-                    styleName={letter === item.id ? 'cur' : ''}
-                    onClick={() => this.getParams('letter', item.id, item.title)}
-                    key={item.id}
-                    href="javascript:;"
-                  >
+                  <a styleName={letter === item.id ? 'cur' : ''} onClick={() => this.getParams('letter', item.id, item.title)} key={item.id} href="javascript:;">
                     {item.title}
                   </a>
                 ))}
@@ -352,12 +328,7 @@ class SubjectList extends Component {
               <dt>排序</dt>
               <dd>
                 {orderArr.map(item => (
-                  <a
-                    styleName={order === item.id ? 'cur' : ''}
-                    onClick={() => this.getParams('order', item.id, item.title)}
-                    key={item.id}
-                    href="javascript:;"
-                  >
+                  <a styleName={order === item.id ? 'cur' : ''} onClick={() => this.getParams('order', item.id, item.title)} key={item.id} href="javascript:;">
                     {item.title}
                   </a>
                 ))}
@@ -370,6 +341,15 @@ class SubjectList extends Component {
             </dl>
           </div>
         </div>
+        {isMobile() ? (
+          <div className="mt20">
+            <Ads id={42} url={url} />
+          </div>
+        ) : (
+          <div className="wp mt20">
+            <Ads id={39} url={url} />
+          </div>
+        )}
         <div className="wp">
           <Item data={data} />
         </div>
