@@ -1,7 +1,9 @@
 @import '../../pages/_mixin';
+
 .detail {
   position: relative;
   overflow: hidden;
+
   &::after {
     position: absolute;
     left: 0;
@@ -33,6 +35,7 @@
   border: 3px solid #fff;
   border-radius: 10px;
   overflow: hidden;
+
   img {
     width: 100%;
     display: block;
@@ -45,6 +48,7 @@
   padding: 30px 0;
   color: #fff;
   display: flex;
+
   a {
     color: #fff;
   }
@@ -55,13 +59,16 @@
   align-items: center;
   margin-bottom: 20px;
   flex-flow: wrap;
+
   h1 {
     font-size: 24px;
     display: inline-block;
   }
+
   span {
     margin-left: 20px;
     display: block;
+
     a {
       font-size: 12px;
       display: inline-block;
@@ -73,6 +80,7 @@
       color: #fff;
       border: 1px solid #fff;
       border-radius: 3px;
+
       &:last-child {
         margin-right: 0;
       }
@@ -82,6 +90,7 @@
 
 .detail-info {
   width: 960px;
+
   p {
     margin-bottom: 10px;
     max-width: 760px;
@@ -93,12 +102,15 @@
   display: flex;
   margin-top: 20px;
   margin-bottom: 20px;
+
   li {
     border-right: 1px solid rgba($color: #fff, $alpha: .7);
     padding-right: 20px;
+
     &:last-child {
       border-right: none;
     }
+
     span {
       display: block;
     }
@@ -132,22 +144,27 @@
   border: 1px solid #0084FF;
   cursor: pointer;
   margin-right: 15px;
+
   &:last-child {
     margin-right: 0;
   }
+
   &.share {
     display: none;
   }
+
   &:hover {
     border-color: hsl(208.94117647058823, 100%, 45%);
     background-color: hsl(208.94117647058823, 100%, 45%);
   }
+
   i {
     font-size: 16px;
     position: relative;
     top: -2px;
     margin-right: 7px;
   }
+
   &.active {
     width: 100px;
     background-color: #e8f1ff;
@@ -171,12 +188,14 @@
 .detail-nav {
   border-bottom: 1px solid #ebebeb;
   background-color: #fff;
+
   li {
     padding-right: 30px;
     font-size: 16px;
     display: inline-block;
     border-bottom: 2px solid transparent;
     position: relative;
+
     a {
       padding: 14px 0;
       display: inline-block;
@@ -185,14 +204,17 @@
       bottom: -1px;
       color: #233;
     }
+
     &.active,
     &:hover {
       margin-bottom: -1px;
       font-weight: bold;
+
       a {
         border-bottom: 2px solid #0084FF;
       }
     }
+
     div {
       position: absolute;
       right: -70px;
@@ -206,6 +228,7 @@
       border-radius: 4px;
       font-size: 13px;
       cursor: pointer;
+
       &:before {
         content: '';
         position: absolute;
@@ -253,6 +276,7 @@
         margin-top: 10px;
         padding-bottom: 10px;
       }
+
       p {
         margin-top: 10px;
         color: #8590A6;
@@ -264,10 +288,21 @@
 .detail-content {
   line-height: 2;
   color: #666;
+
   p {
     margin-top: 0;
   }
 }
+
+.right-actor {
+  max-height: 200px;
+  overflow: hidden;
+
+  &.auto {
+    max-height: inherit;
+  }
+}
+
 
 @media (min-width: 0) and (max-width: 1200px) {
   .detail-pic {
@@ -275,11 +310,14 @@
     margin-right: 10px;
     border: none;
   }
+
   .detail-info {
     width: 65%;
   }
+
   .detail-con {
     padding: 15px 10px;
+
     p {
       &:nth-child(4) {
         span {
@@ -288,6 +326,7 @@
           }
         }
       }
+
       &:nth-child(2),
       &:nth-child(6),
       &.detail-update {
@@ -295,45 +334,55 @@
       }
     }
   }
+
   .detial-title {
     margin-bottom: 15px;
+
     h1 {
       @include clamp(1);
       font-size: 18px;
       width: 100%;
     }
+
     span {
       margin-left: 0;
       margin-top: 10px;
       @include clamp(1);
     }
   }
+
   .detail-info__count,
   .detail-score,
   .detail-tool__share {
     display: none;
   }
+
   .detail-tool {
     left: calc(30% + 14px);
     bottom: 15px;
   }
+
   .detail-tool__on {
     width: 70px;
     height: 30px;
     line-height: 28px;
     font-size: 14px;
     margin-right: 10px;
+
     &.share {
       display: inline-block;
     }
   }
+
   .detail-nav {
     li {
       padding-right: 20px;
       font-size: 14px;
+
       a {
         padding: 10px 0;
       }
+
       &.active {
         a {
           border-bottom-width: 1px;
@@ -347,6 +396,7 @@
   .detial-title {
     margin-bottom: 10px;
   }
+
   .detail-info {
     p {
       margin-bottom: 5px;
