@@ -11,8 +11,10 @@ import '../app/pages/global.scss'
 import configureStore from '@/store'
 import createRouter from '@/router'
 import { getUserInfo } from '@/store/reducers/user'
+import { getAds } from '@/store/reducers/ads'
 
-import { GA } from 'Config'
+import { CNZZ_STAT, BAIDU_STAT, GA } from 'Config'
+import { isMobile } from '@/utils'
 
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 if (process.env.NODE_ENV === 'development') {
@@ -20,10 +22,31 @@ if (process.env.NODE_ENV === 'development') {
   OfflinePluginRuntime.applyUpdate()
 }
 
-(async function() {
+const createAd = (url, isAd) => {
+  let script = document.createElement('script')
+  script.type = 'text/javascript'
+  script.src = url
+  script.async = 1
+  const dom = document.getElementsByTagName('script')
+  const s = dom[0]
+  for (let i = 0; i < dom.length; i++) {
+    if (dom[i].src === url) {
+      dom[i].parentNode.removeChild(dom[i])
+    }
+  }
+  if (isAd) {
+    dom[dom.length - 1].insertBefore(script, s)
+  } else {
+    s.parentNode.insertBefore(script, s)
+  }
+}
+
+;(async function() {
   // 从页面中获取服务端生产redux数据，作为客户端redux初始值
   const store = configureStore(window.__initState__)
   let userinfo = getUserInfo(store.getState())
+  const mAds = getAds(store.getState(), 24)
+  const pcAds = getAds(store.getState(), 25)
   if (!userinfo || !userinfo.userid) userinfo = null
   let logPageView = () => {}
 
@@ -34,6 +57,17 @@ if (process.env.NODE_ENV === 'development') {
       if (userinfo && userinfo._id) option.userId = userinfo._id
       ReactGA.set(option)
       ReactGA.pageview(window.location.pathname)
+      const cnzz = `https://s13.cnzz.com/z_stat.php?id=${CNZZ_STAT}&web_id=${CNZZ_STAT}`
+      const bd = `https://hm.baidu.com/hm.js?${BAIDU_STAT}`
+      const push = 'https://zz.bdstatic.com/linksubmit/push.js'
+      createAd(push)
+      createAd(bd)
+      createAd(cnzz)
+      if (mAds && isMobile()) {
+        createAd(mAds.data.content)
+      } else if (pcAds) {
+        createAd(pcAds.data.content)
+      }
     }
   }
 

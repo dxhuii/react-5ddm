@@ -247,8 +247,7 @@ class Play extends Component {
       userinfo: { userid },
       player: { data = {} },
       match: {
-        params: { id, pid },
-        url
+        params: { id, pid }
       }
     } = this.props
     const { full, isfull, playHtml, mInfo } = this.state
@@ -314,8 +313,12 @@ class Play extends Component {
                 <span>{down}</span>
               </div>
               <div styleName="mcid">
-                {mcid.map(item => {
-                  return item.title ? (
+                {mcid.map((item, index) => {
+                  return (isMobile() ? (
+                    item.title && index < 3
+                  ) : (
+                    item.title
+                  )) ? (
                     <Link key={item.id} to={`/type/${this.getName(listId)}/${item.id}/-/-/-/-/-/`}>
                       {item.title}
                     </Link>
@@ -333,8 +336,8 @@ class Play extends Component {
             </div>
           </div>
         </div>
+        <div className="mt20">{isMobile() ? <Ads id={48} /> : null}</div>
         <PlayList />
-        {isMobile() && <Ads id={48} url={url} />}
         {DOMAIN_NAME === 'dddm.tv' && (
           <div className="wp mt20 box" styleName="zhaimoe">
             <iframe src="//www.zhaimoe.com/portal/page/index/id/35.html" width="1200" height="100%" frameBorder="0" scrolling="no" />
@@ -343,7 +346,7 @@ class Play extends Component {
         <div className="wp">
           {isMobile() ? (
             <div className="mt20">
-              <Ads id={26} url={url} />
+              <Ads id={26} />
             </div>
           ) : (
             <Ads id={21} />
@@ -364,7 +367,7 @@ class Play extends Component {
           </div>
         </div>
         {isMobile() ? (
-          <Ads id={49} url={url} />
+          <Ads id={49} />
         ) : (
           <div className="wp">
             <Ads id={22} />

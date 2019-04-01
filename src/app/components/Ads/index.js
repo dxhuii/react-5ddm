@@ -77,6 +77,7 @@ class Ads extends Component {
     let script = document.createElement('script')
     script.type = 'text/javascript'
     script.src = url
+    console.log(url, this.props)
     this.ads.appendChild(script)
   }
 
@@ -94,13 +95,4 @@ class Ads extends Component {
   }
 }
 
-const Adss = props => {
-  const { url } = props
-  return <Ads {...props} key={url} />
-}
-
-Adss.propTypes = {
-  url: PropTypes.any
-}
-
-export default Adss
+export default Ads

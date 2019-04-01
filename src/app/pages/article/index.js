@@ -91,8 +91,7 @@ class Article extends Component {
   render() {
     const {
       articleData: { data = {} },
-      userinfo: { userid },
-      match: { url }
+      userinfo: { userid }
     } = this.props
     const {
       title,
@@ -157,7 +156,7 @@ class Article extends Component {
             <TagShare tag={tag} config={shareConfig} />
             {isMobile() && (
               <div className="mt20">
-                <Ads id={26} url={url} />
+                <Ads id={26} />
               </div>
             )}
             <div styleName="article-context" className="mt20">

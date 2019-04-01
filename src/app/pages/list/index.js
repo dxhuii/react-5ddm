@@ -218,7 +218,6 @@ class SubjectList extends Component {
   render() {
     const {
       list: { loading },
-      match: { url },
       config
     } = this.props
     const conf = config.data || {}
@@ -343,11 +342,11 @@ class SubjectList extends Component {
         </div>
         {isMobile() ? (
           <div className="mt20">
-            <Ads id={42} url={url} />
+            <Ads id={42} />
           </div>
         ) : (
           <div className="wp mt20">
-            <Ads id={39} url={url} />
+            <Ads id={39} />
           </div>
         )}
         <div className="wp">

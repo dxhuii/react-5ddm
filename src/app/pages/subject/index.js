@@ -184,7 +184,6 @@ class Bangumi extends Component {
     const { visible, isSign } = this.state
     const {
       info: { data = {}, loading },
-      match: { url },
       userinfo: { userid },
       cmScore = {},
       score
@@ -360,11 +359,12 @@ class Bangumi extends Component {
           </div>
         </div>
         {IS9 && copyright === 'banquan' ? <div styleName="copyright">根据国家相关部门规定，本动画不准上架，请支持正版观看，谢谢</div> : <PlayList key="playlist" />}
-        <div className="wp">
+        <div className="wp" style={{ padding: 0 }}>
           {isMobile() ? (
             <div className="mt20">
-              <Ads id={48} url={url} />
-              <Ads id={26} url={url} />
+              <Ads id={48} />
+              <div className="mt20" />
+              <Ads id={26} />
             </div>
           ) : (
             <Ads id={22} />
@@ -457,7 +457,7 @@ class Bangumi extends Component {
             </div>
           </div>
         </div>
-        <div className="wp">{isMobile() ? <Ads id={49} url={url} /> : <Ads id={21} />}</div>
+        <div className="wp">{isMobile() ? <Ads id={49} /> : <Ads id={21} />}</div>
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
           <Sign isSign={isSign} onType={val => this.onType(val)} />
         </Modal>

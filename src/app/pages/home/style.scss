@@ -3,12 +3,15 @@
   flex-wrap: wrap;
   height: 440px;
   overflow: hidden;
+
   &.cn {
     height: 340px;
   }
+
   &.top {
     height: 250px;
   }
+
   &.news {
     height: 430px;
   }
@@ -37,11 +40,13 @@
   text-align: center;
   border-bottom: 1px solid #ddd;
   background-color: #fff;
+
   li {
     padding: 0 30px;
     font-size: 18px;
     display: inline-block;
     border-bottom: 1px solid transparent;
+
     a {
       padding: 20px 0;
       display: inline-block;
@@ -50,9 +55,11 @@
       bottom: -1px;
       color: #999;
     }
+
     &.active,
     &:hover {
       margin-bottom: -1px;
+
       a {
         color: #282828;
         border-bottom: 1px solid #282822;
@@ -65,39 +72,55 @@
   .main {
     height: auto;
     overflow: visible;
+
     &.cn {
       height: auto;
     }
+
     &.top {
       height: auto;
     }
+
     &.news {
       height: auto;
     }
   }
+
   .main-left {
     width: 100%;
     margin-right: 0;
   }
+
   .top-left {
     width: 100%;
-    height: 150px;
+    height: 200px;
     margin-right: 0;
   }
+
   .top-right {
     width: 100%;
     height: 100%;
   }
+
   .main-right {
     display: none;
   }
+
   .list-tab {
     li {
       padding: 0 20px;
       font-size: 16px;
+
       a {
         padding: 10px 0;
       }
     }
+  }
+}
+
+
+@media (min-width: 0px) and (max-width: 399px) {
+  .top-left {
+    height: 170px;
   }
 }

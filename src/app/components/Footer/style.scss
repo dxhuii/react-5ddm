@@ -2,10 +2,12 @@
   padding: 20px 0 30px;
   border-top: 1px solid #ebebeb;
   line-height: 30px;
+
   p {
     a {
       margin-right: 10px;
     }
+
     img {
       display: inline-block;
       position: relative;
@@ -27,7 +29,19 @@
   color: #fff;
   border-radius: 10px;
   z-index: 999;
+
   i {
     font-size: 18px;
+  }
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 1200px) {
+  .top {
+    bottom: 50px;
+    opacity: .7;
   }
 }

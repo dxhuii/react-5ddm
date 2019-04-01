@@ -188,12 +188,12 @@ class Head extends Component {
         {isMobile()
           ? isNot && (
               <div className="mt20">
-                <Ads id={42} url={url} />
+                <Ads id={42} />
               </div>
             )
           : isNot && (
               <div className="wp mt20">
-                <Ads id={39} url={url} />
+                <Ads id={39} />
               </div>
             )}
       </Fragment>
