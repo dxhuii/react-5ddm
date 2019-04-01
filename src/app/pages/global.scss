@@ -23,6 +23,8 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 :global {
@@ -30,9 +32,8 @@
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* 解决定时器运行时，图片有闪烁的问题 */
-    backface-visibility: hidden;
   }
+
   body,
   div,
   dl,
@@ -60,10 +61,12 @@
     padding: 0;
     vertical-align: baseline;
   }
+
   fieldset,
   img {
     border: 0;
   }
+
   em,
   th,
   td,
@@ -71,15 +74,18 @@
     font-style: normal;
     font-weight: normal;
   }
+
   ol,
   ul,
   li {
     list-style: none;
   }
+
   caption,
   th {
     text-align: left;
   }
+
   h1,
   h2,
   h3,
@@ -89,6 +95,7 @@
     font-size: 100%;
     font-weight: normal;
   }
+
   input,
   textarea,
   select {
@@ -96,26 +103,32 @@
     font-size: inherit;
     font-weight: inherit;
   }
+
   legend {
     color: #000;
   }
+
   button {
     background: none;
     border: none;
   }
+
   hr {
     color: #f5f2ee;
     background-color: #f5f2ee;
     border: none;
     height: 1px;
   }
+
   table {
     border-collapse: collapse;
     border-spacing: 0;
   }
+
   html {
     text-size-adjust: none;
   }
+
   body {
     font-size: 14px;
     font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
@@ -123,31 +136,38 @@
     text-rendering: optimizeLegibility;
     -webkit-overflow-scrolling: touch;
   }
+
   button,
   a {
     cursor: pointer;
   }
+
   input,
   button {
     outline: none;
   }
+
   input:-webkit-autofill,
   textarea:-webkit-autofill,
   select:-webkit-autofill {
     box-shadow: 0 0 0 1000px white inset;
   }
+
   p {
     word-wrap: break-word;
   }
+
   a {
     color: #233;
     text-decoration: none;
     transition: all .15s ease-out;
   }
+
   a:hover {
     color: #00a1d6;
     text-decoration: none;
   }
+
   a,
   span {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -155,9 +175,11 @@
     -moz-user-focus: none;
     -moz-user-select: none;
   }
+
   i {
     overflow: hidden;
   }
+
   .clearfix:after {
     clear: both;
     content: ".";
@@ -165,127 +187,154 @@
     height: 0;
     visibility: hidden;
   }
+
   .f14 {
     font-size: 14px;
   }
+
   .f16 {
     font-size: 16px;
   }
+
   .f18 {
     font-size: 18px;
   }
+
   .cp {
     cursor: pointer;
   }
+
   .b {
     font-weight: 700;
   }
+
   .w {
     white-space: nowrap;
   }
+
   .tal {
     text-align: left;
   }
+
   .tac {
     text-align: center;
   }
+
   .tar {
     text-align: right;
   }
+
   .fr {
     float: right;
   }
+
   .db img {
     display: block;
   }
+
   .fl {
     float: left;
   }
+
   .fr {
     float: right;
   }
+
   .pr {
     position: relative;
   }
+
   .pa {
     position: absolute;
   }
+
   .oh {
     overflow: hidden;
   }
+
   .hide {
     display: none;
   }
+
   ::-webkit-input-placeholder {
     color: #666;
   }
+
   ::-moz-placeholder {
     color: #666;
   }
+
   :-moz-placeholder {
     color: #666;
   }
+
   ::-ms-input-placeholder {
     color: #666;
   }
+
   input:-moz-placeholder {
     color: #666;
   }
+
   textarea:-moz-placeholder {
     color: #666;
   }
+
   .wp {
     width: 1240px;
     margin: auto;
   }
+
   .mt20 {
     margin-top: 20px;
   }
+
   .mt10 {
     margin-top: 10px;
   }
+
   .pt15 {
     padding-top: 15px;
   }
+
   .pt20 {
     padding-top: 20px;
   }
+
   .pb20 {
     padding-bottom: 20px !important;
   }
+
   body {
     padding-top: 55px;
     background-color: #f6f6f6;
   }
+
   html {
     &::-webkit-scrollbar {
       width: 7px;
       height: 7px
     }
+
     &::-webkit-scrollbar-thumb {
       border-radius: 1em;
       background-color: rgba(50, 50, 50, 0.3)
     }
+
     &::-webkit-scrollbar-track {
       box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3)
     }
+
     &::-webkit-scrollbar-thumb {
       background: rgba(100, 100, 100, 0.8)
     }
+
     &::-webkit-scrollbar-corner,
     &::-webkit-scrollbar-thumb:window-inactive {
       background: rgba(100, 100, 100, 0.4)
     }
   }
-  .iconfont {
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    display: inline-block;
-    vertical-align: middle;
-  }
+
   .d-badge {
     position: absolute;
     left: 5px;
@@ -299,13 +348,16 @@
     line-height: 20px;
     font-style: normal
   }
+
   .title {
     display: flex;
+
     h2 {
       font-size: 24px;
       color: #444;
       margin-right: 30px;
     }
+
     a {
       margin-left: 30px;
       margin-top: 1px;
@@ -315,6 +367,7 @@
       text-align: center;
       padding-left: 15px;
       color: #0084ff;
+
       i {
         position: relative;
         top: -1px;
@@ -322,6 +375,7 @@
         margin-left: 5px;
       }
     }
+
     .title-icon {
       display: inline-block;
       position: relative;
@@ -333,10 +387,12 @@
       overflow: hidden;
       background: url(../static/img/acg.svg) no-repeat;
       background-size: 35px 40px;
+
       &.cn {
         background: url(../static/img/china.svg) no-repeat;
         background-size: 35px 40px;
       }
+
       &.news {
         background: url(../static/img/news.svg) no-repeat;
         background-size: 35px 40px;
@@ -344,9 +400,11 @@
       }
     }
   }
+
   .warp-bg {
     background-color: #fff;
   }
+
   .playicon {
     float: left;
     margin-top: 4px;
@@ -356,6 +414,7 @@
     background-repeat: no-repeat;
     background: url(../static/img/sprite_source.png) -240px -20px no-repeat;
     background-image: -webkit-image-set(url(../static/img/sprite_source@2x.png) 2x);
+
     &.other,
     &.pv,
     &.otherB,
@@ -369,38 +428,49 @@
     &.op {
       background-position: -240px -20px
     }
+
     &.tudou {
       background-position: -40px 0
     }
+
     &.youku {
       background-position: -20px 0
     }
+
     &.iqiyi {
       background-position: -60px 0
     }
+
     &.sohu {
       background-position: -20px -20px
     }
+
     &.letvyun,
     &.letv {
       background-position: -140px 0
     }
+
     &.qq {
       background-position: 0 0
     }
+
     &.mgtv {
       background-position: -160px -20px
     }
+
     &.pptv {
       background-position: -80px 0
     }
+
     &.bilibili {
       background-position: -180px -20px
     }
+
     &.acfun {
       background-position: -200px -20px
     }
   }
+
   .explaywrap {
     position: relative;
     width: 100%;
@@ -408,6 +478,7 @@
     background-size: cover;
     text-align: center;
     font-weight: 600;
+
     a {
       position: absolute;
       top: auto !important;
@@ -424,6 +495,7 @@
       border-radius: 5px;
       background-color: #f60;
       text-decoration: none;
+
       &.jump {
         bottom: 135px !important;
         background: transparent;
@@ -431,6 +503,7 @@
         font-size: 16px;
       }
     }
+
     p {
       position: absolute;
       bottom: 20px;
@@ -442,6 +515,7 @@
       -webkit-text-stroke: 1px #fff
     }
   }
+
   .bigstar50,
   .bigstar45,
   .bigstar40,
@@ -463,6 +537,7 @@
     overflow: hidden;
     vertical-align: top;
   }
+
   .bigstar50+span.rating_num,
   .bigstar45+span.rating_num,
   .bigstar40+span.rating_num,
@@ -477,105 +552,135 @@
     font-size: 16px;
     line-height: 1
   }
+
   .bigstar50 {
     background-position: 0 0px
   }
+
   .bigstar45 {
     background-position: 0 -15px
   }
+
   .bigstar40 {
     background-position: 0 -30px
   }
+
   .bigstar35 {
     background-position: 0 -45px
   }
+
   .bigstar30 {
     background-position: 0 -60px
   }
+
   .bigstar25 {
     background-position: 0 -75px
   }
+
   .bigstar20 {
     background-position: 0 -90px
   }
+
   .bigstar15 {
     background-position: 0 -105px
   }
+
   .bigstar10 {
     background-position: 0 -120px
   }
+
   .bigstar05 {
     background-position: 0 -135px
   }
+
   .bigstar00 {
     background-position: 0 -150px
   }
+
   .box {
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
     border-radius: 5px !important;
     padding: 10px 20px;
   }
+
   .left {
     width: 920px;
     background-color: #fff;
     border-radius: 10px;
+
     &.manhua {
       width: 100%;
     }
   }
+
   .right {
     width: 300px;
   }
+
   @media (min-width: 0) and (max-width: 1200px) {
     body {
       padding-top: 48px;
     }
+
     .wp {
       width: 100%;
       padding: 0 10px;
+
       &.ads {
         padding: 0;
       }
     }
+
     .pt20 {
       padding-top: 10px;
     }
+
     .mt20 {
       margin-top: 10px;
     }
+
     .title {
       h2 {
         font-size: 18px;
       }
+
       a {
         margin-left: 0;
       }
+
       .title-icon {
         width: 27px;
         height: 34px;
         background-size: 27px 32px;
         top: -3px;
+
         &.cn {
           background-size: 27px 32px;
         }
+
         &.news {
           top: 0;
           background-size: 27px 32px;
         }
       }
     }
+
     .left {
       width: 100%;
     }
+
     .right {
       display: none;
     }
+
     .box {
       padding: 10px;
     }
+
     .explaywrap {
       background: #000;
+
       a {
         background: #333;
         height: 36px;
@@ -583,12 +688,14 @@
         font-size: 16px;
         color: #aaa;
         bottom: 150px !important;
+
         &.jump {
           bottom: 115px !important;
           color: #fff;
           font-size: 14px;
         }
       }
+
       p {
         font-size: 24px;
         text-shadow: none;
@@ -598,6 +705,7 @@
       }
     }
   }
+
   @media (min-width: 0px) and (max-width: 399px) {
     body {
       font-size: 12px;
