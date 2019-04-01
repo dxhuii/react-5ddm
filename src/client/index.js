@@ -13,7 +13,7 @@ import createRouter from '@/router'
 import { getUserInfo } from '@/store/reducers/user'
 import { getAds } from '@/store/reducers/ads'
 
-import { CNZZ_STAT, BAIDU_STAT, GA } from 'Config'
+import { CNZZ_STAT, BAIDU_STAT, GA, ISAD } from 'Config'
 import { isMobile } from '@/utils'
 
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
@@ -63,10 +63,12 @@ const createAd = (url, isAd) => {
       createAd(push)
       createAd(bd)
       createAd(cnzz)
-      if (mAds && isMobile()) {
-        createAd(mAds.data.content)
-      } else if (pcAds) {
-        createAd(pcAds.data.content)
+      if (ISAD) {
+        if (mAds && isMobile()) {
+          createAd(mAds.data.content)
+        } else if (pcAds) {
+          createAd(pcAds.data.content)
+        }
       }
     }
   }
