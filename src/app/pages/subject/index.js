@@ -214,7 +214,7 @@ class Bangumi extends Component {
       keywords,
       website,
       updateDate,
-      // hits,
+      jump,
       tvcont,
       status,
       year,
@@ -246,6 +246,12 @@ class Bangumi extends Component {
         return
       }
       window.location.href = '/404'
+    }
+    if (jump) {
+      if (typeof window === 'undefined') {
+        return
+      }
+      window.location.href = jump
     }
     return (
       <Fragment>
