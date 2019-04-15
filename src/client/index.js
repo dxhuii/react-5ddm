@@ -31,6 +31,7 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 const createAd = (url, isAd) => {
+  if (process.env.NODE_ENV === 'development') return
   let script = document.createElement('script')
   script.type = 'text/javascript'
   script.src = url
