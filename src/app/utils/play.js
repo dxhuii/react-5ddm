@@ -139,6 +139,8 @@ const ck = (type, pv) => {
     return '//www.acgnz.cn/api/bit.php?id=' + pv
   } else if (type === 'qqq') {
     return '//www.acgnz.cn/api/qqquan.php?id=' + pv
+  } else if (type === '360') {
+    return '//www.acgnz.cn/api/360.php?id=' + pv
   } else {
     return flvsp + type + '&id=' + pv
   }
