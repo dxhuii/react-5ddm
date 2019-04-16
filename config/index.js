@@ -41,6 +41,8 @@ const defalut = {
   ISAD: true,
   NAME: '9站',
   DESCRIBE: '_99496动漫 - 小而美的动漫网站',
+  KEYWORDS: '9站, 99496动漫, ',
+  DESCRIPTION: '',
   DOMAIN: 'https://dev.99496.com',
   DOMAIN_NAME: '99496.com',
   PORT: 6666,
