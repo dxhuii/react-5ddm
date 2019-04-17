@@ -20,13 +20,16 @@ import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 if (process.env.NODE_ENV !== 'development') {
   OfflinePluginRuntime.install()
   OfflinePluginRuntime.applyUpdate()
-  // 打开的不是目标网站跳转到目标网站
-  if (window.location.origin !== DOMAIN) {
-    window.location.href = DOMAIN
-  }
-  // 禁止被iframe
-  if (window.top !== window.self) {
-    window.top.location = window.location
+  const { origin, pathname } = window.location
+  if (!/out/.test(pathname)) {
+    // 打开的不是目标网站跳转到目标网站
+    if (origin !== DOMAIN) {
+      window.location.href = DOMAIN + pathname
+    }
+    // 禁止被iframe
+    if (window.top !== window.self) {
+      window.top.location = window.location
+    }
   }
 }
 
