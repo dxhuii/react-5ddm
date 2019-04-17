@@ -110,6 +110,21 @@ class Head extends Component {
       showHis: !this.state.showHis
     })
   }
+  // 判断为几月新番
+  getCurMonth = () => {
+    const date = new Date()
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    let m = '10'
+    if (month >= 1 && month < 4) {
+      m = '01'
+    } else if (month >= 4 && month < 7) {
+      m = '04'
+    } else if (month >= 7 && month < 10) {
+      m = '07'
+    }
+    return year + m
+  }
 
   render() {
     const {
@@ -118,7 +133,7 @@ class Head extends Component {
     } = this.props
     const { wd, isHide, isSign, visible, showMenu, showSearch, showHis } = this.state
     const logo = `header-logo ${DOMAIN_NAME === 'dddm.tv' ? 'dddm' : DOMAIN_NAME === '5ddm.com' ? 'ddm' : ''}`
-    const isNot = !(url === '/' || /dongman|subject|play|search/.test(url))
+    const isNot = !(url === '/' || /dongman|subject|play|search|type/.test(url))
     return (
       <Fragment>
         <header>
@@ -128,7 +143,7 @@ class Head extends Component {
               <NavLink styleName={url === '/' ? 'active' : ''} exact to="/">
                 首页
               </NavLink>
-              <NavLink styleName={/dongman|subject|play|week/.test(url) ? 'active' : ''} exact to="/dongman">
+              <NavLink styleName={/dongman|subject|play|week|type|search/.test(url) ? 'active' : ''} exact to="/dongman">
                 动漫
               </NavLink>
               <NavLink styleName={/news|article/.test(url) ? 'active' : ''} exact to="/news">
@@ -143,7 +158,7 @@ class Head extends Component {
               <NavLink styleName={url === '/new' ? 'active' : ''} exact to="/new">
                 最近更新
               </NavLink>
-              <NavLink styleName={/month/.test(url) ? 'active' : ''} exact to="/month/201901">
+              <NavLink styleName={/month/.test(url) ? 'active' : ''} exact to={`/month/${this.getCurMonth()}`}>
                 新番表
               </NavLink>
             </div>
