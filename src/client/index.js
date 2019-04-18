@@ -20,17 +20,20 @@ import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 if (process.env.NODE_ENV !== 'development') {
   OfflinePluginRuntime.install()
   OfflinePluginRuntime.applyUpdate()
-  // 打开的不是目标网站跳转到目标网站
-  if (window.location.origin !== DOMAIN) {
-    window.location.href = DOMAIN
-  }
-  // 禁止被iframe
-  if (window.top !== window.self) {
-    window.top.location = window.location
+  const { pathname, origin } = window.location
+  if (!/out/.test(pathname)) {
+    // 打开的不是目标网站跳转到目标网站
+    if (origin !== DOMAIN) {
+      window.location.href = DOMAIN + pathname
+    }
+    // 禁止被iframe
+    if (window.top !== window.self) {
+      window.top.location = window.location
+    }
   }
 }
 
-const createAd = (url, isAd) => {
+const createScript = (url, isAd) => {
   if (process.env.NODE_ENV === 'development') return
   let script = document.createElement('script')
   script.type = 'text/javascript'
@@ -69,14 +72,14 @@ const createAd = (url, isAd) => {
       const cnzz = `https://s13.cnzz.com/z_stat.php?id=${CNZZ_STAT}&web_id=${CNZZ_STAT}`
       const bd = `https://hm.baidu.com/hm.js?${BAIDU_STAT}`
       const push = 'https://zz.bdstatic.com/linksubmit/push.js'
-      createAd(push)
-      createAd(bd)
-      createAd(cnzz)
+      createScript(push)
+      createScript(bd)
+      createScript(cnzz)
       if (ISAD) {
         if (mAds && isMobile()) {
-          createAd(mAds.data.content)
+          createScript(mAds.data.content)
         } else if (pcAds) {
-          createAd(pcAds.data.content)
+          createScript(pcAds.data.content)
         }
       }
     }
