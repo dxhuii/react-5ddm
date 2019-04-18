@@ -20,7 +20,7 @@ import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 if (process.env.NODE_ENV !== 'development') {
   OfflinePluginRuntime.install()
   OfflinePluginRuntime.applyUpdate()
-  const { pathname, origin } = window.location
+  const { origin, pathname } = window.location
   if (!/out/.test(pathname)) {
     // 打开的不是目标网站跳转到目标网站
     if (origin !== DOMAIN) {
