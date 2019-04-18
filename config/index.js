@@ -5,6 +5,9 @@
  * ISPLAY 是否播放
  * ISAD 是否显示广告
  * NAME 网站名称
+ * DESCRIBE 网站首页标题
+ * KEYWORDS 关键词
+ * DESCRIPTION 描述
  * DOMAIN_NAME 网站主域名称
  * DOMAIN 网站带 HTTPS 完整域名
  * API 接口地址
@@ -39,10 +42,10 @@ const defalut = {
   IS9: true,
   ISPLAY: false,
   ISAD: true,
-  NAME: '9站',
-  DESCRIBE: '_99496动漫 - 小而美的动漫网站',
-  KEYWORDS: '9站, 99496动漫, ',
-  DESCRIPTION: '',
+  NAME: '99496动漫(9站)',
+  DESCRIBE: '99496动漫(9站) - 小而美的动漫网站',
+  KEYWORDS: '9站, 99496动漫',
+  DESCRIPTION: '99496动漫(9站)致力于为所有动漫迷们免费提供最新最快的高清动画下载及在线观看资源索引。',
   DOMAIN: 'https://dev.99496.com',
   DOMAIN_NAME: '99496.com',
   PORT: 6666,
@@ -64,7 +67,9 @@ const dddm = {
   ISPLAY: false,
   ISAD: true,
   NAME: '丁丁动漫',
-  DESCRIBE: '_一个可以在线看的动漫网站',
+  DESCRIBE: '丁丁动漫_一个可以在线看的动漫网站',
+  KEYWORDS: '丁丁动漫',
+  DESCRIPTION: '丁丁动漫致力于为所有动漫迷们免费提供最新最快的高清动画下载及在线观看资源索引。',
   DOMAIN: 'https://www.dddm.tv',
   DOMAIN_NAME: 'dddm.tv',
   PORT: 8888,
@@ -86,8 +91,10 @@ const ddm = {
   IS9: false,
   ISPLAY: true,
   ISAD: false,
-  NAME: '5D动漫_5站',
-  DESCRIBE: ' - 无广告免费的动漫网站',
+  NAME: '5D动漫(5站)',
+  DESCRIBE: '5D动漫(5站) - 无广告免费的动漫网站',
+  KEYWORDS: '5D动漫,5站',
+  DESCRIPTION: '5D动漫(5站)致力于为所有动漫迷们免费提供最新最快的高清动画下载及在线观看资源索引。',
   DOMAIN: 'https://www.5ddm.com',
   DOMAIN_NAME: '5ddm.com',
   PORT: 7777,
@@ -111,7 +118,9 @@ const kanfan = {
   ISPLAY: true,
   ISAD: false,
   NAME: '看番',
-  DESCRIBE: ' - 您的追番网站',
+  DESCRIBE: '看番 - 您的追番网站',
+  KEYWORDS: '看番',
+  DESCRIPTION: '看番致力于为所有动漫迷们免费提供最新最快的高清动画下载及在线观看资源索引。',
   DOMAIN: 'https://www.kanfan.net',
   DOMAIN_NAME: 'kanfan.net',
   PORT: 9999,
