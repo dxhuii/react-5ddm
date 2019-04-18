@@ -10,19 +10,24 @@ header {
   top: 0;
   right: 0;
   z-index: 999;
+
   a {
     padding: 0 15px;
     display: inline-block;
+
     &:hover {
       color: #175199;
     }
+
     &.active {
       font-weight: bold;
     }
   }
+
   nav {
     flex-grow: 1;
     display: flex;
+
     &.show {
       display: inline-block;
     }
@@ -43,6 +48,7 @@ header {
   background-size: 150px auto;
   background-position: 0 4px;
   margin-left: 10px;
+
   &.dddm {
     width: 130px;
     flex-basis: 130px;
@@ -50,6 +56,7 @@ header {
     background-size: 120px auto;
     background-position: 0 10px;
   }
+
   /*5ddm*/
   &.ddm {
     width: 120px;
@@ -76,6 +83,7 @@ header {
   display: flex;
   border: 1px solid #ebebeb;
   position: relative;
+
   input {
     width: 260px;
     margin-top: 6px;
@@ -86,6 +94,7 @@ header {
     background: none;
     float: left;
   }
+
   button {
     width: 30px;
     height: 30px;
@@ -94,6 +103,7 @@ header {
     float: right;
     color: #8590A6;
   }
+
   &.show {
     display: inline-block;
   }
@@ -108,8 +118,10 @@ header {
   header {
     height: 48px;
     line-height: 48px;
+
     nav {
       display: none;
+
       &.show {
         position: absolute;
         top: 47px;
@@ -125,11 +137,14 @@ header {
       }
     }
   }
+
   .header-nav {
     line-height: 30px;
   }
+
   .header-search {
     display: none;
+
     &.show {
       position: absolute;
       top: 35px;
@@ -138,21 +153,28 @@ header {
       box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
     }
   }
+
   .header-tool {
     flex-grow: 1;
+
     a,
     span {
       padding: 0 7px;
     }
   }
+
   .header-logo {
     width: 120px;
     background-size: 120px auto;
     background-position: 0 5px;
+    flex-basis: 120px;
+    line-height: 48px;
+
     &.dddm {
       width: 110px;
       background-size: 100px auto;
     }
+
     /*5ddm*/
     &.ddm {
       width: 110px;
@@ -160,9 +182,37 @@ header {
       background-position: 0 11px;
     }
   }
+
   .on-search,
   .on-home,
   .on-menu {
     display: inline;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 399px) {
+  header {
+    height: 36px;
+    line-height: 36px;
+  }
+
+  .header-logo {
+    width: 80px;
+    background-size: 80px auto;
+    background-position: 0 5px;
+    flex-basis: 80px;
+    line-height: 36px;
+
+    &.dddm {
+      width: 70px;
+      background-size: 65px auto;
+    }
+
+    /*5ddm*/
+    &.ddm {
+      width: 70px;
+      background-size: 65px auto;
+      background-position: 0 11px;
+    }
   }
 }

@@ -54,7 +54,8 @@ class Play extends Component {
       mInfo: {},
       list: [],
       full: false,
-      isfull: false
+      isfull: false,
+      showPlay: false
     }
   }
 
@@ -242,6 +243,12 @@ class Play extends Component {
     }
   }
 
+  onShowPlayer = () => {
+    this.setState({
+      showPlay: !this.state.showPlay
+    })
+  }
+
   render() {
     const {
       userinfo: { userid },
@@ -250,7 +257,7 @@ class Play extends Component {
         params: { id, pid }
       }
     } = this.props
-    const { full, isfull, playHtml, mInfo } = this.state
+    const { full, isfull, playHtml, mInfo, showPlay } = this.state
     const { listName, listId, listNameBig, list = [], pic, title, pan, subTitle, actor = '', up, down, prev, next, mcid = [], copyright } = data
     const shareConfig = {
       pic,
@@ -286,7 +293,7 @@ class Play extends Component {
                 </h1>
                 <h4>{subTitle}</h4>
               </div>
-              <ul styleName="playlist">
+              <ul styleName={`playlist ${showPlay ? 'show' : 'hide'}`}>
                 {list.map(item => (
                   <li key={item.playName} onClick={() => this.onPlay(item.vid, item.playName)}>
                     <i className={`playicon ${item.playName}`} />
@@ -294,7 +301,7 @@ class Play extends Component {
                   </li>
                 ))}
               </ul>
-              <div styleName="m-play-name">
+              <div styleName="m-play-name" onClick={this.onShowPlayer}>
                 <i className={`playicon ${mInfo.playName}`} />
                 {mInfo.playTitle}
               </div>
@@ -319,7 +326,7 @@ class Play extends Component {
                   ) : (
                     item.title
                   )) ? (
-                    <Link key={item.id} to={`/type/${this.getName(listId)}/${item.id}/-/-/-/-/-/`}>
+                    <Link className={`mcid-${index}`} key={item.id} to={`/type/${this.getName(listId)}/${item.id}/-/-/-/-/-/`}>
                       {item.title}
                     </Link>
                   ) : null
