@@ -14,7 +14,7 @@ import { getUserInfo } from '@/store/reducers/user'
 import { getAds } from '@/store/reducers/ads'
 
 import { CNZZ_STAT, BAIDU_STAT, GA, ISAD, DOMAIN } from 'Config'
-import { isMobile } from '@/utils'
+import { isMobile, loadScript } from '@/utils'
 
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 if (process.env.NODE_ENV !== 'development') {
@@ -33,27 +33,7 @@ if (process.env.NODE_ENV !== 'development') {
   }
 }
 
-const createScript = (url, isAd) => {
-  if (process.env.NODE_ENV === 'development') return
-  let script = document.createElement('script')
-  script.type = 'text/javascript'
-  script.src = url
-  script.async = 1
-  const dom = document.getElementsByTagName('script')
-  const s = dom[0]
-  for (let i = 0; i < dom.length; i++) {
-    if (dom[i].src === url) {
-      dom[i].parentNode.removeChild(dom[i])
-    }
-  }
-  if (isAd) {
-    dom[dom.length - 1].insertBefore(script, s)
-  } else {
-    s.parentNode.insertBefore(script, s)
-  }
-}
-
-;(async function() {
+(async function() {
   // 从页面中获取服务端生产redux数据，作为客户端redux初始值
   const store = configureStore(window.__initState__)
   let userinfo = getUserInfo(store.getState())
@@ -61,25 +41,26 @@ const createScript = (url, isAd) => {
   const pcAds = getAds(store.getState(), 25)
   if (!userinfo || !userinfo.userid) userinfo = null
   let logPageView = () => {}
-
   if (GA) {
     ReactGA.initialize(GA)
     logPageView = userinfo => {
       let option = { page: window.location.pathname }
       if (userinfo && userinfo._id) option.userId = userinfo._id
-      ReactGA.set(option)
-      ReactGA.pageview(window.location.pathname)
-      const cnzz = `https://s13.cnzz.com/z_stat.php?id=${CNZZ_STAT}&web_id=${CNZZ_STAT}`
-      const bd = `https://hm.baidu.com/hm.js?${BAIDU_STAT}`
-      const push = 'https://zz.bdstatic.com/linksubmit/push.js'
-      createScript(push)
-      createScript(bd)
-      createScript(cnzz)
-      if (ISAD) {
-        if (mAds && isMobile()) {
-          createScript(mAds.data.content)
-        } else if (pcAds) {
-          createScript(pcAds.data.content)
+      if (process.env.NODE_ENV !== 'development') {
+        ReactGA.set(option)
+        ReactGA.pageview(window.location.pathname)
+        const cnzz = `https://s13.cnzz.com/z_stat.php?id=${CNZZ_STAT}&web_id=${CNZZ_STAT}`
+        const bd = `https://hm.baidu.com/hm.js?${BAIDU_STAT}`
+        const push = 'https://zz.bdstatic.com/linksubmit/push.js'
+        loadScript(push)
+        loadScript(bd)
+        loadScript(cnzz)
+        if (ISAD) {
+          if (mAds && isMobile()) {
+            loadScript(mAds.data.content, true)
+          } else if (pcAds) {
+            loadScript(pcAds.data.content, true)
+          }
         }
       }
     }
