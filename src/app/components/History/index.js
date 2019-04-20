@@ -105,7 +105,7 @@ class History extends Component {
             <li key={index}>
               <span>
                 <Link to={`/subject/${item.vid}`}>{item.title}</Link>
-                <Link to={`/subject/${item.vid}/${item.pid}`}>{item.name}</Link>
+                <Link to={`/play/${item.vid}/${item.pid}`}>{item.name}</Link>
               </span>
               <Link to={`/play/${item.vid}/${item.pid}`}>续播</Link>
               {item.next ? <Link to={`/play/${item.vid}/${item.next}`}>下一集</Link> : null}
