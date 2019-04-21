@@ -1,5 +1,5 @@
 import { isMobile } from './index'
-import { IS9, DOMAIN_NAME } from 'Config'
+import { IS9, DOMAIN_NAME, DOMAIN } from 'Config'
 
 const isP = IS9 && !isMobile()
 
@@ -129,11 +129,11 @@ const ck = (type, pv) => {
   } else if (type === 'sohu') {
     return isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
   } else if (type === 'yunpan') {
-    return '//www.acgnz.cn/api/p.php?type=yunpan&id=' + pv
+    return `//www.acgnz.cn/api/p.php?type=yunpan&domain=${DOMAIN}&id=${pv}`
   } else if (type === 'qqq') {
-    return '//www.acgnz.cn/api/p.php?type=qqq&id=' + pv
+    return `//www.acgnz.cn/api/p.php?type=qqq&domain=${DOMAIN}&id=${pv}`
   } else if (type === '360') {
-    return '//www.acgnz.cn/api/p.php?type=360&id=' + pv
+    return `//www.acgnz.cn/api/p.php?type=360&domain=${DOMAIN}&id=${pv}`
   } else {
     return flvsp + type + '&id=' + pv
   }
@@ -226,7 +226,7 @@ const isPlay = (name, vid, danmu, uid, isLogin) => {
     url = isP ? HTML('/', isLogin) : jiexiUrl(vid.replace('http://', 'https://'), danmu)
   } else {
     if (/.mp4|.m3u8/.test(vid)) {
-      url = isP ? HTML('/', isLogin) : jiexiUrl(`//www.acgnz.cn/api/p.php?type=${/.mp4/.test(vid) ? 'mp4' : 'm3u8'}&id=${vid}`, danmu)
+      url = isP ? HTML('/', isLogin) : jiexiUrl(`//www.acgnz.cn/api/p.php?type=${/.mp4/.test(vid) ? 'mp4' : 'm3u8'}&domain=${DOMAIN}&id=${vid}`, danmu)
     } else if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com|qq.com|mgtv.com/.test(vid)) {
       if (/bilibili|acfun|youku|tudou|iqiyi/.test(name)) {
         url = jump(name, vid, danmu, isLogin)
