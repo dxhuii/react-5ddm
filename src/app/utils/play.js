@@ -123,24 +123,17 @@ const acfun = (pv, isLogin) => {
 
 const ck = (type, pv) => {
   const flvsp = 'https://api.flvsp.com/?type='
-  // const mdparse = 'https://www.acgnz.cn/mdparse/?type='
-  // if (type === 'pptv') {
-  //   return mdparse + type + '&id=' + pv
-  // } else if (type === 'sohu') {
-  //   return isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
-  // } else
-  if (type === 'bitqiu') {
-    return '//www.acgnz.cn/api/pan.php?url=vbit?v=' + pv
+  const mdparse = 'https://www.acgnz.cn/mdparse/?type='
+  if (type === 'pptv' || type === 'qq' || type === 'letv') {
+    return mdparse + type + '&id=' + pv
+  } else if (type === 'sohu') {
+    return isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
   } else if (type === 'yunpan') {
-    return '//www.acgnz.cn/api/pan.php?url=va360?v=' + pv
-  } else if (type === 'bithls') {
-    return '//www.acgnz.cn/api/pan.php?url=vbithls?v=' + pv
-  } else if (type === 'bit') {
-    return '//www.acgnz.cn/api/bit.php?id=' + pv
+    return '//www.acgnz.cn/api/p.php?type=yunpan&id=' + pv
   } else if (type === 'qqq') {
-    return '//www.acgnz.cn/api/qqquan.php?id=' + pv
+    return '//www.acgnz.cn/api/p.php?type=qqq&id=' + pv
   } else if (type === '360') {
-    return '//www.acgnz.cn/api/360.php?id=' + pv
+    return '//www.acgnz.cn/api/p.php?type=360&id=' + pv
   } else {
     return flvsp + type + '&id=' + pv
   }
@@ -224,50 +217,34 @@ const jump = (name, pv, danmu, isLogin) => {
   return url
 }
 
-const isPlay = (name, vid, danmu, isLogin) => {
-  let playname = name
-  let data = []
-  let pv = vid
-  if (pv.indexOf('@@') !== -1) {
-    data = pv.split('@@')
-    playname = data[1]
-    pv = data[0]
-  }
-  if (playname === 'full') {
-    return isP ? HTML('/', isLogin) : jiexiUrl(pv.replace('http://', 'https://'), danmu)
+const isPlay = (name, vid, danmu, uid, isLogin) => {
+  const playStyle = /acku|sina|letvsaas|weibo|miaopai|yunpan|qqq|360/.test(name)
+  let url = ''
+  if (((/.mp4|.m3u8/.test(vid) || playStyle) && isP && !uid) || ['bit', 'letvyun', 'pmbit', 'bithls', 'bitqiu'].indexOf(name) !== -1) {
+    url = HTML('/', isLogin)
+  } else if (name === 'full') {
+    url = isP ? HTML('/', isLogin) : jiexiUrl(vid.replace('http://', 'https://'), danmu)
   } else {
-    if (/.mp4|.m3u8/.test(pv)) {
-      return isP ? HTML('/', isLogin) : jiexiUrl(`//www.acgnz.cn/api/play.php?url=${pv}`, danmu)
-    } else if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com|qq.com|mgtv.com/.test(pv)) {
-      if (/bilibili|acfun|youku|tudou|iqiyi/.test(playname)) {
-        return jump(playname, pv, danmu, isLogin)
+    if (/.mp4|.m3u8/.test(vid)) {
+      url = isP ? HTML('/', isLogin) : jiexiUrl(`//www.acgnz.cn/api/p.php?type=${/.mp4/.test(vid) ? 'mp4' : 'm3u8'}&id=${vid}`, danmu)
+    } else if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com|qq.com|mgtv.com/.test(vid)) {
+      if (/bilibili|acfun|youku|tudou|iqiyi/.test(name)) {
+        url = jump(name, vid, danmu, isLogin)
       } else {
-        return isP ? HTML(pv, isLogin) : jiexiUrl(rePlayUrl(playname, pv), danmu)
+        url = isP ? HTML(vid, isLogin) : jiexiUrl(rePlayUrl(name, vid), danmu)
       }
     } else {
-      return HTML(pv, isLogin)
+      url = HTML(vid, isLogin)
     }
   }
+  return url
 }
 
-export default (playname, vid, danmu, uid, isLogin) => {
-  let url = ''
-  let name = playname
-  let data = []
-  let pv = vid
-  if (pv.indexOf('@@') !== -1) {
-    data = pv.split('@@')
+export default (name, vid, danmu, uid, isLogin) => {
+  if (vid.indexOf('@@') !== -1) {
+    const data = vid.split('@@')
     name = data[1]
-    pv = data[0]
+    vid = data[0]
   }
-  const isCk = /.html|.shtml|.htm|https:\/\/|http:\/\/|.mp4|.m3u8/.test(pv) || name === 'full' || !isP
-  const playStyle = /acku|sina|letvsaas|weibo|miaopai|bitqiu|yunpan|bithls|qqq/.test(name)
-  if (((/.mp4|.m3u8/.test(pv) || playStyle) && isP && !uid) || ['bit', 'letvyun', 'pmbit'].indexOf(name) !== -1) {
-    url = HTML('/', isLogin)
-  } else if (isCk) {
-    url = isPlay(name, vid, danmu, isLogin)
-  } else {
-    url = jump(name, vid, danmu, isLogin)
-  }
-  return url
+  return isPlay(name, vid, danmu, uid, isLogin)
 }

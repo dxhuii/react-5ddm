@@ -264,7 +264,7 @@ class Play extends Component {
       title: `#${title}# ${subTitle}在线播放 - ${listName}${listNameBig} - #${NAME.split('_').join('##')}# @99496动漫网`,
       url: `/play/${id}/${pid}`
     }
-    if (copyright === 'stop' && !userid && !ISPLAY && !isMobile()) {
+    if (copyright === 'stop' && !userid && !ISPLAY && isP) {
       if (typeof window === 'undefined') {
         return
       }
