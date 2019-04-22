@@ -52,32 +52,18 @@ const youku = (pv, isLogin) => {
   return isP ? HTML(ykUrl(data.length === 3 ? data[2] : pv), isLogin) : iframe(ykIf(data.length === 3 ? data[2] : pv))
 }
 const iqiyi = (pv, isLogin) => {
-  let plus = isMobile() ? '&tvid=' : '&tvId='
-  let data = []
-  let purl = ''
-  let vid = ''
-  if (pv.indexOf(',') > 0) {
-    data = pv.split(',')
-    vid = data[1] + plus + data[0]
-  } else if (pv.indexOf('&tvid=') > 0) {
-    data = pv.split('&tvid=')
-    vid = data[0] + plus + data[1]
-  } else if (pv.indexOf('_') > 0) {
-    data = pv.split('_')
-    vid = data[1] + plus + data[0]
-  }
-  // 5edbc91ba157d0acdb1f3a036959f2b0&tvId=1952779500
-  if (isMobile()) {
-    purl = 'https://m.iqiyi.com/shareplay.html?vid=' + vid + '&coop=coop_117_9949&cid=qc_105102_300452&bd=1&autoplay=1&fullscreen=1'
-  } else {
-    purl = `https://www.iqiyi.com/common/flashplayer/20181107/1549af8f6df.swf?menu=false&autoplay=true&cid=qc_100001_100100&flashP2PCoreUrl=http://www.iqiyi.com/common/flashplayer/20170406/15562a1b82aa.swf&=undefined&&definitionID=${vid}&isPurchase=0&cnId=4&coop=ugc_openapi_wanyouwang&cid=qc_100001_300089&bd=1&autoChainPlay=1&showRecommend=0&source=&purl=&autoplay=true` //'https://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=' + vid
-  }
+  const plus = this.isMobile() ? '&tvid=' : '&tvId='
+  const data = pv.split(/,|&tvid=|_/)
+  const vid = /,|_/.test(pv) ? data[1] + plus + data[0] : data[0] + plus + data[1]
+  //'https://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=' + vid
+  const purl = isMobile()
+    ? `https://m.iqiyi.com/shareplay.html?vid=${vid}&coop=coop_117_9949&cid=qc_105102_300452&bd=1&autoplay=1&fullscreen=1`
+    : `https://www.iqiyi.com/common/flashplayer/20181107/1549af8f6df.swf?menu=false&autoplay=true&cid=qc_100001_100100&flashP2PCoreUrl=http://www.iqiyi.com/common/flashplayer/20170406/15562a1b82aa.swf&=undefined&&definitionID=${vid}&isPurchase=0&cnId=4&coop=ugc_openapi_wanyouwang&cid=qc_100001_300089&bd=1&autoChainPlay=1&showRecommend=0&source=&purl=&autoplay=true`
   return isP ? HTML(purl, isLogin) : isMobile() ? iframe(purl) : flash(purl)
 }
 const letv = (pv, isLogin) => {
   const data = pv.split(',')
-  const len = data.length
-  const purl = len === 2 ? '/' : 'https://www.le.com/ptv/vplay/' + data[0] + '.html'
+  const purl = data.length === 2 ? '/' : 'https://www.le.com/ptv/vplay/' + data[0] + '.html'
   return HTML(purl, isLogin)
 }
 const sohu = (pv, isLogin) => {
@@ -99,23 +85,13 @@ const bilibili = (pv, isLogin) => {
 }
 const acfun = (pv, isLogin) => {
   let vid = ''
-  let data = []
   if (pv.indexOf('ab') !== -1) {
-    data = pv.split('ab')
+    const data = pv.split('ab')
     const ab = data[1].split(',')
-    if (ab.length === 2) {
-      vid = ab[0] + '_' + ab[1]
-    } else {
-      vid = data[1]
-    }
+    vid = ab.length === 2 ? ab[0] + '_' + ab[1] : data[1]
   } else {
-    data = pv.split(',')
-    const len = data.length
-    if (len === 2) {
-      vid = data[0] + '_' + data[1]
-    } else {
-      vid = pv
-    }
+    const data = pv.split(',')
+    vid = data.length === 2 ? data[0] + '_' + data[1] : pv
   }
   const purl = isMobile() ? 'https://m.acfun.cn/v/?' + (pv.indexOf('ab') !== -1 ? 'ab' : 'ac') + '=' + vid : 'https://www.acfun.cn/v/' + (pv.indexOf('ab') !== -1 ? 'ab' : 'ac') + vid
   return HTML(purl, isLogin)
@@ -124,7 +100,7 @@ const acfun = (pv, isLogin) => {
 const ck = (type, pv) => {
   const flvsp = 'https://api.flvsp.com/?type='
   const mdparse = 'https://www.acgnz.cn/mdparse/?type='
-  if (type === 'pptv' || type === 'qq' || type === 'letv') {
+  if (type === 'pptv') {
     return mdparse + type + '&id=' + pv
   } else if (type === 'sohu') {
     return isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
@@ -148,11 +124,6 @@ const rePlayUrl = (playname, pv) => {
   var sVid = '',
     sName = '',
     data = []
-  if (pv.indexOf('@@') !== -1) {
-    data = pv.split('@@')
-    playname = data[1]
-    pv = data[0]
-  }
   switch (playname) {
     case 'letv':
       data = pv.split(',')
@@ -218,9 +189,9 @@ const jump = (name, pv, danmu, isLogin) => {
 }
 
 const isPlay = (name, vid, danmu, uid, isLogin) => {
-  const playStyle = /acku|sina|letvsaas|weibo|miaopai|yunpan|qqq|360/.test(name)
+  const playStyle = /sina|weibo|miaopai|yunpan|qqq|360/.test(name)
   let url = ''
-  if (((/.mp4|.m3u8/.test(vid) || playStyle) && isP && !uid) || ['bit', 'letvyun', 'pmbit', 'bithls', 'bitqiu'].indexOf(name) !== -1) {
+  if (((/.mp4|.m3u8/.test(vid) || playStyle) && isP && !uid) || ['bit', 'letvyun', 'pmbit', 'bithls', 'bitqiu', 'letvsaas', 'acku'].indexOf(name) !== -1) {
     url = HTML('/', isLogin)
   } else if (name === 'full') {
     url = isP ? HTML('/', isLogin) : jiexiUrl(vid.replace('http://', 'https://'), danmu)

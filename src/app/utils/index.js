@@ -17,16 +17,7 @@ export const isMobile = () => {
   if (typeof navigator === 'undefined') {
     return
   }
-  const ua = navigator.userAgent
-  const ipad = ua.match(/(iPad).*OS\s([\d_]+)/)
-  const isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/)
-  const isAndroid = ua.match(/(Android)\s+([\d.]+)/)
-  const isMobile = isIphone || isAndroid
-  if (isMobile) {
-    return true
-  } else {
-    return false
-  }
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 }
 
 // 去掉字符串前后空格
