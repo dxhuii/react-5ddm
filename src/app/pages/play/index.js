@@ -160,10 +160,13 @@ class Play extends Component {
     return data.filter(item => item.playName === 'other')
   }
 
+  getQq(data = []) {
+    return data.filter(item => item.playName === 'qq')
+  }
+
   getData() {
     const that = this
     loadScript('https://pv.sohu.com/cityjson?ie=utf-8', false, function() {
-      const isStop = /上海|北京/.test(returnCitySN.cname)
       const {
         match: {
           params: { id, pid }
@@ -174,6 +177,8 @@ class Play extends Component {
       const { play, type } = that.state
       const { list = [], copyright } = data
       const other = that.getOther(list)
+      const qq = that.getQq(list)
+      const isStop = (qq ? /上海|北京|深圳/ : /上海|北京/).test(returnCitySN.cname)
       const danmu = `${id}_${pid}`
       const isZ = isStop && /vip|banquan|stop/.test(copyright) && +Cookies.get('plain') !== 7 && !ISPLAY
       const isA = other.length > 0 && !isP && !isZ && (copyright !== 'vip' || isMobile() || ISPLAY)
@@ -188,7 +193,8 @@ class Play extends Component {
       console.log(play, playHtml, isA, 'getdata')
       that.setState({
         playHtml,
-        mInfo
+        mInfo,
+        isZ
       })
     })
   }
@@ -264,7 +270,7 @@ class Play extends Component {
         params: { id, pid }
       }
     } = this.props
-    const { full, isfull, playHtml, mInfo, showPlay } = this.state
+    const { full, isfull, playHtml, mInfo, showPlay, isZ } = this.state
     const { listName, listId, listNameBig, list = [], pic, title, pan, subTitle, actor = '', up, down, prev, next, mcid = [], copyright } = data
     const shareConfig = {
       pic,
@@ -301,12 +307,21 @@ class Play extends Component {
                 <h4>{subTitle}</h4>
               </div>
               <ul styleName={`playlist ${showPlay ? 'show' : 'hide'}`}>
-                {list.map(item => (
-                  <li key={item.playName} onClick={() => this.onPlay(item.vid, item.playName)}>
-                    <i className={`playicon ${item.playName}`} />
-                    {item.playTitle}
-                  </li>
-                ))}
+                {list.map((item, index) => {
+                  return isZ ? (
+                    index < 1 ? (
+                      <li key={item.playName}>
+                        <i className={`playicon ${item.playName}`} />
+                        {item.playTitle}
+                      </li>
+                    ) : null
+                  ) : (
+                    <li key={item.playName} onClick={() => this.onPlay(item.vid, item.playName)}>
+                      <i className={`playicon ${item.playName}`} />
+                      {item.playTitle}
+                    </li>
+                  )
+                })}
               </ul>
               <div styleName="m-play-name" onClick={this.onShowPlayer}>
                 <i className={`playicon ${mInfo.playName}`} />
