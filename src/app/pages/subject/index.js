@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -34,8 +33,6 @@ import { isNumber, formatPic, isMobile, loadScript } from '@/utils'
 import { IS9, DOMAIN_NAME, ISPLAY, NAME, DOMAIN } from 'Config'
 
 import './style.scss'
-
-const history = createBrowserHistory()
 @Shell
 @withRouter
 @connect(
@@ -88,6 +85,7 @@ class Bangumi extends Component {
       cmScore,
       hits
     } = this.props
+    const that = this
     if (!info || !info.data) {
       detail({ id })
     }
@@ -96,7 +94,7 @@ class Bangumi extends Component {
     }
     hits({ id, sid })
     loadScript('https://pv.sohu.com/cityjson?ie=utf-8', false, function() {
-      this.setState({
+      that.setState({
         location: /上海|北京|深圳/.test(returnCitySN.cname)
       })
     })
@@ -257,7 +255,10 @@ class Bangumi extends Component {
       window.location.href = jump
     }
     if (copyright === 'stop' && location && !ISPLAY) {
-      history.push('/404')
+      if (typeof window === 'undefined') {
+        return
+      }
+      window.location.href = '/404'
     }
     return (
       <Fragment>
