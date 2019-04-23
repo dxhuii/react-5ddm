@@ -33,6 +33,8 @@ import { isNumber, formatPic, isMobile } from '@/utils'
 import { IS9, DOMAIN_NAME, ISPLAY, NAME, DOMAIN } from 'Config'
 
 import './style.scss'
+
+const isP = IS9 && !isMobile()
 @Shell
 @withRouter
 @connect(
@@ -241,7 +243,7 @@ class Bangumi extends Component {
       desc: reContent,
       url: `/subject/${id}`
     }
-    if ((copyright === 'stop' && !userid && !ISPLAY) || !isMobile) {
+    if (copyright === 'stop' && !userid && !ISPLAY && isP) {
       if (typeof window === 'undefined') {
         return
       }
@@ -371,7 +373,7 @@ class Bangumi extends Component {
             </div>
           </div>
         </div>
-        {IS9 && copyright === 'banquan' ? <div styleName="copyright">根据国家相关部门规定，本动画不准上架，请支持正版观看，谢谢</div> : <PlayList key="playlist" />}
+        {(IS9 || !ISPLAY) && copyright === 'banquan' ? <div styleName="copyright">根据国家相关部门规定，本动画不准上架，请支持正版观看，谢谢</div> : <PlayList key="playlist" />}
         <div className="wp" style={{ padding: 0 }}>
           {isMobile() ? (
             <div className="mt20">
