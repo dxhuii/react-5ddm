@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -29,12 +30,12 @@ import Toast from '@/components/Toast'
 
 import Shell from '@/components/Shell'
 
-import { isNumber, formatPic, isMobile } from '@/utils'
+import { isNumber, formatPic, isMobile, loadScript } from '@/utils'
 import { IS9, DOMAIN_NAME, ISPLAY, NAME, DOMAIN } from 'Config'
 
 import './style.scss'
 
-const isP = IS9 && !isMobile()
+const history = createBrowserHistory()
 @Shell
 @withRouter
 @connect(
@@ -69,7 +70,8 @@ class Bangumi extends Component {
     this.state = {
       visible: false,
       isSign: 'signIn',
-      isMoreActor: false
+      isMoreActor: false,
+      location: false
     }
   }
 
@@ -93,6 +95,11 @@ class Bangumi extends Component {
       score({ id, sid, uid: userid })
     }
     hits({ id, sid })
+    loadScript('https://pv.sohu.com/cityjson?ie=utf-8', false, function() {
+      this.setState({
+        location: /上海|北京|深圳/.test(returnCitySN.cname)
+      })
+    })
   }
 
   async addMark(type, id, cid, uid) {
@@ -190,7 +197,7 @@ class Bangumi extends Component {
   }
 
   render() {
-    const { visible, isSign, isMoreActor } = this.state
+    const { visible, isSign, isMoreActor, location } = this.state
     const {
       info: { data = {}, loading },
       userinfo: { userid },
@@ -248,6 +255,9 @@ class Bangumi extends Component {
         return
       }
       window.location.href = jump
+    }
+    if (copyright === 'stop' && location && !ISPLAY) {
+      history.push('/404')
     }
     return (
       <Fragment>
