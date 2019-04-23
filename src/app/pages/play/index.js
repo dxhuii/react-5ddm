@@ -162,7 +162,7 @@ class Play extends Component {
 
   getData() {
     const that = this
-    loadScript('//pv.sohu.com/cityjson?ie=utf-8', false, function() {
+    loadScript('https://pv.sohu.com/cityjson?ie=utf-8', false, function() {
       const isStop = /上海|北京/.test(returnCitySN.cname)
       const {
         match: {
