@@ -1,4 +1,5 @@
 @import '../../pages/_mixin';
+
 .article-body {
   h1 {
     font-size: 24px;
@@ -13,6 +14,7 @@
 .article-label {
   color: #999;
   margin-top: 10px;
+
   span {
     margin-right: 10px;
   }
@@ -22,12 +24,14 @@
   padding: 20px 20px 0;
   margin-bottom: 20px;
   line-height: 2;
+
   img {
     max-width: 100%;
     margin: 0 auto;
     height: auto;
     display: block;
   }
+
   p {
     padding-bottom: 20px;
   }
@@ -36,6 +40,7 @@
 .article-context {
   padding: 0 20px 20px;
   line-height: 30px;
+
   p {
     @include clamp(1);
   }
@@ -45,10 +50,12 @@
   height: 517.5px;
   position: relative;
   margin-top: 20px;
+
   div {
     width: 100%;
     height: 100%;
   }
+
   a {
     position: absolute;
     right: 10px;
@@ -74,10 +81,12 @@
   .article-video {
     height: 240px;
     margin-top: 10px;
-    a {
+
+    >a {
       display: none;
     }
   }
+
   .article-content {
     padding-top: 10px;
     margin-bottom: 10px;

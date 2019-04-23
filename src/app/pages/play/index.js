@@ -169,7 +169,8 @@ class Play extends Component {
     loadScript('https://pv.sohu.com/cityjson?ie=utf-8', false, function() {
       const {
         match: {
-          params: { id, pid }
+          params: { id, pid },
+          url
         },
         userinfo: { userid },
         player: { data = {} }
@@ -185,9 +186,9 @@ class Play extends Component {
       const { playName, vid, playTitle } = isA ? other[0] : list[0]
       let playHtml = ''
       if (play && !isZ) {
-        playHtml = playing(type, play, danmu, userid, copyright)
+        playHtml = playing({ name: type, vid: play, danmu, uid: userid, isLogin: copyright, url })
       } else {
-        playHtml = playing(playName, vid, danmu, userid, copyright)
+        playHtml = playing({ name: playName, vid, danmu, uid: userid, isLogin: copyright, url })
       }
       const mInfo = { playName, vid, playTitle }
       console.log(play, playHtml, isA, 'getdata')

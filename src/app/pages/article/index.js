@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -33,7 +33,7 @@ import './style.scss'
     hits: bindActionCreators(hits, dispatch)
   })
 )
-class Article extends Component {
+class Article extends PureComponent {
   static propTypes = {
     match: PropTypes.object,
     article: PropTypes.func,
@@ -91,10 +91,11 @@ class Article extends Component {
   render() {
     const {
       articleData: { data = {} },
+      match: { url },
       userinfo: { userid }
     } = this.props
     const { title, id, name, cid, pic = '', remark, keywords, addtime, inputer, tag = [], prev, next, vodid, jump, content = '', playname = '', playurl = '' } = data
-    const playHtml = playing(playname, playurl, `article_${id}`, userid)
+    const playHtml = playing({ name: playname, vid: playurl, danmu: `article_${id}`, uid: userid, url })
     const { full, isfull } = this.state
     const shareConfig = {
       pic,
