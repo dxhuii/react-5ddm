@@ -179,7 +179,7 @@ class Play extends Component {
       const isA = other.length > 0 && !isP && !isZ && (copyright !== 'vip' || isMobile() || ISPLAY)
       const { playName, vid, playTitle } = isA ? other[0] : list[0]
       let playHtml = ''
-      if (play) {
+      if (play && !isZ) {
         playHtml = playing(type, play, danmu, userid, copyright)
       } else {
         playHtml = playing(playName, vid, danmu, userid, copyright)
