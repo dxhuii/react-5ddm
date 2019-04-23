@@ -10,17 +10,13 @@ const iframe = url => {
 }
 
 const HTML = (pv, isLogin) => {
-  if (typeof navigator === 'undefined') {
+  if (typeof window === 'undefined') {
     return
   }
-  let url = ''
   const href = window.location.href.split('/')
-  if (isLogin === 'vip') {
-    url = 'https://www.5ddm.com/play/' + href[4] + '/' + href[5]
-  } else {
-    url = 'https://www.dddm.tv/play/' + href[4] + '/' + href[5]
-  }
-  const reUrl = DOMAIN_NAME === '5ddm.com' && isLogin === 'vip' ? '' : DOMAIN_NAME === 'dddm.tv' && isLogin !== 'vip' ? '' : `<a target="_blank" class="jump" href="${url}">或者点这里试一下</a>`
+  const isJump = /vip|banquan|stop/.test(isLogin)
+  const url = isJump ? 'https://www.5ddm.com/play/' + href[4] + '/' + href[5] : 'https://www.dddm.tv/play/' + href[4] + '/' + href[5]
+  const reUrl = DOMAIN_NAME === '5ddm.com' && isJump ? '' : DOMAIN_NAME === 'dddm.tv' && !isJump ? '' : `<a target="_blank" class="jump" href="${url}">或者点这里试一下</a>`
   return `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">亲，请点我播放</a>${reUrl}<p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
 }
 

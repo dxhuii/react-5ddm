@@ -93,25 +93,7 @@ class Article extends Component {
       articleData: { data = {} },
       userinfo: { userid }
     } = this.props
-    const {
-      title,
-      id,
-      name,
-      cid,
-      pic = '',
-      remark,
-      keywords,
-      addtime,
-      inputer,
-      tag = [],
-      prev,
-      next,
-      vodid,
-      // newsid,
-      content = '',
-      playname = '',
-      playurl = ''
-    } = data
+    const { title, id, name, cid, pic = '', remark, keywords, addtime, inputer, tag = [], prev, next, vodid, jump, content = '', playname = '', playurl = '' } = data
     const playHtml = playing(playname, playurl, `article_${id}`, userid)
     const { full, isfull } = this.state
     const shareConfig = {
@@ -119,6 +101,12 @@ class Article extends Component {
       title: `${title} - ${name} - #${NAME.split('_').join('##')}# @99496动漫网`,
       desc: remark,
       url: `/article/${id}`
+    }
+    if (jump) {
+      if (typeof window === 'undefined') {
+        return
+      }
+      window.location.href = jump
     }
     return (
       <div className="wp mt20 clearfix">

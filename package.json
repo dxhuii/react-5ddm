@@ -21,6 +21,7 @@
     "cookie-parser": "^1.4.3",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
     "qrcode.react": "^0.9.2",
     "react": "^16.7.0",

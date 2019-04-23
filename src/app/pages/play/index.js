@@ -21,8 +21,10 @@ import Toast from '@/components/Toast'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
+import Cookies from 'js-cookie'
+
 import { ISPLAY, IS9, DOMAIN_NAME, NAME } from 'Config'
-import { isMobile } from '@/utils'
+import { isMobile, loadScript } from '@/utils'
 import playing from '@/utils/play'
 
 import './style.scss'
@@ -159,30 +161,35 @@ class Play extends Component {
   }
 
   getData() {
-    const {
-      match: {
-        params: { id, pid }
-      },
-      userinfo: { userid },
-      player: { data = {} }
-    } = this.props
-    const { play, type } = this.state
-    const { list = [], copyright } = data
-    const other = this.getOther(list)
-    const danmu = `${id}_${pid}`
-    const isA = other.length > 0 && !isP && (copyright !== 'vip' || isMobile() || ISPLAY)
-    const { playName, vid, playTitle } = isA ? other[0] : list[0]
-    let playHtml = ''
-    if (play) {
-      playHtml = playing(type, play, danmu, userid, copyright)
-    } else {
-      playHtml = playing(playName, vid, danmu, userid, copyright)
-    }
-    const mInfo = { playName, vid, playTitle }
-    console.log(play, playHtml, isA, 'getdata')
-    this.setState({
-      playHtml,
-      mInfo
+    const that = this
+    loadScript('//pv.sohu.com/cityjson?ie=utf-8', false, function() {
+      const isStop = /上海|北京/.test(returnCitySN.cname)
+      const {
+        match: {
+          params: { id, pid }
+        },
+        userinfo: { userid },
+        player: { data = {} }
+      } = that.props
+      const { play, type } = that.state
+      const { list = [], copyright } = data
+      const other = that.getOther(list)
+      const danmu = `${id}_${pid}`
+      const isZ = isStop && /vip|banquan|stop/.test(copyright) && +Cookies.get('plain') !== 7 && !ISPLAY
+      const isA = other.length > 0 && !isP && !isZ && (copyright !== 'vip' || isMobile() || ISPLAY)
+      const { playName, vid, playTitle } = isA ? other[0] : list[0]
+      let playHtml = ''
+      if (play) {
+        playHtml = playing(type, play, danmu, userid, copyright)
+      } else {
+        playHtml = playing(playName, vid, danmu, userid, copyright)
+      }
+      const mInfo = { playName, vid, playTitle }
+      console.log(play, playHtml, isA, 'getdata')
+      that.setState({
+        playHtml,
+        mInfo
+      })
     })
   }
 

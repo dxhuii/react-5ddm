@@ -39,9 +39,9 @@ const conf = {
   `
 }
 const defalut = {
-  IS9: false,
-  ISPLAY: true,
-  ISAD: false,
+  IS9: true,
+  ISPLAY: false,
+  ISAD: true,
   NAME: '99496动漫(9站)',
   DESCRIBE: '99496动漫(9站) - 小而美的动漫网站',
   KEYWORDS: '9站, 99496动漫',

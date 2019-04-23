@@ -243,12 +243,6 @@ class Bangumi extends Component {
       desc: reContent,
       url: `/subject/${id}`
     }
-    if (copyright === 'stop' && !userid && !ISPLAY && isP) {
-      if (typeof window === 'undefined') {
-        return
-      }
-      window.location.href = '/404'
-    }
     if (jump) {
       if (typeof window === 'undefined') {
         return
@@ -373,7 +367,7 @@ class Bangumi extends Component {
             </div>
           </div>
         </div>
-        {(IS9 || !ISPLAY) && copyright === 'banquan' ? <div styleName="copyright">根据国家相关部门规定，本动画不准上架，请支持正版观看，谢谢</div> : <PlayList key="playlist" />}
+        <PlayList key="playlist" />
         <div className="wp" style={{ padding: 0 }}>
           {isMobile() ? (
             <div className="mt20">
