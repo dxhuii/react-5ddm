@@ -254,12 +254,6 @@ class Bangumi extends Component {
       }
       window.location.href = jump
     }
-    if (copyright === 'stop' && location && !ISPLAY) {
-      if (typeof window === 'undefined') {
-        return
-      }
-      window.location.href = '/404'
-    }
     return (
       <Fragment>
         <div className="warp-bg">
