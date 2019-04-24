@@ -10,8 +10,7 @@ const iframe = url => {
 }
 
 const HTML = (pv, isLogin, path) => {
-  console.log(pv, isLogin, path)
-  const isJump = /vip|banquan|stop/.test(isLogin)
+  const isJump = /zb|vip/.test(isLogin)
   const url = isJump ? `https://www.5ddm.com${path}` : `https://www.dddm.tv${path}`
   const reUrl = DOMAIN_NAME === '5ddm.com' && isJump ? '' : DOMAIN_NAME === 'dddm.tv' && !isJump ? '' : `<a target="_blank" class="jump" href="${url}">或者点这里试一下</a>`
   return `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">亲，请点我播放</a>${reUrl}<p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
