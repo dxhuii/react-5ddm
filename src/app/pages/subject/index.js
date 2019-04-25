@@ -67,8 +67,7 @@ class Bangumi extends Component {
     this.state = {
       visible: false,
       isSign: 'signIn',
-      isMoreActor: false,
-      location: false
+      isMoreActor: false
     }
   }
 
@@ -93,11 +92,6 @@ class Bangumi extends Component {
       score({ id, sid, uid: userid })
     }
     hits({ id, sid })
-    loadScript('https://pv.sohu.com/cityjson?ie=utf-8', false, function() {
-      that.setState({
-        location: /上海|北京|深圳/.test(returnCitySN.cname)
-      })
-    })
   }
 
   async addMark(type, id, cid, uid) {
@@ -195,7 +189,7 @@ class Bangumi extends Component {
   }
 
   render() {
-    const { visible, isSign, isMoreActor, location } = this.state
+    const { visible, isSign, isMoreActor } = this.state
     const {
       info: { data = {}, loading },
       userinfo: { userid },
