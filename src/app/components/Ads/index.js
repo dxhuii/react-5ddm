@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { withRouter } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { ads } from '@/store/actions/ads'
 import { getAds } from '@/store/reducers/ads'
 
 import { ISAD, DOMAIN_NAME } from 'Config'
@@ -39,36 +37,20 @@ const reId = id => {
 const adsId = /24|25|26|27|31/
 
 @withRouter
-@connect(
-  (state, props) => ({
-    adsData: getAds(state, reId(props.id))
-  }),
-  dispatch => ({
-    ads: bindActionCreators(ads, dispatch)
-  })
-)
+@connect((state, props) => ({
+  adsData: getAds(state, reId(props.id))
+}))
 class Ads extends Component {
   static propTypes = {
     id: PropTypes.number,
-    adsData: PropTypes.object,
-    ads: PropTypes.func
+    adsData: PropTypes.object
   }
   async componentDidMount() {
     if (ISAD) {
-      const { id, ads, adsData } = this.props
-      if (!adsData.data) {
-        let [, data] = await ads({ id: reId(id) })
-        if (data && adsId.test(id)) {
-          const url = data.data.content
-          if (url) {
-            this.createAd(url)
-          }
-        }
-      } else {
-        const url = adsData.data.content
-        if (adsId.test(id) && url) {
-          this.createAd(url)
-        }
+      const { id, adsData } = this.props
+      const url = adsData.data.content
+      if (adsId.test(id) && url) {
+        this.createAd(url)
       }
     }
   }
