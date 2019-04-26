@@ -1,0 +1,89 @@
+.img-replace {
+  display: inline-block;
+  overflow: hidden;
+  text-indent: 100%;
+  color: transparent;
+  white-space: nowrap
+}
+
+.cd-popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s 0s, visibility 0s .3s;
+  z-index: 999;
+}
+
+.cd-popup.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .3s 0s, visibility 0s 0s
+}
+
+.cd-popup-container {
+  position: relative;
+  top: 150px;
+  width: 460px;
+  left: 50%;
+  background: #fff;
+  border-radius: .25em .25em .4em .4em;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+  transform: translate(-50%, -50%);
+  backface-visibility: hidden;
+  transition-property: transform;
+  transition-duration: .3s
+}
+
+.cd-popup-container .cd-popup-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.cd-popup-container .cd-popup-close::before,
+.cd-popup-container .cd-popup-close::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  width: 14px;
+  height: 3px;
+  background-color: #8f9cb5
+}
+
+.cd-popup-container .cd-popup-close::before {
+  transform: rotate(45deg);
+  left: 8px
+}
+
+.cd-popup-container .cd-popup-close::after {
+  transform: rotate(-45deg);
+  right: 8px
+}
+
+.is-visible .cd-popup-container {
+  transform: translate(-50%, 0)
+}
+
+.cd-popup.is-visible {
+  .cd-popup-container {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media (min-width: 0) and (max-width: 1200px) {
+  .cd-popup-container {
+    width: 90%;
+  }
+}

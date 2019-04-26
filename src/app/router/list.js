@@ -18,12 +18,14 @@ import topData from '@/pages/top/load-data'
 import newData from '@/pages/new/load-data'
 import episodelistData from '@/pages/episodelist/load-data'
 import detailNewstData from '@/pages/subject/news/load-data'
+import Footer from '@/components/Footer'
 
 export default [
   {
     path: '/',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/home'),
       loading: () => <Loading />
@@ -36,11 +38,11 @@ export default [
     path: '/week',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/week'),
       loading: () => <Loading />
     }),
-
     loadData: WeekData,
     enter: 'everybody'
   },
@@ -59,6 +61,7 @@ export default [
     path: '/week/:id',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/week'),
       loading: () => <Loading />
@@ -71,6 +74,7 @@ export default [
     path: '/topics',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/topics'),
       loading: () => <Loading />
@@ -92,6 +96,7 @@ export default [
     path: '/subject/:id',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/subject'),
       loading: () => <Loading />
@@ -104,6 +109,7 @@ export default [
     path: '/subject/:id/news',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/subject/news'),
       loading: () => <Loading />
@@ -116,6 +122,7 @@ export default [
     path: '/play/:id/:pid',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/play'),
       loading: () => <Loading />
@@ -128,6 +135,7 @@ export default [
     path: '/dongman',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/list'),
       loading: () => <Loading />
@@ -140,6 +148,7 @@ export default [
     path: '/dongman/:name',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/list'),
       loading: () => <Loading />
@@ -152,6 +161,7 @@ export default [
     path: '/type/:name/:mcid/:area/:year/:letter/:lz/:order',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/list'),
       loading: () => <Loading />
@@ -164,6 +174,7 @@ export default [
     path: '/news',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/news'),
       loading: () => <Loading />
@@ -176,6 +187,7 @@ export default [
     path: '/news/:name',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/news'),
       loading: () => <Loading />
@@ -188,6 +200,7 @@ export default [
     path: '/article/:id',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/article'),
       loading: () => <Loading />
@@ -200,6 +213,7 @@ export default [
     path: '/time/:id',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/time'),
       loading: () => <Loading />
@@ -212,6 +226,7 @@ export default [
     path: '/search/:wd',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/list'),
       loading: () => <Loading />
@@ -223,6 +238,7 @@ export default [
     path: '/episode/:id',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/episode'),
       loading: () => <Loading />
@@ -235,6 +251,7 @@ export default [
     path: '/episode/:id/:p',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/episode'),
       loading: () => <Loading />
@@ -247,6 +264,7 @@ export default [
     path: '/month/:month',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/month'),
       loading: () => <Loading />
@@ -259,6 +277,7 @@ export default [
     path: '/top',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/top'),
       loading: () => <Loading />
@@ -271,6 +290,7 @@ export default [
     path: '/new',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/new'),
       loading: () => <Loading />
@@ -283,6 +303,7 @@ export default [
     path: '/ep',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/episodelist'),
       loading: () => <Loading />
@@ -295,6 +316,7 @@ export default [
     path: '/upload',
     exact: true,
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('../pages/upload'),
       loading: () => <Loading />
@@ -303,8 +325,19 @@ export default [
   },
 
   {
+    path: '/out/pic',
+    exact: true,
+    component: Loadable({
+      loader: () => import('../pages/out/pic'),
+      loading: () => <Loading />
+    }),
+    enter: 'everybody'
+  },
+
+  {
     path: '**',
     head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/not-found'),
       loading: () => <Loading />

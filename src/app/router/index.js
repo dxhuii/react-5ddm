@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 // import ReactDOM from 'react-dom';
 import { Route, Switch, Redirect } from 'react-router-dom'
 // import Loadable from 'react-loadable';
@@ -66,25 +66,26 @@ export default (user, logPageView = () => {}) => {
   }
 
   let router = () => (
-    <div>
+    <Fragment>
       <Switch>
         {routerList.map((route, index) => (
-          <Route key={index} path={route.path} exact={route.exact} component={route.head} />
+          <Route key={`head-${index}`} path={route.path} exact={route.exact} component={route.head} />
         ))}
       </Switch>
 
-      <div className="container">
-        <Switch>
-          {routerList.map((route, index) => {
-            if (route.component) {
-              return <Route key={index} path={route.path} exact={route.exact} render={props => enter[route.enter](route.component, props, route)} />
-            }
-          })}
-        </Switch>
-      </div>
-
-      <AsyncComponent load={() => import('@/components/Footer')}>{Component => <Component />}</AsyncComponent>
-    </div>
+      <Switch>
+        {routerList.map((route, index) => {
+          if (route.component) {
+            return <Route key={`body-${index}`} path={route.path} exact={route.exact} render={props => enter[route.enter](route.component, props, route)} />
+          }
+        })}
+      </Switch>
+      <Switch>
+        {routerList.map((route, index) => (
+          <Route key={`footer-${index}`} path={route.path} exact={route.exact} component={route.footer} />
+        ))}
+      </Switch>
+    </Fragment>
   )
 
   return {
