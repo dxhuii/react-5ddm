@@ -340,15 +340,9 @@ class SubjectList extends Component {
             </dl>
           </div>
         </div>
-        {isMobile() ? (
-          <div className="mt20">
-            <Ads id={42} />
-          </div>
-        ) : (
-          <div className="wp mt20">
-            <Ads id={39} />
-          </div>
-        )}
+        <div className="mt20">
+          <Ads id={11} />
+        </div>
         <div className="wp">
           <Item data={data} />
         </div>

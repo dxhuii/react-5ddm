@@ -143,11 +143,9 @@ class Article extends PureComponent {
             ) : null}
             <div styleName="article-content" dangerouslySetInnerHTML={{ __html: convertHTML(content) }} />
             <TagShare tag={tag} config={shareConfig} />
-            {isMobile() && (
-              <div className="mt20">
-                <Ads id={26} />
-              </div>
-            )}
+            <div className="mt20">
+              <Ads id={4} />
+            </div>
             <div styleName="article-context" className="mt20">
               {prev ? (
                 <p>

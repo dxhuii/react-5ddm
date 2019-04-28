@@ -48,7 +48,9 @@ class Home extends Component {
               <Recommend />
             </div>
           </div>
-          <div>{isMobile() ? <Ads id={44} /> : <Ads id={20} />}</div>
+          <div>
+            <Ads id={1} />
+          </div>
           <div className="mt20" styleName="main">
             <div styleName="main-left">
               <WeekDay title="番剧" link="/week/1" isJp={['', '月', '火', '水', '木', '金', '土', '日']} type={1} />
@@ -57,7 +59,9 @@ class Home extends Component {
               <Top name="topListIndexJP" />
             </div>
           </div>
-          <div>{isMobile() ? <Ads id={46} /> : <Ads id={21} />}</div>
+          <div>
+            <Ads id={2} />
+          </div>
           <div className="mt20" styleName="main news">
             <div styleName="main-left">
               <News name="newsPicList" />

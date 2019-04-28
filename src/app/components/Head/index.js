@@ -200,17 +200,11 @@ class Head extends Component {
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
           <Sign isSign={isSign} onType={val => this.onType(val)} />
         </Modal>
-        {isMobile()
-          ? isNot && (
-              <div className="mt20">
-                <Ads id={42} />
-              </div>
-            )
-          : isNot && (
-              <div className="wp mt20">
-                <Ads id={39} />
-              </div>
-            )}
+        {isNot ? (
+          <div className="mt20">
+            <Ads id={7} />
+          </div>
+        ) : null}
       </Fragment>
     )
   }

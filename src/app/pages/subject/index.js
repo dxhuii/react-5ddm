@@ -84,7 +84,6 @@ class Bangumi extends Component {
       cmScore,
       hits
     } = this.props
-    const that = this
     if (!info || !info.data) {
       detail({ id })
     }
@@ -366,17 +365,12 @@ class Bangumi extends Component {
             </div>
           </div>
         </div>
+        <div className="mt20">
+          <Ads id={3} />
+        </div>
         <PlayList key="playlist" />
-        <div className="wp" style={{ padding: 0 }}>
-          {isMobile() ? (
-            <div className="mt20">
-              <Ads id={48} />
-              <div className="mt20" />
-              <Ads id={26} />
-            </div>
-          ) : (
-            <Ads id={22} />
-          )}
+        <div className="wp">
+          <Ads id={4} />
         </div>
         <div className="mt20 clearfix wp" styleName="detail-bottom">
           <div className="fl box pb20 left">
@@ -468,7 +462,9 @@ class Bangumi extends Component {
             </div>
           </div>
         </div>
-        <div className="wp">{isMobile() ? <Ads id={49} /> : <Ads id={21} />}</div>
+        <div className="wp">
+          <Ads id={8} />
+        </div>
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
           <Sign isSign={isSign} onType={val => this.onType(val)} />
         </Modal>

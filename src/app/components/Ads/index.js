@@ -1,57 +1,28 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { getAds } from '@/store/reducers/ads'
+import { ISAD } from 'Config'
+import { loadScript } from '@/utils'
 
-import { ISAD, DOMAIN_NAME } from 'Config'
-
-const reId = id => {
-  let r = id
-  if (DOMAIN_NAME === 'dddm.tv') {
-    switch (id) {
-      case 20:
-        r = 33
-        break
-      case 21:
-        r = 35
-        break
-      case 22:
-        r = 37
-        break
-      default:
-        r = id
-    }
-  }
-  return r
-}
-
-/**
- * 24 手机底部固定位-深蓝广告
- * 25 全站右下角悬浮广告 PC
- * 26 手机端播放列表下广告位
- * 27 手机全站底漂
- * 31 手机端播放列表上广告位
- */
-const adsId = /24|25|26|27|31/
-
-@withRouter
-@connect((state, props) => ({
-  adsData: getAds(state, reId(props.id))
-}))
 class Ads extends Component {
   static propTypes = {
-    id: PropTypes.number,
-    adsData: PropTypes.object
+    id: PropTypes.number
   }
   async componentDidMount() {
     if (ISAD) {
-      const { id, adsData } = this.props
-      const url = adsData.data.content
-      if (adsId.test(id) && url) {
-        this.createAd(url)
-      }
+      const { id } = this.props
+      const that = this
+      loadScript('https://cos.mdb6.com/dddm/income.min.js', true, function() {
+        console.log(income)
+        if (income[id]) {
+          const { type, content } = income[id]
+          if (type === 2) {
+            that.createAd(content)
+          } else if (type === 1) {
+            that.showAd(content)
+          }
+        }
+      })
     }
   }
 
@@ -63,17 +34,12 @@ class Ads extends Component {
     this.ads.appendChild(script)
   }
 
-  showAd() {
-    const {
-      adsData: { data = {} }
-    } = this.props
-    const content = data.content
-    return <div dangerouslySetInnerHTML={{ __html: content }} />
+  showAd(content) {
+    this.ads.innerHTML = content
   }
 
   render() {
-    const { id } = this.props
-    return ISAD ? adsId.test(id) ? <div ref={e => (this.ads = e)} /> : this.showAd() : null
+    return ISAD ? <div ref={e => (this.ads = e)} /> : null
   }
 }
 

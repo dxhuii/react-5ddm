@@ -10,7 +10,8 @@
     "__CLIENT__": true,
     "adsbygoogle": true,
     "importScripts": true,
-    "returnCitySN": true
+    "returnCitySN": true,
+    "income": true
   },
   "plugins": ["react-hooks"],
   "parser": "babel-eslint",

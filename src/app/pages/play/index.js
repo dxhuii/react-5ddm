@@ -360,7 +360,9 @@ class Play extends Component {
             </div>
           </div>
         </div>
-        <div className="mt20">{isMobile() ? <Ads id={48} /> : null}</div>
+        <div className="mt20">
+          <Ads id={3} />
+        </div>
         <PlayList />
         {DOMAIN_NAME === 'dddm.tv' && (
           <div className="wp mt20 box" styleName="zhaimoe">
@@ -368,13 +370,7 @@ class Play extends Component {
           </div>
         )}
         <div className="wp">
-          {isMobile() ? (
-            <div className="mt20">
-              <Ads id={26} />
-            </div>
-          ) : (
-            <Ads id={21} />
-          )}
+          <Ads id={4} />
         </div>
         <div className="mt20" />
         <div className="wp clearfix">
@@ -390,13 +386,9 @@ class Play extends Component {
             <SideBar />
           </div>
         </div>
-        {isMobile() ? (
-          <Ads id={49} />
-        ) : (
-          <div className="wp">
-            <Ads id={22} />
-          </div>
-        )}
+        <div className="wp">
+          <Ads id={8} />
+        </div>
       </Fragment>
     )
   }

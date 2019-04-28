@@ -11,7 +11,6 @@ import '../app/pages/global.scss'
 import configureStore from '@/store'
 import createRouter from '@/router'
 import { getUserInfo } from '@/store/reducers/user'
-import { getAds } from '@/store/reducers/ads'
 
 import { CNZZ_STAT, BAIDU_STAT, GA, ISAD, DOMAIN } from 'Config'
 import { isMobile, loadScript } from '@/utils'
@@ -37,8 +36,6 @@ if (process.env.NODE_ENV !== 'development') {
   // 从页面中获取服务端生产redux数据，作为客户端redux初始值
   const store = configureStore(window.__initState__)
   let userinfo = getUserInfo(store.getState())
-  const mAds = getAds(store.getState(), 24)
-  const pcAds = getAds(store.getState(), 25)
   if (!userinfo || !userinfo.userid) userinfo = null
   let logPageView = () => {}
   if (GA) {
@@ -56,11 +53,13 @@ if (process.env.NODE_ENV !== 'development') {
         loadScript(bd)
         loadScript(cnzz)
         if (ISAD) {
-          if (mAds && isMobile()) {
-            loadScript(mAds.data.content, true)
-          } else if (pcAds) {
-            loadScript(pcAds.data.content, true)
-          }
+          loadScript('https://cos.mdb6.com/dddm/income.min.js', true, function() {
+            console.log(income)
+            if (income[5]) {
+              const { content } = income[5]
+              loadScript(content, true)
+            }
+          })
         }
       }
     }

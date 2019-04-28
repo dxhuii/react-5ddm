@@ -16,7 +16,7 @@ export default class SideBar extends PureComponent {
       <Fragment>
         {vodid ? <ArticleVod ids={vodid} /> : null}
         <div className={vodid ? 'mt20' : ''}>
-          <Ads id={43} />
+          <Ads id={10} />
         </div>
         <div className="box mt20">
           <Top name="topListAll" title="30天热门动漫" sty={{ paddingBottom: 10 }} />
