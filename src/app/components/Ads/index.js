@@ -30,6 +30,7 @@ class Ads extends Component {
     let script = document.createElement('script')
     script.type = 'text/javascript'
     script.src = url
+    script.async = 1
     this.ads.appendChild(script)
   }
 
