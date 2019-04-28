@@ -45,7 +45,7 @@ class SearchAuto extends Component {
     // 正则匹配所有的文本
     const re = new RegExp(wd, 'g')
     for (let i = 0; i < data.length; i++) {
-      const title = data[i].title
+      const title = data[i].title || ''
       if (re.test(data[i].title)) {
         data[i].title = title.replace(re, '<span class="highlight">$&</span>')
       }

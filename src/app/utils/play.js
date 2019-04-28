@@ -95,7 +95,7 @@ const ck = (type, pv) => {
   }
 }
 
-const jiexiUrl = (pv, danmu) => {
+const jiexiUrl = (pv = '', danmu) => {
   const url = `${pv.replace('ikanfan.cn', 'acgnz.cn')}${pv.indexOf('flvsp') === -1 ? `&danmu=${danmu}` : ''}`
   return `<iframe src="${url}" width="100%" height="${playH}" frameborder="0" scrolling="no" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
 }

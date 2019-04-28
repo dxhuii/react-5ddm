@@ -76,10 +76,7 @@ function music163(html) {
       if (type != -1 && id) {
         if (type == 2) {
           let url = `//music.163.com/outchain/player?type=2&id=${id}&auto=0&height=66`
-          html = html.replace(
-            str,
-            `<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="${url}"></iframe>`
-          )
+          html = html.replace(str, `<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="${url}"></iframe>`)
         } else {
           let url = `//music.163.com/outchain/player?type=${type}&id=${id}&height=430`
           html = html.replace(str, `<iframe type="music" src="${url}" height="430"></iframe>`)
@@ -142,10 +139,7 @@ function bilibili(html) {
 
     if (id) {
       let url = `//player.bilibili.com/player.html?aid=${id}`
-      html = html.replace(
-        str,
-        `<iframe src="${url}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>`
-      )
+      html = html.replace(str, `<iframe src="${url}" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>`)
     }
   })
 
@@ -337,17 +331,14 @@ const image = html => {
       // 如果url中包含“?”,需要将其转译成字符串
       _img = _img.replace(/\?/g, '\\?')
 
-      html = html.replace(
-        new RegExp(_img, 'gm'),
-        '<div onclick="webPictureViewer(' + allImage + ',' + index + ');" class="load-demand" data-load-demand=\'' + img + "'></div>"
-      )
+      html = html.replace(new RegExp(_img, 'gm'), '<div onclick="webPictureViewer(' + allImage + ',' + index + ');" class="load-demand" data-load-demand=\'' + img + "'></div>")
     })
   }
 
   return html
 }
 
-export default html => {
+export default (html = '') => {
   // let re = /(<(.*?)>(.*?)<\/(.*?)>|<(.*?)>)/gi;
   // html = html.match(re).join('');
 

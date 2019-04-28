@@ -51,7 +51,7 @@ class Time extends Component {
     const {
       info: { data = {} }
     } = this.props
-    const { id, title, content, listNameBig, pic, actor, year, filmtime, director, mcid, updateDate, tvcont } = data
+    const { id, title, content = '', listNameBig, pic, actor, year, filmtime, director, mcid, updateDate, tvcont } = data
     const shareConfig = {
       pic,
       title: `#${title}#播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新 - #${NAME.split('_').join('##')}# @99496动漫网`,
