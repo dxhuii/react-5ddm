@@ -24,7 +24,6 @@ class MiniDetail extends PureComponent {
 
   render() {
     const { title, pic, gold, vid, pid, status, year, mcid } = this.props
-    console.log(year)
     return (
       <div styleName="detail-mini">
         <Link to={`/subject/${vid}`}>
@@ -39,7 +38,7 @@ class MiniDetail extends PureComponent {
             <Link to={pid ? `/play/${vid}/${pid}` : `/subject/${vid}`}>{isNumber(status) ? `更新至${status}话` : status}</Link>
           </p>
           {year ? <p>{year}年首播</p> : null}
-          {mcid ? <p styleName="clamp">{mcid.map((item, index) => index === mcid.length - 1 ? <span key={item.id}>{item.title}</span> : <span key={item.id}>{item.title} / </span>)}</p> : ''}
+          {mcid ? <p styleName="clamp">{mcid.map((item, index) => (index === mcid.length - 1 ? <span key={item.id}>{item.title}</span> : <span key={item.id}>{item.title} / </span>))}</p> : ''}
         </div>
       </div>
     )

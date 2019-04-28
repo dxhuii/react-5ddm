@@ -42,7 +42,6 @@ class Bangumi extends Component {
     const {
       info: { data = [], loading }
     } = this.props
-    // console.log(data, 'data', this.props)
     return (
       <Fragment>
         {loading ? <div> loading... </div> : null}

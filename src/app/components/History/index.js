@@ -93,7 +93,6 @@ class History extends Component {
   render() {
     const { historyList } = this.state
     const { userid, isShow } = this.props
-    // console.log(historyList)
     return (
       <div styleName="history" className="box" style={{ display: isShow ? 'block' : 'none' }}>
         <div styleName="title">

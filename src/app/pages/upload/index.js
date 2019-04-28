@@ -12,7 +12,7 @@ export default class Main extends Component {
   }
 
   progress = (data, index) => {
-    console.log(data)
+    // console.log(data)
     this.setState({ [`progress_${index}`]: data })
   }
 

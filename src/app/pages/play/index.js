@@ -125,7 +125,6 @@ class Play extends Component {
         url_name: subTitle,
         vod_maxnum: count
       })
-      console.log(data)
     } else if (title) {
       let dataList = JSON.parse(localStorage.historyData || '[]')
       if (dataList.length > 0) {
@@ -191,7 +190,6 @@ class Play extends Component {
         playHtml = playing({ name: playName, vid, danmu, uid: userid, isLogin: copyright, url })
       }
       const mInfo = { playName, vid, playTitle }
-      console.log(play, playHtml, isA, 'getdata')
       that.setState({
         playHtml,
         mInfo,

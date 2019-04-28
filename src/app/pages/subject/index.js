@@ -94,7 +94,7 @@ class Bangumi extends Component {
   }
 
   async addMark(type, id, cid, uid) {
-    console.log(type, id, cid, uid)
+    // console.log(type, id, cid, uid)
 
     const {
       like,

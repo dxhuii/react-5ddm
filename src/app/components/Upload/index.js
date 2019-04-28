@@ -32,7 +32,6 @@ export default class Main extends Component {
   up = (file, index) => {
     const { url, upload } = this.props
     axios.get(url).then(rst => {
-      console.log(rst.data, this.props)
       if (upload) {
         upload(rst.data, file, this.upLoadAlioss, index)
         return

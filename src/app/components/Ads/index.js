@@ -13,7 +13,7 @@ class Ads extends Component {
       const { id } = this.props
       const that = this
       loadScript('https://cos.mdb6.com/dddm/income.min.js', true, function() {
-        console.log(income)
+        // console.log(income)
         if (income[id]) {
           const { type, content } = income[id]
           if (type === 2) {
@@ -30,7 +30,6 @@ class Ads extends Component {
     let script = document.createElement('script')
     script.type = 'text/javascript'
     script.src = url
-    console.log(url, this.props)
     this.ads.appendChild(script)
   }
 
