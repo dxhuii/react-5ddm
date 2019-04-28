@@ -43,7 +43,7 @@ if (process.env.NODE_ENV !== 'development') {
     logPageView = userinfo => {
       let option = { page: window.location.pathname }
       if (userinfo && userinfo._id) option.userId = userinfo._id
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV !== 'development') {
         ReactGA.set(option)
         ReactGA.pageview(window.location.pathname)
         const cnzz = `https://s13.cnzz.com/z_stat.php?id=${CNZZ_STAT}&web_id=${CNZZ_STAT}`
