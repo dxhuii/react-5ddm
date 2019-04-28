@@ -27,7 +27,7 @@ export default class Footer extends PureComponent {
           {BEIAN ? (
             <span>
               <a href="http://www.beian.gov.cn/portal/registerSystemInfo?COLLCC=1146923681&recordcode=34130202000190">
-                <img src="https://ww3.sinaimg.cn/large/628d024fgw1f63puhjy82j200k00k3y9.jpg" />
+                <img src="https://wxt.sinaimg.cn/large/628d024fgw1f63puhjy82j200k00k3y9.jpg" />
                 皖公网安备 34130202000190 号
               </a>
               {isMobile() ? <br /> : null}
