@@ -13,7 +13,7 @@ import createRouter from '@/router'
 import { getUserInfo } from '@/store/reducers/user'
 
 import { CNZZ_STAT, BAIDU_STAT, GA, ISAD, DOMAIN } from 'Config'
-import { isMobile, loadScript } from '@/utils'
+import { loadScript } from '@/utils'
 
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 if (process.env.NODE_ENV !== 'development') {
@@ -43,7 +43,7 @@ if (process.env.NODE_ENV !== 'development') {
     logPageView = userinfo => {
       let option = { page: window.location.pathname }
       if (userinfo && userinfo._id) option.userId = userinfo._id
-      if (process.env.NODE_ENV !== 'development') {
+      if (process.env.NODE_ENV === 'development') {
         ReactGA.set(option)
         ReactGA.pageview(window.location.pathname)
         const cnzz = `https://s13.cnzz.com/z_stat.php?id=${CNZZ_STAT}&web_id=${CNZZ_STAT}`

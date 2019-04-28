@@ -62,13 +62,13 @@ var income = isMoblie
       1: {
         type: 1,
         content:
-          '<div class="mt20 pr"><a href="http://t.acgnz.cn/feifei.html" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1g1jywndow1j30xc02iabi.jpg" style="display: block;width: 100%;"></a><span class="d-badge">广告</span></div>'
+          '<div class="wp mt20 pr"><a href="http://t.acgnz.cn/feifei.html" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1g1jywndow1j30xc02iabi.jpg" style="display: block;width: 100%;"></a><span class="d-badge">广告</span></div>'
       },
       // 首页中部1240*90
       2: {
         type: 1,
         content:
-          '<div class="mt20 pr"><a href="https://www.doorzo.com/?utm_source=bbs&utm_medium=banner&utm_campaign=ikf&utm_term=ikf1" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1fu4tqqe1bmj30xc02idgx.jpg" style="display: block;width: 100%;"></a><span class="d-badge">广告</span></div>'
+          '<div class="wp mt20 pr"><a href="https://www.doorzo.com/?utm_source=bbs&utm_medium=banner&utm_campaign=ikf&utm_term=ikf1" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1fu4tqqe1bmj30xc02idgx.jpg" style="display: block;width: 100%;"></a><span class="d-badge">广告</span></div>'
       },
       // 内页通栏靠上位置1240*90
       3: {},
@@ -76,7 +76,7 @@ var income = isMoblie
       4: {
         type: 1,
         content:
-          '<div class="mt20 pr"><a href="https://www.doorzo.com/?utm_source=bbs&utm_medium=banner&utm_campaign=ikf&utm_term=ikf1" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1fu4tqqe1bmj30xc02idgx.jpg" style="display: block;width: 100%;"></a><span class="d-badge">广告</span></div>'
+          '<div class="wp mt20 pr"><a href="https://www.doorzo.com/?utm_source=bbs&utm_medium=banner&utm_campaign=ikf&utm_term=ikf1" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1fu4tqqe1bmj30xc02idgx.jpg" style="display: block;width: 100%;"></a><span class="d-badge">广告</span></div>'
       },
       // PC全站右下角悬浮广告
       5: {
@@ -87,19 +87,19 @@ var income = isMoblie
       6: {
         type: 1,
         content:
-          '<div class="mt20 pr"><a href="https://api.moeyoyo.com/erciyuan.php" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1fzm555pblpj30xc02ntau.jpg" style="display: block;width: 100%;"></a><span class="d-badge">广告</span></div>'
+          '<div class="wp mt20 pr"><a href="https://api.moeyoyo.com/erciyuan.php" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1fzm555pblpj30xc02ntau.jpg" style="display: block;width: 100%;"></a><span class="d-badge">广告</span></div>'
       },
       // 除首页，详情页，播放页头部通栏
       7: {
         type: 1,
         content:
-          '<div class="mt20 pr"><a href="http://t.acgnz.cn/feiyufeiyouxi.html" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1g1jywn7oidj30xc02iwf7.jpg" style="display: block;width: 100%;"></a><span class="d-badge">广告</span></div>'
+          '<div class="wp mt20 pr"><a href="http://t.acgnz.cn/feiyufeiyouxi.html" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1g1jywn7oidj30xc02iwf7.jpg" style="display: block;width: 100%;"></a><span class="d-badge">广告</span></div>'
       },
       // PC底部通栏
       8: {
         type: 1,
         content:
-          '<div class="mt20 pr"><a href="https://www.doorzo.com/?utm_source=bbs&utm_medium=banner&utm_campaign=ikf&utm_term=ikf1" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1fu4tqqe1bmj30xc02idgx.jpg" style="display: block;width: 100%;"></a><span class="d-badge">广告</span></div>'
+          '<div class="wp mt20 pr"><a href="https://www.doorzo.com/?utm_source=bbs&utm_medium=banner&utm_campaign=ikf&utm_term=ikf1" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1fu4tqqe1bmj30xc02idgx.jpg" style="display: block;width: 100%;"></a><span class="d-badge">广告</span></div>'
       },
       9: {},
       // 全站右侧300x250

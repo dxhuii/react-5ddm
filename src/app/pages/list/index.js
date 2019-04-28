@@ -15,7 +15,6 @@ import Loading from '@/components/Ui/Loading'
 
 import Item from '@/components/List/Item'
 import Ads from '@/components/Ads'
-import { isMobile } from '@/utils'
 
 import './style.scss'
 
@@ -340,9 +339,7 @@ class SubjectList extends Component {
             </dl>
           </div>
         </div>
-        <div className="mt20">
-          <Ads id={11} />
-        </div>
+        <Ads id={7} />
         <div className="wp">
           <Item data={data} />
         </div>

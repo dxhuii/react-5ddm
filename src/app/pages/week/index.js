@@ -95,7 +95,7 @@ class Week extends PureComponent {
     const weekType = this.getArea(data)
     const weekData = id === '0' || id === '1' ? this.getEveryWeek(weekType[id], id) : this.getEveryWeek(data)
     const today = new Date().getDay() - 1
-    const title = id === '1' ? '国产' : id === '0' ? '日本' : ''
+    const title = id === '1' ? '日本' : id === '0' ? '国产' : ''
     return (
       <div className="wp mt20">
         <Meta title={`${title}新番时间表`}>

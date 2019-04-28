@@ -29,8 +29,8 @@ import Toast from '@/components/Toast'
 
 import Shell from '@/components/Shell'
 
-import { isNumber, formatPic, isMobile, loadScript } from '@/utils'
-import { IS9, DOMAIN_NAME, ISPLAY, NAME, DOMAIN } from 'Config'
+import { isNumber, formatPic } from '@/utils'
+import { IS9, DOMAIN_NAME, NAME, DOMAIN } from 'Config'
 
 import './style.scss'
 @Shell

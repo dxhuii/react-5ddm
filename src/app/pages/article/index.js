@@ -17,7 +17,6 @@ import Ads from '@/components/Ads'
 import convertHTML from '@/components/HtmlText'
 
 import playing from '@/utils/play'
-import { isMobile } from '@/utils'
 import { NAME } from 'Config'
 
 import './style.scss'

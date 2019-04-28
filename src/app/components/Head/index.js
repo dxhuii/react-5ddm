@@ -13,7 +13,7 @@ import Modal from '@/components/Modal'
 import Sign from '@/components/Sign'
 import Ads from '@/components/Ads'
 
-import { trim, isMobile } from '@/utils'
+import { trim } from '@/utils'
 import { DOMAIN_NAME, NAME } from 'Config'
 
 import './style.scss'
@@ -200,11 +200,7 @@ class Head extends Component {
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
           <Sign isSign={isSign} onType={val => this.onType(val)} />
         </Modal>
-        {isNot ? (
-          <div className="mt20">
-            <Ads id={7} />
-          </div>
-        ) : null}
+        {isNot ? <Ads id={7} /> : null}
       </Fragment>
     )
   }
