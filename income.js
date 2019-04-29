@@ -26,7 +26,7 @@ var income = isMoblie
       // 全站底漂
       5: {
         type: 2,
-        content: 'https://cdn.xiaohui12.cn/12943.js'
+        content: 'https://w.wangphp.com/qw.php?id=2534'
       },
       // 播放列表下广告位1
       6: {
