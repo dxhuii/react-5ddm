@@ -44,10 +44,12 @@ export default {
     verify: `${apiReact}verify-${Math.random()}`, // 验证码
     ads: `${apiReact}getAds`, // 广告
     digg: `${apiHome}updown-index`, // 视频ID type up 顶 down 踩 sid 模型
-    //观看记录
+    // 观看记录
     getplaylog: `${apiReact}getplaylog`, // 获取观看记录 需登录
     addplaylog: `${apiReact}addplaylog`, // 添加观看记录 需登录
     emptyhistory: `${apiReact}emptyhistory`, // 清空观看记录 需登录
-    delplaylog: `${apiReact}delplaylog` // 删除观看记录 需登录
+    delplaylog: `${apiReact}delplaylog`, // 删除观看记录 需登录
+    // 游戏
+    game: `${apiReact}game` // order排序 wd 关键词 p 分页 limit 每页条数
   }
 }

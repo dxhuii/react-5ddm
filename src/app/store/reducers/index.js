@@ -21,6 +21,7 @@ import articleVod from './articleVod'
 import month from './month'
 import page from './page'
 import ads from './ads'
+import game from './game'
 
 export default function() {
   const states = {
@@ -44,7 +45,8 @@ export default function() {
     page: page(),
     ads: ads(),
     scroll: scroll(),
-    history: history()
+    history: history(),
+    game: game()
   }
 
   return combineReducers(states)

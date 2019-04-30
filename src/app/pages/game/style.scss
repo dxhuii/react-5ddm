@@ -1,0 +1,462 @@
+:global {
+  .qrcode {
+    span {
+      display: none;
+      position: absolute;
+      right: 215px;
+      top: 0;
+      padding: 5px;
+      background-color: #fff;
+      box-shadow: 0 0 5px 5px rgba(0, 0, 0, .1);
+
+      p {
+        height: 34px;
+        line-height: 34px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 400;
+        color: #f60;
+      }
+
+      i {
+        position: absolute;
+        right: -10px;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-left: 10px solid #99d846;
+        border-bottom: 10px solid transparent;
+      }
+
+      &.an {
+        border: 1px solid #99d846;
+
+        i {
+          border-left-color: #99d846;
+          top: 40px;
+        }
+      }
+
+      &.ios {
+        border: 1px solid #48aef0;
+
+        i {
+          border-left-color: #48aef0;
+          top: 92px;
+        }
+      }
+    }
+
+    &:hover {
+      span {
+        display: block;
+      }
+    }
+  }
+
+  .gamelist {
+    margin-top: 10px;
+
+    li {
+      float: left;
+      width: 100px;
+      text-align: center;
+      margin: 10px;
+      cursor: pointer;
+      position: relative;
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100px;
+        border-radius: 30px;
+      }
+
+      p {
+        height: 30px;
+        line-height: 30px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      a {
+        margin: 5px 3px 0;
+        padding: 0 10px;
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+        border-radius: 5px;
+        display: inline-block;
+        color: #fff;
+        font-size: 12px;
+
+        &.an {
+          background-color: #99d846;
+        }
+
+        &.ios {
+          background-color: #48aef0;
+        }
+      }
+
+      .qrcode {
+        span {
+          right: auto;
+          top: 170px;
+          z-index: 10;
+          left: 50%;
+          transform: translateX(-50%);
+
+          i {
+            right: auto;
+            left: 59px;
+            top: -20px;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #99d846;
+          }
+
+          &.an {
+            i {
+              border-bottom-color: #99d846;
+            }
+          }
+
+          &.ios {
+            i {
+              border-bottom-color: #48aef0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .row {
+    display: flex
+  }
+
+  .col {
+    flex: 1;
+    display: block;
+    width: 100%
+  }
+
+  .join {
+    padding: 15px 10px;
+    background: #fff;
+    margin-bottom: 10px;
+  }
+
+  .join .join-left {
+    display: block
+  }
+
+  .join .join-middel {
+    margin: 0 10px
+  }
+
+  .join .join-middel .j-head {
+    font-size: 16px;
+    padding-top: 3px
+  }
+
+  .join .join-middel .j-desc {
+    font-size: 14px
+  }
+
+  .join-right .j-link {
+    display: block;
+    margin-top: 5px;
+    padding: 8px 20px;
+    border: 1px solid #E73C44;
+    color: #E73C44;
+    -webkit-border-radius: 3px;
+    border-radius: 3px
+  }
+
+  .safariDown {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100
+  }
+
+  .safariDown .join {
+    background: rgba(0, 0, 0, .8);
+    margin: 0;
+    padding: 10px;
+    color: #fff
+  }
+
+  .safariDown .join-left {
+    border-radius: 5px;
+    border-radius: 5px
+  }
+
+  .safariDown .join-middel .j-head {
+    font-weight: 700;
+    padding-top: 6px
+  }
+
+  .safariDown .join-middel .j-desc {
+    color: #fff
+  }
+
+  .safariDown .join-right a {
+    background-color: #60ca20;
+    color: #fff;
+    border: 0
+  }
+
+  .safariDown .j-link {
+    margin: 8px 28px 0 0
+  }
+
+  .safari-close {
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    right: 5px;
+    top: 5px
+  }
+
+  .safari-close:before,
+  .safari-close:after {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    content: "";
+    width: 22px;
+    height: 2px;
+    background: #FFF
+  }
+
+  .safari-close:before {
+    transform: rotate(-45deg)
+  }
+
+  .safari-close:after {
+    transform: rotate(45deg)
+  }
+
+
+  .gameinfo {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    padding: 10px;
+    width: 820px;
+    z-index: 999;
+    background-color: #fff;
+    ;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    overflow: hidden;
+
+    .closeA {
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .closeA:before,
+    .closeA:after {
+      background: #000;
+    }
+
+    .info {
+      background-color: #f2f2f2;
+      margin: -10px -10px 0;
+      padding: 10px;
+      box-shadow: 3px 0 6px rgba(0, 0, 0, .2);
+      border-bottom: 1px solid #ddd;
+
+      img {
+        float: left;
+        width: 150px;
+        height: 150px;
+        border-radius: 30px;
+      }
+
+      .type {
+        float: left;
+        width: 430px;
+        margin-left: 20px;
+        font-size: 12px;
+
+        h1 {
+          font-size: 24px;
+        }
+
+        p {
+          color: #666;
+          line-height: 20px;
+          margin-bottom: 10px;
+        }
+      }
+
+      .down {
+        float: left;
+        width: 200px;
+        padding-top: 20px;
+        position: relative;
+
+        a {
+          position: relative;
+          margin-top: 10px;
+          width: 100%;
+          height: 42px;
+          line-height: 42px;
+          text-align: center;
+          border-radius: 5px;
+          display: inline-block;
+          color: #fff;
+          font-size: 16px;
+
+          &.an {
+            background-color: #99d846;
+          }
+
+          &.ios {
+            background-color: #48aef0;
+          }
+
+          em {
+            font-size: 12px;
+
+            &.version {
+              font-size: 12px;
+              position: absolute;
+              background-color: #fff;
+              height: 20px;
+              color: #333;
+              line-height: 20px;
+              border-radius: 10px;
+              top: -10px;
+              padding: 0 10px;
+              left: 50%;
+              transform: translateX(-50%);
+              box-shadow: 0 1px 10px rgba(0, 0, 0, .1);
+            }
+          }
+        }
+      }
+    }
+
+    .summary {
+      margin-top: 20px;
+      line-height: 30px;
+      line-height: 30px;
+      text-indent: 2em;
+      color: #666;
+      font-size: 14px;
+      max-height: 120px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .piclist {
+      margin-top: 20px;
+
+      li {
+        margin-right: 10px;
+        float: left;
+        width: 150px;
+
+        img {
+          width: 100%;
+          display: block;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  .page {
+    text-align: center;
+    padding: 20px 0;
+
+    .rc-pagination {
+      display: inline-block;
+    }
+  }
+
+  .mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .7);
+    z-index: 998;
+  }
+
+  @media (max-width: 767px) {
+    .safariDown {
+      display: block;
+    }
+
+    .gameinfo {
+      width: auto;
+      left: 10px;
+      top: 10px;
+      bottom: 10px;
+      right: 10px;
+      overflow-y: auto;
+      transform: none;
+      border-radius: 0;
+
+      .info {
+        img {
+          margin-right: 20px;
+        }
+
+        .type {
+          float: none;
+          width: auto;
+          margin-left: 0;
+          font-size: 14px;
+          height: 150px;
+        }
+
+        .down {
+          float: none;
+          width: 100%;
+          text-align: center;
+          padding-top: 5px;
+        }
+      }
+    }
+
+    .piclist {
+      width: 100%;
+      overflow-x: auto;
+
+      ul {
+        width: 900px;
+      }
+    }
+
+    .gamelist {
+      li {
+        width: 30%;
+        margin: 2%;
+
+        &:nth-child(3n) {
+          margin-right: 0;
+        }
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+}

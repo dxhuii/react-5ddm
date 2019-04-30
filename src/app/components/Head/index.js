@@ -152,14 +152,17 @@ class Head extends Component {
               <NavLink styleName={/ep/.test(url) ? 'active' : ''} exact to="/ep">
                 剧情
               </NavLink>
-              <NavLink styleName={url === '/top' ? 'active' : ''} exact to="/top">
+              <NavLink styleName={/game/.test(url) ? 'active' : ''} exact to="/game">
+                游戏
+              </NavLink>
+              <NavLink styleName={/top/.test(url) ? 'active' : ''} exact to="/top">
                 排行榜
               </NavLink>
-              <NavLink styleName={url === '/new' ? 'active' : ''} exact to="/new">
+              <NavLink styleName={/new/.test(url) ? 'active' : ''} exact to="/new">
                 最近更新
               </NavLink>
               <NavLink styleName={/month/.test(url) ? 'active' : ''} exact to={`/month/${this.getCurMonth()}`}>
-                新番表
+                {this.getCurMonth().substring(5)}月新番表
               </NavLink>
             </div>
           </nav>
@@ -173,9 +176,6 @@ class Head extends Component {
             {isHide ? <SearchAuto wd={wd} /> : null}
           </div>
           <div styleName="header-tool" className="tar">
-            <NavLink styleName={`on-home ${url === '/' ? 'active' : ''}`} exact to="/">
-              首页
-            </NavLink>
             <a onClick={this.onShowSearch} styleName="on-search">
               搜索
             </a>

@@ -112,6 +112,7 @@ header {
 .header-nav {
   flex-grow: 1;
   line-height: 56px;
+  white-space: nowrap;
 }
 
 @media (min-width: 0px) and (max-width: 1200px) {

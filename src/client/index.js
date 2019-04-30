@@ -52,7 +52,7 @@ if (process.env.NODE_ENV !== 'development') {
         loadScript(push)
         loadScript(bd)
         loadScript(cnzz)
-        if (ISAD) {
+        if (ISAD && !userinfo.userid) {
           loadScript('https://cos.mdb6.com/dddm/income.min.js', true, function() {
             // console.log(income)
             if (income[5]) {

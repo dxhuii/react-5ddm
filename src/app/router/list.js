@@ -18,6 +18,7 @@ import topData from '@/pages/top/load-data'
 import newData from '@/pages/new/load-data'
 import episodelistData from '@/pages/episodelist/load-data'
 import detailNewstData from '@/pages/subject/news/load-data'
+import gameData from '@/pages/game/load-data'
 import Footer from '@/components/Footer'
 
 export default [
@@ -331,6 +332,32 @@ export default [
       loader: () => import('../pages/out/pic'),
       loading: () => <Loading />
     }),
+    enter: 'everybody'
+  },
+
+  {
+    path: '/game',
+    exact: true,
+    head: Head,
+    footer: Footer,
+    component: Loadable({
+      loader: () => import('../pages/game'),
+      loading: () => <Loading />
+    }),
+    loadData: gameData,
+    enter: 'everybody'
+  },
+
+  {
+    path: '/game/:wd',
+    exact: true,
+    head: Head,
+    footer: Footer,
+    component: Loadable({
+      loader: () => import('../pages/game'),
+      loading: () => <Loading />
+    }),
+    loadData: gameData,
     enter: 'everybody'
   },
 
