@@ -57,6 +57,9 @@ class Game extends PureComponent {
         gameList({
           wd
         })
+        this.setState({
+          display: true
+        })
       } else {
         gameList({
           order: 'update',
@@ -185,18 +188,18 @@ class Game extends PureComponent {
     } = this.props
     const { display, dataIndex } = this.state
     const dataInfo = data[wd ? 0 : dataIndex]
-    const { Description, name } = dataInfo || {}
+    const { shortDesc, name } = dataInfo || {}
     return (
       <Fragment>
         {wd ? (
           <Meta title={`${name}_${name}安卓IOS下载`}>
             <meta name="keywords" content={`${name},${name}安卓下载,${name}IOS下载`} />
-            <meta name="description" content={Description} />
+            <meta name="description" content={shortDesc} />
           </Meta>
         ) : (
           <Meta title="游戏列表_安卓IOS游戏下载">
-            <meta name="keywords" content="游戏列表" />
-            <meta name="description" content="游戏列表" />
+            <meta name="keywords" content="游戏列表,手机游戏下载,安卓游戏下载,IOS游戏下载" />
+            <meta name="description" content="提供安卓和IOS游戏下载" />
           </Meta>
         )}
         {loading ? <Loading /> : null}
