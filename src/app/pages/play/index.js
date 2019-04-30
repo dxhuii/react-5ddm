@@ -27,6 +27,9 @@ import { ISPLAY, IS9, DOMAIN_NAME, NAME } from 'Config'
 import { isMobile, loadScript } from '@/utils'
 import playing from '@/utils/play'
 
+import '@/utils/base64.min'
+import authcode from '@/utils/authcode'
+
 import './style.scss'
 
 const isP = IS9 && !isMobile()
@@ -175,7 +178,7 @@ class Play extends Component {
         player: { data = {} }
       } = that.props
       const { play, type } = that.state
-      const { list = [], copyright } = data
+      const { list = [], copyright, key } = data
       const other = that.getOther(list)
       const qq = that.getQq(list)
       const isStop = (qq ? /上海|北京|深圳/ : /上海|北京/).test(returnCitySN.cname)
@@ -185,9 +188,9 @@ class Play extends Component {
       const { playName, vid, playTitle } = isA ? other[0] : list[0]
       let playHtml = ''
       if (play && !isZ) {
-        playHtml = playing({ name: type, vid: play, danmu, uid: userid, isLogin: copyright, url })
+        playHtml = playing({ name: type, vid: authcode(atob(play), 'DECODE', key, 0), danmu, uid: userid, isLogin: copyright, url })
       } else {
-        playHtml = playing({ name: playName, vid, danmu, uid: userid, isLogin: copyright, url })
+        playHtml = playing({ name: playName, vid: authcode(atob(vid), 'DECODE', key, 0), danmu, uid: userid, isLogin: copyright, url })
       }
       const mInfo = { playName, vid, playTitle }
       that.setState({
