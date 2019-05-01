@@ -13,7 +13,6 @@ export default ({ store, match }) => {
       return
     }
     let [err, res] = await gameList(wd !== 'totalList' ? { wd: reWd } : { order: 'update', wd: 'totalList', limit: 100 })(store.dispatch, store.getState)
-    console.log(reWd, err, res, 'server')
     addCache('gameList-' + reWd, res)
     resolve({ code: 200 })
   })

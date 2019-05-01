@@ -103,10 +103,9 @@ class Article extends PureComponent {
       url: `/article/${id}`
     }
     if (jump) {
-      if (typeof window === 'undefined') {
-        return
+      if (!(typeof window === 'undefined')) {
+        window.location.href = jump
       }
-      window.location.href = jump
     }
     return (
       <div className="wp mt20 clearfix">

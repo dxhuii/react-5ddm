@@ -14,10 +14,9 @@ export const formatPic = (pic = '', type = '') => {
 }
 
 export const isMobile = () => {
-  if (typeof navigator === 'undefined') {
-    return
+  if (!(typeof navigator === 'undefined')) {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
   }
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 }
 
 // 去掉字符串前后空格
@@ -43,35 +42,34 @@ export const firstNumber = str => {
 
 // 动态加载JS
 export const loadScript = (src, end, callback = function() {}) => {
-  if (typeof document === 'undefined') {
-    return
-  }
-  const script = document.createElement('script'),
-    head = document.getElementsByTagName('head')[0],
-    body = document.getElementsByTagName('body')[0],
-    dom = document.getElementsByTagName('script')
-  script.src = src
-  script.async = 1
-  for (let i = 0; i < dom.length; i++) {
-    if (dom[i].src === src) {
-      dom[i].parentNode.removeChild(dom[i])
-    }
-  }
-  if (script.addEventListener) {
-    script.addEventListener(
-      'load',
-      function() {
-        callback()
-      },
-      false
-    )
-  } else if (script.attachEvent) {
-    script.attachEvent('onreadystatechange', function() {
-      const target = window.event.srcElement
-      if (target.readyState === 'loaded') {
-        callback()
+  if (!(typeof document === 'undefined')) {
+    const script = document.createElement('script'),
+      head = document.getElementsByTagName('head')[0],
+      body = document.getElementsByTagName('body')[0],
+      dom = document.getElementsByTagName('script')
+    script.src = src
+    script.async = 1
+    for (let i = 0; i < dom.length; i++) {
+      if (dom[i].src === src) {
+        dom[i].parentNode.removeChild(dom[i])
       }
-    })
+    }
+    if (script.addEventListener) {
+      script.addEventListener(
+        'load',
+        function() {
+          callback()
+        },
+        false
+      )
+    } else if (script.attachEvent) {
+      script.attachEvent('onreadystatechange', function() {
+        const target = window.event.srcElement
+        if (target.readyState === 'loaded') {
+          callback()
+        }
+      })
+    }
+    end ? body.appendChild(script) : head.appendChild(script)
   }
-  end ? body.appendChild(script) : head.appendChild(script)
 }
