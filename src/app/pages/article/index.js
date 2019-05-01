@@ -143,7 +143,7 @@ class Article extends PureComponent {
             <div styleName="article-content" dangerouslySetInnerHTML={{ __html: convertHTML(content) }} />
             <TagShare tag={tag} config={shareConfig} />
             <div className="mt20">
-              <Ads id={4} />
+              <Ads id={11} />
             </div>
             <div styleName="article-context" className="mt20">
               {prev ? (

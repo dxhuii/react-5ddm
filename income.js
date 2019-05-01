@@ -4,24 +4,22 @@ var income = isMoblie
       // 手机首页顶部广告
       1: {
         type: 1,
-        content:
-          '<div class="mt20 pr"><a href="http://t.acgnz.cn/feiyufeiyouxi.html" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1g1jywnda1dj30hs046q4d.jpg" style="display: block;width: 100%;"></a></div>'
+        content: ''
       },
       // 手机首页中部
       2: {
-        type: 1,
-        content:
-          '<div class="mt20 pr"><a href="http://t.acgnz.cn/feiyufeiyouxi.html" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1g1jywnda1dj30hs046q4d.jpg" style="display: block;width: 100%;"></a></div>'
+        type: 2,
+        content: 'https://img.nktcw.cn/1364.js'
       },
       // 手机端播放列表上广告位
       3: {
         type: 1,
-        content: '<a href="http://t.acgnz.cn/feifei.html" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1g1jywnda1dj30hs046q4d.jpg" style="display: block;width: 100%;"></a>'
+        content: ''
       },
       // 手机端播放列表下广告位2
       4: {
         type: 2,
-        content: 'https://api.51sxzz.com/1364.js'
+        content: 'https://img.nktcw.cn/1364.js'
       },
       // 全站底漂
       5: {
@@ -31,19 +29,17 @@ var income = isMoblie
       // 播放列表下广告位1
       6: {
         type: 1,
-        content: '<a href="http://t.acgnz.cn/feifei.html" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1g1jywnda1dj30hs046q4d.jpg" style="display: block;width: 100%;"></a>'
+        content: ''
       },
       // 手机除首页，详情页，播放页头部通栏
       7: {
         type: 1,
-        content:
-          '<div class="mt20 pr"><a href="http://t.acgnz.cn/feiyufeiyouxi.html" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1g1jywnda1dj30hs046q4d.jpg" style="display: block;width: 100%;"></a></div>'
+        content: ''
       },
       // 手机底部通栏
       8: {
         type: 1,
-        content:
-          '<div class="mt20 pr"><a href="http://t.acgnz.cn/feiyufeiyouxi.html" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1g1jywnda1dj30hs046q4d.jpg" style="display: block;width: 100%;"></a></div>'
+        content: ''
       },
       // 手机端右悬浮广告
       9: {
@@ -54,15 +50,14 @@ var income = isMoblie
       // 新闻详情页
       11: {
         type: 2,
-        content: 'https://api.51sxzz.com/1364.js'
+        content: 'https://img.nktcw.cn/1364.js'
       }
     }
   : {
       // 首页顶部广告1240*90
       1: {
         type: 1,
-        content:
-          '<div class="wp mt20 pr"><a href="http://t.acgnz.cn/feifei.html" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1g1jywndow1j30xc02iabi.jpg" style="display: block;width: 100%;"></a><span class="d-badge">广告</span></div>'
+        content: ''
       },
       // 首页中部1240*90
       2: {
@@ -92,8 +87,7 @@ var income = isMoblie
       // 除首页，详情页，播放页头部通栏
       7: {
         type: 1,
-        content:
-          '<div class="wp mt20 pr"><a href="http://t.acgnz.cn/feiyufeiyouxi.html" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1g1jywn7oidj30xc02iwf7.jpg" style="display: block;width: 100%;"></a><span class="d-badge">广告</span></div>'
+        content: ''
       },
       // PC底部通栏
       8: {
@@ -105,8 +99,7 @@ var income = isMoblie
       // 全站右侧300x250
       10: {
         type: 1,
-        content:
-          '<div class="pr"><a href="http://t.acgnz.cn/feiyufeiyouxi.html" target="_blank"><img src="https://wxt.sinaimg.cn/large/006bnWk0gy1g1n6xcmi30j308c06ywfi.jpg" style="display: block;width: 100%;"></a><span class="d-badge">广告</span></div>'
+        content: ''
       },
       // 新闻详情页
       11: {}

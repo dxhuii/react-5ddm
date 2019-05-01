@@ -16,7 +16,7 @@ export function playlog({ uid }) {
     return loadData({
       dispatch,
       getState,
-      name: 'playlog',
+      name: uid,
       reducerName: 'history',
       actionType: 'GET_PLAY_LOG',
       api: 'getplaylog',

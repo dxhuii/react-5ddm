@@ -19,7 +19,6 @@ export default function() {
         return {
           data: []
         }
-
       default:
         return state
     }

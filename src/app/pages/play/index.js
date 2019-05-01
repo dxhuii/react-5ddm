@@ -387,9 +387,6 @@ class Play extends Component {
             <SideBar />
           </div>
         </div>
-        <div className="wp">
-          <Ads id={8} />
-        </div>
       </Fragment>
     )
   }

@@ -462,9 +462,6 @@ class Bangumi extends Component {
             </div>
           </div>
         </div>
-        <div className="wp">
-          <Ads id={8} />
-        </div>
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
           <Sign isSign={isSign} onType={val => this.onType(val)} />
         </Modal>

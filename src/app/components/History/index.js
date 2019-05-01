@@ -46,18 +46,9 @@ class History extends Component {
   async showHistory() {
     const { userid, playlog, data } = this.props
     let historyList = []
-    let count = 0
     if (userid) {
       if (!data.data) {
-        let [, data] = await playlog({ uid: userid })
-        if (data) {
-          historyList = data.data
-        }
-      } else {
-        const {
-          data: { data = [] }
-        } = this.props
-        historyList = data
+        playlog({ uid: userid })
       }
     } else {
       historyList = JSON.parse(localStorage.historyData || '[]')
@@ -92,7 +83,12 @@ class History extends Component {
 
   render() {
     const { historyList } = this.state
-    const { userid, isShow } = this.props
+    const {
+      userid,
+      isShow,
+      data: { data }
+    } = this.props
+    const list = (userid ? data : historyList) || []
     return (
       <div styleName="history" className="box" style={{ display: isShow ? 'block' : 'none' }}>
         <div styleName="title">
@@ -100,7 +96,7 @@ class History extends Component {
           <span onClick={this.emptyhistory}>清空记录</span>
         </div>
         <ul styleName="list">
-          {historyList.map((item, index) => (
+          {list.map((item, index) => (
             <li key={index}>
               <span>
                 <Link to={`/subject/${item.vid}`}>{item.title}</Link>

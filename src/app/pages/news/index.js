@@ -19,8 +19,6 @@ import Item from '@/components/News/Item'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
-import { NAME } from 'Config'
-
 import './style.scss'
 
 const reNewsCateId = name => {
@@ -172,4 +170,17 @@ class NewsIndex extends Component {
   }
 }
 
-export default NewsIndex
+const NewsIndexs = props => {
+  const {
+    match: {
+      params: { name }
+    }
+  } = props
+  return <NewsIndex {...props} key={name} />
+}
+
+NewsIndexs.propTypes = {
+  match: PropTypes.object
+}
+
+export default NewsIndexs

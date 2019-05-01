@@ -8,6 +8,12 @@ class Ads extends Component {
   static propTypes = {
     id: PropTypes.number
   }
+  constructor(props) {
+    super(props)
+    this.state = {
+      type: 0
+    }
+  }
   async componentDidMount() {
     if (ISAD) {
       const { id } = this.props
@@ -16,6 +22,9 @@ class Ads extends Component {
         // console.log(income)
         if (income[id]) {
           const { type, content } = income[id]
+          that.setState({
+            type
+          })
           if (type === 2) {
             that.createAd(content)
           } else if (type === 1) {
@@ -39,7 +48,7 @@ class Ads extends Component {
   }
 
   render() {
-    return ISAD ? <div ref={e => (this.ads = e)} /> : null
+    return ISAD ? <div ref={e => (this.ads = e)} className={this.state.type === 2 ? 'mt20' : ''} /> : null
   }
 }
 
