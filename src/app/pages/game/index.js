@@ -52,13 +52,15 @@ class Game extends PureComponent {
         params: { wd }
       }
     } = this.props
+    if (wd) {
+      this.setState({
+        display: true
+      })
+    }
     if (!info.data) {
       if (wd) {
         gameList({
           wd
-        })
-        this.setState({
-          display: true
         })
       } else {
         gameList({
@@ -67,17 +69,10 @@ class Game extends PureComponent {
           limit: 100
         })
       }
-    } else {
-      if (wd) {
-        this.setState({
-          display: true
-        })
-      }
     }
   }
 
   getPic = data => {
-    console.log(data)
     const piclist = data ? (
       data.map((item, i) => {
         if (item.indexOf('banner') === -1) {
@@ -106,13 +101,9 @@ class Game extends PureComponent {
       gameList({
         order: 'update',
         wd: 'totalList',
-        limit: 10
+        limit: 100
       })
     } else {
-      // this.setState({
-      //   display: value,
-      //   dataIndex: index
-      // })
       this.props.history.push(`/game/${name}`)
     }
   }
