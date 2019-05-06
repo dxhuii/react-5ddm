@@ -49,7 +49,6 @@ class SignIn extends Component {
     let [err, success] = await signIn({ username: username.value, password: password.value })
     setTimeout(() => {
       if (success) {
-        // window.location.href = '/'
         this.props.history.push('/')
       }
     }, 300)

@@ -55,7 +55,7 @@ class Ads extends Component {
    */
   createIframe(dom, src, onload) {
     //在document中创建iframe
-    var iframe = document.createElement('iframe')
+    const iframe = document.createElement('iframe')
 
     //设置iframe的样式
     iframe.style.width = '100%'

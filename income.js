@@ -1,4 +1,10 @@
 var isMoblie = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+/**
+ * @type 类别
+ * 1 图文
+ * 2 JS
+ * 3 iframe
+ */
 var income = isMoblie
   ? {
       // 手机首页顶部广告

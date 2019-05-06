@@ -52,25 +52,21 @@ class Game extends PureComponent {
         params: { wd }
       }
     } = this.props
+    if (wd) {
+      this.setState({
+        display: true
+      })
+    }
     if (!info.data) {
       if (wd) {
         gameList({
           wd
-        })
-        this.setState({
-          display: true
         })
       } else {
         gameList({
           order: 'update',
           wd: 'totalList',
           limit: 100
-        })
-      }
-    } else {
-      if (wd) {
-        this.setState({
-          display: true
         })
       }
     }
@@ -105,7 +101,7 @@ class Game extends PureComponent {
       gameList({
         order: 'update',
         wd: 'totalList',
-        limit: 10
+        limit: 100
       })
     } else {
       this.props.history.push(`/game/${name}`)

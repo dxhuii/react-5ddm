@@ -237,14 +237,12 @@ class Bangumi extends Component {
     const reContent = `${content.substring(0, 120)}${content.length > 120 ? '...' : ''}`
     const shareConfig = {
       pic,
-      title: `#${title}#${language ? `(${language})` : ''} - ${listName}${listNameBig} - #${NAME.split('_').join('##')}# @99496动漫网`,
+      title: `#${title}#${language ? `(${language})` : ''} - ${listName}${listNameBig} - #${NAME}# @99496动漫网`,
       desc: reContent,
       url: `/subject/${id}`
     }
-    if (jump) {
-      if (!(typeof window === 'undefined')) {
-        window.location.href = jump
-      }
+    if (jump && !(typeof window === 'undefined')) {
+      window.location.href = jump
     }
     return (
       <Fragment>

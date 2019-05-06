@@ -98,14 +98,12 @@ class Article extends PureComponent {
     const { full, isfull } = this.state
     const shareConfig = {
       pic,
-      title: `${title} - ${name} - #${NAME.split('_').join('##')}# @99496动漫网`,
+      title: `${title} - ${name} - #${NAME}# @99496动漫网`,
       desc: remark,
       url: `/article/${id}`
     }
-    if (jump) {
-      if (!(typeof window === 'undefined')) {
-        window.location.href = jump
-      }
+    if (jump && !(typeof window === 'undefined')) {
+      window.location.href = jump
     }
     return (
       <div className="wp mt20 clearfix">

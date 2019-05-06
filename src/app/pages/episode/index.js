@@ -91,7 +91,7 @@ class Episode extends Component {
     } = this.props
     const { epMore } = this.state
     const { title, name, content, prev, next, vid, id, vTitle, gold, pic, storyNum, vContent, actor, year, status, mcid, pid } = data
-    const shareTitle = ` - #${NAME.split('_').join('##')}# @99496动漫网`
+    const shareTitle = ` - #${NAME}# @99496动漫网`
     const shareConfig = {
       pic,
       title: !p ? `#${vTitle}#剧情(共${storyNum}集)_${vTitle}全集剧情${shareTitle}` : `#${vTitle}#${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情${shareTitle}`,
