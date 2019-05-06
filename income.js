@@ -3,7 +3,7 @@ var income = isMoblie
   ? {
       // 手机首页顶部广告
       1: {
-        type: 1,
+        type: 2,
         content: ''
       },
       // 手机首页中部
@@ -13,7 +13,7 @@ var income = isMoblie
       },
       // 手机端播放列表上广告位
       3: {
-        type: 1,
+        type: 2,
         content: ''
       },
       // 手机端播放列表下广告位2
@@ -38,7 +38,7 @@ var income = isMoblie
       },
       // 手机底部通栏
       8: {
-        type: 1,
+        type: 2,
         content: ''
       },
       // 手机端右悬浮广告
