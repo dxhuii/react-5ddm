@@ -77,7 +77,6 @@ class Game extends PureComponent {
   }
 
   getPic = data => {
-    console.log(data)
     const piclist = data ? (
       data.map((item, i) => {
         if (item.indexOf('banner') === -1) {
@@ -109,10 +108,6 @@ class Game extends PureComponent {
         limit: 10
       })
     } else {
-      // this.setState({
-      //   display: value,
-      //   dataIndex: index
-      // })
       this.props.history.push(`/game/${name}`)
     }
   }
