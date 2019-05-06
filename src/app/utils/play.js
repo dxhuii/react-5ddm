@@ -79,24 +79,24 @@ const acfun = pv => {
 
 const ck = (type, pv) => {
   const flvsp = 'https://api.flvsp.com/?type='
-  const mdparse = 'https://www.acgnz.cn/mdparse/?type='
+  const mdparse = 'https://p.mdb6.cn/mdparse/?type='
   if (type === 'pptv') {
     return mdparse + type + '&id=' + pv
   } else if (type === 'sohu') {
     return isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
   } else if (type === 'yunpan') {
-    return `//www.acgnz.cn/api/p.php?type=yunpan&domain=${DOMAIN}&id=${pv}`
+    return `//p.mdb6.cn/api/p.php?type=yunpan&domain=${DOMAIN}&id=${pv}`
   } else if (type === 'qqq') {
-    return `//www.acgnz.cn/api/p.php?type=qqq&domain=${DOMAIN}&id=${pv}`
+    return `//p.mdb6.cn/api/p.php?type=qqq&domain=${DOMAIN}&id=${pv}`
   } else if (type === '360') {
-    return `//www.acgnz.cn/api/p.php?type=360&domain=${DOMAIN}&id=${pv}`
+    return `//p.mdb6.cn/api/p.php?type=360&domain=${DOMAIN}&id=${pv}`
   } else {
     return flvsp + type + '&id=' + pv
   }
 }
 
 const jiexiUrl = (pv = '', danmu) => {
-  const url = `${pv.replace('ikanfan.cn', 'acgnz.cn')}${pv.indexOf('flvsp') === -1 ? `&danmu=${danmu}` : ''}`
+  const url = `${pv.replace('www.ikanfan.cn', 'p.mdb6.cn')}${pv.indexOf('flvsp') === -1 ? `&danmu=${danmu}` : ''}`
   return `<iframe src="${url}" width="100%" height="${playH}" frameborder="0" scrolling="no" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
 }
 
@@ -177,7 +177,7 @@ const isPlay = (name, vid, danmu, uid, isLogin, path) => {
     url = isP ? HTML('/', isLogin, path) : jiexiUrl(vid.replace('http://', 'https://'), danmu)
   } else {
     if (/.mp4|.m3u8/.test(vid)) {
-      url = isP ? HTML('/', isLogin, path) : jiexiUrl(`//www.acgnz.cn/api/p.php?type=${/.mp4/.test(vid) ? 'mp4' : 'm3u8'}&domain=${DOMAIN}&id=${vid}`, danmu)
+      url = isP ? HTML('/', isLogin, path) : jiexiUrl(`//p.mdb6.cn/api/p.php?type=${/.mp4/.test(vid) ? 'mp4' : 'm3u8'}&domain=${DOMAIN}&id=${vid}`, danmu)
     } else if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com|qq.com|mgtv.com/.test(vid)) {
       if (/bilibili|acfun|youku|tudou|iqiyi/.test(name)) {
         url = jump(name, vid, isLogin, path)
