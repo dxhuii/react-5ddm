@@ -1,5 +1,5 @@
 import { isMobile } from './index'
-import { IS9, DOMAIN_NAME, DOMAIN } from 'Config'
+import { IS9, DOMAIN_NAME, DOMAIN, ISPLAY } from 'Config'
 
 const isP = IS9 && !isMobile()
 
@@ -9,8 +9,8 @@ const iframe = url => {
   return `<iframe src="${url}" width="100%" height="${playH}" frameborder="0" scrolling=no  allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
 }
 
-const HTML = (pv, isLogin, path) => {
-  const isJump = /zb|vip/.test(isLogin)
+const HTML = (pv, copyright, path) => {
+  const isJump = /zb|vip/.test(copyright)
   const url = isJump ? `https://www.5ddm.com${path}` : `https://www.dddm.tv${path}`
   const reUrl = DOMAIN_NAME === '5ddm.com' && isJump ? '' : DOMAIN_NAME === 'dddm.tv' && !isJump ? '' : `<a target="_blank" class="jump" href="${url}">或者点这里试一下</a>`
   return `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">亲，请点我播放</a>${reUrl}<p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
@@ -168,34 +168,34 @@ const jump = (name, pv, isLogin, path) => {
   return isP || /bilibili|acfun|pptv|letv/.test(name) ? HTML(url, isLogin, path) : /iqiyi/.test(name) && !isMobile() ? flash(url) : iframe(url)
 }
 
-const isPlay = (name, vid, danmu, uid, isLogin, path) => {
+const isPlay = (name, vid, danmu, uid, copyright, path) => {
   const playStyle = /sina|weibo|miaopai|yunpan|qqq|360/.test(name)
   let url = ''
-  if (((/.mp4|.m3u8/.test(vid) || playStyle) && isP && !uid) || ['bit', 'letvyun', 'pmbit', 'bithls', 'bitqiu', 'letvsaas', 'acku'].indexOf(name) !== -1) {
-    url = HTML('/', isLogin, path)
+  if (((/.mp4|.m3u8/.test(vid) || playStyle) && isP && !uid) || (copyright === 'vip' && !ISPLAY) || ['bit', 'letvyun', 'pmbit', 'bithls', 'bitqiu', 'letvsaas', 'acku'].indexOf(name) !== -1) {
+    url = HTML('/', copyright, path)
   } else if (name === 'full') {
-    url = isP ? HTML('/', isLogin, path) : jiexiUrl(vid.replace('http://', 'https://'), danmu)
+    url = isP ? HTML('/', copyright, path) : jiexiUrl(vid.replace('http://', 'https://'), danmu)
   } else {
     if (/.mp4|.m3u8/.test(vid)) {
-      url = isP ? HTML('/', isLogin, path) : jiexiUrl(`//p.mdb6.com/api/p.php?type=${/.mp4/.test(vid) ? 'mp4' : 'm3u8'}&domain=${DOMAIN}&id=${vid}`, danmu)
+      url = isP ? HTML('/', copyright, path) : jiexiUrl(`//p.mdb6.com/api/p.php?type=${/.mp4/.test(vid) ? 'mp4' : 'm3u8'}&domain=${DOMAIN}&id=${vid}`, danmu)
     } else if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com|qq.com|mgtv.com/.test(vid)) {
       if (/bilibili|acfun|youku|tudou|iqiyi/.test(name)) {
-        url = jump(name, vid, isLogin, path)
+        url = jump(name, vid, copyright, path)
       } else {
-        url = isP ? HTML(vid, isLogin, path) : jiexiUrl(rePlayUrl(name, vid), danmu)
+        url = isP ? HTML(vid, copyright, path) : jiexiUrl(rePlayUrl(name, vid), danmu)
       }
     } else {
-      url = HTML(vid, isLogin, path)
+      url = HTML(vid, copyright, path)
     }
   }
   return url
 }
 
-export default ({ name, vid, danmu, uid, isLogin, url }) => {
+export default ({ name, vid, danmu, uid, copyright, url }) => {
   if (vid.indexOf('@@') !== -1) {
     const data = vid.split('@@')
     name = data[1]
     vid = data[0]
   }
-  return isPlay(name, vid, danmu, uid, isLogin, url)
+  return isPlay(name, vid, danmu, uid, copyright, url)
 }
