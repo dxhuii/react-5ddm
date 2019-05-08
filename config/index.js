@@ -1,5 +1,6 @@
 /**
  * 生产环境配置
+ * API 接口地址
  * debug 是否开发
  * IS9 是否是 9 站
  * ISPLAY 是否播放
@@ -10,7 +11,6 @@
  * DESCRIPTION 描述
  * DOMAIN_NAME 网站主域名称
  * DOMAIN 网站带 HTTPS 完整域名
- * API 接口地址
  * PORT 端口
  * AUTH_COOKIE_NAME 登录 cookie 名称
  * COOKIE_PREFIX cookie 前缀
@@ -29,7 +29,6 @@ const DOMAIN_NAME = '99496.com'
 
 const conf = {
   debug: false,
-  API: 'https://api.99496.com/',
   CLASS_SCOPED_NAME: '[hash:base64:8]',
   AUTH_COOKIE_NAME: 'auth',
   HEAD: `
@@ -39,6 +38,7 @@ const conf = {
   `
 }
 const defalut = {
+  API: 'https://api.99496.com/',
   IS9: true,
   ISPLAY: false,
   ISAD: true,
@@ -63,6 +63,7 @@ const defalut = {
  * dddm.tv
  */
 const dddm = {
+  API: 'https://api.dddm.tv/',
   IS9: false,
   ISPLAY: false,
   ISAD: true,
@@ -74,7 +75,7 @@ const dddm = {
   DOMAIN_NAME: 'dddm.tv',
   PORT: 8888,
   COOKIE_PREFIX: 'dddm_',
-  PUBLIC_PATH: '//cos.mdb6.com/dddm/client',
+  PUBLIC_PATH: '//www.dddm.tv/dist/client',
   BAIDU_STAT: 'aee66555ebcf1b95945961320239ae30',
   CNZZ_STAT: '1274947867',
   GA: 'UA-7957076-9',
@@ -88,6 +89,7 @@ const dddm = {
  *
  */
 const ddm = {
+  API: 'https://api.dddm.tv/',
   IS9: false,
   ISPLAY: true,
   ISAD: false,
@@ -99,7 +101,7 @@ const ddm = {
   DOMAIN_NAME: '5ddm.com',
   PORT: 7777,
   COOKIE_PREFIX: 'ddm_',
-  PUBLIC_PATH: '//cos.mdb6.com/5ddm',
+  PUBLIC_PATH: '//www.5ddm.com/dist/client',
   BAIDU_STAT: '9449f42e45055b4f70ad84574c4c65c8',
   CNZZ_STAT: '1276171240',
   GA: 'UA-7957076-8',
@@ -114,6 +116,7 @@ const ddm = {
  *
  */
 const kanfan = {
+  API: 'https://api.dddm.tv/',
   IS9: false,
   ISPLAY: true,
   ISAD: false,
@@ -125,7 +128,7 @@ const kanfan = {
   DOMAIN_NAME: 'kanfan.net',
   PORT: 9999,
   COOKIE_PREFIX: 'kanfan_',
-  PUBLIC_PATH: '//cos.mdb6.com/kanfan',
+  PUBLIC_PATH: '//www.kanfan.net/dist/client',
   BAIDU_STAT: '9449f42e45055b4f70ad84574c4c65c8',
   CNZZ_STAT: '1276171240',
   GA: 'UA-7957076-8',

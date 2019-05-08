@@ -1,7 +1,7 @@
 import { API } from 'Config'
 
-const apiReact = `${API}api.php?s=home-react-`
-const apiHome = `${API}api.php?s=home-`
+const apiReact = `${API}?s=home-react-`
+const apiHome = `${API}?s=home-`
 
 export default {
   api: {
