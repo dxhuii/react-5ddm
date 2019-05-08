@@ -56,6 +56,7 @@ class Play extends Component {
       title: '',
       subTitle: '',
       playHtml: '',
+      isZ: '',
       mInfo: {},
       list: [],
       full: false,
@@ -183,14 +184,14 @@ class Play extends Component {
       const qq = that.getQq(list)
       const isStop = (qq ? /上海|北京|深圳/ : /上海|北京/).test(returnCitySN.cname)
       const danmu = `${id}_${pid}`
-      const isZ = isStop && /zb/.test(copyright) && +Cookies.get('plain') !== 7 && !ISPLAY
-      const isA = other.length > 0 && !isP && !isZ && (copyright !== 'vip' || isMobile() || ISPLAY)
+      const isZ = isStop && /zb|vip/.test(copyright) && +Cookies.get('plain') !== 7 && !ISPLAY
+      const isA = other.length > 0 && !isP && !isZ && copyright !== 'vip' && (isMobile() || ISPLAY)
       const { playName, vid, playTitle } = isA ? other[0] : list[0]
       let playHtml = ''
       if (play && !isZ) {
-        playHtml = playing({ name: type, vid: authcode(atob(play), 'DECODE', key, 0), danmu, uid: userid, isLogin: copyright, url })
+        playHtml = playing({ name: type, vid: authcode(atob(play), 'DECODE', key, 0), danmu, uid: userid, copyright, url })
       } else {
-        playHtml = playing({ name: playName, vid: authcode(atob(vid), 'DECODE', key, 0), danmu, uid: userid, isLogin: copyright, url })
+        playHtml = playing({ name: playName, vid: authcode(atob(vid), 'DECODE', key, 0), danmu, uid: userid, copyright, url })
       }
       const mInfo = { playName, vid, playTitle }
       that.setState({
@@ -264,6 +265,27 @@ class Play extends Component {
     })
   }
 
+  showList = (list = []) => {
+    const { isZ } = this.state
+    if (isZ !== '') {
+      return list.map((item, index) => {
+        return isZ ? (
+          index < 1 ? (
+            <li key={item.playName}>
+              <i className={`playicon ${item.playName}`} />
+              {item.playTitle}
+            </li>
+          ) : null
+        ) : (
+          <li key={item.playName} onClick={() => this.onPlay(item.vid, item.playName)}>
+            <i className={`playicon ${item.playName}`} />
+            {item.playTitle}
+          </li>
+        )
+      })
+    }
+  }
+
   render() {
     const {
       userinfo: { userid },
@@ -272,7 +294,7 @@ class Play extends Component {
         params: { id, pid }
       }
     } = this.props
-    const { full, isfull, playHtml, mInfo, showPlay, isZ } = this.state
+    const { full, isfull, playHtml, mInfo, showPlay } = this.state
     const { listName, listId, listNameBig, list = [], pic, title, pan, subTitle, actor = '', up, down, prev, next, mcid = [], copyright } = data
     const shareConfig = {
       pic,
@@ -302,23 +324,7 @@ class Play extends Component {
                 </h1>
                 <h4>{subTitle}</h4>
               </div>
-              <ul styleName={`playlist ${showPlay ? 'show' : 'hide'}`}>
-                {list.map((item, index) => {
-                  return isZ ? (
-                    index < 1 ? (
-                      <li key={item.playName}>
-                        <i className={`playicon ${item.playName}`} />
-                        {item.playTitle}
-                      </li>
-                    ) : null
-                  ) : (
-                    <li key={item.playName} onClick={() => this.onPlay(item.vid, item.playName)}>
-                      <i className={`playicon ${item.playName}`} />
-                      {item.playTitle}
-                    </li>
-                  )
-                })}
-              </ul>
+              <ul styleName={`playlist ${showPlay ? 'show' : 'hide'}`}>{this.showList(list)}</ul>
               <div styleName="m-play-name" onClick={this.onShowPlayer}>
                 <i className={`playicon ${mInfo.playName}`} />
                 {mInfo.playTitle}
