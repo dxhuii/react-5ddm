@@ -36,8 +36,6 @@ app.use(function(req, res, next) {
 // 登录、退出
 app.use('/sign', sign())
 
-const https = require('https')
-
 app.get('*', async function(req, res) {
   const path = req.path
   const reg = /\d+/g
