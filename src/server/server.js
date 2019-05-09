@@ -44,25 +44,7 @@ app.get('*', async function(req, res) {
   const arr = path.match(reg)
   const url = path.split('/')
   // 兼容老的URL跳转
-  if (/bangumi/.test(path)) {
-    const pinyin = url[2]
-    // 根据拼音获取视频ID
-    if (pinyin) {
-      https.get(`${API}api.php?s=home-react-getVodId&pinyin=${pinyin}`, function(r) {
-        r.on('data', function(d) {
-          const data = JSON.parse(d || '{}')
-          if (data.data) {
-            const reUrl = url.length === 4 && /.html/.test(path) ? `/play/${data.data}/${arr[arr.length - 1]}` : `/subject/${data.data}`
-            res.status(301)
-            res.redirect(reUrl)
-          } else {
-            res.redirect(DOMAIN)
-          }
-        })
-      })
-      return
-    }
-  } else if ((/news/.test(path) || /article/.test(path)) && /.html/.test(path)) {
+  if ((/news/.test(path) || /article/.test(path)) && /.html/.test(path)) {
     const reUrl = `/article/${arr[0]}`
     res.status(301)
     res.redirect(reUrl)
