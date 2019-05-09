@@ -22,7 +22,7 @@ class Ads extends Component {
       loadScript('https://cos.mdb6.com/dddm/income.min.js', true, function() {
         // console.log(income)
         if (income[id]) {
-          const { type, content } = income[id]
+          const { type, content, height } = income[id]
           that.setState({
             type
           })
@@ -31,7 +31,7 @@ class Ads extends Component {
           } else if (type === 1) {
             that.showAd(content)
           } else if (type === 3) {
-            that.createIframe(that.ads, content)
+            that.createIframe(that.ads, content, height)
           }
         }
       })
@@ -53,13 +53,13 @@ class Ads extends Component {
    * @param onload iframe载入完后触发该事件。能够为空
    * @return 返回创建的iframe对象
    */
-  createIframe(dom, src, onload) {
+  createIframe(dom, src, height = 90, onload) {
     //在document中创建iframe
     const iframe = document.createElement('iframe')
 
     //设置iframe的样式
     iframe.style.width = '100%'
-    iframe.style.height = '90px'
+    iframe.style.height = height + 'px'
     iframe.style.margin = '0'
     iframe.style.padding = '0'
     iframe.style.overflow = 'hidden'

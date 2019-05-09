@@ -45,6 +45,7 @@ var income = isMoblie
       // 手机底部通栏
       8: {
         type: 3,
+        height: 190,
         content: 'https://www.99496.com/in/in.html'
       },
       // 手机端右悬浮广告
