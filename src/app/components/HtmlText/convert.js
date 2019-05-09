@@ -1,6 +1,6 @@
 /* eslint-disable */
 // 从html字符串中，获取所有图片地址
-const abstractImagesFromHTML = str => {
+const abstractImagesFromHTML = (str = '') => {
   let imgReg = /<img [^>]*src=['"]([^'"]+)([^>]*>)/gi
   let srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i
   let result = []

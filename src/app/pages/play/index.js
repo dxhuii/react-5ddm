@@ -185,7 +185,7 @@ class Play extends Component {
       const isStop = (qq ? /上海|北京|深圳/ : /上海|北京/).test(returnCitySN.cname)
       const danmu = `${id}_${pid}`
       const isZ = isStop && /zb|vip/.test(copyright) && +Cookies.get('plain') !== 7 && !ISPLAY
-      const isA = other.length > 0 && !isP && !isZ && copyright !== 'vip' && (isMobile() || ISPLAY)
+      const isA = other.length > 0 && !isP && !isZ && ((copyright !== 'vip' && ISPLAY) || isMobile() || ISPLAY)
       const { playName, vid, playTitle } = isA ? other[0] : list[0]
       let playHtml = ''
       if (play && !isZ) {
