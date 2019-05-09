@@ -250,9 +250,9 @@ class Game extends PureComponent {
                 </div>
               </div>
               <div className="summary">{dataInfo.Description}</div>
-              <div className="piclist">
-                <ul>{this.getPic(dataInfo.imgList)}</ul>
-              </div>
+              <ul className="piclist">
+                {this.getPic(dataInfo.imgList)}
+              </ul>
             </div>
           )}
           <div className="mask" style={{ display: display ? 'block' : 'none' }} onClick={() => this.switch()} />
