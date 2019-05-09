@@ -19,7 +19,7 @@ class Ads extends Component {
     if (ISAD) {
       const { id } = this.props
       const that = this
-      loadScript('https://cos.mdb6.com/dddm/income.min.js', true, function() {
+      loadScript('//cos.mdb6.com/static/income.min.js', true, function() {
         // console.log(income)
         if (income[id]) {
           const { type, content, height } = income[id]

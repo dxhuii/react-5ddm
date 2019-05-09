@@ -53,7 +53,7 @@ if (process.env.NODE_ENV !== 'development') {
         loadScript(bd)
         loadScript(cnzz)
         if (ISAD) {
-          loadScript('https://cos.mdb6.com/dddm/income.min.js', true, function() {
+          loadScript('//cos.mdb6.com/static/income.min.js', true, function() {
             // console.log(income)
             if (income[5]) {
               const { content } = income[5]
