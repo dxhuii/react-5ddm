@@ -296,7 +296,7 @@
         p {
           color: #666;
           line-height: 20px;
-          margin-bottom: 10px;
+          margin: 10px 0;
         }
       }
 
@@ -350,7 +350,6 @@
     .summary {
       margin-top: 20px;
       line-height: 30px;
-      text-indent: 2em;
       color: #666;
       font-size: 14px;
       max-height: 120px;
@@ -360,19 +359,22 @@
 
     .piclist {
       margin-top: 20px;
-      display: flex;
 
-      li {
-        flex: 1;
-        margin-right: 10px;
+      ul {
+        display: flex;
 
-        img {
-          width: 100%;
-          display: block;
-        }
+        li {
+          flex: 1;
+          margin-right: 10px;
 
-        &:last-child {
-          margin-right: 0;
+          img {
+            width: 100%;
+            display: block;
+          }
+
+          &:last-child {
+            margin-right: 0;
+          }
         }
       }
     }
@@ -404,12 +406,14 @@
       border-radius: 0;
 
       .info {
+        display: block;
+
         img {
+          float: left;
           margin-right: 20px;
         }
 
         .type {
-          float: none;
           width: auto;
           margin-left: 0;
           font-size: 14px;
