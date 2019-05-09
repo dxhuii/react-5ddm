@@ -1,28 +1,34 @@
 .news-nav {
   width: 160px;
+
   h2 {
     font-size: 18px;
     margin: 0 -20px;
     padding: 0 20px 15px;
     border-bottom: 1px solid #ebebeb;
   }
+
   ul {
     li {
       margin: 0 -20px;
       font-size: 16px;
       border-bottom: 1px solid #ebebeb;
+
       &:last-child {
         border-bottom: none;
       }
+
       a {
         padding: 15px 20px;
         display: block;
         color: #666;
+
         &:hover {
           display: block;
           background-color: #ebebeb;
         }
       }
+
       &.active {
         a {
           background-color: #0084ff;
@@ -36,7 +42,7 @@
 .news-left {
   width: 740px;
   margin-left: 20px;
-  padding-top: 15px;
+  padding-top: 5px;
 }
 
 @media (min-width: 0) and (max-width: 1200px) {
@@ -45,23 +51,28 @@
     display: flex;
     overflow-y: hidden;
     overflow-x: auto;
+
     h2 {
       display: none;
     }
+
     ul {
       display: flex;
       white-space: nowrap;
+
       li {
         margin: 0;
         border-bottom: 0;
         border-radius: 50px;
         overflow: hidden;
+
         a {
           padding: 5px 10px;
         }
       }
     }
   }
+
   .news-left {
     width: 100%;
     margin-left: 0;

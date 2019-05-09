@@ -1,47 +1,8 @@
-:global {
-  .swipe {
-    overflow: hidden;
-    visibility: hidden;
-    position: relative;
-    max-width: 100%;
-    margin: 0 auto;
-    display: block;
-    background: #ddd;
-    height: 230px;
-    text-align: center;
-  }
-
-  .swipe-wrap {
-    overflow: hidden;
-    position: relative;
-  }
-
-  .swipe-wrap div {
-    float: left;
-    width: 100%;
-    position: relative;
-  }
-
-  .swipe-item {
-    position: relative;
-
-    img {
-      display: block;
-      width: 100%;
-      min-height: 100%;
-    }
-
-    a {
-      display: block;
-      height: 230px;
-    }
-  }
-}
-
 .swiper {
   position: relative;
   border-radius: 10px;
   overflow: hidden;
+  height: 100%;
 
   &:hover {
 
@@ -50,121 +11,92 @@
       display: block;
     }
   }
-}
 
-.title {
-  height: 36px;
-  line-height: 36px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  background: -webkit-linear-gradient(transparent, rgba(0, 0, 0, .5));
-
-  a {
-    color: #fff;
-    opacity: 0;
-    transition: all .3s;
-    position: absolute;
-    bottom: 0;
-    left: 10px;
-
-    p {
-      color: #fff;
-    }
-
-    &.cur {
-      opacity: 1;
-    }
-  }
-}
-
-.swiper-prev,
-.swiper-next {
-  display: none;
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  background: rgba(0, 0, 0, .5);
-  border-radius: 50%;
-  text-align: center;
-  line-height: 50px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  user-select: none;
-
-  i {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-    color: #fff;
-    opacity: .7;
-  }
-
-  &:hover {
-    i {
-      color: #0084FF;
-    }
-  }
-}
-
-.swiper-prev {
-  left: 20px;
-}
-
-.swiper-next {
-  right: 20px;
-}
-
-.page {
-  position: absolute;
-  right: 10px;
-  bottom: 5px;
-  z-index: 3;
-
-  em {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: inline-block;
-    text-indent: -9999px;
-    background: #fff;
-    cursor: pointer;
-    margin: 0 3px;
-
-    &.cur {
-      background: #0084FF;
-    }
-  }
-}
-
-@media (min-width: 0px) and (max-width: 1200px) {
   :global {
     .swipe {
-      height: 200px;
+      overflow: hidden;
+      visibility: hidden;
+      position: relative;
+      max-width: 100%;
+      margin: 0 auto;
+      display: block;
+      background: #ddd;
+      height: 100%;
+      text-align: center;
     }
 
-    .swipe-item {
-      a {
-        height: 200px;
+    .swipe-wrap {
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+    }
+
+    .swipe-wrap div {
+      float: left;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+  }
+
+  .swiper-prev,
+  .swiper-next {
+    display: none;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, .5);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+
+    i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      color: #fff;
+      opacity: .7;
+    }
+
+    &:hover {
+      i {
+        color: #0084FF;
       }
     }
   }
-}
 
-@media (min-width: 0px) and (max-width: 399px) {
-  :global {
-    .swipe {
-      height: 170px;
-    }
+  .swiper-prev {
+    left: 20px;
+  }
 
-    .swipe-item {
-      a {
-        height: 170px;
+  .swiper-next {
+    right: 20px;
+  }
+
+  .page {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    z-index: 3;
+
+    em {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      text-indent: -9999px;
+      background: #fff;
+      cursor: pointer;
+      margin: 0 3px;
+
+      &.cur {
+        background: #0084FF;
       }
     }
   }

@@ -5,11 +5,10 @@ import Top from '@/components/Top'
 import List from '@/components/List'
 import News from '@/components/News'
 import NewsYG from '@/components/News/yugao'
-import Swiper from '@/components/Swiper'
+import Slide from '@/components/Slide'
 import Recommend from '@/components/Recommend'
 import Ads from '@/components/Ads'
 
-import { isMobile } from '@/utils'
 import { DESCRIBE, KEYWORDS, DESCRIPTION } from 'Config'
 import './style.scss'
 // 壳组件
@@ -42,7 +41,7 @@ class Home extends Component {
           </Meta>
           <div className="pt20" styleName="main top">
             <div styleName="top-left">
-              <Swiper />
+              <Slide />
             </div>
             <div styleName="top-right">
               <Recommend />

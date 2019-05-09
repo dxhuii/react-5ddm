@@ -12,7 +12,6 @@ import { getConfig } from '@/store/reducers/config'
 import { getNewsIndex } from '@/store/reducers/newsIndex'
 
 import SideBar from '@/components/SideBar'
-import Swiper from '@/components/Swiper'
 import Item from '@/components/News/Item'
 
 // 壳组件
@@ -159,7 +158,6 @@ class NewsIndex extends Component {
           </ul>
         </div>
         <div styleName="news-left" className="box fl">
-          <Swiper />
           <Item data={data} />
         </div>
         <div className="right fr">

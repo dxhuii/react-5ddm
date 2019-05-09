@@ -25,7 +25,7 @@
  * WW 文网文
  */
 
-const DOMAIN_NAME = 'dddm.tv'
+const DOMAIN_NAME = '99496.com'
 
 const conf = {
   debug: false,
