@@ -50,7 +50,7 @@ export const loadScript = (src, end, callback = function() {}) => {
     script.src = src
     script.async = 1
     for (let i = 0; i < dom.length; i++) {
-      if (dom[i].src === src) {
+      if (dom[i].src === window.location.protocol + src) {
         dom[i].parentNode.removeChild(dom[i])
       }
     }
