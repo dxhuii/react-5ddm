@@ -92,6 +92,8 @@ const ck = (type, pv) => {
     return `//p.mdb6.com/api/p.php?type=qqq&domain=${DOMAIN}&id=${pv}`
   } else if (type === '360') {
     return `//p.mdb6.com/api/p.php?type=360&domain=${DOMAIN}&id=${pv}`
+  } else if (type === 'ksyun') {
+    return `//p.mdb6.com/api/p.php?type=ksyun&domain=${DOMAIN}&id=${pv}`
   } else {
     return flvsp + type + '&id=' + pv
   }
@@ -175,7 +177,7 @@ const jump = (name, pv, copyright, path) => {
 }
 
 const isPlay = (name, vid, danmu, uid, copyright, path) => {
-  const playStyle = /sina|weibo|miaopai|yunpan|qqq|360/.test(name)
+  const playStyle = /sina|weibo|miaopai|yunpan|qqq|360|ksyun/.test(name)
   let url = ''
   if (((/.mp4|.m3u8/.test(vid) || playStyle) && isP && !uid) || ['bit', 'letvyun', 'pmbit', 'bithls', 'bitqiu', 'letvsaas', 'acku'].indexOf(name) !== -1) {
     url = HTML('/', copyright, path)
