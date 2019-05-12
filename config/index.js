@@ -63,7 +63,7 @@ const defalut = {
  * dddm.tv
  */
 const dddm = {
-  API: 'https://api.99496.com/',
+  API: 'https://api.dddm.tv/',
   IS9: false,
   ISPLAY: false,
   ISAD: true,
@@ -89,7 +89,7 @@ const dddm = {
  *
  */
 const ddm = {
-  API: 'https://api.99496.com/',
+  API: 'https://api.dddm.tv/',
   IS9: false,
   ISPLAY: true,
   ISAD: false,
@@ -116,7 +116,7 @@ const ddm = {
  *
  */
 const kanfan = {
-  API: 'https://api.99496.com/',
+  API: 'https://api.dddm.tv/',
   IS9: false,
   ISPLAY: true,
   ISAD: false,
