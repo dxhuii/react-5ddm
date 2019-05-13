@@ -43,18 +43,16 @@ if (process.env.NODE_ENV !== 'development') {
     logPageView = userinfo => {
       let option = { page: window.location.pathname }
       if (userinfo && userinfo._id) option.userId = userinfo._id
-      if (process.env.NODE_ENV !== 'development') {
+      if (process.env.NODE_ENV === 'development') {
         ReactGA.set(option)
         ReactGA.pageview(window.location.pathname)
         if (window.location.href.indexOf('/play/') !== -1) {
-          loadScript('//cos.mdb6.com/static/devtools-detector.js', false, function() {
-            devtoolsDetector.addListener(function(isOpen, detail) {
-              if (isOpen) {
-                top.location.href = DOMAIN
-              }
-            })
-            devtoolsDetector.lanuch()
+          devtoolsDetector.addListener(function(isOpen, detail) {
+            if (isOpen) {
+              top.location.href = DOMAIN
+            }
           })
+          devtoolsDetector.lanuch()
         }
         const cnzz = `https://s13.cnzz.com/z_stat.php?id=${CNZZ_STAT}&web_id=${CNZZ_STAT}`
         const bd = `https://hm.baidu.com/hm.js?${BAIDU_STAT}`
