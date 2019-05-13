@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser'
 import compress from 'compression'
 
 // 配置
-import { PORT, DOMAIN, API } from 'Config'
+import { PORT } from 'Config'
 
 import render from './render'
 
@@ -59,14 +59,14 @@ app.get('*', async function(req, res) {
     return
   }
 
-  let { context, html, meta, reduxState } = await render(req, res)
+  let { context, html, meta, reduxState, CNZZ_STAT, BAIDU_STAT } = await render(req, res)
 
   res.status(context.code)
 
   if (context.redirect) {
     res.redirect(context.redirect)
   } else {
-    res.render('../dist/server/index.ejs', { html, reduxState, meta })
+    res.render('../dist/server/index.ejs', { html, reduxState, meta, CNZZ_STAT, BAIDU_STAT })
   }
 
   res.end()

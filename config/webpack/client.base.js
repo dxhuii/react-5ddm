@@ -221,6 +221,8 @@ module.exports = {
       metaDom: '<%- meta %>',
       htmlDom: '<%- html %>',
       reduxState: '<%- reduxState %>',
+      CNZZ_STAT: '<%- CNZZ_STAT %>',
+      BAIDU_STAT: '<%- BAIDU_STAT %>',
       head: config.HEAD
       // inject: false
     }),

@@ -36,6 +36,16 @@
         <a href="https://chrome.google.com/" target="_blank">Google Chrome</a>
       </div>
     <![endif]-->
+    <script type="text/javascript" src="https://s13.cnzz.com/z_stat.php?id=<%= htmlWebpackPlugin.options.CNZZ_STAT %>&web_id=<%= htmlWebpackPlugin.options.CNZZ_STAT %>"></script>
+    <script>
+      var _hmt = _hmt || []
+      ;(function() {
+        var hm = document.createElement('script')
+        hm.src = 'https://hm.baidu.com/hm.js?<%= htmlWebpackPlugin.options.BAIDU_STAT %>'
+        var s = document.getElementsByTagName('script')[0]
+        s.parentNode.insertBefore(hm, s)
+      })()
+    </script>
     <script src="//cos.mdb6.com/dddm/qq.js"></script>
   </body>
 </html>

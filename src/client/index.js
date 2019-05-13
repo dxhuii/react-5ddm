@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { matchPath } from 'react-router'
-import ReactGA from 'react-ga'
+// import ReactGA from 'react-ga'
 
 // 引入全局样式
 import '../app/pages/global.scss'
@@ -12,7 +12,8 @@ import configureStore from '@/store'
 import createRouter from '@/router'
 import { getUserInfo } from '@/store/reducers/user'
 
-import { CNZZ_STAT, BAIDU_STAT, GA, ISAD, DOMAIN } from 'Config'
+// import { CNZZ_STAT, BAIDU_STAT, GA, ISAD, DOMAIN } from 'Config'
+import { ISAD, DOMAIN } from 'Config'
 import { loadScript } from '@/utils'
 
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
@@ -38,32 +39,32 @@ if (process.env.NODE_ENV !== 'development') {
   let userinfo = getUserInfo(store.getState())
   if (!userinfo || !userinfo.userid) userinfo = null
   let logPageView = () => {}
-  if (GA) {
-    ReactGA.initialize(GA)
-    logPageView = userinfo => {
-      let option = { page: window.location.pathname }
-      if (userinfo && userinfo._id) option.userId = userinfo._id
-      if (process.env.NODE_ENV !== 'development') {
-        ReactGA.set(option)
-        ReactGA.pageview(window.location.pathname)
-        const cnzz = `https://s13.cnzz.com/z_stat.php?id=${CNZZ_STAT}&web_id=${CNZZ_STAT}`
-        const bd = `https://hm.baidu.com/hm.js?${BAIDU_STAT}`
-        const push = 'https://zz.bdstatic.com/linksubmit/push.js'
-        loadScript(push)
-        loadScript(bd)
-        loadScript(cnzz)
-        if (ISAD) {
-          loadScript('//cos.mdb6.com/static/income.min.js', true, function() {
-            // console.log(income)
-            if (income[5]) {
-              const { content } = income[5]
-              loadScript(content, true)
-            }
-          })
-        }
+  // if (GA) {
+  //   ReactGA.initialize(GA)
+  logPageView = userinfo => {
+    let option = { page: window.location.pathname }
+    if (userinfo && userinfo._id) option.userId = userinfo._id
+    if (process.env.NODE_ENV !== 'development') {
+      // ReactGA.set(option)
+      // ReactGA.pageview(window.location.pathname)
+      // const cnzz = `https://s13.cnzz.com/z_stat.php?id=${CNZZ_STAT}&web_id=${CNZZ_STAT}`
+      // const bd = `https://hm.baidu.com/hm.js?${BAIDU_STAT}`
+      const push = 'https://zz.bdstatic.com/linksubmit/push.js'
+      loadScript(push)
+      // loadScript(bd)
+      // loadScript(cnzz)
+      if (ISAD) {
+        loadScript('//cos.mdb6.com/static/income.min.js', true, function() {
+          // console.log(income)
+          if (income[5]) {
+            const { content } = income[5]
+            loadScript(content, true)
+          }
+        })
       }
     }
   }
+  // }
 
   const router = createRouter(userinfo, logPageView)
   const RouterDom = router.dom
