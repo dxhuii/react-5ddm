@@ -170,35 +170,37 @@ class Play extends Component {
   getData() {
     const that = this
     loadScript('https://pv.sohu.com/cityjson?ie=utf-8', false, function() {
-      const {
-        match: {
-          params: { id, pid },
-          url
-        },
-        userinfo: { userid },
-        player: { data = {} }
-      } = that.props
-      const { play, type } = that.state
-      const { list = [], copyright, key } = data
-      const other = that.getOther(list)
-      const qq = that.getQq(list)
-      const isStop = (qq ? /上海|北京|深圳/ : /上海|北京/).test(returnCitySN.cname)
-      const danmu = `${id}_${pid}`
-      const isZ = isStop && /zb/.test(copyright) && +Cookies.get('plain') !== 7 && !ISPLAY
-      const isA = other.length > 0 && !isP && !isZ && (copyright !== 'vip' || isMobile() || ISPLAY)
-      const { playName, vid, playTitle } = isA ? other[0] : list[0]
-      let playHtml = ''
-      if (play && !isZ) {
-        playHtml = playing({ name: type, vid: authcode(atob(play), 'DECODE', key, 0), danmu, uid: userid, copyright, url })
-      } else {
-        playHtml = playing({ name: playName, vid: authcode(atob(vid), 'DECODE', key, 0), danmu, uid: userid, copyright, url })
-      }
-      const mInfo = { playName, vid, playTitle }
-      that.setState({
-        playHtml,
-        mInfo,
-        isZ
-      })
+      setTimeout(() => {
+        const {
+          match: {
+            params: { id, pid },
+            url
+          },
+          userinfo: { userid },
+          player: { data = {} }
+        } = that.props
+        const { play, type } = that.state
+        const { list = [], copyright, key } = data
+        const other = that.getOther(list)
+        const qq = that.getQq(list)
+        const isStop = (qq ? /上海|北京|深圳/ : /上海|北京/).test(returnCitySN.cname)
+        const danmu = `${id}_${pid}`
+        const isZ = isStop && /zb/.test(copyright) && +Cookies.get('plain') !== 7 && !ISPLAY
+        const isA = other.length > 0 && !isP && !isZ && (copyright !== 'vip' || isMobile() || ISPLAY)
+        const { playName, vid, playTitle } = isA ? other[0] : list[0]
+        let playHtml = ''
+        if (play && !isZ) {
+          playHtml = playing({ name: type, vid: authcode(atob(play), 'DECODE', key, 0), danmu, uid: userid, copyright, url })
+        } else {
+          playHtml = playing({ name: playName, vid: authcode(atob(vid), 'DECODE', key, 0), danmu, uid: userid, copyright, url })
+        }
+        const mInfo = { playName, vid, playTitle }
+        that.setState({
+          playHtml,
+          mInfo,
+          isZ
+        })
+      }, 500)
     })
   }
 

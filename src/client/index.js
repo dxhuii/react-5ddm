@@ -44,8 +44,6 @@ if (process.env.NODE_ENV !== 'development') {
       let option = { page: window.location.pathname }
       if (userinfo && userinfo._id) option.userId = userinfo._id
       if (process.env.NODE_ENV !== 'development') {
-        ReactGA.set(option)
-        ReactGA.pageview(window.location.pathname)
         if (window.location.href.indexOf('/play/') !== -1) {
           devtoolsDetector.addListener(function(isOpen, detail) {
             if (isOpen) {
@@ -54,6 +52,8 @@ if (process.env.NODE_ENV !== 'development') {
           })
           devtoolsDetector.lanuch()
         }
+        ReactGA.set(option)
+        ReactGA.pageview(window.location.pathname)
         const cnzz = `https://s13.cnzz.com/z_stat.php?id=${CNZZ_STAT}&web_id=${CNZZ_STAT}`
         const bd = `https://hm.baidu.com/hm.js?${BAIDU_STAT}`
         const push = 'https://zz.bdstatic.com/linksubmit/push.js'
