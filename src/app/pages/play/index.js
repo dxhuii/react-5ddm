@@ -200,7 +200,7 @@ class Play extends Component {
           mInfo,
           isZ
         })
-      }, 500)
+      }, 1000)
     })
   }
 
