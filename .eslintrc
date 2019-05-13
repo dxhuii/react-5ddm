@@ -11,7 +11,8 @@
     "adsbygoogle": true,
     "importScripts": true,
     "returnCitySN": true,
-    "income": true
+    "income": true,
+    "devtoolsDetector": true
   },
   "plugins": ["react-hooks"],
   "parser": "babel-eslint",

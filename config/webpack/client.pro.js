@@ -24,7 +24,7 @@ const webpackConfig = {
     new OfflinePlugin({
       autoUpdate: 1000 * 60 * 5,
       ServiceWorker: {
-        publicPath: '/dist/client/sw.js'
+        publicPath: '/sw.js'
       }
     }),
     // new ManifestPlugin({ fileName: 'manifest.json' }),

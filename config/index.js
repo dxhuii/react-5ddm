@@ -31,8 +31,7 @@ const conf = {
   debug: false,
   CLASS_SCOPED_NAME: '[hash:base64:8]',
   AUTH_COOKIE_NAME: 'auth',
-  HEAD: `
-    <meta name="renderer" content="webkit">
+  HEAD: `<meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
   `
@@ -50,7 +49,7 @@ const defalut = {
   DOMAIN_NAME: '99496.com',
   PORT: 6666,
   COOKIE_PREFIX: 'ikf_',
-  PUBLIC_PATH: '//dev.99496.com/dist/client',
+  PUBLIC_PATH: '//dev.99496.com',
   BAIDU_STAT: 'b3c1facee308e3a3450dc7f836101938',
   CNZZ_STAT: '5862511',
   GA: 'UA-63362690-1',
@@ -75,7 +74,7 @@ const dddm = {
   DOMAIN_NAME: 'dddm.tv',
   PORT: 8888,
   COOKIE_PREFIX: 'dddm_',
-  PUBLIC_PATH: '//www.dddm.tv/dist/client',
+  PUBLIC_PATH: '//www.dddm.tv',
   BAIDU_STAT: 'aee66555ebcf1b95945961320239ae30',
   CNZZ_STAT: '1274947867',
   GA: 'UA-7957076-9',
@@ -101,7 +100,7 @@ const ddm = {
   DOMAIN_NAME: '5ddm.com',
   PORT: 7777,
   COOKIE_PREFIX: 'ddm_',
-  PUBLIC_PATH: '//www.5ddm.com/dist/client',
+  PUBLIC_PATH: '//www.5ddm.com',
   BAIDU_STAT: '9449f42e45055b4f70ad84574c4c65c8',
   CNZZ_STAT: '1276171240',
   GA: 'UA-7957076-8',
@@ -128,7 +127,7 @@ const kanfan = {
   DOMAIN_NAME: 'kanfan.net',
   PORT: 9999,
   COOKIE_PREFIX: 'kanfan_',
-  PUBLIC_PATH: '//www.kanfan.net/dist/client',
+  PUBLIC_PATH: '//www.kanfan.net',
   BAIDU_STAT: '9449f42e45055b4f70ad84574c4c65c8',
   CNZZ_STAT: '1276171240',
   GA: 'UA-7957076-8',
