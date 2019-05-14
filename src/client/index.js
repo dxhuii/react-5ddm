@@ -38,12 +38,12 @@ if (process.env.NODE_ENV !== 'development') {
   let userinfo = getUserInfo(store.getState())
   if (!userinfo || !userinfo.userid) userinfo = null
   let logPageView = () => {}
+  const { href, pathname } = window.location
   if (GA) {
     ReactGA.initialize(GA)
     logPageView = userinfo => {
-      let option = { page: window.location.pathname }
+      let option = { page: pathname }
       if (userinfo && userinfo._id) option.userId = userinfo._id
-      const { href, pathname } = window.location
       if (process.env.NODE_ENV !== 'development') {
         if (href.indexOf('/play/') !== -1) {
           devtoolsDetector.addListener(function(isOpen, detail) {
@@ -54,7 +54,7 @@ if (process.env.NODE_ENV !== 'development') {
           devtoolsDetector.lanuch()
         }
         ReactGA.set(option)
-        ReactGA.pageview(window.location.pathname)
+        ReactGA.pageview(pathname)
         const cnzz = `https://s13.cnzz.com/z_stat.php?id=${CNZZ_STAT}&web_id=${CNZZ_STAT}`
         const bd = `https://hm.baidu.com/hm.js?${BAIDU_STAT}`
         const push = 'https://zz.bdstatic.com/linksubmit/push.js'
@@ -80,7 +80,7 @@ if (process.env.NODE_ENV !== 'development') {
   let _route = null
 
   router.list.some(route => {
-    let match = matchPath(window.location.pathname, route)
+    let match = matchPath(pathname, route)
     if (match && match.path) {
       _route = route
       return true
