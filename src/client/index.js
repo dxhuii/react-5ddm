@@ -43,8 +43,9 @@ if (process.env.NODE_ENV !== 'development') {
     logPageView = userinfo => {
       let option = { page: window.location.pathname }
       if (userinfo && userinfo._id) option.userId = userinfo._id
+      const { href, pathname } = window.location
       if (process.env.NODE_ENV !== 'development') {
-        if (window.location.href.indexOf('/play/') !== -1) {
+        if (href.indexOf('/play/') !== -1) {
           devtoolsDetector.addListener(function(isOpen, detail) {
             if (isOpen) {
               top.location.href = DOMAIN
@@ -60,7 +61,7 @@ if (process.env.NODE_ENV !== 'development') {
         loadScript(push)
         loadScript(bd)
         loadScript(cnzz)
-        if (ISAD) {
+        if (ISAD && pathname !== '/') {
           loadScript('//cos.mdb6.com/static/income.min.js', true, function() {
             // console.log(income)
             if (income[5]) {
