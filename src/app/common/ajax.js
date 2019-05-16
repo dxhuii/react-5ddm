@@ -1,13 +1,13 @@
 import axios from 'axios'
+import qs from 'qs'
 
 const AJAX = ({ url = '', method = 'get', data = {}, headers = {} }) => {
   let option = { url, method, headers }
-
   if (method === 'get') {
     data._t = new Date().getTime()
     option.params = data
   } else if (method === 'post') {
-    option.data = data
+    option.data = qs.stringify(data)
   }
 
   return axios(option)

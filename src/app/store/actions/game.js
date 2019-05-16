@@ -9,6 +9,7 @@ export function gameList({ order, wd, limit }) {
       reducerName: 'game',
       actionType: 'GET_GAME',
       api: 'game',
+      method: 'post',
       params: {
         order,
         limit,

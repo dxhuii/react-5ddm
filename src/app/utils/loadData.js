@@ -1,18 +1,7 @@
 import config from '@/utils/config'
 import Ajax from '@/common/ajax'
 
-export default ({
-  dispatch,
-  getState,
-  reducerName,
-  name,
-  actionType,
-  api,
-  params,
-  isPage = false,
-  method = 'get',
-  callback = () => {}
-}) => {
+export default ({ dispatch, getState, reducerName, name, actionType, api, params, isPage = false, method = 'get', callback = () => {} }) => {
   return new Promise(async (resolve, reject) => {
     let state = getState(),
       list = state[reducerName][name] || {}
@@ -44,11 +33,15 @@ export default ({
 
     if (actionType) dispatch({ type: actionType, name, data: list })
 
+    const url = config.api[api]
+
     let [err, data] = await Ajax({
       method,
-      url: config.api[api],
-      data: isPage ? Object.assign({}, params, { p: list.page }) : params
+      url,
+      data: isPage ? Object.assign({}, params, { s: url.split('=')[1], p: list.page }) : params
     })
+
+    console.log(err, data, 'loaddata')
 
     if (err) {
       list.loading = false
