@@ -31,24 +31,6 @@
 - [ ] 角色详情
 - [ ] 用户中心
 
-## 播放条件
-
-### copyright 接口返回
-
-#### IS9 如果为 true 配置文件配置
-
-- 值为 vip 时，无论有没有登录，不强制切换其他播放组
-- 值为 stop 时，未登录，强制跳转到 404 页面，登录则不跳
-- 值为 banquan 时，不区分是否登录，不显示播放列表，提示版权限制
-- 值为 空是，无论有没有登录，不强制切换其他播放组
-
-#### IS9 如果为 false
-
-- 值为 vip 时，没有登录，不强制切换其他播放组，登录则强制切换其他组
-- 值为 stop 时，正常播放
-- 值为 banquan 时，正常播放
-- 值为 空是，无论有没有登录，都强制切换其他播放组
-
 ## 开始
 
 **_没有在 windows 机器上测试过，可能会报错_**
@@ -112,49 +94,5 @@ Web 前端世界日新月异变化太快，为了让自己跟上节奏不掉队�
 - 🔄 开发环境支持热更新
 - 🎛 内置登录、退出、页面权限控制、帖子列表获取、帖子详情获取等功能
 - 🚧 内置用户访问页面时，301、404 状态相应的处理逻辑
-
-## BraftEditor 富文本编辑器调用方法
-
-- 引入
-
-```javascript
-import { AsyncComponent } from '../../components/generate-async-component' // 生成异步加载组件
-```
-
-- 获取数据，写入 localStorage 里，默认不支持服务端渲染
-- 调用
-
-```jsx
-<div styleName='editor'>
-  <AsyncComponent load={() => import('../../components/Editor')}>
-    {Component => <Component />}
-  </AsyncComponent>
-</div>
-<h5>输出内容</h5>
-<div className="editorbox">{outputHTML}</div>
-```
-
-## SimpleMDE 富文本编辑器调用方法
-
-- 引入组件
-
-```javascript
-import SimpleEditor from '../../components/SimpleEditor'
-```
-
-- 获取数据
-
-```javascript
-getValue = val => {
-  console.log(val, 'html')
-  localStorage.commit = val
-}
-```
-
-- 调用
-
-```jsx
-<SimpleEditor getValue={this.getValue} />
-```
 
 >  注：项目里面包含了对 vscode 的配置
