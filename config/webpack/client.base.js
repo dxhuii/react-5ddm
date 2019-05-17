@@ -36,9 +36,6 @@ module.exports = {
       '@babel/polyfill',
       // ArriveFooter 监听抵达页尾的事件
       './src/app/utils/arrive-footer.js',
-      // 网页图片浏览器
-      // WebPictureViewer(['https://avatars3.githubusercontent.com/u/888115?v=3&s=40']);
-      './src/app/utils/web-picture-viewer.js',
       /**
        * 懒加载图片、Dom
        * 使用方式

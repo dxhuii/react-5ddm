@@ -37,11 +37,13 @@ export default class Swiper extends PureComponent {
     this.mySwipe.restart()
   }
 
-  prev = () => {
+  prev = e => {
+    e.stopPropagation()
     this.mySwipe.prev()
   }
 
-  next = () => {
+  next = e => {
+    e.stopPropagation()
     this.mySwipe.next()
   }
 
@@ -50,7 +52,7 @@ export default class Swiper extends PureComponent {
   }
 
   render() {
-    const { Pagination, Controller, Autoplay, Start = 0 } = this.props
+    const { Pagination, Controller, Autoplay = 0, Start = 0 } = this.props
     const { current } = this.state
     const elem = Array.from(Array(this.props.children.length), (v, k) => k) || []
     return (
@@ -71,9 +73,9 @@ export default class Swiper extends PureComponent {
           {this.props.children}
         </Swipe>
         {Pagination ? (
-          <div styleName="page" ref={e => (this.page = e)}>
+          <div className="swiper-page" ref={e => (this.page = e)}>
             {elem.map(item => (
-              <em key={item} styleName={item === current ? 'cur' : ''} onClick={() => this.onCur(item)}>
+              <em key={item} className={item === current ? 'cur' : ''} onClick={() => this.onCur(item)}>
                 {item + 1}
               </em>
             ))}
@@ -81,10 +83,10 @@ export default class Swiper extends PureComponent {
         ) : null}
         {Controller ? (
           <Fragment>
-            <div styleName="swiper-prev" onClick={this.prev}>
+            <div className="swiper-prev" onClick={this.prev}>
               <i className="iconfont">&#xe8ff;</i>
             </div>
-            <div styleName="swiper-next" onClick={this.next}>
+            <div className="swiper-next" onClick={this.next}>
               <i className="iconfont">&#xe65e;</i>
             </div>
           </Fragment>

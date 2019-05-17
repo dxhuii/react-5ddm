@@ -2,7 +2,7 @@ import { isMobile } from './index'
 import { IS9, DOMAIN_NAME, DOMAIN, ISPLAY } from 'Config'
 
 const isP = IS9 && !isMobile()
-
+const playUrl = '//p.mdb6.com/api/p.php?type='
 const playH = '100%'
 
 const iframe = url => {
@@ -87,15 +87,15 @@ const ck = (type, pv) => {
   } else if (type === 'sohu') {
     return isMobile() ? mdparse + type + '&id=' + pv : flvsp + type + '&id=' + pv
   } else if (type === 'yunpan') {
-    return `//p.mdb6.com/api/p.php?type=yunpan&domain=${DOMAIN}&id=${pv}`
+    return `${playUrl}yunpan&domain=${DOMAIN}&id=${pv}`
   } else if (type === 'qqq') {
-    return `//p.mdb6.com/api/p.php?type=qqq&domain=${DOMAIN}&id=${pv}`
+    return `${playUrl}qqq&domain=${DOMAIN}&id=${pv}`
   } else if (type === '360') {
-    return `//p.mdb6.com/api/p.php?type=360&domain=${DOMAIN}&id=${pv}`
+    return `${playUrl}360&domain=${DOMAIN}&id=${pv}`
   } else if (type === 'ksyun') {
-    return `//p.mdb6.com/api/p.php?type=ksyun&domain=${DOMAIN}&id=${pv}`
+    return `${playUrl}ksyun&domain=${DOMAIN}&id=${pv}`
   } else if (type === 's360') {
-    return `//p.mdb6.com/api/p.php?type=s360&domain=${DOMAIN}&id=${pv}`
+    return `${playUrl}s360&domain=${DOMAIN}&id=${pv}`
   } else {
     return flvsp + type + '&id=' + pv
   }
@@ -187,7 +187,7 @@ const isPlay = (name, vid, danmu, uid, copyright, path) => {
     url = isP ? HTML('/', copyright, path) : jiexiUrl(vid.replace('http://', 'https://'), danmu)
   } else {
     if (/.mp4|.m3u8/.test(vid)) {
-      url = isP ? HTML('/', copyright, path) : jiexiUrl(`//p.mdb6.com/api/p.php?type=${/.mp4/.test(vid) ? 'mp4' : 'm3u8'}&domain=${DOMAIN}&id=${vid}`, danmu)
+      url = isP ? HTML('/', copyright, path) : jiexiUrl(`${playUrl}${/.mp4/.test(vid) ? 'mp4' : 'm3u8'}&domain=${DOMAIN}&id=${vid}`, danmu)
     } else if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com|qq.com|mgtv.com/.test(vid)) {
       if (/bilibili|acfun|youku|tudou|iqiyi/.test(name)) {
         url = jump(name, vid, copyright, path)

@@ -1,21 +1,4 @@
 /* eslint-disable */
-// 从html字符串中，获取所有图片地址
-const abstractImagesFromHTML = (str = '') => {
-  let imgReg = /<img [^>]*src=['"]([^'"]+)([^>]*>)/gi
-  let srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i
-  let result = []
-
-  let imgs = str.match(imgReg)
-
-  if (imgs && imgs.length > 0) {
-    imgs.map(img => {
-      let _img = img.match(srcReg)
-      if (_img && _img[1]) result.push(_img[1])
-    })
-  }
-
-  return result
-}
 
 function randomString(len) {
   len = len || 32
@@ -310,34 +293,6 @@ const link = str => {
   return str
 }
 
-const image = html => {
-  // 图片处理
-  let re = /<img [^>]*src=['"]([^'"]+)([^>]*>)/gi
-
-  let imgs = [...new Set(html.match(re))]
-
-  // 获取页面中所有的图片
-  let allImage = abstractImagesFromHTML(html)
-
-  allImage.map((item, index) => {
-    allImage[index] = item.split('?')[0]
-  })
-  allImage = "['" + allImage.join("','") + "']"
-
-  if (imgs && imgs.length > 0) {
-    imgs.map((img, index) => {
-      let _img = img
-
-      // 如果url中包含“?”,需要将其转译成字符串
-      _img = _img.replace(/\?/g, '\\?')
-
-      html = html.replace(new RegExp(_img, 'gm'), '<div onclick="webPictureViewer(' + allImage + ',' + index + ');" class="load-demand" data-load-demand=\'' + img + "'></div>")
-    })
-  }
-
-  return html
-}
-
 export default (html = '') => {
   // let re = /(<(.*?)>(.*?)<\/(.*?)>|<(.*?)>)/gi;
   // html = html.match(re).join('');
@@ -348,7 +303,6 @@ export default (html = '') => {
   html = youtube(html)
   html = vqq(html)
   html = link(html)
-  html = image(html)
 
   return html
 }

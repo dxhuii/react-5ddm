@@ -15,9 +15,11 @@ import SideBar from '@/components/SideBar'
 import TagShare from '@/components/TagShare'
 import Ads from '@/components/Ads'
 import convertHTML from '@/components/HtmlText'
+import Swiper from '@/components/Swiper'
 
 import playing from '@/utils/play'
 import { NAME } from 'Config'
+import { isMobile } from '@/utils'
 
 import './style.scss'
 @Shell
@@ -45,7 +47,9 @@ class Article extends PureComponent {
     super(props)
     this.state = {
       full: false,
-      isfull: false
+      isfull: false,
+      showPic: false,
+      imgObj: {}
     }
   }
 
@@ -67,6 +71,32 @@ class Article extends PureComponent {
         this.isFull()
       }
     }
+    const that = this
+
+    document.body.addEventListener('click', function(e) {
+      // 判断是否点击的图片
+      if (e.path[0].nodeName === 'IMG') {
+        let params = {}
+        params.param = {}
+        // 获取imglist
+        const oPics = that.content.getElementsByTagName('img')
+        params.param.imageArray = []
+        for (let i = 0; i < oPics.length; i++) {
+          params.param.imageArray.push({ url: oPics[i].src })
+        }
+        for (let i = 0; i < oPics.length; i++) {
+          // 判断点击图片的index
+          if (e.path[0].src === params.param.imageArray[i].url) {
+            params.param.index = i
+          }
+        }
+        console.log(params)
+        that.setState({
+          imgObj: params.param,
+          showPic: true
+        })
+      }
+    })
   }
 
   isFull = () => {
@@ -87,6 +117,12 @@ class Article extends PureComponent {
     })
   }
 
+  closePic = () => {
+    this.setState({
+      showPic: false
+    })
+  }
+
   render() {
     const {
       articleData: { data = {} },
@@ -95,7 +131,7 @@ class Article extends PureComponent {
     } = this.props
     const { title, id, name, cid, pic = '', remark, keywords, addtime, inputer, tag = [], prev, next, vodid, jump, content = '', playname = '', playurl = '' } = data
     const playHtml = playing({ name: playname, vid: playurl, danmu: `article_${id}`, uid: userid, url })
-    const { full, isfull } = this.state
+    const { full, isfull, showPic, imgObj } = this.state
     const shareConfig = {
       pic,
       title: `${title} - ${name} - #${NAME}# @99496动漫网`,
@@ -105,6 +141,7 @@ class Article extends PureComponent {
     if (jump && !(typeof window === 'undefined')) {
       window.location.href = jump
     }
+    const { imageArray = [], index } = imgObj
     return (
       <div className="wp mt20 clearfix">
         <Meta title={title}>
@@ -137,7 +174,19 @@ class Article extends PureComponent {
                 ) : null}
               </div>
             ) : null}
-            <div styleName="article-content" dangerouslySetInnerHTML={{ __html: convertHTML(content) }} />
+            <div ref={e => (this.content = e)} styleName="article-content" dangerouslySetInnerHTML={{ __html: convertHTML(content) }} />
+            {showPic ? (
+              <div styleName="article-slide" onClick={this.closePic}>
+                <span />
+                <Swiper Pagination={true} Controller={true} Start={index}>
+                  {imageArray.map((item, index) => (
+                    <div className="swipe-item" key={item.url + index}>
+                      <img src={item.url} />
+                    </div>
+                  ))}
+                </Swiper>
+              </div>
+            ) : null}
             <TagShare tag={tag} config={shareConfig} />
             <div className="mt20">
               <Ads id={11} />
