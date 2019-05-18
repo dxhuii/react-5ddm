@@ -8,6 +8,7 @@ import { episode } from '@/store/actions/episode'
 import { getEpisode } from '@/store/reducers/episode'
 import { hits } from '@/store/actions/hits'
 
+import Loading from '@/components/Ui/Loading'
 import Detail from '@/components/Detail'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
@@ -84,7 +85,7 @@ class Episode extends Component {
 
   render() {
     const {
-      info: { data = {} },
+      info: { data = {}, loading },
       match: {
         params: { p }
       }
@@ -99,6 +100,7 @@ class Episode extends Component {
       url: !p ? `/episode/${id}` : `/episode/${id}/${p}`
     }
     const reName = !p ? '' : name
+    if (loading || !data.vTitle) return <Loading />
     return (
       <div className="wp mt20 clearfix">
         <Meta title={`${!p ? `${vTitle}剧情(共${storyNum}集)_${vTitle}全集剧情` : `${vTitle}${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情`}`}>

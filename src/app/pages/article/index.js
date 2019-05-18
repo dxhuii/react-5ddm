@@ -9,6 +9,7 @@ import { getArticle } from '@/store/reducers/article'
 import { hits } from '@/store/actions/hits'
 import { getUserInfo } from '@/store/reducers/user'
 
+import Loading from '@/components/Ui/Loading'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 import SideBar from '@/components/SideBar'
@@ -19,7 +20,6 @@ import Swiper from '@/components/Swiper'
 
 import playing from '@/utils/play'
 import { NAME } from 'Config'
-import { isMobile } from '@/utils'
 
 import './style.scss'
 @Shell
@@ -125,7 +125,7 @@ class Article extends PureComponent {
 
   render() {
     const {
-      articleData: { data = {} },
+      articleData: { data = {}, loading },
       match: { url },
       userinfo: { userid }
     } = this.props
@@ -142,6 +142,7 @@ class Article extends PureComponent {
       window.location.href = jump
     }
     const { imageArray = [], index } = imgObj
+    if (loading || !data.title) return <Loading />
     return (
       <div className="wp mt20 clearfix">
         <Meta title={title}>

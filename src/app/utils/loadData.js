@@ -41,8 +41,6 @@ export default ({ dispatch, getState, reducerName, name, actionType, api, params
       data: isPage ? Object.assign({}, params, { s: url.split('=')[1], p: list.page }) : params
     })
 
-    console.log(err, data, 'loaddata')
-
     if (err) {
       list.loading = false
       resolve([null, list])

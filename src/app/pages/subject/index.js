@@ -244,10 +244,10 @@ class Bangumi extends Component {
     if (jump && !(typeof window === 'undefined')) {
       window.location.href = jump
     }
+    if (loading || !data.title) return <Loading />
     return (
       <Fragment>
         <div className="warp-bg">
-          {loading ? <Loading /> : null}
           <Meta
             title={`${title}全集在线观看${repairtitle && repairtitle !== '讨论帖' ? `_${repairtitle}` : ''}${
               vod_pantitle || DOMAIN_NAME === 'dddm.tv' ? '_百度云盘下载' : ''

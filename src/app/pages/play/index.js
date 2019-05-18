@@ -11,6 +11,7 @@ import { addplaylog } from '@/store/actions/history'
 import { getPlayerList } from '@/store/reducers/player'
 import { getUserInfo } from '@/store/reducers/user'
 
+import Loading from '@/components/Ui/Loading'
 import PlayList from '@/components/PlayList'
 import DetailActor from '@/components/DetailActor'
 import SideBar from '@/components/SideBar'
@@ -291,7 +292,7 @@ class Play extends Component {
   render() {
     const {
       userinfo: { userid },
-      player: { data = {} },
+      player: { data = {}, loading },
       match: {
         params: { id, pid }
       }
@@ -303,6 +304,7 @@ class Play extends Component {
       title: `#${title}# ${subTitle}在线播放 - ${listName}${listNameBig} - #${NAME.split('_').join('##')}# @99496动漫网`,
       url: `/play/${id}/${pid}`
     }
+    if (loading || !data.title) return <Loading />
     return (
       <Fragment>
         <div styleName="player">

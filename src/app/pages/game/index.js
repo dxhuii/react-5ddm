@@ -180,6 +180,7 @@ class Game extends PureComponent {
     const { display, dataIndex } = this.state
     const dataInfo = data[wd ? 0 : dataIndex]
     const { shortDesc, name } = dataInfo || {}
+    if (loading) return <Loading />
     return (
       <Fragment>
         {wd ? (
