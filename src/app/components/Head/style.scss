@@ -195,6 +195,12 @@ header {
   header {
     height: 36px;
     line-height: 36px;
+
+    nav {
+      &.show {
+        top: 35px;
+      }
+    }
   }
 
   .header-logo {

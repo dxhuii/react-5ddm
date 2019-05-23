@@ -1,49 +1,18 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState, useEffect, useRef } from 'react'
 
 import { ISAD } from 'Config'
 import { loadScript } from '@/utils'
 
-class Ads extends Component {
-  static propTypes = {
-    id: PropTypes.number
-  }
-  constructor(props) {
-    super(props)
-    this.state = {
-      type: 0
-    }
-  }
+export default function Ads(props) {
+  const [type, setType] = useState(0)
+  const ads = useRef(null)
 
-  componentDidMount() {
-    if (ISAD) {
-      const { id } = this.props
-      const that = this
-      loadScript('//cos.mdb6.com/static/income.min.js', true, function() {
-        // console.log(income)
-        if (income[id]) {
-          const { type, content, height } = income[id]
-          that.setState({
-            type
-          })
-          if (type === 2) {
-            that.createAd(content)
-          } else if (type === 1) {
-            that.showAd(content)
-          } else if (type === 3) {
-            that.createIframe(that.ads, content, height)
-          }
-        }
-      })
-    }
-  }
-
-  createAd(url) {
+  function createAd(url) {
     let script = document.createElement('script')
     script.type = 'text/javascript'
     script.src = url
     script.async = 1
-    this.ads.appendChild(script)
+    ads.current.appendChild(script)
   }
 
   /**
@@ -53,7 +22,7 @@ class Ads extends Component {
    * @param onload iframe载入完后触发该事件。能够为空
    * @return 返回创建的iframe对象
    */
-  createIframe(dom, src, height = 90, onload) {
+  function createIframe(dom, src, height = 90, onload) {
     //在document中创建iframe
     const iframe = document.createElement('iframe')
 
@@ -86,7 +55,7 @@ class Ads extends Component {
    * 销毁iframe，释放iframe所占用的内存。
    * @param iframe 须要销毁的iframe对象
    */
-  destroyIframe(iframe) {
+  function destroyIframe(iframe) {
     //把iframe指向空白页面，这样能够释放大部分内存。
     iframe.src = 'about:blank'
     try {
@@ -99,13 +68,28 @@ class Ads extends Component {
     iframe.parentNode.removeChild(iframe)
   }
 
-  showAd(content) {
-    this.ads.innerHTML = content
+  function showAd(content) {
+    ads.current.innerHTML = content
   }
 
-  render() {
-    return ISAD ? <div ref={e => (this.ads = e)} className={this.state.type !== 1 ? 'mt20' : ''} /> : null
-  }
+  useEffect(() => {
+    if (ISAD) {
+      const { id } = props
+      loadScript('//cos.mdb6.com/static/income.min.js', true, function() {
+        if (income[id]) {
+          const { type, content, height } = income[id]
+          setType(type)
+          if (type === 2) {
+            createAd(content)
+          } else if (type === 1) {
+            showAd(content)
+          } else if (type === 3) {
+            createIframe(ads.current, content, height)
+          }
+        }
+      })
+    }
+  }, [props])
+
+  return ISAD ? <div ref={ads} className={type !== 1 ? 'mt20' : ''} /> : null
 }
-
-export default Ads
