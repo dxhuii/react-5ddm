@@ -63,9 +63,14 @@ if (process.env.NODE_ENV !== 'development') {
         loadScript(cnzz)
         if (ISAD && pathname !== '/') {
           loadScript('//cos.mdb6.com/static/income.min.js', true, function() {
-            // console.log(income)
+            // 全站底漂
             if (income[5]) {
               const { content } = income[5]
+              loadScript(content, true)
+            }
+            // 右侧小图标
+            if (income[9]) {
+              const { content } = income[9]
               loadScript(content, true)
             }
           })
