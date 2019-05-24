@@ -97,9 +97,9 @@ class List extends Component {
     const {
       list: { data = [], loading }
     } = this.props
-    if (loading) return <Loading />
     return (
       <div styleName="main-list">
+        {loading ? <Loading /> : null}
         <div className="wp">
           <Item data={data} />
         </div>
