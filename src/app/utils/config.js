@@ -42,7 +42,6 @@ export default {
     storyDetail: `${apiReact}storyread`, // 获取剧情详情
     getuserinfo: `${apiReact}getuserinfo`, // 获取用户信息 参数 id  val评分值
     verify: `${apiReact}verify-${Math.random()}`, // 验证码
-    ads: `${apiReact}getAds`, // 广告
     digg: `${apiHome}updown-index`, // 视频ID type up 顶 down 踩 sid 模型
     // 观看记录
     getplaylog: `${apiReact}getplaylog`, // 获取观看记录 需登录

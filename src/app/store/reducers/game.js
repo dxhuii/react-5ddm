@@ -17,6 +17,5 @@ export default function() {
 }
 
 export const getGame = (state, wd) => {
-  console.log(state.game, wd ? (state.game[wd] ? state.game[wd] : {}) : 'xx')
   return wd ? (state.game[wd] ? state.game[wd] : {}) : state.game ? state.game : {}
 }

@@ -20,7 +20,6 @@ import search from './search'
 import articleVod from './articleVod'
 import month from './month'
 import page from './page'
-import ads from './ads'
 import game from './game'
 
 export default function() {
@@ -43,7 +42,6 @@ export default function() {
     articleVod: articleVod(),
     month: month(),
     page: page(),
-    ads: ads(),
     scroll: scroll(),
     history: history(),
     game: game()
