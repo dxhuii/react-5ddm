@@ -60,24 +60,6 @@ if (process.env.NODE_ENV !== 'development') {
         loadScript({ src: 'https://zz.bdstatic.com/linksubmit/push.js' })
         loadScript({ src: `https://hm.baidu.com/hm.js?${BAIDU_STAT}` })
         loadScript({ src: `https://s13.cnzz.com/z_stat.php?id=${CNZZ_STAT}&web_id=${CNZZ_STAT}` })
-        if (ISAD && pathname !== '/') {
-          loadScript({
-            src: '//cos.mdb6.com/static/income.min.js',
-            end: true,
-            callback: function() {
-              // 全站底漂
-              if (income[5]) {
-                const { content } = income[5]
-                loadScript({ src: content, end: true })
-              }
-              // 右侧小图标
-              if (income[9]) {
-                const { content } = income[9]
-                loadScript({ src: content, end: true })
-              }
-            }
-          })
-        }
       }
     }
   }
