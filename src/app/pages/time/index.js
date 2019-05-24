@@ -31,7 +31,8 @@ class Time extends Component {
   static propTypes = {
     match: PropTypes.object,
     detail: PropTypes.func,
-    info: PropTypes.object
+    info: PropTypes.object,
+    location: PropTypes.object
   }
 
   componentDidMount() {
@@ -49,7 +50,8 @@ class Time extends Component {
 
   render() {
     const {
-      info: { data = {} }
+      info: { data = {} },
+      location
     } = this.props
     const { id, title, content = '', listNameBig, pic, actor, year, filmtime, director, mcid, updateDate, tvcont } = data
     const shareConfig = {
@@ -122,7 +124,7 @@ class Time extends Component {
                 {updateDate}
               </p>
             </div>
-            <TagShare tag={[title]} config={shareConfig} />
+            <TagShare tag={[title]} config={shareConfig} location={location} />
           </article>
         </div>
         <div className="fr right">

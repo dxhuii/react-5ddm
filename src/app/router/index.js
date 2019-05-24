@@ -1,21 +1,10 @@
 import React, { Fragment } from 'react'
-// import ReactDOM from 'react-dom';
 import { Route, Switch, Redirect } from 'react-router-dom'
-// import Loadable from 'react-loadable';
 
 // 生成异步加载组件
-// import { AsyncComponent } from '../components/generate-async-component';
-// import LazyComponent from '@components/lazy';
-import AsyncComponent from '@/components/AsyncComponent'
+// import AsyncComponent from '@/components/AsyncComponent'
 
 import routerList from './list'
-
-// const OtherComponent = React.lazy(() => import('../components/footer'));
-
-// const LoadableComponent = Loadable({
-//   loader: () => import('../modules/global'),
-//   loading: <div>loading...</div>
-// });
 
 /**
  * 创建路由
@@ -29,11 +18,7 @@ export default (user, logPageView = () => {}) => {
     everybody: (Layout, props, route) => {
       logPageView()
 
-      // if (route.routes) {
-      // return <Layout {...props} routes={route.routes} />
-      // } else {
       return <Layout {...props} />
-      // }
     },
     // 游客
     tourists: (Layout, props, route) => {
@@ -42,11 +27,7 @@ export default (user, logPageView = () => {}) => {
       if (user) {
         return <Redirect to="/" />
       } else {
-        // if (route.routes) {
-        // return <Layout {...props} routes={route.routes} />
-        // } else {
         return <Layout {...props} />
-        // }
       }
     },
     // 会员
@@ -56,11 +37,7 @@ export default (user, logPageView = () => {}) => {
       if (!user) {
         return <Redirect to="/" />
       } else {
-        // if (route.routes) {
-        // return <Layout {...props} routes={route.routes} />
-        // } else {
         return <Layout {...props} />
-        // }
       }
     }
   }

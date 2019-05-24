@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
-import Globel from '@/components/Global'
+import ScrollTop from '@/components/ScrollTop'
 import Ads from '@/components/Ads'
 import { isMobile } from '@/utils'
 import { NAME, EMAIL, DOMAIN_NAME, WW, ICP, BEIAN } from 'Config'
@@ -40,7 +40,7 @@ export default class Footer extends PureComponent {
             ) : null}
             {WW ? WW : null}
           </p>
-          <Globel />
+          <ScrollTop />
         </footer>
       </Fragment>
     )

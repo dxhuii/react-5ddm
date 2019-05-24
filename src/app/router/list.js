@@ -313,17 +313,17 @@ export default [
     enter: 'everybody'
   },
 
-  {
-    path: '/upload',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
-      loader: () => import('../pages/upload'),
-      loading: () => <Loading />
-    }),
-    enter: 'everybody'
-  },
+  // {
+  //   path: '/upload',
+  //   exact: true,
+  //   head: Head,
+  //   footer: Footer,
+  //   component: Loadable({
+  //     loader: () => import('../pages/upload'),
+  //     loading: () => <Loading />
+  //   }),
+  //   enter: 'everybody'
+  // },
 
   {
     path: '/out/pic',

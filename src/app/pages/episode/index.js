@@ -42,7 +42,8 @@ class Episode extends Component {
     match: PropTypes.object,
     episode: PropTypes.func,
     info: PropTypes.object,
-    hits: PropTypes.func
+    hits: PropTypes.func,
+    location: PropTypes.object
   }
 
   componentDidMount() {
@@ -88,7 +89,8 @@ class Episode extends Component {
       info: { data = {}, loading },
       match: {
         params: { p }
-      }
+      },
+      location
     } = this.props
     const { epMore } = this.state
     const { title, name, content, prev, next, vid, id, vTitle, gold, pic, storyNum, vContent, actor, year, status, mcid, pid } = data
@@ -115,7 +117,7 @@ class Episode extends Component {
             <div styleName="article-content" className="clearfix">
               {((!p ? vContent : content) || '').replace('&nbsp; ', '').replace('&nbsp; ', '')}
             </div>
-            <TagShare tag={[vTitle]} config={shareConfig} />
+            <TagShare tag={[vTitle]} config={shareConfig} location={location} />
             {!p && storyNum <= 1 ? null : (
               <div styleName="article-context" className="mt10">
                 {prev && prev > 0 ? <Link to={`/episode/${id}/${prev}`}>上一集</Link> : null}

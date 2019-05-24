@@ -1,18 +1,16 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 
 import './style.scss'
 
-export default class Loading extends PureComponent {
-  render() {
-    return (
-      <div styleName="loading">
-        <span>
-          <i />
-          <i />
-          <i />
-          <i />
-        </span>
-      </div>
-    )
-  }
+export default function Loading() {
+  return (
+    <div styleName="loading">
+      <span>
+        <i />
+        <i />
+        <i />
+        <i />
+      </span>
+    </div>
+  )
 }

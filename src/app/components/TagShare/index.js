@@ -12,10 +12,11 @@ export default class TagShare extends PureComponent {
   }
   static propTypes = {
     tag: PropTypes.array,
-    config: PropTypes.object
+    config: PropTypes.object,
+    location: PropTypes.object
   }
   render() {
-    const { tag, config } = this.props
+    const { tag, config, location } = this.props
     return (
       <div styleName="article-tool">
         <div styleName="article-tool__tag">
@@ -26,7 +27,7 @@ export default class TagShare extends PureComponent {
           ))}
         </div>
         <div styleName="article-tool__share">
-          <Share data={config} />
+          <Share data={config} location={location} />
         </div>
       </div>
     )

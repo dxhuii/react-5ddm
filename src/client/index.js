@@ -45,33 +45,36 @@ if (process.env.NODE_ENV !== 'development') {
       let option = { page: pathname }
       if (userinfo && userinfo._id) option.userId = userinfo._id
       if (process.env.NODE_ENV !== 'development') {
-        if (href.indexOf('/play/') !== -1) {
+        if (href.indexOf('/play/') !== -1 && document.cookie.indexOf('plain') === -1) {
           devtoolsDetector.addListener(function(isOpen, detail) {
             if (isOpen) {
-              top.location.href = DOMAIN
+              window.location.href = DOMAIN
             }
           })
           devtoolsDetector.lanuch()
+        } else if (/bangumi/.test(href)) {
+          window.location.href = DOMAIN
         }
         ReactGA.set(option)
         ReactGA.pageview(pathname)
-        const cnzz = `https://s13.cnzz.com/z_stat.php?id=${CNZZ_STAT}&web_id=${CNZZ_STAT}`
-        const bd = `https://hm.baidu.com/hm.js?${BAIDU_STAT}`
-        const push = 'https://zz.bdstatic.com/linksubmit/push.js'
-        loadScript(push)
-        loadScript(bd)
-        loadScript(cnzz)
+        loadScript({ src: 'https://zz.bdstatic.com/linksubmit/push.js' })
+        loadScript({ src: `https://hm.baidu.com/hm.js?${BAIDU_STAT}` })
+        loadScript({ src: `https://s13.cnzz.com/z_stat.php?id=${CNZZ_STAT}&web_id=${CNZZ_STAT}` })
         if (ISAD && pathname !== '/') {
-          loadScript('//cos.mdb6.com/static/income.min.js', true, function() {
-            // 全站底漂
-            if (income[5]) {
-              const { content } = income[5]
-              loadScript(content, true)
-            }
-            // 右侧小图标
-            if (income[9]) {
-              const { content } = income[9]
-              loadScript(content, true)
+          loadScript({
+            src: '//cos.mdb6.com/static/income.min.js',
+            end: true,
+            callback: function() {
+              // 全站底漂
+              if (income[5]) {
+                const { content } = income[5]
+                loadScript({ src: content, end: true })
+              }
+              // 右侧小图标
+              if (income[9]) {
+                const { content } = income[9]
+                loadScript({ src: content, end: true })
+              }
             }
           })
         }

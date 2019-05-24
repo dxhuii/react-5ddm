@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { Fragment, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import QRCode from 'qrcode.react'
 
@@ -8,39 +7,20 @@ import weixin from '@/utils/weixin'
 
 import './style.scss'
 
-@withRouter
-class Share extends Component {
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-    comment: PropTypes.object,
-    match: PropTypes.object,
-    location: PropTypes.object
-  }
+export default function Share({ data = {}, location = {} }) {
+  const [displayTips, showTips] = useState(false)
+  const [showQrcode, showQRcode] = useState(false)
 
-  static defaultProps = {
-    data: {}
-  }
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      displayTips: false,
-      showQrcode: false
+  const shareToWeiXin = () => {
+    if (weixin.in) {
+      showTips(true)
+    } else {
+      showQRcode(true)
     }
   }
 
-  componentDidMount() {
-    const { _s } = this.props.location && this.props.location.params ? this.props.location.params : {}
-
-    if (_s === 'weixin') {
-      this.showTips(true)
-    }
-  }
-
-  goShare = type => {
-    const {
-      data: { title, desc, pic, url }
-    } = this.props
+  const goShare = type => {
+    const { title, desc, pic, url } = data
     const enUrl = encodeURIComponent(`${DOMAIN}${url}`)
     const enTitle = encodeURIComponent(title)
     const enPic = encodeURIComponent(pic)
@@ -58,70 +38,59 @@ class Share extends Component {
     window.open(site[type], '_blank', 'width=770,height=620')
   }
 
-  shareToWeiXin = () => {
-    if (weixin.in) {
-      this.showTips(true)
-    } else {
-      this.showQRcode(true)
+  useEffect(() => {
+    const { _s } = location && location.params ? location.params : {}
+
+    if (_s === 'weixin') {
+      showTips(true)
     }
-  }
+  }, [location])
 
-  showQRcode = bl => {
-    this.setState({ showQrcode: bl })
-  }
-
-  showTips = bl => {
-    this.setState({ displayTips: bl })
-  }
-
-  render() {
-    const { displayTips, showQrcode } = this.state
-    const {
-      data: { url }
-    } = this.props
-    return (
+  return (
+    <Fragment>
+      <i styleName="wechat" onClick={shareToWeiXin} />
+      <i styleName="weibo" onClick={() => goShare('weibo')} />
+      <i styleName="tieba" onClick={() => goShare('tieba')} />
+      <i styleName="qzone" onClick={() => goShare('qzone')} />
+      <i styleName="qq" onClick={() => goShare('qq')} />
+      <i styleName="facebook" onClick={() => goShare('facebook')} />
+      <i styleName="twitter" onClick={() => goShare('twitter')} />
       <Fragment>
-        <i styleName="wechat" onClick={this.shareToWeiXin} />
-        <i styleName="weibo" onClick={() => this.goShare('weibo')} />
-        <i styleName="tieba" onClick={() => this.goShare('tieba')} />
-        <i styleName="qzone" onClick={() => this.goShare('qzone')} />
-        <i styleName="qq" onClick={() => this.goShare('qq')} />
-        <i styleName="facebook" onClick={() => this.goShare('facebook')} />
-        <i styleName="twitter" onClick={() => this.goShare('twitter')} />
-        <Fragment>
-          {showQrcode ? (
-            <div
-              styleName="mark"
-              onClick={e => {
-                this.showQRcode(false)
-              }}
-            />
-          ) : null}
-
-          {showQrcode ? (
-            <div styleName="qrcode">
-              <QRCode value={`${DOMAIN}${url}?_s=weixin`} />
-              <div>微信扫一扫，分享</div>
-            </div>
-          ) : null}
-
+        {showQrcode ? (
           <div
-            styleName="tips-weixin-share"
-            style={{ display: displayTips ? 'block' : 'none' }}
-            onClick={() => {
-              this.showTips(false)
+            styleName="mark"
+            onClick={e => {
+              showQRcode(false)
             }}
-          >
-            <div>
-              点击右上角 ... 按钮，
-              <br />
-              将此页面分享给你的朋友或朋友圈
-            </div>
+          />
+        ) : null}
+
+        {showQrcode ? (
+          <div styleName="qrcode">
+            <QRCode value={`${DOMAIN}${data.url}?_s=weixin`} />
+            <div>微信扫一扫，分享</div>
           </div>
-        </Fragment>
+        ) : null}
+
+        <div
+          styleName="tips-weixin-share"
+          style={{ display: displayTips ? 'block' : 'none' }}
+          onClick={() => {
+            showTips(false)
+          }}
+        >
+          <div>
+            点击右上角 ... 按钮，
+            <br />
+            将此页面分享给你的朋友或朋友圈
+          </div>
+        </div>
       </Fragment>
-    )
-  }
+    </Fragment>
+  )
 }
 
-export default Share
+Share.propTypes = {
+  data: PropTypes.object,
+  location: PropTypes.object
+}

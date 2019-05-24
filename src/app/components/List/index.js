@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { listLoad } from '@/store/actions/list'
 import { getList } from '@/store/reducers/list'
 
 import Item from './Item'
+import Loading from '@/components/Ui/Loading'
 
 import './style.scss'
 
@@ -14,20 +14,9 @@ function isEmpty(val, type) {
   return val === undefined || val === '' || val === '-' ? (type ? 'addtime' : '') : val
 }
 
-@withRouter
 @connect(
   (state, props) => ({
-    list: getList(
-      state,
-      props.id,
-      isEmpty(props.mcid),
-      isEmpty(props.year),
-      isEmpty(props.area),
-      isEmpty(props.wd),
-      isEmpty(props.letter),
-      isEmpty(props.lz),
-      isEmpty(props.order, 1)
-    )
+    list: getList(state, props.id, isEmpty(props.mcid), isEmpty(props.year), isEmpty(props.area), isEmpty(props.wd), isEmpty(props.letter), isEmpty(props.lz), isEmpty(props.order, 1))
   }),
   dispatch => ({
     listLoad: bindActionCreators(listLoad, dispatch)
@@ -63,10 +52,6 @@ class List extends Component {
     listLoad: PropTypes.func,
     scrollLoad: PropTypes.bool,
     loading: PropTypes.bool
-  }
-
-  static contextTypes = {
-    router: PropTypes.object.isRequired
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -112,9 +97,9 @@ class List extends Component {
     const {
       list: { data = [], loading }
     } = this.props
+    if (loading) return <Loading />
     return (
       <div styleName="main-list">
-        {loading ? <div>loading</div> : null}
         <div className="wp">
           <Item data={data} />
         </div>

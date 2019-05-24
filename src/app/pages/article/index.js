@@ -40,7 +40,8 @@ class Article extends PureComponent {
     article: PropTypes.func,
     hits: PropTypes.func,
     articleData: PropTypes.object,
-    userinfo: PropTypes.object
+    userinfo: PropTypes.object,
+    location: PropTypes.object
   }
 
   constructor(props) {
@@ -127,7 +128,8 @@ class Article extends PureComponent {
     const {
       articleData: { data = {}, loading },
       match: { url },
-      userinfo: { userid }
+      userinfo: { userid },
+      location
     } = this.props
     const { title, id, name, cid, pic = '', remark, keywords, addtime, inputer, tag = [], prev, next, vodid, jump, content = '', playname = '', playurl = '' } = data
     const playHtml = playing({ name: playname, vid: playurl, danmu: `article_${id}`, uid: userid, url })
@@ -188,7 +190,7 @@ class Article extends PureComponent {
                 </Swiper>
               </div>
             ) : null}
-            <TagShare tag={tag} config={shareConfig} />
+            <TagShare tag={tag} config={shareConfig} location={location} />
             <div className="mt20">
               <Ads id={11} />
             </div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import FileUpload from '../../components/Upload'
-import Tooltip from '../../components/Tooltip'
 import { PUBLIC_PATH } from 'Config'
 
 import './style.scss'
@@ -32,9 +31,7 @@ export default class Main extends Component {
           }}
           progress={(data, index) => this.progress(data, index)}
           fileNum={data => this.setState({ file: data })}
-        >
-          <Tooltip text="你好你好你好你好你好你好">上传</Tooltip>
-        </FileUpload>
+        />
         <ul styleName="img-list">
           {file.length > 0
             ? file.map(item => (

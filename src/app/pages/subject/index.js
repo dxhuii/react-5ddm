@@ -57,6 +57,7 @@ class Bangumi extends Component {
     sid: PropTypes.number,
     userinfo: PropTypes.object,
     cmScore: PropTypes.object,
+    location: PropTypes.object,
     hits: PropTypes.func,
     isMeta: PropTypes.any,
     like: PropTypes.func
@@ -193,7 +194,8 @@ class Bangumi extends Component {
       info: { data = {}, loading },
       userinfo: { userid },
       cmScore = {},
-      score
+      score,
+      location
     } = this.props
     const {
       id,
@@ -322,7 +324,7 @@ class Bangumi extends Component {
                     <i className="iconfont">&#xe655;</i>分享
                   </div>
                   <div styleName="detail-tool__share">
-                    <Share data={shareConfig} />
+                    <Share data={shareConfig} location={location} />
                   </div>
                 </div>
               </div>
