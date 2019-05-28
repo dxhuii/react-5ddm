@@ -72,18 +72,6 @@ export default [
   },
 
   {
-    path: '/topics',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
-      loader: () => import('@/pages/topics'),
-      loading: () => <Loading />
-    }),
-    enter: 'everybody'
-  },
-
-  {
     path: '/sign-in',
     exact: true,
     component: Loadable({
