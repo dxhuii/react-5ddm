@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -7,10 +7,11 @@ import { connect } from 'react-redux'
 import { TopList } from '@/store/actions/page'
 import { getTopList } from '@/store/reducers/page'
 
-import './style.scss'
-
+import BaseLayout from '@/layout/baseLayout'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
+
+import './style.scss'
 
 @Shell
 @withRouter
@@ -61,7 +62,7 @@ class TopPage extends PureComponent {
     const monthData = month.data || []
     const allData = all.data || []
     return (
-      <Fragment>
+      <BaseLayout>
         <Meta title="动漫排行榜 动漫热播榜" />
         <div className="wp mt20" styleName="top">
           <div className="box">
@@ -113,7 +114,7 @@ class TopPage extends PureComponent {
             </ul>
           </div>
         </div>
-      </Fragment>
+      </BaseLayout>
     )
   }
 }
