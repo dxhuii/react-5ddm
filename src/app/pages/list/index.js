@@ -9,9 +9,10 @@ import { configLoad } from '@/store/actions/config'
 import { getConfig } from '@/store/reducers/config'
 import { getList } from '@/store/reducers/list'
 
+import BaseLayout from '@/layout/baseLayout'
+import Loading from '@/components/Ui/Loading'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
-import Loading from '@/components/Ui/Loading'
 
 import Item from '@/components/List/Item'
 import Ads from '@/components/Ads'
@@ -231,7 +232,7 @@ class SubjectList extends Component {
     const orderArr = [{ title: '最新', id: 'addtime' }, { title: '评分', id: 'gold' }, { title: '热门', id: 'hits' }]
     const keyword = decodeURIComponent(wd)
     return (
-      <Fragment>
+      <BaseLayout>
         {loading ? <Loading /> : null}
         <Meta
           title={
@@ -343,7 +344,7 @@ class SubjectList extends Component {
         <div className="wp">
           <Item data={data} />
         </div>
-      </Fragment>
+      </BaseLayout>
     )
   }
 }

@@ -129,7 +129,7 @@ class Head extends Component {
   render() {
     const {
       userinfo: { userid, nickname },
-      match: { url, params = {} }
+      match: { url = '', params = {} }
     } = this.props
     const { wd, isHide, isSign, visible, showMenu, showSearch, showHis } = this.state
     const logo = `header-logo ${DOMAIN_NAME === 'dddm.tv' ? 'dddm' : DOMAIN_NAME === '5ddm.com' ? 'ddm' : ''}`

@@ -1,19 +1,26 @@
-import React, { Fragment } from 'react'
+import React, { PureComponent, Fragment } from 'react'
+import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import Head from '@/components/Head'
 import Footer from '@/components/Footer'
 
-export default function BaseLayout(props) {
-  return (
-    <Fragment>
-      <Head />
-      {props.children}
-      <Footer />
-    </Fragment>
-  )
+@withRouter
+class BaseLayout extends PureComponent {
+  static propTypes = {
+    children: PropTypes.any,
+    match: PropTypes.object
+  }
+
+  render() {
+    return (
+      <Fragment>
+        <Head match={this.props.match} />
+        {this.props.children}
+        <Footer />
+      </Fragment>
+    )
+  }
 }
 
-BaseLayout.propTypes = {
-  children: PropTypes.array
-}
+export default BaseLayout

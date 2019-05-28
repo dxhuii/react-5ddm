@@ -265,8 +265,6 @@ export default [
   {
     path: '/top',
     exact: true,
-    head: Head,
-    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/top'),
       loading: () => <Loading />

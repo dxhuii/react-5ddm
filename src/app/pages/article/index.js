@@ -9,14 +9,15 @@ import { getArticle } from '@/store/reducers/article'
 import { hits } from '@/store/actions/hits'
 import { getUserInfo } from '@/store/reducers/user'
 
+import BaseLayout from '@/layout/baseLayout'
 import Loading from '@/components/Ui/Loading'
-import Shell from '@/components/Shell'
-import Meta from '@/components/Meta'
 import SideBar from '@/components/SideBar'
 import TagShare from '@/components/TagShare'
 import Ads from '@/components/Ads'
 import convertHTML from '@/components/HtmlText'
 import Swiper from '@/components/Swiper'
+import Shell from '@/components/Shell'
+import Meta from '@/components/Meta'
 
 import playing from '@/utils/play'
 import { NAME } from 'Config'
@@ -146,74 +147,76 @@ class Article extends PureComponent {
     const { imageArray = [], index } = imgObj
     if (loading || !data.title) return <Loading />
     return (
-      <div className="wp mt20 clearfix">
-        <Meta title={title}>
-          <meta property="og:locale" content="zh_CN" />
-          <meta property="og:type" content="article" />
-          <meta property="og:title" content={title} />
-          <meta property="og:description" content={remark} />
-          <meta property="og:image" content={pic} />
-          <meta property="og:url" content={`/article/${id}`} />
-          <meta property="og:site_name" content={NAME} />
-          <meta name="description" content={remark} />
-          <meta name="keywords" content={keywords} />
-        </Meta>
-        <div className={`fl left ${cid === 205 ? 'manhua' : ''}`}>
-          <article styleName="article-body">
-            <div styleName="article-head">
-              <h1>{title}</h1>
-              <div styleName="article-label">
-                <span>来源：{inputer ? inputer : '网络'}</span>
-                <span>更新时间：{addtime}</span>
+      <BaseLayout>
+        <div className="wp mt20 clearfix">
+          <Meta title={title}>
+            <meta property="og:locale" content="zh_CN" />
+            <meta property="og:type" content="article" />
+            <meta property="og:title" content={title} />
+            <meta property="og:description" content={remark} />
+            <meta property="og:image" content={pic} />
+            <meta property="og:url" content={`/article/${id}`} />
+            <meta property="og:site_name" content={NAME} />
+            <meta name="description" content={remark} />
+            <meta name="keywords" content={keywords} />
+          </Meta>
+          <div className={`fl left ${cid === 205 ? 'manhua' : ''}`}>
+            <article styleName="article-body">
+              <div styleName="article-head">
+                <h1>{title}</h1>
+                <div styleName="article-label">
+                  <span>来源：{inputer ? inputer : '网络'}</span>
+                  <span>更新时间：{addtime}</span>
+                </div>
               </div>
-            </div>
-            {playname ? (
-              <div styleName={`article-video ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
-                <div dangerouslySetInnerHTML={{ __html: playHtml }} />
-                {isfull ? (
-                  <a onMouseOver={this.showFull} onClick={this.isFull}>
-                    {full ? '退出全屏' : '网页全屏'}
-                  </a>
+              {playname ? (
+                <div styleName={`article-video ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
+                  <div dangerouslySetInnerHTML={{ __html: playHtml }} />
+                  {isfull ? (
+                    <a onMouseOver={this.showFull} onClick={this.isFull}>
+                      {full ? '退出全屏' : '网页全屏'}
+                    </a>
+                  ) : null}
+                </div>
+              ) : null}
+              <div ref={e => (this.content = e)} styleName="article-content" dangerouslySetInnerHTML={{ __html: convertHTML(content) }} />
+              {showPic ? (
+                <div styleName="article-slide" onClick={this.closePic}>
+                  <span />
+                  <Swiper Pagination={true} Controller={true} Start={index}>
+                    {imageArray.map((item, index) => (
+                      <div className="swipe-item" key={item.url + index}>
+                        <img src={item.url} />
+                      </div>
+                    ))}
+                  </Swiper>
+                </div>
+              ) : null}
+              <TagShare tag={tag} config={shareConfig} location={location} />
+              <div className="mt20">
+                <Ads id={11} />
+              </div>
+              <div styleName="article-context" className="mt20">
+                {prev ? (
+                  <p>
+                    上一篇：<Link to={`/article/${prev.id}`}>{prev.title}</Link>
+                  </p>
+                ) : null}
+                {next ? (
+                  <p>
+                    下一篇：<Link to={`/article/${next.id}`}>{next.title}</Link>
+                  </p>
                 ) : null}
               </div>
-            ) : null}
-            <div ref={e => (this.content = e)} styleName="article-content" dangerouslySetInnerHTML={{ __html: convertHTML(content) }} />
-            {showPic ? (
-              <div styleName="article-slide" onClick={this.closePic}>
-                <span />
-                <Swiper Pagination={true} Controller={true} Start={index}>
-                  {imageArray.map((item, index) => (
-                    <div className="swipe-item" key={item.url + index}>
-                      <img src={item.url} />
-                    </div>
-                  ))}
-                </Swiper>
-              </div>
-            ) : null}
-            <TagShare tag={tag} config={shareConfig} location={location} />
-            <div className="mt20">
-              <Ads id={11} />
-            </div>
-            <div styleName="article-context" className="mt20">
-              {prev ? (
-                <p>
-                  上一篇：<Link to={`/article/${prev.id}`}>{prev.title}</Link>
-                </p>
-              ) : null}
-              {next ? (
-                <p>
-                  下一篇：<Link to={`/article/${next.id}`}>{next.title}</Link>
-                </p>
-              ) : null}
-            </div>
-          </article>
-        </div>
-        {cid === 205 ? null : (
-          <div className="fr right">
-            <SideBar vodid={vodid} />
+            </article>
           </div>
-        )}
-      </div>
+          {cid === 205 ? null : (
+            <div className="fr right">
+              <SideBar vodid={vodid} />
+            </div>
+          )}
+        </div>
+      </BaseLayout>
     )
   }
 }
