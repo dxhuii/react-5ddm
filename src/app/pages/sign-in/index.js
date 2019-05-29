@@ -28,6 +28,11 @@ class SignIn extends Component {
     super(props)
     this.state = {}
     this.submit = this.submit.bind(this)
+    this.jump = null
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.jump)
   }
 
   async submit(event) {
@@ -47,7 +52,7 @@ class SignIn extends Component {
     }
 
     let [err, success] = await signIn({ username: username.value, password: password.value })
-    setTimeout(() => {
+    this.jump = setTimeout(() => {
       if (success) {
         this.props.history.push('/')
       }

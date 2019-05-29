@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -7,10 +7,11 @@ import { connect } from 'react-redux'
 import { TopList } from '@/store/actions/page'
 import { getTopList } from '@/store/reducers/page'
 
-import './style.scss'
-
+import BaseLayout from '@/layout/baseLayout'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
+
+import './style.scss'
 
 @Shell
 @withRouter
@@ -72,7 +73,7 @@ class NewPage extends PureComponent {
       info: { data = [] }
     } = this.props
     return (
-      <Fragment>
+      <BaseLayout>
         <Meta title="最新更新的100个动漫" />
         <div className="wp mt20">
           <div className="box">
@@ -105,7 +106,7 @@ class NewPage extends PureComponent {
             </ul>
           </div>
         </div>
-      </Fragment>
+      </BaseLayout>
     )
   }
 }

@@ -38,6 +38,7 @@ class Head extends Component {
       showHis: false,
       isSign: 'signIn'
     }
+    this.reload = null
   }
 
   static propTypes = {
@@ -51,11 +52,19 @@ class Head extends Component {
     document.onclick = this.hide
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.reload)
+    this.onChange = null
+    this.setState = (state, callback) => {
+      return
+    }
+  }
+
   signOut = async () => {
     let [, success] = await this.props.signOut()
     if (success) {
       // 退出成功
-      setTimeout(() => {
+      this.reload = setTimeout(() => {
         window.location.reload()
       }, 300)
     } else {

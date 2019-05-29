@@ -7,13 +7,13 @@ import { connect } from 'react-redux'
 import { week } from '@/store/actions/week'
 import { getWeek } from '@/store/reducers/week'
 
+import BaseLayout from '@/layout/baseLayout'
 import Loading from '@/components/Ui/Loading'
 import ItemS from '@/components/Week/ItemS'
-
-import './style.scss'
-
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
+
+import './style.scss'
 
 @Shell
 @withRouter
@@ -97,25 +97,27 @@ class Week extends PureComponent {
     const today = new Date().getDay() - 1
     const title = id === '1' ? '日本' : id === '0' ? '国产' : ''
     return (
-      <div className="wp mt20">
-        <Meta title={`${title}新番时间表`}>
-          <meta name="keywords" content={`${title}新番时间表,${title}动漫时间表`} />
-          <meta name="description" content={`${title}新番时间表`} />
-        </Meta>
-        {loading ? <Loading /> : null}
-        <ul styleName="list">
-          {weekCn.map((item, index) => (
-            <li key={item} styleName={today === index ? 'active' : ''}>
-              {item}
-            </li>
-          ))}
-        </ul>
-        <ul styleName="weeklist">
-          {weekEng.map((obj, index) => (
-            <ItemS key={obj} data={weekData[weekEng[index]]} type={2} />
-          ))}
-        </ul>
-      </div>
+      <BaseLayout>
+        <div className="wp mt20">
+          <Meta title={`${title}新番时间表`}>
+            <meta name="keywords" content={`${title}新番时间表,${title}动漫时间表`} />
+            <meta name="description" content={`${title}新番时间表`} />
+          </Meta>
+          {loading ? <Loading /> : null}
+          <ul styleName="list">
+            {weekCn.map((item, index) => (
+              <li key={item} styleName={today === index ? 'active' : ''}>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <ul styleName="weeklist">
+            {weekEng.map((obj, index) => (
+              <ItemS key={obj} data={weekData[weekEng[index]]} type={2} />
+            ))}
+          </ul>
+        </div>
+      </BaseLayout>
     )
   }
 }

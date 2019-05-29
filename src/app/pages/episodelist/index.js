@@ -1,19 +1,19 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 
 import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
 import { episodeList } from '@/store/actions/episode'
 import { getEpisodeList } from '@/store/reducers/episode'
 
+import BaseLayout from '@/layout/baseLayout'
 import SideBar from '@/components/SideBar'
-import { formatPic, isNumber } from '@/utils'
-
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
+
+import { formatPic, isNumber } from '@/utils'
 
 import './style.scss'
 
@@ -58,7 +58,7 @@ class EpisodeList extends Component {
       list: { data = [] }
     } = this.props
     return (
-      <Fragment>
+      <BaseLayout>
         <Meta title="剧情首页" />
         <div className="wp mt20 clearfix">
           <div className="left fl">
@@ -66,10 +66,7 @@ class EpisodeList extends Component {
               {data.map(item => (
                 <li key={item.storyId}>
                   <Link to={`/episode/${item.storyId}`}>
-                    <div
-                      className="load-demand"
-                      data-load-demand={`<img src="${formatPic(item.pic, 'thumb150')}" alt="${item.title}" />`}
-                    />
+                    <div className="load-demand" data-load-demand={`<img src="${formatPic(item.pic, 'thumb150')}" alt="${item.title}" />`} />
                     <h4>{item.title}</h4>
                     <p>{isNumber(item.continu) ? `更新至${item.continu}话` : item.continu}</p>
                   </Link>
@@ -81,7 +78,7 @@ class EpisodeList extends Component {
             <SideBar />
           </div>
         </div>
-      </Fragment>
+      </BaseLayout>
     )
   }
 }

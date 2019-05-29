@@ -13,7 +13,7 @@ import createRouter from '@/router'
 import { getUserInfo } from '@/store/reducers/user'
 
 import { CNZZ_STAT, BAIDU_STAT, GA, ISAD, DOMAIN } from 'Config'
-import { loadScript } from '@/utils'
+import { loadScript } from '@/utils/loadScript'
 
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 if (process.env.NODE_ENV !== 'development') {

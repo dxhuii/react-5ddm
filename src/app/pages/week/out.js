@@ -1,16 +1,18 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
 import WeekDay from '@/components/Week/out'
-
-import './style.scss'
 // 壳组件
 import Shell from '@/components/Shell'
+import Meta from '@/components/Meta'
+
+import './style.scss'
 
 @Shell
-class WeekOut extends Component {
+class WeekOut extends PureComponent {
   render() {
     return (
       <div styleName="week-out">
+        <Meta title="新番时间表" />
         <WeekDay />
       </div>
     )

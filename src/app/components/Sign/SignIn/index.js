@@ -24,6 +24,11 @@ class SignIn extends Component {
     super(props)
     this.state = {}
     this.submit = this.submit.bind(this)
+    this.reload = null
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.reload)
   }
 
   async submit(event) {
@@ -44,7 +49,7 @@ class SignIn extends Component {
 
     let [err, success] = await signIn({ username: username.value, password: password.value })
     if (success) {
-      setTimeout(() => {
+      this.reload = setTimeout(() => {
         window.location.reload()
         return false
       }, 300)

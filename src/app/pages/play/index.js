@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -11,6 +11,7 @@ import { addplaylog } from '@/store/actions/history'
 import { getPlayerList } from '@/store/reducers/player'
 import { getUserInfo } from '@/store/reducers/user'
 
+import BaseLayout from '@/layout/baseLayout'
 import Loading from '@/components/Ui/Loading'
 import PlayList from '@/components/PlayList'
 import DetailActor from '@/components/DetailActor'
@@ -18,14 +19,14 @@ import SideBar from '@/components/SideBar'
 import Share from '@/components/Share'
 import Ads from '@/components/Ads'
 import Toast from '@/components/Toast'
-
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
 import Cookies from 'js-cookie'
 
 import { ISPLAY, IS9, DOMAIN_NAME, NAME } from 'Config'
-import { isMobile, loadScript } from '@/utils'
+import { isMobile } from '@/utils'
+import { loadScript } from '@/utils/loadScript'
 import playing from '@/utils/play'
 
 import '@/utils/base64.min'
@@ -64,6 +65,7 @@ class Play extends Component {
       isfull: false,
       showPlay: false
     }
+    this.playTime = null
   }
 
   static propTypes = {
@@ -109,6 +111,7 @@ class Play extends Component {
     this.setState({
       play: ''
     })
+    clearTimeout(this.playTime)
   }
 
   async addHistory() {
@@ -175,7 +178,7 @@ class Play extends Component {
       src: 'https://pv.sohu.com/cityjson?ie=utf-8',
       end: false,
       callback: function() {
-        setTimeout(() => {
+        that.playTime = setTimeout(() => {
           const {
             match: {
               params: { id, pid },
@@ -312,7 +315,7 @@ class Play extends Component {
     }
     if (loading || !data.title) return <Loading />
     return (
-      <Fragment>
+      <BaseLayout>
         <div styleName="player">
           <div className="wp pt20">
             <Meta title={`${title} ${subTitle}在线播放 - ${listName}${listNameBig}`}>
@@ -403,7 +406,7 @@ class Play extends Component {
             <SideBar />
           </div>
         </div>
-      </Fragment>
+      </BaseLayout>
     )
   }
 }

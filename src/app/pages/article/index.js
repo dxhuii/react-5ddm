@@ -77,7 +77,7 @@ class Article extends PureComponent {
 
     document.body.addEventListener('click', function(e) {
       // 判断是否点击的图片
-      if (e.path[0].nodeName === 'IMG') {
+      if (e.path[0].nodeName === 'IMG' && that.content) {
         let params = {}
         params.param = {}
         // 获取imglist
@@ -92,7 +92,7 @@ class Article extends PureComponent {
             params.param.index = i
           }
         }
-        console.log(params)
+
         that.setState({
           imgObj: params.param,
           showPic: true

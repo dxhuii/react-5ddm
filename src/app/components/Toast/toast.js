@@ -8,6 +8,13 @@ class ToastBox extends Component {
     this.transitionTime = 300
     this.state = { notices: [] }
     this.removeNotice = this.removeNotice.bind(this)
+    this.remove = null
+    this.close = null
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.remove)
+    clearTimeout(this.close)
   }
 
   getNoticeKey() {
@@ -24,7 +31,7 @@ class ToastBox extends Component {
 
     this.setState({ notices })
     if (notice.duration > 0) {
-      setTimeout(() => {
+      this.remove = setTimeout(() => {
         this.removeNotice(notice.key)
       }, notice.duration)
     }
@@ -38,7 +45,9 @@ class ToastBox extends Component {
     this.setState({
       notices: notices.filter(notice => {
         if (notice.key === key) {
-          if (notice.onClose) setTimeout(notice.onClose, this.transitionTime)
+          if (notice.onClose) {
+            this.close = setTimeout(notice.onClose, this.transitionTime)
+          }
           return false
         }
         return true

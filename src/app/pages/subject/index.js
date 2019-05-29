@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
@@ -10,6 +10,7 @@ import { hits } from '@/store/actions/hits'
 import { getDetail, getScore } from '@/store/reducers/detail'
 import { getUserInfo } from '@/store/reducers/user'
 
+import BaseLayout from '@/layout/baseLayout'
 import Loading from '@/components/Ui/Loading'
 import Comment from '@/components/Comment'
 import DetailActor from '@/components/DetailActor'
@@ -23,10 +24,8 @@ import Tating from '@/components/Tating'
 import Modal from '@/components/Modal'
 import Ads from '@/components/Ads'
 import Sign from '@/components/Sign'
-import Meta from '@/components/Meta'
-
 import Toast from '@/components/Toast'
-
+import Meta from '@/components/Meta'
 import Shell from '@/components/Shell'
 
 import { isNumber, formatPic } from '@/utils'
@@ -248,7 +247,7 @@ class Bangumi extends Component {
     }
     if (loading || !data.title) return <Loading />
     return (
-      <Fragment>
+      <BaseLayout>
         <div className="warp-bg">
           <Meta
             title={`${title}全集在线观看${repairtitle && repairtitle !== '讨论帖' ? `_${repairtitle}` : ''}${
@@ -464,7 +463,7 @@ class Bangumi extends Component {
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
           <Sign isSign={isSign} onType={val => this.onType(val)} />
         </Modal>
-      </Fragment>
+      </BaseLayout>
     )
   }
 }

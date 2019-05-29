@@ -1,17 +1,15 @@
-import React, { Component, Fragment } from 'react'
-
+import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
 import { vodNews } from '@/store/actions/detail'
 import { getVodNews } from '@/store/reducers/detail'
 
+import BaseLayout from '@/layout/baseLayout'
 import SideBar from '@/components/SideBar'
 import Item from '@/components/News/Item'
-
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
@@ -77,7 +75,7 @@ class VodNews extends Component {
       }
     } = this.props
     return (
-      <Fragment>
+      <BaseLayout>
         <Meta title="视频新闻列表" />
         <div className="wp clearfix mt20">
           <div className="left box fl">
@@ -87,7 +85,7 @@ class VodNews extends Component {
             <SideBar vodid={+id} />
           </div>
         </div>
-      </Fragment>
+      </BaseLayout>
     )
   }
 }

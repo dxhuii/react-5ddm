@@ -30,10 +30,15 @@ class SignIn extends Component {
       imgKey: ''
     }
     this.submit = this.submit.bind(this)
+    this.reload = null
   }
 
   componentDidMount() {
     this.getVerify()
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.reload)
   }
 
   getVerify = async () => {
@@ -86,7 +91,7 @@ class SignIn extends Component {
       key: this.state.imgkey
     })
     if (success) {
-      setTimeout(() => {
+      this.reload = setTimeout(() => {
         window.location.reload()
         return false
       }, 300)

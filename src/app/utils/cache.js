@@ -1,4 +1,5 @@
 const __cache = {} //用来存放缓存的全局变量。
+let __cacheTime = null
 export default (function() {
   const o = {}
   /**
@@ -11,7 +12,7 @@ export default (function() {
     const msecs = msec ? msec : 60 * 60 * 5
     const tcache = cachename
     __cache[tcache] = value
-    setTimeout(function() {
+    __cacheTime = setTimeout(function() {
       //使用TIMEOUT来处理超时时的删除。
       delete __cache[tcache]
     }, msecs)

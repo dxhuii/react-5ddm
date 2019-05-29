@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -7,11 +7,11 @@ import { connect } from 'react-redux'
 import { monthLoad } from '@/store/actions/month'
 import { getMonth } from '@/store/reducers/month'
 
-import Shell from '@/components/Shell'
-import Meta from '@/components/Meta'
-
+import BaseLayout from '@/layout/baseLayout'
 import Item from '@/components/List/Item'
 import Loading from '@/components/Ui/Loading'
+import Shell from '@/components/Shell'
+import Meta from '@/components/Meta'
 
 import './style.scss'
 
@@ -86,13 +86,10 @@ class Month extends PureComponent {
     const { year, nowYear } = this.state
     const m = month.substring(4)
     return (
-      <Fragment>
+      <BaseLayout>
         <Meta title={`${year}年${m}月播出的新番动漫_${m}月新番_动漫新番表_新番表`}>
           <meta name="keywords" content={`${year}年${m}月播出的新番动漫,${m}月新番,动漫新番表,${m}月最新动漫,${year}年${m}月的动漫,新番表`} />
-          <meta
-            name="description"
-            content={`您想知道${year}年${m}月有哪些新番动漫播出吗，你想了解最新的动漫新番表 ，${m}月份最新动漫观看指南，${m}月播出的动漫资讯信息，请关注本站。`}
-          />
+          <meta name="description" content={`您想知道${year}年${m}月有哪些新番动漫播出吗，你想了解最新的动漫新番表 ，${m}月份最新动漫观看指南，${m}月播出的动漫资讯信息，请关注本站。`} />
         </Meta>
         {loading ? <Loading /> : null}
         <div className="wp mt20">
@@ -117,7 +114,7 @@ class Month extends PureComponent {
           </div>
           <Item data={data} />
         </div>
-      </Fragment>
+      </BaseLayout>
     )
   }
 }
