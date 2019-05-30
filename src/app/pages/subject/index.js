@@ -72,6 +72,17 @@ class Bangumi extends Component {
   }
 
   componentDidMount() {
+    this.getData()
+  }
+
+  componentDidUpdate(prevProps) {
+    // 当 url 参数参数发生改变时，重新进行请求
+    let oldId = prevProps.match.params.id
+    let newId = this.props.match.params.id
+    if (newId !== oldId) this.getData()
+  }
+
+  getData = () => {
     const {
       match: {
         params: { id }
@@ -415,12 +426,14 @@ class Bangumi extends Component {
               </div>
               {id ? <DetailActor actor={actor ? actor.map(item => item.title).join(',') : ''} no={id} /> : null}
             </div>
-            <div className="mt20">
-              <div styleName="title">
-                <h2>评论</h2>
+            {comment.length > 0 ? (
+              <div className="mt20">
+                <div styleName="title">
+                  <h2>评论</h2>
+                </div>
+                <Comment data={comment} />
               </div>
-              <Comment data={comment} />
-            </div>
+            ) : null}
           </div>
           <div className="fr right">
             <div className="box pb20">
@@ -468,17 +481,4 @@ class Bangumi extends Component {
   }
 }
 
-const Bangumis = props => {
-  const {
-    match: {
-      params: { id }
-    }
-  } = props
-  return <Bangumi {...props} key={id} />
-}
-
-Bangumis.propTypes = {
-  match: PropTypes.object
-}
-
-export default Bangumis
+export default Bangumi

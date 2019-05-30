@@ -48,6 +48,17 @@ class Episode extends Component {
   }
 
   componentDidMount() {
+    this.getData()
+  }
+
+  componentDidUpdate(prevProps) {
+    // 当 url 参数参数发生改变时，重新进行请求
+    const oldId = prevProps.match.params
+    const newId = this.props.match.params
+    if (JSON.stringify(newId) !== JSON.stringify(oldId)) this.getData()
+  }
+
+  getData = () => {
     const {
       match: {
         params: { id, p = 0 }
@@ -156,17 +167,4 @@ class Episode extends Component {
   }
 }
 
-const Episodes = props => {
-  const {
-    match: {
-      params: { p }
-    }
-  } = props
-  return <Episode {...props} key={p} />
-}
-
-Episodes.propTypes = {
-  match: PropTypes.object
-}
-
-export default Episodes
+export default Episode

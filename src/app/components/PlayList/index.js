@@ -154,12 +154,7 @@ class PlayList extends Component {
         const pageEnd = i === 1 ? pageSize : i === pageNum && surplus ? pageSize * i - (pageSize - surplus) : pageSize * i // 余数不为 0 取剩余话数
         const isCurrent = start === pageStart && pageEnd === end // 判断是否为当前选中的集数
         html.push(
-          <li
-            key={i}
-            onClick={() => this.pageJump(pageStart, pageEnd)}
-            ref={isCurrent ? e => (this.pageCurrent = e) : null}
-            styleName={isCurrent ? 'active' : ''}
-          >
+          <li key={i} onClick={() => this.pageJump(pageStart, pageEnd)} ref={isCurrent ? e => (this.pageCurrent = e) : null} styleName={isCurrent ? 'active' : ''}>
             第{pageFirst}话 - 第{pageEnd}话
           </li>
         )
@@ -183,7 +178,7 @@ class PlayList extends Component {
 
   render() {
     const {
-      play: { loading, data = [] },
+      play: { data = [] },
       match: {
         params: { id, pid }
       }
@@ -196,7 +191,6 @@ class PlayList extends Component {
       <Fragment>
         {data.length ? (
           <div styleName="playlistbox">
-            {loading && data.length ? <div>loading...</div> : null}
             {data.length > pageSize ? (
               <div styleName="play-page">
                 {data.length > 144 ? (

@@ -33,6 +33,17 @@ class Week extends PureComponent {
   }
 
   componentDidMount() {
+    this.getData()
+  }
+
+  componentDidUpdate(prevProps) {
+    // 当 url 参数参数发生改变时，重新进行请求
+    let oldId = prevProps.match.params.id
+    let newId = this.props.match.params.id
+    if (newId !== oldId) this.getData()
+  }
+
+  getData = () => {
     const { weekData, week } = this.props
     if (!weekData.data) {
       week()
@@ -122,17 +133,4 @@ class Week extends PureComponent {
   }
 }
 
-const Weeks = props => {
-  const {
-    match: {
-      params: { id }
-    }
-  } = props
-  return <Week {...props} key={id} />
-}
-
-Weeks.propTypes = {
-  match: PropTypes.object
-}
-
-export default Weeks
+export default Week

@@ -111,16 +111,27 @@ class NewsIndex extends Component {
   }
 
   componentDidMount() {
+    this.getData()
+  }
+
+  componentDidUpdate(prevProps) {
+    // 当 url 参数参数发生改变时，重新进行请求
+    let oldId = prevProps.match.params.name
+    let newId = this.props.match.params.name
+    if (newId !== oldId) this.getData()
+  }
+
+  componentWillUnmount() {
+    ArriveFooter.remove('newslist')
+  }
+
+  getData = () => {
     const { newsData, config, configLoad } = this.props
     if (!config.data) {
       configLoad({ name: 'menu' })
     }
     if (!newsData.data) this.load()
     ArriveFooter.add('newslist', this.load)
-  }
-
-  componentWillUnmount() {
-    ArriveFooter.remove('newslist')
   }
 
   async load() {
@@ -170,17 +181,4 @@ class NewsIndex extends Component {
   }
 }
 
-const NewsIndexs = props => {
-  const {
-    match: {
-      params: { name }
-    }
-  } = props
-  return <NewsIndex {...props} key={name} />
-}
-
-NewsIndexs.propTypes = {
-  match: PropTypes.object
-}
-
-export default NewsIndexs
+export default NewsIndex

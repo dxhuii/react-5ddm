@@ -40,6 +40,17 @@ class Month extends PureComponent {
     }
   }
   componentDidMount() {
+    this.getData()
+  }
+
+  componentDidUpdate(prevProps) {
+    // 当 url 参数参数发生改变时，重新进行请求
+    let oldId = prevProps.match.params.month
+    let newId = this.props.match.params.month
+    if (newId !== oldId) this.getData()
+  }
+
+  getData = () => {
     const {
       info,
       monthLoad,
@@ -119,17 +130,4 @@ class Month extends PureComponent {
   }
 }
 
-const Months = props => {
-  const {
-    match: {
-      params: { month }
-    }
-  } = props
-  return <Month {...props} key={month} />
-}
-
-Months.propTypes = {
-  match: PropTypes.object
-}
-
-export default Months
+export default Month
