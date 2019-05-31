@@ -44,28 +44,23 @@ export default (user, logPageView = () => {}) => {
 
   let router = () => (
     <Fragment>
-      {/* <Switch>
-        {routerList.map((route, index) => {
-          if (route.component) {
-            return <Route key={`head-${index}`} path={route.path} exact={route.exact} render={props => enter[route.enter](route.head, props, route)} />
-          }
-        })}
-      </Switch> */}
-
+      <Switch>
+        {routerList.map((route, index) => (
+          <Route key={index} path={route.path} exact={route.exact} component={route.head} />
+        ))}
+      </Switch>
       <Switch>
         {routerList.map((route, index) => {
           if (route.component) {
-            return <Route key={`body-${index}`} path={route.path} exact={route.exact} render={props => enter[route.enter](route.component, props, route)} />
+            return <Route key={index} path={route.path} exact={route.exact} render={props => enter[route.enter](route.component, props, route)} />
           }
         })}
       </Switch>
-      {/* <Switch>
-        {routerList.map((route, index) => {
-          if (route.component) {
-            return <Route key={`footer-${index}`} path={route.path} exact={route.exact} render={props => enter[route.enter](route.footer, props, route)} />
-          }
-        })}
-      </Switch> */}
+      <Switch>
+        {routerList.map((route, index) => (
+          <Route key={index} path={route.path} exact={route.exact} component={route.footer} />
+        ))}
+      </Switch>
     </Fragment>
   )
 

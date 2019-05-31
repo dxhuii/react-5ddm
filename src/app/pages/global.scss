@@ -32,6 +32,15 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  a,
+  img,
+  button,
+  input,
+  textarea,
+  div {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  }
+
   body,
   div,
   dl,

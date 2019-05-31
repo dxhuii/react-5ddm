@@ -1,9 +1,9 @@
 import React, { PureComponent, Fragment } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import Head from '@/components/Head'
-import Footer from '@/components/Footer'
+// import Head from '@/components/Head'
+// import Footer from '@/components/Footer'
 
 @withRouter
 class BaseLayout extends PureComponent {
@@ -15,9 +15,9 @@ class BaseLayout extends PureComponent {
   render() {
     return (
       <Fragment>
-        <Head match={this.props.match} />
+        {/* <Head match={this.props.match} /> */}
         {this.props.children}
-        <Footer />
+        {/* <Footer /> */}
       </Fragment>
     )
   }

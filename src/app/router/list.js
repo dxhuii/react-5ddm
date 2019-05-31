@@ -2,6 +2,8 @@ import React from 'react'
 import Loadable from 'react-loadable'
 
 import Head from '@/components/Head'
+import Empty from '@/components/Empty'
+import Footer from '@/components/Footer'
 import Loading from '@/components/Ui/Loading'
 
 import HomeLoadData from '@/pages/home/load-data'
@@ -19,7 +21,6 @@ import newData from '@/pages/new/load-data'
 import episodelistData from '@/pages/episodelist/load-data'
 import detailNewstData from '@/pages/subject/news/load-data'
 import gameData from '@/pages/game/load-data'
-import Footer from '@/components/Footer'
 
 export default [
   {
@@ -51,6 +52,8 @@ export default [
   {
     path: '/week/out',
     exact: true,
+    head: Empty,
+    footer: Empty,
     component: Loadable({
       loader: () => import('@/pages/week/out'),
       loading: () => <Loading />
@@ -74,6 +77,8 @@ export default [
   {
     path: '/sign-in',
     exact: true,
+    head: Empty,
+    footer: Empty,
     component: Loadable({
       loader: () => import('@/pages/sign-in'),
       loading: () => <Loading />
@@ -265,6 +270,8 @@ export default [
   {
     path: '/top',
     exact: true,
+    head: Empty,
+    footer: Empty,
     component: Loadable({
       loader: () => import('@/pages/top'),
       loading: () => <Loading />
@@ -314,6 +321,8 @@ export default [
   {
     path: '/out/pic',
     exact: true,
+    head: Empty,
+    footer: Empty,
     component: Loadable({
       loader: () => import('../pages/out/pic'),
       loading: () => <Loading />
