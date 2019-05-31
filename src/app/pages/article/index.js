@@ -56,25 +56,13 @@ class Article extends PureComponent {
   }
 
   async componentDidMount() {
-    const {
-      match: {
-        params: { id }
-      },
-      article,
-      articleData,
-      hits
-    } = this.props
-    if (!articleData.data) {
-      article({ id })
-    }
-    hits({ id, sid: 2 })
+    const that = this
     document.onkeyup = event => {
       if (event.which == '27') {
         this.isFull()
       }
     }
-    const that = this
-
+    this.getData()
     document.body.addEventListener('click', function(e) {
       // 判断是否点击的图片
       if (e.path[0].nodeName === 'IMG' && that.content) {
@@ -99,6 +87,28 @@ class Article extends PureComponent {
         })
       }
     })
+  }
+
+  componentDidUpdate(prevProps) {
+    // 当 url 参数参数发生改变时，重新进行请求
+    let oldId = prevProps.match.params.id
+    let newId = this.props.match.params.id
+    if (newId !== oldId) this.getData()
+  }
+
+  getData = () => {
+    const {
+      match: {
+        params: { id }
+      },
+      article,
+      articleData,
+      hits
+    } = this.props
+    if (!articleData.data) {
+      article({ id })
+    }
+    hits({ id, sid: 2 })
   }
 
   isFull = () => {
@@ -221,17 +231,17 @@ class Article extends PureComponent {
   }
 }
 
-const Articles = props => {
-  const {
-    match: {
-      params: { id }
-    }
-  } = props
-  return <Article {...props} key={id} />
-}
+// const Articles = props => {
+//   const {
+//     match: {
+//       params: { id }
+//     }
+//   } = props
+//   return <Article {...props} key={id} />
+// }
 
-Articles.propTypes = {
-  match: PropTypes.object
-}
+// Articles.propTypes = {
+//   match: PropTypes.object
+// }
 
-export default Articles
+export default Article

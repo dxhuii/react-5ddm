@@ -79,7 +79,30 @@ class Play extends Component {
     location: PropTypes.object
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.getData()
+    document.onkeyup = event => {
+      if (event.which == '27') {
+        this.isFull()
+      }
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    // 当 url 参数参数发生改变时，重新进行请求
+    const oldId = prevProps.match.params
+    const newId = this.props.match.params
+    if (JSON.stringify(newId) !== JSON.stringify(oldId)) this.getData()
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      play: ''
+    })
+    clearTimeout(this.playTime)
+  }
+
+  getData = async () => {
     const {
       player,
       playerLoad,
@@ -93,25 +116,12 @@ class Play extends Component {
       let [, data] = await playerLoad({ id, pid })
       if (data) {
         this.addHistory() // 增加观看记录
-        this.getData()
+        this.getPlay()
       }
     } else {
-      this.getData()
+      this.getPlay()
       this.addHistory() // 增加观看记录
     }
-
-    document.onkeyup = event => {
-      if (event.which == '27') {
-        this.isFull()
-      }
-    }
-  }
-
-  componentWillUnmount() {
-    this.setState({
-      play: ''
-    })
-    clearTimeout(this.playTime)
   }
 
   async addHistory() {
@@ -161,7 +171,7 @@ class Play extends Component {
   }
 
   onPlay(play, type) {
-    this.setState({ play, type }, () => this.getData())
+    this.setState({ play, type }, () => this.getPlay())
   }
 
   getOther(data = []) {
@@ -172,7 +182,7 @@ class Play extends Component {
     return data.filter(item => item.playName === 'qq')
   }
 
-  getData() {
+  getPlay() {
     const that = this
     loadScript({
       src: 'https://pv.sohu.com/cityjson?ie=utf-8',
@@ -313,7 +323,6 @@ class Play extends Component {
       title: `#${title}# ${subTitle}在线播放 - ${listName}${listNameBig} - #${NAME.split('_').join('##')}# @99496动漫网`,
       url: `/play/${id}/${pid}`
     }
-    if (loading || !data.title) return <Loading />
     return (
       <BaseLayout>
         <div styleName="player">

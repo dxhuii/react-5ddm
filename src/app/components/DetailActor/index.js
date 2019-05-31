@@ -40,11 +40,10 @@ class Bangumi extends Component {
 
   render() {
     const {
-      info: { data = [], loading }
+      info: { data = [] }
     } = this.props
     return (
       <Fragment>
-        {loading ? <div> loading... </div> : null}
         <div styleName="d-item">
           {data.map(item => (
             <li key={item.id}>
