@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -6,16 +6,20 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { article } from '@/store/actions/article'
 import { getArticle } from '@/store/reducers/article'
+import { newsIndex } from '@/store/actions/newsIndex'
 import { hits } from '@/store/actions/hits'
 import { getUserInfo } from '@/store/reducers/user'
+import { getNewsIndex } from '@/store/reducers/newsIndex'
 
 import BaseLayout from '@/layout/baseLayout'
+import Swiper from '@/components/Swiper'
 import Loading from '@/components/Ui/Loading'
 import SideBar from '@/components/SideBar'
 import TagShare from '@/components/TagShare'
-import Ads from '@/components/Ads'
+import Item from '@/components/News/Item'
 import convertHTML from '@/components/HtmlText'
-import Swiper from '@/components/Swiper'
+import Ads from '@/components/Ads'
+
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
@@ -28,21 +32,25 @@ import './style.scss'
 @connect(
   (state, props) => ({
     userinfo: getUserInfo(state),
-    articleData: getArticle(state, props.match.params.id)
+    articleData: getArticle(state, props.match.params.id),
+    newsData: getNewsIndex(state, 'newslist', 44)
   }),
   dispatch => ({
     article: bindActionCreators(article, dispatch),
+    newsIndex: bindActionCreators(newsIndex, dispatch),
     hits: bindActionCreators(hits, dispatch)
   })
 )
-class Article extends PureComponent {
+class Article extends Component {
   static propTypes = {
     match: PropTypes.object,
     article: PropTypes.func,
+    newsIndex: PropTypes.func,
     hits: PropTypes.func,
     articleData: PropTypes.object,
     userinfo: PropTypes.object,
-    location: PropTypes.object
+    location: PropTypes.object,
+    newsData: PropTypes.object
   }
 
   constructor(props) {
@@ -53,6 +61,7 @@ class Article extends PureComponent {
       showPic: false,
       imgObj: {}
     }
+    this.load = this.load.bind(this)
   }
 
   async componentDidMount() {
@@ -96,11 +105,16 @@ class Article extends PureComponent {
     if (newId !== oldId) this.getData()
   }
 
+  componentWillUnmount() {
+    ArriveFooter.remove('newsArticle')
+  }
+
   getData = () => {
     const {
       match: {
         params: { id }
       },
+      newsData,
       article,
       articleData,
       hits
@@ -108,7 +122,14 @@ class Article extends PureComponent {
     if (!articleData.data) {
       article({ id })
     }
+    if (!newsData.data) this.load()
+    ArriveFooter.add('newsArticle', this.load)
     hits({ id, sid: 2 })
+  }
+
+  async load() {
+    const { newsIndex } = this.props
+    await newsIndex({ name: 'newslist', id: 44 })
   }
 
   isFull = () => {
@@ -138,6 +159,7 @@ class Article extends PureComponent {
   render() {
     const {
       articleData: { data = {}, loading },
+      newsData,
       match: { url },
       userinfo: { userid },
       location
@@ -151,11 +173,12 @@ class Article extends PureComponent {
       desc: remark,
       url: `/article/${id}`
     }
+    const newsListData = newsData.data || []
+    const { imageArray = [], index } = imgObj
+    if (loading || !data.title) return <Loading />
     if (jump && !(typeof window === 'undefined')) {
       window.location.href = jump
     }
-    const { imageArray = [], index } = imgObj
-    if (loading || !data.title) return <Loading />
     return (
       <BaseLayout>
         <div className="wp mt20 clearfix">
@@ -218,6 +241,15 @@ class Article extends PureComponent {
                   </p>
                 ) : null}
               </div>
+              <div styleName="newslist">
+                <div className="title">
+                  <h2>推荐新闻</h2>
+                  <Link to="/news">
+                    更多<i className="iconfont">&#xe65e;</i>
+                  </Link>
+                </div>
+                <Item data={newsListData} />
+              </div>
             </article>
           </div>
           {cid === 205 ? null : (
@@ -230,18 +262,5 @@ class Article extends PureComponent {
     )
   }
 }
-
-// const Articles = props => {
-//   const {
-//     match: {
-//       params: { id }
-//     }
-//   } = props
-//   return <Article {...props} key={id} />
-// }
-
-// Articles.propTypes = {
-//   match: PropTypes.object
-// }
 
 export default Article

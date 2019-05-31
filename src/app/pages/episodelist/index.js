@@ -10,6 +10,7 @@ import { getEpisodeList } from '@/store/reducers/episode'
 
 import BaseLayout from '@/layout/baseLayout'
 import SideBar from '@/components/SideBar'
+
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 

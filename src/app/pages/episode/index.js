@@ -11,11 +11,11 @@ import { hits } from '@/store/actions/hits'
 import BaseLayout from '@/layout/baseLayout'
 import Loading from '@/components/Ui/Loading'
 import Detail from '@/components/Detail'
-import Shell from '@/components/Shell'
-import Meta from '@/components/Meta'
-
 import SideBar from '@/components/SideBar'
 import TagShare from '@/components/TagShare'
+
+import Shell from '@/components/Shell'
+import Meta from '@/components/Meta'
 
 import { NAME } from 'Config'
 

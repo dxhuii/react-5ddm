@@ -10,6 +10,7 @@ import { getGame } from '@/store/reducers/game'
 
 import BaseLayout from '@/layout/baseLayout'
 import Loading from '@/components/Ui/Loading'
+
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 

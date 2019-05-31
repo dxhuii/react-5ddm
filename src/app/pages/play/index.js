@@ -12,13 +12,13 @@ import { getPlayerList } from '@/store/reducers/player'
 import { getUserInfo } from '@/store/reducers/user'
 
 import BaseLayout from '@/layout/baseLayout'
-import Loading from '@/components/Ui/Loading'
-import PlayList from '@/components/PlayList'
-import DetailActor from '@/components/DetailActor'
 import SideBar from '@/components/SideBar'
 import Share from '@/components/Share'
-import Ads from '@/components/Ads'
+import PlayList from '@/components/PlayList'
+import DetailActor from '@/components/DetailActor'
 import Toast from '@/components/Toast'
+import Ads from '@/components/Ads'
+
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 

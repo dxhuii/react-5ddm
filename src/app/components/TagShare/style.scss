@@ -5,6 +5,8 @@
 
 .article-tool__tag {
   flex-grow: 1;
+  max-width: 580px;
+
   a {
     display: inline-block;
     padding: 0 10px;
@@ -14,10 +16,13 @@
     color: #0084ff;
     font-size: 14px;
     margin-right: 10px;
+    margin-bottom: 10px;
     border-radius: 12px;
+
     &:last-child {
       margin-right: 0;
     }
+
     &:hover {
       background-color: rgba(0, 132, 255, .15);
     }
@@ -32,8 +37,15 @@
   .article-tool {
     display: inline-block;
   }
+
   .article-tool__share {
     margin-top: 10px;
     margin-left: 0;
+  }
+
+  .article-tool__tag {
+    a {
+      margin-bottom: 5px;
+    }
   }
 }

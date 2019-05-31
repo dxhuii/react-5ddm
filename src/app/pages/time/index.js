@@ -10,6 +10,7 @@ import { getDetail } from '@/store/reducers/detail'
 import BaseLayout from '@/layout/baseLayout'
 import SideBar from '@/components/SideBar'
 import TagShare from '@/components/TagShare'
+
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 

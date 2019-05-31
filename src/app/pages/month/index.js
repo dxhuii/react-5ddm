@@ -8,8 +8,9 @@ import { monthLoad } from '@/store/actions/month'
 import { getMonth } from '@/store/reducers/month'
 
 import BaseLayout from '@/layout/baseLayout'
-import Item from '@/components/List/Item'
 import Loading from '@/components/Ui/Loading'
+import Item from '@/components/List/Item'
+
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 

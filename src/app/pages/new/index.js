@@ -8,6 +8,7 @@ import { TopList } from '@/store/actions/page'
 import { getTopList } from '@/store/reducers/page'
 
 import BaseLayout from '@/layout/baseLayout'
+
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 

@@ -32,6 +32,7 @@ class TopPage extends PureComponent {
     week: PropTypes.object,
     month: PropTypes.object,
     all: PropTypes.object,
+    location: PropTypes.object,
     TopList: PropTypes.func
   }
 
@@ -56,7 +57,16 @@ class TopPage extends PureComponent {
   }
 
   render() {
-    const { day, week, month, all } = this.props
+    const {
+      day,
+      week,
+      month,
+      all,
+      location: {
+        params: { name }
+      }
+    } = this.props
+    const isHits = name === 'hits'
     const dayData = day.data || []
     const weekData = week.data || []
     const monthData = month.data || []
@@ -72,7 +82,7 @@ class TopPage extends PureComponent {
                 <li key={item.id}>
                   <span styleName={`num ${index <= 2 ? 'on' : ''}`}>{index + 1}</span>
                   <Link to={`/subject/${item.id}`}>{item.title}</Link>
-                  <span>{item.glod}</span>
+                  <span>{isHits ? item.hits : item.glod}</span>
                 </li>
               ))}
             </ul>
@@ -84,7 +94,7 @@ class TopPage extends PureComponent {
                 <li key={item.id}>
                   <span styleName={`num ${index <= 2 ? 'on' : ''}`}>{index + 1}</span>
                   <Link to={`/subject/${item.id}`}>{item.title}</Link>
-                  <span>{item.hits}</span>
+                  <span>{isHits ? item.hits : item.glod}</span>
                 </li>
               ))}
             </ul>
@@ -96,7 +106,7 @@ class TopPage extends PureComponent {
                 <li key={item.id}>
                   <span styleName={`num ${index <= 2 ? 'on' : ''}`}>{index + 1}</span>
                   <Link to={`/subject/${item.id}`}>{item.title}</Link>
-                  <span>{item.hits}</span>
+                  <span>{isHits ? item.hits : item.glod}</span>
                 </li>
               ))}
             </ul>
@@ -108,7 +118,7 @@ class TopPage extends PureComponent {
                 <li key={item.id}>
                   <span styleName={`num ${index <= 2 ? 'on' : ''}`}>{index + 1}</span>
                   <Link to={`/subject/${item.id}`}>{item.title}</Link>
-                  <span>{item.hits}</span>
+                  <span>{isHits ? item.hits : item.glod}</span>
                 </li>
               ))}
             </ul>

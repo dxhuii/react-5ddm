@@ -6,10 +6,10 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { signIn } from '@/store/actions/user'
 
-import './style.scss'
-
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
+
+import './style.scss'
 
 @withRouter
 @connect(

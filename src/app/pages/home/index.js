@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
 import BaseLayout from '@/layout/baseLayout'
+import Slide from '@/components/Slide'
+import Recommend from '@/components/Recommend'
 import WeekDay from '@/components/Week'
 import Top from '@/components/Top'
 import List from '@/components/List'
 import News from '@/components/News'
 import NewsYG from '@/components/News/yugao'
-import Slide from '@/components/Slide'
-import Recommend from '@/components/Recommend'
 import Ads from '@/components/Ads'
 
 // 壳组件

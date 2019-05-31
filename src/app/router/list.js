@@ -270,8 +270,8 @@ export default [
   {
     path: '/top',
     exact: true,
-    head: Empty,
-    footer: Empty,
+    head: Head,
+    footer: Footer,
     component: Loadable({
       loader: () => import('@/pages/top'),
       loading: () => <Loading />

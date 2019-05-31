@@ -141,6 +141,20 @@
   z-index: 9999;
 }
 
+.newslist {
+  padding: 0 20px;
+
+  :global {
+    .title {
+      margin-bottom: 10px;
+
+      h2 {
+        flex-grow: 1;
+      }
+    }
+  }
+}
+
 @media (min-width: 0) and (max-width: 1200px) {
   .article-body {
     margin: 0 -10px;

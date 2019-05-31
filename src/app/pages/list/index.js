@@ -11,11 +11,11 @@ import { getList } from '@/store/reducers/list'
 
 import BaseLayout from '@/layout/baseLayout'
 import Loading from '@/components/Ui/Loading'
-import Shell from '@/components/Shell'
-import Meta from '@/components/Meta'
-
 import Item from '@/components/List/Item'
 import Ads from '@/components/Ads'
+
+import Shell from '@/components/Shell'
+import Meta from '@/components/Meta'
 
 import './style.scss'
 
