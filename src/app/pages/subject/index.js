@@ -67,8 +67,7 @@ class Bangumi extends Component {
     super(props)
     this.state = {
       visible: false,
-      isSign: 'signIn',
-      isMoreActor: false
+      isSign: 'signIn'
     }
   }
 
@@ -193,14 +192,8 @@ class Bangumi extends Component {
     return name
   }
 
-  onMoreActor = () => {
-    this.setState({
-      isMoreActor: !this.state.isMoreActor
-    })
-  }
-
   render() {
-    const { visible, isSign, isMoreActor } = this.state
+    const { visible, isSign } = this.state
     const {
       info: { data = {}, loading },
       userinfo: { userid },
@@ -441,10 +434,7 @@ class Bangumi extends Component {
               <div styleName="title">
                 <h2>角色声优</h2>
               </div>
-              <div styleName={`right-actor ${isMoreActor ? 'auto' : ''}`}>
-                {actor ? actor.map((item, index) => <p key={index}>{item.title}</p>) : <p>暂无</p>}
-                <p onClick={this.onMoreActor}>{isMoreActor ? '收起' : '查看更多'}</p>
-              </div>
+              <div>{actor ? actor.map((item, index) => <p key={index}>{item.title}</p>) : <p>暂无</p>}</div>
             </div>
             <div className="box pb20 mt20">
               <div styleName="title">

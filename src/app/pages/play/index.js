@@ -412,7 +412,7 @@ class Play extends Component {
             </div>
           </div>
           <div className="right fr">
-            <SideBar />
+            <SideBar vodid={id} />
           </div>
         </div>
       </BaseLayout>
