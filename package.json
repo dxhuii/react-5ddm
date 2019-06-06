@@ -15,7 +15,7 @@
   "author": "吴世剑 <54sword@163.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
@@ -51,7 +51,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-stage-0": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "autoprefixer": "^9.4.1",
+    "autoprefixer": "^9.6.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
     "babel-plugin-react-css-modules": "^5.0.0",
@@ -94,5 +94,9 @@
     "webpack-node-externals": "^1.7.2",
     "webpack-parallel-uglify-plugin": "^1.1.0",
     "write-file-webpack-plugin": "^4.4.1"
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    ">1%"
+  ]
 }

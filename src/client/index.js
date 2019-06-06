@@ -12,7 +12,7 @@ import configureStore from '@/store'
 import createRouter from '@/router'
 import { getUserInfo } from '@/store/reducers/user'
 
-import { CNZZ_STAT, BAIDU_STAT, GA, DOMAIN } from 'Config'
+import { GA, DOMAIN } from 'Config'
 import { loadScript } from '@/utils/loadScript'
 
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
@@ -57,9 +57,9 @@ if (process.env.NODE_ENV !== 'development') {
         }
         ReactGA.set(option)
         ReactGA.pageview(pathname)
+        window._hmt && window._hmt.push(['_trackPageview', pathname])
+        window._czc && window._czc.push(['_trackPageview', pathname, document.referrer])
         loadScript({ src: 'https://zz.bdstatic.com/linksubmit/push.js' })
-        loadScript({ src: `https://hm.baidu.com/hm.js?${BAIDU_STAT}` })
-        loadScript({ src: `https://s13.cnzz.com/z_stat.php?id=${CNZZ_STAT}&web_id=${CNZZ_STAT}` })
       }
     }
   }

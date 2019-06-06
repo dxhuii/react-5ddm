@@ -71,7 +71,7 @@ export default Component => {
     // 组件被卸载
     componentWillUnmount() {
       const { pathname, search } = this.props.location
-      this.props.saveScrollPosition(pathname + search)
+      if (pathname == '/') this.props.saveScrollPosition(pathname + search)
     }
 
     componentDidCatch(error, info) {

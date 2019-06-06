@@ -13,7 +13,7 @@ import createRouter from '@/router'
 // 加载初始数据
 import initData from '@/init-data'
 
-import { AUTH_COOKIE_NAME, COOKIE_PREFIX } from 'Config'
+import { AUTH_COOKIE_NAME, COOKIE_PREFIX, CNZZ_STAT, BAIDU_STAT } from 'Config'
 
 export default (req, res) => {
   return new Promise(async (resolve, reject) => {
@@ -83,6 +83,9 @@ export default (req, res) => {
 
     // 获取页面的meta，嵌套到模版中
     params.meta = metaTagsInstance.renderToString()
+
+    params.CNZZ_STAT = CNZZ_STAT
+    params.BAIDU_STAT = BAIDU_STAT
 
     // redux
     params.reduxState = JSON.stringify(store.getState()).replace(/</g, '\\x3c')
