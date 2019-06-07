@@ -65,16 +65,21 @@ class Article extends Component {
   }
 
   async componentDidMount() {
-    const that = this
     document.onkeyup = event => {
       if (event.which == '27') {
         this.isFull()
       }
     }
     this.getData()
+    this.getImg()
+  }
+
+  getImg = () => {
+    const that = this
     document.body.addEventListener('click', function(e) {
+      const arr = e.path.filter(item => item.id === 'content')
       // 判断是否点击的图片
-      if (e.path[0].nodeName === 'IMG' && that.content) {
+      if (e.path[0].nodeName === 'IMG' && that.content && arr[0].id === 'content') {
         let params = {}
         params.param = {}
         // 获取imglist
@@ -212,7 +217,7 @@ class Article extends Component {
                   ) : null}
                 </div>
               ) : null}
-              <div ref={e => (this.content = e)} styleName="article-content" dangerouslySetInnerHTML={{ __html: convertHTML(content) }} />
+              <div ref={e => (this.content = e)} id="content" styleName="article-content" dangerouslySetInnerHTML={{ __html: convertHTML(content) }} />
               {showPic ? (
                 <div styleName="article-slide" onClick={this.closePic}>
                   <span />

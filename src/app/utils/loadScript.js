@@ -1,5 +1,5 @@
 // 动态加载JS
-export const loadScript = ({ src, end, dom, callback, clear = false }) => {
+export const loadScript = ({ src, end, dom, callback }) => {
   if (!(typeof document === 'undefined')) {
     const script = document.createElement('script'),
       head = document.getElementsByTagName('head')[0],

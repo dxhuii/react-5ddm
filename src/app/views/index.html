@@ -36,15 +36,17 @@
         <a href="https://chrome.google.com/" target="_blank">Google Chrome</a>
       </div>
     <![endif]-->
-    <script>
-      var _hmt = _hmt || []
-      ;(function() {
-        var hm = document.createElement('script')
-        hm.src = 'https://hm.baidu.com/hm.js?<%= htmlWebpackPlugin.options.BAIDU_STAT %>'
-        var s = document.getElementsByTagName('script')[0]
-        s.parentNode.insertBefore(hm, s)
-      })()
-    </script>
-    <script type="text/javascript" src="https://s22.cnzz.com/z_stat.php?id=<%= htmlWebpackPlugin.options.CNZZ_STAT %>&web_id=<%= htmlWebpackPlugin.options.CNZZ_STAT %>"></script>
+    <div style="display: none;">
+      <script>
+        var _hmt = _hmt || []
+        ;(function() {
+          var hm = document.createElement('script')
+          hm.src = 'https://hm.baidu.com/hm.js?<%= htmlWebpackPlugin.options.BAIDU_STAT %>'
+          var s = document.getElementsByTagName('script')[0]
+          s.parentNode.insertBefore(hm, s)
+        })()
+      </script>
+      <script type="text/javascript" src="https://s22.cnzz.com/z_stat.php?id=<%= htmlWebpackPlugin.options.CNZZ_STAT %>&web_id=<%= htmlWebpackPlugin.options.CNZZ_STAT %>"></script>
+    </div>
   </body>
 </html>
