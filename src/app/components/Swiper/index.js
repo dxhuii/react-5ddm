@@ -21,6 +21,7 @@ export default class Swiper extends PureComponent {
     children: PropTypes.array,
     Pagination: PropTypes.bool,
     Controller: PropTypes.bool,
+    Continuous: PropTypes.bool,
     Start: PropTypes.number,
     Autoplay: PropTypes.number
   }
@@ -52,7 +53,7 @@ export default class Swiper extends PureComponent {
   }
 
   render() {
-    const { Pagination, Controller, Autoplay = 0, Start = 0 } = this.props
+    const { Pagination, Controller, Autoplay = 0, Start = 0, Continuous = true } = this.props
     const { current } = this.state
     const elem = Array.from(Array(this.props.children.length), (v, k) => k) || []
     return (
@@ -63,7 +64,7 @@ export default class Swiper extends PureComponent {
           speed={300}
           auto={Autoplay}
           draggable={true}
-          continuous={true}
+          continuous={Continuous}
           autoRestart={false}
           disableScroll={false}
           stopPropagation={false}
@@ -75,7 +76,7 @@ export default class Swiper extends PureComponent {
         {Pagination ? (
           <div className="swiper-page" ref={e => (this.page = e)}>
             {elem.map(item => (
-              <em key={item} className={item === current ? 'cur' : ''} onClick={() => this.onCur(item)}>
+              <em key={item} className={item === Start || current ? 'cur' : ''} onClick={() => this.onCur(item)}>
                 {item + 1}
               </em>
             ))}

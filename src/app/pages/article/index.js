@@ -77,9 +77,11 @@ class Article extends Component {
   getImg = () => {
     const that = this
     document.body.addEventListener('click', function(e) {
-      const arr = e.path.filter(item => item.id === 'content')
+      console.log(e, 'getimg')
+      const isFF = /Firefox/.test(navigator.userAgent)
+      const elem = isFF ? e.rangeParent.id || e.rangeParent.parentNode.id : (e.path.filter(item => item.id === 'content')[0] || []).id
       // 判断是否点击的图片
-      if (e.path[0].nodeName === 'IMG' && that.content && arr[0].id === 'content') {
+      if (e.target.nodeName === 'IMG' && that.content && elem === 'content') {
         let params = {}
         params.param = {}
         // 获取imglist
@@ -90,7 +92,7 @@ class Article extends Component {
         }
         for (let i = 0; i < oPics.length; i++) {
           // 判断点击图片的index
-          if (e.path[0].src === params.param.imageArray[i].url) {
+          if (e.target.src === params.param.imageArray[i].url) {
             params.param.index = i
           }
         }
@@ -221,7 +223,7 @@ class Article extends Component {
               {showPic ? (
                 <div styleName="article-slide" onClick={this.closePic}>
                   <span />
-                  <Swiper Pagination={true} Controller={true} Start={index}>
+                  <Swiper Pagination={true} Controller={true} Start={index} Continuous={false}>
                     {imageArray.map((item, index) => (
                       <div className="swipe-item" key={item.url + index}>
                         <img src={item.url} />
