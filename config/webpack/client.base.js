@@ -7,6 +7,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const config = require('../index')
 const devMode = process.env.NODE_ENV === 'development'
@@ -198,6 +199,11 @@ module.exports = {
     new webpack.DefinePlugin({
       __SERVER__: 'false',
       __CLIENT__: 'true'
+    }),
+
+    // 清空打包目录
+    new CleanWebpackPlugin({
+      verbose: true
     }),
 
     // 提取css插件

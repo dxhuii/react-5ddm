@@ -1,10 +1,9 @@
 const webpack = require('webpack')
-// const HtmlwebpackPlugin = require('html-webpack-plugin');
 const path = require('path')
 const chalk = require('chalk')
 const nodeExternals = require('webpack-node-externals')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const config = require('../index')
 
@@ -93,6 +92,11 @@ module.exports = {
     new webpack.DefinePlugin({
       __SERVER__: 'true',
       __CLIENT__: 'false'
+    }),
+
+    // 清空打包目录
+    new CleanWebpackPlugin({
+      verbose: true
     }),
 
     new ProgressBarPlugin({

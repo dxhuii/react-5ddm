@@ -78,7 +78,9 @@ class Article extends Component {
     const that = this
     document.body.addEventListener('click', function(e) {
       console.log(e, 'getimg')
+      // 火狐没有 e.path 属性
       const isFF = /Firefox/.test(navigator.userAgent)
+      // 可点击区域
       const elem = isFF ? e.rangeParent.id || e.rangeParent.parentNode.id : (e.path.filter(item => item.id === 'content')[0] || []).id
       // 判断是否点击的图片
       if (e.target.nodeName === 'IMG' && that.content && elem === 'content') {
