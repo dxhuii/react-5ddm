@@ -76,7 +76,7 @@ export default class Swiper extends PureComponent {
         {Pagination ? (
           <div className="swiper-page" ref={e => (this.page = e)}>
             {elem.map(item => (
-              <em key={item} className={item === Start || current ? 'cur' : ''} onClick={() => this.onCur(item)}>
+              <em key={item} className={item === current ? 'cur' : ''} onClick={() => this.onCur(item)}>
                 {item + 1}
               </em>
             ))}

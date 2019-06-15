@@ -1,29 +1,39 @@
 .filter {
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
+  padding: 10px 0;
   background: #fff;
-  padding-top: 10px;
+  border-bottom: 1px solid #ddd;
+
   dl {
     dt {
       float: left;
       color: #666;
     }
+
     dd {
       margin-left: 40px;
       word-wrap: break-word;
       display: flex;
       flex-flow: wrap;
+
       a {
         margin-right: 10px;
         white-space: nowrap;
+
         &.cur {
           color: #0084ff;
         }
       }
+
       span {
         flex-grow: 1;
         text-align: right;
       }
     }
+  }
+}
+
+@media (min-width: 0px) and (max-width: 1200px) {
+  .filter {
+    padding: 10px;
   }
 }

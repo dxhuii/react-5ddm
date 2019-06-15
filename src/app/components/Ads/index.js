@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 
 import { ISAD } from 'Config'
-import { createIframe } from '@/utils/createIframe'
 import { loadScript } from '@/utils/loadScript'
 import useScript from '@/utils/useScript'
 
 export default function Ads(props) {
   const [type, setType] = useState(0)
+  const [con, setCon] = useState(0)
   const ads = useRef(null)
   const [loaded, error] = useScript('//cos.mdb6.com/static/income.min.js')
 
@@ -19,14 +19,13 @@ export default function Ads(props) {
       const { id } = props
       if (loaded && !error) {
         if (income[id]) {
-          const { type, content, height } = income[id]
+          const { type, content } = income[id]
           setType(type)
-          if (type === 2) {
+          setCon(content)
+          if (type === 2 && content) {
             loadScript({ src: content, dom: ads.current })
-          } else if (type === 1) {
+          } else if (type === 1 && content) {
             showAd(content)
-          } else if (type === 3) {
-            createIframe(ads.current, content, height)
           }
         }
       }
@@ -34,5 +33,5 @@ export default function Ads(props) {
     return () => {}
   }, [error, loaded, props])
 
-  return ISAD ? <div ref={ads} className={type !== 1 ? 'mt20' : ''} /> : null
+  return ISAD ? <div ref={ads} className={type !== 1 && con ? 'mt20' : ''} /> : null
 }

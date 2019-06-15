@@ -3,13 +3,16 @@
   flex-wrap: wrap;
   margin: 0 -10px;
   padding-top: 20px;
+
   li {
     position: relative;
     width: 190px;
     margin: 0 10px 25px;
+
     &:nth-child(6n) {
       margin-right: 0;
     }
+
     div {
       position: relative;
       z-index: 2;
@@ -19,6 +22,7 @@
       overflow: hidden;
       box-shadow: 0 3px 14px 0 rgba(203, 193, 187, .40);
     }
+
     img {
       position: absolute;
       left: 0;
@@ -30,16 +34,19 @@
       display: block;
       width: 100%;
     }
+
     p {
       margin-top: 6px;
       height: 16px;
       line-height: 16px;
       color: #999;
       overflow: hidden;
+
       &.today {
         color: #0084ff;
       }
     }
+
     h3 {
       margin: 15px 0;
       height: 20px;
@@ -49,6 +56,7 @@
       color: #333;
       white-space: normal;
       overflow: hidden;
+
       &:hover {
         color: #0084ff;
       }
@@ -63,19 +71,24 @@
 @media (min-width: 0px) and (max-width: 1200px) {
   .d-item {
     margin: 0;
-    padding-top: 15px;
+    padding: 10px 10px 0;
+
     li {
       width: 32%;
       margin: 0 2% 15px 0;
+
       &:nth-child(3n) {
         margin-right: 0;
       }
+
       div {
         height: 170px;
       }
+
       h3 {
         margin: 10px 0;
       }
+
       p {
         margin-top: 0;
       }
@@ -89,10 +102,12 @@
       div {
         height: 135px;
       }
+
       h3 {
         font-size: 12px;
         margin: 5px 0;
       }
+
       p {
         font-size: 12px;
       }

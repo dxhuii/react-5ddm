@@ -13,6 +13,8 @@ import Loading from '@/components/Ui/Loading'
 import Detail from '@/components/Detail'
 import SideBar from '@/components/SideBar'
 import TagShare from '@/components/TagShare'
+import DetailActor from '@/components/DetailActor'
+import Ads from '@/components/Ads'
 
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
@@ -36,7 +38,7 @@ class Episode extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      epMore: props.match.params.p > 20 ? true : false
+      epMore: false
     }
   }
   static propTypes = {
@@ -67,6 +69,9 @@ class Episode extends Component {
       hits,
       info
     } = this.props
+    this.setState({
+      epMore: false
+    })
     if (!info.data) {
       episode({ id, p })
     }
@@ -138,6 +143,17 @@ class Episode extends Component {
                 </div>
               )}
             </article>
+            <div styleName="article-bottom">
+              <div className="mt20" styleName="article-ads">
+                <Ads id={11} />
+              </div>
+              <div className="mt10" styleName="ep-like">
+                <div styleName="title">
+                  <h2>相关动漫</h2>
+                </div>
+                {id ? <DetailActor actor={actor} no={id} /> : null}
+              </div>
+            </div>
           </div>
           <div className="fr right">
             <div className="box">
@@ -148,11 +164,19 @@ class Episode extends Component {
                 </li>
                 {this.showList(id, storyNum, p)}
               </ul>
-              {p > 19 ? (
-                <div onClick={this.epMore} styleName="eplist-more">
-                  {epMore ? '收起' : '更多'}
-                </div>
-              ) : null}
+              <ul styleName="eplist">
+                {p > 19 ? (
+                  <li styleName={!p ? 'active' : ''}>
+                    <Link to={`/episode/${id}/${p}`}>{p}集</Link>
+                  </li>
+                ) : null}
+
+                {!epMore && storyNum > 19 ? (
+                  <li onClick={this.epMore}>
+                    <span />
+                  </li>
+                ) : null}
+              </ul>
               <Link styleName="go-detail" to={`/subject/${vid}`}>
                 去 {vTitle}
               </Link>

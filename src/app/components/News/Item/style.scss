@@ -1,10 +1,12 @@
 @import '../../../pages/_mixin';
+
 .list {
   li {
     margin-top: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid #ebebeb;
     display: flex;
+
     :global {
       .load-demand {
         width: 200px;
@@ -13,6 +15,7 @@
         margin-right: 20px;
         height: 110px;
         float: left;
+
         img {
           width: 100%;
           display: block;
@@ -22,28 +25,35 @@
         }
       }
     }
+
     .info {
       width: 100%;
+
       h3 {
         height: 48px;
         font-size: 18px;
         line-height: 24px;
         @include clamp(2);
       }
+
       .tag {
         margin-top: 4px;
         height: 30px;
       }
+
       p {
         color: #999;
         height: 18px;
         line-height: 18px;
+
         span {
           margin-right: 10px;
         }
+
         .share {
           float: right;
           margin-right: 0;
+
           i {
             float: left;
             margin-right: 5px;
@@ -56,6 +66,9 @@
 
 @media (min-width: 0) and (max-width: 1200px) {
   .list {
+    margin-top: 10px;
+    padding-bottom: 10px;
+
     li {
       :global {
         .load-demand {
@@ -64,17 +77,26 @@
           height: 80px;
         }
       }
+
+      &:first-child {
+        padding-top: 0;
+        margin-top: -5px;
+      }
+
       .info {
         h3 {
           font-size: 14px;
           line-height: 20px;
           height: 40px;
         }
+
         .tag {
           display: none;
         }
+
         p {
           margin-top: 20px;
+
           span {
             &:last-child {
               display: none;
