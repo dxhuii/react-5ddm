@@ -35,6 +35,10 @@
 
   p {
     padding-bottom: 20px;
+
+    br {
+      display: none;
+    }
   }
 }
 
@@ -64,6 +68,10 @@
     color: #fff;
     text-shadow: 0 0 3px rgba($color: #000, $alpha: .5)
   }
+}
+
+.article-share {
+  padding: 0 20px;
 }
 
 .article-slide {
@@ -157,7 +165,6 @@
 
 @media (min-width: 0) and (max-width: 1200px) {
   .article-body {
-    margin: 0 -10px;
     background-color: #fff;
 
     h1 {
@@ -179,13 +186,25 @@
   }
 
   .article-content {
-    padding-top: 10px;
+    padding: 10px 10px 0;
     margin-bottom: 0;
     font-size: 16px;
 
     p {
-      margin-bottom: 10px;
+      padding-bottom: 10px;
     }
+  }
+
+  .article-context {
+    padding: 0 10px 0;
+  }
+
+  .article-share {
+    padding: 0 10px;
+  }
+
+  .newslist {
+    padding: 0 10px;
   }
 
   .article-slide {

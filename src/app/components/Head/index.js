@@ -173,9 +173,6 @@ class Head extends Component {
               <NavLink styleName={/month/.test(url) ? 'active' : ''} exact to={`/month/${this.getCurMonth()}`}>
                 {this.getCurMonth().substring(5)}月新番表
               </NavLink>
-              <a href="http://149.28.134.102/" target="_blank" rel="noopener noreferrer">
-                APP下载
-              </a>
             </div>
           </nav>
           <div styleName={`header-search ${showSearch ? 'show' : ''}`}>

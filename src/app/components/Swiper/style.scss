@@ -2,6 +2,7 @@
   position: relative;
   overflow: hidden;
   height: 100%;
+  border-radius: 10px;
 
   &:hover {
     :global {
@@ -99,5 +100,11 @@
         }
       }
     }
+  }
+}
+
+@media (min-width: 0) and (max-width: 1200px) {
+  .swiper {
+    border-radius: 5px;
   }
 }

@@ -1,14 +1,19 @@
 .article-body {
-  padding-bottom: 30px;
+  padding: 10px 20px 0;
+
   h1 {
     font-size: 24px;
-    padding: 20px;
+    padding: 10px 0 20px;
   }
 }
 
 .article-content {
-  padding: 0 20px 20px;
+  padding-bottom: 20px;
   line-height: 2;
+}
+
+.ep-like {
+  padding: 0 20px;
 }
 
 .eplist {
@@ -16,10 +21,12 @@
   flex-flow: wrap;
   max-height: 132px;
   overflow: hidden;
+
   &.auto {
     overflow: visible;
     max-height: inherit;
   }
+
   li {
     width: 46px;
     height: 28px;
@@ -29,20 +36,35 @@
     margin-top: 5px;
     border: 1px solid #e8f1ff;
     text-align: center;
+
     &.active {
       border-color: #0084ff;
+
       a {
         color: #0084ff;
       }
     }
+
     &:nth-child(5n) {
       margin-right: 0
+    }
+
+    span {
+      border-color: #0084ff transparent transparent;
+      border-style: solid dashed dashed;
+      border-width: 5px;
+      display: inline-block;
+      font-size: 0;
+      height: 0;
+      line-height: 0;
+      vertical-align: middle;
+      width: 0;
+      margin-top: 4px;
     }
   }
 }
 
 .article-context {
-  padding: 0 20px;
   line-height: 30px;
 }
 
@@ -54,6 +76,7 @@
 .go-detail {
   margin-top: 15px;
   display: block;
+  color: #0084ff;
 }
 
 .box {
@@ -61,4 +84,31 @@
   box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
   border-radius: 5px;
   padding: 10px 20px;
+}
+
+.title {
+  h2 {
+    font-size: 16px;
+  }
+}
+
+
+@media (min-width: 0) and (max-width: 1200px) {
+
+  .article-body,
+  .article-bottom {
+    background-color: #fff;
+  }
+
+  .article-bottom {
+    padding: 0 10px;
+  }
+
+  .ep-like {
+    padding: 0;
+  }
+
+  .article-ads {
+    margin: 0 -10px;
+  }
 }

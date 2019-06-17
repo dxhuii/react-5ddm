@@ -57,16 +57,15 @@ class TopPage extends PureComponent {
   }
 
   render() {
+    console.log(this.props)
     const {
       day,
       week,
       month,
       all,
-      location: {
-        params: { name }
-      }
+      location: { search }
     } = this.props
-    const isHits = name === 'hits'
+    const isHits = search.indexOf('hits') !== -1
     const dayData = day.data || []
     const weekData = week.data || []
     const monthData = month.data || []

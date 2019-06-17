@@ -78,7 +78,9 @@ class Article extends Component {
     const that = this
     document.body.addEventListener('click', function(e) {
       console.log(e, 'getimg')
+      // 火狐没有 e.path 属性
       const isFF = /Firefox/.test(navigator.userAgent)
+      // 可点击区域
       const elem = isFF ? e.rangeParent.id || e.rangeParent.parentNode.id : (e.path.filter(item => item.id === 'content')[0] || []).id
       // 判断是否点击的图片
       if (e.target.nodeName === 'IMG' && that.content && elem === 'content') {
@@ -232,9 +234,8 @@ class Article extends Component {
                   </Swiper>
                 </div>
               ) : null}
-              <TagShare tag={tag} config={shareConfig} location={location} />
-              <div className="mt20">
-                <Ads id={11} />
+              <div styleName="article-share">
+                <TagShare tag={tag} config={shareConfig} location={location} />
               </div>
               <div styleName="article-context" className="mt20">
                 {prev ? (
@@ -248,7 +249,10 @@ class Article extends Component {
                   </p>
                 ) : null}
               </div>
-              <div styleName="newslist">
+              <div className="mt20">
+                <Ads id={11} />
+              </div>
+              <div className="mt20" styleName="newslist">
                 <div className="title">
                   <h2>推荐新闻</h2>
                   <Link to="/news">

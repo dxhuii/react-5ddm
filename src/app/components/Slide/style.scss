@@ -28,3 +28,12 @@
     height: 100%;
   }
 }
+
+@media (min-width: 0) and (max-width: 1200px) {
+  .slide {
+
+    img {
+      border-radius: 5px;
+    }
+  }
+}
