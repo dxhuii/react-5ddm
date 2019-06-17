@@ -118,7 +118,7 @@ module.exports = {
             options: {
               modules: true,
               localIdentName: config.CLASS_SCOPED_NAME,
-              // minimize: true,
+              minimize: true,
               sourceMap: true,
               importLoaders: 1
             }
