@@ -35,7 +35,7 @@ export default function Share({ data = {}, location = {} }) {
       facebook: `https://www.facebook.com/sharer/sharer.php?s=100&p[title]=${enTitle}p[summary]=${enDesc}&p[url]=${enUrl}&p[images]=${enPic}`,
       twitter: `https://twitter.com/intent/tweet?text=${enTitle}&url=${enUrl}`
     }
-    window.open(site[type], '_blank', 'width=770,height=620')
+    window.open(site[type], '_blank', 'width=770, height=620')
   }
 
   useEffect(() => {

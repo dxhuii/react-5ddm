@@ -24,7 +24,7 @@ import Meta from '@/components/Meta'
 
 import Cookies from 'js-cookie'
 
-import { ISPLAY, IS9, DOMAIN_NAME, NAME } from 'Config'
+import { ISPLAY, DOMAIN_NAME, NAME } from 'Config'
 import { isMobile } from '@/utils'
 import { loadScript } from '@/utils/loadScript'
 import playing from '@/utils/play'
@@ -33,8 +33,6 @@ import '@/utils/base64.min'
 import authcode from '@/utils/authcode'
 
 import './style.scss'
-
-const isP = IS9 && !isMobile()
 
 @Shell
 @connect(
@@ -204,13 +202,13 @@ class Play extends Component {
           const isStop = (qq ? /上海|北京|深圳/ : /上海|北京/).test(returnCitySN.cname)
           const danmu = `${id}_${pid}`
           const isZ = isStop && /zb/.test(copyright) && +Cookies.get('plain') !== 7 && !ISPLAY
-          const isA = other.length > 0 && !isP && !isZ && (copyright !== 'vip' || isMobile() || ISPLAY)
+          const isA = other.length > 0 && !isZ && (copyright !== 'vip' || isMobile() || ISPLAY || userid)
           const { playName, vid, playTitle } = isA ? other[0] : list[0]
           let playHtml = ''
           if (play && !isZ) {
-            playHtml = playing({ name: type, vid: authcode(atob(play), 'DECODE', key, 0), danmu, uid: userid, copyright, url })
+            playHtml = playing({ name: type, vid: authcode(atob(play), 'DECODE', key, 0), danmu, copyright, url })
           } else {
-            playHtml = playing({ name: playName, vid: authcode(atob(vid), 'DECODE', key, 0), danmu, uid: userid, copyright, url })
+            playHtml = playing({ name: playName, vid: authcode(atob(vid), 'DECODE', key, 0), danmu, copyright, url })
           }
           const mInfo = { playName, vid, playTitle }
           that.setState({
@@ -310,7 +308,7 @@ class Play extends Component {
   render() {
     const {
       userinfo: { userid },
-      player: { data = {}, loading },
+      player: { data = {} },
       match: {
         params: { id, pid }
       },
@@ -377,7 +375,7 @@ class Play extends Component {
                     </Link>
                   ) : null
                 })}
-                {(pan && !isP) || userid ? (
+                {pan ? (
                   <a href={pan} target="_blank" rel="noopener noreferrer">
                     网盘下载
                   </a>

@@ -2,7 +2,6 @@
  * 生产环境配置
  * API 接口地址
  * debug 是否开发
- * IS9 是否是 9 站
  * ISPLAY 是否播放
  * ISAD 是否显示广告
  * NAME 网站名称
@@ -25,7 +24,7 @@
  * WW 文网文
  */
 
-const DOMAIN_NAME = '99496.com'
+const DOMAIN_NAME = 'dddm.tv'
 
 const conf = {
   debug: false,
@@ -39,7 +38,6 @@ const conf = {
 }
 const defalut = {
   API: 'https://api.99496.com/',
-  IS9: true,
   ISPLAY: false,
   ISAD: true,
   NAME: '99496动漫(9站)',
@@ -64,7 +62,6 @@ const defalut = {
  */
 const dddm = {
   API: 'https://api.99496.com/',
-  IS9: false,
   ISPLAY: false,
   ISAD: true,
   NAME: '丁丁动漫',
@@ -90,7 +87,6 @@ const dddm = {
  */
 const ddm = {
   API: 'https://api.99496.com/',
-  IS9: false,
   ISPLAY: true,
   ISAD: false,
   NAME: '5D动漫(5站)',
@@ -117,7 +113,6 @@ const ddm = {
  */
 const kanfan = {
   API: 'https://api.99496.com/',
-  IS9: false,
   ISPLAY: true,
   ISAD: false,
   NAME: '看番',

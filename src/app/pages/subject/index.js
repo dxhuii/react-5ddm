@@ -30,7 +30,7 @@ import Meta from '@/components/Meta'
 import Shell from '@/components/Shell'
 
 import { isNumber, formatPic } from '@/utils'
-import { IS9, DOMAIN_NAME, NAME, DOMAIN } from 'Config'
+import { DOMAIN_NAME, NAME, DOMAIN } from 'Config'
 
 import './style.scss'
 @Shell
@@ -147,23 +147,6 @@ class Bangumi extends Component {
     })
   }
 
-  showPan(pan, uid) {
-    if (pan) {
-      return (IS9 && uid) || !IS9 ? (
-        <li>
-          <a href={pan} target="_blank" rel="noopener noreferrer">
-            网盘下载
-          </a>
-        </li>
-      ) : (
-        <li>
-          网盘下载
-          <div onClick={this.showModal}>登录后可用</div>
-        </li>
-      )
-    }
-  }
-
   getName(id) {
     let name = ''
     switch (id) {
@@ -229,7 +212,6 @@ class Bangumi extends Component {
       repairtitle,
       pan,
       vod_pantitle,
-      copyright,
       mcid = [],
       original = [],
       director = [],
@@ -363,7 +345,13 @@ class Bangumi extends Component {
                 <li>
                   <Link to={`/time/${id}`}>播出时间</Link>
                 </li>
-                {this.showPan(pan, userid)}
+                {pan ? (
+                  <li>
+                    <a href={pan} target="_blank" rel="noopener noreferrer">
+                      网盘下载
+                    </a>
+                  </li>
+                ) : null}
               </ul>
             </div>
           </div>
