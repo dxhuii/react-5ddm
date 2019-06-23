@@ -169,13 +169,16 @@ const jump = (name, pv, copyright, path) => {
 
 const isPlay = (name, vid, danmu, copyright, path) => {
   let url = ''
+  debugger
   if (/sina|weibo|miaopai|bit|letvyun|pmbit|bithls|bitqiu|letvsaas|acku|yunpan|s360|ksyun/.test(name)) {
     url = HTML('/', copyright, path)
   } else if (/ikanfan|acgnz/.test(vid)) {
     url = HTML(vid.split('=')[1].split('&')[0], copyright, path)
   } else if (/.mp4|.m3u8/.test(vid)) {
     url = jiexiUrl(`${playUrl}${/.mp4/.test(vid) ? 'mp4' : 'm3u8'}&domain=${DOMAIN}&id=${vid}`, danmu)
-  } else if (/.html|.shtml|.htm|https:\/\/|http:\/\//.test(vid) || name === 'full') {
+  } else if (/360|qqq/.test(name)) {
+    url = jiexiUrl(ck(name, vid), danmu)
+  } else if ((/.html|.shtml|.htm|https:\/\/|http:\/\//.test(vid) || name === 'full') && !/vip|zb/.test(copyright)) {
     if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com/.test(vid)) {
       url = jiexiUrl(rePlayUrl(name, vid), danmu)
     } else {
@@ -184,8 +187,10 @@ const isPlay = (name, vid, danmu, copyright, path) => {
   } else if (/bilibili|acfun|youku|tudou|iqiyi|pptv|letv|qq|sohu|viqiyi/.test(name)) {
     if (/bilibili|acfun|youku|tudou|iqiyi/.test(name)) {
       url = jump(name, vid, copyright, path)
-    } else {
+    } else if (!/vip|zb/.test(copyright)) {
       url = jiexiUrl(rePlayUrl(name, vid), danmu)
+    } else {
+      url = HTML(vid, copyright, path)
     }
   } else {
     url = HTML(vid, copyright, path)
