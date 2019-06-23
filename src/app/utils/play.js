@@ -169,7 +169,7 @@ const jump = (name, pv, copyright, path) => {
 
 const isPlay = (name, vid, danmu, copyright, path) => {
   let url = ''
-  debugger
+  let isFlvsp = false
   if (/sina|weibo|miaopai|bit|letvyun|pmbit|bithls|bitqiu|letvsaas|acku|yunpan|s360|ksyun/.test(name)) {
     url = HTML('/', copyright, path)
   } else if (/ikanfan|acgnz/.test(vid)) {
@@ -181,6 +181,7 @@ const isPlay = (name, vid, danmu, copyright, path) => {
   } else if ((/.html|.shtml|.htm|https:\/\/|http:\/\//.test(vid) || name === 'full') && !/vip|zb/.test(copyright)) {
     if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com/.test(vid)) {
       url = jiexiUrl(rePlayUrl(name, vid), danmu)
+      isFlvsp = true
     } else {
       url = HTML(vid, copyright, path)
     }
@@ -189,13 +190,14 @@ const isPlay = (name, vid, danmu, copyright, path) => {
       url = jump(name, vid, copyright, path)
     } else if (!/vip|zb/.test(copyright)) {
       url = jiexiUrl(rePlayUrl(name, vid), danmu)
+      isFlvsp = true
     } else {
       url = HTML(vid, copyright, path)
     }
   } else {
     url = HTML(vid, copyright, path)
   }
-  return url
+  return [url, isFlvsp]
 }
 
 export default ({ name, vid, danmu, copyright, url }) => {

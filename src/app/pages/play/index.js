@@ -59,6 +59,7 @@ class Play extends Component {
       isZ: '',
       mInfo: {},
       list: [],
+      isFlvsp: false,
       full: false,
       isfull: false,
       showPlay: false
@@ -212,7 +213,8 @@ class Play extends Component {
           }
           const mInfo = { playName, vid, playTitle }
           that.setState({
-            playHtml,
+            playHtml: playHtml[0],
+            isFlvsp: playHtml[1],
             mInfo,
             isZ
           })
@@ -307,14 +309,13 @@ class Play extends Component {
 
   render() {
     const {
-      userinfo: { userid },
       player: { data = {} },
       match: {
         params: { id, pid }
       },
       location
     } = this.props
-    const { full, isfull, playHtml, mInfo, showPlay } = this.state
+    const { full, isfull, playHtml, mInfo, showPlay, isFlvsp } = this.state
     const { listName, listId, listNameBig, list = [], pic, title, pan, subTitle, actor = '', up, down, prev, next, mcid = [], copyright } = data
     const shareConfig = {
       pic,
@@ -329,7 +330,7 @@ class Play extends Component {
               <meta name="keywords" content={`${title}${subTitle},${title}在线观看,动画${title}`} />
               <meta name="description" content={`${NAME}为您提供${listName}${listNameBig}${title}${subTitle}在线观看。喜欢${title}${subTitle}，就推荐给小伙伴们吧！`} />
             </Meta>
-            <div styleName={`player-box ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
+            <div styleName={`player-box ${isFlvsp ? 'is-flvsp' : ''} ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
               <div dangerouslySetInnerHTML={{ __html: playHtml }} />
               {isfull ? (
                 <a onMouseOver={this.showFull} onClick={this.isFull}>

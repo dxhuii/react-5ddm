@@ -162,6 +162,10 @@
   .player-box {
     height: 233px;
 
+    &.is-flvsp {
+      height: 300px;
+    }
+
     >a {
       display: none;
     }
