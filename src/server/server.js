@@ -21,6 +21,10 @@ app.use(express.static('./dist/client'))
 app.use(express.static('./public'))
 
 app.use(function(req, res, next) {
+  // 在服务端发起的请求的ua，传递给api
+  if (req && req.headers && req.headers['user-agent']) {
+    global.ua = req.headers['user-agent']
+  }
   // 计算页面加载完成花费的时间
   var exec_start_at = Date.now()
   var _send = res.send
@@ -37,28 +41,6 @@ app.use(function(req, res, next) {
 app.use('/sign', sign())
 
 app.get('*', async function(req, res) {
-  const path = req.path
-  const reg = /\d+/g
-  const arr = path.match(reg)
-  const url = path.split('/')
-  // 兼容老的URL跳转
-  if ((/news/.test(path) || /article/.test(path)) && /.html/.test(path)) {
-    const reUrl = `/article/${arr[0]}`
-    res.status(301)
-    res.redirect(reUrl)
-    return
-  } else if (/plot/.test(path)) {
-    const reUrl = url.length === 3 ? '/ep' : `/episode/${url[2]}/${url[3]}`
-    res.status(301)
-    res.redirect(reUrl)
-    return
-  } else if (/\/ac/.test(path)) {
-    const reUrl = /.html/.test(path) ? `/play/${arr[0]}/${arr[2]}` : `/subject/${arr[0]}`
-    res.status(301)
-    res.redirect(reUrl)
-    return
-  }
-
   let { context, html, meta, reduxState, CNZZ_STAT, BAIDU_STAT } = await render(req, res)
 
   res.status(context.code)
