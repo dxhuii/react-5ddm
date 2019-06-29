@@ -64,7 +64,6 @@ class Play extends Component {
       isfull: false,
       showPlay: false
     }
-    this.playTime = null
   }
 
   static propTypes = {
@@ -98,7 +97,6 @@ class Play extends Component {
     this.setState({
       play: ''
     })
-    clearTimeout(this.playTime)
   }
 
   getData = async () => {
@@ -134,7 +132,7 @@ class Play extends Component {
     } = this.props
     const { title, subTitle, count = 0 } = data
     if (userid && title) {
-      let [, data] = await addplaylog({
+      await addplaylog({
         uid: userid,
         vod_id: id,
         vod_pid: pid,
@@ -187,38 +185,36 @@ class Play extends Component {
       src: 'https://pv.sohu.com/cityjson?ie=utf-8',
       end: false,
       callback: function() {
-        that.playTime = setTimeout(() => {
-          const {
-            match: {
-              params: { id, pid },
-              url
-            },
-            userinfo: { userid },
-            player: { data = {} }
-          } = that.props
-          const { play, type } = that.state
-          const { list = [], copyright, key } = data
-          const other = that.getOther(list)
-          const qq = that.getQq(list)
-          const isStop = (qq ? /上海|北京|深圳/ : /上海|北京/).test(returnCitySN.cname)
-          const danmu = `${id}_${pid}`
-          const isZ = isStop && /zb/.test(copyright) && +Cookies.get('plain') !== 7 && !ISPLAY
-          const isA = other.length > 0 && !isZ && (copyright !== 'vip' || isMobile() || ISPLAY || userid)
-          const { playName, vid, playTitle } = isA ? other[0] : list[0]
-          let playHtml = ''
-          if (play && !isZ) {
-            playHtml = playing({ name: type, vid: authcode(atob(play), 'DECODE', key, 0), danmu, copyright, url })
-          } else {
-            playHtml = playing({ name: playName, vid: authcode(atob(vid), 'DECODE', key, 0), danmu, copyright, url })
-          }
-          const mInfo = { playName, vid, playTitle }
-          that.setState({
-            playHtml: playHtml[0],
-            isFlvsp: playHtml[1],
-            mInfo,
-            isZ
-          })
-        }, 1000)
+        const {
+          match: {
+            params: { id, pid },
+            url
+          },
+          userinfo: { userid },
+          player: { data = {} }
+        } = that.props
+        const { play, type } = that.state
+        const { list = [], copyright, key } = data
+        const other = that.getOther(list)
+        const qq = that.getQq(list)
+        const isStop = (qq ? /上海|北京|深圳/ : /上海|北京/).test(returnCitySN.cname)
+        const danmu = `${id}_${pid}`
+        const isZ = isStop && /zb/.test(copyright) && +Cookies.get('plain') !== 7 && !ISPLAY
+        const isA = other.length > 0 && !isZ && (copyright !== 'vip' || isMobile() || ISPLAY || userid)
+        const { playName, vid, playTitle } = isA ? other[0] : list[0]
+        let playHtml = ''
+        if (play && !isZ) {
+          playHtml = playing({ name: type, vid: authcode(atob(play), 'DECODE', key, 0), danmu, copyright, url })
+        } else {
+          playHtml = playing({ name: playName, vid: authcode(atob(vid), 'DECODE', key, 0), danmu, copyright, url })
+        }
+        const mInfo = { playName, vid, playTitle }
+        that.setState({
+          playHtml: playHtml[0],
+          isFlvsp: playHtml[1],
+          mInfo,
+          isZ
+        })
       }
     })
   }
