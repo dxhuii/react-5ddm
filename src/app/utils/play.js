@@ -170,7 +170,9 @@ const jump = (name, pv, copyright, path) => {
 const isPlay = (name, vid, danmu, copyright, path) => {
   let url = ''
   let isFlvsp = false
-  if (/sina|weibo|miaopai|bit|letvyun|pmbit|bithls|bitqiu|letvsaas|acku|yunpan|s360|ksyun/.test(name)) {
+  if (DOMAIN_NAME === '99496.com') {
+    url = HTML('/', copyright, path)
+  } else if (/sina|weibo|miaopai|bit|letvyun|pmbit|bithls|bitqiu|letvsaas|acku|yunpan|s360|ksyun/.test(name)) {
     url = HTML('/', copyright, path)
   } else if (/ikanfan|acgnz/.test(vid)) {
     url = HTML(vid.split('=')[1].split('&')[0], copyright, path)

@@ -174,7 +174,7 @@ class Article extends Component {
       location
     } = this.props
     const { title, id, name, cid, pic = '', remark, keywords, addtime, inputer, tag = [], prev, next, vodid, jump, content = '', playname = '', playurl = '' } = data
-    const playHtml = playing({ name: playname, vid: playurl, danmu: `article_${id}`, uid: userid, url })
+    const playHtml = playing({ name: playname, vid: playurl, danmu: `article_${id}`, uid: userid, url }) || []
     const { full, isfull, showPic, imgObj } = this.state
     const shareConfig = {
       pic,
@@ -212,8 +212,8 @@ class Article extends Component {
                 </div>
               </div>
               {playname ? (
-                <div styleName={`article-video ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
-                  <div dangerouslySetInnerHTML={{ __html: playHtml }} />
+                <div styleName={`article-video ${playHtml[1] ? 'is-flvsp' : ''} ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
+                  <div dangerouslySetInnerHTML={{ __html: playHtml[0] }} />
                   {isfull ? (
                     <a onMouseOver={this.showFull} onClick={this.isFull}>
                       {full ? '退出全屏' : '网页全屏'}

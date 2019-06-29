@@ -20,7 +20,6 @@ import topData from '@/pages/top/load-data'
 import newData from '@/pages/new/load-data'
 import episodelistData from '@/pages/episodelist/load-data'
 import detailNewstData from '@/pages/subject/news/load-data'
-import gameData from '@/pages/game/load-data'
 
 export default [
   {
@@ -339,7 +338,6 @@ export default [
       loader: () => import('../pages/game'),
       loading: () => <Loading />
     }),
-    loadData: gameData,
     enter: 'everybody'
   },
 
@@ -352,7 +350,6 @@ export default [
       loader: () => import('../pages/game'),
       loading: () => <Loading />
     }),
-    loadData: gameData,
     enter: 'everybody'
   },
 

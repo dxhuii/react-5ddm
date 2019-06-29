@@ -176,6 +176,10 @@
     height: 240px;
     margin-top: 10px;
 
+    &.is-flvsp {
+      height: 300px;
+    }
+
     >a {
       display: none;
     }
