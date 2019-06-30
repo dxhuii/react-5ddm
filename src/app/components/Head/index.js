@@ -141,7 +141,7 @@ class Head extends Component {
       match: { url = '', params = {} }
     } = this.props
     const { wd, isHide, isSign, visible, showMenu, showSearch, showHis } = this.state
-    const logo = `header-logo ${DOMAIN_NAME === 'dddm.tv' ? 'dddm' : DOMAIN_NAME === '5ddm.com' ? 'ddm' : ''}`
+    const logo = `header-logo ${DOMAIN_NAME === 'dddm.tv' ? 'dddm' : DOMAIN_NAME === '5ddm.com' ? 'ddm' : DOMAIN_NAME === 'kanfan.net' ? 'kanfan' : ''}`
     const isNot = !(url === '/' || /dongman|subject|play|search|type/.test(url))
     return (
       <Fragment>
