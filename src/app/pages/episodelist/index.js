@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { episodeList } from '@/store/actions/episode'
-import { getEpisodeList } from '@/store/reducers/list'
+import { getEpisodeList } from '@/store/reducers/episode'
 
 import SideBar from '@/components/SideBar'
 
