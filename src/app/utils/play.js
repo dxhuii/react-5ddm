@@ -170,7 +170,6 @@ const jump = (name, pv, copyright, path) => {
 const isPlay = (name, vid, danmu, copyright, path) => {
   let url = ''
   let isFlvsp = false
-  debugger
   if (DOMAIN_NAME === '99496.com') {
     url = HTML('/', copyright, path)
   } else if (/sina|weibo|miaopai|bit|letvyun|pmbit|bithls|bitqiu|letvsaas|acku|yunpan|s360|ksyun/.test(name)) {

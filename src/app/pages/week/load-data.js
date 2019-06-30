@@ -1,4 +1,4 @@
-import { week } from '@/store/actions/week'
+import { week } from '@/store/actions/list'
 import cache from '@/utils/cache'
 const { getCache, addCache } = cache
 

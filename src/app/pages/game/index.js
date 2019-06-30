@@ -8,7 +8,6 @@ import { connect } from 'react-redux'
 import { gameList } from '@/store/actions/game'
 import { getGame } from '@/store/reducers/game'
 
-import BaseLayout from '@/layout/baseLayout'
 import Loading from '@/components/Ui/Loading'
 
 import Shell from '@/components/Shell'
@@ -183,7 +182,7 @@ class Game extends PureComponent {
     const { shortDesc, name } = dataInfo || {}
     if (loading) return <Loading />
     return (
-      <BaseLayout>
+      <>
         {wd ? (
           <Meta title={`${name}_${name}安卓IOS下载`}>
             <meta name="keywords" content={`${name},${name}安卓下载,${name}IOS下载`} />
@@ -278,7 +277,7 @@ class Game extends PureComponent {
             <i className="safari-close" onClick={this.closeGP} />
           </div>
         </div>
-      </BaseLayout>
+      </>
     )
   }
 }

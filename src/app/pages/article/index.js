@@ -11,7 +11,6 @@ import { hits } from '@/store/actions/hits'
 import { getUserInfo } from '@/store/reducers/user'
 import { getNewsIndex } from '@/store/reducers/newsIndex'
 
-import BaseLayout from '@/layout/baseLayout'
 import Swiper from '@/components/Swiper'
 import Loading from '@/components/Ui/Loading'
 import SideBar from '@/components/SideBar'
@@ -189,87 +188,85 @@ class Article extends Component {
       window.location.href = jump
     }
     return (
-      <BaseLayout>
-        <div className="wp mt20 clearfix">
-          <Meta title={title}>
-            <meta property="og:locale" content="zh_CN" />
-            <meta property="og:type" content="article" />
-            <meta property="og:title" content={title} />
-            <meta property="og:description" content={remark} />
-            <meta property="og:image" content={pic} />
-            <meta property="og:url" content={`/article/${id}`} />
-            <meta property="og:site_name" content={NAME} />
-            <meta name="description" content={remark} />
-            <meta name="keywords" content={keywords} />
-          </Meta>
-          <div className={`fl left ${cid === 205 ? 'manhua' : ''}`}>
-            <article styleName="article-body">
-              <div styleName="article-head">
-                <h1>{title}</h1>
-                <div styleName="article-label">
-                  <span>来源：{inputer ? inputer : '网络'}</span>
-                  <span>更新时间：{addtime}</span>
-                </div>
+      <div className="wp mt20 clearfix">
+        <Meta title={title}>
+          <meta property="og:locale" content="zh_CN" />
+          <meta property="og:type" content="article" />
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content={remark} />
+          <meta property="og:image" content={pic} />
+          <meta property="og:url" content={`/article/${id}`} />
+          <meta property="og:site_name" content={NAME} />
+          <meta name="description" content={remark} />
+          <meta name="keywords" content={keywords} />
+        </Meta>
+        <div className={`fl left ${cid === 205 ? 'manhua' : ''}`}>
+          <article styleName="article-body">
+            <div styleName="article-head">
+              <h1>{title}</h1>
+              <div styleName="article-label">
+                <span>来源：{inputer ? inputer : '网络'}</span>
+                <span>更新时间：{addtime}</span>
               </div>
-              {playname ? (
-                <div styleName={`article-video ${playHtml[1] ? 'is-flvsp' : ''} ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
-                  <div dangerouslySetInnerHTML={{ __html: playHtml[0] }} />
-                  {isfull ? (
-                    <a onMouseOver={this.showFull} onClick={this.isFull}>
-                      {full ? '退出全屏' : '网页全屏'}
-                    </a>
-                  ) : null}
-                </div>
-              ) : null}
-              <div ref={e => (this.content = e)} id="content" styleName="article-content" dangerouslySetInnerHTML={{ __html: convertHTML(content) }} />
-              {showPic ? (
-                <div styleName="article-slide" onClick={this.closePic}>
-                  <span />
-                  <Swiper Pagination={true} Controller={true} Start={index} Continuous={false}>
-                    {imageArray.map((item, index) => (
-                      <div className="swipe-item" key={item.url + index}>
-                        <img src={item.url} />
-                      </div>
-                    ))}
-                  </Swiper>
-                </div>
-              ) : null}
-              <div styleName="article-share">
-                <TagShare tag={tag} config={shareConfig} location={location} />
-              </div>
-              <div styleName="article-context" className="mt20">
-                {prev ? (
-                  <p>
-                    上一篇：<Link to={`/article/${prev.id}`}>{prev.title}</Link>
-                  </p>
-                ) : null}
-                {next ? (
-                  <p>
-                    下一篇：<Link to={`/article/${next.id}`}>{next.title}</Link>
-                  </p>
-                ) : null}
-              </div>
-              <div className="mt20">
-                <Ads id={11} />
-              </div>
-              <div className="mt20" styleName="newslist">
-                <div className="title">
-                  <h2>推荐新闻</h2>
-                  <Link to="/news">
-                    更多<i className="iconfont">&#xe65e;</i>
-                  </Link>
-                </div>
-                <Item data={newsListData} />
-              </div>
-            </article>
-          </div>
-          {cid === 205 ? null : (
-            <div className="fr right">
-              <SideBar vodid={vodid} />
             </div>
-          )}
+            {playname ? (
+              <div styleName={`article-video ${playHtml[1] ? 'is-flvsp' : ''} ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
+                <div dangerouslySetInnerHTML={{ __html: playHtml[0] }} />
+                {isfull ? (
+                  <a onMouseOver={this.showFull} onClick={this.isFull}>
+                    {full ? '退出全屏' : '网页全屏'}
+                  </a>
+                ) : null}
+              </div>
+            ) : null}
+            <div ref={e => (this.content = e)} id="content" styleName="article-content" dangerouslySetInnerHTML={{ __html: convertHTML(content) }} />
+            {showPic ? (
+              <div styleName="article-slide" onClick={this.closePic}>
+                <span />
+                <Swiper Pagination={true} Controller={true} Start={index} Continuous={false}>
+                  {imageArray.map((item, index) => (
+                    <div className="swipe-item" key={item.url + index}>
+                      <img src={item.url} />
+                    </div>
+                  ))}
+                </Swiper>
+              </div>
+            ) : null}
+            <div styleName="article-share">
+              <TagShare tag={tag} config={shareConfig} location={location} />
+            </div>
+            <div styleName="article-context" className="mt20">
+              {prev ? (
+                <p>
+                  上一篇：<Link to={`/article/${prev.id}`}>{prev.title}</Link>
+                </p>
+              ) : null}
+              {next ? (
+                <p>
+                  下一篇：<Link to={`/article/${next.id}`}>{next.title}</Link>
+                </p>
+              ) : null}
+            </div>
+            <div className="mt20">
+              <Ads id={11} />
+            </div>
+            <div className="mt20" styleName="newslist">
+              <div className="title">
+                <h2>推荐新闻</h2>
+                <Link to="/news">
+                  更多<i className="iconfont">&#xe65e;</i>
+                </Link>
+              </div>
+              <Item data={newsListData} />
+            </div>
+          </article>
         </div>
-      </BaseLayout>
+        {cid === 205 ? null : (
+          <div className="fr right">
+            <SideBar vodid={vodid} />
+          </div>
+        )}
+      </div>
     )
   }
 }

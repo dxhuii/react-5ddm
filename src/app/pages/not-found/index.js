@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 
-import BaseLayout from '@/layout/baseLayout'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 @Shell
@@ -13,10 +12,10 @@ class NotFound extends PureComponent {
 
   render() {
     return (
-      <BaseLayout>
+      <>
         <Meta title="404,无法找到该页面" />
         404,无法找到该页面
-      </BaseLayout>
+      </>
     )
   }
 }

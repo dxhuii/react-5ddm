@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { top } from '@/store/actions/top'
-import { getTopList } from '@/store/reducers/top'
+import { top } from '@/store/actions/list'
+import { getList } from '@/store/reducers/list'
 import Loading from '@/components/Ui/Loading'
 
 import './style.scss'
@@ -12,7 +12,7 @@ import './style.scss'
 @withRouter
 @connect(
   (state, props) => ({
-    topData: getTopList(state, props.name)
+    topData: getList(state, props.name)
   }),
   dispatch => ({
     top: bindActionCreators(top, dispatch)

@@ -5,14 +5,15 @@ const { getCache, addCache } = cache
 export default ({ store, match }) => {
   return new Promise(async function(resolve, reject) {
     const { id, p = 0 } = match.params
-    const data = getCache(`episode-${id}${p ? `-${p}` : ''}`)
+    const name = `${id}${p ? `-${p}` : ''}`
+    const data = getCache(`episode-${name}`)
     if (data) {
-      store.dispatch({ type: 'GET_EPISCODE', name: `${id}${p ? `-${p}` : ''}`, data: data })
+      store.dispatch({ type: 'GET_EPISCODE', name, data: data })
       resolve({ code: 200 })
       return
     }
     let [err, res] = await episode({ id, p })(store.dispatch, store.getState)
-    addCache(`episode-${id}${p ? `-${p}` : ''}`, res)
+    addCache(`episode-${name}`, res)
     resolve({ code: 200 })
   })
 }

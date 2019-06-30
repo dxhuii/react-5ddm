@@ -19,11 +19,6 @@ export default function() {
   }
 }
 
-export const getEpisode = (state, id, p) => {
-  const ids = `${id}${p ? `-${p}` : ''}`
-  return state.episode[ids] ? state.episode[ids] : {}
-}
-
 export const getEpisodeList = (state, id) => {
   return state.episode[id] ? state.episode[id] : {}
 }

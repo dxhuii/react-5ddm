@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { withRouter } from 'react-router-dom'
@@ -9,7 +9,6 @@ import { configLoad } from '@/store/actions/config'
 import { getConfig } from '@/store/reducers/config'
 import { getList } from '@/store/reducers/list'
 
-import BaseLayout from '@/layout/baseLayout'
 import Loading from '@/components/Ui/Loading'
 import Item from '@/components/List/Item'
 import Ads from '@/components/Ads'
@@ -23,22 +22,17 @@ function isEmpty(val, type) {
   return val === undefined || val === '' || val === '-' ? (type ? 'addtime' : '') : val
 }
 
+function reduxName(props) {
+  const { id, mcid, year, area, wd, letter, lz, order } = props.match.params
+  return (id || 3) + isEmpty(mcid) + isEmpty(year) + isEmpty(area) + isEmpty(wd) + isEmpty(letter) + isEmpty(lz) + isEmpty(order, 1)
+}
+
 @Shell
 @withRouter
 @connect(
   (state, props) => ({
     config: getConfig(state, 'list'),
-    list: getList(
-      state,
-      props.match.params.id || 3,
-      isEmpty(props.match.params.mcid),
-      isEmpty(props.match.params.year),
-      isEmpty(props.match.params.area),
-      isEmpty(props.match.params.wd),
-      isEmpty(props.match.params.letter),
-      isEmpty(props.match.params.lz),
-      isEmpty(props.match.params.order, 1)
-    )
+    list: getList(state, reduxName(props))
   }),
   dispatch => ({
     configLoad: bindActionCreators(configLoad, dispatch),
@@ -232,7 +226,7 @@ class SubjectList extends Component {
     const orderArr = [{ title: '最新', id: 'addtime' }, { title: '评分', id: 'gold' }, { title: '热门', id: 'hits' }]
     const keyword = decodeURIComponent(wd)
     return (
-      <BaseLayout>
+      <>
         {loading ? <Loading /> : null}
         <Meta
           title={
@@ -344,7 +338,7 @@ class SubjectList extends Component {
         <div className="wp">
           <Item data={data} />
         </div>
-      </BaseLayout>
+      </>
     )
   }
 }

@@ -11,11 +11,11 @@ import { addplaylog } from '@/store/actions/history'
 import { getPlayerList } from '@/store/reducers/player'
 import { getUserInfo } from '@/store/reducers/user'
 
-import BaseLayout from '@/layout/baseLayout'
 import SideBar from '@/components/SideBar'
 import Share from '@/components/Share'
 import PlayList from '@/components/PlayList'
-import DetailActor from '@/components/DetailActor'
+import DetailActor from '@/components/Subject/DetailActor'
+import HotWeek from '@/components/Subject/HotWeek'
 import Toast from '@/components/Toast'
 import Ads from '@/components/Ads'
 
@@ -319,7 +319,7 @@ class Play extends Component {
       url: `/play/${id}/${pid}`
     }
     return (
-      <BaseLayout>
+      <>
         <div styleName="player">
           <div className="wp pt20">
             <Meta title={`${title} ${subTitle}在线播放 - ${listName}${listNameBig}`}>
@@ -399,18 +399,24 @@ class Play extends Component {
         <div className="mt20" />
         <div className="wp clearfix">
           <div className="fl left box">
-            <div className="mt20">
+            <div className="mt10">
               <div styleName="title">
                 <h2>相关动漫</h2>
               </div>
               {id ? <DetailActor actor={actor} no={id} /> : null}
+            </div>
+            <div className="mt10">
+              <div styleName="title">
+                <h2>小伙伴还在看(=￣ω￣=)（一周热门）</h2>
+              </div>
+              <HotWeek />
             </div>
           </div>
           <div className="right fr">
             <SideBar vodid={id} />
           </div>
         </div>
-      </BaseLayout>
+      </>
     )
   }
 }

@@ -16,7 +16,7 @@ function isEmpty(val, type) {
 
 @connect(
   (state, props) => ({
-    list: getList(state, props.id, isEmpty(props.mcid), isEmpty(props.year), isEmpty(props.area), isEmpty(props.wd), isEmpty(props.letter), isEmpty(props.lz), isEmpty(props.order, 1))
+    list: getList(state, props.id + isEmpty(props.mcid) + isEmpty(props.year) + isEmpty(props.area) + isEmpty(props.wd) + isEmpty(props.letter) + isEmpty(props.lz) + isEmpty(props.order, 1))
   }),
   dispatch => ({
     listLoad: bindActionCreators(listLoad, dispatch)

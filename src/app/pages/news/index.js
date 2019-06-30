@@ -10,7 +10,6 @@ import { configLoad } from '@/store/actions/config'
 import { getConfig } from '@/store/reducers/config'
 import { getNewsIndex } from '@/store/reducers/newsIndex'
 
-import BaseLayout from '@/layout/baseLayout'
 import SideBar from '@/components/SideBar'
 import Item from '@/components/News/Item'
 
@@ -154,29 +153,27 @@ class NewsIndex extends Component {
     } = this.props
     const newsMenu = ((config.data || [])[1] || {}).son || []
     return (
-      <BaseLayout>
-        <div className="wp mt20 clearfix">
-          <Meta title="动漫新闻_动漫资讯_新番情报_动漫先行图_漫画情报" />
-          <div styleName="news-nav" className="box fl">
-            <h2>
-              <Link to="/news">专栏</Link>
-            </h2>
-            <ul>
-              {newsMenu.map(item => (
-                <li key={item.id} styleName={`${name === item.name ? 'active' : ''}`}>
-                  <Link to={`/news/${item.name}`}>{item.title}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div styleName="news-left" className="box fl">
-            <Item data={data} />
-          </div>
-          <div className="right fr">
-            <SideBar />
-          </div>
+      <div className="wp mt20 clearfix">
+        <Meta title="动漫新闻_动漫资讯_新番情报_动漫先行图_漫画情报" />
+        <div styleName="news-nav" className="box fl">
+          <h2>
+            <Link to="/news">专栏</Link>
+          </h2>
+          <ul>
+            {newsMenu.map(item => (
+              <li key={item.id} styleName={`${name === item.name ? 'active' : ''}`}>
+                <Link to={`/news/${item.name}`}>{item.title}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
-      </BaseLayout>
+        <div styleName="news-left" className="box fl">
+          <Item data={data} />
+        </div>
+        <div className="right fr">
+          <SideBar />
+        </div>
+      </div>
     )
   }
 }

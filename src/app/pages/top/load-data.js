@@ -1,4 +1,4 @@
-import { TopList } from '@/store/actions/page'
+import { TopList } from '@/store/actions/list'
 import cache from '@/utils/cache'
 const { getCache, addCache } = cache
 
@@ -8,23 +8,23 @@ export default ({ store, match }) => {
     if (data) {
       store.dispatch({
         type: 'GET_TOP_LIST',
-        name: 'hits_day',
+        name: 'pqge-hits_day',
         data: data[0][1]
       })
       store.dispatch({
         type: 'GET_TOP_LIST',
-        name: 'hits_week',
+        name: 'pqge-hits_week',
         data: data[1][1]
       })
       store.dispatch({
         type: 'GET_TOP_LIST',
-        name: 'hits_month',
+        name: 'pqge-hits_month',
         data: data[2][1]
       })
 
       store.dispatch({
         type: 'GET_TOP_LIST',
-        name: 'hits',
+        name: 'pqge-hits',
         data: data[3][1]
       })
       resolve({ code: 200 })

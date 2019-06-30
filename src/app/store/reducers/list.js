@@ -8,6 +8,30 @@ export default function() {
       case 'GET_LIST':
         state[name] = data
         return merge({}, state, {})
+      case 'GET_SEARCH':
+        state[name] = data
+        return merge({}, state, {})
+      case 'GET_RECOMMEND':
+        state[name] = data
+        return merge({}, state, {})
+      case 'GET_TOP':
+        state[name] = data
+        return merge({}, state, {})
+      case 'GET_WEEK':
+        state[name] = data
+        return merge({}, state, {})
+      case 'GET_DETAIL_ACTOR':
+        state[name] = data
+        return merge({}, state, {})
+      case 'GET_ARTICLE_VOD':
+        state[name] = data
+        return merge({}, state, {})
+      case 'GET_HOT_WEEK':
+        state[name] = data
+        return merge({}, state, {})
+      case 'GET_TOP_LIST':
+        state[name] = data
+        return merge({}, state, {})
       case 'CLEAN':
         return {}
 
@@ -17,7 +41,6 @@ export default function() {
   }
 }
 
-export const getList = (state, id, mcid, year, area, wd, letter, lz, order) => {
-  const ids = `${id}${mcid}${year}${area}${wd}${letter}${lz}${order}`
-  return state.list[ids] ? state.list[ids] : {}
+export const getList = (state, name) => {
+  return state.list[name] ? state.list[name] : {}
 }

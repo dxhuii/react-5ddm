@@ -4,15 +4,15 @@ import PropTypes from 'prop-types'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { articleVod } from '@/store/actions/articleVod'
-import { getArticleVod } from '@/store/reducers/articleVod'
+import { articleVod } from '@/store/actions/list'
+import { getList } from '@/store/reducers/list'
 
 import Detail from '@/components/Detail'
 
 @withRouter
 @connect(
   (state, props) => ({
-    data: getArticleVod(state, props.ids)
+    data: getList(state, `article-${props.ids}`)
   }),
   dispatch => ({
     articleVod: bindActionCreators(articleVod, dispatch)
@@ -40,16 +40,7 @@ class ArticleVod extends Component {
       <Fragment>
         {data.map((item, index) => (
           <div className={`box ${index > 0 ? 'mt20' : ''}`} key={item.id}>
-            <Detail
-              title={item.title}
-              pic={item.pic}
-              gold={item.glod}
-              vid={item.id}
-              pid={item.pid}
-              status={item.status}
-              year={item.year}
-              mcid={item.mcid}
-            />
+            <Detail title={item.title} pic={item.pic} gold={item.glod} vid={item.id} pid={item.pid} status={item.status} year={item.year} mcid={item.mcid} />
           </div>
         ))}
       </Fragment>

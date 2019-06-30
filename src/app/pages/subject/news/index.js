@@ -5,9 +5,8 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { vodNews } from '@/store/actions/detail'
-import { getVodNews } from '@/store/reducers/detail'
+import { getDetail } from '@/store/reducers/detail'
 
-import BaseLayout from '@/layout/baseLayout'
 import SideBar from '@/components/SideBar'
 import Item from '@/components/News/Item'
 
@@ -18,7 +17,7 @@ import Meta from '@/components/Meta'
 @withRouter
 @connect(
   (state, props) => ({
-    newsData: getVodNews(state, props.match.params.id)
+    newsData: getDetail(state, `vod_news_${props.match.params.id}`)
   }),
   dispatch => ({
     vodNews: bindActionCreators(vodNews, dispatch)
@@ -76,7 +75,7 @@ class VodNews extends Component {
       }
     } = this.props
     return (
-      <BaseLayout>
+      <>
         <Meta title="视频新闻列表" />
         <div className="wp clearfix mt20">
           <div className="left box fl">
@@ -86,7 +85,7 @@ class VodNews extends Component {
             <SideBar vodid={+id} />
           </div>
         </div>
-      </BaseLayout>
+      </>
     )
   }
 }

@@ -39,18 +39,13 @@ export default ({ store, match }) => {
   return new Promise(async function(resolve, reject) {
     const { name, mcid, year, area, wd = '', order, letter, lz } = match.params
     const id = getTypeId(name)
-    const reMcid = isEmpty(mcid)
-    const reYear = isEmpty(year)
-    const reArea = isEmpty(area)
-    const reLetter = isEmpty(letter)
-    const reLz = isEmpty(lz)
-    const reOrder = isEmpty(order, 1)
-
+    const reduxName = id + isEmpty(mcid) + isEmpty(year) + isEmpty(area) + isEmpty(wd) + isEmpty(letter) + isEmpty(lz) + isEmpty(order, 1)
+    console.log(reduxName, 'reduxName')
     const data = getCache('list')
     if (data) {
       store.dispatch({
         type: 'GET_LIST',
-        name: `${id}${reMcid}${reYear}${reArea}${wd}${reLetter}${reLz}${reOrder}`,
+        name: reduxName,
         data: data[0][1]
       })
       store.dispatch({
@@ -64,13 +59,13 @@ export default ({ store, match }) => {
     Promise.all([
       listLoad({
         id,
-        wd,
-        mcid: reMcid,
-        year: reYear,
-        area: reArea,
-        letter: reLetter,
-        lz: reLz,
-        order: reOrder
+        mcid: isEmpty(mcid),
+        year: isEmpty(year),
+        area: isEmpty(area),
+        wd: isEmpty(wd),
+        letter: isEmpty(letter),
+        lz: isEmpty(lz),
+        order: isEmpty(order, 1)
       })(store.dispatch, store.getState),
       configLoad({ name: 'list' })(store.dispatch, store.getState)
     ]).then(data => {

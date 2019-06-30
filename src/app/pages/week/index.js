@@ -4,10 +4,9 @@ import { withRouter } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { week } from '@/store/actions/week'
-import { getWeek } from '@/store/reducers/week'
+import { week } from '@/store/actions/list'
+import { getList } from '@/store/reducers/list'
 
-import BaseLayout from '@/layout/baseLayout'
 import Loading from '@/components/Ui/Loading'
 import ItemS from '@/components/Week/ItemS'
 
@@ -20,7 +19,7 @@ import './style.scss'
 @withRouter
 @connect(
   state => ({
-    weekData: getWeek(state)
+    weekData: getList(state, 'week')
   }),
   dispatch => ({
     week: bindActionCreators(week, dispatch)
@@ -109,27 +108,25 @@ class Week extends PureComponent {
     const today = new Date().getDay() - 1
     const title = id === '1' ? '日本' : id === '0' ? '国产' : ''
     return (
-      <BaseLayout>
-        <div className="wp mt20">
-          <Meta title={`${title}新番时间表`}>
-            <meta name="keywords" content={`${title}新番时间表,${title}动漫时间表`} />
-            <meta name="description" content={`${title}新番时间表`} />
-          </Meta>
-          {loading ? <Loading /> : null}
-          <ul styleName="list">
-            {weekCn.map((item, index) => (
-              <li key={item} styleName={today === index ? 'active' : ''}>
-                {item}
-              </li>
-            ))}
-          </ul>
-          <ul styleName="weeklist">
-            {weekEng.map((obj, index) => (
-              <ItemS key={obj} data={weekData[weekEng[index]]} type={2} />
-            ))}
-          </ul>
-        </div>
-      </BaseLayout>
+      <div className="wp mt20">
+        <Meta title={`${title}新番时间表`}>
+          <meta name="keywords" content={`${title}新番时间表,${title}动漫时间表`} />
+          <meta name="description" content={`${title}新番时间表`} />
+        </Meta>
+        {loading ? <Loading /> : null}
+        <ul styleName="list">
+          {weekCn.map((item, index) => (
+            <li key={item} styleName={today === index ? 'active' : ''}>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <ul styleName="weeklist">
+          {weekEng.map((obj, index) => (
+            <ItemS key={obj} data={weekData[weekEng[index]]} type={2} />
+          ))}
+        </ul>
+      </div>
     )
   }
 }

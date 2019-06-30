@@ -4,10 +4,8 @@ import PropTypes from 'prop-types'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { TopList } from '@/store/actions/page'
-import { getTopList } from '@/store/reducers/page'
-
-import BaseLayout from '@/layout/baseLayout'
+import { TopList } from '@/store/actions/list'
+import { getList } from '@/store/reducers/list'
 
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
@@ -18,7 +16,7 @@ import './style.scss'
 @withRouter
 @connect(
   (state, props) => ({
-    info: getTopList(state, 'addtime')
+    info: getList(state, 'page-addtime')
   }),
   dispatch => ({
     TopList: bindActionCreators(TopList, dispatch)
@@ -74,7 +72,7 @@ class NewPage extends PureComponent {
       info: { data = [] }
     } = this.props
     return (
-      <BaseLayout>
+      <>
         <Meta title="最新更新的100个动漫" />
         <div className="wp mt20">
           <div className="box">
@@ -107,7 +105,7 @@ class NewPage extends PureComponent {
             </ul>
           </div>
         </div>
-      </BaseLayout>
+      </>
     )
   }
 }

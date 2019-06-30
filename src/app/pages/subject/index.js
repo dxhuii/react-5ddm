@@ -7,15 +7,15 @@ import { connect } from 'react-redux'
 import { detail, score } from '@/store/actions/detail'
 import { like } from '@/store/actions/mark'
 import { hits } from '@/store/actions/hits'
-import { getDetail, getScore } from '@/store/reducers/detail'
+import { getDetail } from '@/store/reducers/detail'
 import { getUserInfo } from '@/store/reducers/user'
 
-import BaseLayout from '@/layout/baseLayout'
 import Loading from '@/components/Ui/Loading'
 import SideBar from '@/components/SideBar'
 import Share from '@/components/Share'
 import PlayList from '@/components/PlayList'
-import DetailActor from '@/components/DetailActor'
+import DetailActor from '@/components/Subject/DetailActor'
+import HotWeek from '@/components/Subject/HotWeek'
 import EpList from '@/components/Subject/EpList'
 import NewsPic from '@/components/Subject/NewsPic'
 import NewsText from '@/components/Subject/NewsText'
@@ -39,7 +39,7 @@ import './style.scss'
   (state, props) => ({
     info: getDetail(state, props.match.params.id),
     userinfo: getUserInfo(state),
-    cmScore: getScore(state, props.match.params.id, 1, getUserInfo(state).userid || 0)
+    cmScore: getDetail(state, `score_${props.match.params.id}`)
   }),
   dispatch => ({
     detail: bindActionCreators(detail, dispatch),
@@ -234,7 +234,7 @@ class Bangumi extends Component {
     }
     if (loading || !data.title) return <Loading />
     return (
-      <BaseLayout>
+      <>
         <div className="warp-bg">
           <Meta
             title={`${title}全集在线观看${repairtitle && repairtitle !== '讨论帖' ? `_${repairtitle}` : ''}${
@@ -394,6 +394,12 @@ class Bangumi extends Component {
                 <EpList id={storyId} data={storylist} />
               </div>
             ) : null}
+            <div className="mt10">
+              <div styleName="title">
+                <h2>相关动漫</h2>
+              </div>
+              {id ? <DetailActor actor={actor ? actor.map(item => item.title).join(',') : ''} no={id} /> : null}
+            </div>
             {newsPiclist.length > 0 ? (
               <div className="mt10">
                 <div styleName="title">
@@ -402,11 +408,11 @@ class Bangumi extends Component {
                 <NewsPic data={newsPiclist} />
               </div>
             ) : null}
-            <div className={`${!(newsTextlist.length > 0 && storyId && newsPiclist.length > 0) ? 'mt10' : 'mt20'}`}>
+            <div className={`${newsPiclist.length > 0 ? 'mt20' : 'mt10'}`}>
               <div styleName="title">
-                <h2>相关动漫</h2>
+                <h2>小伙伴还在看(=￣ω￣=)（一周热门）</h2>
               </div>
-              {id ? <DetailActor actor={actor ? actor.map(item => item.title).join(',') : ''} no={id} /> : null}
+              <HotWeek />
             </div>
             {comment.length > 0 ? (
               <div className="mt20">
@@ -455,7 +461,7 @@ class Bangumi extends Component {
         <Modal visible={visible} showModal={this.showModal} closeModal={this.closeModal}>
           <Sign isSign={isSign} onType={val => this.onType(val)} />
         </Modal>
-      </BaseLayout>
+      </>
     )
   }
 }

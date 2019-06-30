@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import { detail } from '@/store/actions/detail'
 import { getDetail } from '@/store/reducers/detail'
 
-import BaseLayout from '@/layout/baseLayout'
 import SideBar from '@/components/SideBar'
 import TagShare from '@/components/TagShare'
 
@@ -62,78 +61,78 @@ class Time extends Component {
       url: `/time/${id}`
     }
     return (
-      <BaseLayout>
-        <div className="wp mt20 clearfix">
-          <Meta title={`${title}播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新`}>
-            <meta name="keywords" content={`${title}播出时间,${listNameBig}${title}播出周期,${title}几点更新,${title}更新时间`} />
-            <meta name="description" content={`{$sitename}为你提供了包括${listNameBig}${title}播出时间、${title}周几更新以及${title}播出周期希望你能喜欢`} />
-          </Meta>
-          <div className="fl left">
-            <article styleName="article-body">
-              <h1>{title}</h1>
-              <div styleName="article-content" className="clearfix">
-                <Link to={`/subject/${id}`}>
-                  <img src={pic} alt={`${title} 播出时间`} />
-                </Link>
-                <p>
-                  播出时间：{filmtime ? `${filmtime}` : `${year}年`} {tvcont}
-                </p>
-                <p>
-                  {title}是
-                  {actor && (
-                    <span>
-                      由
-                      {actor.map((item, index) => (
-                        <b key={index}>{item.title}</b>
-                      ))}
-                      等主演的
-                    </span>
-                  )}
-                  {director && (
-                    <span>
-                      以及
-                      {director.map((item, index) => (
-                        <b key={index}>{item.title}</b>
-                      ))}
-                      等编导的
-                    </span>
-                  )}
-                  {mcid && (
-                    <span>
-                      一部
-                      {mcid.map((item, index) => (
-                        <b key={index}>{item.title}</b>
-                      ))}
-                      的动画，
-                    </span>
-                  )}
-                  {filmtime ? (
-                    <span>
-                      从<b>{filmtime}</b>起开始
-                    </span>
-                  ) : (
-                    <span>
-                      从<b>{year}</b>年起开始
-                    </span>
-                  )}
-                  在本网站播出，敬请关注！
-                </p>
-                <p styleName="content">
-                  {title}简介：{content.replace(/<[^<>]+>/g, '')}
-                </p>
-                <p>
-                  <em>最后更新:</em>
-                  {updateDate}
-                </p>
-              </div>
+      <div className="wp mt20 clearfix">
+        <Meta title={`${title}播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新`}>
+          <meta name="keywords" content={`${title}播出时间,${listNameBig}${title}播出周期,${title}几点更新,${title}更新时间`} />
+          <meta name="description" content={`{$sitename}为你提供了包括${listNameBig}${title}播出时间、${title}周几更新以及${title}播出周期希望你能喜欢`} />
+        </Meta>
+        <div className="fl left">
+          <article styleName="article-body">
+            <h1>{title}</h1>
+            <div styleName="article-content" className="clearfix">
+              <Link to={`/subject/${id}`}>
+                <img src={pic} alt={`${title} 播出时间`} />
+              </Link>
+              <p>
+                播出时间：{filmtime ? `${filmtime}` : `${year}年`} {tvcont}
+              </p>
+              <p>
+                {title}是
+                {actor && (
+                  <span>
+                    由
+                    {actor.map((item, index) => (
+                      <b key={index}>{item.title}</b>
+                    ))}
+                    等主演的
+                  </span>
+                )}
+                {director && (
+                  <span>
+                    以及
+                    {director.map((item, index) => (
+                      <b key={index}>{item.title}</b>
+                    ))}
+                    等编导的
+                  </span>
+                )}
+                {mcid && (
+                  <span>
+                    一部
+                    {mcid.map((item, index) => (
+                      <b key={index}>{item.title}</b>
+                    ))}
+                    的动画，
+                  </span>
+                )}
+                {filmtime ? (
+                  <span>
+                    从<b>{filmtime}</b>起开始
+                  </span>
+                ) : (
+                  <span>
+                    从<b>{year}</b>年起开始
+                  </span>
+                )}
+                在本网站播出，敬请关注！
+              </p>
+              <p styleName="content">
+                {title}简介：{content.replace(/<[^<>]+>/g, '')}
+              </p>
+              <p>
+                <em>最后更新:</em>
+                {updateDate}
+              </p>
+            </div>
+            <div styleName="tag-share">
               <TagShare tag={[title]} config={shareConfig} location={location} />
-            </article>
-          </div>
-          <div className="fr right">
-            <SideBar />
-          </div>
+            </div>
+          </article>
         </div>
-      </BaseLayout>
+        <div className="fr right">
+          <SideBar />
+        </div>
+      </div>
     )
   }
 }

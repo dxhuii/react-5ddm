@@ -1,8 +1,6 @@
-import { week } from '@/store/actions/week'
+import { week, top, recommend } from '@/store/actions/list'
 import { slide } from '@/store/actions/slide'
-import { top } from '@/store/actions/top'
 import { newsIndex } from '@/store/actions/newsIndex'
-import { recommend } from '@/store/actions/recommend'
 
 import cache from '@/utils/cache'
 const { getCache, addCache } = cache
@@ -18,8 +16,8 @@ export default ({ store, match }) => {
     if (data) {
       // 将数据写入到redux
       store.dispatch({ type: 'GET_SLIDE', name: 'slide', data: data[0][1] })
-      store.dispatch({ type: 'GET_RECOMMEND', name: 'indexRecommendAnime', data: data[1][1] })
-      store.dispatch({ type: 'GET_RECOMMEND', name: 'indexRecommendNews', data: data[2][1] })
+      store.dispatch({ type: 'GET_RECOMMEND', name: 'anime', data: data[1][1] })
+      store.dispatch({ type: 'GET_RECOMMEND', name: 'news', data: data[2][1] })
       store.dispatch({ type: 'GET_WEEK', name: 'week', data: data[3][1] })
       store.dispatch({ type: 'GET_NEWS_INDEX_LIST', name: 'newsPicList', data: data[4][1] })
       store.dispatch({ type: 'GET_NEWS_INDEX_LIST', name: 'newsTextList', data: data[5][1] })
@@ -33,8 +31,8 @@ export default ({ store, match }) => {
 
     Promise.all([
       slide()(store.dispatch, store.getState),
-      recommend({ name: 'indexRecommendAnime' })(store.dispatch, store.getState),
-      recommend({ name: 'indexRecommendNews' })(store.dispatch, store.getState),
+      recommend({ name: 'anime' })(store.dispatch, store.getState),
+      recommend({ name: 'news' })(store.dispatch, store.getState),
       week()(store.dispatch, store.getState),
       newsIndex({ name: 'newsPicList' })(store.dispatch, store.getState),
       newsIndex({ name: 'newsTextList' })(store.dispatch, store.getState),

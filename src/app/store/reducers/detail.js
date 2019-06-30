@@ -25,13 +25,3 @@ export default function() {
 export const getDetail = (state, name) => {
   return state.detail[name] ? state.detail[name] : {}
 }
-
-export const getScore = (state, id) => {
-  const ids = `score_${id}`
-  return state.detail[ids] ? state.detail[ids] : {}
-}
-
-export const getVodNews = (state, name) => {
-  const ids = `vod_news_${name}`
-  return state.detail[ids] ? state.detail[ids] : {}
-}

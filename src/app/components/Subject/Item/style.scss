@@ -1,17 +1,21 @@
-@import '../../pages/_mixin';
+@import '../../../pages/_mixin';
+
 .d-item {
   display: flex;
   flex-wrap: wrap;
   padding-top: 20px;
   width: 910px;
   margin-left: -10px;
+
   li {
     position: relative;
     width: 155px;
     margin: 0 12.5px 25px;
+
     &:nth-child(5n) {
       margin-right: 0;
     }
+
     div {
       position: relative;
       z-index: 2;
@@ -21,6 +25,7 @@
       overflow: hidden;
       box-shadow: 0 3px 14px 0 rgba(203, 193, 187, .40);
     }
+
     img {
       position: absolute;
       left: 0;
@@ -32,16 +37,19 @@
       display: block;
       width: 100%;
     }
+
     p {
       margin-top: 6px;
       height: 16px;
       line-height: 16px;
       color: #999;
       overflow: hidden;
+
       &.today {
         color: #0084ff;
       }
     }
+
     h3 {
       margin: 15px 0;
       height: 20px;
@@ -50,6 +58,7 @@
       font-weight: blod;
       color: #333;
       @include clamp(1);
+
       &:hover {
         color: #0084ff;
       }
@@ -62,25 +71,32 @@
     padding-top: 15px;
     width: 100%;
     margin-left: 0;
+
     li {
       width: 32%;
       margin: 0 2% 15px 0;
+
       &:nth-child(5n) {
         margin-right: 2%;
       }
+
       &:nth-child(3n) {
         margin-right: 0;
       }
+
       &:last-child {
         display: none;
       }
+
       div {
         height: 150px;
       }
+
       h3 {
         margin: 10px 0;
         font-size: 14px;
       }
+
       p {
         margin-top: 0;
         font-size: 14px;
@@ -95,10 +111,12 @@
       div {
         height: 135px;
       }
+
       h3 {
         font-size: 12px;
         margin: 5px 0;
       }
+
       p {
         font-size: 12px;
       }

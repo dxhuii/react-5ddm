@@ -4,8 +4,8 @@ import { Link, withRouter } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { week } from '@/store/actions/week'
-import { getWeek } from '@/store/reducers/week'
+import { week } from '@/store/actions/list'
+import { getList } from '@/store/reducers/list'
 
 import Loading from '@/components/Ui/Loading'
 import Item from '@/components/Week/Item'
@@ -15,7 +15,7 @@ import './style.scss'
 @withRouter
 @connect(
   state => ({
-    weekData: getWeek(state)
+    weekData: getList(state, 'week')
   }),
   dispatch => ({
     week: bindActionCreators(week, dispatch)

@@ -4,14 +4,14 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { search } from '@/store/actions/search'
-import { getSearch } from '@/store/reducers/search'
+import { search } from '@/store/actions/list'
+import { getList } from '@/store/reducers/list'
 
 import './style.scss'
 
 @connect(
   (state, props) => ({
-    auto: getSearch(state, props.wd)
+    auto: getList(state, props.wd)
   }),
   dispatch => ({
     search: bindActionCreators(search, dispatch)

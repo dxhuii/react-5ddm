@@ -1,5 +1,6 @@
 .article-body {
   padding-bottom: 20px;
+
   h1 {
     font-size: 24px;
     line-height: 1.5;
@@ -9,22 +10,31 @@
 
 .article-content {
   padding: 20px;
+
   img {
     margin-right: 20px;
     width: 240px;
     float: left;
     height: auto;
   }
+
   p {
     padding-bottom: 20px;
+
     &:last-child {
       padding-bottom: 0;
     }
   }
+
   b {
     margin: 0 3px;
   }
+
   .content {
     line-height: 28px;
   }
+}
+
+.tag-share {
+  padding: 0 20px;
 }

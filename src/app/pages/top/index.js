@@ -1,13 +1,12 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { TopList } from '@/store/actions/page'
-import { getTopList } from '@/store/reducers/page'
+import { TopList } from '@/store/actions/list'
+import { getList } from '@/store/reducers/list'
 
-import BaseLayout from '@/layout/baseLayout'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
@@ -17,10 +16,10 @@ import './style.scss'
 @withRouter
 @connect(
   (state, props) => ({
-    day: getTopList(state, 'hits_day'),
-    week: getTopList(state, 'hits_week'),
-    month: getTopList(state, 'hits_month'),
-    all: getTopList(state, 'hits')
+    day: getList(state, 'page-hits_day'),
+    week: getList(state, 'page-hits_week'),
+    month: getList(state, 'page-hits_month'),
+    all: getList(state, 'page-hits')
   }),
   dispatch => ({
     TopList: bindActionCreators(TopList, dispatch)
@@ -71,7 +70,7 @@ class TopPage extends PureComponent {
     const monthData = month.data || []
     const allData = all.data || []
     return (
-      <BaseLayout>
+      <>
         <Meta title="动漫排行榜 动漫热播榜" />
         <div className="wp mt20" styleName="top">
           <div className="box">
@@ -123,7 +122,7 @@ class TopPage extends PureComponent {
             </ul>
           </div>
         </div>
-      </BaseLayout>
+      </>
     )
   }
 }

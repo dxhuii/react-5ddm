@@ -3,8 +3,8 @@ import { withRouter, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { recommend } from '@/store/actions/recommend'
-import { getRecommend } from '@/store/reducers/recommend'
+import { recommend } from '@/store/actions/list'
+import { getList } from '@/store/reducers/list'
 
 import { formatPic } from '@/utils'
 
@@ -13,8 +13,8 @@ import './style.scss'
 @withRouter
 @connect(
   (state, props) => ({
-    animeData: getRecommend(state, 'indexRecommendAnime'),
-    newsData: getRecommend(state, 'indexRecommendNews')
+    animeData: getList(state, 'anime'),
+    newsData: getList(state, 'news')
   }),
   dispatch => ({
     recommendAnime: bindActionCreators(recommend, dispatch),
@@ -31,10 +31,10 @@ class Recommend extends Component {
   componentDidMount() {
     const { recommendAnime, animeData, recommendNews, newsData } = this.props
     if (!animeData.data) {
-      recommendAnime({ name: 'indexRecommendAnime' })
+      recommendAnime({ name: 'anime' })
     }
     if (!newsData.data) {
-      recommendNews({ name: 'indexRecommendNews' })
+      recommendNews({ name: 'news' })
     }
   }
 
@@ -43,7 +43,7 @@ class Recommend extends Component {
     return data.map(item => (
       <li key={item.id}>
         <Link to={link(item.id)}>
-          <div className="load-demand" data-load-demand={`<img src="${formatPic(item.pic, 'orj360')}" alt="${item.title}" />`} />
+          <img src={formatPic(item.pic, 'orj360')} alt={item.title} />
           <div styleName="mark">
             <p>{item.title}</p>
           </div>

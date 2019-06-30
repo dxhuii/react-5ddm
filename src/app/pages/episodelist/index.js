@@ -6,9 +6,8 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { episodeList } from '@/store/actions/episode'
-import { getEpisodeList } from '@/store/reducers/episode'
+import { getEpisodeList } from '@/store/reducers/list'
 
-import BaseLayout from '@/layout/baseLayout'
 import SideBar from '@/components/SideBar'
 
 import Shell from '@/components/Shell'
@@ -59,7 +58,7 @@ class EpisodeList extends Component {
       list: { data = [] }
     } = this.props
     return (
-      <BaseLayout>
+      <>
         <Meta title="剧情首页" />
         <div className="wp mt20 clearfix">
           <div className="left fl">
@@ -79,7 +78,7 @@ class EpisodeList extends Component {
             <SideBar />
           </div>
         </div>
-      </BaseLayout>
+      </>
     )
   }
 }
