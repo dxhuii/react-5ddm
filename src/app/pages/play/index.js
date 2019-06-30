@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 
 import { playerLoad } from '@/store/actions/player'
 import { digg } from '@/store/actions/mark'
-import { hits } from '@/store/actions/hits'
 import { addplaylog } from '@/store/actions/history'
 import { getPlayerList } from '@/store/reducers/player'
 import { getUserInfo } from '@/store/reducers/user'
@@ -43,8 +42,7 @@ import './style.scss'
   dispatch => ({
     playerLoad: bindActionCreators(playerLoad, dispatch),
     digg: bindActionCreators(digg, dispatch),
-    addplaylog: bindActionCreators(addplaylog, dispatch),
-    hits: bindActionCreators(hits, dispatch)
+    addplaylog: bindActionCreators(addplaylog, dispatch)
   })
 )
 class Play extends Component {
@@ -70,7 +68,6 @@ class Play extends Component {
     playerLoad: PropTypes.func,
     digg: PropTypes.func,
     addplaylog: PropTypes.func,
-    hits: PropTypes.func,
     player: PropTypes.object,
     match: PropTypes.object,
     userinfo: PropTypes.object,
@@ -103,12 +100,10 @@ class Play extends Component {
     const {
       player,
       playerLoad,
-      hits,
       match: {
         params: { id, pid }
       }
     } = this.props
-    hits({ id, sid: 1 })
     if (!player || !player.data) {
       let [, data] = await playerLoad({ id, pid })
       if (data) {
@@ -312,7 +307,7 @@ class Play extends Component {
       location
     } = this.props
     const { full, isfull, playHtml, mInfo, showPlay, isFlvsp } = this.state
-    const { listName, listId, listNameBig, list = [], pic, title, pan, subTitle, actor = '', up, down, prev, next, mcid = [], copyright } = data
+    const { listName, listId, listNameBig, list = [], playlist = [], pic, title, pan, subTitle, actor = '', up, down, prev, next, mcid = [], copyright } = data
     const shareConfig = {
       pic,
       title: `#${title}# ${subTitle}在线播放 - ${listName}${listNameBig} - #${NAME.split('_').join('##')}# @99496动漫网`,
@@ -387,7 +382,7 @@ class Play extends Component {
         <div className="mt20">
           <Ads id={3} />
         </div>
-        <PlayList />
+        {playlist.length > 0 ? <PlayList data={playlist} /> : null}
         {DOMAIN_NAME === 'dddm.tv' && (
           <div className="wp mt20 box" styleName="zhaimoe">
             <iframe src="//www.zhaimoe.com/portal/page/index/id/35.html" width="1200" height="100%" frameBorder="0" scrolling="no" />

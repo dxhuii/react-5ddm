@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 
 import { detail, score } from '@/store/actions/detail'
 import { like } from '@/store/actions/mark'
-import { hits } from '@/store/actions/hits'
 import { getDetail } from '@/store/reducers/detail'
 import { getUserInfo } from '@/store/reducers/user'
 
@@ -44,8 +43,7 @@ import './style.scss'
   dispatch => ({
     detail: bindActionCreators(detail, dispatch),
     like: bindActionCreators(like, dispatch),
-    score: bindActionCreators(score, dispatch),
-    hits: bindActionCreators(hits, dispatch)
+    score: bindActionCreators(score, dispatch)
   })
 )
 class Bangumi extends Component {
@@ -58,7 +56,6 @@ class Bangumi extends Component {
     userinfo: PropTypes.object,
     cmScore: PropTypes.object,
     location: PropTypes.object,
-    hits: PropTypes.func,
     isMeta: PropTypes.any,
     like: PropTypes.func
   }
@@ -92,8 +89,7 @@ class Bangumi extends Component {
       score,
       sid = 1,
       userinfo: { userid },
-      cmScore,
-      hits
+      cmScore
     } = this.props
     if (!info || !info.data) {
       detail({ id })
@@ -101,7 +97,6 @@ class Bangumi extends Component {
     if (!cmScore || !cmScore.data) {
       score({ id, sid, uid: userid })
     }
-    hits({ id, sid })
   }
 
   async addMark(type, id, cid, uid) {
@@ -217,7 +212,8 @@ class Bangumi extends Component {
       director = [],
       storylist = [],
       newsTextlist = [],
-      newsPiclist = []
+      newsPiclist = [],
+      playlist = []
     } = data
     const rePic = formatPic(pic, 'orj360')
     const csData = cmScore.data || {}
@@ -359,7 +355,7 @@ class Bangumi extends Component {
         <div className="mt20">
           <Ads id={3} />
         </div>
-        <PlayList key="playlist" />
+        {playlist.length > 0 ? <PlayList data={playlist} /> : null}
         <div className="wp">
           <Ads id={4} />
         </div>

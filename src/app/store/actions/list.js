@@ -120,7 +120,7 @@ export function articleVod({ ids }) {
       reducerName: 'list',
       actionType: 'GET_ARTICLE_VOD',
       api: 'list',
-      params: { ids, p: 0 }
+      params: { ids, p: 0, limit: 1000 }
     })
   }
 }
