@@ -181,12 +181,7 @@ const isPlay = (name, vid, danmu, copyright, path) => {
   } else if (/360|qqq/.test(name)) {
     url = jiexiUrl(ck(name, vid), danmu)
   } else if ((/.html|.shtml|.htm|https:\/\/|http:\/\//.test(vid) || name === 'full') && !/vip|zb/.test(copyright)) {
-    if (!/youku.com|iqiyi.com|acfun.cn|bilibili.com/.test(vid)) {
-      url = jiexiUrl(rePlayUrl(name, vid), danmu)
-      isFlvsp = true
-    } else {
-      url = HTML(vid, copyright, path)
-    }
+    url = HTML(vid, copyright, path)
   } else if (/bilibili|acfun|youku|tudou|iqiyi|pptv|letv|qq|sohu|viqiyi/.test(name)) {
     if (/bilibili|acfun|youku|tudou|iqiyi/.test(name)) {
       url = jump(name, vid, copyright, path)
