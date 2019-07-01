@@ -1,15 +1,19 @@
+.tag-share {
+  padding: 0 20px;
+}
+
 .article-body {
-  padding-bottom: 20px;
+  padding: 10px 20px 0;
 
   h1 {
     font-size: 24px;
-    line-height: 1.5;
-    padding: 20px 20px 0;
+    padding: 10px 0 20px;
   }
 }
 
 .article-content {
-  padding: 20px;
+  padding-bottom: 20px;
+  line-height: 2;
 
   img {
     margin-right: 20px;
@@ -35,6 +39,72 @@
   }
 }
 
-.tag-share {
+.ep-like {
   padding: 0 20px;
+}
+
+.article-context {
+  line-height: 30px;
+}
+
+.eplist-more {
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.go-detail {
+  margin-top: 15px;
+  display: block;
+  color: #0084ff;
+}
+
+.box {
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+.title {
+  h2 {
+    font-size: 16px;
+  }
+}
+
+
+@media (min-width: 0) and (max-width: 1200px) {
+
+  .article-body {
+    h1 {
+      padding: 0 10px 10px 0;
+    }
+  }
+
+  .article-body,
+  .article-bottom {
+    background-color: #fff;
+  }
+
+  .article-content {
+    p {
+      padding-bottom: 10px;
+    }
+
+    img {
+      margin-right: 15px;
+      width: 150px;
+    }
+  }
+
+  .article-bottom {
+    padding: 0 10px;
+  }
+
+  .ep-like {
+    padding: 0;
+  }
+
+  .article-ads {
+    margin: 0 -10px;
+  }
 }

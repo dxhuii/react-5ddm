@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import { article } from '@/store/actions/article'
 import { getArticle } from '@/store/reducers/article'
 import { newsIndex } from '@/store/actions/newsIndex'
-import { hits } from '@/store/actions/hits'
 import { getUserInfo } from '@/store/reducers/user'
 import { getNewsIndex } from '@/store/reducers/newsIndex'
 
@@ -36,8 +35,7 @@ import './style.scss'
   }),
   dispatch => ({
     article: bindActionCreators(article, dispatch),
-    newsIndex: bindActionCreators(newsIndex, dispatch),
-    hits: bindActionCreators(hits, dispatch)
+    newsIndex: bindActionCreators(newsIndex, dispatch)
   })
 )
 class Article extends Component {
@@ -45,7 +43,6 @@ class Article extends Component {
     match: PropTypes.object,
     article: PropTypes.func,
     newsIndex: PropTypes.func,
-    hits: PropTypes.func,
     articleData: PropTypes.object,
     userinfo: PropTypes.object,
     location: PropTypes.object,
@@ -124,15 +121,13 @@ class Article extends Component {
       },
       newsData,
       article,
-      articleData,
-      hits
+      articleData
     } = this.props
     if (!articleData.data) {
       article({ id })
     }
     if (!newsData.data) this.load()
     ArriveFooter.add('newsArticle', this.load)
-    hits({ id, sid: 2 })
   }
 
   async load() {

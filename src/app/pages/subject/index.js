@@ -215,6 +215,7 @@ class Bangumi extends Component {
       newsPiclist = [],
       playlist = []
     } = data
+    const reActor = actor ? actor.map(item => item.title).join(',') : ''
     const rePic = formatPic(pic, 'orj360')
     const csData = cmScore.data || {}
     const { loveid, remindid, star, comment = [] } = csData
@@ -251,7 +252,7 @@ class Bangumi extends Component {
             <meta property="og:video" content={`/play/${id}/1`} />
             <meta property="og:site_name" content={NAME} />
             <meta property="og:video:score" content={gold} />
-            <meta property="og:video:actor" content={actor ? actor.map(item => item.title).join(',') : ''} />
+            <meta property="og:video:actor" content={reActor} />
             <meta property="og:video:area" content={area} />
             <meta property="og:video:class" content={`${listName}${mcid.length > 0 ? mcid.map(item => item.title).join(',') : ''}`} />
             <meta property="og:video:language" content={language} />
@@ -394,7 +395,7 @@ class Bangumi extends Component {
               <div styleName="title">
                 <h2>相关动漫</h2>
               </div>
-              {id ? <DetailActor actor={actor ? actor.map(item => item.title).join(',') : ''} no={id} /> : null}
+              {id ? <DetailActor actor={reActor} no={id} /> : null}
             </div>
             {newsPiclist.length > 0 ? (
               <div className="mt10">

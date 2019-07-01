@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { episode } from '@/store/actions/episode'
 import { getEpisodeList } from '@/store/reducers/episode'
-import { hits } from '@/store/actions/hits'
 
 import Loading from '@/components/Ui/Loading'
 import Detail from '@/components/Detail'
@@ -30,8 +29,7 @@ import './style.scss'
     info: getEpisodeList(state, `${props.match.params.id}${props.match.params.p ? `-${props.match.params.p}` : ''}`)
   }),
   dispatch => ({
-    episode: bindActionCreators(episode, dispatch),
-    hits: bindActionCreators(hits, dispatch)
+    episode: bindActionCreators(episode, dispatch)
   })
 )
 class Episode extends Component {
@@ -45,7 +43,6 @@ class Episode extends Component {
     match: PropTypes.object,
     episode: PropTypes.func,
     info: PropTypes.object,
-    hits: PropTypes.func,
     location: PropTypes.object
   }
 
@@ -66,7 +63,6 @@ class Episode extends Component {
         params: { id, p = 0 }
       },
       episode,
-      hits,
       info
     } = this.props
     this.setState({
@@ -75,7 +71,6 @@ class Episode extends Component {
     if (!info.data) {
       episode({ id, p })
     }
-    hits({ id, sid: 4 })
   }
 
   epMore = () => {

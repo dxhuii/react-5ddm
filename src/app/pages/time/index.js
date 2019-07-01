@@ -9,6 +9,9 @@ import { getDetail } from '@/store/reducers/detail'
 
 import SideBar from '@/components/SideBar'
 import TagShare from '@/components/TagShare'
+import DetailActor from '@/components/Subject/DetailActor'
+import HotWeek from '@/components/Subject/HotWeek'
+import Ads from '@/components/Ads'
 
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
@@ -60,6 +63,7 @@ class Time extends Component {
       desc: content,
       url: `/time/${id}`
     }
+    const reActor = actor ? actor.map(item => item.title).join(',') : ''
     return (
       <div className="wp mt20 clearfix">
         <Meta title={`${title}播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新`}>
@@ -124,10 +128,25 @@ class Time extends Component {
                 {updateDate}
               </p>
             </div>
-            <div styleName="tag-share">
-              <TagShare tag={[title]} config={shareConfig} location={location} />
-            </div>
+            <TagShare tag={[title]} config={shareConfig} location={location} />
           </article>
+          <div styleName="article-bottom">
+            <div className="mt20" styleName="article-ads">
+              <Ads id={11} />
+            </div>
+            <div className="mt10" styleName="ep-like">
+              <div styleName="title">
+                <h2>相关动漫</h2>
+              </div>
+              {id ? <DetailActor actor={reActor} no={id} /> : null}
+            </div>
+            <div className="mt10" styleName="ep-like">
+              <div styleName="title">
+                <h2>小伙伴还在看(=￣ω￣=)（一周热门）</h2>
+              </div>
+              <HotWeek />
+            </div>
+          </div>
         </div>
         <div className="fr right">
           <SideBar />
