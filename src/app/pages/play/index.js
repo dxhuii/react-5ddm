@@ -307,7 +307,7 @@ class Play extends Component {
       location
     } = this.props
     const { full, isfull, playHtml, mInfo, showPlay, isFlvsp } = this.state
-    const { listName, listId, listNameBig, list = [], playlist = [], pic, title, pan, subTitle, actor = '', up, down, prev, next, mcid = [], copyright } = data
+    const { listName, listId, listNameBig, list = [], pic, title, pan, subTitle, actor = '', up, down, prev, next, mcid = [], copyright } = data
     const shareConfig = {
       pic,
       title: `#${title}# ${subTitle}在线播放 - ${listName}${listNameBig} - #${NAME.split('_').join('##')}# @99496动漫网`,
@@ -382,7 +382,7 @@ class Play extends Component {
         <div className="mt20">
           <Ads id={3} />
         </div>
-        {playlist.length > 0 ? <PlayList data={playlist} /> : null}
+        <PlayList />
         {DOMAIN_NAME === 'dddm.tv' && (
           <div className="wp mt20 box" styleName="zhaimoe">
             <iframe src="//www.zhaimoe.com/portal/page/index/id/35.html" width="1200" height="100%" frameBorder="0" scrolling="no" />

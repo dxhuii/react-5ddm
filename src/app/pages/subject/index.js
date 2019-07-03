@@ -212,8 +212,7 @@ class Bangumi extends Component {
       director = [],
       storylist = [],
       newsTextlist = [],
-      newsPiclist = [],
-      playlist = []
+      newsPiclist = []
     } = data
     const reActor = actor ? actor.map(item => item.title).join(',') : ''
     const rePic = formatPic(pic, 'orj360')
@@ -241,7 +240,9 @@ class Bangumi extends Component {
             <meta name="description" content={`${title}动画全集由${reContent}`} />
             <meta
               name="keywords"
-              content={`${title},${title}动漫,${title}下载${vod_pantitle ? `,${title}百度云盘下载` : ''},${title}全集,${title}动画片,${title}在线观看${keywords ? `,${keywords}` : ''}`}
+              content={`${title},${title}动漫,${title}下载${vod_pantitle ? `,${title}百度云盘下载` : ''},${title}全集,${title}动画片,${title}在线观看${
+                keywords ? `,${keywords}` : ''
+              }`}
             />
             <meta property="og:locale" content="zh_CN" />
             <meta property="og:type" content="videolist" />
@@ -356,7 +357,7 @@ class Bangumi extends Component {
         <div className="mt20">
           <Ads id={3} />
         </div>
-        {playlist.length > 0 ? <PlayList data={playlist} /> : null}
+        <PlayList />
         <div className="wp">
           <Ads id={4} />
         </div>

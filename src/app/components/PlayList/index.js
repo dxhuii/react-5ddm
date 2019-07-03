@@ -1,11 +1,24 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import { playlist } from '@/store/actions/playlist'
+import { getPlayList } from '@/store/reducers/playlist'
 
 import { trim, firstNumber, isMobile } from '@/utils'
 
 import './style.scss'
 @withRouter
+@connect(
+  (state, props) => ({
+    play: getPlayList(state, props.match.params.id)
+  }),
+  dispatch => ({
+    playlist: bindActionCreators(playlist, dispatch)
+  })
+)
 class PlayList extends Component {
   constructor(props) {
     super(props)
@@ -21,18 +34,28 @@ class PlayList extends Component {
 
   static propTypes = {
     id: PropTypes.number,
-    data: PropTypes.array,
+    play: PropTypes.object,
+    playlist: PropTypes.func,
     match: PropTypes.object
   }
 
   componentDidMount() {
     const {
-      data,
+      play,
+      playlist,
       match: {
-        params: { pid }
+        params: { id, pid }
       }
     } = this.props
-    this.setData(data, pid)
+    if (!play || !play.data) {
+      playlist({ id }).then(res => {
+        const data = res[1]
+        this.setData(data, pid)
+      })
+    } else {
+      const { data } = play
+      this.setData(data, pid)
+    }
   }
 
   onDom() {
@@ -115,7 +138,9 @@ class PlayList extends Component {
   }
 
   page = () => {
-    const { data = [] } = this.props
+    const {
+      play: { data = [] }
+    } = this.props
     const { pageSize, start, end } = this.state
     const len = data.length
     const num = parseInt(len / pageSize)
@@ -153,7 +178,7 @@ class PlayList extends Component {
 
   render() {
     const {
-      data = [],
+      play: { data = [] },
       match: {
         params: { id, pid }
       }
@@ -161,7 +186,7 @@ class PlayList extends Component {
     const { pageSize, start, end, isReverse, isAll } = this.state
     const len = parseInt(data.length / pageSize)
     const surplus = data.length % pageSize
-    const dataSource = data.slice(start, end)
+    const dataSource = [] //data.slice(start, end)
     return (
       <Fragment>
         {data.length ? (
