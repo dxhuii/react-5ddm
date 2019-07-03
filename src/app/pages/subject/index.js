@@ -281,7 +281,7 @@ class Bangumi extends Component {
                   </span>
                 </div>
                 {aliases ? <p>别名：{aliases}</p> : null}
-                <ul styleName="detail-info__count">{/* <li>热度<span>{hits}</span></li> */}</ul>
+                <ul styleName="detail-info__count"></ul>
                 {filmtime || status || total ? (
                   <p>
                     {filmtime ? <span>{filmtime} 播出</span> : <span>{year}年</span>}
