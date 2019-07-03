@@ -186,7 +186,7 @@ class PlayList extends Component {
     const { pageSize, start, end, isReverse, isAll } = this.state
     const len = parseInt(data.length / pageSize)
     const surplus = data.length % pageSize
-    const dataSource = [] //data.slice(start, end)
+    const dataSource = data.slice(start, end)
     return (
       <Fragment>
         {data.length ? (
