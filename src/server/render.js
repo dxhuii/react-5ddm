@@ -5,6 +5,7 @@ import { StaticRouter, matchPath } from 'react-router'
 import { Provider } from 'react-redux'
 import MetaTagsServer from 'react-meta-tags/server'
 import { MetaTagsContext } from 'react-meta-tags'
+import cache from 'memory-cache'
 
 // 创建redux store
 import createStore from '@/store'
@@ -13,10 +14,23 @@ import createRouter from '@/router'
 // 加载初始数据
 import initData from '@/init-data'
 
-import { AUTH_COOKIE_NAME, COOKIE_PREFIX, CNZZ_STAT, BAIDU_STAT } from 'Config'
+import { AUTH_COOKIE_NAME, COOKIE_PREFIX, CNZZ_STAT, BAIDU_STAT, CACHA_TIME } from 'Config'
 
 export default (req, res) => {
   return new Promise(async (resolve, reject) => {
+    const isLogin = req.cookies[`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`]
+    // 如果是游客，则优先使用缓存中的数据
+    if (!isLogin) {
+      let _cache = cache.get(req.url)
+      if (_cache) {
+        try {
+          resolve(JSON.parse(_cache))
+          return
+          // eslint-disable-next-line no-empty
+        } catch (err) {}
+      }
+    }
+
     let params = {
       context: {
         code: 200
@@ -30,7 +44,7 @@ export default (req, res) => {
     let store = createStore()
 
     // 准备数据，如果有token，获取用户信息并返回
-    let [err, user] = await initData(store, req.cookies[`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`] || '')
+    let [err, user] = await initData(store, isLogin || '')
 
     const router = createRouter(user)
 
@@ -92,6 +106,11 @@ export default (req, res) => {
 
     // 释放store内存
     store = null
+
+    // 对游客的请求进行缓存
+    if (!isLogin) {
+      cache.put(req.url, JSON.stringify(params), CACHA_TIME)
+    }
 
     resolve(params)
   })

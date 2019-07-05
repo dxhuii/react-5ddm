@@ -23,6 +23,7 @@
     "express": "^4.17.1",
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
+    "memory-cache": "^0.2.0",
     "qrcode.react": "^0.9.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
