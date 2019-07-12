@@ -41,14 +41,14 @@ app.use(function(req, res, next) {
 app.use('/sign', sign())
 
 app.get('*', async function(req, res) {
-  let { context, html, meta, reduxState, CNZZ_STAT, BAIDU_STAT } = await render(req, res)
+  let { context, html, meta, reduxState, CNZZ_STAT, BAIDU_STAT, debug } = await render(req, res)
 
   res.status(context.code)
 
   if (context.redirect) {
     res.redirect(context.redirect)
   } else {
-    res.render('../dist/server/index.ejs', { html, reduxState, meta, CNZZ_STAT, BAIDU_STAT })
+    res.render('../dist/server/index.ejs', { html, reduxState, meta, CNZZ_STAT, BAIDU_STAT, debug })
   }
 
   res.end()

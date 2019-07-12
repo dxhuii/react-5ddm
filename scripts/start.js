@@ -18,6 +18,8 @@ const compilerPromise = compiler => {
       }
       return reject('Compilation failed')
     })
+  }).catch(function(reason) {
+    console.log('catch:', reason)
   })
 }
 
@@ -72,6 +74,11 @@ const start = async () => {
     if (error) {
       console.log(error, 'error')
     }
+  })
+
+  process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason)
+    // application specific logging, throwing an error, or other logic here
   })
 
   await serverPromise

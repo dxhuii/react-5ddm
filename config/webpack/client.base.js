@@ -221,6 +221,7 @@ module.exports = {
       reduxState: '<%- reduxState %>',
       CNZZ_STAT: '<%- CNZZ_STAT %>',
       BAIDU_STAT: '<%- BAIDU_STAT %>',
+      debug: '<%- debug %>',
       head: config.HEAD
       // inject: false
     }),

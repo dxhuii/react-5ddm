@@ -9,6 +9,7 @@
     <script>
       window.__initState__ = <%= htmlWebpackPlugin.options.reduxState %>
     </script>
+    <% if (!htmlWebpackPlugin.options.debug) { %>
     <!--[if lt IE 10]>
       <style type="text/css">
         body {
@@ -48,5 +49,6 @@
       </script>
       <script type="text/javascript" src="https://s22.cnzz.com/z_stat.php?id=<%= htmlWebpackPlugin.options.CNZZ_STAT %>&web_id=<%= htmlWebpackPlugin.options.CNZZ_STAT %>"></script>
     </div>
+    <% } %>
   </body>
 </html>

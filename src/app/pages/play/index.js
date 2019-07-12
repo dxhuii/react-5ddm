@@ -300,7 +300,7 @@ class Play extends Component {
 
   render() {
     const {
-      player: { data = {} },
+      player: { data = {}, loading },
       match: {
         params: { id, pid }
       },
@@ -317,10 +317,12 @@ class Play extends Component {
       <>
         <div styleName="player">
           <div className="wp pt20">
-            <Meta title={`${title} ${subTitle}在线播放 - ${listName}${listNameBig}`}>
-              <meta name="keywords" content={`${title}${subTitle},${title}在线观看,动画${title}`} />
-              <meta name="description" content={`${NAME}为您提供${listName}${listNameBig}${title}${subTitle}在线观看。喜欢${title}${subTitle}，就推荐给小伙伴们吧！`} />
-            </Meta>
+            {!loading && data.title ? (
+              <Meta title={`${title} ${subTitle}在线播放 - ${listName}${listNameBig}`}>
+                <meta name="keywords" content={`${title}${subTitle},${title}在线观看,动画${title}`} />
+                <meta name="description" content={`${NAME}为您提供${listName}${listNameBig}${title}${subTitle}在线观看。喜欢${title}${subTitle}，就推荐给小伙伴们吧！`} />
+              </Meta>
+            ) : null}
             <div styleName={`player-box ${isFlvsp ? 'is-flvsp' : ''} ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
               <div dangerouslySetInnerHTML={{ __html: playHtml }} />
               {isfull ? (

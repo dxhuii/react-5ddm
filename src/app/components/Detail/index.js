@@ -5,8 +5,7 @@ import { isNumber, formatPic } from '@/utils'
 
 import './style.scss'
 
-export default function MiniDetail(props) {
-  const { title, pic, gold, vid, pid, status, year, mcid } = props
+export default function MiniDetail({ title, pic, gold, vid, pid, status, year, mcid }) {
   return (
     <div styleName="detail-mini">
       <Link to={`/subject/${vid}`}>
@@ -21,7 +20,9 @@ export default function MiniDetail(props) {
           <Link to={pid ? `/play/${vid}/${pid}` : `/subject/${vid}`}>{isNumber(status) ? `更新至${status}话` : status}</Link>
         </p>
         {year ? <p>{year}年首播</p> : null}
-        {mcid ? <p styleName="clamp">{mcid.map((item, index) => (index === mcid.length - 1 ? <span key={item.id}>{item.title}</span> : <span key={item.id}>{item.title} / </span>))}</p> : ''}
+        {mcid ? (
+          <p styleName="clamp">{mcid.map((item, index) => (index === mcid.length - 1 ? <span key={item.id}>{item.title}</span> : <span key={item.id}>{item.title} / </span>))}</p>
+        ) : null}
       </div>
     </div>
   )

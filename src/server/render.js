@@ -14,7 +14,7 @@ import createRouter from '@/router'
 // 加载初始数据
 import initData from '@/init-data'
 
-import { AUTH_COOKIE_NAME, COOKIE_PREFIX, CNZZ_STAT, BAIDU_STAT, CACHA_TIME } from 'Config'
+import { AUTH_COOKIE_NAME, COOKIE_PREFIX, CNZZ_STAT, BAIDU_STAT, CACHA_TIME, debug } from 'Config'
 
 export default (req, res) => {
   return new Promise(async (resolve, reject) => {
@@ -46,7 +46,9 @@ export default (req, res) => {
     // 准备数据，如果有token，获取用户信息并返回
     let [err, user] = await initData(store, isLogin || '')
 
-    const router = createRouter(user)
+    params.user = user
+
+    const router = createRouter({ user })
 
     let route = null,
       match = null
@@ -63,33 +65,37 @@ export default (req, res) => {
 
     if (route.enter == 'tourists' && user) {
       // 游客
-      params.context = { code: 403, redirect: '/' }
+      params.code = 403
+      params.redirect = '/'
       resolve(params)
       return
     } else if (route.enter == 'member' && !user) {
       // 注册会员
-      params.context = { code: 403, redirect: '/' }
+      params.code = 403
+      params.redirect = '/'
       resolve(params)
       return
     }
 
     if (route.loadData) {
       // 服务端加载数据，并返回页面的状态
-      params.context = await route.loadData({ store, match, res, req, user })
+      let { code, redirect } = await route.loadData({ store, match, res, req, user })
+      params.code = code
+      params.redirect = redirect
     }
 
     // 获取路由dom
-    const Router = router.dom
+    const Page = router.dom
     const metaTagsInstance = MetaTagsServer()
 
-    await route.component.preload()
+    await route.body.preload()
 
     // html
     params.html = ReactDOMServer.renderToString(
       <Provider store={store}>
         <MetaTagsContext extract={metaTagsInstance.extract}>
           <StaticRouter location={req.url} context={params.context}>
-            <Router />
+            <Page />
           </StaticRouter>
         </MetaTagsContext>
       </Provider>
@@ -100,6 +106,7 @@ export default (req, res) => {
 
     params.CNZZ_STAT = CNZZ_STAT
     params.BAIDU_STAT = BAIDU_STAT
+    params.debug = debug
 
     // redux
     params.reduxState = JSON.stringify(store.getState()).replace(/</g, '\\x3c')

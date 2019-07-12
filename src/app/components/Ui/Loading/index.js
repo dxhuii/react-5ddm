@@ -2,7 +2,7 @@ import React from 'react'
 
 import './style.scss'
 
-export default function Loading() {
+export default function() {
   return (
     <div styleName="loading">
       <span>

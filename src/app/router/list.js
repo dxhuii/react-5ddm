@@ -2,7 +2,6 @@ import React from 'react'
 import Loadable from 'react-loadable'
 
 import Head from '@/components/Head'
-import Empty from '@/components/Empty'
 import Footer from '@/components/Footer'
 import Loading from '@/components/Ui/Loading'
 
@@ -21,15 +20,17 @@ import newData from '@/pages/new/load-data'
 import episodelistData from '@/pages/episodelist/load-data'
 import detailNewstData from '@/pages/subject/news/load-data'
 
+const exact = true
+const base = { exact, head: Head, footer: Footer }
+const loading = () => <Loading />
+
 export default [
   {
     path: '/',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/home'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: HomeLoadData,
     enter: 'everybody'
@@ -37,12 +38,10 @@ export default [
 
   {
     path: '/week',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/week'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: WeekData,
     enter: 'everybody'
@@ -50,24 +49,20 @@ export default [
 
   {
     path: '/week/out',
-    exact: true,
-    head: Empty,
-    footer: Empty,
-    component: Loadable({
+    exact,
+    body: Loadable({
       loader: () => import('@/pages/week/out'),
-      loading: () => <Loading />
+      loading
     }),
     enter: 'everybody'
   },
 
   {
     path: '/week/:id',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/week'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: WeekData,
     enter: 'everybody'
@@ -75,24 +70,20 @@ export default [
 
   {
     path: '/sign-in',
-    exact: true,
-    head: Empty,
-    footer: Empty,
-    component: Loadable({
+    exact,
+    body: Loadable({
       loader: () => import('@/pages/sign-in'),
-      loading: () => <Loading />
+      loading
     }),
     enter: 'tourists'
   },
 
   {
     path: '/subject/:id',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/subject'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: SubjectLoadData,
     enter: 'everybody'
@@ -100,12 +91,10 @@ export default [
 
   {
     path: '/subject/:id/news',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/subject/news'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: detailNewstData,
     enter: 'everybody'
@@ -113,12 +102,10 @@ export default [
 
   {
     path: '/play/:id/:pid',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/play'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: PlayLoadData,
     enter: 'everybody'
@@ -126,12 +113,10 @@ export default [
 
   {
     path: '/dongman',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/list'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: ListLoadData,
     enter: 'everybody'
@@ -139,12 +124,10 @@ export default [
 
   {
     path: '/dongman/:name',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/list'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: ListLoadData,
     enter: 'everybody'
@@ -152,12 +135,10 @@ export default [
 
   {
     path: '/type/:name/:mcid/:area/:year/:letter/:lz/:order',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/list'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: ListLoadData,
     enter: 'everybody'
@@ -165,12 +146,10 @@ export default [
 
   {
     path: '/news',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/news'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: newsData,
     enter: 'everybody'
@@ -178,12 +157,10 @@ export default [
 
   {
     path: '/news/:name',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/news'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: newsData,
     enter: 'everybody'
@@ -191,12 +168,10 @@ export default [
 
   {
     path: '/article/:id',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/article'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: articleData,
     enter: 'everybody'
@@ -204,12 +179,10 @@ export default [
 
   {
     path: '/time/:id',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/time'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: timeData,
     enter: 'everybody'
@@ -217,24 +190,20 @@ export default [
 
   {
     path: '/search/:wd',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/list'),
-      loading: () => <Loading />
+      loading
     }),
     enter: 'everybody'
   },
 
   {
     path: '/episode/:id',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/episode'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: episodeData,
     enter: 'everybody'
@@ -242,12 +211,10 @@ export default [
 
   {
     path: '/episode/:id/:p',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/episode'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: episodeData,
     enter: 'everybody'
@@ -255,12 +222,10 @@ export default [
 
   {
     path: '/month/:month',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/month'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: monthData,
     enter: 'everybody'
@@ -268,12 +233,10 @@ export default [
 
   {
     path: '/top',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/top'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: topData,
     enter: 'everybody'
@@ -281,12 +244,10 @@ export default [
 
   {
     path: '/new',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/new'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: newData,
     enter: 'everybody'
@@ -294,61 +255,31 @@ export default [
 
   {
     path: '/ep',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('@/pages/episodelist'),
-      loading: () => <Loading />
+      loading
     }),
     loadData: episodelistData,
     enter: 'everybody'
   },
 
-  // {
-  //   path: '/upload',
-  //   exact: true,
-  //   head: Head,
-  //   footer: Footer,
-  //   component: Loadable({
-  //     loader: () => import('../pages/upload'),
-  //     loading: () => <Loading />
-  //   }),
-  //   enter: 'everybody'
-  // },
-
-  {
-    path: '/out/pic',
-    exact: true,
-    head: Empty,
-    footer: Empty,
-    component: Loadable({
-      loader: () => import('../pages/out/pic'),
-      loading: () => <Loading />
-    }),
-    enter: 'everybody'
-  },
-
   {
     path: '/game',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('../pages/game'),
-      loading: () => <Loading />
+      loading
     }),
     enter: 'everybody'
   },
 
   {
     path: '/game/:wd',
-    exact: true,
-    head: Head,
-    footer: Footer,
-    component: Loadable({
+    ...base,
+    body: Loadable({
       loader: () => import('../pages/game'),
-      loading: () => <Loading />
+      loading
     }),
     enter: 'everybody'
   },
@@ -357,9 +288,9 @@ export default [
     path: '**',
     head: Head,
     footer: Footer,
-    component: Loadable({
+    body: Loadable({
       loader: () => import('@/pages/not-found'),
-      loading: () => <Loading />
+      loading
     }),
     enter: 'everybody'
   }
