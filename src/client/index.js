@@ -52,8 +52,6 @@ if (process.env.NODE_ENV !== 'development') {
             }
           })
           devtoolsDetector.lanuch()
-        } else if (/bangumi/.test(href)) {
-          window.location.href = DOMAIN
         }
         ReactGA.set(option)
         ReactGA.pageview(pathname)
