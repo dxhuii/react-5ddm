@@ -40,7 +40,6 @@ export default ({ store, match }) => {
     const { name, mcid, year, area, wd = '', order, letter, lz } = match.params
     const id = getTypeId(name)
     const reduxName = id + isEmpty(mcid) + isEmpty(year) + isEmpty(area) + isEmpty(wd) + isEmpty(letter) + isEmpty(lz) + isEmpty(order, 1)
-    console.log(reduxName, 'reduxName')
     const data = getCache('list')
     if (data) {
       store.dispatch({
