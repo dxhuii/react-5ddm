@@ -8,7 +8,7 @@ import list from './list'
  * @param  {Object} userinfo 用户信息，以此判断用户是否是登录状态，并控制页面访问权限
  * @return {[type]}
  */
-export default (user, enterEvent = () => {}) => {
+export default ({ user, enterEvent = () => {} }) => {
   // 进入路由的权限控制
   const enter = (role, Layout, props, route) => {
     enterEvent()
