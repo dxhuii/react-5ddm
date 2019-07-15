@@ -1,88 +1,61 @@
-import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
-import { withRouter, Link } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 
+import useReactRouter from 'use-react-router'
+
+// redux
+import { useStore, useSelector } from 'react-redux'
 import { playlist } from '@/store/actions/playlist'
 import { getPlayList } from '@/store/reducers/playlist'
 
 import { trim, firstNumber, isMobile } from '@/utils'
 
 import './style.scss'
-@withRouter
-@connect(
-  (state, props) => ({
-    play: getPlayList(state, props.match.params.id)
-  }),
-  dispatch => ({
-    playlist: bindActionCreators(playlist, dispatch)
-  })
-)
-class PlayList extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      pageSize: 18,
-      start: 0,
-      end: 18,
-      isReverse: false,
-      isAll: false
-    }
-    this.liWidth = 130
+
+export default () => {
+  const { match } = useReactRouter()
+  const { id, pid } = match.params || {}
+  const [start, setStart] = useState(0)
+  const [end, setEnd] = useState(18)
+  const [isReverse, onReverse] = useState(false)
+  const [isAll, onAll] = useState(false)
+
+  const store = useStore()
+  const info = useSelector(state => getPlayList(state, id))
+
+  const pageNav = useRef()
+  const pageNavUl = useRef()
+  const pageCurrent = useRef()
+
+  const pageSize = 18
+  const liWidth = 130
+
+  const onDom = () => {
+    const navWidth = pageNav.current.clientWidth
+    const ulWidth = pageNavUl.current.clientWidth
+    const currentLeft = pageCurrent.current.offsetLeft
+    const isNeq1200 = ulWidth - currentLeft < 1200 - liWidth // 是否小于1200减一页的宽
+    const X = isNeq1200 ? ulWidth - navWidth : currentLeft - liWidth * 3
+    pageNavUl.current.style.transform = `translateX(-${X}px)`
   }
 
-  static propTypes = {
-    id: PropTypes.number,
-    play: PropTypes.object,
-    playlist: PropTypes.func,
-    match: PropTypes.object
+  const onPrev = () => {
+    pageNavUl.current.style.transition = 'transform .3s ease'
+    const num = parseInt(pageNavUl.current.style.transform.replace(/[^0-9]/gi, '')) || 0
+    const X = num < liWidth ? 0 : -num + liWidth
+    pageNavUl.current.style.transform = `translateX(${X}px)`
   }
 
-  componentDidMount() {
-    const {
-      play,
-      playlist,
-      match: {
-        params: { id, pid }
-      }
-    } = this.props
-    if (!play || !play.data) {
-      playlist({ id }).then(res => {
-        const data = res[1]
-        this.setData(data, pid)
-      })
-    } else {
-      const { data } = play
-      this.setData(data, pid)
-    }
+  const onNext = () => {
+    const navWidth = pageNav.current.clientWidth
+    const ulWidth = pageNavUl.current.clientWidth
+    pageNavUl.current.style.transition = 'transform .3s ease'
+    const num = parseInt(pageNavUl.current.style.transform.replace(/[^0-9]/gi, '')) || 0
+    const X = num >= ulWidth - navWidth ? -ulWidth + navWidth : -num - liWidth
+    pageNavUl.current.style.transform = `translateX(${X}px)`
   }
 
-  onDom() {
-    this.navWidth = this.pageNav.clientWidth
-    this.ulWidth = this.pageNavUl.clientWidth
-    const currentLeft = this.pageCurrent.offsetLeft
-    const isNeq1200 = this.ulWidth - currentLeft < 1200 - this.liWidth // 是否小于1200减一页的宽
-    const X = isNeq1200 ? this.ulWidth - this.navWidth : currentLeft - this.liWidth * 3
-    this.pageNavUl.style.transform = `translateX(-${X}px)`
-  }
-
-  onPrev = () => {
-    this.pageNavUl.style.transition = 'transform .3s ease'
-    const num = parseInt(this.pageNavUl.style.transform.replace(/[^0-9]/gi, '')) || 0
-    const X = num < this.liWidth ? 0 : -num + this.liWidth
-    this.pageNavUl.style.transform = `translateX(${X}px)`
-  }
-
-  onNext = () => {
-    this.pageNavUl.style.transition = 'transform .3s ease'
-    const num = parseInt(this.pageNavUl.style.transform.replace(/[^0-9]/gi, '')) || 0
-    const X = num >= this.ulWidth - this.navWidth ? -this.ulWidth + this.navWidth : -num - this.liWidth
-    this.pageNavUl.style.transform = `translateX(${X}px)`
-  }
-
-  setData(data = [], pid) {
-    const { pageSize } = this.state
+  const setData = useCallback((data = [], pid) => {
     const len = data.length
     const pageLen = parseInt(len / pageSize) + (len % pageSize ? 1 : 0) // 总页数
     let start = 0
@@ -96,21 +69,16 @@ class PlayList extends Component {
       start = surplus ? noSurplus : noSurplus - pageSize
       end = surplus ? (yesSurplus > len ? len : yesSurplus) : noSurplus
     }
-    this.setState(
-      {
-        start,
-        end
-      },
-      () => {
-        // 分页面数大于 8 页时调用
-        if (pageLen > 8) {
-          this.onDom()
-        }
-      }
-    )
-  }
+    setStart(start)
+    setEnd(end)
 
-  format(data, item, id) {
+    // 分页面数大于 8 页时调用
+    if (pageLen > 8) {
+      onDom()
+    }
+  }, [])
+
+  const format = (data, item, id) => {
     let num = ''
     let subName = ''
     if (data === '全集') {
@@ -130,18 +98,13 @@ class PlayList extends Component {
     )
   }
 
-  pageJump = (start, end) => {
-    this.setState({
-      start,
-      end
-    })
+  const pageJump = (start, end) => {
+    setStart(start)
+    setEnd(end)
   }
 
-  page = () => {
-    const {
-      play: { data = [] }
-    } = this.props
-    const { pageSize, start, end } = this.state
+  const page = () => {
+    const { data = [] } = info
     const len = data.length
     const num = parseInt(len / pageSize)
     const surplus = len % pageSize // 除 pageSize 的余数
@@ -154,7 +117,7 @@ class PlayList extends Component {
         const pageEnd = i === 1 ? pageSize : i === pageNum && surplus ? pageSize * i - (pageSize - surplus) : pageSize * i // 余数不为 0 取剩余话数
         const isCurrent = start === pageStart && pageEnd === end // 判断是否为当前选中的集数
         html.push(
-          <li key={i} onClick={() => this.pageJump(pageStart, pageEnd)} ref={isCurrent ? e => (this.pageCurrent = e) : null} styleName={isCurrent ? 'active' : ''}>
+          <li key={i} onClick={() => pageJump(pageStart, pageEnd)} ref={isCurrent ? pageCurrent : null} styleName={isCurrent ? 'active' : ''}>
             第{pageFirst}话 - 第{pageEnd}话
           </li>
         )
@@ -164,85 +127,76 @@ class PlayList extends Component {
     return html.map(item => item)
   }
 
-  onReverse = () => {
-    this.setState({
-      isReverse: !this.state.isReverse
-    })
-  }
+  useEffect(() => {
+    const _playlist = args => playlist(args)(store.dispatch, store.getState)
+    if (!info || !info.data) {
+      _playlist({ id }).then(res => {
+        const data = res[1]
+        setData(data, pid)
+      })
+    } else {
+      const { data } = info
+      setData(data, pid)
+    }
+  }, [id, info, pid, setData, store.dispatch, store.getState])
 
-  isAll = () => {
-    this.setState({
-      isAll: !this.state.isAll
-    })
-  }
-
-  render() {
-    const {
-      play: { data = [] },
-      match: {
-        params: { id, pid }
-      }
-    } = this.props
-    const { pageSize, start, end, isReverse, isAll } = this.state
-    const len = parseInt(data.length / pageSize)
-    const surplus = data.length % pageSize
-    const dataSource = data.slice(start, end)
-    return (
-      <Fragment>
-        {data.length ? (
-          <div styleName="playlistbox">
-            {data.length > pageSize ? (
-              <div styleName="play-page">
-                {data.length > 144 ? (
-                  <div styleName="play-prev-next">
-                    <div styleName="pn" onClick={this.onPrev}>
-                      <i className="iconfont">&#xe8ff;</i>
-                    </div>
-                    <div styleName="pn" onClick={this.onNext}>
-                      <i className="iconfont">&#xe65e;</i>
-                    </div>
-                    <div onClick={this.isAll}>全部集数</div>
+  const { data = [] } = info
+  const len = parseInt(data.length / pageSize)
+  const surplus = data.length % pageSize
+  const dataSource = data.slice(start, end)
+  return (
+    <>
+      {data.length ? (
+        <div styleName="playlistbox">
+          {data.length > pageSize ? (
+            <div styleName="play-page">
+              {data.length > 144 ? (
+                <div styleName="play-prev-next">
+                  <div styleName="pn" onClick={() => onPrev()}>
+                    <i className="iconfont">&#xe8ff;</i>
                   </div>
-                ) : null}
-                <div styleName="playlist playlist-boreder" ref={e => (this.pageNav = e)}>
-                  <ul styleName="playlist-nav" ref={e => (this.pageNavUl = e)} style={{ width: `${(len + (surplus ? 1 : 0)) * 140}px` }}>
-                    {this.page()}
-                  </ul>
+                  <div styleName="pn" onClick={() => onNext()}>
+                    <i className="iconfont">&#xe65e;</i>
+                  </div>
+                  <div onClick={() => onAll(!isAll)}>全部集数</div>
                 </div>
+              ) : null}
+              <div styleName="playlist playlist-boreder" ref={pageNav}>
+                <ul styleName="playlist-nav" ref={pageNavUl} style={{ width: `${(len + (surplus ? 1 : 0)) * 140}px` }}>
+                  {page()}
+                </ul>
               </div>
-            ) : null}
-            <div styleName="playlist">
-              <ul styleName="playlist-ul">
-                {dataSource.map(item => (
-                  <li styleName={+pid === +item.episode ? 'active' : ''} key={item.episode}>
-                    {this.format(item.title, item.episode, id)}
-                  </li>
-                ))}
-              </ul>
             </div>
-            <div styleName={`moblie-list ${isAll ? 'showAll' : ''}`}>
-              <div styleName="moblie-title">
-                <h2>分集</h2>
-                {isMobile() ? <span onClick={this.onReverse}>{isReverse ? '倒序' : '正序'}</span> : null}
-                {isAll ? (
-                  <i className="iconfont" onClick={this.isAll}>
-                    &#xe610;
-                  </i>
-                ) : null}
-              </div>
-              <ul>
-                {(isReverse ? data.reverse() : data).map(item => (
-                  <li styleName={+pid === +item.episode ? 'active' : ''} key={item.episode}>
-                    <Link to={`/play/${id}/${item.episode}`}>{firstNumber(item.title)}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          ) : null}
+          <div styleName="playlist">
+            <ul styleName="playlist-ul">
+              {dataSource.map(item => (
+                <li styleName={+pid === +item.episode ? 'active' : ''} key={item.episode}>
+                  {format(item.title, item.episode, id)}
+                </li>
+              ))}
+            </ul>
           </div>
-        ) : null}
-      </Fragment>
-    )
-  }
+          <div styleName={`moblie-list ${isAll ? 'showAll' : ''}`}>
+            <div styleName="moblie-title">
+              <h2>分集</h2>
+              {isMobile() ? <span onClick={() => onReverse(!isReverse)}>{isReverse ? '倒序' : '正序'}</span> : null}
+              {isAll ? (
+                <i className="iconfont" onClick={() => onAll(!isAll)}>
+                  &#xe610;
+                </i>
+              ) : null}
+            </div>
+            <ul>
+              {(isReverse ? data.reverse() : data).map(item => (
+                <li styleName={+pid === +item.episode ? 'active' : ''} key={item.episode}>
+                  <Link to={`/play/${id}/${item.episode}`}>{firstNumber(item.title)}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ) : null}
+    </>
+  )
 }
-
-export default PlayList

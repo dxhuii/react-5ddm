@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { withRouter, Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+
+// redux
+import { useStore, useSelector } from 'react-redux'
 import { recommend } from '@/store/actions/list'
 import { getList } from '@/store/reducers/list'
 
@@ -10,35 +10,23 @@ import { formatPic } from '@/utils'
 
 import './style.scss'
 
-@withRouter
-@connect(
-  (state, props) => ({
-    animeData: getList(state, 'anime'),
-    newsData: getList(state, 'news')
-  }),
-  dispatch => ({
-    recommendAnime: bindActionCreators(recommend, dispatch),
-    recommendNews: bindActionCreators(recommend, dispatch)
-  })
-)
-class Recommend extends Component {
-  static propTypes = {
-    recommendAnime: PropTypes.func,
-    recommendNews: PropTypes.func,
-    animeData: PropTypes.object,
-    newsData: PropTypes.object
-  }
-  componentDidMount() {
-    const { recommendAnime, animeData, recommendNews, newsData } = this.props
-    if (!animeData.data) {
-      recommendAnime({ name: 'anime' })
-    }
-    if (!newsData.data) {
-      recommendNews({ name: 'news' })
-    }
-  }
+export default () => {
+  const anime = useSelector(state => getList(state, 'anime'))
+  const news = useSelector(state => getList(state, 'news'))
 
-  showData(data = [], type) {
+  const store = useStore()
+
+  useEffect(() => {
+    const getData = args => recommend(args)(store.dispatch, store.getState)
+    if (!anime.data) {
+      getData({ name: 'anime' })
+    }
+    if (!news.data) {
+      getData({ name: 'news' })
+    }
+  }, [anime.data, news.data, store.dispatch, store.getState])
+
+  const showData = (data = [], type) => {
     const link = id => (type ? `/subject/${id}` : `/article/${id}`)
     return data.map(item => (
       <li key={item.id}>
@@ -52,17 +40,10 @@ class Recommend extends Component {
     ))
   }
 
-  render() {
-    const { newsData, animeData } = this.props
-    const news = newsData.data
-    const anime = animeData.data
-    return (
-      <ul styleName="recommend">
-        {this.showData(anime, 1)}
-        {this.showData(news)}
-      </ul>
-    )
-  }
+  return (
+    <ul styleName="recommend">
+      {showData(anime.data, 1)}
+      {showData(news.data)}
+    </ul>
+  )
 }
-
-export default Recommend

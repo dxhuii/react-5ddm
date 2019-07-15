@@ -1,41 +1,29 @@
-import React, { Component } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+
+// redux
+import { useStore, useSelector } from 'react-redux'
 import { newsIndex } from '@/store/actions/newsIndex'
 import { getNewsIndex } from '@/store/reducers/newsIndex'
 
 import Loading from '@/components/Ui/Loading'
 import './style.scss'
 
-@withRouter
-@connect(
-  (state, props) => ({
-    newsData: getNewsIndex(state, props.name)
-  }),
-  dispatch => ({
-    newsIndex: bindActionCreators(newsIndex, dispatch)
-  })
-)
-class NewsYG extends Component {
-  static propTypes = {
-    newsIndex: PropTypes.func,
-    newsData: PropTypes.object,
-    name: PropTypes.string,
-    isType: PropTypes.bool,
-    isCate: PropTypes.bool,
-    title: PropTypes.string,
-    sty: PropTypes.object
-  }
-  componentDidMount() {
-    const { newsIndex, newsData, name } = this.props
-    if (!newsData.data) {
-      newsIndex({ name })
-    }
-  }
+export default function NewsYG({ name, sty, isType, isCate, title }) {
+  const info = useSelector(state => getNewsIndex(state, name))
+  const store = useStore()
 
-  getClass(cid) {
+  useEffect(() => {
+    const _newsIndex = args => newsIndex(args)(store.dispatch, store.getState)
+    if (!info.data) {
+      _newsIndex({ name })
+    }
+  })
+
+  const { data = [], loading } = info || {}
+
+  const getClass = cid => {
     let type = 6
     switch (cid) {
       case 214:
@@ -57,15 +45,11 @@ class NewsYG extends Component {
     return type
   }
 
-  showData() {
-    const {
-      newsData: { data = [] },
-      isType
-    } = this.props
+  const showData = () => {
     return data.map(item => (
       <li key={item.id}>
         {isType ? (
-          <Link styleName={`type type-${this.getClass(item.cid)}`} to={`/news/${item.cid}`} title={item.name}>
+          <Link styleName={`type type-${getClass(item.cid)}`} to={`/news/${item.cid}`} title={item.name}>
             {item.name}
           </Link>
         ) : null}
@@ -74,41 +58,39 @@ class NewsYG extends Component {
     ))
   }
 
-  render() {
-    const {
-      newsData: { loading },
-      title,
-      isCate,
-      sty
-    } = this.props
-    return (
-      <div style={sty}>
-        <div className="title">
-          <h2 styleName="h2">{title || '预告'}</h2>
-          {isCate ? (
-            <ul styleName="news-tab tab">
-              <li>
-                <Link to="/news/op">OP</Link>
-              </li>
-              <li>
-                <Link to="/news/ed">ED</Link>
-              </li>
-              <li>
-                <Link to="/news/cm">CM</Link>
-              </li>
-              <li>
-                <Link to="/news/bgm">BGM</Link>
-              </li>
-            </ul>
-          ) : null}
-        </div>
-        <ul styleName="newstxt">
-          {loading ? <Loading /> : null}
-          {this.showData()}
-        </ul>
+  return (
+    <div style={sty}>
+      <div className="title">
+        <h2 styleName="h2">{title || '预告'}</h2>
+        {isCate ? (
+          <ul styleName="news-tab tab">
+            <li>
+              <Link to="/news/op">OP</Link>
+            </li>
+            <li>
+              <Link to="/news/ed">ED</Link>
+            </li>
+            <li>
+              <Link to="/news/cm">CM</Link>
+            </li>
+            <li>
+              <Link to="/news/bgm">BGM</Link>
+            </li>
+          </ul>
+        ) : null}
       </div>
-    )
-  }
+      <ul styleName="newstxt">
+        {loading ? <Loading /> : null}
+        {showData()}
+      </ul>
+    </div>
+  )
 }
 
-export default NewsYG
+NewsYG.propTypes = {
+  name: PropTypes.string,
+  isType: PropTypes.bool,
+  isCate: PropTypes.bool,
+  title: PropTypes.string,
+  sty: PropTypes.object
+}

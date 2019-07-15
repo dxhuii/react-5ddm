@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import QRCode from 'qrcode.react'
 
@@ -47,7 +47,7 @@ export default function Share({ data = {}, location = {} }) {
   }, [location])
 
   return (
-    <Fragment>
+    <>
       <i styleName="wechat" onClick={shareToWeiXin} />
       <i styleName="weibo" onClick={() => goShare('weibo')} />
       <i styleName="tieba" onClick={() => goShare('tieba')} />
@@ -55,7 +55,7 @@ export default function Share({ data = {}, location = {} }) {
       <i styleName="qq" onClick={() => goShare('qq')} />
       <i styleName="facebook" onClick={() => goShare('facebook')} />
       <i styleName="twitter" onClick={() => goShare('twitter')} />
-      <Fragment>
+      <>
         {showQrcode ? (
           <div
             styleName="mark"
@@ -85,8 +85,8 @@ export default function Share({ data = {}, location = {} }) {
             将此页面分享给你的朋友或朋友圈
           </div>
         </div>
-      </Fragment>
-    </Fragment>
+      </>
+    </>
   )
 }
 

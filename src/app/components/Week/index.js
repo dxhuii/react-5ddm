@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+// redux
+import { useStore, useSelector } from 'react-redux'
 import { week } from '@/store/actions/list'
 import { getList } from '@/store/reducers/list'
 
@@ -12,43 +12,21 @@ import Item from '@/components/Week/Item'
 
 import './style.scss'
 
-@withRouter
-@connect(
-  state => ({
-    weekData: getList(state, 'week')
-  }),
-  dispatch => ({
-    week: bindActionCreators(week, dispatch)
-  })
-)
-class weekDay extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      currentIndex: 0,
-      onWeekShow: false
+export default function WeekDay({ id, title, link, isJp, type, linkText }) {
+  const [current, setCurrent] = useState(0)
+  const [tab, showTab] = useState(false)
+
+  const info = useSelector(state => getList(state, 'week'))
+  const store = useStore()
+
+  useEffect(() => {
+    const _week = args => week(args)(store.dispatch, store.getState)
+    if (!info.data) {
+      _week({ id })
     }
-  }
+  }, [id, info.data, store.dispatch, store.getState])
 
-  static propTypes = {
-    weekData: PropTypes.object,
-    week: PropTypes.func,
-    id: PropTypes.any,
-    title: PropTypes.string,
-    link: PropTypes.string,
-    isJp: PropTypes.array,
-    type: PropTypes.number,
-    linkText: PropTypes.string
-  }
-
-  componentDidMount() {
-    const { weekData, week, id } = this.props
-    if (!weekData.data) {
-      week({ id })
-    }
-  }
-
-  getArea(weekData = []) {
+  const getArea = (weekData = []) => {
     let cn = []
     let jp = []
     weekData.map(item => {
@@ -61,7 +39,7 @@ class weekDay extends Component {
     return [cn, jp]
   }
 
-  getEveryWeek(weekData, isCN) {
+  const getEveryWeek = (weekData, isCN) => {
     // isCN  1 日本  其他为中国
     let data = {}
     let [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday] = [[], [], [], [], [], [], []]
@@ -94,57 +72,53 @@ class weekDay extends Component {
     return data
   }
 
-  onWeek = () => {
-    this.setState({
-      onWeekShow: !this.state.onWeekShow
-    })
+  const onWeek = () => {
+    showTab(!tab)
   }
 
-  render() {
-    const {
-      title,
-      weekData: { data = [], loading },
-      link,
-      isJp,
-      type,
-      linkText
-    } = this.props
-    const { currentIndex, onWeekShow } = this.state
-    const weekCn = ['最新', '一', '二', '三', '四', '五', '六', '日']
-    const weekEng = ['Zero', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    const weekType = this.getArea(data)
-    const weekData = type === -1 ? this.getEveryWeek(data) : this.getEveryWeek(weekType[type], type)
-    return (
-      <div styleName="index-week">
-        <div className="title">
-          {type !== -1 && (
-            <h2>
-              <i className={isJp ? 'title-icon' : 'title-icon cn'} /> {title}
-            </h2>
-          )}
-          <div styleName="week-tab">
-            <span onClick={this.onWeek}>最新</span>
-            <ul styleName={`tab ${onWeekShow ? 'show' : ''}`} className={`${onWeekShow ? 'box' : ''}`}>
-              {weekCn.map((item, index) => (
-                <li key={index} onClick={() => this.setState({ currentIndex: index })} styleName={index === currentIndex ? 'active' : ''}>
-                  {`${index !== 0 ? '周' : ''}${item}`}
-                  {isJp && index !== 0 ? <em>{isJp[index]}</em> : ''}
-                </li>
-              ))}
-            </ul>
-          </div>
-          {link ? (
-            <Link to={link}>
-              {linkText || '新番时间表'}
-              <i className="iconfont">&#xe65e;</i>
-            </Link>
-          ) : null}
+  const { data = [], loading } = info
+
+  const weekCn = ['最新', '一', '二', '三', '四', '五', '六', '日']
+  const weekEng = ['Zero', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+  const weekType = getArea(data)
+  const weekData = type === -1 ? getEveryWeek(data) : getEveryWeek(weekType[type], type)
+  return (
+    <div styleName="index-week">
+      <div className="title">
+        {type !== -1 && (
+          <h2>
+            <i className={isJp ? 'title-icon' : 'title-icon cn'} /> {title}
+          </h2>
+        )}
+        <div styleName="week-tab">
+          <span onClick={onWeek}>最新</span>
+          <ul styleName={`tab ${tab ? 'show' : ''}`} className={`${tab ? 'box' : ''}`}>
+            {weekCn.map((item, index) => (
+              <li key={index} onClick={() => setCurrent(index)} styleName={index === current ? 'active' : ''}>
+                {`${index !== 0 ? '周' : ''}${item}`}
+                {isJp && index !== 0 ? <em>{isJp[index]}</em> : ''}
+              </li>
+            ))}
+          </ul>
         </div>
-        {loading ? <Loading /> : null}
-        <Item data={weekData[weekEng[currentIndex]]} type={type} />
+        {link ? (
+          <Link to={link}>
+            {linkText || '新番时间表'}
+            <i className="iconfont">&#xe65e;</i>
+          </Link>
+        ) : null}
       </div>
-    )
-  }
+      {loading ? <Loading /> : null}
+      <Item data={weekData[weekEng[current]]} type={type} />
+    </div>
+  )
 }
 
-export default weekDay
+WeekDay.propTypes = {
+  id: PropTypes.any,
+  title: PropTypes.string,
+  link: PropTypes.string,
+  isJp: PropTypes.array,
+  type: PropTypes.number,
+  linkText: PropTypes.string
+}

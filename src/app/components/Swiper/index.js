@@ -1,98 +1,81 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 
 import { Swipe } from 'swipejs/react'
 import './style.scss'
 
-export default class Swiper extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {
-      current: 0
-    }
-    this.mySwipe = {}
+export default function Swiper({ Pagination, Controller, Autoplay = 0, Start = 0, Continuous = true, children }) {
+  const [current, setCurrent] = useState(0)
+  const swipe = useRef()
+
+  const handleCallback = index => {
+    setCurrent(index)
   }
 
-  static defaultProps = {
-    data: []
+  const onTransactionEnd = () => {
+    swipe.current.instance.restart()
   }
 
-  static propTypes = {
-    children: PropTypes.array,
-    Pagination: PropTypes.bool,
-    Controller: PropTypes.bool,
-    Continuous: PropTypes.bool,
-    Start: PropTypes.number,
-    Autoplay: PropTypes.number
-  }
-
-  componentDidMount() {
-    this.mySwipe = { ...this.swipe.instance }
-  }
-
-  handleCallback = index => {
-    this.setState({ current: index })
-  }
-
-  onTransactionEnd = () => {
-    this.mySwipe.restart()
-  }
-
-  prev = e => {
+  const prev = e => {
     e.stopPropagation()
-    this.mySwipe.prev()
+    swipe.current.instance.prev()
   }
 
-  next = e => {
+  const next = e => {
     e.stopPropagation()
-    this.mySwipe.next()
+    swipe.current.instance.next()
   }
 
-  onCur = index => {
-    this.mySwipe.slide(parseInt(index, 10), 300)
+  const onCur = index => {
+    swipe.current.instance.slide(parseInt(index, 10), 300)
   }
 
-  render() {
-    const { Pagination, Controller, Autoplay = 0, Start = 0, Continuous = true } = this.props
-    const { current } = this.state
-    const elem = Array.from(Array(this.props.children.length), (v, k) => k) || []
-    return (
-      <div styleName="swiper">
-        <Swipe
-          ref={o => (this.swipe = o)}
-          startSlide={Start}
-          speed={300}
-          auto={Autoplay}
-          draggable={true}
-          continuous={Continuous}
-          autoRestart={false}
-          disableScroll={false}
-          stopPropagation={false}
-          callback={this.handleCallback}
-          transitionEnd={this.onTransactionEnd}
-        >
-          {this.props.children}
-        </Swipe>
-        {Pagination ? (
-          <div className="swiper-page" ref={e => (this.page = e)}>
-            {elem.map(item => (
-              <em key={item} className={item === current ? 'cur' : ''} onClick={() => this.onCur(item)}>
-                {item + 1}
-              </em>
-            ))}
+  const elem = Array.from(Array(children.length), (v, k) => k) || []
+  return (
+    <div styleName="swiper">
+      <Swipe
+        ref={swipe}
+        startSlide={Start}
+        speed={300}
+        auto={Autoplay}
+        draggable={true}
+        continuous={Continuous}
+        autoRestart={false}
+        disableScroll={false}
+        stopPropagation={false}
+        callback={handleCallback}
+        transitionEnd={onTransactionEnd}
+      >
+        {children}
+      </Swipe>
+      {Pagination ? (
+        <div className="swiper-page">
+          {elem.map(item => (
+            <em key={item} className={item === current ? 'cur' : ''} onClick={() => onCur(item)}>
+              {item + 1}
+            </em>
+          ))}
+        </div>
+      ) : null}
+      {Controller ? (
+        <>
+          <div className="swiper-prev" onClick={prev}>
+            <i className="iconfont">&#xe8ff;</i>
           </div>
-        ) : null}
-        {Controller ? (
-          <Fragment>
-            <div className="swiper-prev" onClick={this.prev}>
-              <i className="iconfont">&#xe8ff;</i>
-            </div>
-            <div className="swiper-next" onClick={this.next}>
-              <i className="iconfont">&#xe65e;</i>
-            </div>
-          </Fragment>
-        ) : null}
-      </div>
-    )
-  }
+          <div className="swiper-next" onClick={next}>
+            <i className="iconfont">&#xe65e;</i>
+          </div>
+        </>
+      ) : null}
+    </div>
+  )
+}
+
+Swiper.propTypes = {
+  children: PropTypes.array,
+  Pagination: PropTypes.bool,
+  Controller: PropTypes.bool,
+  Continuous: PropTypes.bool,
+  Start: PropTypes.number,
+  Autoplay: PropTypes.number
 }

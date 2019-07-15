@@ -1,149 +1,86 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+// redux
+import { useStore } from 'react-redux'
 import { signUp, getCode } from '@/store/actions/user'
 
 import '../style.scss'
 
-@withRouter
-@connect(
-  (state, props) => ({}),
-  dispatch => ({
-    signUp: bindActionCreators(signUp, dispatch),
-    getCode: bindActionCreators(getCode, dispatch)
-  })
-)
-class SignIn extends Component {
-  static propTypes = {
-    signUp: PropTypes.func,
-    history: PropTypes.object,
-    getCode: PropTypes.func
-  }
-  constructor(props) {
-    super(props)
-    this.state = {
-      rand: 0,
-      base64img: '',
-      imgKey: ''
-    }
-    this.submit = this.submit.bind(this)
-    this.reload = null
-  }
+export default () => {
+  const store = useStore()
+  const _signUp = args => signUp(args)(store.dispatch, store.getState)
+  const [base64img, getBase64] = useState('')
+  const [imgkey, getImgKey] = useState('')
+  const [username, password, email, rePassword, validate] = [useRef(), useRef(), useRef(), useRef(), useRef()]
 
-  componentDidMount() {
-    this.getVerify()
-  }
+  useEffect(() => {
+    getVerify()
+  }, [getVerify])
 
-  componentWillUnmount() {
-    clearTimeout(this.reload)
-  }
-
-  getVerify = async () => {
-    const { getCode } = this.props
-    let [err, data] = await getCode()
+  const getVerify = useCallback(async () => {
+    const _getCode = () => getCode()(store.dispatch, store.getState)
+    let [err, data] = await _getCode()
     if (data.code === 0) {
       const { base64img, imgkey } = data.data
-      this.setState({
-        base64img,
-        imgkey
-      })
+      getBase64(base64img)
+      getImgKey(imgkey)
     }
-  }
-  async submit(event) {
+  }, [store.dispatch, store.getState])
+
+  const submit = async event => {
     event.preventDefault()
 
-    const { username, password, email, rePassword, validate } = this
-    const { signUp } = this.props
-
-    if (!username.value) {
-      username.focus()
+    if (!username.current.value) {
+      username.current.focus()
       return false
     }
 
-    if (!email.value) {
-      email.focus()
+    if (!email.current.value) {
+      email.current.focus()
       return false
     }
 
-    if (!password.value) {
-      password.focus()
+    if (!password.current.value) {
+      password.current.focus()
       return false
     }
 
-    if (password.value !== rePassword.value) {
-      password.focus()
+    if (password.current.value !== rePassword.current.value) {
+      password.current.focus()
       return false
     }
 
-    if (validate.value !== validate.value) {
-      password.focus()
+    if (validate.current.value) {
+      password.current.focus()
       return false
     }
 
-    let [err, success] = await signUp({
-      username: username.value,
-      password: password.value,
-      email: email.value,
-      validate: validate.value,
-      key: this.state.imgkey
+    let [err, success] = await _signUp({
+      username: username.current.value,
+      password: password.current.value,
+      email: email.current.value,
+      validate: validate.current.value,
+      key: imgkey
     })
     if (success) {
-      this.reload = setTimeout(() => {
+      setTimeout(() => {
         window.location.reload()
         return false
       }, 300)
     }
   }
 
-  render() {
-    const { base64img } = this.state
-    return (
-      <form onSubmit={this.submit}>
-        <input
-          type="text"
-          ref={c => {
-            this.username = c
-          }}
-          placeholder="请输入账号"
-        />
-        <input
-          type="text"
-          ref={c => {
-            this.email = c
-          }}
-          placeholder="请输入Email"
-        />
-        <input
-          type="password"
-          ref={c => {
-            this.password = c
-          }}
-          placeholder="请输入密码"
-        />
-        <input
-          type="password"
-          ref={c => {
-            this.rePassword = c
-          }}
-          placeholder="再输入一次密码"
-        />
-        <div styleName="validate">
-          <input
-            type="text"
-            ref={c => {
-              this.validate = c
-            }}
-            placeholder="请输入验证"
-          />
-          <img src={base64img} onClick={this.getVerify} />
-        </div>
-        <button type="submit">注册</button>
-      </form>
-    )
-  }
+  return (
+    <form onSubmit={submit}>
+      <input type="text" ref={username} placeholder="请输入账号" />
+      <input type="text" ref={email} placeholder="请输入Email" />
+      <input type="password" ref={password} placeholder="请输入密码" />
+      <input type="password" ref={rePassword} placeholder="再输入一次密码" />
+      <div styleName="validate">
+        <input type="text" ref={validate} placeholder="请输入验证" />
+        <img src={base64img} onClick={getVerify} />
+      </div>
+      <button type="submit">注册</button>
+    </form>
+  )
 }
-
-export default SignIn

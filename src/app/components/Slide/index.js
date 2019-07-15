@@ -1,52 +1,35 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+// redux
+import { useStore, useSelector } from 'react-redux'
 import { slide } from '@/store/actions/slide'
 import { getSlide } from '@/store/reducers/slide'
 
 import Swiper from '../Swiper'
 import './style.scss'
 
-@connect(
-  state => ({
-    slideData: getSlide(state)
-  }),
-  dispatch => ({
-    slide: bindActionCreators(slide, dispatch)
-  })
-)
-class Slide extends Component {
-  static propTypes = {
-    slideData: PropTypes.object,
-    slide: PropTypes.func
-  }
+export default () => {
+  const info = useSelector(state => getSlide(state))
+  const store = useStore()
 
-  componentDidMount() {
-    const { slideData, slide } = this.props
-    if (!slideData.data) {
-      slide()
+  useEffect(() => {
+    const _slide = args => slide(args)(store.dispatch, store.getState)
+    if (!info.data) {
+      _slide()
     }
-  }
+  }, [store.dispatch, store.getState, info.data])
 
-  render() {
-    const {
-      slideData: { data = [] }
-    } = this.props
-    return (
-      <Swiper Pagination={true} Controller={true} Autoplay={3000} Start={0}>
-        {data.map(item => (
-          <div className="swipe-item" styleName="slide" key={item.url}>
-            <a href={item.url}>
-              <img src={item.pic} />
-              <p>{item.title}</p>
-            </a>
-          </div>
-        ))}
-      </Swiper>
-    )
-  }
+  const { data = [] } = info
+  return (
+    <Swiper Pagination={true} Controller={true} Autoplay={3000} Start={0}>
+      {data.map(item => (
+        <div className="swipe-item" styleName="slide" key={item.url}>
+          <a href={item.url}>
+            <img src={item.pic} />
+            <p>{item.title}</p>
+          </a>
+        </div>
+      ))}
+    </Swiper>
+  )
 }
-
-export default Slide

@@ -1,59 +1,32 @@
-import React, { Component, Fragment } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+// redux
+import { useStore } from 'react-redux'
 import { mark } from '@/store/actions/mark'
 
 import Toast from '@/components/Toast'
 
 import './style.scss'
 
-@withRouter
-@connect(
-  (state, props) => ({}),
-  dispatch => ({
-    mark: bindActionCreators(mark, dispatch)
-  })
-)
-class Tating extends Component {
-  static propTypes = {
-    data: PropTypes.object,
-    mark: PropTypes.func,
-    score: PropTypes.func,
-    id: PropTypes.number,
-    sid: PropTypes.number,
-    uid: PropTypes.number
-  }
+export default function Tating({ data, id, sid, uid, score }) {
+  const starText = ['很差', '较差', '还行', '推荐', '力荐']
+  const [starWith, setStarWith] = useState(16)
+  const [star, setStar] = useState(16)
+  const store = useStore()
 
-  static defaultProps = {
-    data: {}
-  }
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      starWith: 16,
-      star: 0,
-      starText: ['很差', '较差', '还行', '推荐', '力荐']
-    }
-  }
-
-  async onStar(index) {
-    this.setState({
-      starWith: index * 16,
-      star: index
-    })
-    const { mark, score, id, sid, uid } = this.props
-    let [err, data] = await mark({ id, val: index })
+  const onStar = async index => {
+    setStarWith(index * 16)
+    setStar(index)
+    const _mark = args => mark(args)(store.dispatch, store.getState)
+    let [err, data] = await _mark({ id, val: index })
     if (data.rcode === 1) {
       score({ id, sid, uid })
       Toast.success('评分成功')
     }
   }
 
-  starClass(pfnum) {
+  const starClass = pfnum => {
     var pfclass = ''
     if (pfnum >= 50) {
       pfclass = 'bigstar50'
@@ -81,7 +54,7 @@ class Tating extends Component {
     return pfclass
   }
 
-  show(data, text) {
+  const show = (data, text) => {
     const { a, b, c, d, e, pinfen } = data
     if (pinfen > 0) {
       const total = a + b + c + d + e
@@ -93,7 +66,7 @@ class Tating extends Component {
           <h4>评分</h4>
           <div styleName="rating-num">
             <strong>{pinfen === '10.0' ? 10 : pinfen}</strong>
-            <span className={this.starClass(parseFloat(pinfen) * 5)} />
+            <span className={starClass(parseFloat(pinfen) * 5)} />
             <span styleName="people">
               <em>{total}</em>人评价
             </span>
@@ -116,37 +89,31 @@ class Tating extends Component {
     }
   }
 
-  move(index) {
-    this.setState({
-      star: index
-    })
+  const move = index => {
+    setStar(index)
   }
 
-  render() {
-    const { starWith, starText, star } = this.state
-    const { data } = this.props
-    return (
-      <Fragment>
-        {this.show(data, starText)}
-        <div styleName="starBox">
-          <em>评分</em>
-          <div styleName="starlist">
-            {[1, 2, 3, 4, 5].map(item => (
-              <a
-                key={item}
-                title={`${item}星`}
-                styleName={`star_${item}`}
-                onClick={() => this.onStar(item)}
-                onMouseOver={() => this.move(item)}
-              />
-            ))}
-          </div>
-          <div styleName="star_current" style={{ width: starWith }} />
-          <span>{starText[star - 1]}</span>
+  return (
+    <>
+      {show(data, starText)}
+      <div styleName="starBox">
+        <em>评分</em>
+        <div styleName="starlist">
+          {[1, 2, 3, 4, 5].map(item => (
+            <a key={item} title={`${item}星`} styleName={`star_${item}`} onClick={() => onStar(item)} onMouseOver={() => move(item)} />
+          ))}
         </div>
-      </Fragment>
-    )
-  }
+        <div styleName="star_current" style={{ width: starWith }} />
+        <span>{starText[star - 1]}</span>
+      </div>
+    </>
+  )
 }
 
-export default Tating
+Tating.propTypes = {
+  data: PropTypes.object,
+  score: PropTypes.func,
+  id: PropTypes.number,
+  sid: PropTypes.number,
+  uid: PropTypes.number
+}
