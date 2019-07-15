@@ -15,6 +15,5 @@ export default (state = cloneObj(initialState), action = {}) => {
 
 export const getNewsIndex = (state, name, id) => {
   const ids = name === 'newslist' && id !== 44 ? id : name
-  console.log(state, ids)
   return state.newsIndex[ids] ? state.newsIndex[ids] : {}
 }
