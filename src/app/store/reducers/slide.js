@@ -1,22 +1,17 @@
-import merge from 'lodash/merge'
+import cloneObj from '../clone'
 
-export default function() {
-  let initialState = {}
-  return function slide(state = initialState, action = {}) {
-    const { data } = action
-    switch (action.type) {
-      case 'GET_SLIDE':
-        state = data
-        return merge({}, state, {})
-      case 'CLEAN':
-        return {}
+let initialState = {}
 
-      default:
-        return state
-    }
+export default (state = cloneObj(initialState), action = {}) => {
+  const { data } = action
+  switch (action.type) {
+    case 'GET_SLIDE':
+      if (data) state = data
+      break
+    default:
+      return state
   }
+  return cloneObj(state)
 }
 
-export const getSlide = state => {
-  return state.slide ? state.slide : {}
-}
+export const getSlide = state => state.slide || {}

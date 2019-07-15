@@ -2,9 +2,10 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import compress from 'compression'
+import cache from 'memory-cache'
 
 // 配置
-import { PORT } from 'Config'
+import { PORT, AUTH_COOKIE_NAME, COOKIE_PREFIX, CACHA_TIME } from 'Config'
 
 import render from './render'
 
@@ -21,6 +22,14 @@ app.use(express.static('./dist/client'))
 app.use(express.static('./public'))
 
 app.use(function(req, res, next) {
+  // 如果是游客，则优先使用缓存中的数据
+  if (!req.cookies[`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`]) {
+    let _cache = cache.get(req.url)
+    if (_cache) {
+      res.send(_cache)
+      return
+    }
+  }
   // 在服务端发起的请求的ua，传递给api
   if (req && req.headers && req.headers['user-agent']) {
     global.ua = req.headers['user-agent']
@@ -41,17 +50,24 @@ app.use(function(req, res, next) {
 app.use('/sign', sign())
 
 app.get('*', async function(req, res) {
-  let { context, html, meta, reduxState, CNZZ_STAT, BAIDU_STAT, debug } = await render(req, res)
+  let { code, redirect, html, meta, reduxState, CNZZ_STAT, BAIDU_STAT, debug } = await render(req, res)
 
-  res.status(context.code)
+  res.status(code)
 
-  if (context.redirect) {
-    res.redirect(context.redirect)
+  if (redirect) {
+    res.redirect(redirect)
   } else {
-    res.render('../dist/server/index.ejs', { html, reduxState, meta, CNZZ_STAT, BAIDU_STAT, debug })
+    res.render('../dist/server/index.ejs', { html, reduxState, meta, CNZZ_STAT, BAIDU_STAT, debug }),
+      function() {
+        // 对游客的请求进行缓存
+        if (!req.cookies[`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`]) {
+          cache.put(req.url, html, CACHA_TIME)
+        }
+        res.send(html)
+      }
   }
 
-  res.end()
+  // res.end() /
 })
 
 app.listen(PORT)

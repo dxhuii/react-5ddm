@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux'
-
 import user from './user'
 import detail from './detail'
 import playlist from './playlist'
@@ -14,24 +12,19 @@ import scroll from './scroll'
 import history from './history'
 import month from './month'
 import game from './game'
-
-export default function() {
-  const states = {
-    user: user(),
-    detail: detail(),
-    playlist: playlist(),
-    player: player(),
-    list: list(),
-    slide: slide(),
-    newsIndex: newsIndex(),
-    article: article(),
-    config: config(),
-    episode: episode(),
-    month: month(),
-    scroll: scroll(),
-    history: history(),
-    game: game()
-  }
-
-  return combineReducers(states)
+export default {
+  user,
+  detail,
+  playlist,
+  player,
+  list,
+  slide,
+  newsIndex,
+  article,
+  config,
+  episode,
+  month,
+  scroll,
+  history,
+  game
 }

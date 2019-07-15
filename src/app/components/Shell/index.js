@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 // redux
 import { useStore } from 'react-redux'
 import { saveScrollPosition, setScrollPosition } from '@/store/actions/scroll'
-// import { addVisitHistory } from '@/store/actions/history'
 
 // tools
 import parseUrl from '@/common/parse-url'

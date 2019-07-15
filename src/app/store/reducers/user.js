@@ -1,19 +1,15 @@
-import merge from 'lodash/merge'
+import cloneObj from '../clone'
 
-export default function() {
-  let initialState = {}
-  return function user(state = initialState, action = {}) {
-    switch (action.type) {
-      case 'SAVE_USER_INFO':
-        state = action.data
-        return merge({}, state, {})
-      case 'CLEAN':
-        return {}
-
-      default:
-        return state
-    }
+let initialState = {}
+export default (state = initialState, action = {}) => {
+  switch (action.type) {
+    case 'SAVE_USER_INFO':
+      if (action.data) state = action.data
+      break
+    default:
+      return state
   }
+  return cloneObj(state)
 }
 
 // 获取用户信息

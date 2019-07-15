@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers'
 import { createLogger } from 'redux-logger'
@@ -11,7 +11,7 @@ if (process.env.NODE_ENV == 'development' && __CLIENT__) {
 }
 
 export default function configureStore(initialState = {}) {
-  const store = createStore(rootReducer(), initialState, compose(applyMiddleware(...middleware)))
+  const store = createStore(combineReducers(rootReducer), initialState, compose(applyMiddleware(...middleware)))
 
   /*
   if (module.hot) {
