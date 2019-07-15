@@ -149,6 +149,8 @@ if (DOMAIN_NAME === 'dddm.tv') {
   config = Object.assign({}, conf, defalut)
 }
 
+console.log(config, 'config')
+
 config.HEAD += `<link rel="icon" href="/${ico}favicon.ico" />`
 
 // 开发环境配置
