@@ -21,6 +21,7 @@
     "cookie-parser": "^1.4.4",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
+    "helmet": "^3.18.0",
     "js-cookie": "^2.2.0",
     "memory-cache": "^0.2.0",
     "qrcode.react": "^0.9.3",

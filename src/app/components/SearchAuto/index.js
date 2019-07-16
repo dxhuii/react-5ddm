@@ -15,7 +15,7 @@ export default function SearchAuto({ wd }) {
 
   useEffect(() => {
     const _search = args => search(args)(store.dispatch, store.getState)
-    if (!info.data) {
+    if (!info.data && wd) {
       _search({ wd })
     }
   }, [wd, store.dispatch, store.getState, info.data])

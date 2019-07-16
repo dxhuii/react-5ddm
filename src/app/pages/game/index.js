@@ -31,12 +31,14 @@ export default Shell(() => {
 
   const getGameData = useCallback(() => {
     const getData = args => gameList(args)(store.dispatch, store.getState)
-    getData({
-      order: 'update',
-      wd: 'totalList',
-      limit: 100
-    })
-  }, [store.dispatch, store.getState])
+    if (!info.data) {
+      getData({
+        order: 'update',
+        wd: 'totalList',
+        limit: 100
+      })
+    }
+  }, [info.data, store.dispatch, store.getState])
 
   useEffect(() => {
     const getData = args => gameList(args)(store.dispatch, store.getState)
