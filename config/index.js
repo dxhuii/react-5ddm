@@ -30,7 +30,7 @@ const conf = {
   debug: false,
   CLASS_SCOPED_NAME: '[hash:base64:8]',
   AUTH_COOKIE_NAME: 'auth',
-  CACHA_TIME: 60000,
+  CACHA_TIME: 300000,
   HEAD: `<meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">

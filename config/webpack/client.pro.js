@@ -2,6 +2,7 @@ const baseConfig = require('./client.base')
 const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const OfflinePlugin = require('offline-plugin')
+const config = require('../index')
 
 const webpackConfig = {
   ...baseConfig,
@@ -24,7 +25,7 @@ const webpackConfig = {
     new OfflinePlugin({
       autoUpdate: 1000 * 60 * 5,
       ServiceWorker: {
-        publicPath: '/sw.js'
+        publicPath: config.PUBLIC_PATH + '/sw.js'
       }
     }),
     // new ManifestPlugin({ fileName: 'manifest.json' }),
