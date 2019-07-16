@@ -6,7 +6,7 @@ import { isNumber, formatPic } from '@/utils'
 
 import './style.scss'
 
-const BangumiItem = ({ data = [] }) => {
+export default function BangumiItem({ data = [] }) {
   return (
     <div styleName="d-item">
       {data.map(item => (
@@ -41,5 +41,3 @@ BangumiItem.defaultProps = {
 BangumiItem.propTypes = {
   data: PropTypes.array
 }
-
-export default BangumiItem

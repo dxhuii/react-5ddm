@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react'
-import { withRouter, Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import useReactRouter from 'use-react-router'
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+// redux
+import { useStore, useSelector } from 'react-redux'
 import { monthLoad } from '@/store/actions/month'
 import { getMonth } from '@/store/reducers/month'
 
@@ -15,55 +15,25 @@ import Meta from '@/components/Meta'
 
 import './style.scss'
 
-@Shell
-@withRouter
-@connect(
-  (state, props) => ({
-    info: getMonth(state, props.match.params.month)
-  }),
-  dispatch => ({
-    monthLoad: bindActionCreators(monthLoad, dispatch)
-  })
-)
-class Month extends PureComponent {
-  static propTypes = {
-    info: PropTypes.object,
-    match: PropTypes.object,
-    monthLoad: PropTypes.func
-  }
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      nowYear: new Date().getFullYear(),
-      year: parseInt(props.match.params.month.substring(0, 4))
+export default Shell(() => {
+  const {
+    match: {
+      params: { month }
     }
-  }
-  componentDidMount() {
-    this.getData()
-  }
+  } = useReactRouter()
+  const nowYear = new Date().getFullYear()
+  const [year, onYear] = useState(parseInt(month.substring(0, 4)))
+  const store = useStore()
+  const info = useSelector(state => getMonth(state, month))
 
-  componentDidUpdate(prevProps) {
-    // 当 url 参数参数发生改变时，重新进行请求
-    let oldId = prevProps.match.params.month
-    let newId = this.props.match.params.month
-    if (newId !== oldId) this.getData()
-  }
-
-  getData = () => {
-    const {
-      info,
-      monthLoad,
-      match: {
-        params: { month }
-      }
-    } = this.props
+  useEffect(() => {
+    const getData = args => monthLoad(args)(store.dispatch, store.getState)
     if (!info.data) {
-      monthLoad({ month })
+      getData({ month })
     }
-  }
+  }, [info.data, month, store.dispatch, store.getState])
 
-  year(start) {
+  const getYear = start => {
     const d = new Date()
     const s = d.getFullYear() - start
     let y = []
@@ -73,61 +43,47 @@ class Month extends PureComponent {
     return y
   }
 
-  month(year) {
+  const getMonths = year => {
     let m = []
     for (let i = 1; i <= 12; i++) {
       m.push(i <= 9 ? `${year}0${i}` : `${year}${i}`)
     }
     return m
   }
-
-  onYear(year) {
-    this.setState({
-      year
-    })
-  }
-
-  render() {
-    const {
-      info: { data = [], loading },
-      match: {
-        params: { month }
-      }
-    } = this.props
-    const { year, nowYear } = this.state
-    const m = month.substring(4)
-    return (
-      <>
-        <Meta title={`${year}年${m}月播出的新番动漫_${m}月新番_动漫新番表_新番表`}>
-          <meta name="keywords" content={`${year}年${m}月播出的新番动漫,${m}月新番,动漫新番表,${m}月最新动漫,${year}年${m}月的动漫,新番表`} />
-          <meta name="description" content={`您想知道${year}年${m}月有哪些新番动漫播出吗，你想了解最新的动漫新番表 ，${m}月份最新动漫观看指南，${m}月播出的动漫资讯信息，请关注本站。`} />
-        </Meta>
-        {loading ? <Loading /> : null}
-        <div className="wp mt20">
-          <div className="box">
-            <ul styleName="year" className="clearfix">
-              {this.year(nowYear - 18).map(item => (
-                <li key={item} styleName={year === item ? 'cur' : ''} onClick={() => this.onYear(item)}>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <div styleName="month">
-              {this.month(year).map(item => (
-                <Link to={`/month/${item}`} key={item} styleName={month === item ? 'cur' : ''}>
-                  {item}
-                </Link>
-              ))}
-            </div>
+  const { data = [], loading } = info
+  const m = month.substring(4)
+  return (
+    <>
+      <Meta title={`${year}年${m}月播出的新番动漫_${m}月新番_动漫新番表_新番表`}>
+        <meta name="keywords" content={`${year}年${m}月播出的新番动漫,${m}月新番,动漫新番表,${m}月最新动漫,${year}年${m}月的动漫,新番表`} />
+        <meta
+          name="description"
+          content={`您想知道${year}年${m}月有哪些新番动漫播出吗，你想了解最新的动漫新番表 ，${m}月份最新动漫观看指南，${m}月播出的动漫资讯信息，请关注本站。`}
+        />
+      </Meta>
+      {loading ? <Loading /> : null}
+      <div className="wp mt20">
+        <div className="box">
+          <ul styleName="year" className="clearfix">
+            {getYear(nowYear - 18).map(item => (
+              <li key={item} styleName={year === item ? 'cur' : ''} onClick={() => onYear(item)}>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div styleName="month">
+            {getMonths(year).map(item => (
+              <Link to={`/month/${item}`} key={item} styleName={month === item ? 'cur' : ''}>
+                {item}
+              </Link>
+            ))}
           </div>
-          <div className="box mt20">
-            共 <b>{data.length}</b> 条
-          </div>
-          <Item data={data} />
         </div>
-      </>
-    )
-  }
-}
-
-export default Month
+        <div className="box mt20">
+          共 <b>{data.length}</b> 条
+        </div>
+        <Item data={data} />
+      </div>
+    </>
+  )
+})

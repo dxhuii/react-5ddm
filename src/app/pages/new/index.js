@@ -1,9 +1,8 @@
-import React, { PureComponent } from 'react'
-import { withRouter, Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+// redux
+import { useStore, useSelector } from 'react-redux'
 import { TopList } from '@/store/actions/list'
 import { getList } from '@/store/reducers/list'
 
@@ -12,102 +11,60 @@ import Meta from '@/components/Meta'
 
 import './style.scss'
 
-@Shell
-@withRouter
-@connect(
-  (state, props) => ({
-    info: getList(state, 'page-addtime')
-  }),
-  dispatch => ({
-    TopList: bindActionCreators(TopList, dispatch)
-  })
-)
-class NewPage extends PureComponent {
-  static propTypes = {
-    info: PropTypes.object,
-    TopList: PropTypes.func
+export default Shell(() => {
+  const store = useStore()
+  const info = useSelector(state => getList(state, 'page-addtime'))
+  const menu = {
+    201: 'tv',
+    202: 'ova',
+    203: 'juchang',
+    4: 'tebie',
+    204: 'zhenren',
+    35: 'qita'
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
-  componentDidMount() {
-    const { info, TopList } = this.props
+  useEffect(() => {
+    const getData = args => TopList(args)(store.dispatch, store.getState)
     if (!info.data) {
-      TopList({ order: 'addtime' })
+      getData({ order: 'addtime' })
     }
-  }
+  }, [info.data, store.dispatch, store.getState])
 
-  getName(id) {
-    let name = ''
-    switch (id) {
-      case 201:
-        name = 'tv'
-        break
-      case 202:
-        name = 'ova'
-        break
-      case 203:
-        name = 'juchang'
-        break
-      case 4:
-        name = 'tebie'
-        break
-      case 204:
-        name = 'zhenren'
-        break
-      case 35:
-        name = 'qita'
-        break
-      default:
-        name = 'list'
-        break
-    }
-    return name
-  }
-
-  render() {
-    const {
-      info: { data = [] }
-    } = this.props
-    return (
-      <>
-        <Meta title="最新更新的100个动漫" />
-        <div className="wp mt20">
-          <div className="box">
-            <ul styleName="newlist">
-              <li>
-                <span>动漫标题</span>
-                <span>动漫分类</span>
-                <span>动漫类型</span>
-                <span>更新时间</span>
+  const { data = [] } = info
+  return (
+    <>
+      <Meta title="最新更新的100个动漫" />
+      <div className="wp mt20">
+        <div className="box">
+          <ul styleName="newlist">
+            <li>
+              <span>动漫标题</span>
+              <span>动漫分类</span>
+              <span>动漫类型</span>
+              <span>更新时间</span>
+            </li>
+            {data.map(item => (
+              <li key={item.id}>
+                <span>
+                  <Link to={`/subject/${item.id}`}>{item.title}</Link> / <Link to={`/play/${item.id}/${item.pid}`}>{item.lastname}</Link>
+                  {item.isDate ? <em>new</em> : null}
+                </span>
+                <span>
+                  <Link to={`/type/${menu[item.listId] || 'list'}/-/-/-/-/-/-/`}>{item.listName}</Link>
+                </span>
+                <span>
+                  {(item.mcid || []).map(val => (
+                    <Link to={`/type/${menu[item.listId] || 'list'}/${val.id}/-/-/-/-/-/`} key={val.id}>
+                      {val.title}
+                    </Link>
+                  ))}
+                </span>
+                <span styleName={item.isDate ? 'red' : ''}>{item.time}</span>
               </li>
-              {data.map(item => (
-                <li key={item.id}>
-                  <span>
-                    <Link to={`/subject/${item.id}`}>{item.title}</Link> / <Link to={`/play/${item.id}/${item.pid}`}>{item.lastname}</Link>
-                    {item.isDate ? <em>new</em> : null}
-                  </span>
-                  <span>
-                    <Link to={`/type/${this.getName(item.listId)}/-/-/-/-/-/-/`}>{item.listName}</Link>
-                  </span>
-                  <span>
-                    {(item.mcid || []).map(val => (
-                      <Link to={`/type/${this.getName(item.listId)}/${val.id}/-/-/-/-/-/`} key={val.id}>
-                        {val.title}
-                      </Link>
-                    ))}
-                  </span>
-                  <span styleName={item.isDate ? 'red' : ''}>{item.time}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+            ))}
+          </ul>
         </div>
-      </>
-    )
-  }
-}
-
-export default NewPage
+      </div>
+    </>
+  )
+})

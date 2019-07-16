@@ -1,40 +1,23 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react'
 
+// redux
+import { useStore, useSelector } from 'react-redux'
 import { hotWeek } from '@/store/actions/list'
 import { getList } from '@/store/reducers/list'
 
 import Item from '@/components/Subject/Item'
 
-@connect(
-  (state, props) => ({
-    info: getList(state, 'hotweek')
-  }),
-  dispatch => ({
-    hotWeek: bindActionCreators(hotWeek, dispatch)
-  })
-)
-class HotWeek extends Component {
-  static propTypes = {
-    info: PropTypes.object.isRequired,
-    hotWeek: PropTypes.func
-  }
+export default () => {
+  const store = useStore()
+  const info = useSelector(state => getList(state, 'hotweek'))
 
-  componentDidMount() {
-    const { info, hotWeek } = this.props
+  useEffect(() => {
+    const getData = () => hotWeek()(store.dispatch, store.getState)
     if (!info || !info.data) {
-      hotWeek()
+      getData()
     }
-  }
+  }, [info, info.data, store.dispatch, store.getState])
 
-  render() {
-    const {
-      info: { data = [] }
-    } = this.props
-    return <Item data={data} />
-  }
+  const { data = [] } = info
+  return <Item data={data} />
 }
-
-export default HotWeek

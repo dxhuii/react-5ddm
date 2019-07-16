@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import React, { useEffect, useCallback } from 'react'
+import useReactRouter from 'use-react-router'
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { vodNews } from '@/store/actions/detail'
+// redux
+import { useStore, useSelector } from 'react-redux'
+import { vodNews, detail } from '@/store/actions/detail'
 import { getDetail } from '@/store/reducers/detail'
 
 import SideBar from '@/components/SideBar'
@@ -13,81 +12,51 @@ import Item from '@/components/News/Item'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
-@Shell
-@withRouter
-@connect(
-  (state, props) => ({
-    newsData: getDetail(state, `vod_news_${props.match.params.id}`)
-  }),
-  dispatch => ({
-    vodNews: bindActionCreators(vodNews, dispatch)
-  })
-)
-class VodNews extends Component {
-  static propTypes = {
-    vodNews: PropTypes.func,
-    newsData: PropTypes.object,
-    id: PropTypes.any,
-    match: PropTypes.object,
-    scrollLoad: PropTypes.bool
-  }
+import { NAME } from 'Config'
 
-  constructor(props) {
-    super(props)
-    this.load = this.load.bind(this)
-  }
+export default Shell(() => {
+  const {
+    match: {
+      params: { id }
+    }
+  } = useReactRouter()
+  const store = useStore()
+  const info = useSelector(state => getDetail(state, `vod_news_${id}`))
+  const vodInfo = useSelector(state => getDetail(state, id))
 
-  componentDidMount() {
-    const {
-      newsData,
-      match: {
-        params: { id }
-      }
-    } = this.props
-    if (!newsData.data) this.load()
-    ArriveFooter.add(id, this.load)
-  }
+  const load = useCallback(() => {
+    const getData = args => vodNews(args)(store.dispatch, store.getState)
+    getData({ id })
+  }, [id, store.dispatch, store.getState])
 
-  componentWillUnmount() {
-    const {
-      match: {
-        params: { id }
-      }
-    } = this.props
-    ArriveFooter.remove(id)
-  }
+  useEffect(() => {
+    const getVod = args => detail(args)(store.dispatch, store.getState)
+    if (!vodInfo.data) {
+      getVod({ id })
+    }
+    if (!info.data) load()
+    ArriveFooter.add(id, load)
+    return () => {
+      ArriveFooter.remove(id)
+    }
+  }, [id, info.data, load, store.dispatch, store.getState, vodInfo.data])
 
-  async load() {
-    const {
-      vodNews,
-      match: {
-        params: { id }
-      }
-    } = this.props
-    await vodNews({ id })
-  }
-
-  render() {
-    const {
-      newsData: { data = [] },
-      match: {
-        params: { id }
-      }
-    } = this.props
-    return (
-      <>
-        <Meta title="视频新闻列表" />
-        <div className="wp clearfix mt20">
-          <div className="left box fl">
-            <Item data={data} />
-          </div>
-          <div className="right fr">
-            <SideBar vodid={+id} />
-          </div>
+  const { data = [] } = info
+  const vod = vodInfo.data || {}
+  return (
+    <>
+      <Meta title={`${vod.title}预告_${vod.title}花絮_${vod.title}新闻_${vod.title}新闻列表`}>
+        <meta name="keywords" content={`${vod.title}预告,${vod.title}花絮,${vod.title}新闻`} />
+        <meta name="description" content={`${NAME}为您提供${vod.title}相关花絮,预告片以及，${vod.title}资讯新闻等更多信息请关注${NAME}`} />
+      </Meta>
+      <div className="wp clearfix mt20">
+        <div className="left box fl">
+          <Item data={data} />
         </div>
-      </>
-    )
-  }
-}
-
-export default VodNews
+        <div className="right fr">
+          <SideBar vodid={+id} />
+        </div>
+      </div>
+    </>
+  )
+})

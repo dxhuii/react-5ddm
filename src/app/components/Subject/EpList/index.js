@@ -4,13 +4,13 @@ import PropTypes from 'prop-types'
 
 import './style.scss'
 
-const EpList = props => {
+export default function EpList({ data = [], id }) {
   return (
     <ul styleName="eplist" className="mt20">
-      {props.data.map(item => (
+      {data.map(item => (
         <li key={item.pid}>
           <h4>
-            <Link to={`/episode/${props.id}/${item.pid ? item.pid : 1}`}>
+            <Link to={`/episode/${id}/${item.pid ? item.pid : 1}`}>
               {item.name} {item.title}
             </Link>
           </h4>
@@ -25,5 +25,3 @@ EpList.propTypes = {
   data: PropTypes.array.isRequired,
   id: PropTypes.number.isRequired
 }
-
-export default EpList

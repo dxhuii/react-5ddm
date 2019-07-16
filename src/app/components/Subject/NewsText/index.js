@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import './style.scss'
 
-const NewsText = props => {
+export default function NewsText({ data = [] }) {
   return (
     <ul styleName="d-yugao">
       <li styleName="top">
@@ -14,7 +14,7 @@ const NewsText = props => {
         <span styleName="play">播放</span>
         <span styleName="source">来源</span>
       </li>
-      {props.data.map(item => (
+      {data.map(item => (
         <li key={item.id}>
           <span styleName="time">{item.addtime}</span>
           <span styleName="name">
@@ -41,5 +41,3 @@ const NewsText = props => {
 NewsText.propTypes = {
   data: PropTypes.array.isRequired
 }
-
-export default NewsText

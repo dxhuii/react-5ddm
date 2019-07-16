@@ -1,9 +1,8 @@
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import useReactRouter from 'use-react-router'
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+// redux
+import { useStore, useSelector } from 'react-redux'
 import { week } from '@/store/actions/list'
 import { getList } from '@/store/reducers/list'
 
@@ -15,42 +14,23 @@ import Meta from '@/components/Meta'
 
 import './style.scss'
 
-@Shell
-@withRouter
-@connect(
-  state => ({
-    weekData: getList(state, 'week')
-  }),
-  dispatch => ({
-    week: bindActionCreators(week, dispatch)
-  })
-)
-class Week extends PureComponent {
-  static propTypes = {
-    weekData: PropTypes.object,
-    week: PropTypes.func,
-    match: PropTypes.object
-  }
-
-  componentDidMount() {
-    this.getData()
-  }
-
-  componentDidUpdate(prevProps) {
-    // 当 url 参数参数发生改变时，重新进行请求
-    let oldId = prevProps.match.params.id
-    let newId = this.props.match.params.id
-    if (newId !== oldId) this.getData()
-  }
-
-  getData = () => {
-    const { weekData, week } = this.props
-    if (!weekData.data) {
-      week()
+export default Shell(() => {
+  const {
+    match: {
+      params: { id }
     }
-  }
+  } = useReactRouter()
+  const store = useStore()
+  const info = useSelector(state => getList(state, 'week'))
 
-  getArea(weekData = []) {
+  useEffect(() => {
+    const getData = _ => week()(store.dispatch, store.getState)
+    if (!info.data) {
+      getData()
+    }
+  }, [info.data, store.dispatch, store.getState])
+
+  const getArea = (weekData = []) => {
     let cn = []
     let jp = []
     weekData.map(item => {
@@ -63,7 +43,7 @@ class Week extends PureComponent {
     return [cn, jp]
   }
 
-  getEveryWeek(weekData) {
+  const getEveryWeek = weekData => {
     // isCN  1 日本  其他为中国
     let data = {}
     let [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday] = [[], [], [], [], [], [], []]
@@ -94,41 +74,32 @@ class Week extends PureComponent {
     data.Sunday = Sunday
     return data
   }
-  render() {
-    const {
-      weekData: { data = [], loading },
-      match: {
-        params: { id }
-      }
-    } = this.props
-    const weekCn = ['一', '二', '三', '四', '五', '六', '日']
-    const weekEng = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    const weekType = this.getArea(data)
-    const weekData = id === '0' || id === '1' ? this.getEveryWeek(weekType[id], id) : this.getEveryWeek(data)
-    const today = new Date().getDay() - 1
-    const title = id === '1' ? '日本' : id === '0' ? '国产' : ''
-    return (
-      <div className="wp mt20">
-        <Meta title={`${title}新番时间表`}>
-          <meta name="keywords" content={`${title}新番时间表,${title}动漫时间表`} />
-          <meta name="description" content={`${title}新番时间表`} />
-        </Meta>
-        {loading ? <Loading /> : null}
-        <ul styleName="list">
-          {weekCn.map((item, index) => (
-            <li key={item} styleName={today === index ? 'active' : ''}>
-              {item}
-            </li>
-          ))}
-        </ul>
-        <ul styleName="weeklist">
-          {weekEng.map((obj, index) => (
-            <ItemS key={obj} data={weekData[weekEng[index]]} type={2} />
-          ))}
-        </ul>
-      </div>
-    )
-  }
-}
-
-export default Week
+  const { data = [], loading } = info
+  const weekCn = ['一', '二', '三', '四', '五', '六', '日']
+  const weekEng = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+  const weekType = getArea(data)
+  const weekData = id === '0' || id === '1' ? getEveryWeek(weekType[id], id) : getEveryWeek(data)
+  const today = new Date().getDay() - 1
+  const title = id === '1' ? '日本' : id === '0' ? '国产' : ''
+  return (
+    <div className="wp mt20">
+      <Meta title={`${title}新番时间表`}>
+        <meta name="keywords" content={`${title}新番时间表,${title}动漫时间表`} />
+        <meta name="description" content={`${title}新番时间表`} />
+      </Meta>
+      {loading ? <Loading /> : null}
+      <ul styleName="list">
+        {weekCn.map((item, index) => (
+          <li key={item} styleName={today === index ? 'active' : ''}>
+            {item}
+          </li>
+        ))}
+      </ul>
+      <ul styleName="weeklist">
+        {weekEng.map((obj, index) => (
+          <ItemS key={obj} data={weekData[weekEng[index]]} type={2} />
+        ))}
+      </ul>
+    </div>
+  )
+})

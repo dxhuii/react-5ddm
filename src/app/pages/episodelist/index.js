@@ -1,15 +1,12 @@
-import React, { Component } from 'react'
+import React, { useEffect, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 
-import { withRouter, Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+// redux
+import { useStore, useSelector } from 'react-redux'
 import { episodeList } from '@/store/actions/episode'
 import { getEpisodeList } from '@/store/reducers/episode'
 
 import SideBar from '@/components/SideBar'
-
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
@@ -17,70 +14,49 @@ import { formatPic, isNumber } from '@/utils'
 
 import './style.scss'
 
-@Shell
-@withRouter
-@connect(
-  (state, props) => ({
-    list: getEpisodeList(state, 'episodelist')
-  }),
-  dispatch => ({
-    episodeList: bindActionCreators(episodeList, dispatch)
-  })
-)
-class EpisodeList extends Component {
-  static propTypes = {
-    episodeList: PropTypes.func,
-    list: PropTypes.object
-  }
+export default Shell(() => {
+  const store = useStore()
+  const info = useSelector(state => getEpisodeList(state, 'episodelist'))
 
-  constructor(props) {
-    super(props)
-    this.load = this.load.bind(this)
-  }
+  const load = useCallback(async () => {
+    const getData = () => episodeList()(store.dispatch, store.getState)
+    await getData()
+  }, [store.dispatch, store.getState])
 
-  componentDidMount() {
-    const { list } = this.props
-    if (!list.data) this.load()
-    ArriveFooter.add('episodelist', this.load)
-  }
+  useEffect(() => {
+    if (!info.data) load()
+    ArriveFooter.add('episodelist', load)
+    return () => {
+      ArriveFooter.remove('episodelist')
+    }
+  }, [info.data, load])
 
-  componentWillUnmount() {
-    ArriveFooter.remove('episodelist')
-  }
+  const { data = [] } = info
 
-  async load() {
-    const { episodeList } = this.props
-    await episodeList()
-  }
-
-  render() {
-    const {
-      list: { data = [] }
-    } = this.props
-    return (
-      <>
-        <Meta title="剧情首页" />
-        <div className="wp mt20 clearfix">
-          <div className="left fl">
-            <ul styleName="list">
-              {data.map(item => (
-                <li key={item.storyId}>
-                  <Link to={`/episode/${item.storyId}`}>
-                    <div className="load-demand" data-load-demand={`<img src="${formatPic(item.pic, 'thumb150')}" alt="${item.title}" />`} />
-                    <h4>{item.title}</h4>
-                    <p>{isNumber(item.continu) ? `更新至${item.continu}话` : item.continu}</p>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="right fr">
-            <SideBar />
-          </div>
+  return (
+    <>
+      <Meta title="最新剧情动漫剧情,剧情动漫分集剧情,剧情动漫全集剧情">
+        <meta name="keywords" content="最新剧情动漫剧情,剧情动漫分集剧情,剧情动漫全集剧情" />
+        <meta name="description" content="最新剧情动漫剧情包含等全集剧情。" />
+      </Meta>
+      <div className="wp mt20 clearfix">
+        <div className="left fl">
+          <ul styleName="list">
+            {data.map(item => (
+              <li key={item.storyId}>
+                <Link to={`/episode/${item.storyId}`}>
+                  <div className="load-demand" data-load-demand={`<img src="${formatPic(item.pic, 'thumb150')}" alt="${item.title}" />`} />
+                  <h4>{item.title}</h4>
+                  <p>{isNumber(item.continu) ? `更新至${item.continu}话` : item.continu}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
-      </>
-    )
-  }
-}
-
-export default EpisodeList
+        <div className="right fr">
+          <SideBar />
+        </div>
+      </div>
+    </>
+  )
+})

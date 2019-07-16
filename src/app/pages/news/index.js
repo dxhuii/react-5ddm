@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
+import React, { useEffect, useCallback } from 'react'
+import { Link } from 'react-router-dom'
+import useReactRouter from 'use-react-router'
 
-import { withRouter, Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+// redux
+import { useStore, useSelector } from 'react-redux'
 import { newsIndex } from '@/store/actions/newsIndex'
 import { configLoad } from '@/store/actions/config'
 import { getConfig } from '@/store/reducers/config'
@@ -19,163 +18,76 @@ import Meta from '@/components/Meta'
 
 import './style.scss'
 
-const reNewsCateId = name => {
-  let id
-  switch (name) {
-    case 'zixun':
-      id = 211
-      break
-    case 'donghua':
-      id = 206
-      break
-    case 'manhua':
-      id = 205
-      break
-    case 'cast':
-      id = 207
-      break
-    case 'bagua':
-      id = 208
-      break
-    case 'jianping':
-      id = 221
-      break
-    case 'pic':
-      id = 212
-      break
-    case 'video':
-      id = 222
-      break
-    case 'yugao':
-      id = 214
-      break
-    case 'op':
-      id = 215
-      break
-    case 'bgm':
-      id = 216
-      break
-    case 'ed':
-      id = 217
-      break
-    case 'cm':
-      id = 223
-      break
-    case 'cosplay':
-      id = 213
-      break
-    case 'mad':
-      id = 220
-      break
-    case 'shengrou':
-      id = 218
-      break
-    case 'tedian':
-      id = 219
-      break
-    case 'chanye':
-      id = 209
-      break
-    default:
-      id = 44
-      break
-  }
-  return id
-}
-
-@Shell
-@withRouter
-@connect(
-  (state, props) => ({
-    config: getConfig(state, 'menu'),
-    newsData: getNewsIndex(state, 'newslist', reNewsCateId(props.match.params.name))
-  }),
-  dispatch => ({
-    configLoad: bindActionCreators(configLoad, dispatch),
-    newsIndex: bindActionCreators(newsIndex, dispatch)
-  })
-)
-class NewsIndex extends Component {
-  static propTypes = {
-    newsIndex: PropTypes.func,
-    configLoad: PropTypes.func,
-    config: PropTypes.object,
-    newsData: PropTypes.object,
-    match: PropTypes.object
-  }
-
-  constructor(props) {
-    super(props)
-    this.load = this.load.bind(this)
-  }
-
-  componentDidMount() {
-    this.getData()
-  }
-
-  componentDidUpdate(prevProps) {
-    // 当 url 参数参数发生改变时，重新进行请求
-    let oldId = prevProps.match.params.name
-    let newId = this.props.match.params.name
-    if (newId !== oldId) this.getData()
-  }
-
-  componentWillUnmount() {
-    ArriveFooter.remove('newslist')
-  }
-
-  getData = () => {
-    const { newsData, config, configLoad } = this.props
-    if (!config.data) {
-      configLoad({ name: 'menu' })
+export default Shell(() => {
+  const {
+    match: {
+      params: { name }
     }
-    if (!newsData.data) this.load()
-    ArriveFooter.add('newslist', this.load)
+  } = useReactRouter()
+  const menu = {
+    zixun: 211,
+    donghua: 206,
+    manhua: 205,
+    cast: 207,
+    bagua: 208,
+    jianping: 221,
+    pic: 212,
+    video: 222,
+    yugao: 214,
+    op: 215,
+    bgm: 216,
+    ed: 217,
+    cm: 223,
+    cosplay: 213,
+    mad: 220,
+    shengrou: 218,
+    tedian: 219,
+    chanye: 209
   }
+  const store = useStore()
+  const config = useSelector(state => getConfig(state, 'menu'))
+  const info = useSelector(state => getNewsIndex(state, 'newslist', menu[name] || 44))
 
-  async load() {
-    const {
-      newsIndex,
-      match: {
-        params: { name }
-      }
-    } = this.props
-    await newsIndex({ name: 'newslist', id: reNewsCateId(name) })
-  }
+  const load = useCallback(async () => {
+    const getData = args => newsIndex(args)(store.dispatch, store.getState)
+    await getData({ name: 'newslist', id: menu[name] || 44 })
+  }, [menu, name, store.dispatch, store.getState])
 
-  render() {
-    const {
-      newsData: { data = [] },
-      match: {
-        params: { name }
-      },
-      config
-    } = this.props
-    const newsMenu = ((config.data || [])[1] || {}).son || []
-    return (
-      <div className="wp mt20 clearfix">
-        <Meta title="动漫新闻_动漫资讯_新番情报_动漫先行图_漫画情报" />
-        <div styleName="news-nav" className="box fl">
-          <h2>
-            <Link to="/news">专栏</Link>
-          </h2>
-          <ul>
-            {newsMenu.map(item => (
-              <li key={item.id} styleName={`${name === item.name ? 'active' : ''}`}>
-                <Link to={`/news/${item.name}`}>{item.title}</Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div styleName="news-left" className="box fl">
-          <Item data={data} />
-        </div>
-        <div className="right fr">
-          <SideBar />
-        </div>
+  useEffect(() => {
+    const getData = args => configLoad(args)(store.dispatch, store.getState)
+    if (!config.data) {
+      getData({ name: 'menu' })
+    }
+    if (!info.data) load()
+    ArriveFooter.add('newslist', load)
+    return () => {
+      ArriveFooter.remove('newslist')
+    }
+  }, [config.data, info.data, load, store.dispatch, store.getState])
+
+  const { data = [] } = info
+  const newsMenu = ((config.data || [])[1] || {}).son || []
+  return (
+    <div className="wp mt20 clearfix">
+      <Meta title="动漫新闻_动漫资讯_新番情报_动漫先行图_漫画情报" />
+      <div styleName="news-nav" className="box fl">
+        <h2>
+          <Link to="/news">专栏</Link>
+        </h2>
+        <ul>
+          {newsMenu.map(item => (
+            <li key={item.id} styleName={`${name === item.name ? 'active' : ''}`}>
+              <Link to={`/news/${item.name}`}>{item.title}</Link>
+            </li>
+          ))}
+        </ul>
       </div>
-    )
-  }
-}
-
-export default NewsIndex
+      <div styleName="news-left" className="box fl">
+        <Item data={data} />
+      </div>
+      <div className="right fr">
+        <SideBar />
+      </div>
+    </div>
+  )
+})

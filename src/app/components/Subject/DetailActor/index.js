@@ -1,45 +1,31 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 
+// redux
+import { useStore, useSelector } from 'react-redux'
 import { detailActor } from '@/store/actions/list'
 import { getList } from '@/store/reducers/list'
 
 import Item from '@/components/Subject/Item'
 
-@connect(
-  (state, props) => ({
-    info: getList(state, `like-${props.no}`)
-  }),
-  dispatch => ({
-    detailActor: bindActionCreators(detailActor, dispatch)
-  })
-)
-class Like extends Component {
-  static propTypes = {
-    info: PropTypes.object.isRequired,
-    detailActor: PropTypes.func,
-    actor: PropTypes.string,
-    no: PropTypes.any
-  }
+export default function Like({ actor = '', no }) {
+  const store = useStore()
+  const info = useSelector(state => getList(state, `like-${no}`))
 
-  componentDidMount() {
-    const { info, actor, detailActor, no } = this.props
+  useEffect(() => {
+    const getData = args => detailActor(args)(store.dispatch, store.getState)
     if (!info || !info.data) {
-      detailActor({
+      getData({
         actor,
         no
       })
     }
-  }
-
-  render() {
-    const {
-      info: { data = [] }
-    } = this.props
-    return <Item data={data} />
-  }
+  }, [actor, info, no, store.dispatch, store.getState])
+  const { data = [] } = info
+  return <Item data={data} />
 }
 
-export default Like
+Like.propTypes = {
+  actor: PropTypes.string,
+  no: PropTypes.any
+}

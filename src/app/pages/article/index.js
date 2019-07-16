@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { withRouter, Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
+import { Link } from 'react-router-dom'
+import useReactRouter from 'use-react-router'
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+// redux
+import { useStore, useSelector } from 'react-redux'
 import { article } from '@/store/actions/article'
 import { getArticle } from '@/store/reducers/article'
 import { newsIndex } from '@/store/actions/newsIndex'
@@ -25,65 +25,64 @@ import playing from '@/utils/play'
 import { NAME } from 'Config'
 
 import './style.scss'
-@Shell
-@withRouter
-@connect(
-  (state, props) => ({
-    userinfo: getUserInfo(state),
-    articleData: getArticle(state, props.match.params.id),
-    newsData: getNewsIndex(state, 'newslist', 44)
-  }),
-  dispatch => ({
-    article: bindActionCreators(article, dispatch),
-    newsIndex: bindActionCreators(newsIndex, dispatch)
-  })
-)
-class Article extends Component {
-  static propTypes = {
-    match: PropTypes.object,
-    article: PropTypes.func,
-    newsIndex: PropTypes.func,
-    articleData: PropTypes.object,
-    userinfo: PropTypes.object,
-    location: PropTypes.object,
-    newsData: PropTypes.object
-  }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      full: false,
-      isfull: false,
-      showPic: false,
-      imgObj: {}
+export default Shell(() => {
+  const [full, isFull] = useState(false)
+  const [isfull, setIsfull] = useState(false)
+  const [showPic, setPic] = useState(false)
+  const [imgObj, setImgObj] = useState({})
+  const articleContent = useRef()
+  const {
+    location,
+    match: {
+      params: { id },
+      url
     }
-    this.load = this.load.bind(this)
-  }
+  } = useReactRouter()
 
-  async componentDidMount() {
+  const store = useStore()
+  const me = useSelector(state => getUserInfo(state))
+  const articleData = useSelector(state => getArticle(state, id))
+  const newsData = useSelector(state => getNewsIndex(state, 'newslist', 44))
+
+  const load = useCallback(async () => {
+    const getNewsData = args => newsIndex(args)(store.dispatch, store.getState)
+    await getNewsData({ name: 'newslist', id: 44 })
+  }, [store.dispatch, store.getState])
+
+  useEffect(() => {
+    const getArticleData = args => article(args)(store.dispatch, store.getState)
     document.onkeyup = event => {
       if (event.which == '27') {
-        this.isFull()
+        isFull(false)
       }
     }
-    this.getData()
-    this.getImg()
-  }
+    if (!articleData.data) {
+      getArticleData({ id })
+    }
+    if (!newsData.data) load()
+    ArriveFooter.add('newsArticle', load)
+    getImg()
+    return () => {
+      ArriveFooter.remove('newsArticle')
+    }
+  }, [articleData.data, id, load, newsData.data, store.dispatch, store.getState])
 
-  getImg = () => {
-    const that = this
+  const getImg = () => {
+    const content = articleContent.current
     document.body.addEventListener('click', function(e) {
-      console.log(e, 'getimg')
       // 火狐没有 e.path 属性
       const isFF = /Firefox/.test(navigator.userAgent)
       // 可点击区域
       const elem = isFF ? e.rangeParent.id || e.rangeParent.parentNode.id : (e.path.filter(item => item.id === 'content')[0] || []).id
       // 判断是否点击的图片
-      if (e.target.nodeName === 'IMG' && that.content && elem === 'content') {
+      if (e.target.nodeName === 'IMG' && content && elem === 'content') {
+        e.preventDefault()
+        console.log(e, 'getimg')
         let params = {}
         params.param = {}
         // 获取imglist
-        const oPics = that.content.getElementsByTagName('img')
+        const oPics = content.getElementsByTagName('img')
         params.param.imageArray = []
         for (let i = 0; i < oPics.length; i++) {
           params.param.imageArray.push({ url: oPics[i].src })
@@ -95,175 +94,108 @@ class Article extends Component {
           }
         }
 
-        that.setState({
-          imgObj: params.param,
-          showPic: true
-        })
+        setPic(true)
+        setImgObj(params.param)
       }
     })
   }
 
-  componentDidUpdate(prevProps) {
-    // 当 url 参数参数发生改变时，重新进行请求
-    let oldId = prevProps.match.params.id
-    let newId = this.props.match.params.id
-    if (newId !== oldId) this.getData()
-  }
+  const { data = {}, loading } = articleData
+  const newsListData = newsData.data || []
+  const { userid } = me
 
-  componentWillUnmount() {
-    ArriveFooter.remove('newsArticle')
+  const { title, name, cid, pic = '', remark, keywords, addtime, inputer, tag = [], prev, next, vodid, jump, content = '', playname = '', playurl = '' } = data
+  const playHtml = playing({ name: playname, vid: playurl, danmu: `article_${id}`, uid: userid, url }) || []
+  const shareConfig = {
+    pic,
+    title: `${title} - ${name} - #${NAME}# @99496动漫网`,
+    desc: remark,
+    url: `/article/${id}`
   }
-
-  getData = () => {
-    const {
-      match: {
-        params: { id }
-      },
-      newsData,
-      article,
-      articleData
-    } = this.props
-    if (!articleData.data) {
-      article({ id })
-    }
-    if (!newsData.data) this.load()
-    ArriveFooter.add('newsArticle', this.load)
+  const { imageArray = [], index } = imgObj
+  if (loading || !data.title) return <Loading />
+  if (jump && !(typeof window === 'undefined')) {
+    window.location.href = jump
   }
-
-  async load() {
-    const { newsIndex } = this.props
-    await newsIndex({ name: 'newslist', id: 44 })
-  }
-
-  isFull = () => {
-    this.setState({
-      full: !this.state.full
-    })
-  }
-
-  showFull = () => {
-    this.setState({
-      isfull: true
-    })
-  }
-
-  hideFull = () => {
-    this.setState({
-      isfull: false
-    })
-  }
-
-  closePic = () => {
-    this.setState({
-      showPic: false
-    })
-  }
-
-  render() {
-    const {
-      articleData: { data = {}, loading },
-      newsData,
-      match: { url },
-      userinfo: { userid },
-      location
-    } = this.props
-    const { title, id, name, cid, pic = '', remark, keywords, addtime, inputer, tag = [], prev, next, vodid, jump, content = '', playname = '', playurl = '' } = data
-    const playHtml = playing({ name: playname, vid: playurl, danmu: `article_${id}`, uid: userid, url }) || []
-    const { full, isfull, showPic, imgObj } = this.state
-    const shareConfig = {
-      pic,
-      title: `${title} - ${name} - #${NAME}# @99496动漫网`,
-      desc: remark,
-      url: `/article/${id}`
-    }
-    const newsListData = newsData.data || []
-    const { imageArray = [], index } = imgObj
-    if (loading || !data.title) return <Loading />
-    if (jump && !(typeof window === 'undefined')) {
-      window.location.href = jump
-    }
-    return (
-      <div className="wp mt20 clearfix">
-        <Meta title={title}>
-          <meta property="og:locale" content="zh_CN" />
-          <meta property="og:type" content="article" />
-          <meta property="og:title" content={title} />
-          <meta property="og:description" content={remark} />
-          <meta property="og:image" content={pic} />
-          <meta property="og:url" content={`/article/${id}`} />
-          <meta property="og:site_name" content={NAME} />
-          <meta name="description" content={remark} />
-          <meta name="keywords" content={keywords} />
-        </Meta>
-        <div className={`fl left ${cid === 205 ? 'manhua' : ''}`}>
-          <article styleName="article-body">
-            <div styleName="article-head">
-              <h1>{title}</h1>
-              <div styleName="article-label">
-                <span>来源：{inputer ? inputer : '网络'}</span>
-                <span>更新时间：{addtime}</span>
-              </div>
+  return (
+    <div className="wp mt20 clearfix">
+      <Meta title={title}>
+        <meta property="og:locale" content="zh_CN" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={remark} />
+        <meta property="og:image" content={pic} />
+        <meta property="og:url" content={`/article/${id}`} />
+        <meta property="og:site_name" content={NAME} />
+        <meta name="description" content={remark} />
+        <meta name="keywords" content={keywords} />
+      </Meta>
+      <div className={`fl left ${cid === 205 ? 'manhua' : ''}`}>
+        <article styleName="article-body">
+          <div styleName="article-head">
+            <h1>{title}</h1>
+            <div styleName="article-label">
+              <span>来源：{inputer ? inputer : '网络'}</span>
+              <span>更新时间：{addtime}</span>
             </div>
-            {playname ? (
-              <div styleName={`article-video ${playHtml[1] ? 'is-flvsp' : ''} ${full ? 'play-full' : ''}`} onMouseOver={this.showFull} onMouseLeave={this.hideFull}>
-                <div dangerouslySetInnerHTML={{ __html: playHtml[0] }} />
-                {isfull ? (
-                  <a onMouseOver={this.showFull} onClick={this.isFull}>
-                    {full ? '退出全屏' : '网页全屏'}
-                  </a>
-                ) : null}
-              </div>
-            ) : null}
-            <div ref={e => (this.content = e)} id="content" styleName="article-content" dangerouslySetInnerHTML={{ __html: convertHTML(content) }} />
-            {showPic ? (
-              <div styleName="article-slide" onClick={this.closePic}>
-                <span />
-                <Swiper Pagination={true} Controller={true} Start={index} Continuous={false}>
-                  {imageArray.map((item, index) => (
-                    <div className="swipe-item" key={item.url + index}>
-                      <img src={item.url} />
-                    </div>
-                  ))}
-                </Swiper>
-              </div>
-            ) : null}
-            <div styleName="article-share">
-              <TagShare tag={tag} config={shareConfig} location={location} />
-            </div>
-            <div styleName="article-context" className="mt20">
-              {prev ? (
-                <p>
-                  上一篇：<Link to={`/article/${prev.id}`}>{prev.title}</Link>
-                </p>
-              ) : null}
-              {next ? (
-                <p>
-                  下一篇：<Link to={`/article/${next.id}`}>{next.title}</Link>
-                </p>
-              ) : null}
-            </div>
-            <div className="mt20">
-              <Ads id={11} />
-            </div>
-            <div className="mt20" styleName="newslist">
-              <div className="title">
-                <h2>推荐新闻</h2>
-                <Link to="/news">
-                  更多<i className="iconfont">&#xe65e;</i>
-                </Link>
-              </div>
-              <Item data={newsListData} />
-            </div>
-          </article>
-        </div>
-        {cid === 205 ? null : (
-          <div className="fr right">
-            <SideBar vodid={vodid} />
           </div>
-        )}
+          {playname ? (
+            <div styleName={`article-video ${playHtml[1] ? 'is-flvsp' : ''} ${full ? 'play-full' : ''}`} onMouseOver={() => setIsfull(true)} onMouseLeave={() => setIsfull(false)}>
+              <div dangerouslySetInnerHTML={{ __html: playHtml[0] }} />
+              {isfull ? (
+                <a onMouseOver={() => setIsfull(true)} onClick={() => isFull(!full)}>
+                  {full ? '退出全屏' : '网页全屏'}
+                </a>
+              ) : null}
+            </div>
+          ) : null}
+          <div ref={articleContent} id="content" styleName="article-content" dangerouslySetInnerHTML={{ __html: convertHTML(content) }} />
+          {showPic ? (
+            <div styleName="article-slide" onClick={() => setPic(false)}>
+              <span />
+              <Swiper Pagination={true} Controller={true} Start={index} Continuous={false}>
+                {imageArray.map((item, index) => (
+                  <div className="swipe-item" key={item.url + index}>
+                    <img src={item.url} />
+                  </div>
+                ))}
+              </Swiper>
+            </div>
+          ) : null}
+          <div styleName="article-share">
+            <TagShare tag={tag} config={shareConfig} location={location} />
+          </div>
+          <div styleName="article-context" className="mt20">
+            {prev ? (
+              <p>
+                上一篇：<Link to={`/article/${prev.id}`}>{prev.title}</Link>
+              </p>
+            ) : null}
+            {next ? (
+              <p>
+                下一篇：<Link to={`/article/${next.id}`}>{next.title}</Link>
+              </p>
+            ) : null}
+          </div>
+          <div className="mt20">
+            <Ads id={11} />
+          </div>
+          <div className="mt20" styleName="newslist">
+            <div className="title">
+              <h2>推荐新闻</h2>
+              <Link to="/news">
+                更多<i className="iconfont">&#xe65e;</i>
+              </Link>
+            </div>
+            <Item data={newsListData} />
+          </div>
+        </article>
       </div>
-    )
-  }
-}
-
-export default Article
+      {cid === 205 ? null : (
+        <div className="fr right">
+          <SideBar vodid={vodid} />
+        </div>
+      )}
+    </div>
+  )
+})

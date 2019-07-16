@@ -6,10 +6,10 @@ import { formatPic } from '@/utils'
 
 import './style.scss'
 
-const NewsPic = props => {
+export default function NewsPic({ data = [] }) {
   return (
     <ul styleName="newslist">
-      {props.data.map(item => (
+      {data.map(item => (
         <li key={item.id}>
           <Link to={`/article/${item.id}`}>
             <img src={formatPic(item.pic, 'orj360')} alt={item.title} />
@@ -26,5 +26,3 @@ const NewsPic = props => {
 NewsPic.propTypes = {
   data: PropTypes.array.isRequired
 }
-
-export default NewsPic
