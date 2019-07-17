@@ -49,6 +49,6 @@ export default {
     emptyhistory: `${apiReact}emptyhistory`, // 清空观看记录 需登录
     delplaylog: `${apiReact}delplaylog`, // 删除观看记录 需登录
     // 游戏
-    game: `https://api.99496.com/r.php?s=home-react-game` // order排序 wd 关键词 p 分页 limit 每页条数
+    game: `${apiReact}game` // order排序 wd 关键词 p 分页 limit 每页条数
   }
 }
