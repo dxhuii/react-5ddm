@@ -4,12 +4,13 @@ import PropTypes from 'prop-types'
 // redux
 import { useStore } from 'react-redux'
 import { mark } from '@/store/actions/mark'
+import { score } from '@/store/actions/detail'
 
 import Toast from '@/components/Toast'
 
 import './style.scss'
 
-export default function Tating({ data, id, sid, uid, score }) {
+export default function Tating({ data, id, sid, uid }) {
   const starText = ['很差', '较差', '还行', '推荐', '力荐']
   const [starWith, setStarWith] = useState(16)
   const [star, setStar] = useState(16)
@@ -19,9 +20,10 @@ export default function Tating({ data, id, sid, uid, score }) {
     setStarWith(index * 16)
     setStar(index)
     const _mark = args => mark(args)(store.dispatch, store.getState)
-    let [err, data] = await _mark({ id, val: index })
+    const _score = args => score(args)(store.dispatch, store.getState)
+    let [, data] = await _mark({ id, val: index })
     if (data.rcode === 1) {
-      score({ id, sid, uid })
+      _score({ id, sid, uid })
       Toast.success('评分成功')
     }
   }
@@ -112,7 +114,6 @@ export default function Tating({ data, id, sid, uid, score }) {
 
 Tating.propTypes = {
   data: PropTypes.object,
-  score: PropTypes.func,
   id: PropTypes.number,
   sid: PropTypes.number,
   uid: PropTypes.number

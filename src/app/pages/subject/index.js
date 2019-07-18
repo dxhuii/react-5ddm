@@ -226,7 +226,7 @@ export default Shell(() => {
             </div>
             {star ? (
               <div styleName="detail-score">
-                <Tating data={star} id={+id} uid={userid} sid={1} score={score} />
+                <Tating data={star} id={+id} uid={userid} sid={1} />
               </div>
             ) : null}
           </div>
