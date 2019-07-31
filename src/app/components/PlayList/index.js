@@ -33,7 +33,7 @@ export default () => {
   const onDom = () => {
     const navWidth = pageNav.current.clientWidth
     const ulWidth = pageNavUl.current.clientWidth
-    const currentLeft = pageCurrent.current.offsetLeft
+    const currentLeft = (pageCurrent.current || {}).offsetLeft
     const isNeq1200 = ulWidth - currentLeft < 1200 - liWidth // 是否小于1200减一页的宽
     const X = isNeq1200 ? ulWidth - navWidth : currentLeft - liWidth * 3
     pageNavUl.current.style.transform = `translateX(-${X}px)`
@@ -73,7 +73,7 @@ export default () => {
     setEnd(end)
 
     // 分页面数大于 8 页时调用
-    if (pageLen > 8) {
+    if (pageLen > 8 && pid) {
       onDom()
     }
   }, [])
@@ -117,7 +117,7 @@ export default () => {
         const pageEnd = i === 1 ? pageSize : i === pageNum && surplus ? pageSize * i - (pageSize - surplus) : pageSize * i // 余数不为 0 取剩余话数
         const isCurrent = start === pageStart && pageEnd === end // 判断是否为当前选中的集数
         html.push(
-          <li key={i} onClick={() => pageJump(pageStart, pageEnd)} ref={isCurrent ? pageCurrent : null} styleName={isCurrent ? 'active' : ''}>
+          <li key={i} onClick={() => pageJump(pageStart, pageEnd)} ref={pageCurrent} styleName={isCurrent ? 'active' : ''}>
             第{pageFirst}话 - 第{pageEnd}话
           </li>
         )
