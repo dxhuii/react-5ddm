@@ -24,7 +24,7 @@
  * WW 文网文
  */
 
-const DOMAIN_NAME = 'dddm.tv'
+const DOMAIN_NAME = '5ddm.com'
 
 const conf = {
   debug: false,
@@ -48,7 +48,7 @@ const defalut = {
   DOMAIN: 'https://dev.99496.com',
   DOMAIN_NAME: '99496.com',
   PORT: 6666,
-  COOKIE_PREFIX: 'ikf_',
+  COOKIE_PREFIX: 'plain_',
   PUBLIC_PATH: '//dev.99496.com',
   BAIDU_STAT: 'b3c1facee308e3a3450dc7f836101938',
   CNZZ_STAT: '5862511',
@@ -87,7 +87,7 @@ const dddm = {
  *
  */
 const ddm = {
-  API: 'https://api.99496.com/',
+  API: 'http://test.99496.com/',
   ISPLAY: true,
   ISAD: false,
   NAME: '5D动漫(5站)',

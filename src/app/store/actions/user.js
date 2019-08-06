@@ -2,13 +2,18 @@ import Ajax from '@/common/ajax'
 import config from '@/utils/config'
 import Toast from '@/components/Toast'
 
-export function loadUserInfo({ uid }) {
+export function loadUserInfo({ token, uid }) {
   return (dispatch, getState) => {
     return new Promise(async (resolve, reject) => {
       let [err, data] = await Ajax({
         url: config.api.getuserinfo,
         method: 'get',
-        data: { uid }
+        data: {
+          uid
+        },
+        headers: {
+          authorization: token
+        }
       })
 
       if (err) {
@@ -22,7 +27,7 @@ export function loadUserInfo({ uid }) {
 }
 
 export function getCode() {
-  return (dispatch, getState) => {
+  return () => {
     return new Promise(async (resolve, reject) => {
       let [err, data] = await Ajax({
         url: config.api.verify,
@@ -48,12 +53,14 @@ export function saveCookie(params, name) {
       data: params
     })
 
-    if (data.rcode === 1) {
+    if (data.code === 1) {
+      localStorage.userid = data.data.user.user_id
+      localStorage.token = data.data.token
       // 储存 cookie
-      [err, data] = await Ajax({
+      ;[err, data] = await Ajax({
         url: window.location.origin + '/sign/in',
         method: 'post',
-        data: { userid: data.data }
+        data: { token: data.data.token, userid: data.data.user.user_id }
       })
 
       if (data && data.success) {
@@ -67,15 +74,15 @@ export function saveCookie(params, name) {
   })
 }
 
-export function signIn({ username, password }) {
+export function signIn({ username, password, validate, key }) {
   return dispatch => {
-    return saveCookie({ username, password }, 'login')
+    return saveCookie({ user_name: username, user_password: password, validate, key }, 'login')
   }
 }
 
 export function signUp({ username, password, email, validate, key }) {
   return dispatch => {
-    return saveCookie({ username, password, email, validate, key }, 'reg')
+    return saveCookie({ user_name: username, user_password: password, email, validate, key }, 'reg')
   }
 }
 

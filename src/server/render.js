@@ -30,7 +30,7 @@ export default (req, res) => {
     let store = createStore()
 
     // 准备数据，如果有token，获取用户信息并返回
-    let [err, user] = await initData(store, req.cookies[`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`] || '')
+    let [err, user] = await initData(store, req.cookies[`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`] || '', req.cookies[`${COOKIE_PREFIX}userid`])
 
     params.user = user
 

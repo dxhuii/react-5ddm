@@ -51,7 +51,7 @@ export default () => {
     }
 
     if (validate.current.value) {
-      password.current.focus()
+      validate.current.focus()
       return false
     }
 
