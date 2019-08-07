@@ -2,17 +2,17 @@ import Ajax from '@/common/ajax'
 import config from '@/utils/config'
 import Toast from '@/components/Toast'
 
-export function loadUserInfo({ token, uid }) {
+export function loadUserInfo({ user }) {
   return (dispatch, getState) => {
     return new Promise(async (resolve, reject) => {
       let [err, data] = await Ajax({
         url: config.api.getuserinfo,
         method: 'get',
         data: {
-          uid
+          uid: user.userid
         },
         headers: {
-          authorization: token
+          authorization: user.token
         }
       })
 
@@ -54,13 +54,13 @@ export function saveCookie(params, name) {
     })
 
     if (data.code === 1) {
-      localStorage.userid = data.data.user.user_id
+      localStorage.userid = data.data.userid
       localStorage.token = data.data.token
       // 储存 cookie
       ;[err, data] = await Ajax({
         url: window.location.origin + '/sign/in',
         method: 'post',
-        data: { token: data.data.token, userid: data.data.user.user_id }
+        data: { user: data.data }
       })
 
       if (data && data.success) {

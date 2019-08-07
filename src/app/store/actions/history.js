@@ -20,7 +20,8 @@ export function playlog({ uid }) {
       reducerName: 'history',
       actionType: 'GET_PLAY_LOG',
       api: 'getplaylog',
-      params: { uid }
+      params: { uid },
+      header: true
     })
   }
 }

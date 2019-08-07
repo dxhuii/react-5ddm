@@ -13,9 +13,9 @@ export default {
     getuserinfo: `${apiHomeUser}getuserinfo`, // 获取用户信息 参数 id  val评分值
     digg: `${apiHomeUser}updown-index`, // 视频ID type up 顶 down 踩 sid 模型
     // 观看记录
-    getplaylog: `${apiHomeUser}getplaylog`, // 获取观看记录 需登录
+    getplaylog: `${apiHomeUser}playlog`, // 获取观看记录 需登录
     addplaylog: `${apiHomeUser}addplaylog`, // 添加观看记录 需登录
-    emptyhistory: `${apiHomeUser}emptyhistory`, // 清空观看记录 需登录
+    emptyhistory: `${apiHomeUser}clearplaylog`, // 清空观看记录 需登录
     delplaylog: `${apiHomeUser}delplaylog`, // 删除观看记录 需登录
     // id: 视频ID cid: 分类ID
     love: `${apiHomeUser}love`, // 收藏
