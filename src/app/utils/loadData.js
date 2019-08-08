@@ -39,7 +39,7 @@ export default ({ dispatch, getState, reducerName, name, actionType, api, params
       method,
       url,
       data: isPage ? Object.assign({}, params, { s: url.split('=')[1], p: list.page }) : params,
-      headers: header ? { authorization: localStorage.token } : {}
+      headers: header ? { authorization: localStorage.getItem('token') } : {}
     })
 
     if (err) {

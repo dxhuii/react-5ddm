@@ -1,6 +1,6 @@
 {
   "name": "react-zanpian",
-  "version": "2.7.1",
+  "version": "2.8",
   "description": "5d动漫",
   "scripts": {
     "start": "cross-env NODE_ENV=development node ./scripts/start.js",

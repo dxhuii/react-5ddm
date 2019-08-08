@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react'
+import PropTypes from 'prop-types'
 
 // redux
 import { useStore } from 'react-redux'
@@ -6,7 +7,7 @@ import { signIn, getCode } from '@/store/actions/user'
 
 import '../style.scss'
 
-export default () => {
+export default function SignIn({ visible }) {
   const store = useStore()
   const _signIn = args => signIn(args)(store.dispatch, store.getState)
   const [base64img, getBase64] = useState('')
@@ -16,8 +17,8 @@ export default () => {
   const validate = useRef()
 
   useEffect(() => {
-    getVerify()
-  }, [getVerify])
+    if (visible) getVerify()
+  }, [getVerify, visible])
 
   const getVerify = useCallback(async () => {
     const _getCode = () => getCode()(store.dispatch, store.getState)
@@ -71,4 +72,8 @@ export default () => {
       <button type="submit">登录</button>
     </form>
   )
+}
+
+SignIn.propTypes = {
+  visible: PropTypes.bool
 }

@@ -43,8 +43,8 @@ export default Shell(() => {
         <div className="left fl">
           <ul styleName="list">
             {data.map(item => (
-              <li key={item.storyId}>
-                <Link to={`/episode/${item.storyId}`}>
+              <li key={item.sid}>
+                <Link to={`/episode/${item.sid}`}>
                   <div className="load-demand" data-load-demand={`<img src="${formatPic(item.pic, 'thumb150')}" alt="${item.title}" />`} />
                   <h4>{item.title}</h4>
                   <p>{isNumber(item.continu) ? `更新至${item.continu}话` : item.continu}</p>

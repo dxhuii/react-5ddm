@@ -54,8 +54,8 @@ export function saveCookie(params, name) {
     })
 
     if (data.code === 1) {
-      localStorage.userid = data.data.userid
-      localStorage.token = data.data.token
+      localStorage.setItem('userid', data.data.userid)
+      localStorage.setItem('token', data.data.token)
       // 储存 cookie
       ;[err, data] = await Ajax({
         url: window.location.origin + '/sign/in',

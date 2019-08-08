@@ -105,7 +105,7 @@ export default Shell(() => {
         max: count
       })
     } else if (title) {
-      let dataList = JSON.parse(localStorage.historyData || '[]')
+      let dataList = JSON.parse(localStorage.getItem('historyData') || '[]')
       if (dataList.length > 0) {
         for (let i = 0; i < dataList.length; i++) {
           const obj = JSON.parse(dataList[i])
@@ -126,7 +126,7 @@ export default Shell(() => {
           next: +pid < count ? +pid + 1 : 0
         })
       )
-      localStorage.historyData = JSON.stringify([...new Set([...dataList])])
+      localStorage.setItem('historyData', JSON.stringify([...new Set([...dataList])]))
     }
   }, [data, id, pid, store.dispatch, store.getState, userid])
 

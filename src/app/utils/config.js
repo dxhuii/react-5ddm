@@ -22,10 +22,6 @@ export default {
     remind: `${apiHomeUser}remind`, // 订阅
     gold: `${apiHomeUser}gold`, // 查询评分，是否收藏，订阅
     mark: `${apiHomeUser}mark`, // 评分 val 分值 id 视频ID sid 视频大类
-
-    playlist: `${apiReact}play`, // 播放列表 id:视频id
-    player: `${apiReact}play`, // 单集 id:视频id，pid，集数
-    detail: `${apiReact}detail`, // 视频详情
     /**
      * 获取列表
      * $hits
@@ -40,6 +36,9 @@ export default {
      */
     list: `${apiReact}list-id-3`, // 列表接口
     listNoId: `${apiReact}list`, // 列表接口
+    playlist: `${apiReact}play`, // 播放列表 id:视频id
+    player: `${apiReact}play`, // 单集 id:视频id，pid，集数
+    detail: `${apiReact}detail`, // 视频详情
     month: `${apiReact}month-id-3`, // 月份追番表
     newslist: `${apiReact}newsList`, // 新闻列表接口
     score: `${apiReact}comment`, // 获取评论评分

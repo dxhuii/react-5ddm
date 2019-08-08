@@ -7,7 +7,7 @@ import { DOMAIN_NAME } from 'Config'
 
 import './style.scss'
 
-export default function Sign({ isSign, onType }) {
+export default function Sign({ isSign, onType, visible }) {
   const setType = (e, isSign) => {
     e.stopPropagation()
     onType(isSign)
@@ -17,7 +17,7 @@ export default function Sign({ isSign, onType }) {
     <div styleName="user">
       <div styleName={logo} />
       <h1>{isSign === 'signIn' ? '登录' : '注册'}，可以发现更多</h1>
-      {isSign === 'signIn' ? <SignIn /> : <SignUp />}
+      {isSign === 'signIn' ? <SignIn visible={visible} /> : <SignUp visible={visible} />}
       <div styleName="user-reg" className="mt20">
         {isSign === 'signIn' ? (
           <span>
@@ -35,5 +35,6 @@ export default function Sign({ isSign, onType }) {
 
 Sign.propTypes = {
   isSign: PropTypes.string,
-  onType: PropTypes.func
+  onType: PropTypes.func,
+  visible: PropTypes.bool
 }

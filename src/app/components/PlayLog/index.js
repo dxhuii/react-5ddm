@@ -21,26 +21,24 @@ export default function PlayLog({ userid, isShow }) {
     const _playlog = args => playlog(args)(store.dispatch, store.getState)
     let playlogList = []
     if (userid) {
-      if (!info.data) {
-        _playlog({ uid: userid })
-      }
+      _playlog({ uid: userid })
     } else {
-      playlogList = JSON.parse(localStorage.historyData || '[]')
+      playlogList = JSON.parse(localStorage.getItem('historyData') || '[]')
       for (let i = 0; i < playlogList.length; i++) {
         playlogList[i] = JSON.parse(playlogList[i])
       }
     }
     localPlaylog(playlogList)
-  }, [info.data, localPlaylog, store.dispatch, store.getState, userid])
+  }, [localPlaylog, store.dispatch, store.getState, userid])
 
   // 删除记录
   const onDel = id => {
     if (userid) {
       _delplaylog({ id, uid: userid })
     } else {
-      const historyData = JSON.parse(localStorage.historyData || '[]')
+      const historyData = JSON.parse(localStorage.getItem('historyData') || '[]')
       historyData.splice(id, 1)
-      localStorage.historyData = JSON.stringify(historyData)
+      localStorage.setItem('historyData', JSON.stringify(historyData))
     }
     showPlayLog()
   }
@@ -50,7 +48,7 @@ export default function PlayLog({ userid, isShow }) {
     if (userid) {
       _emptyhistory({ uid: userid })
     } else {
-      localStorage.historyData = ''
+      localStorage.removeItem('historyData')
     }
     showPlayLog()
   }

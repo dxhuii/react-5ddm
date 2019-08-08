@@ -128,29 +128,34 @@ export default () => {
   }
 
   useEffect(() => {
-    const _playlist = args => playlist(args)(store.dispatch, store.getState)
-    if (!info || !info.data) {
-      _playlist({ id }).then(res => {
-        const data = res[1]
-        setData(data, pid)
-      })
-    } else {
-      const { data } = info
-      setData(data, pid)
+    async function fetchData() {
+      const _playlist = args => playlist(args)(store.dispatch, store.getState)
+      if (!(info && info.data)) {
+        const [, data] = await _playlist({ id })
+        if (data) {
+          setData(data.list, pid)
+        }
+      } else {
+        const { data = {} } = info
+        const list = data.list || []
+        setData(list, pid)
+      }
     }
+    fetchData()
   }, [id, info, pid, setData, store.dispatch, store.getState])
 
-  const { data = [] } = info
-  const len = parseInt(data.length / pageSize)
-  const surplus = data.length % pageSize
-  const dataSource = data.slice(start, end)
+  const { data = {} } = info
+  const list = data.list || []
+  const len = parseInt(list.length / pageSize)
+  const surplus = list.length % pageSize
+  const dataSource = list.slice(start, end)
   return (
     <>
-      {data.length ? (
+      {list.length ? (
         <div styleName="playlistbox">
-          {data.length > pageSize ? (
+          {list.length > pageSize ? (
             <div styleName="play-page">
-              {data.length > 144 ? (
+              {list.length > 144 ? (
                 <div styleName="play-prev-next">
                   <div styleName="pn" onClick={() => onPrev()}>
                     <i className="iconfont">&#xe8ff;</i>
@@ -188,7 +193,7 @@ export default () => {
               ) : null}
             </div>
             <ul>
-              {(isReverse ? data.reverse() : data).map(item => (
+              {(isReverse ? list.reverse() : list).map(item => (
                 <li styleName={+pid === +item.episode ? 'active' : ''} key={item.episode}>
                   <Link to={`/play/${id}/${item.episode}`}>{firstNumber(item.title)}</Link>
                 </li>

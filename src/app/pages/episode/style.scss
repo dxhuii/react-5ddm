@@ -65,7 +65,23 @@
 }
 
 .article-context {
-  line-height: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+
+  a {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 0 15px;
+    height: 24px;
+    line-height: 24px;
+    background-color: #f0f0f0;
+    border-radius: 12px;
+
+    &:hover {
+      background-color: #0084ff;
+      color: #fff;
+    }
+  }
 }
 
 .eplist-more {
@@ -95,6 +111,8 @@
 
 @media (min-width: 0) and (max-width: 1200px) {
   .article-body {
+    padding: 10px 10px 0;
+
     h1 {
       padding: 0 10px 10px 0;
     }

@@ -21,9 +21,11 @@
   color: rgb(139, 139, 139);
   z-index: 10001;
   border-radius: 5px;
+
   >canvas {
     margin-top: 15px;
   }
+
   >div {
     margin-top: 5px;
   }
@@ -40,6 +42,7 @@
   color: #fff;
   text-align: center;
   border-top: 10px solid #1c1c20;
+
   div {
     position: fixed;
     top: 0px;
@@ -63,11 +66,12 @@
   display: inline-block;
   width: 30px;
   height: 30px;
-  margin: 0 5px 0 5px;
+  margin-right: 10px;
   background-size: contain;
   cursor: pointer;
   background-color: #fff;
   border-radius: 50%;
+
   &:hover {
     opacity: .8;
   }
@@ -99,4 +103,5 @@
 
 .twitter {
   background-image: url(../../static/img/twitter.png);
+  margin-right: 0;
 }
