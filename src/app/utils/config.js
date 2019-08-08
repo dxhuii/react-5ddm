@@ -21,8 +21,8 @@ export default {
     love: `${apiHomeUser}love`, // 收藏
     remind: `${apiHomeUser}remind`, // 订阅
     gold: `${apiHomeUser}gold`, // 查询评分，是否收藏，订阅
+    mark: `${apiHomeUser}mark`, // 评分 val 分值 id 视频ID sid 视频大类
 
-    mark: `${apiReact}mark`, // 评分 val 分值 id 视频ID sid 视频大类
     playlist: `${apiReact}play`, // 播放列表 id:视频id
     player: `${apiReact}play`, // 单集 id:视频id，pid，集数
     detail: `${apiReact}detail`, // 视频详情

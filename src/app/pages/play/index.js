@@ -97,13 +97,12 @@ export default Shell(() => {
     const { title, subTitle, count = 0 } = data
     if (userid && title) {
       await getPlaylogData({
+        id,
+        pid,
+        sid: 0,
         uid: userid,
-        vod_id: id,
-        vod_pid: pid,
-        vod_sid: 0,
-        vod_name: title,
-        url_name: subTitle,
-        vod_maxnum: count
+        name: subTitle,
+        max: count
       })
     } else if (title) {
       let dataList = JSON.parse(localStorage.historyData || '[]')

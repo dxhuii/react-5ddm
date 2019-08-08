@@ -8,7 +8,8 @@ export function like({ type, id, cid, uid }) {
         id,
         cid,
         uid
-      }
+      },
+      header: true
     })
   }
 }

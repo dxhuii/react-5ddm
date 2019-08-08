@@ -26,7 +26,7 @@ export function playlog({ uid }) {
   }
 }
 
-export const addplaylog = ({ vod_id, vod_pid, vod_sid, vod_name, url_name, vod_maxnum, uid }) => {
+export const addplaylog = ({ id, pid, sid, name, max, uid }) => {
   return (dispatch, getState) => {
     return new Promise(async resolve => {
       let [err, data] = await Ajax({
@@ -34,13 +34,13 @@ export const addplaylog = ({ vod_id, vod_pid, vod_sid, vod_name, url_name, vod_m
         method: 'post',
         data: {
           uid,
-          vod_id,
-          vod_pid,
-          vod_sid,
-          vod_name,
-          url_name,
-          vod_maxnum
-        }
+          id,
+          pid,
+          sid,
+          name,
+          max
+        },
+        header: true
       })
       resolve([err, data])
     })
@@ -56,7 +56,8 @@ export const delplaylog = ({ id, uid }) => {
         data: {
           id,
           uid
-        }
+        },
+        header: true
       })
       resolve([err, data])
     })
@@ -71,7 +72,8 @@ export const emptyhistory = ({ uid }) => {
         method: 'get',
         data: {
           uid
-        }
+        },
+        header: true
       })
       resolve([err, data])
     })

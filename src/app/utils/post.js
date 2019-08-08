@@ -2,12 +2,13 @@ import config from '@/utils/config'
 import Ajax from '@/common/ajax'
 import Toast from '@/components/Toast'
 
-export default ({ api, params, method = 'get', callback = () => {} }) => {
+export default ({ api, params, method = 'get', header = true, callback = () => {} }) => {
   return new Promise(async (resolve, reject) => {
     let [err, data] = await Ajax({
       method,
       url: config.api[api],
-      data: params
+      data: params,
+      headers: header ? { authorization: localStorage.token } : {}
     })
 
     if (err) {
