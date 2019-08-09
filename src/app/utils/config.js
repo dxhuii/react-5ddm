@@ -11,17 +11,14 @@ export default {
     verify: `${apiUser}verify-${Math.random()}`, // 验证码
 
     getuserinfo: `${apiHomeUser}getuserinfo`, // 获取用户信息 参数 id  val评分值
-    digg: `${apiHomeUser}updown-index`, // 视频ID type up 顶 down 踩 sid 模型
     // 观看记录
     getplaylog: `${apiHomeUser}playlog`, // 获取观看记录 需登录
     addplaylog: `${apiHomeUser}addplaylog`, // 添加观看记录 需登录
     emptyhistory: `${apiHomeUser}clearplaylog`, // 清空观看记录 需登录
     delplaylog: `${apiHomeUser}delplaylog`, // 删除观看记录 需登录
     // id: 视频ID cid: 分类ID
-    love: `${apiHomeUser}love`, // 收藏
-    remind: `${apiHomeUser}remind`, // 订阅
-    gold: `${apiHomeUser}gold`, // 查询评分，是否收藏，订阅
-    mark: `${apiHomeUser}mark`, // 评分 val 分值 id 视频ID sid 视频大类
+    mark: `${apiHomeUser}mark`, // type remind订阅 和 love 收藏
+    love: `${apiHomeUser}favoriteAndRemind`, // 查询评分，是否收藏，订阅
     /**
      * 获取列表
      * $hits
@@ -41,11 +38,13 @@ export default {
     detail: `${apiReact}detail`, // 视频详情
     month: `${apiReact}month-id-3`, // 月份追番表
     newslist: `${apiReact}newsList`, // 新闻列表接口
-    score: `${apiReact}comment`, // 获取评论评分
+    comment: `${apiReact}comment`, // 获取评论评分
     newsDetail: `${apiReact}newsDetail`, // 新闻内容接口
     slide: `${apiReact}slide`, // 获取轮播图
     storylist: `${apiReact}storylist`, // 剧情列表 902
     storyDetail: `${apiReact}storyread`, // 获取剧情详情
+    digg: `${apiHomeUser}digg`, // 视频ID type up 顶和送花 down 踩 sid 模型
+    addgold: `${apiReact}addgold`, // 评分 val 分值 id 视频ID sid 视频大类
     /**
      * name menu菜单 sns配置 user配置 pay支付配置 emot配置 list 各种列表
      */

@@ -4,8 +4,8 @@ import useReactRouter from 'use-react-router'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
-import { detail, score } from '@/store/actions/detail'
-import { like } from '@/store/actions/mark'
+import { detail, getComment, love } from '@/store/actions/detail'
+import { mark } from '@/store/actions/mark'
 import { getDetail } from '@/store/reducers/detail'
 import { getUserInfo } from '@/store/reducers/user'
 
@@ -36,6 +36,7 @@ import './style.scss'
 export default Shell(() => {
   const [visible, onModal] = useState(false)
   const [isSign, onSign] = useState('signIn')
+  const [loveData, setLove] = useState({})
   const menu = {
     201: 'tv',
     202: 'ova',
@@ -56,30 +57,36 @@ export default Shell(() => {
   const store = useStore()
   const me = useSelector(state => getUserInfo(state))
   const info = useSelector(state => getDetail(state, id))
-  const cmScore = useSelector(state => getDetail(state, `score_${id}`))
+  const commentData = useSelector(state => getDetail(state, `comment_${id}`))
+  const loveD = useSelector(state => getDetail(state, `love_${id}`))
 
   const { userid } = me
 
   useEffect(() => {
     const getData = args => detail(args)(store.dispatch, store.getState)
-    const getScore = args => score(args)(store.dispatch, store.getState)
+    const getCommentData = args => getComment(args)(store.dispatch, store.getState)
+    const getloveData = args => love(args)(store.dispatch, store.getState)
     if (!info || !info.data) {
       getData({ id })
     }
-    if (!cmScore || !cmScore.data) {
-      getScore({ id, sid: 1, uid: userid })
+    if (!commentData || !commentData.data) {
+      getCommentData({ id, sid: 1 })
     }
-  }, [cmScore, id, info, store.dispatch, store.getState, userid])
+    async function feachLove() {
+      let [, data] = await getloveData({ id, sid: 1 })
+      setLove(data.data)
+    }
+    if (!(loveD && loveD.data) && userid) feachLove()
+  }, [commentData, loveD, id, info, store.dispatch, store.getState, userid])
 
-  const addMark = async (type, id, cid, uid) => {
-    const onLike = args => like(args)(store.dispatch, store.getState)
-    const csData = cmScore.data || {}
-    const { loveid, remindid } = csData
+  const addMark = async (type, id, cid) => {
+    const onLike = args => mark(args)(store.dispatch, store.getState)
+    const getloveData = args => love(args)(store.dispatch, store.getState)
     if (userid) {
-      let [, data] = await onLike({ type, id, cid, uid })
+      let [, data] = await onLike({ type, id, cid })
       if (data.rcode === 1) {
-        score({ id, sid: 1, uid })
-        Toast.success(type === 'remind' ? (remindid ? '取消追番' : '追番成功') : loveid ? '取消收藏' : '收藏成功')
+        getloveData({ id, sid: 1 })
+        Toast.success(data.msg)
       }
     } else {
       onModal(true)
@@ -128,8 +135,10 @@ export default Shell(() => {
   } = data
   const reActor = actor ? actor.map(item => item.title).join(',') : ''
   const rePic = formatPic(pic, 'orj360')
-  const csData = cmScore.data || {}
-  const { loveid, remindid, star, comment = [] } = csData
+  const commitD = commentData.data || {}
+  const commentList = commitD.list || []
+  const star = commitD.gold || {}
+  const { loveid, remindid } = loveData
   const reContent = `${content.substring(0, 120)}${content.length > 120 ? '...' : ''}`
   const shareConfig = {
     pic,
@@ -226,7 +235,7 @@ export default Shell(() => {
             </div>
             {star ? (
               <div styleName="detail-score">
-                <Tating data={star} id={+id} uid={userid} sid={1} />
+                <Tating data={star} id={+id} sid={1} />
               </div>
             ) : null}
           </div>
@@ -324,12 +333,12 @@ export default Shell(() => {
             </div>
             <HotWeek />
           </div>
-          {comment.length > 0 ? (
+          {commentList.length > 0 ? (
             <div className="mt20">
               <div styleName="title">
                 <h2>评论</h2>
               </div>
-              <Comment data={comment} />
+              <Comment data={commentList} />
             </div>
           ) : null}
         </div>

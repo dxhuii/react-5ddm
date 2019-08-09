@@ -8,9 +8,6 @@ export function loadUserInfo({ user }) {
       let [err, data] = await Ajax({
         url: config.api.getuserinfo,
         method: 'get',
-        data: {
-          uid: user.userid
-        },
         headers: {
           authorization: user.token
         }

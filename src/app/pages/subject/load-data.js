@@ -1,4 +1,4 @@
-import { detail, score } from '@/store/actions/detail'
+import { detail, getComment } from '@/store/actions/detail'
 import cache from '@/utils/cache'
 const { getCache, addCache } = cache
 
@@ -14,14 +14,14 @@ export default ({ store, match, user = {} }) => {
         data: data[0][1]
       })
       store.dispatch({
-        type: 'GET_SCORE',
-        name: `score_${id}`,
+        type: 'GET_COMMENT',
+        name: `comment_${id}`,
         data: data[1][1]
       })
       resolve({ code: 200 })
       return
     }
-    Promise.all([detail({ id })(store.dispatch, store.getState), score({ id, sid: 1, uid: userid || 0 })(store.dispatch, store.getState)]).then(data => {
+    Promise.all([detail({ id })(store.dispatch, store.getState), getComment({ id, sid: 1 })(store.dispatch, store.getState)]).then(data => {
       addCache(`subject-${id}`, data)
       resolve({ code: 200 })
     })

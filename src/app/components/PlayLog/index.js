@@ -21,7 +21,7 @@ export default function PlayLog({ userid, isShow }) {
     const _playlog = args => playlog(args)(store.dispatch, store.getState)
     let playlogList = []
     if (userid) {
-      _playlog({ uid: userid })
+      _playlog()
     } else {
       playlogList = JSON.parse(localStorage.getItem('historyData') || '[]')
       for (let i = 0; i < playlogList.length; i++) {
@@ -34,7 +34,7 @@ export default function PlayLog({ userid, isShow }) {
   // 删除记录
   const onDel = id => {
     if (userid) {
-      _delplaylog({ id, uid: userid })
+      _delplaylog({ id })
     } else {
       const historyData = JSON.parse(localStorage.getItem('historyData') || '[]')
       historyData.splice(id, 1)
@@ -46,7 +46,7 @@ export default function PlayLog({ userid, isShow }) {
   // 清空记录
   const empty = () => {
     if (userid) {
-      _emptyhistory({ uid: userid })
+      _emptyhistory()
     } else {
       localStorage.removeItem('historyData')
     }

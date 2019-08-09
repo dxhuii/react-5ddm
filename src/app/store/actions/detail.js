@@ -33,16 +33,31 @@ export function vodNews({ id }) {
   }
 }
 
-export function score({ id, sid, uid }) {
+export function getComment({ id, sid }) {
   return (dispatch, getState) => {
     return loadData({
       dispatch,
       getState,
-      name: `score_${id}`,
+      name: `comment_${id}`,
       reducerName: 'detail',
-      actionType: 'GET_SCORE',
-      api: 'score',
-      params: { id, sid, uid }
+      actionType: 'GET_COMMENT',
+      api: 'comment',
+      params: { id, sid }
+    })
+  }
+}
+
+export function love({ id, sid }) {
+  return (dispatch, getState) => {
+    return loadData({
+      dispatch,
+      getState,
+      name: `love_${id}`,
+      reducerName: 'detail',
+      actionType: 'GET_LOVE',
+      api: 'love',
+      params: { id, sid },
+      header: true
     })
   }
 }

@@ -1,7 +1,7 @@
 import config from '@/utils/config'
 import Ajax from '@/common/ajax'
 
-export default ({ dispatch, getState, reducerName, name, actionType, api, params, isPage = false, header = false, method = 'get', callback = () => {} }) => {
+export default ({ dispatch, getState, reducerName, actionType, api, name = '', params = {}, isPage = false, header = false, method = 'get', callback = () => {} }) => {
   return new Promise(async (resolve, reject) => {
     let state = getState(),
       list = state[reducerName][name] || {}

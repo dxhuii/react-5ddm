@@ -5,7 +5,6 @@ export function slide() {
     return loadData({
       dispatch,
       getState,
-      name: '',
       reducerName: 'slide',
       actionType: 'GET_SLIDE',
       api: 'slide',

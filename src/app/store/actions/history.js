@@ -11,27 +11,24 @@ export const addVisitHistory = page => {
   }
 }
 
-export function playlog({ uid }) {
+export function playlog() {
   return (dispatch, getState) => {
     return loadData({
       dispatch,
       getState,
-      name: uid,
       reducerName: 'history',
       actionType: 'GET_PLAY_LOG',
       api: 'getplaylog',
-      params: { uid },
       header: true
     })
   }
 }
 
-export function addplaylog({ id, pid, sid, name, max, uid }) {
+export function addplaylog({ id, pid, sid, name, max }) {
   return () => {
     return Post({
       api: 'addplaylog',
       params: {
-        uid,
         id,
         pid,
         sid,
@@ -43,26 +40,22 @@ export function addplaylog({ id, pid, sid, name, max, uid }) {
   }
 }
 
-export function delplaylog({ id, uid }) {
+export function delplaylog({ id }) {
   return () => {
     return Post({
       api: 'delplaylog',
       params: {
-        id,
-        uid
+        id
       },
       header: true
     })
   }
 }
 
-export function emptyhistory({ uid }) {
+export function emptyhistory() {
   return () => {
     return Post({
       api: 'emptyhistory',
-      params: {
-        uid
-      },
       header: true
     })
   }

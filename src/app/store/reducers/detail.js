@@ -8,7 +8,10 @@ export default (state = cloneObj(initialState), action = {}) => {
     case 'GET_DETAIL':
       if (name && data) state[name] = data
       break
-    case 'GET_SCORE':
+    case 'GET_COMMENT':
+      if (name && data) state[name] = data
+      break
+    case 'GET_LOVE':
       if (name && data) state[name] = data
       break
     case 'GET_VOD_NEWS':
