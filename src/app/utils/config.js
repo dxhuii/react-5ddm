@@ -19,6 +19,8 @@ export default {
     // id: 视频ID cid: 分类ID
     mark: `${apiHomeUser}mark`, // type remind订阅 和 love 收藏
     love: `${apiHomeUser}favoriteAndRemind`, // 查询评分，是否收藏，订阅
+    addComment: `${apiHomeUser}addcm`, // 添加评论
+    addReptyComment: `${apiHomeUser}addrecm`, // 添加回复
     /**
      * 获取列表
      * $hits
@@ -38,7 +40,7 @@ export default {
     detail: `${apiReact}detail`, // 视频详情
     month: `${apiReact}month-id-3`, // 月份追番表
     newslist: `${apiReact}newsList`, // 新闻列表接口
-    comment: `${apiReact}comment`, // 获取评论评分
+    comment: `${apiReact}comment`, // 获取评论
     newsDetail: `${apiReact}newsDetail`, // 新闻内容接口
     slide: `${apiReact}slide`, // 获取轮播图
     storylist: `${apiReact}storylist`, // 剧情列表 902

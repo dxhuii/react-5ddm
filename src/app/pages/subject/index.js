@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import useReactRouter from 'use-react-router'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
-import { detail, getComment, love } from '@/store/actions/detail'
+import { detail, love } from '@/store/actions/detail'
+import { comment, addComment } from '@/store/actions/comment'
 import { mark } from '@/store/actions/mark'
 import { getDetail } from '@/store/reducers/detail'
+import { getComment } from '@/store/reducers/comment'
 import { getUserInfo } from '@/store/reducers/user'
 
 import Loading from '@/components/Ui/Loading'
@@ -49,43 +51,41 @@ export default Shell(() => {
   const {
     location,
     match: {
-      params: { id },
-      url
+      params: { id, sid = 1 }
     }
   } = useReactRouter()
 
   const store = useStore()
   const me = useSelector(state => getUserInfo(state))
   const info = useSelector(state => getDetail(state, id))
-  const commentData = useSelector(state => getDetail(state, `comment_${id}`))
+  const commentData = useSelector(state => getComment(state, `${sid}_${id}`))
   const loveD = useSelector(state => getDetail(state, `love_${id}`))
+  const getCommentData = useCallback(args => comment(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
+  const getloveData = useCallback(args => love(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
 
-  const { userid } = me
+  const { userid, nickname } = me
 
   useEffect(() => {
     const getData = args => detail(args)(store.dispatch, store.getState)
-    const getCommentData = args => getComment(args)(store.dispatch, store.getState)
-    const getloveData = args => love(args)(store.dispatch, store.getState)
     if (!info || !info.data) {
       getData({ id })
     }
     if (!commentData || !commentData.data) {
-      getCommentData({ id, sid: 1 })
+      getCommentData({ id, sid })
     }
     async function feachLove() {
-      let [, data] = await getloveData({ id, sid: 1 })
-      setLove(data.data)
+      let [, data] = await getloveData({ id, sid })
+      setLove(data.data || {})
     }
     if (!(loveD && loveD.data) && userid) feachLove()
-  }, [commentData, loveD, id, info, store.dispatch, store.getState, userid])
+  }, [commentData, loveD, id, info, store.dispatch, store.getState, userid, sid, getCommentData, getloveData])
 
   const addMark = async (type, id, cid) => {
     const onLike = args => mark(args)(store.dispatch, store.getState)
-    const getloveData = args => love(args)(store.dispatch, store.getState)
     if (userid) {
       let [, data] = await onLike({ type, id, cid })
       if (data.rcode === 1) {
-        getloveData({ id, sid: 1 })
+        getloveData({ id, sid })
         Toast.success(data.msg)
       }
     } else {
@@ -96,6 +96,25 @@ export default Shell(() => {
   const onType = isSign => {
     onSign(isSign)
     onModal(true)
+  }
+
+  const submit = async (e, content) => {
+    e.preventDefault()
+    if (!userid) {
+      onModal(true)
+      return
+    }
+    if (!content.value) {
+      content.focus()
+      Toast.error('评论内容不能为空')
+      return
+    }
+    const add = args => addComment(args)(store.dispatch, store.getState)
+    let [err, data] = await add({ id, sid, content: content.value, nickname, pid: 0 })
+    if (data.code === 1) {
+      content.value = ''
+      getCommentData({ id, sid })
+    }
   }
 
   const { data = {}, loading } = info
@@ -235,7 +254,7 @@ export default Shell(() => {
             </div>
             {star ? (
               <div styleName="detail-score">
-                <Tating data={star} id={+id} sid={1} />
+                <Tating data={star} id={+id} sid={sid} />
               </div>
             ) : null}
           </div>
@@ -333,14 +352,12 @@ export default Shell(() => {
             </div>
             <HotWeek />
           </div>
-          {commentList.length > 0 ? (
-            <div className="mt20">
-              <div styleName="title">
-                <h2>评论</h2>
-              </div>
-              <Comment data={commentList} />
+          <div className="mt20">
+            <div styleName="title">
+              <h2>评论</h2>
             </div>
-          ) : null}
+            <Comment data={commentList} submit={(e, content) => submit(e, content)} />
+          </div>
         </div>
         <div className="fr right">
           <div className="box pb20">
@@ -378,7 +395,7 @@ export default Shell(() => {
         </div>
       </div>
       <Modal visible={visible} showModal={() => onModal(true)} closeModal={() => onModal(false)}>
-        <Sign isSign={isSign} onType={val => onType(val)} />
+        <Sign isSign={isSign} onType={val => onType(val)} visible={visible} />
       </Modal>
     </>
   )

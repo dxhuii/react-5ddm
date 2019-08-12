@@ -12,6 +12,7 @@ import scroll from './scroll'
 import history from './history'
 import month from './month'
 import game from './game'
+import comment from './comment'
 export default {
   user,
   detail,
@@ -26,5 +27,6 @@ export default {
   month,
   scroll,
   history,
-  game
+  game,
+  comment
 }

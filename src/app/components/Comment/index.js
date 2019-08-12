@@ -1,12 +1,33 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
+import Toast from '@/components/Toast'
+
 import './style.scss'
 
-export default function comment({ data }) {
+export default function Comment({ data, submit }) {
+  const commentContent = useRef(null)
+
+  const addComment = e => {
+    // e.preventDefault()
+    const body = commentContent.current
+    // if (!body.value) {
+    //   body.focus()
+    //   Toast.error('评论内容不能为空')
+    //   return
+    // }
+    submit(e, body)
+  }
+
   return (
     <div styleName="comment">
+      <div styleName="comment-form">
+        <form onSubmit={addComment}>
+          <textarea ref={commentContent}></textarea>
+          <button>发表</button>
+        </form>
+      </div>
       <div styleName="comment-list">
         {data.length < 0 ? (
           <div styleName="comment-empty" className="tac">
@@ -28,7 +49,7 @@ export default function comment({ data }) {
                 <div styleName="commit-list__content">
                   {item.content}
                   {(item.sub || []).length > 0 ? (
-                    <ul styleName="commit_sublist" className="mt10">
+                    <ul styleName="commit-sublist" className="mt10">
                       {item.sub.map(subItem => (
                         <li key={subItem.id}>
                           <div styleName="commit-list__people">
@@ -64,10 +85,11 @@ export default function comment({ data }) {
   )
 }
 
-comment.defaultProps = {
+Comment.defaultProps = {
   data: []
 }
 
-comment.propTypes = {
-  data: PropTypes.array
+Comment.propTypes = {
+  data: PropTypes.array,
+  submit: PropTypes.func
 }

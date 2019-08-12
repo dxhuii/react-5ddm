@@ -49,7 +49,7 @@ export default ({ dispatch, getState, reducerName, actionType, api, name = '', p
       return
     }
 
-    list.data = isPage && list.page !== 1 ? list.data.concat(data.data) : data.data
+    list.data = isPage && list.page !== 1 ? list.data.concat(data.data) : data.data || {}
     list.params = params
     list.loading = false
 

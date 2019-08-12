@@ -33,20 +33,6 @@ export function vodNews({ id }) {
   }
 }
 
-export function getComment({ id, sid }) {
-  return (dispatch, getState) => {
-    return loadData({
-      dispatch,
-      getState,
-      name: `comment_${id}`,
-      reducerName: 'detail',
-      actionType: 'GET_COMMENT',
-      api: 'comment',
-      params: { id, sid }
-    })
-  }
-}
-
 export function love({ id, sid }) {
   return (dispatch, getState) => {
     return loadData({
