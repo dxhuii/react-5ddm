@@ -40,10 +40,10 @@ export default function Comment({ data, submit }) {
                 <div styleName="commit-list__people">
                   <div styleName="avatar">
                     <img src={item.avatar} />
-                    {item.nickname}
+                    {item.username} {item.floor}楼
                   </div>
                   <div styleName="commit-list__zan">
-                    有用({item.up}) 没用({item.down})
+                    {item.time} 有用({item.up}) 没用({item.down})
                   </div>
                 </div>
                 <div styleName="commit-list__content">
@@ -56,11 +56,11 @@ export default function Comment({ data, submit }) {
                             <span styleName="title">
                               {subItem.at ? (
                                 <span>
-                                  <Link to={`/people/${subItem.uid}`}>{subItem.nickname}</Link> 回复了
-                                  <Link to={`/people/${subItem.at.uid}`}> {subItem.at.nickname}</Link>
+                                  <Link to={`/people/${subItem.uid}`}>{subItem.username}</Link> 回复了
+                                  <Link to={`/people/${subItem.at.uid}`}> {subItem.at.username}</Link>
                                 </span>
                               ) : (
-                                <Link to={`/people/${subItem.uid}`}>{subItem.nickname}</Link>
+                                <Link to={`/people/${subItem.uid}`}>{subItem.username}</Link>
                               )}
                             </span>
                             <span styleName="time">
