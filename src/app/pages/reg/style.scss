@@ -1,21 +1,24 @@
 .container {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-color: #343a40;
+
   >form {
     padding: 15px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
     h1 {
       font-size: 36px;
       color: #fff;
       text-align: center;
     }
+
     input {
       width: 100%;
       margin-top: 20px;
@@ -25,6 +28,7 @@
       line-height: 40px;
       border: none;
     }
+
     button,
     a {
       margin-top: 20px;
@@ -35,12 +39,33 @@
       color: #fff;
       border-radius: 20px;
     }
+
     a {
       display: inline-block;
       background-color: #888;
       color: #fff;
       text-align: center;
       line-height: 40px;
+    }
+
+    .validate {
+      position: relative;
+
+      img {
+        position: absolute;
+        right: 0;
+        top: 20px;
+        width: 136px;
+        border-radius: 20px;
+      }
+    }
+  }
+}
+
+@media (min-width: 0) and (max-width: 1200px) {
+  .container {
+    >form {
+      width: 90%;
     }
   }
 }

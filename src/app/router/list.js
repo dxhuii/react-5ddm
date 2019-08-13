@@ -19,6 +19,7 @@ import topData from '@/pages/top/load-data'
 import newData from '@/pages/new/load-data'
 import episodelistData from '@/pages/episodelist/load-data'
 import detailNewstData from '@/pages/subject/news/load-data'
+import gameData from '@/pages/game/load-data'
 
 const exact = true
 const base = { exact, head: Head, footer: Footer }
@@ -69,10 +70,20 @@ export default [
   },
 
   {
-    path: '/sign-in',
+    path: '/sign',
     exact,
     body: Loadable({
-      loader: () => import('@/pages/sign-in'),
+      loader: () => import('@/pages/sign'),
+      loading
+    }),
+    enter: 'tourists'
+  },
+
+  {
+    path: '/reg',
+    exact,
+    body: Loadable({
+      loader: () => import('@/pages/reg'),
       loading
     }),
     enter: 'tourists'
@@ -271,6 +282,7 @@ export default [
       loader: () => import('../pages/game'),
       loading
     }),
+    loadData: gameData,
     enter: 'everybody'
   },
 

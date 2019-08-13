@@ -16,7 +16,7 @@ import { GA, DOMAIN, debug } from 'Config'
 import { loadScript } from '@/utils/loadScript'
 
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
-if (process.env.NODE_ENV !== 'development') {
+if (!debug) {
   OfflinePluginRuntime.install()
   OfflinePluginRuntime.applyUpdate()
   const { origin, pathname } = window.location
@@ -36,14 +36,14 @@ if (process.env.NODE_ENV !== 'development') {
   // 从页面中获取服务端生产redux数据，作为客户端redux初始值
   const store = configureStore(window.__initState__)
   let userinfo = getUserInfo(store.getState())
-  if (!userinfo || !userinfo.userid) userinfo = null
+  if (!userinfo || !userinfo.userid) userinfo = {}
   let enterEvent = () => {}
   const { href, pathname } = window.location
   if (GA) {
     ReactGA.initialize(GA, { debug })
     enterEvent = userinfo => {
       let option = { page: pathname, userId: userinfo && userinfo._id ? userinfo._id : null }
-      if (process.env.NODE_ENV !== 'development') {
+      if (!debug) {
         if (href.indexOf('/play/') !== -1 && document.cookie.indexOf('plain') === -1) {
           devtoolsDetector.addListener(function(isOpen, detail) {
             if (isOpen) {
@@ -86,7 +86,7 @@ if (process.env.NODE_ENV !== 'development') {
     document.getElementById('app')
   )
 
-  if (process.env.NODE_ENV === 'development') {
+  if (debug) {
     if (module.hot) {
       module.hot.accept()
     }

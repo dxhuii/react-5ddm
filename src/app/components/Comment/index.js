@@ -2,21 +2,13 @@ import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import Toast from '@/components/Toast'
-
 import './style.scss'
 
 export default function Comment({ data, submit }) {
   const commentContent = useRef(null)
 
   const addComment = e => {
-    // e.preventDefault()
     const body = commentContent.current
-    // if (!body.value) {
-    //   body.focus()
-    //   Toast.error('评论内容不能为空')
-    //   return
-    // }
     submit(e, body)
   }
 
