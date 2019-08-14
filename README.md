@@ -79,7 +79,7 @@ node ./dist/server/server.js
 或使用 pm2 启动服务
 
 ```
-pm2 start ./dist/server/server.js --name "react-99496" --max-memory-restart 400M
+pm2 start ./dist/server/server.js --name "react-5ddm" --max-memory-restart 400M
 ```
 
 ## 特点
@@ -96,7 +96,7 @@ pm2 start ./dist/server/server.js --name "react-99496" --max-memory-restart 400M
 
 ## 感谢
 
-> 本站基于以下脚手架开发
-> ⚛️ React 同构脚手架 [https://github.com/54sword/react-starter](https://github.com/54sword/react-starter)
-> 本站衍生出的脚手架，基于以上脚手架优化而来
-> https://github.com/dxhuii/react-ssr
+> - 本站基于以下脚手架开发
+> - ⚛️React 同构脚手架 [https://github.com/54sword/react-starter](https://github.com/54sword/react-starter)
+> - 本站衍生出的脚手架，基于以上脚手架优化而来
+> - [https://github.com/dxhuii/react-ssr](https://github.com/dxhuii/react-ssr)
