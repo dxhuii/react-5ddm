@@ -1,6 +1,7 @@
 import Ajax from '@/common/ajax'
 import config from '@/utils/config'
 import Toast from '@/components/Toast'
+import Post from '@/utils/post'
 
 export function loadUserInfo({ user }) {
   return (dispatch, getState) => {
@@ -40,6 +41,19 @@ export function getCode() {
   }
 }
 
+export function send({ to }) {
+  return () => {
+    return Post({
+      api: 'send',
+      params: {
+        type: 'reg',
+        ac: 'mobile',
+        to
+      }
+    })
+  }
+}
+
 export function saveCookie(params, name) {
   return new Promise(async (resolve, reject) => {
     // 这里写你的登录请求，登录成功以后，将token储存到cookie，使用httpOnly(比较安全)
@@ -49,6 +63,8 @@ export function saveCookie(params, name) {
       method: 'post',
       data: params
     })
+
+    debugger
 
     if (data.code === 1) {
       localStorage.setItem('userid', data.data.userid)
@@ -77,9 +93,9 @@ export function signIn({ username, password, validate, key }) {
   }
 }
 
-export function signUp({ username, password, email, validate, key }) {
+export function signUp({ username, password, mobile, validate, key }) {
   return dispatch => {
-    return saveCookie({ user_name: username, user_password: password, email, validate, key }, 'reg')
+    return saveCookie({ user_name: username, user_password: password, to: mobile, validate, key }, 'reg')
   }
 }
 

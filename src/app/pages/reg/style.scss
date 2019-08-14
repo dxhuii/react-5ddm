@@ -51,12 +51,13 @@
     .validate {
       position: relative;
 
-      img {
+      div {
         position: absolute;
-        right: 0;
+        right: 15px;
         top: 20px;
-        width: 136px;
-        border-radius: 20px;
+        line-height: 40px;
+        color: #999;
+        cursor: pointer;
       }
     }
   }

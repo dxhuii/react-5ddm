@@ -4,7 +4,6 @@ import Toast from '@/components/Toast'
 
 export default ({ api, params = {}, header = true, callback = () => {} }) => {
   return new Promise(async (resolve, reject) => {
-    debugger
     let [err, data] = await Ajax({
       method: 'post',
       url: config.api[api],

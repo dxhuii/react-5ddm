@@ -1,8 +1,9 @@
 import { API } from 'Config'
 
-const apiReact = `${API}index.php?s=home-mapi-`
-const apiHomeUser = `${API}index.php?s=home-user-`
-const apiUser = `${API}index.php?s=user-api-`
+const apiReact = `${API}index.php/home/mapi/`
+const apiHomeUser = `${API}index.php/home/user/`
+const apiUser = `${API}index.php/user/api/`
+const apiUserReg = `${API}index.php/user/reg/`
 
 export default {
   api: {
@@ -21,6 +22,9 @@ export default {
     love: `${apiHomeUser}favoriteAndRemind`, // 查询评分，是否收藏，订阅
     addComment: `${apiHomeUser}addcm`, // 添加评论
     addReptyComment: `${apiHomeUser}addrecm`, // 添加回复
+
+    send: `${apiUserReg}send`, // 发送手机验证码
+    sendemail: `${apiUserReg}sendemail`, // 发送邮件验证码
     /**
      * 获取列表
      * $hits
