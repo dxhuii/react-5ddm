@@ -37,10 +37,10 @@
 **_没有在 windows 机器上测试过，可能会报错_**
 
 ```
-$ git clone git@gitee.com:dxhuii/react-99496.git
-$ cd react-99496
-$ npm install
-$ npm run start
+$ git clone git@gitee.com:dxhuii/react-5ddm.git
+$ cd react-5ddm
+$ yarn
+$ yarn start
 ```
 
 浏览器打开 [http://localhost:4000](http://localhost:4000)
@@ -50,13 +50,13 @@ $ npm run start
 ### 开发环境
 
 ```
-npm run start
+yarn start
 ```
 
 ### 生产环境测试
 
 ```
-npm run pro
+yarn pro
 ```
 
 ## 部署到服务器
@@ -64,7 +64,7 @@ npm run pro
 1、打包项目
 
 ```
-npm run dist
+yarn dist
 ```
 
 2、将项目上传至你的服务器  
@@ -82,10 +82,6 @@ node ./dist/server/server.js
 pm2 start ./dist/server/server.js --name "react-99496" --max-memory-restart 400M
 ```
 
-#### ⚛️ React 同构脚手架 [https://github.com/54sword/react-starter](https://github.com/54sword/react-starter)
-
-Web 前端世界日新月异变化太快，为了让自己跟上节奏不掉队，总结出了自己的一套 React 脚手架，方便日后项目可以基于此快速上手开发。
-
 ## 特点
 
 - 🖥 支持首屏服务端渲染，支持 SEO
@@ -96,4 +92,11 @@ Web 前端世界日新月异变化太快，为了让自己跟上节奏不掉队�
 - 🎛 内置登录、退出、页面权限控制、帖子列表获取、帖子详情获取等功能
 - 🚧 内置用户访问页面时，301、404 状态相应的处理逻辑
 
->  注：项目里面包含了对 vscode 的配置
+> 注：项目里面包含了对 vscode 的配置
+
+## 感谢
+
+> 本站基于以下脚手架开发
+> ⚛️ React 同构脚手架 [https://github.com/54sword/react-starter](https://github.com/54sword/react-starter)
+> 本站衍生出的脚手架，基于以上脚手架优化而来
+> https://github.com/dxhuii/react-ssr
