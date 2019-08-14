@@ -3,13 +3,12 @@ import Post from '@/utils/post'
 export function mark({ type, id, cid }) {
   return () => {
     return Post({
-      api: type === 'love' ? 'love' : 'remind',
+      api: 'mark',
       params: {
         type,
         id,
         cid
-      },
-      header: true
+      }
     })
   }
 }

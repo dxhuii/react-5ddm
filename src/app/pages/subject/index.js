@@ -60,8 +60,8 @@ export default Shell(() => {
   const info = useSelector(state => getDetail(state, id))
   const commentData = useSelector(state => getComment(state, `${sid}_${id}`))
   const loveD = useSelector(state => getDetail(state, `love_${id}`))
-  const getCommentData = useCallback(args => comment(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
-  const getloveData = useCallback(args => love(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
+  const _comment = useCallback(args => comment(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
+  const _love = useCallback(args => love(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
 
   const { userid, nickname } = me
 
@@ -71,21 +71,22 @@ export default Shell(() => {
       getData({ id })
     }
     if (!commentData || !commentData.data) {
-      getCommentData({ id, sid })
+      _comment({ id, sid })
     }
     async function feachLove() {
-      let [, data] = await getloveData({ id, sid })
+      let [, data] = await _love({ id, sid })
       setLove(data.data || {})
     }
     if (!(loveD && loveD.data) && userid) feachLove()
-  }, [commentData, loveD, id, info, store.dispatch, store.getState, userid, sid, getCommentData, getloveData])
+  }, [commentData, loveD, id, info, store.dispatch, store.getState, userid, sid, _love, _comment])
 
   const addMark = async (type, id, cid) => {
     const onLike = args => mark(args)(store.dispatch, store.getState)
     if (userid) {
       let [, data] = await onLike({ type, id, cid })
-      if (data.rcode === 1) {
-        getloveData({ id, sid })
+      if (data.code === 1) {
+        let [, res] = await _love({ id, sid })
+        setLove(res.data || {})
         Toast.success(data.msg)
       }
     } else {
@@ -109,11 +110,11 @@ export default Shell(() => {
       Toast.error('评论内容不能为空')
       return
     }
-    const add = args => addComment(args)(store.dispatch, store.getState)
-    let [err, data] = await add({ id, sid, content: content.value, nickname, pid: 0 })
+    const _addComment = args => addComment(args)(store.dispatch, store.getState)
+    let [, data] = await _addComment({ id, sid, content: content.value, nickname, pid: 0 })
     if (data.code === 1) {
       content.value = ''
-      getCommentData({ id, sid })
+      _comment({ id, sid })
     }
   }
 
@@ -121,17 +122,14 @@ export default Shell(() => {
   const {
     cid,
     title,
-    content = '',
     listName,
     listNameBig,
-    pic = '',
     actor,
     area,
     aliases,
     gold,
     filmtime,
     total,
-    language = '',
     company,
     keywords,
     website,
@@ -145,6 +143,9 @@ export default Shell(() => {
     repairtitle,
     pan,
     vod_pantitle,
+    pic = '',
+    language = '',
+    content = '',
     mcid = [],
     original = [],
     director = [],
@@ -169,6 +170,7 @@ export default Shell(() => {
     window.location.href = jump
   }
   if (loading || !data.title) return <Loading />
+  console.log(loveData, 'loveData')
   return (
     <>
       <div className="warp-bg">

@@ -129,9 +129,7 @@ export default function() {
           <a onClick={() => onPlaylog(!showLog)}>记录</a>
           {nickname ? <span>{nickname}</span> : null}
           {userid ? (
-            <a href="javascript:void(0)" onClick={() => onSignOut()}>
-              退出
-            </a>
+            <a onClick={() => onSignOut()}>退出</a>
           ) : (
             <Fragment>
               <a onClick={() => onType('signIn')}>登录</a>

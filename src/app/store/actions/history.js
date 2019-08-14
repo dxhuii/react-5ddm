@@ -34,8 +34,7 @@ export function addplaylog({ id, pid, sid, name, max }) {
         sid,
         name,
         max
-      },
-      header: true
+      }
     })
   }
 }
@@ -46,8 +45,7 @@ export function delplaylog({ id }) {
       api: 'delplaylog',
       params: {
         id
-      },
-      header: true
+      }
     })
   }
 }
@@ -55,8 +53,7 @@ export function delplaylog({ id }) {
 export function emptyhistory() {
   return () => {
     return Post({
-      api: 'emptyhistory',
-      header: true
+      api: 'emptyhistory'
     })
   }
 }

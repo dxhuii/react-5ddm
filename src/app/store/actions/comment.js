@@ -25,8 +25,7 @@ export function addComment({ id, sid = 1, content, nickname, pid }) {
         comm_txt: content,
         user_nickname: nickname,
         comm_pid: pid
-      },
-      header: true
+      }
     })
   }
 }

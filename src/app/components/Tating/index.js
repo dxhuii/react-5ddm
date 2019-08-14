@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // redux
 import { useStore } from 'react-redux'
 import { addgold } from '@/store/actions/mark'
-import { getComment } from '@/store/actions/detail'
+import { comment } from '@/store/actions/comment'
 
 import Toast from '@/components/Toast'
 
@@ -20,10 +20,10 @@ export default function Tating({ data, id, sid }) {
     setStarWith(index * 16)
     setStar(index)
     const onAddgold = args => addgold(args)(store.dispatch, store.getState)
-    const getCommentData = args => getComment(args)(store.dispatch, store.getState)
+    const getComment = args => comment(args)(store.dispatch, store.getState)
     let [, data] = await onAddgold({ id, val: index })
     if (data.code === 1) {
-      getCommentData({ id, sid })
+      getComment({ id, sid })
       Toast.success(data.msg)
     }
   }
