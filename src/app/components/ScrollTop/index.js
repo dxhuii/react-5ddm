@@ -23,7 +23,7 @@ export default function() {
   }
 
   return (
-    <a styleName="top" onClick={top} href="javascript:;">
+    <a styleName="top" onClick={top}>
       <i className="iconfont">&#xe900;</i>
     </a>
   )

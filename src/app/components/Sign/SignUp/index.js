@@ -50,8 +50,8 @@ export default () => {
       return false
     }
 
-    if (validate.current.value) {
-      password.current.focus()
+    if (!validate.current.value) {
+      validate.current.focus()
       return false
     }
 

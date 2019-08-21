@@ -78,7 +78,7 @@ export default Shell(() => {
       // 判断是否点击的图片
       if (e.target.nodeName === 'IMG' && content && elem === 'content') {
         e.preventDefault()
-        console.log(e, 'getimg')
+        e.stopPropagation()
         let params = {}
         params.param = {}
         // 获取imglist
@@ -98,6 +98,14 @@ export default Shell(() => {
         setImgObj(params.param)
       }
     })
+  }
+
+  const closePic = val => {
+    setPic(val)
+    if (!val) {
+      imgObj.index = undefined
+      setImgObj(imgObj)
+    }
   }
 
   const { data = {}, loading } = articleData
@@ -151,15 +159,17 @@ export default Shell(() => {
           ) : null}
           <div ref={articleContent} id="content" styleName="article-content" dangerouslySetInnerHTML={{ __html: convertHTML(content) }} />
           {showPic ? (
-            <div styleName="article-slide" onClick={() => setPic(false)}>
+            <div styleName="article-slide" onClick={() => closePic(false)}>
               <span />
-              <Swiper Pagination={true} Controller={true} Start={index} Continuous={false}>
-                {imageArray.map((item, index) => (
-                  <div className="swipe-item" key={item.url + index}>
-                    <img src={item.url} />
-                  </div>
-                ))}
-              </Swiper>
+              {index !== undefined ? (
+                <Swiper Pagination={true} Controller={true} Start={index} Continuous={false}>
+                  {imageArray.map((item, i) => (
+                    <div className="swipe-item" key={item.url + i}>
+                      <img src={item.url} />
+                    </div>
+                  ))}
+                </Swiper>
+              ) : null}
             </div>
           ) : null}
           <div styleName="article-share">
