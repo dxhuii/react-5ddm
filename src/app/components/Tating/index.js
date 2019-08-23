@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 
 // redux
 import { useStore } from 'react-redux'
-import { mark } from '@/store/actions/mark'
-import { score } from '@/store/actions/detail'
+import { addgold } from '@/store/actions/mark'
+import { comment } from '@/store/actions/comment'
 
 import Toast from '@/components/Toast'
 
 import './style.scss'
 
-export default function Tating({ data, id, sid, uid }) {
+export default function Tating({ data, id, sid }) {
   const starText = ['很差', '较差', '还行', '推荐', '力荐']
   const [starWith, setStarWith] = useState(16)
   const [star, setStar] = useState(16)
@@ -19,12 +19,12 @@ export default function Tating({ data, id, sid, uid }) {
   const onStar = async index => {
     setStarWith(index * 16)
     setStar(index)
-    const _mark = args => mark(args)(store.dispatch, store.getState)
-    const _score = args => score(args)(store.dispatch, store.getState)
-    let [, data] = await _mark({ id, val: index })
-    if (data.rcode === 1) {
-      _score({ id, sid, uid })
-      Toast.success('评分成功')
+    const onAddgold = args => addgold(args)(store.dispatch, store.getState)
+    const getComment = args => comment(args)(store.dispatch, store.getState)
+    let [, data] = await onAddgold({ id, val: index })
+    if (data.code === 1) {
+      getComment({ id, sid })
+      Toast.success(data.msg)
     }
   }
 

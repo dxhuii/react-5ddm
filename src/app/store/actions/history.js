@@ -1,6 +1,6 @@
-import Ajax from '@/common/ajax'
-import config from '@/utils/config'
 import loadData from '@/utils/loadData'
+import Post from '@/utils/post'
+
 /**
  * 用户访问页面的记录
  * @param {String} page url地址
@@ -11,68 +11,49 @@ export const addVisitHistory = page => {
   }
 }
 
-export function playlog({ uid }) {
+export function playlog() {
   return (dispatch, getState) => {
     return loadData({
       dispatch,
       getState,
-      name: uid,
       reducerName: 'history',
       actionType: 'GET_PLAY_LOG',
       api: 'getplaylog',
-      params: { uid }
+      header: true
     })
   }
 }
 
-export const addplaylog = ({ vod_id, vod_pid, vod_sid, vod_name, url_name, vod_maxnum, uid }) => {
-  return (dispatch, getState) => {
-    return new Promise(async resolve => {
-      let [err, data] = await Ajax({
-        url: config.api.addplaylog,
-        method: 'post',
-        data: {
-          uid,
-          vod_id,
-          vod_pid,
-          vod_sid,
-          vod_name,
-          url_name,
-          vod_maxnum
-        }
-      })
-      resolve([err, data])
+export function addplaylog({ id, pid, sid, name, max }) {
+  return () => {
+    return Post({
+      api: 'addplaylog',
+      params: {
+        id,
+        pid,
+        sid,
+        name,
+        max
+      }
     })
   }
 }
 
-export const delplaylog = ({ id, uid }) => {
-  return (dispatch, getState) => {
-    return new Promise(async resolve => {
-      let [err, data] = await Ajax({
-        url: config.api.delplaylog,
-        method: 'get',
-        data: {
-          id,
-          uid
-        }
-      })
-      resolve([err, data])
+export function delplaylog({ id }) {
+  return () => {
+    return Post({
+      api: 'delplaylog',
+      params: {
+        id
+      }
     })
   }
 }
 
-export const emptyhistory = ({ uid }) => {
-  return (dispatch, getState) => {
-    return new Promise(async resolve => {
-      let [err, data] = await Ajax({
-        url: config.api.emptyhistory,
-        method: 'get',
-        data: {
-          uid
-        }
-      })
-      resolve([err, data])
+export function emptyhistory() {
+  return () => {
+    return Post({
+      api: 'emptyhistory'
     })
   }
 }

@@ -1,7 +1,7 @@
 import config from '@/utils/config'
 import Ajax from '@/common/ajax'
 
-export default ({ dispatch, getState, reducerName, name, actionType, api, params, isPage = false, method = 'get', callback = () => {} }) => {
+export default ({ dispatch, getState, reducerName, actionType, api, name = '', params = {}, isPage = false, header = false, method = 'get', callback = () => {} }) => {
   return new Promise(async (resolve, reject) => {
     let state = getState(),
       list = state[reducerName][name] || {}
@@ -38,7 +38,8 @@ export default ({ dispatch, getState, reducerName, name, actionType, api, params
     let [err, data] = await Ajax({
       method,
       url,
-      data: isPage ? Object.assign({}, params, { s: url.split('=')[1], p: list.page }) : params
+      data: isPage ? Object.assign({}, params, { s: url.split('=')[1], p: list.page }) : params,
+      headers: header ? { authorization: localStorage.getItem('token') ? localStorage.getItem('token') : 0 } : {}
     })
 
     if (err) {
@@ -48,7 +49,7 @@ export default ({ dispatch, getState, reducerName, name, actionType, api, params
       return
     }
 
-    list.data = isPage && list.page !== 1 ? list.data.concat(data.data) : data.data
+    list.data = isPage && list.page !== 1 ? list.data.concat(data.data) : data.data || {}
     list.params = params
     list.loading = false
 

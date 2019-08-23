@@ -1,20 +1,26 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import useReactRouter from 'use-react-router'
 
 // redux
 import { useStore } from 'react-redux'
 import { signUp, send } from '@/store/actions/user'
 import Toast from '@/components/Toast'
 
-import '../style.scss'
+import Shell from '@/components/Shell'
+import Meta from '@/components/Meta'
+
+import './style.scss'
 
 const sTime = 60
 let syTime = sTime
 
-export default () => {
+export default Shell(() => {
+  const { location } = useReactRouter()
   const store = useStore()
-  const _signUp = args => signUp(args)(store.dispatch, store.getState)
   const [paused, setPaused] = useState(true)
   const [time, setTime] = useState(sTime)
+  const _signUp = args => signUp(args)(store.dispatch, store.getState)
   const [username, password, mobile, rePassword, code] = [useRef(), useRef(), useRef(), useRef(), useRef()]
 
   const tick = () => {
@@ -85,7 +91,7 @@ export default () => {
     }
 
     if (!code.value) {
-      Toast.error('请输入验证码')
+      Toast.error('两次输入的密码不一至')
       c.focus()
       return false
     }
@@ -98,23 +104,32 @@ export default () => {
     })
     if (success) {
       setTimeout(() => {
-        window.location.reload()
+        const {
+          params: { from }
+        } = location
+        window.location.href = from ? from : '/'
         return false
       }, 300)
     }
   }
 
   return (
-    <form onSubmit={submit}>
-      <input type="text" ref={username} placeholder="请输入账号" />
-      <input type="password" ref={password} placeholder="请输入密码" />
-      <input type="password" ref={rePassword} placeholder="再输入一次密码" />
-      <div styleName="validate">
-        <input type="text" ref={mobile} placeholder="请输入手机号" />
-        <div onClick={start}>{time > 1 && time < sTime ? time : '发送验证码'}</div>
-      </div>
-      <input type="text" ref={code} placeholder="请输入验证" />
-      <button type="submit">注册</button>
-    </form>
+    <div styleName="container" className="tec">
+      <Meta title="注册" />
+      <form onSubmit={submit}>
+        <h1>注册</h1>-{time}-
+        <input type="text" ref={username} placeholder="请输入账号" />
+        <input type="password" ref={password} placeholder="请输入密码" />
+        <input type="password" ref={rePassword} placeholder="再输入一次密码" />
+        <div styleName="validate">
+          <input type="text" ref={mobile} placeholder="请输入手机号" />
+          <div onClick={start}>{time > 1 && time < sTime ? time : '发送验证码'}</div>
+        </div>
+        <input type="text" ref={code} placeholder="请输入验证" />
+        <button type="submit">注册</button>
+        <Link to="/sign">有账号？登录</Link>
+        <Link to="/">返回首页</Link>
+      </form>
+    </div>
   )
-}
+})

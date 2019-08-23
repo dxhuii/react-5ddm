@@ -282,7 +282,6 @@ class SubjectList extends Component {
                     styleName={lz === item.id ? 'cur' : ''}
                     onClick={() => this.getParams('lz', item.id, item.title)}
                     key={item.id}
-                   
                   >
                     {item.title}
                   </a>

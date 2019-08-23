@@ -2,12 +2,13 @@ import config from '@/utils/config'
 import Ajax from '@/common/ajax'
 import Toast from '@/components/Toast'
 
-export default ({ api, params, method = 'get', callback = () => {} }) => {
+export default ({ api, params = {}, header = true, callback = () => {} }) => {
   return new Promise(async (resolve, reject) => {
     let [err, data] = await Ajax({
-      method,
+      method: 'post',
       url: config.api[api],
-      data: params
+      data: params,
+      headers: header ? { authorization: localStorage.getItem('token') ? localStorage.getItem('token') : 0 } : {}
     })
 
     if (err) {
@@ -15,9 +16,11 @@ export default ({ api, params, method = 'get', callback = () => {} }) => {
       callback([null, data])
       return
     }
-    if (data.rcode === 1) {
+    if (data.code === 1) {
       resolve([null, data])
       callback([null, data])
+    } else if (header && (data.status === 1002 || data.status === 1003)) {
+      window.location.href = `/sign?from=${window.location.href}`
     } else {
       Toast.info(data.msg)
     }

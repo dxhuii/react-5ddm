@@ -36,6 +36,8 @@ export default function() {
     let [, success] = await _signOut()
     if (success) {
       // 退出成功
+      localStorage.removeItem('userid')
+      localStorage.removeItem('token')
       window.location.reload()
     } else {
       alert('退出失败')
@@ -127,9 +129,7 @@ export default function() {
           <a onClick={() => onPlaylog(!showLog)}>记录</a>
           {nickname ? <span>{nickname}</span> : null}
           {userid ? (
-            <a href="javascript:void(0)" onClick={() => onSignOut()}>
-              退出
-            </a>
+            <a onClick={() => onSignOut()}>退出</a>
           ) : (
             <Fragment>
               <a onClick={() => onType('signIn')}>登录</a>
@@ -143,7 +143,7 @@ export default function() {
         <PlayLog userid={userid} pid={params.pid} isShow={showLog} />
       </header>
       <Modal visible={visible} showModal={() => onModal(true)} closeModal={() => onModal(false)}>
-        <Sign isSign={type} onType={val => onType(val)} />
+        <Sign isSign={type} onType={val => onType(val)} visible={visible} />
       </Modal>
       {isNot ? <Ads id={7} /> : null}
     </Fragment>

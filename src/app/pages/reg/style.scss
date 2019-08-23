@@ -1,0 +1,72 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #343a40;
+
+  >form {
+    padding: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    h1 {
+      font-size: 36px;
+      color: #fff;
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      margin-top: 20px;
+      border-radius: 20px;
+      padding: 0 15px;
+      height: 40px;
+      line-height: 40px;
+      border: none;
+    }
+
+    button,
+    a {
+      margin-top: 20px;
+      width: 100%;
+      height: 40px;
+      background-color: #0084FF;
+      font-size: 18px;
+      color: #fff;
+      border-radius: 20px;
+    }
+
+    a {
+      display: inline-block;
+      background-color: #888;
+      color: #fff;
+      text-align: center;
+      line-height: 40px;
+    }
+
+    .validate {
+      position: relative;
+
+      div {
+        position: absolute;
+        right: 15px;
+        top: 20px;
+        line-height: 40px;
+        color: #999;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media (min-width: 0) and (max-width: 1200px) {
+  .container {
+    >form {
+      width: 90%;
+    }
+  }
+}

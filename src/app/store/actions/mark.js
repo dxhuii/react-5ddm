@@ -1,22 +1,22 @@
 import Post from '@/utils/post'
 
-export function like({ type, id, cid, uid }) {
-  return (dispatch, getState) => {
+export function mark({ type, id, cid }) {
+  return () => {
     return Post({
-      api: type === 'love' ? 'love' : 'remind',
+      api: 'mark',
       params: {
+        type,
         id,
-        cid,
-        uid
+        cid
       }
     })
   }
 }
 
-export function mark({ id, val }) {
-  return (dispatch, getState) => {
+export function addgold({ id, val }) {
+  return () => {
     return Post({
-      api: 'mark',
+      api: 'addgold',
       params: {
         id,
         val
@@ -26,12 +26,12 @@ export function mark({ id, val }) {
 }
 
 export function digg({ id, type, sid = 1 }) {
-  return (dispatch, getState) => {
+  return () => {
     return Post({
       api: 'digg',
       params: {
-        id,
         type,
+        id,
         sid
       }
     })

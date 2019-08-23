@@ -85,13 +85,17 @@ export default Shell(() => {
           <div styleName="article-content" className="clearfix">
             {((!p ? vContent : content) || '').replace('&nbsp; ', '').replace('&nbsp; ', '')}
           </div>
+          <div styleName="article-context">
+            {!p && storyNum >= 1 ? (
+              <Link to={`/episode/${id}/1`}>分集剧情</Link>
+            ) : (
+              <>
+                {prev && prev > 0 ? <Link to={`/episode/${id}/${prev}`}>上一集</Link> : <Link to={`/episode/${id}`}>剧情简介</Link>}
+                {next ? <Link to={`/episode/${id}/${next}`}>下一集</Link> : null}
+              </>
+            )}
+          </div>
           <TagShare tag={[vTitle]} config={shareConfig} location={location} />
-          {!p && storyNum <= 1 ? null : (
-            <div styleName="article-context" className="mt10">
-              {prev && prev > 0 ? <Link to={`/episode/${id}/${prev}`}>上一集</Link> : null}
-              {next ? <Link to={`/episode/${id}/${next}`}>下一集</Link> : null}
-            </div>
-          )}
         </article>
         <div styleName="article-bottom">
           <div className="mt20" styleName="article-ads">

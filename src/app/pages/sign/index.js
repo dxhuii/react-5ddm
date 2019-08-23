@@ -1,24 +1,27 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react'
-import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import useReactRouter from 'use-react-router'
 
 // redux
 import { useStore } from 'react-redux'
 import { signIn, getCode } from '@/store/actions/user'
 
-import '../style.scss'
+import Shell from '@/components/Shell'
+import Meta from '@/components/Meta'
 
-export default function SignIn({ visible }) {
+import './style.scss'
+
+export default Shell(() => {
+  const { location } = useReactRouter()
   const store = useStore()
   const _signIn = args => signIn(args)(store.dispatch, store.getState)
   const [base64img, getBase64] = useState('')
   const [imgkey, getImgKey] = useState('')
-  const username = useRef()
-  const password = useRef()
-  const validate = useRef()
+  const [username, password, validate] = [useRef(), useRef(), useRef()]
 
   useEffect(() => {
-    if (visible) getVerify()
-  }, [getVerify, visible])
+    getVerify()
+  }, [getVerify])
 
   const getVerify = useCallback(async () => {
     const _getCode = () => getCode()(store.dispatch, store.getState)
@@ -55,25 +58,30 @@ export default function SignIn({ visible }) {
     let [err, success] = await _signIn({ username: name.value, password: pass.value, validate: vali.value, key: imgkey })
     if (success) {
       setTimeout(() => {
-        window.location.reload()
+        const {
+          params: { from }
+        } = location
+        window.location.href = from ? from : '/'
         return false
       }, 300)
     }
   }
 
   return (
-    <form onSubmit={submit}>
-      <input type="text" ref={username} placeholder="请输入账号/邮箱" />
-      <input type="password" ref={password} placeholder="请输入密码" />
-      <div styleName="validate">
-        <input type="text" ref={validate} placeholder="请输入验证" />
-        <img src={base64img} onClick={getVerify} />
-      </div>
-      <button type="submit">登录</button>
-    </form>
+    <div styleName="container" className="tec">
+      <Meta title="登录" />
+      <form onSubmit={submit}>
+        <h1>登录</h1>
+        <input type="text" ref={username} placeholder="请输入账号/邮箱" />
+        <input type="password" ref={password} placeholder="请输入密码" />
+        <div styleName="validate">
+          <input type="text" ref={validate} placeholder="请输入验证" />
+          <img src={base64img} onClick={getVerify} />
+        </div>
+        <button type="submit">登录</button>
+        <Link to="/reg">没有账号？注册</Link>
+        <Link to="/">返回首页</Link>
+      </form>
+    </div>
   )
-}
-
-SignIn.propTypes = {
-  visible: PropTypes.bool
-}
+})

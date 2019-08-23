@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import useReactRouter from 'use-react-router'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
-import { detail, score } from '@/store/actions/detail'
-import { like } from '@/store/actions/mark'
+import { detail, love } from '@/store/actions/detail'
+import { comment, addComment } from '@/store/actions/comment'
+import { mark } from '@/store/actions/mark'
 import { getDetail } from '@/store/reducers/detail'
+import { getComment } from '@/store/reducers/comment'
 import { getUserInfo } from '@/store/reducers/user'
 
 import Loading from '@/components/Ui/Loading'
@@ -36,6 +38,7 @@ import './style.scss'
 export default Shell(() => {
   const [visible, onModal] = useState(false)
   const [isSign, onSign] = useState('signIn')
+  const [loveData, setLove] = useState({})
   const menu = {
     201: 'tv',
     202: 'ova',
@@ -48,38 +51,43 @@ export default Shell(() => {
   const {
     location,
     match: {
-      params: { id },
-      url
+      params: { id, sid = 1 }
     }
   } = useReactRouter()
 
   const store = useStore()
   const me = useSelector(state => getUserInfo(state))
   const info = useSelector(state => getDetail(state, id))
-  const cmScore = useSelector(state => getDetail(state, `score_${id}`))
+  const commentData = useSelector(state => getComment(state, `${sid}_${id}`))
+  const loveD = useSelector(state => getDetail(state, `love_${id}`))
+  const _comment = useCallback(args => comment(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
+  const _love = useCallback(args => love(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
 
-  const { userid } = me
+  const { userid, nickname } = me
 
   useEffect(() => {
     const getData = args => detail(args)(store.dispatch, store.getState)
-    const getScore = args => score(args)(store.dispatch, store.getState)
     if (!info || !info.data) {
       getData({ id })
     }
-    if (!cmScore || !cmScore.data) {
-      getScore({ id, sid: 1, uid: userid })
+    if (!commentData || !commentData.data) {
+      _comment({ id, sid })
     }
-  }, [cmScore, id, info, store.dispatch, store.getState, userid])
+    async function feachLove() {
+      let [, data] = await _love({ id, sid })
+      setLove(data.data || {})
+    }
+    if (!(loveD && loveD.data) && userid) feachLove()
+  }, [commentData, loveD, id, info, store.dispatch, store.getState, userid, sid, _love, _comment])
 
-  const addMark = async (type, id, cid, uid) => {
-    const onLike = args => like(args)(store.dispatch, store.getState)
-    const csData = cmScore.data || {}
-    const { loveid, remindid } = csData
+  const addMark = async (type, id, cid) => {
+    const onLike = args => mark(args)(store.dispatch, store.getState)
     if (userid) {
-      let [, data] = await onLike({ type, id, cid, uid })
-      if (data.rcode === 1) {
-        score({ id, sid: 1, uid })
-        Toast.success(type === 'remind' ? (remindid ? '取消追番' : '追番成功') : loveid ? '取消收藏' : '收藏成功')
+      let [, data] = await onLike({ type, id, cid })
+      if (data.code === 1) {
+        let [, res] = await _love({ id, sid })
+        setLove(res.data || {})
+        Toast.success(data.msg)
       }
     } else {
       onModal(true)
@@ -91,21 +99,37 @@ export default Shell(() => {
     onModal(true)
   }
 
+  const submit = async (e, content) => {
+    e.preventDefault()
+    if (!userid) {
+      onModal(true)
+      return
+    }
+    if (!content.value) {
+      content.focus()
+      Toast.error('评论内容不能为空')
+      return
+    }
+    const _addComment = args => addComment(args)(store.dispatch, store.getState)
+    let [, data] = await _addComment({ id, sid, content: content.value, nickname, pid: 0 })
+    if (data.code === 1) {
+      content.value = ''
+      _comment({ id, sid })
+    }
+  }
+
   const { data = {}, loading } = info
   const {
     cid,
     title,
-    content = '',
     listName,
     listNameBig,
-    pic = '',
     actor,
     area,
     aliases,
     gold,
     filmtime,
     total,
-    language = '',
     company,
     keywords,
     website,
@@ -119,6 +143,9 @@ export default Shell(() => {
     repairtitle,
     pan,
     vod_pantitle,
+    pic = '',
+    language = '',
+    content = '',
     mcid = [],
     original = [],
     director = [],
@@ -128,8 +155,10 @@ export default Shell(() => {
   } = data
   const reActor = actor ? actor.map(item => item.title).join(',') : ''
   const rePic = formatPic(pic, 'orj360')
-  const csData = cmScore.data || {}
-  const { loveid, remindid, star, comment = [] } = csData
+  const commitD = commentData.data || {}
+  const commentList = commitD.list || []
+  const star = commitD.gold || {}
+  const { loveid, remindid } = loveData
   const reContent = `${content.substring(0, 120)}${content.length > 120 ? '...' : ''}`
   const shareConfig = {
     pic,
@@ -141,6 +170,7 @@ export default Shell(() => {
     window.location.href = jump
   }
   if (loading || !data.title) return <Loading />
+  console.log(loveData, 'loveData')
   return (
     <>
       <div className="warp-bg">
@@ -226,7 +256,7 @@ export default Shell(() => {
             </div>
             {star ? (
               <div styleName="detail-score">
-                <Tating data={star} id={+id} uid={userid} sid={1} />
+                <Tating data={star} id={+id} sid={sid} />
               </div>
             ) : null}
           </div>
@@ -324,14 +354,12 @@ export default Shell(() => {
             </div>
             <HotWeek />
           </div>
-          {comment.length > 0 ? (
-            <div className="mt20">
-              <div styleName="title">
-                <h2>评论</h2>
-              </div>
-              <Comment data={comment} />
+          <div className="mt20">
+            <div styleName="title">
+              <h2>评论</h2>
             </div>
-          ) : null}
+            <Comment data={commentList} submit={(e, content) => submit(e, content)} />
+          </div>
         </div>
         <div className="fr right">
           <div className="box pb20">
@@ -369,7 +397,7 @@ export default Shell(() => {
         </div>
       </div>
       <Modal visible={visible} showModal={() => onModal(true)} closeModal={() => onModal(false)}>
-        <Sign isSign={isSign} onType={val => onType(val)} />
+        <Sign isSign={isSign} onType={val => onType(val)} visible={visible} />
       </Modal>
     </>
   )
