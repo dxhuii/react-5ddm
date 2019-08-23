@@ -99,7 +99,7 @@ class SubjectList extends Component {
       }
     } = this.props
     if (!config.data) {
-      configLoad({ name: 'list' })
+      configLoad({ tag: 'list' })
     }
     this.load()
     ArriveFooter.add(id, this.load)

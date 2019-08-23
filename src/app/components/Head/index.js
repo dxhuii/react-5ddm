@@ -105,7 +105,7 @@ export default function() {
             <NavLink styleName={/top/.test(url) ? 'active' : ''} exact to="/top">
               排行榜
             </NavLink>
-            <NavLink styleName={url.indexOf('new') !== -1 ? 'active' : ''} exact to="/new">
+            <NavLink styleName={url === '/new' ? 'active' : ''} exact to="/new">
               最近更新
             </NavLink>
             <NavLink styleName={/month/.test(url) ? 'active' : ''} exact to={`/month/${getCurMonth()}`}>

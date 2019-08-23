@@ -1,6 +1,7 @@
 import { API } from 'Config'
 
 const apiReact = `${API}index.php/home/mapi/`
+const apiGame = `${API}index.php/home/game`
 const apiHomeUser = `${API}index.php/home/user/`
 const apiUser = `${API}index.php/user/api/`
 const apiUserReg = `${API}index.php/user/reg/`
@@ -56,6 +57,6 @@ export default {
      */
     config: `${apiReact}config`, // 网站各种配置
     // 游戏
-    game: `${apiReact}game` // order排序 wd 关键词 p 分页 limit 每页条数
+    game: `${apiGame}` // order排序 wd 关键词 p 分页 limit 每页条数
   }
 }

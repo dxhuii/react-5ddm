@@ -56,17 +56,17 @@ export default Shell(() => {
   useEffect(() => {
     const getData = args => configLoad(args)(store.dispatch, store.getState)
     if (!config.data) {
-      getData({ name: 'menu' })
+      getData({ tag: 'menu' })
     }
     if (!info.data) load()
     ArriveFooter.add('newslist', load)
     return () => {
       ArriveFooter.remove('newslist')
     }
-  }, [config.data, info.data, load, store.dispatch, store.getState])
+  }, [config, config.data, info, info.data, load, store.dispatch, store.getState])
 
   const { data = [] } = info
-  const newsMenu = ((config.data || [])[1] || {}).son || []
+  const newsMenu = (config.data || {}).son || []
   return (
     <div className="wp mt20 clearfix">
       <Meta title="动漫新闻_动漫资讯_新番情报_动漫先行图_漫画情报" />

@@ -293,6 +293,7 @@ export default [
       loader: () => import('../pages/game'),
       loading
     }),
+    loadData: gameData,
     enter: 'everybody'
   },
 

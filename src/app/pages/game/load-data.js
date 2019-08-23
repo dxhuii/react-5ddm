@@ -4,16 +4,14 @@ const { getCache, addCache } = cache
 
 export default ({ store, match }) => {
   return new Promise(async function(resolve, reject) {
-    const { wd } = match.params
-    const reWd = decodeURIComponent(wd)
-    const data = getCache('gameList-' + reWd)
+    const data = getCache('gameList')
     if (data) {
-      store.dispatch({ type: 'GET_GAME', name: '', data: data })
+      store.dispatch({ type: 'GET_GAME', data: data })
       resolve({ code: 200 })
       return
     }
-    let [err, res] = await gameList(wd !== 'totalList' ? { wd: reWd } : { order: 'update', wd: 'totalList', limit: 100 })(store.dispatch, store.getState)
-    addCache('gameList-' + reWd, res)
+    let [err, res] = await gameList()(store.dispatch, store.getState)
+    addCache('gameList', res)
     resolve({ code: 200 })
   })
 }

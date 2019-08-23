@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import useReactRouter from 'use-react-router'
 import QRCode from 'qrcode.react'
 
@@ -18,7 +18,6 @@ import './style.scss'
 export default Shell(() => {
   const [showGame, onShowGame] = useState(false)
   const [show, onShow] = useState(false)
-  const dataIndex = -1
   const {
     history,
     match: {
@@ -27,18 +26,7 @@ export default Shell(() => {
   } = useReactRouter()
 
   const store = useStore()
-  const info = useSelector(state => getGame(state, wd ? wd : 'totalList'))
-
-  const getGameData = useCallback(() => {
-    const getData = args => gameList(args)(store.dispatch, store.getState)
-    if (!info.data) {
-      getData({
-        order: 'update',
-        wd: 'totalList',
-        limit: 100
-      })
-    }
-  }, [info.data, store.dispatch, store.getState])
+  const info = useSelector(state => getGame(state))
 
   useEffect(() => {
     const getData = args => gameList(args)(store.dispatch, store.getState)
@@ -46,15 +34,9 @@ export default Shell(() => {
       onShowGame(true)
     }
     if (!info.data) {
-      if (wd) {
-        getData({
-          wd
-        })
-      } else {
-        getGameData()
-      }
+      getData()
     }
-  }, [getGameData, info.data, store.dispatch, store.getState, wd])
+  }, [info.data, store.dispatch, store.getState, wd])
 
   const getPic = data => {
     const piclist = data ? (
@@ -76,7 +58,6 @@ export default Shell(() => {
   const game = name => {
     if (wd) {
       history.push('/game')
-      getGameData()
     } else {
       history.push(`/game/${name}`)
     }
@@ -138,9 +119,12 @@ export default Shell(() => {
     return renderList
   }
 
-  const { data = [], loading } = info
+  const findGame = (data, name) => {
+    return name ? data.filter(item => item.name === name)[0] : null
+  }
 
-  const dataInfo = data[wd ? 0 : dataIndex]
+  const { data = [], loading } = info
+  const dataInfo = findGame(data, wd) || null
   const { shortDesc, name } = dataInfo || {}
   if (loading) return <Loading />
   return (

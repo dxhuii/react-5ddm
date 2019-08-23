@@ -64,8 +64,6 @@ export function saveCookie(params, name) {
       data: params
     })
 
-    debugger
-
     if (data.code === 1) {
       localStorage.setItem('userid', data.data.userid)
       localStorage.setItem('token', data.data.token)
@@ -88,19 +86,19 @@ export function saveCookie(params, name) {
 }
 
 export function signIn({ username, password, validate, key }) {
-  return dispatch => {
+  return () => {
     return saveCookie({ user_name: username, user_password: password, validate, key }, 'login')
   }
 }
 
 export function signUp({ username, password, mobile, validate, key }) {
-  return dispatch => {
+  return () => {
     return saveCookie({ user_name: username, user_password: password, to: mobile, validate, key }, 'reg')
   }
 }
 
 export function signOut() {
-  return dispatch => {
+  return () => {
     return new Promise(async (resolve, reject) => {
       let [err, data] = await Ajax({
         url: window.location.origin + '/sign/out',

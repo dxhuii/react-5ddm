@@ -66,7 +66,7 @@ export default ({ store, match }) => {
         lz: isEmpty(lz),
         order: isEmpty(order, 1)
       })(store.dispatch, store.getState),
-      configLoad({ name: 'list' })(store.dispatch, store.getState)
+      configLoad({ tag: 'list' })(store.dispatch, store.getState)
     ]).then(data => {
       addCache('list', data)
       resolve({ code: 200 })

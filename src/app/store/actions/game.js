@@ -1,21 +1,14 @@
 import loadData from '@/utils/loadData'
 
-export function gameList({ order, wd, limit }) {
+export function gameList() {
   return (dispatch, getState) => {
     return loadData({
       dispatch,
       getState,
-      name: wd ? wd : '',
       reducerName: 'game',
       actionType: 'GET_GAME',
       api: 'game',
-      method: 'post',
-      params: {
-        order,
-        limit,
-        wd
-      },
-      isPage: true
+      method: 'get'
     })
   }
 }
