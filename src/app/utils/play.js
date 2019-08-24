@@ -128,7 +128,7 @@ const rePlayUrl = (playname, pv) => {
   return ck(sName, sVid)
 }
 
-const jump = (name, pv, copyright, path) => {
+const jump = (name, pv, copyright, path, area) => {
   let url = ''
   switch (name) {
     case 'youku':
@@ -165,14 +165,14 @@ const jump = (name, pv, copyright, path) => {
       url = jiexiUrl(ck(name, pv))
       break
   }
-  return (/vip|zb/.test(copyright) && !ISPLAY) || /bilibili|acfun|pptv|letv/.test(name)
+  return (/vip|zb/.test(copyright) && !ISPLAY && area) || /bilibili|acfun|pptv|letv/.test(name)
     ? HTML(/iqiyi/.test(name) ? url[0] : url, copyright, path)
     : /iqiyi/.test(name) && !isMobile()
     ? flash(url[1])
     : iframe(url)
 }
 
-const isPlay = (name, vid, danmu, copyright, path) => {
+const isPlay = (name, vid, danmu, copyright, path, area) => {
   let url = ''
   let isFlvsp = false
   if (/sina|weibo|miaopai|bit|letvyun|pmbit|bithls|bitqiu|letvsaas|acku|yunpan|s360|ksyun/.test(name)) {
@@ -190,7 +190,7 @@ const isPlay = (name, vid, danmu, copyright, path) => {
       if ((isMobile() && name === 'iqiyi') || name === 'youku') {
         url = jiexiUrl(ck(name, vid), danmu)
       } else {
-        url = jump(name, vid, copyright, path)
+        url = jump(name, vid, copyright, path, area)
       }
     } else if (!/vip|zb/.test(copyright)) {
       url = jiexiUrl(rePlayUrl(name, vid), danmu)
@@ -204,11 +204,11 @@ const isPlay = (name, vid, danmu, copyright, path) => {
   return [url, isFlvsp]
 }
 
-export default ({ name, vid, danmu, copyright, url }) => {
+export default ({ name, vid, danmu, copyright, url, area }) => {
   if (vid.indexOf('@@') !== -1) {
     const data = vid.split('@@')
     name = data[1]
     vid = data[0]
   }
-  return isPlay(name, vid, danmu, copyright, url)
+  return isPlay(name, vid, danmu, copyright, url, area)
 }

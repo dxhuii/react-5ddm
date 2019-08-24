@@ -160,9 +160,9 @@ export default Shell(() => {
           let playHtml = ''
           if (playName && vid && playTitle) {
             if (play && !isZ) {
-              playHtml = playing({ name: type, vid: authcode(atob(play), 'DECODE', key, 0), danmu, copyright, url })
+              playHtml = playing({ name: type, vid: authcode(atob(play), 'DECODE', key, 0), danmu, copyright, url, area: isZ })
             } else {
-              playHtml = playing({ name: playName, vid: authcode(atob(vid), 'DECODE', key, 0), danmu, copyright, url })
+              playHtml = playing({ name: playName, vid: authcode(atob(vid), 'DECODE', key, 0), danmu, copyright, url, area: isZ })
             }
             const mInfo = { playName, vid, playTitle }
             setPlayHtml(playHtml[0])
