@@ -24,7 +24,7 @@
  * WW 文网文
  */
 
-const DOMAIN_NAME = 'dddm.tv'
+const DOMAIN_NAME = 'kanfan.net'
 
 const conf = {
   debug: false,
