@@ -81,10 +81,15 @@ const acfun = pv => {
 
 const ck = (type, pv) => {
   const flvsp = 'https://api.flvsp.com/?type='
-  if (type === 'qqq') {
-    return `${playUrl}qqq&domain=${DOMAIN}&id=${pv}`
-  } else if (type === '360') {
-    return `${playUrl}360&domain=${DOMAIN}&id=${pv}`
+  if (type === 'qqq' || type === '360') {
+    return `${playUrl}${type}&domain=${DOMAIN}&id=${pv}`
+  } else if (type === 'youku') {
+    const vid = `https://v.youku.com/v_show/id_${pv}.html`
+    return `${playUrl}${type}&domain=${DOMAIN}&id=${vid}`
+  } else if (type === 'iqiyi') {
+    const data = pv.split(/,|&tvid=|_/)
+    const vid = /,|_/.test(pv) ? data[0] : data[1]
+    return `${playUrl}${type}&domain=${DOMAIN}&id=${vid}`
   } else {
     return flvsp + type + '&id=' + pv
   }
@@ -170,9 +175,7 @@ const jump = (name, pv, copyright, path) => {
 const isPlay = (name, vid, danmu, copyright, path) => {
   let url = ''
   let isFlvsp = false
-  if (DOMAIN_NAME === '99496.com') {
-    url = HTML('/', copyright, path)
-  } else if (/sina|weibo|miaopai|bit|letvyun|pmbit|bithls|bitqiu|letvsaas|acku|yunpan|s360|ksyun/.test(name)) {
+  if (/sina|weibo|miaopai|bit|letvyun|pmbit|bithls|bitqiu|letvsaas|acku|yunpan|s360|ksyun/.test(name)) {
     url = HTML('/', copyright, path)
   } else if (/ikanfan|acgnz/.test(vid)) {
     url = HTML(vid.split('=')[1].split('&')[0], copyright, path)
@@ -184,7 +187,11 @@ const isPlay = (name, vid, danmu, copyright, path) => {
     url = HTML(vid, copyright, path)
   } else if (/bilibili|acfun|youku|tudou|iqiyi|pptv|letv|qq|sohu|viqiyi/.test(name)) {
     if (/bilibili|acfun|youku|tudou|iqiyi/.test(name)) {
-      url = jump(name, vid, copyright, path)
+      if ((isMobile() && name === 'iqiyi') || name === 'youku') {
+        url = jiexiUrl(ck(name, vid), danmu)
+      } else {
+        url = jump(name, vid, copyright, path)
+      }
     } else if (!/vip|zb/.test(copyright)) {
       url = jiexiUrl(rePlayUrl(name, vid), danmu)
       isFlvsp = true
