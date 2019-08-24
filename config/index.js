@@ -48,7 +48,7 @@ const defalut = {
   DOMAIN: 'https://dev.99496.com',
   DOMAIN_NAME: '99496.com',
   PORT: 6666,
-  COOKIE_PREFIX: 'ikf_',
+  COOKIE_PREFIX: 'plain_',
   PUBLIC_PATH: '//dev.99496.com',
   BAIDU_STAT: 'b3c1facee308e3a3450dc7f836101938',
   CNZZ_STAT: '5862511',
@@ -87,8 +87,8 @@ const dddm = {
  *
  */
 const ddm = {
-  API: 'https://api.99496.com/',
-  ISPLAY: true,
+  API: 'http://test.99496.com/',
+  ISPLAY: false,
   ISAD: false,
   NAME: '5D动漫(5站)',
   DESCRIBE: '5D动漫(5站) - 无广告免费的动漫网站',

@@ -154,7 +154,7 @@ export default Shell(() => {
           const qq = getQq(list)
           const isStop = (qq ? /上海|北京|深圳/ : /上海|北京/).test(returnCitySN.cname)
           const danmu = `${id}_${pid}`
-          const isZ = isStop && /zb/.test(copyright) && +Cookies.get('plain') !== 7 && !ISPLAY
+          const isZ = isStop && +Cookies.get('plain') !== 7
           const isA = other.length > 0 && !isZ && (copyright !== 'vip' || isMobile() || ISPLAY || userid)
           const { playName, vid, playTitle } = isA ? other[0] || {} : list[0] || {}
           let playHtml = ''

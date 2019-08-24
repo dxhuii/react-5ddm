@@ -10,8 +10,8 @@ const iframe = url => {
 
 const HTML = (pv, copyright, path) => {
   const isJump = /zb|vip/.test(copyright)
-  const url = isJump ? `https://www.5ddm.com${path}` : `https://www.dddm.tv${path}`
-  const reUrl = (DOMAIN_NAME === '5ddm.com' && isJump) || (DOMAIN_NAME === 'dddm.tv' && !isJump) ? '' : `<a target="_blank" class="jump" href="${url}">或者点这里试一下</a>`
+  const url = isJump ? `https://www.kanfan.net${path}` : `https://www.dddm.tv${path}`
+  const reUrl = (DOMAIN_NAME === 'kanfan.net' && isJump) || (DOMAIN_NAME === 'dddm.tv' && !isJump) ? '' : `<a target="_blank" class="jump" href="${url}">或者点这里试一下</a>`
   const tipsTxt = pv === '/' ? '资源失效，返回首页' : '亲，请点我播放'
   return `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">${tipsTxt}</a>${reUrl}<p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
 }
@@ -165,7 +165,7 @@ const jump = (name, pv, copyright, path) => {
       url = jiexiUrl(ck(name, pv))
       break
   }
-  return (copyright === 'vip' && !ISPLAY) || /bilibili|acfun|pptv|letv/.test(name)
+  return (/vip|zb/.test(copyright) && !ISPLAY) || /bilibili|acfun|pptv|letv/.test(name)
     ? HTML(/iqiyi/.test(name) ? url[0] : url, copyright, path)
     : /iqiyi/.test(name) && !isMobile()
     ? flash(url[1])
