@@ -10,10 +10,9 @@ const iframe = url => {
 
 const HTML = (pv, copyright, path) => {
   const isJump = /zb|vip/.test(copyright)
-  const url = isJump ? `https://www.kanfan.net${path}` : `https://www.dddm.tv${path}`
-  const reUrl = (DOMAIN_NAME === 'kanfan.net' && isJump) || (DOMAIN_NAME === 'dddm.tv' && !isJump) ? '' : `<a target="_blank" class="jump" href="${url}">或者点这里试一下</a>`
+  const url = isJump ? `<a target="_blank" class="jump" href="https://www.kanfan.net${path}">或者点这里试一下</a>` : ''
   const tipsTxt = pv === '/' ? '资源失效，返回首页' : '亲，请点我播放'
-  return `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">${tipsTxt}</a>${reUrl}<p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
+  return `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">${tipsTxt}</a>${url}<p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
 }
 
 const flash = url => {
