@@ -1,9 +1,11 @@
 const baseConfig = require('./server.base')
 const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const config = {
   ...baseConfig,
   plugins: [
+    ...baseConfig.plugins,
     new WebpackParallelUglifyPlugin({
       uglifyJS: {
         warnings: false, // 在UglifyJs删除没有用到的代码时不输出警告
@@ -18,7 +20,11 @@ const config = {
         }
       }
     }),
-    ...baseConfig.plugins
+
+    // 清空打包目录
+    new CleanWebpackPlugin({
+      verbose: true
+    })
   ],
   mode: 'production'
 }

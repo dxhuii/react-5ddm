@@ -4,8 +4,6 @@ const path = require('path')
 const chalk = require('chalk')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const config = require('../index')
 const devMode = process.env.NODE_ENV === 'development'
@@ -84,17 +82,17 @@ module.exports = {
       {
         test: /\.js$/i,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel'
       },
       {
         test: /\.scss$/,
         use: [
-          'css-hot-loader',
+          'css-hot',
           {
             loader: MiniCssExtractPlugin.loader
           },
           {
-            loader: `css-loader`,
+            loader: `css`,
             options: {
               modules: {
                 localIdentName: config.CLASS_SCOPED_NAME
@@ -113,11 +111,38 @@ module.exports = {
       // css 解析
       {
         test: /\.css$/,
-        use: ['css-hot-loader', { loader: MiniCssExtractPlugin.loader }, { loader: `css-loader` }, { ...postcssConfig }]
+        use: ['css-hot', { loader: MiniCssExtractPlugin.loader }, { loader: `css` }, { ...postcssConfig }]
       },
 
       // 小于8K的图片，转 base64
-      { test: /\.(png|jpe?g|gif|svg)$/, loader: 'url?limit=8192' }
+      {
+        test: /\.(png|jpe?g|gif|bmp|svg)$/,
+        use: [
+          {
+            loader: 'url',
+            options: {
+              // 配置图片编译路径
+              limit: 8192, // 小于8k将图片转换成base64
+              name: '[name].[hash:8].[ext]',
+              outputPath: 'images/'
+            }
+          },
+          {
+            loader: 'image-webpack', // 图片压缩
+            options: {
+              bypassOnDebug: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url',
+        options: {
+          limit: 8192,
+          name: 'fonts/[name].[hash:8].[ext]'
+        }
+      }
     ]
   },
 
@@ -130,11 +155,6 @@ module.exports = {
     new webpack.DefinePlugin({
       __SERVER__: 'false',
       __CLIENT__: 'true'
-    }),
-
-    // 清空打包目录
-    new CleanWebpackPlugin({
-      verbose: true
     }),
 
     // 提取css插件
@@ -160,13 +180,6 @@ module.exports = {
     new ProgressBarPlugin({
       format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
       clear: false
-    }),
-
-    new CopyWebpackPlugin([
-      { from: 'src/app/static/favicon.ico', to: 'favicon.ico' },
-      { from: 'src/app/static/5d_favicon.ico', to: '5d_favicon.ico' },
-      { from: 'src/app/static/dd_favicon.ico', to: 'dd_favicon.ico' }
-      // { from: 'config/manifest.json', to: 'manifest.json' }
-    ])
+    })
   ]
 }
