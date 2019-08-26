@@ -338,7 +338,7 @@ export default Shell(() => {
             <div styleName="title">
               <h2>相关动漫</h2>
             </div>
-            {id ? <DetailActor actor={reActor} no={id} /> : null}
+            {id ? <DetailActor actor={reActor} not={id} /> : null}
           </div>
           {newsPiclist.length > 0 ? (
             <div className="mt10">
@@ -352,7 +352,7 @@ export default Shell(() => {
             <div styleName="title">
               <h2>小伙伴还在看(=￣ω￣=)（一周热门）</h2>
             </div>
-            <HotWeek />
+            <HotWeek not={id} />
           </div>
           <div className="mt20">
             <div styleName="title">

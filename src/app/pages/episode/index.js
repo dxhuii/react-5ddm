@@ -105,13 +105,13 @@ export default Shell(() => {
             <div styleName="title">
               <h2>相关动漫</h2>
             </div>
-            {id ? <DetailActor actor={actor} no={id} /> : null}
+            {vid ? <DetailActor actor={actor} not={vid} /> : null}
           </div>
           <div className="mt10" styleName="ep-like">
             <div styleName="title">
               <h2>小伙伴还在看(=￣ω￣=)（一周热门）</h2>
             </div>
-            <HotWeek />
+            <HotWeek not={vid} />
           </div>
         </div>
       </div>

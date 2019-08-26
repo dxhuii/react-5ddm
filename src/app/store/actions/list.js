@@ -97,16 +97,16 @@ export function week() {
   }
 }
 
-export function detailActor({ actor, no }) {
+export function detailActor({ actor, not }) {
   return (dispatch, getState) => {
     return loadData({
       dispatch,
       getState,
-      name: `like-${no}`,
+      name: `like-${not}`,
       reducerName: 'list',
       actionType: 'GET_DETAIL_ACTOR',
       api: 'list',
-      params: { actor, no, p: 0 }
+      params: { actor, not, p: 0 }
     })
   }
 }
@@ -125,7 +125,7 @@ export function articleVod({ ids }) {
   }
 }
 
-export function hotWeek() {
+export function hotWeek({ not }) {
   return (dispatch, getState) => {
     return loadData({
       dispatch,
@@ -134,7 +134,7 @@ export function hotWeek() {
       reducerName: 'list',
       actionType: 'GET_HOT_WEEK',
       api: 'list',
-      params: { order: 'hits_week', p: 0 }
+      params: { order: 'hits_week', not, p: 0 }
     })
   }
 }

@@ -8,24 +8,24 @@ import { getList } from '@/store/reducers/list'
 
 import Item from '@/components/Subject/Item'
 
-export default function Like({ actor = '', no }) {
+export default function Like({ actor = '', not }) {
   const store = useStore()
-  const info = useSelector(state => getList(state, `like-${no}`))
+  const info = useSelector(state => getList(state, `like-${not}`))
 
   useEffect(() => {
     const getData = args => detailActor(args)(store.dispatch, store.getState)
     if (!info || !info.data) {
       getData({
         actor,
-        no
+        not
       })
     }
-  }, [actor, info, no, store.dispatch, store.getState])
+  }, [actor, info, not, store.dispatch, store.getState])
   const { data = [] } = info
   return <Item data={data} />
 }
 
 Like.propTypes = {
   actor: PropTypes.string,
-  no: PropTypes.any
+  not: PropTypes.any
 }
