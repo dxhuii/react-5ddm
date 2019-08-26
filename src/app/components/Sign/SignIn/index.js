@@ -13,7 +13,6 @@ export default () => {
   const password = useRef()
 
   const submit = async event => {
-    debugger
     event.preventDefault()
 
     const name = username.current

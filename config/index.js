@@ -28,7 +28,7 @@ const DOMAIN_NAME = 'dddm.tv'
 
 const conf = {
   debug: false,
-  CLASS_SCOPED_NAME: '[hash:base64:8]',
+  CLASS_SCOPED_NAME: '[hash:base64:5]',
   AUTH_COOKIE_NAME: 'auth',
   CACHA_TIME: 300000,
   HEAD: `<meta name="renderer" content="webkit">

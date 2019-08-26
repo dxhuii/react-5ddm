@@ -57,22 +57,14 @@ module.exports = {
         test: /\.scss$/,
         use: [
           {
-            loader: `css/locals`,
+            loader: `css`,
             options: {
-              modules: true,
-              localIdentName: config.CLASS_SCOPED_NAME
-              // minimize: true,
-              // sourceMap: true
-
-              // camelCase: true,
-              // importLoaders: 1,
-              // modules: true,
-              // localIdentName: config.CLASS_SCOPED_NAME
+              modules: {
+                localIdentName: config.CLASS_SCOPED_NAME
+              }
             }
           },
-          {
-            loader: `sass`
-          }
+          { loader: `sass` }
         ]
       },
 
@@ -81,9 +73,38 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: `css/locals`
+            loader: `css`
           }
         ]
+      },
+
+      {
+        test: /\.(png|jpe?g|gif|bmp|svg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              // 配置图片编译路径
+              limit: 8192, // 小于8k将图片转换成base64
+              name: '[name].[hash:8].[ext]',
+              outputPath: 'images/'
+            }
+          },
+          {
+            loader: 'image-webpack-loader', // 图片压缩
+            options: {
+              bypassOnDebug: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 8192,
+          name: 'fonts/[name].[hash:8].[ext]'
+        }
       }
     ]
   },
@@ -103,9 +124,5 @@ module.exports = {
       format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
       clear: false
     })
-
-    // new CopyWebpackPlugin([
-    //   { from: 'src/server/amp/views', to: 'views/' }
-    // ])
   ]
 }
