@@ -61,7 +61,8 @@ module.exports = {
             options: {
               modules: {
                 localIdentName: config.CLASS_SCOPED_NAME
-              }
+              },
+              onlyLocals: true // 只映射，不打包CSS
             }
           },
           { loader: `sass` }
@@ -73,38 +74,12 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: `css`
-          }
-        ]
-      },
-
-      {
-        test: /\.(png|jpe?g|gif|bmp|svg)$/,
-        use: [
-          {
-            loader: 'url-loader',
+            loader: `css`,
             options: {
-              // 配置图片编译路径
-              limit: 8192, // 小于8k将图片转换成base64
-              name: '[name].[hash:8].[ext]',
-              outputPath: 'images/'
-            }
-          },
-          {
-            loader: 'image-webpack-loader', // 图片压缩
-            options: {
-              bypassOnDebug: true
+              onlyLocals: true // 只映射，不打包CSS
             }
           }
         ]
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 8192,
-          name: 'fonts/[name].[hash:8].[ext]'
-        }
       }
     ]
   },
