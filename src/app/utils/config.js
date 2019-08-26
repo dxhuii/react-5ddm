@@ -1,10 +1,10 @@
 import { API } from 'Config'
 
-const apiReact = `${API}index.php/home/mapi/`
-const apiGame = `${API}index.php/home/game`
-const apiHomeUser = `${API}index.php/home/user/`
-const apiUser = `${API}index.php/user/api/`
-const apiUserReg = `${API}index.php/user/reg/`
+const apiReact = `${API}?s=/home/mapi/`
+const apiGame = `${API}?s=/home/game`
+const apiHomeUser = `${API}?s=/home/user/`
+const apiUser = `${API}?s=/user/api/`
+const apiUserReg = `${API}?s=/user/reg/`
 
 export default {
   api: {
