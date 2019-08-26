@@ -87,7 +87,7 @@ const dddm = {
  *
  */
 const ddm = {
-  API: 'http://test.99496.com/',
+  API: 'https://api.99496.com/',
   ISPLAY: false,
   ISAD: false,
   NAME: '5D动漫(5站)',
