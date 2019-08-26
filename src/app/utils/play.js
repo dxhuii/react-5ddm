@@ -1,5 +1,5 @@
 import { isMobile } from './index'
-import { DOMAIN_NAME, DOMAIN, ISPLAY } from 'Config'
+import { DOMAIN, ISPLAY } from 'Config'
 
 const playUrl = '//p.mdb6.com/api/p.php?type='
 const playH = '100%'
