@@ -12,7 +12,7 @@ export default function Sign({ isSign, onType, visible }) {
     e.stopPropagation()
     onType(isSign)
   }
-  const logo = `logo ${DOMAIN_NAME === 'dddm.tv' ? 'dddm' : DOMAIN_NAME === '5ddm.com' ? 'ddm' : ''}`
+  const logo = `logo ${DOMAIN_NAME === 'dddm.tv' ? 'dddm' : DOMAIN_NAME === '5ddm.com' ? 'ddm' : DOMAIN_NAME === 'kanfan.net' ? 'kanfan' : ''}`
   return (
     <div styleName="user">
       <div styleName={logo} />

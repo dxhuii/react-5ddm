@@ -10,10 +10,9 @@ const iframe = url => {
 
 const HTML = (pv, copyright, path) => {
   const isJump = /zb|vip/.test(copyright)
-  const url = isJump ? `https://www.5ddm.com${path}` : `https://www.dddm.tv${path}`
-  const reUrl = (DOMAIN_NAME === '5ddm.com' && isJump) || (DOMAIN_NAME === 'dddm.tv' && !isJump) ? '' : `<a target="_blank" class="jump" href="${url}">或者点这里试一下</a>`
+  const url = isJump ? `<a target="_blank" class="jump" href="https://www.kanfan.net${path}">或者点这里试一下</a>` : ''
   const tipsTxt = pv === '/' ? '资源失效，返回首页' : '亲，请点我播放'
-  return `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">${tipsTxt}</a>${reUrl}<p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
+  return `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">${tipsTxt}</a>${url}<p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
 }
 
 const flash = url => {
@@ -128,7 +127,7 @@ const rePlayUrl = (playname, pv) => {
   return ck(sName, sVid)
 }
 
-const jump = (name, pv, copyright, path) => {
+const jump = (name, pv, copyright, path, area) => {
   let url = ''
   switch (name) {
     case 'youku':
@@ -165,14 +164,14 @@ const jump = (name, pv, copyright, path) => {
       url = jiexiUrl(ck(name, pv))
       break
   }
-  return (copyright === 'vip' && !ISPLAY) || /bilibili|acfun|pptv|letv/.test(name)
+  return (/vip|zb/.test(copyright) && !ISPLAY && area) || /bilibili|acfun|pptv|letv/.test(name)
     ? HTML(/iqiyi/.test(name) ? url[0] : url, copyright, path)
     : /iqiyi/.test(name) && !isMobile()
     ? flash(url[1])
     : iframe(url)
 }
 
-const isPlay = (name, vid, danmu, copyright, path) => {
+const isPlay = (name, vid, danmu, copyright, path, area) => {
   let url = ''
   let isFlvsp = false
   if (/sina|weibo|miaopai|bit|letvyun|pmbit|bithls|bitqiu|letvsaas|acku|yunpan|s360|ksyun/.test(name)) {
@@ -190,7 +189,7 @@ const isPlay = (name, vid, danmu, copyright, path) => {
       if ((isMobile() && name === 'iqiyi') || name === 'youku') {
         url = jiexiUrl(ck(name, vid), danmu)
       } else {
-        url = jump(name, vid, copyright, path)
+        url = jump(name, vid, copyright, path, area)
       }
     } else if (!/vip|zb/.test(copyright)) {
       url = jiexiUrl(rePlayUrl(name, vid), danmu)
@@ -204,11 +203,11 @@ const isPlay = (name, vid, danmu, copyright, path) => {
   return [url, isFlvsp]
 }
 
-export default ({ name, vid, danmu, copyright, url }) => {
+export default ({ name, vid, danmu, copyright, url, area }) => {
   if (vid.indexOf('@@') !== -1) {
     const data = vid.split('@@')
     name = data[1]
     vid = data[0]
   }
-  return isPlay(name, vid, danmu, copyright, url)
+  return isPlay(name, vid, danmu, copyright, url, area)
 }

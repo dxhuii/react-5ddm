@@ -153,15 +153,15 @@ export default Shell(() => {
           const qq = getQq(list)
           const isStop = (qq ? /上海|北京|深圳/ : /上海|北京/).test(returnCitySN.cname)
           const danmu = `${id}_${pid}`
-          const isZ = isStop && /zb/.test(copyright) && +Cookies.get('plain') !== 7 && !ISPLAY
+          const isZ = isStop && +Cookies.get('plain') !== 7 && !ISPLAY && /vip|zb/.test(copyright)
           const isA = other.length > 0 && !isZ && (copyright !== 'vip' || isMobile() || ISPLAY || userid)
           const { playName, vid, playTitle } = isA ? other[0] || {} : list[0] || {}
           let playHtml = ''
           if (playName && vid && playTitle) {
             if (play && !isZ) {
-              playHtml = playing({ name: type, vid: authcode(atob(play), 'DECODE', key, 0), danmu, copyright, url })
+              playHtml = playing({ name: type, vid: authcode(atob(play), 'DECODE', key, 0), danmu, copyright, url, area: isZ })
             } else {
-              playHtml = playing({ name: playName, vid: authcode(atob(vid), 'DECODE', key, 0), danmu, copyright, url })
+              playHtml = playing({ name: playName, vid: authcode(atob(vid), 'DECODE', key, 0), danmu, copyright, url, area: isZ })
             }
             const mInfo = { playName, vid, playTitle }
             setPlayHtml(playHtml[0])

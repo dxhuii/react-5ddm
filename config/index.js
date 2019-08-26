@@ -28,7 +28,7 @@ const DOMAIN_NAME = '5ddm.com'
 
 const conf = {
   debug: false,
-  CLASS_SCOPED_NAME: '[hash:base64:8]',
+  CLASS_SCOPED_NAME: '[hash:base64:5]',
   AUTH_COOKIE_NAME: 'auth',
   CACHA_TIME: 300000,
   HEAD: `<meta name="renderer" content="webkit">
@@ -88,7 +88,7 @@ const dddm = {
  */
 const ddm = {
   API: 'http://test.99496.com/',
-  ISPLAY: true,
+  ISPLAY: false,
   ISAD: false,
   NAME: '5D动漫(5站)',
   DESCRIBE: '5D动漫(5站) - 无广告免费的动漫网站',

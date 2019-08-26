@@ -429,69 +429,55 @@
     width: 20px;
     height: 20px;
     background-repeat: no-repeat;
-    background: url(../static/img/sprite_source.png) -240px -20px no-repeat;
-    background-image: -webkit-image-set(url(../static/img/sprite_source@2x.png) 2x);
+    background: url(../static/img/sprite_source@2x.png) -200px 0 no-repeat;
+    background-size: 219px 19px;
 
-    &.other,
-    &.pv,
-    &.otherB,
-    &.otherC,
-    &.otherD,
-    &.nodel,
-    &.mad,
-    &.cm,
-    &.ed,
-    &.bgm,
-    &.op {
-      background-position: -240px -20px
-    }
-
-    &.tudou {
-      background-position: -40px 0
+    &.qq {
+      background-position: 0 0
     }
 
     &.youku {
       background-position: -20px 0
     }
 
+    &.tudou {
+      background-position: -40px 0
+    }
+
     &.iqiyi {
       background-position: -60px 0
-    }
-
-    &.sohu {
-      background-position: -20px -20px
-    }
-
-    &.letvyun,
-    &.letv {
-      background-position: -140px 0
-    }
-
-    &.qq {
-      background-position: 0 0
-    }
-
-    &.mgtv {
-      background-position: -160px -20px
     }
 
     &.pptv {
       background-position: -80px 0
     }
 
+    &.sohu {
+      background-position: -100px 0
+    }
+
+    &.letvyun,
+    &.letv {
+      background-position: -120px 0
+    }
+
+    &.mgtv {
+      background-position: -140px 0
+    }
+
     &.bilibili {
-      background-position: -180px -20px
+      background-position: -160px 0
     }
 
     &.acfun {
-      background-position: -200px -20px
+      background-position: -180px 0
     }
   }
 
   .explaywrap {
     position: relative;
     width: 100%;
-    background: url(http://ww4.sinaimg.cn/large/a15b4afegw1f3jj0rv3uaj21z41esu0y) no-repeat;
+    background: url(https://wxt.sinaimg.cn/large/a15b4afegw1f3jj0rv3uaj21z41esu0y.jpg) no-repeat;
     background-size: cover;
     text-align: center;
     font-weight: 600;
@@ -546,8 +532,8 @@
   .bigstar00 {
     display: inline-block;
     zoom: 1;
-    background: url(../static/img/ic_rating_m.png) no-repeat;
-    background: -webkit-image-set(url(../static/img/ic_rating_m.png) 1x, url(../static/img/ic_rating_m@2x.png) 2x) no-repeat;
+    background: url(../static/img/ic_rating_m@2x.png) no-repeat;
+    background-size: 75px 165px;
     width: 75px;
     height: 15px;
     margin: 1px 5px 0 0;

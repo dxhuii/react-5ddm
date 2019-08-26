@@ -42,6 +42,7 @@
   }
 
   .logo {
+    position: relative;
     line-height: 56px;
     height: 56px;
     flex-basis: 150px;
@@ -60,6 +61,22 @@
     /*5ddm*/
     &.ddm {
       background-image: url(../../static/img/5d.svg);
+    }
+
+    &.kanfan {
+      background: no-repeat;
+      width: 100%;
+
+      &::before {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90px;
+        content: '看番';
+        font-size: 30px;
+        color: #0088ff;
+        letter-spacing: 5px;
+      }
     }
   }
 }
