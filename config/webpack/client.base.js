@@ -116,34 +116,8 @@ module.exports = {
         use: ['css-hot-loader', { loader: MiniCssExtractPlugin.loader }, { loader: `css-loader` }, { ...postcssConfig }]
       },
 
-      {
-        test: /\.(png|jpe?g|gif|bmp|svg)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              // 配置图片编译路径
-              limit: 8192, // 小于8k将图片转换成base64
-              name: '[name].[hash:8].[ext]',
-              outputPath: 'images/'
-            }
-          },
-          {
-            loader: 'image-webpack-loader', // 图片压缩
-            options: {
-              bypassOnDebug: true
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 8192,
-          name: 'fonts/[name].[hash:8].[ext]'
-        }
-      }
+      // 小于8K的图片，转 base64
+      { test: /\.(png|jpe?g|gif|svg)$/, loader: 'url?limit=8192' }
     ]
   },
 
