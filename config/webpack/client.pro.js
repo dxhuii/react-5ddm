@@ -8,7 +8,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const webpackConfig = {
   ...baseConfig,
   plugins: [
-    ...baseConfig.plugins,
     new WebpackParallelUglifyPlugin({
       uglifyJS: {
         warnings: false, // 在UglifyJs删除没有用到的代码时不输出警告
@@ -41,7 +40,8 @@ const webpackConfig = {
       ServiceWorker: {
         publicPath: '/sw.js'
       }
-    })
+    }),
+    ...baseConfig.plugins
     // new ManifestPlugin({ fileName: 'manifest.json' }),
   ],
   mode: 'production'
