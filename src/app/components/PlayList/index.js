@@ -104,8 +104,9 @@ export default () => {
   }
 
   const page = () => {
-    const { data = [] } = info
-    const len = data.length
+    const { data = {} } = info
+    const list = data.list || []
+    const len = list.length
     const num = parseInt(len / pageSize)
     const surplus = len % pageSize // 除 pageSize 的余数
     const pageNum = surplus ? num + 1 : num // 余数不为 0 分页数 + 1

@@ -22,7 +22,7 @@ export default function Like({ actor = '', not }) {
     }
   }, [actor, info, not, store.dispatch, store.getState])
   const { data = [] } = info
-  return <Item data={data} />
+  return <>{data.length > 0 ? <Item data={data} /> : null}</>
 }
 
 Like.propTypes = {

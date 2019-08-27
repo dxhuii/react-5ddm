@@ -38,12 +38,12 @@ export default {
      * lz 是否连载 1 为连载 0 完结
      * wd 关键词
      */
-    list: `${apiReact}list-id-3`, // 列表接口
+    list: `${apiReact}list/id/3`, // 列表接口
     listNoId: `${apiReact}list`, // 列表接口
     playlist: `${apiReact}play`, // 播放列表 id:视频id
     player: `${apiReact}play`, // 单集 id:视频id，pid，集数
     detail: `${apiReact}detail`, // 视频详情
-    month: `${apiReact}month-id-3`, // 月份追番表
+    month: `${apiReact}month/id/3`, // 月份追番表
     newslist: `${apiReact}newsList`, // 新闻列表接口
     comment: `${apiReact}comment`, // 获取评论
     newsDetail: `${apiReact}newsDetail`, // 新闻内容接口
