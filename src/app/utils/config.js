@@ -50,7 +50,7 @@ export default {
     slide: `${apiReact}slide`, // 获取轮播图
     storylist: `${apiReact}storylist`, // 剧情列表 902
     storyDetail: `${apiReact}storyread`, // 获取剧情详情
-    digg: `${apiHomeUser}digg`, // 视频ID type up 顶和送花 down 踩 sid 模型
+    digg: `${apiReact}digg`, // 视频ID type up 顶和送花 down 踩 sid 模型
     addgold: `${apiReact}addgold`, // 评分 val 分值 id 视频ID sid 视频大类
     /**
      * name menu菜单 sns配置 user配置 pay支付配置 emot配置 list 各种列表

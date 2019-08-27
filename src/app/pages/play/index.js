@@ -178,12 +178,13 @@ export default Shell(() => {
   const onDigg = async (type, id) => {
     const onDigg = args => digg(args)(store.dispatch, store.getState)
     let [, res] = await onDigg({ type, id })
-    if (res.rcode === 1) {
-      const num = res.data.split(':')
-      upDiv.current.querySelectorAll('span')[0].innerText = num[0]
-      downDiv.current.querySelectorAll('span')[0].innerText = num[1]
-      Toast.success(res.msg)
+    if (res.code === 1) {
+      const up = upDiv.current.querySelectorAll('span')[0]
+      const down = downDiv.current.querySelectorAll('span')[0]
+      up.innerText = up.innerText * 1 + 1
+      down.innerText = down.innerText * 1 + 1
     }
+    Toast.success(res.msg)
   }
 
   const showList = (list = []) => {

@@ -33,7 +33,8 @@ export function digg({ id, type, sid = 1 }) {
         type,
         id,
         sid
-      }
+      },
+      header: false
     })
   }
 }
