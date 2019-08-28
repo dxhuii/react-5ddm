@@ -20,7 +20,8 @@ export function addgold({ id, val }) {
       params: {
         id,
         val
-      }
+      },
+      header: false
     })
   }
 }
