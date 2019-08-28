@@ -1,193 +1,57 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState, useEffect } from 'react'
+import useReactRouter from 'use-react-router'
 
-import { withRouter } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { listLoad } from '@/store/actions/list'
+// redux
+import { useStore, useSelector } from 'react-redux'
 import { configLoad } from '@/store/actions/config'
 import { getConfig } from '@/store/reducers/config'
-import { getList } from '@/store/reducers/list'
 
-import Loading from '@/components/Ui/Loading'
-import Item from '@/components/List/Item'
+import List from '@/components/List'
 import Ads from '@/components/Ads'
-
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
 import './style.scss'
 
-function isEmpty(val, type) {
-  return val === undefined || val === '' || val === '-' ? (type ? 'addtime' : '') : val
-}
+export default Shell(() => {
+  const {
+    match: {
+      params: { name, mcid, area, year, letter, lz, wd = '', order = 'addtime' }
+    },
+    location: { pathname }
+  } = useReactRouter()
 
-function reduxName(props) {
-  const { id, mcid, year, area, wd, letter, lz, order } = props.match.params
-  return (id || 3) + isEmpty(mcid) + isEmpty(year) + isEmpty(area) + isEmpty(wd) + isEmpty(letter) + isEmpty(lz) + isEmpty(order, 1)
-}
-
-@Shell
-@withRouter
-@connect(
-  (state, props) => ({
-    config: getConfig(state, 'list'),
-    list: getList(state, reduxName(props))
-  }),
-  dispatch => ({
-    configLoad: bindActionCreators(configLoad, dispatch),
-    listLoad: bindActionCreators(listLoad, dispatch)
-  })
-)
-class SubjectList extends Component {
-  constructor(props) {
-    super(props)
-    const {
-      match: {
-        params: { id = 3, name, mcid, area, year, letter, lz, wd = '', order = 'addtime' },
-        url
-      }
-    } = props
-    let params = {}
-    if (name) {
-      const id = this.getTypeId(name)
-      const type = name
-      params = Object.assign(
-        {},
-        url.indexOf('type/') === -1
-          ? { id, type }
-          : {
-              id,
-              type,
-              mcid,
-              area,
-              year,
-              letter,
-              lz,
-              order
-            },
-        {}
-      )
-    } else {
-      params = {
-        id,
-        wd
-      }
-    }
-    this.state = Object.assign({}, params, {
-      data: []
-    })
-    this.load = this.load.bind(this)
+  const type = {
+    tv: 201,
+    ova: 202,
+    juchang: 203,
+    tebie: 4,
+    zhenren: 204,
+    qita: 35
   }
 
-  static propTypes = {
-    location: PropTypes.object,
-    match: PropTypes.object,
-    configLoad: PropTypes.func,
-    listLoad: PropTypes.func,
-    config: PropTypes.object,
-    history: PropTypes.object,
-    list: PropTypes.object
-  }
+  const [eId, getId] = useState(type[name] || 3)
+  const [eMcid, getMcid] = useState(mcid ? parseInt(mcid) : '')
+  const [eArea, getArea] = useState(area || '全部')
+  const [eYear, getYear] = useState(year || '全部')
+  const [eLetter, getLetter] = useState(letter || '全部')
+  const [eOrder, getOrder] = useState(order)
+  const store = useStore()
+  const config = useSelector(state => getConfig(state, 'list'))
 
-  componentDidMount() {
-    const {
-      config,
-      configLoad,
-      match: {
-        params: { id }
-      }
-    } = this.props
+  useEffect(() => {
+    const _configLoad = args => configLoad(args)(store.dispatch, store.getState)
     if (!config.data) {
-      configLoad({ tag: 'list' })
+      _configLoad({ tag: 'list' })
     }
-    this.load()
-    ArriveFooter.add(id, this.load)
+  }, [config, config.data, eMcid, mcid, store.dispatch, store.getState])
+
+  const isSearch = () => {
+    const search = pathname.indexOf('search') !== -1
+    return search
   }
 
-  componentWillUnmount() {
-    const {
-      match: {
-        params: { id }
-      }
-    } = this.props
-    ArriveFooter.remove(id)
-  }
-
-  async load() {
-    const { listLoad } = this.props
-    const { id, mcid, year, area, wd = '', letter, lz, order } = this.state
-    const reMcid = isEmpty(mcid)
-    const reYear = isEmpty(year)
-    const reArea = isEmpty(area)
-    const reLetter = isEmpty(letter)
-    const reLz = isEmpty(lz)
-    const reOrder = isEmpty(order, 1)
-    let [, data] = await listLoad({ id, mcid: reMcid, year: reYear, area: reArea, wd, letter: reLetter, lz: reLz, order: reOrder })
-    if (data) {
-      this.setState({
-        data: data.data
-      })
-    }
-  }
-
-  getTypeId(name) {
-    let id
-    switch (name) {
-      case 'tv':
-        id = 201
-        break
-      case 'ova':
-        id = 202
-        break
-      case 'juchang':
-        id = 203
-        break
-      case 'tebie':
-        id = 4
-        break
-      case 'zhenren':
-        id = 204
-        break
-      case 'qita':
-        id = 35
-        break
-      default:
-        id = 3
-        break
-    }
-    return id
-  }
-
-  getName(data, id) {
-    for (let i of data) {
-      if (i.id === id) {
-        return i.title
-      }
-    }
-  }
-
-  getParams(type, value, title) {
-    const {
-      match: { url }
-    } = this.props
-    this.setState(
-      Object.assign({}, type === 'type' ? { id: this.getTypeId(value) } : {}, {
-        [type]: value === '全部' ? '' : value,
-        [`${type}Name`]: title === '全部' ? '' : title || ''
-      }),
-      () => {
-        if (url.indexOf('type/') !== -1) {
-          const { type, mcid, area, year, letter, lz, order } = this.state
-          const path = `/type/${type || '-'}/${mcid || '-'}/${area || '-'}/${year || '-'}/${letter || '-'}/${lz || '-'}/${order}/`
-          history.pushState(null, null, path)
-        }
-        this.load()
-      }
-    )
-  }
-
-  formatArray(data = []) {
+  const formatArray = (data = []) => {
     let f = [{ title: '全部', id: '' }]
     for (let i of data) {
       f.push({ title: i, id: i })
@@ -195,153 +59,147 @@ class SubjectList extends Component {
     return f
   }
 
-  isSearch() {
-    const {
-      location: { pathname },
-      match: {
-        params: { wd = '' }
+  const findName = (data = [], id) => {
+    if (id) {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].id === id) return data[i].title
       }
-    } = this.props
-    const isSearch = pathname.indexOf('search') !== -1
-    return {
-      wd,
-      isSearch
+    } else {
+      return '全部'
     }
   }
 
-  render() {
-    const {
-      list: { loading },
-      config
-    } = this.props
-    const conf = config.data || {}
-    const { data, type, mcid, area, year, letter, lz, order, typeName, mcidName, areaName, yearName, letterName, lzName } = this.state
-    const { wd = '', isSearch } = this.isSearch()
-    const idArr = [{ title: '全部', name: '' }].concat((conf.menu || {}).son || [])
-    const mcidArr = [{ title: '全部', id: '' }].concat(conf.mcid || [])
-    const areaArr = this.formatArray(conf.area)
-    const yearArr = this.formatArray(conf.year)
-    const letterArr = this.formatArray(conf.letter)
-    // const lzArr = [{ title: '全部', id: '' }, { title: '连载', id: 1 }, { title: '完结', id: 2 }]
-    const orderArr = [{ title: '最新', id: 'addtime' }, { title: '评分', id: 'gold' }, { title: '热门', id: 'hits' }]
-    const keyword = decodeURIComponent(wd)
-    return (
-      <>
-        {loading ? <Loading /> : null}
-        <Meta
-          title={
-            isSearch
-              ? `你搜索的是《${keyword}》`
-              : `动漫列表${typeName ? `_${typeName}动漫_${typeName}动漫排行榜` : ''}${
-                  mcidName ? `_${mcidName}动漫_好看的${mcidName}动漫_最新${mcidName}动画片大全_${mcidName}动漫排行榜` : ''
-                }${areaName ? `_${areaName}${typeName}大全_${areaName}${typeName}排行榜` : ''}${yearName ? `_${yearName}的动漫` : ''}${
-                  letterName ? `_字母${letterName}开头的动漫` : ''
-                }`
-          }
-        />
-        <div styleName="filter">
-          <div className="wp clearfix">
-            {(type || mcid || area || year || letter || lz) && (
-              <dl>
-                <dt>已选</dt>
-                <dd>
-                  {typeName ? <a onClick={() => this.getParams('type', '')}>{typeName}</a> : null}
-                  {mcidName ? <a onClick={() => this.getParams('mcid', '')}>{mcidName}</a> : null}
-                  {/* {lzName ? <a onClick={() => this.getParams('lz', '')}>{lzName}</a> : null} */}
-                  {areaName ? <a onClick={() => this.getParams('area', '')}>{areaName}</a> : null}
-                  {yearName ? <a onClick={() => this.getParams('year', '')}>{yearName}</a> : null}
-                  {letterName ? <a onClick={() => this.getParams('letter', '')}>{letterName}</a> : null}
-                </dd>
-              </dl>
-            )}
-            <dl className="clearfix">
-              <dt>分类</dt>
-              <dd>
-                {idArr.map(item => (
-                  <a styleName={type === item.name ? 'cur' : ''} onClick={() => this.getParams('type', item.name, item.title)} key={item.name}>
-                    {item.title}
-                  </a>
-                ))}
-              </dd>
-            </dl>
-            <dl className="clearfix">
-              <dt>类型</dt>
-              <dd>
-                {mcidArr.map(item => (
-                  <a styleName={mcid === item.id ? 'cur' : ''} onClick={() => this.getParams('mcid', item.id, item.title)} key={item.id}>
-                    {item.title}
-                  </a>
-                ))}
-              </dd>
-            </dl>
-            {/* <dl className="clearfix">
-              <dt>连载</dt>
-              <dd>
-                {lzArr.map(item => (
-                  <a
-                    styleName={lz === item.id ? 'cur' : ''}
-                    onClick={() => this.getParams('lz', item.id, item.title)}
-                    key={item.id}
-                  >
-                    {item.title}
-                  </a>
-                ))}
-              </dd>
-            </dl> */}
-            <dl className="clearfix">
-              <dt>地区</dt>
-              <dd>
-                {areaArr.map(item => (
-                  <a styleName={area === item.id ? 'cur' : ''} onClick={() => this.getParams('area', item.id, item.title)} key={item.id}>
-                    {item.title}
-                  </a>
-                ))}
-              </dd>
-            </dl>
-            <dl className="clearfix">
-              <dt>年份</dt>
-              <dd>
-                {yearArr.map(item => (
-                  <a styleName={year === item.id ? 'cur' : ''} onClick={() => this.getParams('year', item.id, item.title)} key={item.id}>
-                    {item.title}
-                  </a>
-                ))}
-              </dd>
-            </dl>
-            <dl className="clearfix">
-              <dt>字母</dt>
-              <dd>
-                {letterArr.map(item => (
-                  <a styleName={letter === item.id ? 'cur' : ''} onClick={() => this.getParams('letter', item.id, item.title)} key={item.id}>
-                    {item.title}
-                  </a>
-                ))}
-              </dd>
-            </dl>
-            <dl className="clearfix">
-              <dt>排序</dt>
-              <dd>
-                {orderArr.map(item => (
-                  <a styleName={order === item.id ? 'cur' : ''} onClick={() => this.getParams('order', item.id, item.title)} key={item.id}>
-                    {item.title}
-                  </a>
-                ))}
-                {isSearch ? (
-                  <span>
-                    你搜索的是：<b>{keyword}</b>
-                  </span>
-                ) : null}
-              </dd>
-            </dl>
-          </div>
-        </div>
-        <Ads id={7} />
-        <div className="wp">
-          <Item data={data} />
-        </div>
-      </>
-    )
+  const isAll = name => {
+    return name === '全部' ? '' : name
   }
-}
 
-export default SubjectList
+  const { data = {} } = config
+  const idArr = [{ title: '全部', id: 3 }].concat((data.menu || {}).son || [])
+  const mcidArr = [{ title: '全部', id: '' }].concat(data.mcid || [])
+  const areaArr = formatArray(data.area)
+  const yearArr = formatArray(data.year)
+  const letterArr = formatArray(data.letter)
+  // const lzArr = [{ title: '全部', id: '' }, { title: '连载', id: 1 }, { title: '完结', id: 2 }]
+  const orderArr = [{ title: '最新', id: 'addtime' }, { title: '评分', id: 'gold' }, { title: '热门', id: 'hits' }]
+  const keyword = decodeURIComponent(wd)
+  const typeName = findName(idArr, eId)
+  const mcidName = findName(mcidArr, eMcid)
+  const t = isAll(typeName)
+  const y = isAll(eYear)
+  const m = isAll(mcidName)
+  const l = isAll(eLetter)
+  const a = isAll(eArea)
+  return (
+    <>
+      <Meta
+        title={
+          isSearch()
+            ? `你搜索的是《${keyword}》`
+            : `动漫列表${t ? `_${t}动漫_${t}动漫排行榜` : ''}${m ? `_${m}动漫_好看的${m}动漫_最新${m}动画片大全_${m}动漫排行榜` : ''}${a ? `_${a}${t}大全_${a}${t}排行榜` : ''}${
+                y ? `_${y}的动漫` : ''
+              }${l ? `_字母${l}开头的动漫` : ''}`
+        }
+      />
+      <div styleName="filter">
+        <div className="wp clearfix">
+          {(t || a || m || y || l) && (
+            <dl>
+              <dt>已选</dt>
+              <dd>
+                {t ? <a onClick={() => getId('')}>{t}</a> : null}
+                {m ? <a onClick={() => getMcid('')}>{m}</a> : null}
+                {/* {lzName ? <a onClick={() => this.getParams('lz', '')}>{lzName}</a> : null} */}
+                {a ? <a onClick={() => getArea('')}>{a}</a> : null}
+                {y ? <a onClick={() => getYear('')}>{y}</a> : null}
+                {l ? <a onClick={() => getLetter('')}>{l}</a> : null}
+              </dd>
+            </dl>
+          )}
+          <dl className="clearfix">
+            <dt>分类</dt>
+            <dd>
+              {idArr.map(item => (
+                <a styleName={eId === item.id ? 'cur' : ''} onClick={() => getId(item.id)} key={item.id}>
+                  {item.title}
+                </a>
+              ))}
+            </dd>
+          </dl>
+          <dl className="clearfix">
+            <dt>类型</dt>
+            <dd>
+              {mcidArr.map(item => (
+                <a styleName={eMcid === item.id ? 'cur' : ''} onClick={() => getMcid(item.id)} key={item.id}>
+                  {item.title}
+                </a>
+              ))}
+            </dd>
+          </dl>
+          {/* <dl className="clearfix">
+            <dt>连载</dt>
+            <dd>
+              {lzArr.map(item => (
+                <a
+                  styleName={lz === item.id ? 'cur' : ''}
+                  onClick={() => this.getParams('lz', item.id, item.title)}
+                  key={item.id}
+                >
+                  {item.title}
+                </a>
+              ))}
+            </dd>
+          </dl> */}
+          <dl className="clearfix">
+            <dt>地区</dt>
+            <dd>
+              {areaArr.map(item => (
+                <a styleName={eArea === item.title ? 'cur' : ''} onClick={() => getArea(item.title)} key={item.id}>
+                  {item.title}
+                </a>
+              ))}
+            </dd>
+          </dl>
+          <dl className="clearfix">
+            <dt>年份</dt>
+            <dd>
+              {yearArr.map(item => (
+                <a styleName={eYear === item.title ? 'cur' : ''} onClick={() => getYear(item.title)} key={item.id}>
+                  {item.title}
+                </a>
+              ))}
+            </dd>
+          </dl>
+          <dl className="clearfix">
+            <dt>字母</dt>
+            <dd>
+              {letterArr.map(item => (
+                <a styleName={eLetter === item.title ? 'cur' : ''} onClick={() => getLetter(item.title)} key={item.id}>
+                  {item.title}
+                </a>
+              ))}
+            </dd>
+          </dl>
+          <dl className="clearfix">
+            <dt>排序</dt>
+            <dd>
+              {orderArr.map(item => (
+                <a styleName={eOrder === item.id ? 'cur' : ''} onClick={() => getOrder(item.id)} key={item.id}>
+                  {item.title}
+                </a>
+              ))}
+              {isSearch() ? (
+                <span>
+                  你搜索的是：<b>{keyword}</b>
+                </span>
+              ) : null}
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <Ads id={7} />
+      <div className="wp">
+        <List id={eId || 3} order={eOrder} letter={eLetter} year={eYear} mcid={eMcid} area={eArea} limit={30} wd={wd} scrollLoad={true} />
+      </div>
+    </>
+  )
+})

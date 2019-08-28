@@ -9,7 +9,7 @@ export function listLoad({ id, mcid, year, area, wd, letter, lz, order }) {
     return loadData({
       dispatch,
       getState,
-      name: id + isEmpty(mcid) + isEmpty(year) + isEmpty(area) + isEmpty(wd) + isEmpty(letter) + isEmpty(lz) + isEmpty(order, 1),
+      name: '' + id + isEmpty(mcid) + isEmpty(year) + isEmpty(area) + isEmpty(wd) + isEmpty(letter) + isEmpty(lz) + isEmpty(order, 1),
       reducerName: 'list',
       actionType: 'GET_LIST',
       api: 'listNoId',

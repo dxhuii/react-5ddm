@@ -21,6 +21,7 @@ import './style.scss'
 
 export default function() {
   let timer = null
+  let timerBlur = null
   const [isHide, onHide] = useState(false)
   const [visible, onModal] = useState(false)
   const [showMenu, onMenu] = useState(false)
@@ -31,6 +32,11 @@ export default function() {
 
   const store = useStore()
   const me = useSelector(state => getUserInfo(state))
+
+  const {
+    match: { url = '', params = {} },
+    history
+  } = useReactRouter()
 
   const onSignOut = async () => {
     const _signOut = () => signOut()(store.dispatch, store.getState)
@@ -45,6 +51,12 @@ export default function() {
     }
   }
 
+  useEffect(() => {
+    return () => {
+      clearTimeout(timerBlur)
+    }
+  })
+
   const onChange = e => {
     clearTimeout(timer)
     const wd = trim(e.target.value)
@@ -54,17 +66,27 @@ export default function() {
     }, 300)
   }
 
-  const onBlur = _ => {
-    setTimeout(() => onHide(false), 500)
+  const onBlur = () => {
+    timerBlur = setTimeout(() => onHide(false), 500)
   }
 
-  const onFocus = _ => {
+  const onFocus = () => {
     onHide(true)
   }
 
   const onType = isSign => {
     Login(isSign)
     onModal(true)
+  }
+
+  const onPressEnter = e => {
+    if (e.which === 13 && wd) {
+      history.push(`/search/${wd}`)
+    }
+  }
+
+  const onSubmit = () => {
+    history.push(`/search/${wd}`)
   }
 
   // 判断为几月新番
@@ -84,9 +106,6 @@ export default function() {
   }
 
   const { userid, nickname } = me
-  const {
-    match: { url = '', params = {} }
-  } = useReactRouter()
   const logo = `header-logo ${DOMAIN_NAME === 'dddm.tv' ? 'dddm' : DOMAIN_NAME === '5ddm.com' ? 'ddm' : DOMAIN_NAME === 'kanfan.net' ? 'kanfan' : ''}`
   const isNot = !(url === '/' || /dongman|subject|play|search|type/.test(url))
   return (
@@ -122,12 +141,10 @@ export default function() {
           </div>
         </nav>
         <div styleName={`header-search ${showSearch ? 'show' : ''}`}>
-          <form action={`/search/${wd}`}>
-            <input required type="text" placeholder={params.wd || '片名、导演、声优、原作...'} onChange={onChange} onBlur={onBlur} onFocus={onFocus} />
-            <button disabled={!wd} type="submit">
-              <i className="iconfont">&#xe78d;</i>
-            </button>
-          </form>
+          <input required type="search" placeholder={params.wd || '片名、导演、声优、原作...'} onChange={onChange} onBlur={onBlur} onFocus={onFocus} onKeyPress={onPressEnter} />
+          <button disabled={!wd} onClick={onSubmit}>
+            <i className="iconfont">&#xe78d;</i>
+          </button>
           {isHide ? <SearchAuto wd={wd} /> : null}
         </div>
         <div styleName="header-tool" className="tar">

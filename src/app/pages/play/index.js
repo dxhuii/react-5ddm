@@ -264,7 +264,7 @@ export default Shell(() => {
                 ) : (
                   item.title
                 )) ? (
-                  <Link className={`mcid-${index}`} key={item.id} to={`/type/${menu[listId] || 'list'}/${item.id}/-/-/-/-/-/`}>
+                  <Link className={`mcid-${index}`} key={item.id} to={`/type/${menu[listId] || 'list'}/${item.id}/-/-/-/-/addtime/`}>
                     {item.title}
                   </Link>
                 ) : null

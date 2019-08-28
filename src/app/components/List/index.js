@@ -12,10 +12,10 @@ import Loading from '@/components/Ui/Loading'
 import './style.scss'
 export default function List({ id, mcid, year, area, wd, letter, lz, order }) {
   const isEmpty = (val, type) => {
-    return val === undefined || val === '' || val === '-' ? (type ? 'addtime' : '') : val
+    return val === undefined || val === '' || val === '-' ? (type ? 'addtime' : '') : val === '全部' ? '' : val
   }
 
-  const info = useSelector(state => getList(state, id + isEmpty(mcid) + isEmpty(year) + isEmpty(area) + isEmpty(wd) + isEmpty(letter) + isEmpty(lz) + isEmpty(order, 1)))
+  const info = useSelector(state => getList(state, '' + id + isEmpty(mcid) + isEmpty(year) + isEmpty(area) + isEmpty(wd) + isEmpty(letter) + isEmpty(lz) + isEmpty(order, 1)))
   const store = useStore()
 
   // 显示记录

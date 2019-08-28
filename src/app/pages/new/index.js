@@ -60,11 +60,11 @@ export default Shell(() => {
                   {item.isDate ? <em>new</em> : null}
                 </span>
                 <span>
-                  <Link to={`/type/${menu[item.listId] || 'list'}/-/-/-/-/-/-/`}>{item.listName}</Link>
+                  <Link to={`/type/${menu[item.listId] || 'list'}/-/-/-/-/-/addtime/`}>{item.listName}</Link>
                 </span>
                 <span>
                   {(item.mcid || []).map(val => (
-                    <Link to={`/type/${menu[item.listId] || 'list'}/${val.id}/-/-/-/-/-/`} key={val.id}>
+                    <Link to={`/type/${menu[item.listId] || 'list'}/${val.id}/-/-/-/-/addtime/`} key={val.id}>
                       {val.title}
                     </Link>
                   ))}

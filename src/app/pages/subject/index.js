@@ -210,11 +210,11 @@ export default Shell(() => {
               <div styleName="detial-title">
                 <h1>{title}</h1>
                 <span>
-                  <Link to={`/type/${menu[cid] || 'list'}/-/-/-/-/-/-/`}>{listName}</Link>
+                  <Link to={`/type/${menu[cid] || 'list'}/-/-/-/-/-/addtime/`}>{listName}</Link>
                   {mcid.length > 0
                     ? mcid.map(item =>
                         item.title ? (
-                          <Link key={item.id} to={`/type/${menu[cid] || 'list'}/${item.id}/-/-/-/-/-/`}>
+                          <Link key={item.id} to={`/type/${menu[cid] || 'list'}/${item.id}/-/-/-/-/addtime/`}>
                             {item.title}
                           </Link>
                         ) : null

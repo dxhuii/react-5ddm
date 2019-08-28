@@ -206,6 +206,7 @@ export default [
       loader: () => import('@/pages/list'),
       loading
     }),
+    loadData: ListLoadData,
     enter: 'everybody'
   },
 

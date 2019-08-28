@@ -3,43 +3,25 @@ import { configLoad } from '@/store/actions/config'
 import cache from '@/utils/cache'
 const { getCache, addCache } = cache
 
-function getTypeId(name) {
-  let id
-  switch (name) {
-    case 'tv':
-      id = 201
-      break
-    case 'ova':
-      id = 202
-      break
-    case 'juchang':
-      id = 203
-      break
-    case 'tebie':
-      id = 4
-      break
-    case 'zhenren':
-      id = 204
-      break
-    case 'qita':
-      id = 35
-      break
-    default:
-      id = 3
-      break
-  }
-  return id
-}
-
 function isEmpty(val, type) {
   return val === undefined || val === '' || val === '-' ? (type ? 'addtime' : '') : val
+}
+
+const type = {
+  tv: 201,
+  ova: 202,
+  juchang: 203,
+  tebie: 4,
+  zhenren: 204,
+  qita: 35
 }
 
 export default ({ store, match }) => {
   return new Promise(async function(resolve, reject) {
     const { name, mcid, year, area, wd = '', order, letter, lz } = match.params
-    const id = getTypeId(name)
-    const reduxName = id + isEmpty(mcid) + isEmpty(year) + isEmpty(area) + isEmpty(wd) + isEmpty(letter) + isEmpty(lz) + isEmpty(order, 1)
+    const id = type[name] || 3
+    const reduxName = id + isEmpty(mcid) + isEmpty(year) + isEmpty(area) + isEmpty(decodeURIComponent(wd)) + isEmpty(letter) + isEmpty(lz) + isEmpty(order, 1)
+    console.log(reduxName)
     const data = getCache('list')
     if (data) {
       store.dispatch({
