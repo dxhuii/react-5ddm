@@ -70,7 +70,9 @@ export default () => {
       end = surplus ? (yesSurplus > len ? len : yesSurplus) : noSurplus
     }
     setStart(start)
-    setEnd(end)
+    if (end) {
+      setEnd(end)
+    }
 
     // 分页面数大于 8 页时调用
     if (pageLen > 8 && pid) {
@@ -149,6 +151,7 @@ export default () => {
   const list = data.list || []
   const len = parseInt(list.length / pageSize)
   const surplus = list.length % pageSize
+  console.log(start, end)
   const dataSource = list.slice(start, end)
   return (
     <>

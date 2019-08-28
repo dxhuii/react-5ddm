@@ -179,10 +179,13 @@ export default Shell(() => {
     const onDigg = args => digg(args)(store.dispatch, store.getState)
     let [, res] = await onDigg({ type, id })
     if (res.code === 1) {
-      const up = upDiv.current.querySelectorAll('span')[0]
-      const down = downDiv.current.querySelectorAll('span')[0]
-      up.innerText = up.innerText * 1 + 1
-      down.innerText = down.innerText * 1 + 1
+      if (type === 'up') {
+        const up = upDiv.current.querySelectorAll('span')[0]
+        up.innerText = up.innerText * 1 + 1
+      } else {
+        const down = downDiv.current.querySelectorAll('span')[0]
+        down.innerText = down.innerText * 1 + 1
+      }
     }
     Toast.success(res.msg)
   }
