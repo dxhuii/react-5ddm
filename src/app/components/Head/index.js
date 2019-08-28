@@ -20,6 +20,7 @@ import { DOMAIN_NAME, NAME } from 'Config'
 import './style.scss'
 
 export default function() {
+  let timer = null
   const [isHide, onHide] = useState(false)
   const [visible, onModal] = useState(false)
   const [showMenu, onMenu] = useState(false)
@@ -45,9 +46,12 @@ export default function() {
   }
 
   const onChange = e => {
-    const wd = trim(e.target.value)
-    changeSearch(wd)
-    onHide(true)
+    clearTimeout(timer)
+    timer = setTimeout(function() {
+      const wd = trim(e.target.value)
+      changeSearch(wd)
+      onHide(true)
+    }, 300)
   }
 
   const onType = isSign => {
