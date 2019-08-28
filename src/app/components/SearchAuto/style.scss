@@ -1,3 +1,5 @@
+@import '../../pages/_mixin';
+
 .search-auto {
   position: absolute;
   top: 50px;
@@ -10,6 +12,7 @@
   padding: 10px 15px;
   border: 1px solid #eee;
   z-index: 99;
+
   &::before {
     content: '';
     width: 0;
@@ -23,6 +26,7 @@
     transform: translateX(-50%);
     position: absolute;
   }
+
   &::after {
     content: '';
     width: 0;
@@ -36,6 +40,11 @@
     transform: translateX(-50%);
     position: absolute;
   }
+
+  li {
+    @include clamp(1);
+  }
+
   a {
     padding: 0;
     display: block;

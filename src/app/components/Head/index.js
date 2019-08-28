@@ -47,11 +47,19 @@ export default function() {
 
   const onChange = e => {
     clearTimeout(timer)
+    const wd = trim(e.target.value)
     timer = setTimeout(function() {
-      const wd = trim(e.target.value)
       changeSearch(wd)
       onHide(true)
     }, 300)
+  }
+
+  const onBlur = _ => {
+    setTimeout(() => onHide(false), 500)
+  }
+
+  const onFocus = _ => {
+    onHide(true)
   }
 
   const onType = isSign => {
@@ -74,10 +82,6 @@ export default function() {
     }
     return year + m
   }
-
-  useEffect(() => {
-    document.onclick = onHide
-  }, [])
 
   const { userid, nickname } = me
   const {
@@ -119,7 +123,7 @@ export default function() {
         </nav>
         <div styleName={`header-search ${showSearch ? 'show' : ''}`}>
           <form action={`/search/${wd}`}>
-            <input required type="text" placeholder={params.wd || '片名、导演、声优、原作...'} onChange={onChange} />
+            <input required type="text" placeholder={params.wd || '片名、导演、声优、原作...'} onChange={onChange} onBlur={onBlur} onFocus={onFocus} />
             <button disabled={!wd} type="submit">
               <i className="iconfont">&#xe78d;</i>
             </button>
