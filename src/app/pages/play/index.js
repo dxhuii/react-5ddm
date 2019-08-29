@@ -78,13 +78,15 @@ export default Shell(() => {
   }, [getPlay, id, info, pid, store.dispatch, store.getState])
 
   useEffect(() => {
-    document.onkeyup = event => {
-      if (event.which == '27') {
+    load()
+    const exitFull = e => {
+      if (e.which === 27) {
         isFull(false)
       }
     }
-    load()
+    document.addEventListener('keyup', exitFull)
     return () => {
+      document.removeEventListener('keyup', exitFull)
       addHistory() // 增加观看记录
     }
   }, [addHistory, load])
