@@ -1,10 +1,10 @@
 import { API } from 'Config'
 
-const apiReact = `${API}?s=/home/mapi/`
-const apiGame = `${API}?s=/home/game`
-const apiHomeUser = `${API}?s=/home/user/`
-const apiUser = `${API}?s=/user/api/`
-const apiUserReg = `${API}?s=/user/reg/`
+const apiReact = `${API}home-mapi-`
+const apiGame = `${API}home-game`
+const apiHomeUser = `${API}home-user-`
+const apiUser = `${API}user-api-`
+const apiUserReg = `${API}user-reg-`
 
 export default {
   api: {

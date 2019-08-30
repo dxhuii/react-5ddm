@@ -8,7 +8,7 @@ export default ({ api, params = {}, header = true, callback = () => {} }) => {
       method: 'post',
       url: config.api[api],
       data: params,
-      headers: header ? { authorization: localStorage.getItem('token') ? localStorage.getItem('token') : 0 } : {}
+      headers: header ? { Authorization: localStorage.getItem('token') ? localStorage.getItem('token') : 0 } : {}
     })
 
     if (err) {

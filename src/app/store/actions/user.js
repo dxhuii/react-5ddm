@@ -10,7 +10,7 @@ export function loadUserInfo({ user }) {
         url: config.api.getuserinfo,
         method: 'get',
         headers: {
-          authorization: user.token
+          Authorization: user.token
         }
       })
 
