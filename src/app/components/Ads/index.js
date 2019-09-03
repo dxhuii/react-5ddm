@@ -23,6 +23,7 @@ export default function Ads(props) {
           setType(type)
           setCon(content)
           if (type === 2 && content) {
+            ads.current.innerHTML = ''
             loadScript({ src: content, dom: ads.current })
           } else if (type === 1 && content) {
             showAd(content)

@@ -89,7 +89,7 @@ const dddm = {
 const ddm = {
   API: 'https://api.99496.com/',
   ISPLAY: false,
-  ISAD: false,
+  ISAD: true,
   NAME: '5D动漫(5站)',
   DESCRIBE: '5D动漫(5站) - 无广告免费的动漫网站',
   KEYWORDS: '5D动漫,5站',
