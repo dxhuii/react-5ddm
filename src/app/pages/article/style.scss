@@ -55,10 +55,24 @@
   height: 517.5px;
   position: relative;
   margin-top: 20px;
+  background-color: #000;
+
+  &::before {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 32px;
+    transform: translate(-50%, -50%);
+    content: "加载中，请稍后...";
+  }
 
   div {
     width: 100%;
     height: 100%;
+    position: relative;
   }
 
   a {
