@@ -10,6 +10,7 @@ export const isNumber = val => typeof val === 'number'
 export const formatPic = (pic = '', type = '') => {
   const rePic = pic.replace('http://', '//').replace('https://', '//')
   if (/.gif/.test(pic)) return pic
+  if (/i.99496.com/.test(pic)) return pic.replace('i.99496.com', 's.dddm.tv')
   return rePic.replace(/large|mw1024/, type)
 }
 

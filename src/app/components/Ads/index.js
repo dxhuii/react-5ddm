@@ -7,7 +7,7 @@ import useScript from '@/utils/useScript'
 export default function Ads(props) {
   const [type, setType] = useState(0)
   const [con, setCon] = useState(0)
-  const [loaded, error] = useScript('//cos.mdb6.com/static/income.min.js')
+  const [loaded, error] = useScript('//s.dddm.tv/static/income.min.js')
   const ads = useRef(null)
 
   function showAd(content) {

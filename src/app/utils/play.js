@@ -1,7 +1,7 @@
 import { isMobile } from './index'
 import { DOMAIN, ISPLAY } from 'Config'
 
-const playUrl = '//p.mdb6.com/api/p.php?type='
+const playUrl = '//api.dddm.tv/api/p.php?type='
 const playH = '100%'
 
 const iframe = url => {
@@ -95,7 +95,7 @@ const ck = (type, pv) => {
 }
 
 const jiexiUrl = (pv = '', danmu) => {
-  const url = `${pv.replace('www.ikanfan.cn', 'p.mdb6.com')}${pv.indexOf('flvsp') === -1 ? `&danmu=${danmu}` : ''}`
+  const url = `${pv.replace('www.ikanfan.cn', 'api.dddm.tv')}${pv.indexOf('flvsp') === -1 ? `&danmu=${danmu}` : ''}`
   return `<iframe src="${url}" width="100%" height="${playH}" frameborder="0" scrolling="no" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
 }
 
