@@ -6,68 +6,25 @@ import { formatPic } from '@/utils'
 import './style.scss'
 
 export default function NewsItem({ data }) {
-  const reNewsCateName = id => {
-    let name
-    switch (id) {
-      case 211:
-        name = 'zixun'
-        break
-      case 206:
-        name = 'donghua'
-        break
-      case 205:
-        name = 'manhua'
-        break
-      case 207:
-        name = 'cast'
-        break
-      case 208:
-        name = 'bagua'
-        break
-      case 221:
-        name = 'jianping'
-        break
-      case 212:
-        name = 'pic'
-        break
-      case 222:
-        name = 'video'
-        break
-      case 214:
-        name = 'yugao'
-        break
-      case 215:
-        name = 'op'
-        break
-      case 216:
-        name = 'bgm'
-        break
-      case 217:
-        name = 'ed'
-        break
-      case 223:
-        name = 'cm'
-        break
-      case 213:
-        name = 'cosplay'
-        break
-      case 220:
-        name = 'mad'
-        break
-      case 218:
-        name = 'shengrou'
-        break
-      case 219:
-        name = 'tedian'
-        break
-      case 209:
-        name = 'chanye'
-        break
-      default:
-        name = 'news'
-        break
-    }
-    return name
+  const menu = {
+    211: 'zixun',
+    206: 'donghua',
+    205: 'manhua',
+    207: 'cast',
+    208: 'bagua',
+    221: 'jianping',
+    212: 'pic',
+    222: 'video',
+    214: 'yugao',
+    215: 'op',
+    216: 'bgm',
+    217: 'ed',
+    223: 'cm',
+    220: 'mad',
+    213: 'cosplay',
+    218: 'shengrou',
+    219: 'tedian',
+    209: 'chanye'
   }
 
   return (
@@ -87,7 +44,7 @@ export default function NewsItem({ data }) {
                 <i className="iconfont">&#xe655;</i>分享
               </span>
               <span>
-                分类：<Link to={`/news/${reNewsCateName(item.cid)}`}>{item.name}</Link>
+                分类：<Link to={`/news/${menu[item.cid] || 'news'}`}>{item.name}</Link>
               </span>
               <span>时间：{item.addtime}</span>
             </p>
