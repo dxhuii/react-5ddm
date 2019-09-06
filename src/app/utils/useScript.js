@@ -14,7 +14,6 @@ export default function useScript(src) {
       let script = document.createElement('script'),
         scriptDom = document.getElementsByTagName('script')
       script.src = src
-      script.async = 1
 
       for (let i = 0; i < scriptDom.length; i++) {
         const url = /http:|https:/.test(src) ? src : window.location.protocol + src
