@@ -53,7 +53,7 @@ export default ({ dispatch, getState, reducerName, actionType, api, name = '', p
     list.params = params
     list.loading = false
 
-    if (isPage) list.more = data.count === list.data.length || data.count === 0
+    if (isPage) list.more = list.data.length < params.limit
 
     if (actionType) dispatch({ type: actionType, name, data: list })
 

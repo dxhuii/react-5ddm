@@ -74,7 +74,7 @@ export function top({ name }) {
       reducerName: 'list',
       actionType: 'GET_TOP',
       api: 'list',
-      params: Object.assign({}, api, { order: 'hits_month' })
+      params: Object.assign({}, api, { order: 'hits_month', p: 0 })
     })
   }
 }
