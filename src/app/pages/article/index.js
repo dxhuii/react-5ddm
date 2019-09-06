@@ -45,13 +45,9 @@ export default Shell(() => {
   const articleData = useSelector(state => getArticle(state, id))
   const newsData = useSelector(state => getNewsIndex(state, 'newslist', 44))
 
-  const load = useCallback(async () => {
-    const getNewsData = args => newsIndex(args)(store.dispatch, store.getState)
-    await getNewsData({ name: 'newslist', id: 44 })
-  }, [store.dispatch, store.getState])
-
   useEffect(() => {
     const getArticleData = args => article(args)(store.dispatch, store.getState)
+    const getNewsData = args => newsIndex(args)(store.dispatch, store.getState)
     document.onkeyup = event => {
       if (event.which == '27') {
         isFull(false)
@@ -60,13 +56,11 @@ export default Shell(() => {
     if (!articleData.data) {
       getArticleData({ id })
     }
-    if (!newsData.data) load()
-    ArriveFooter.add('newsArticle', load)
-    getImg()
-    return () => {
-      ArriveFooter.remove('newsArticle')
+    if (!newsData.data) {
+      getNewsData({ name: 'newslist', id: 44, order: 'hits_week' })
     }
-  }, [articleData.data, id, load, newsData.data, store.dispatch, store.getState])
+    getImg()
+  }, [articleData.data, id, newsData.data, store.dispatch, store.getState])
 
   const getImg = () => {
     const content = articleContent.current
@@ -112,7 +106,7 @@ export default Shell(() => {
   const newsListData = newsData.data || []
   const { userid } = me
 
-  const { title, name, cid, pic = '', remark, keywords, addtime, inputer, tag = [], prev, next, vodid, jump, content = '', playname = '', playurl = '' } = data
+  const { title, name, cid, pic = '', remark, keywords, addtime, inputer, tag = [], prev, next, jump, content = '', playname = '', playurl = '', vodlist = [] } = data
   const playHtml = playing({ name: playname, vid: playurl, danmu: `article_${id}`, uid: userid, url }) || []
   const shareConfig = {
     pic,
@@ -192,18 +186,21 @@ export default Shell(() => {
           </div>
           <div className="mt20" styleName="newslist">
             <div className="title">
-              <h2>推荐新闻</h2>
+              <h2>推荐新闻(一周热门)</h2>
               <Link to="/news">
                 更多<i className="iconfont">&#xe65e;</i>
               </Link>
             </div>
             <Item data={newsListData} />
+            <div styleName="newslist-more">
+              <Link to="/news">查看更多最新资讯</Link>
+            </div>
           </div>
         </article>
       </div>
       {cid === 205 ? null : (
         <div className="fr right">
-          <SideBar vodid={vodid} />
+          <SideBar data={vodlist} />
         </div>
       )}
     </div>

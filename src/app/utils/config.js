@@ -43,6 +43,7 @@ export default {
     playlist: `${apiReact}play`, // 播放列表 id:视频id
     player: `${apiReact}play`, // 单集 id:视频id，pid，集数
     detail: `${apiReact}detail`, // 视频详情
+    detailNews: `${apiReact}vodnewslist`, // 视频关联新闻
     month: `${apiReact}month/id/3`, // 月份追番表
     newslist: `${apiReact}newsList`, // 新闻列表接口
     comment: `${apiReact}comment`, // 获取评论

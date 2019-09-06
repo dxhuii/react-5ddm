@@ -212,7 +212,7 @@ export default Shell(() => {
     }
   }
 
-  const { listName, listId, listNameBig, list = [], pic, title, pan, subTitle, actor = '', up, down, prev, next, mcid = [], copyright } = data
+  const { listName, listId, listNameBig, list = [], pic, title, pan, subTitle, actor = '', up, down, prev, next, mcid = [] } = data
   const shareConfig = {
     pic,
     title: `#${title}# ${subTitle}在线播放 - ${listName}${listNameBig} - #${NAME.split('_').join('##')}# @99496动漫网`,
@@ -315,7 +315,7 @@ export default Shell(() => {
           </div>
         </div>
         <div className="right fr">
-          <SideBar vodid={id} />
+          <SideBar data={[data]} />
         </div>
       </div>
     </>

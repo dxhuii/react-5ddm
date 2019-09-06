@@ -54,7 +54,7 @@ export default Shell(() => {
               <li key={item.id}>
                 <span styleName={`num ${index <= 2 ? 'on' : ''}`}>{index + 1}</span>
                 <Link to={`/subject/${item.id}`}>{item.title}</Link>
-                <span>{isHits ? item.hits : item.glod}</span>
+                <span>{isHits ? item.hits : item.gold}</span>
               </li>
             ))}
           </ul>
@@ -66,7 +66,7 @@ export default Shell(() => {
               <li key={item.id}>
                 <span styleName={`num ${index <= 2 ? 'on' : ''}`}>{index + 1}</span>
                 <Link to={`/subject/${item.id}`}>{item.title}</Link>
-                <span>{isHits ? item.hits : item.glod}</span>
+                <span>{isHits ? item.hits : item.gold}</span>
               </li>
             ))}
           </ul>
@@ -78,7 +78,7 @@ export default Shell(() => {
               <li key={item.id}>
                 <span styleName={`num ${index <= 2 ? 'on' : ''}`}>{index + 1}</span>
                 <Link to={`/subject/${item.id}`}>{item.title}</Link>
-                <span>{isHits ? item.hits : item.glod}</span>
+                <span>{isHits ? item.hits : item.gold}</span>
               </li>
             ))}
           </ul>
@@ -90,7 +90,7 @@ export default Shell(() => {
               <li key={item.id}>
                 <span styleName={`num ${index <= 2 ? 'on' : ''}`}>{index + 1}</span>
                 <Link to={`/subject/${item.id}`}>{item.title}</Link>
-                <span>{isHits ? item.hits : item.glod}</span>
+                <span>{isHits ? item.hits : item.gold}</span>
               </li>
             ))}
           </ul>

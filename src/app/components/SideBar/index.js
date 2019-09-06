@@ -6,11 +6,11 @@ import Top from '@/components/Top'
 import ArticleVod from '@/components/Vod'
 import Ads from '@/components/Ads'
 
-export default function SideBar({ vodid }) {
+export default function SideBar({ data = [] }) {
   return (
     <>
-      {vodid ? <ArticleVod ids={vodid} /> : null}
-      <div className={vodid ? 'mt20' : ''}>
+      {data.length > 0 ? <ArticleVod data={data} /> : null}
+      <div className={data.length > 0 ? 'mt20' : ''}>
         <Ads id={10} />
       </div>
       <div className="box mt20">
@@ -24,5 +24,5 @@ export default function SideBar({ vodid }) {
 }
 
 SideBar.propTypes = {
-  vodid: PropTypes.any
+  data: PropTypes.array
 }

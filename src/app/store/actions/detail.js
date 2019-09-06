@@ -22,11 +22,10 @@ export function vodNews({ id }) {
       name: `vod_news_${id}`,
       reducerName: 'detail',
       actionType: 'GET_VOD_NEWS',
-      api: 'newslist',
+      api: 'detailNews',
       params: {
-        did: id,
-        limit: 20,
-        id: 44
+        id,
+        limit: 20
       },
       isPage: true
     })

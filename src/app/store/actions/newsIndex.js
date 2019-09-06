@@ -1,6 +1,6 @@
 import loadData from '@/utils/loadData'
 
-export function newsIndex({ name, id = 44, p = 0 }) {
+export function newsIndex({ name, id = 44, p = 0, order = 'addtime' }) {
   return (dispatch, getState) => {
     let api = {}
     if (name === 'newsPicList') {
@@ -8,9 +8,9 @@ export function newsIndex({ name, id = 44, p = 0 }) {
     } else if (name === 'newsTextList') {
       api = { id: '214,215,216,217,218,219,220,223' }
     } else if (name === 'newsAll') {
-      api = { id: '44', day: 30, order: 'hits_month' }
+      api = { id: '44', order: 'hits_month' }
     } else if (name === 'newslist') {
-      api = { id, limit: 15 }
+      api = { id, limit: 15, order }
     }
     return loadData({
       dispatch,

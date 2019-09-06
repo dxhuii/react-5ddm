@@ -32,7 +32,7 @@ export default function Top({ name, title, sty }) {
           <li key={item.id}>
             <span styleName={`top-li__num ${index <= 2 ? 'on' : ''}`}>{index + 1}</span>
             <Link to={`/subject/${item.id}`}>{item.title}</Link>
-            <span styleName="top-li__score">{item.glod}</span>
+            <span styleName="top-li__score">{item.gold}</span>
           </li>
         ))}
       </ul>
