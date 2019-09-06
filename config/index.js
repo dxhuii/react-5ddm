@@ -34,7 +34,7 @@ const conf = {
   HEAD: `<meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
-    <script src="//s.dddm.tv/static/devtools-detector.js"></script>
+    <script src="//i.99496.com/static/devtools-detector.js"></script>
   `
 }
 const defalut = {
