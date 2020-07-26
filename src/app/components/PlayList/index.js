@@ -21,7 +21,7 @@ export default () => {
   const [isAll, onAll] = useState(false)
 
   const store = useStore()
-  const info = useSelector(state => getPlayList(state, id))
+  const info = useSelector((state) => getPlayList(state, id))
 
   const pageNav = useRef()
   const pageNavUl = useRef()
@@ -127,12 +127,12 @@ export default () => {
       }
     }
 
-    return html.map(item => item)
+    return html.map((item) => item)
   }
 
   useEffect(() => {
     async function fetchData() {
-      const _playlist = args => playlist(args)(store.dispatch, store.getState)
+      const _playlist = (args) => playlist(args)(store.dispatch, store.getState)
       if (!(info && info.data)) {
         const [, data] = await _playlist({ id })
         if (data) {
@@ -151,35 +151,34 @@ export default () => {
   const list = data.list || []
   const len = parseInt(list.length / pageSize)
   const surplus = list.length % pageSize
-  console.log(start, end)
   const dataSource = list.slice(start, end)
   return (
     <>
       {list.length ? (
-        <div styleName="playlistbox">
+        <div styleName='playlistbox'>
           {list.length > pageSize ? (
-            <div styleName="play-page">
+            <div styleName='play-page'>
               {list.length > 144 ? (
-                <div styleName="play-prev-next">
-                  <div styleName="pn" onClick={() => onPrev()}>
-                    <i className="iconfont">&#xe8ff;</i>
+                <div styleName='play-prev-next'>
+                  <div styleName='pn' onClick={() => onPrev()}>
+                    <i className='iconfont'>&#xe8ff;</i>
                   </div>
-                  <div styleName="pn" onClick={() => onNext()}>
-                    <i className="iconfont">&#xe65e;</i>
+                  <div styleName='pn' onClick={() => onNext()}>
+                    <i className='iconfont'>&#xe65e;</i>
                   </div>
                   <div onClick={() => onAll(!isAll)}>全部集数</div>
                 </div>
               ) : null}
-              <div styleName="playlist playlist-boreder" ref={pageNav}>
-                <ul styleName="playlist-nav" ref={pageNavUl} style={{ width: `${(len + (surplus ? 1 : 0)) * 140}px` }}>
+              <div styleName='playlist playlist-boreder' ref={pageNav}>
+                <ul styleName='playlist-nav' ref={pageNavUl} style={{ width: `${(len + (surplus ? 1 : 0)) * 140}px` }}>
                   {page()}
                 </ul>
               </div>
             </div>
           ) : null}
-          <div styleName="playlist">
-            <ul styleName="playlist-ul">
-              {dataSource.map(item => (
+          <div styleName='playlist'>
+            <ul styleName='playlist-ul'>
+              {dataSource.map((item) => (
                 <li styleName={+pid === +item.episode ? 'active' : ''} key={item.episode}>
                   {format(item.title, item.episode, id)}
                 </li>
@@ -187,17 +186,17 @@ export default () => {
             </ul>
           </div>
           <div styleName={`moblie-list ${isAll ? 'showAll' : ''}`}>
-            <div styleName="moblie-title">
+            <div styleName='moblie-title'>
               <h2>分集</h2>
               {isMobile() ? <span onClick={() => onReverse(!isReverse)}>{isReverse ? '倒序' : '正序'}</span> : null}
               {isAll ? (
-                <i className="iconfont" onClick={() => onAll(!isAll)}>
+                <i className='iconfont' onClick={() => onAll(!isAll)}>
                   &#xe610;
                 </i>
               ) : null}
             </div>
             <ul>
-              {(isReverse ? list.reverse() : list).map(item => (
+              {(isReverse ? list.reverse() : list).map((item) => (
                 <li styleName={+pid === +item.episode ? 'active' : ''} key={item.episode}>
                   <Link to={`/play/${id}/${item.episode}`}>{firstNumber(item.title)}</Link>
                 </li>

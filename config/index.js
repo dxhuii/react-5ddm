@@ -14,7 +14,7 @@
  * AUTH_COOKIE_NAME 登录 cookie 名称
  * COOKIE_PREFIX cookie 前缀
  * CLASS_SCOPED_NAME css-modules 规则 https://github.com/css-modules/css-modules
- * PUBLIC_PATH 前端打包后，静态资源路径前缀 生成效果如：//dev.99496.com/app.bundle.js
+ * PUBLIC_PATH 前端打包后，静态资源路径前缀 生成效果如：//www.5ddm.com/app.bundle.js
  * HEAD 添加内容到模版的head中
  * BAIDU_STAT 百度统计
  * CNZZ_STAT CNZZ统计
@@ -24,7 +24,7 @@
  * WW 文网文
  */
 
-const DOMAIN_NAME = '5ddm.com'
+const DOMAIN_NAME = ''
 
 const conf = {
   debug: false,
@@ -34,60 +34,14 @@ const conf = {
   HEAD: `<meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
-    <script src="//i.99496.com/static/devtools-detector.js"></script>
-  `
-}
-const defalut = {
-  API: 'https://api.99496.com/',
-  ISPLAY: false,
-  ISAD: true,
-  NAME: '99496动漫(9站)',
-  DESCRIBE: '99496动漫(9站) - 小而美的动漫网站',
-  KEYWORDS: '9站, 99496动漫',
-  DESCRIPTION: '99496动漫(9站)致力于为所有动漫迷们免费提供最新最快的高清动画下载及在线观看资源索引。',
-  DOMAIN: 'https://dev.99496.com',
-  DOMAIN_NAME: '99496.com',
-  PORT: 6666,
-  COOKIE_PREFIX: 'plain_',
-  PUBLIC_PATH: '//dev.99496.com',
-  BAIDU_STAT: 'b3c1facee308e3a3450dc7f836101938',
-  CNZZ_STAT: '5862511',
-  GA: 'UA-63362690-1',
-  EMAIL: 'dxhuii@qq.com',
-  ICP: '沪ICP备16032125号-1',
-  WW: '沪网文(2017)1295-032号',
-  BEIAN: true
-}
-/**
- * dddm.tv
- */
-const dddm = {
-  API: 'https://api.99496.com/',
-  ISPLAY: false,
-  ISAD: true,
-  NAME: '丁丁动漫',
-  DESCRIBE: '丁丁动漫_一个可以在线看的动漫网站',
-  KEYWORDS: '丁丁动漫',
-  DESCRIPTION: '丁丁动漫致力于为所有动漫迷们免费提供最新最快的高清动画下载及在线观看资源索引。',
-  DOMAIN: 'https://www.dddm.tv',
-  DOMAIN_NAME: 'dddm.tv',
-  PORT: 6667,
-  COOKIE_PREFIX: 'dddm_',
-  PUBLIC_PATH: '//www.dddm.tv',
-  BAIDU_STAT: 'aee66555ebcf1b95945961320239ae30',
-  CNZZ_STAT: '1274947867',
-  GA: 'UA-7957076-9',
-  EMAIL: 'dddmtv@outlook.com',
-  ICP: '',
-  WW: '',
-  BEIAN: false
+  `,
 }
 /**
  * 5ddm.com
  *
  */
-const ddm = {
-  API: 'https://api.99496.com/',
+const defalut = {
+  API: 'https://www.5ddm.com/home.php/',
   ISPLAY: false,
   ISAD: true,
   NAME: '5D动漫(5站)',
@@ -96,7 +50,7 @@ const ddm = {
   DESCRIPTION: '5D动漫(5站)致力于为所有动漫迷们免费提供最新最快的高清动画下载及在线观看资源索引。',
   DOMAIN: 'https://www.5ddm.com',
   DOMAIN_NAME: '5ddm.com',
-  PORT: 6668,
+  PORT: 6666,
   COOKIE_PREFIX: 'ddm_',
   PUBLIC_PATH: '//www.5ddm.com',
   BAIDU_STAT: '9449f42e45055b4f70ad84574c4c65c8',
@@ -105,7 +59,7 @@ const ddm = {
   EMAIL: 'ddm_com@outlook.com',
   ICP: '',
   WW: '',
-  BEIAN: false
+  BEIAN: false,
 }
 
 /**
@@ -113,7 +67,7 @@ const ddm = {
  *
  */
 const kanfan = {
-  API: 'https://api.99496.com/',
+  API: 'https://www.5ddm.com/home.php/',
   ISPLAY: true,
   ISAD: false,
   NAME: '看番',
@@ -131,18 +85,12 @@ const kanfan = {
   EMAIL: 'kanfan_net@outlook.com',
   ICP: '',
   WW: '',
-  BEIAN: false
+  BEIAN: false,
 }
 
 let config = {},
   ico = ''
-if (DOMAIN_NAME === 'dddm.tv') {
-  config = Object.assign({}, conf, dddm)
-  ico = 'dd_'
-} else if (DOMAIN_NAME === '5ddm.com') {
-  config = Object.assign({}, conf, ddm)
-  ico = '5d_'
-} else if (DOMAIN_NAME === 'kanfan.net') {
+if (DOMAIN_NAME === 'kanfan.net') {
   config = Object.assign({}, conf, kanfan)
   ico = 'kanfan_'
 } else {

@@ -31,11 +31,11 @@ export default function() {
   const [type, Login] = useState('signIn')
 
   const store = useStore()
-  const me = useSelector(state => getUserInfo(state))
+  const me = useSelector((state) => getUserInfo(state))
 
   const {
     match: { url = '', params = {} },
-    history
+    history,
   } = useReactRouter()
 
   const onSignOut = async () => {
@@ -57,7 +57,7 @@ export default function() {
     }
   })
 
-  const onChange = e => {
+  const onChange = (e) => {
     clearTimeout(timer)
     const wd = trim(e.target.value)
     timer = setTimeout(function() {
@@ -74,12 +74,12 @@ export default function() {
     onHide(true)
   }
 
-  const onType = isSign => {
+  const onType = (isSign) => {
     Login(isSign)
     onModal(true)
   }
 
-  const onPressEnter = e => {
+  const onPressEnter = (e) => {
     if (e.which === 13 && wd) {
       history.push(`/search/${wd}`)
     }
@@ -106,33 +106,33 @@ export default function() {
   }
 
   const { userid, nickname } = me
-  const logo = `header-logo ${DOMAIN_NAME === 'dddm.tv' ? 'dddm' : DOMAIN_NAME === '5ddm.com' ? 'ddm' : DOMAIN_NAME === 'kanfan.net' ? 'kanfan' : ''}`
+  const logo = `header-logo ${DOMAIN_NAME === 'kanfan.net' ? 'kanfan' : ''}`
   const isNot = !(url === '/' || /dongman|subject|play|search|type/.test(url))
   return (
     <Fragment>
       <header>
-        <NavLink styleName={logo} exact to="/" title={NAME} />
+        <NavLink styleName={logo} exact to='/' title={NAME} />
         <nav styleName={showMenu ? 'show' : ''}>
-          <div styleName="header-nav">
-            <NavLink styleName={url === '/' ? 'active' : ''} exact to="/">
+          <div styleName='header-nav'>
+            <NavLink styleName={url === '/' ? 'active' : ''} exact to='/'>
               首页
             </NavLink>
-            <NavLink styleName={/dongman|subject|play|week|type|search/.test(url) ? 'active' : ''} exact to="/dongman">
+            <NavLink styleName={/dongman|subject|play|week|type|search/.test(url) ? 'active' : ''} exact to='/dongman'>
               动漫
             </NavLink>
-            <NavLink styleName={/news|article/.test(url) ? 'active' : ''} exact to="/news">
+            <NavLink styleName={/news|article/.test(url) ? 'active' : ''} exact to='/news'>
               新闻
             </NavLink>
-            <NavLink styleName={/ep/.test(url) ? 'active' : ''} exact to="/ep">
+            <NavLink styleName={/ep/.test(url) ? 'active' : ''} exact to='/ep'>
               剧情
             </NavLink>
-            <NavLink styleName={/game/.test(url) ? 'active' : ''} exact to="/game">
+            <NavLink styleName={/game/.test(url) ? 'active' : ''} exact to='/game'>
               游戏
             </NavLink>
-            <NavLink styleName={/top/.test(url) ? 'active' : ''} exact to="/top">
+            <NavLink styleName={/top/.test(url) ? 'active' : ''} exact to='/top'>
               排行榜
             </NavLink>
-            <NavLink styleName={url === '/new' ? 'active' : ''} exact to="/new">
+            <NavLink styleName={url === '/new' ? 'active' : ''} exact to='/new'>
               最近更新
             </NavLink>
             <NavLink styleName={/month/.test(url) ? 'active' : ''} exact to={`/month/${getCurMonth()}`}>
@@ -141,14 +141,14 @@ export default function() {
           </div>
         </nav>
         <div styleName={`header-search ${showSearch ? 'show' : ''}`}>
-          <input required type="search" placeholder={params.wd || '片名、导演、声优、原作...'} onChange={onChange} onBlur={onBlur} onFocus={onFocus} onKeyPress={onPressEnter} />
+          <input required type='search' placeholder={params.wd || '片名、导演、声优、原作...'} onChange={onChange} onBlur={onBlur} onFocus={onFocus} onKeyPress={onPressEnter} />
           <button disabled={!wd} onClick={onSubmit}>
-            <i className="iconfont">&#xe78d;</i>
+            <i className='iconfont'>&#xe78d;</i>
           </button>
           {isHide ? <SearchAuto wd={wd} /> : null}
         </div>
-        <div styleName="header-tool" className="tar">
-          <a onClick={() => onSearch(!showSearch)} styleName="on-search">
+        <div styleName='header-tool' className='tar'>
+          <a onClick={() => onSearch(!showSearch)} styleName='on-search'>
             搜索
           </a>
           <a onClick={() => onPlaylog(!showLog)}>记录</a>
@@ -161,14 +161,14 @@ export default function() {
               <a onClick={() => onType('signUp')}>注册</a>
             </Fragment>
           )}
-          <a onClick={() => onMenu(!showMenu)} styleName="on-menu">
+          <a onClick={() => onMenu(!showMenu)} styleName='on-menu'>
             菜单
           </a>
         </div>
         <PlayLog userid={userid} pid={params.pid} isShow={showLog} />
       </header>
       <Modal visible={visible} showModal={() => onModal(true)} closeModal={() => onModal(false)}>
-        <Sign isSign={type} onType={val => onType(val)} visible={visible} />
+        <Sign isSign={type} onType={(val) => onType(val)} visible={visible} />
       </Modal>
       {isNot ? <Ads id={7} /> : null}
     </Fragment>

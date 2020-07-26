@@ -4,26 +4,24 @@ import { DOMAIN, ISPLAY } from 'Config'
 const playUrl = '//s.99496.com/api/p.php?type='
 const playH = '100%'
 
-const iframe = url => {
+const iframe = (url) => {
   return `<iframe src="${url}" width="100%" height="${playH}" frameborder="0" scrolling=no  allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" id="ckplayer"></iframe>`
 }
 
-const HTML = (pv, copyright, path) => {
-  const isJump = /zb|vip/.test(copyright)
-  const url = isJump ? `<a target="_blank" class="jump" href="https://www.kanfan.net${path}">或者点这里试一下</a>` : ''
+const HTML = (pv) => {
   const tipsTxt = pv === '/' ? '资源失效，返回首页' : '亲，请点我播放'
-  return `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">${tipsTxt}</a>${url}<p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
+  return `<div class="explaywrap" style="height:${playH};"><a target="_blank" href="${pv}">${tipsTxt}</a><p>该视频需要跳转播放<br>请点击上⾯的按钮哦</p></div>`
 }
 
-const flash = url => {
+const flash = (url) => {
   return `<embed src="${url}" width="100%" height="${playH}" bgcolor="#000000" quality="high" allowfullscreen="true" allowscriptaccess="always" id="ckplayer">`
 }
 
-const ykIf = data => {
+const ykIf = (data) => {
   return '//player.youku.com/embed/' + data + '?client_id=08fa721d0f5abf37'
 }
 
-const tudou = pv => {
+const tudou = (pv) => {
   const data = pv.split(',')
   const len = data.length
   if (len === 1) {
@@ -34,38 +32,38 @@ const tudou = pv => {
     youku(data[2])
   }
 }
-const youku = pv => {
+const youku = (pv) => {
   const data = pv.split(',')
   return ykIf(data.length === 3 ? data[2] : pv)
 }
-const iqiyi = pv => {
+const iqiyi = (pv) => {
   const plus = isMobile() ? '&tvid=' : '&tvId='
   const data = pv.split(/,|&tvid=|_/)
   const vid = /,|_/.test(pv) ? data[1] + plus + data[0] : data[0] + plus + data[1]
   const url = [
     `//open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=${vid}&accessToken=2.f22860a2479ad60d8da7697274de9346&appKey=3955c3425820435e86d0f4cdfe56f5e7&appId=1368&height=100%&width=100%`,
-    `https://www.iqiyi.com/common/flashplayer/20181107/1549af8f6df.swf?menu=false&autoplay=true&cid=qc_100001_100100&flashP2PCoreUrl=http://www.iqiyi.com/common/flashplayer/20170406/15562a1b82aa.swf&=undefined&&definitionID=${vid}&isPurchase=0&cnId=4&coop=ugc_openapi_wanyouwang&cid=qc_100001_300089&bd=1&autoChainPlay=1&showRecommend=0&source=&purl=&autoplay=true`
+    `https://www.iqiyi.com/common/flashplayer/20181107/1549af8f6df.swf?menu=false&autoplay=true&cid=qc_100001_100100&flashP2PCoreUrl=http://www.iqiyi.com/common/flashplayer/20170406/15562a1b82aa.swf&=undefined&&definitionID=${vid}&isPurchase=0&cnId=4&coop=ugc_openapi_wanyouwang&cid=qc_100001_300089&bd=1&autoChainPlay=1&showRecommend=0&source=&purl=&autoplay=true`,
   ]
   return isMobile() ? `https://m.iqiyi.com/shareplay.html?vid=${vid}&coop=coop_117_9949&cid=qc_105102_300452&bd=1&autoplay=1&fullscreen=1` : url
 }
-const letv = pv => {
+const letv = (pv) => {
   const data = pv.split(',')
   return data.length === 2 ? '/' : 'https://www.le.com/ptv/vplay/' + data[0] + '.html'
 }
-const sohu = pv => {
+const sohu = (pv) => {
   return 'https://tv.sohu.com/upload/static/share/share_play.html#' + pv.split('_')[0] + (isMobile() ? '' : '_9468532_0_9001_0')
 }
-const pptv = pv => {
+const pptv = (pv) => {
   return 'https://' + (isMobile() ? 'm' : 'www') + '.pptv.com/show/' + pv.split(',')[0] + '.html'
 }
-const qq = pv => {
+const qq = (pv) => {
   return 'https://v.qq.com/iframe/player.html?vid=' + pv + '&tiny=0&auto=1'
 }
-const bilibili = pv => {
+const bilibili = (pv) => {
   const data = pv.split(',')
   return pv.indexOf('http') !== -1 ? pv : data.length === 2 ? 'https://www.bilibili.com/video/av' + data[0] + '/?p=' + data[1] : 'https://www.bilibili.com/video/av' + pv + '/'
 }
-const acfun = pv => {
+const acfun = (pv) => {
   let vid = ''
   if (pv.indexOf('ab') !== -1) {
     const data = pv.split('ab')
@@ -171,36 +169,26 @@ const jump = (name, pv, copyright, path, area) => {
     : iframe(url)
 }
 
-const isPlay = (name, vid, danmu, copyright, path, area) => {
+const isPlay = (name, vid) => {
   let url = ''
-  let isFlvsp = false
-  if (/sina|weibo|miaopai|bit|letvyun|pmbit|bithls|bitqiu|letvsaas|acku|yunpan|s360|ksyun/.test(name)) {
-    url = HTML('/', copyright, path)
+  if (/sina|weibo|miaopai|bit|letvyun|pmbit|bithls|bitqiu|letvsaas|acku|yunpan|s360|ksyun|360|qqq/.test(name)) {
+    url = HTML('/')
   } else if (/ikanfan|acgnz/.test(vid)) {
-    url = HTML(vid.split('=')[1].split('&')[0], copyright, path)
+    url = HTML(vid.split('=')[1].split('&')[0])
   } else if (/.mp4|.m3u8/.test(vid)) {
-    url = jiexiUrl(`${playUrl}${/.mp4/.test(vid) ? 'mp4' : 'm3u8'}&domain=${DOMAIN}&id=${vid}`, danmu)
-  } else if (/360|qqq/.test(name)) {
-    url = jiexiUrl(ck(name, vid), danmu)
+    url = HTML('/')
   } else if (/.html|.shtml|.htm|https:\/\/|http:\/\//.test(vid) || name === 'full') {
-    url = HTML(vid, copyright, path)
+    url = HTML(vid)
   } else if (/bilibili|acfun|youku|tudou|iqiyi|pptv|letv|qq|sohu|viqiyi/.test(name)) {
     if (/bilibili|acfun|youku|tudou|iqiyi/.test(name)) {
-      if ((isMobile() && name === 'iqiyi') || name === 'youku') {
-        url = jiexiUrl(ck(name, vid), danmu)
-      } else {
-        url = jump(name, vid, copyright, path, area)
-      }
-    } else if (!/vip|zb/.test(copyright)) {
-      url = jiexiUrl(rePlayUrl(name, vid), danmu)
-      isFlvsp = true
+      url = jump(name, vid)
     } else {
-      url = HTML(vid, copyright, path)
+      url = HTML(vid)
     }
   } else {
-    url = HTML(vid, copyright, path)
+    url = HTML(vid)
   }
-  return [url, isFlvsp]
+  return url
 }
 
 export default ({ name, vid, danmu, copyright, url, area }) => {

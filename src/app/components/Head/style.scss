@@ -41,31 +41,14 @@ header {
 }
 
 .header-logo {
-  width: 150px;
+  width: 120px;
   line-height: 56px;
-  flex-basis: 150px;
-  background: url(../../static/img/logo.png) no-repeat;
-  background-size: 150px auto;
-  background-position: 0 4px;
+  flex-basis: 120px;
+  background: url(../../static/img/5d.svg) no-repeat;
+  background-size: 110px auto;
+  background-position: 0 15px;
   margin-left: 10px;
   position: relative;
-
-  &.dddm {
-    width: 130px;
-    flex-basis: 130px;
-    background-image: url(../../static/img/dd.svg);
-    background-size: 120px auto;
-    background-position: 0 10px;
-  }
-
-  /*5ddm*/
-  &.ddm {
-    width: 120px;
-    flex-basis: 120px;
-    background-image: url(../../static/img/5d.svg);
-    background-size: 110px auto;
-    background-position: 0 15px;
-  }
 
   &.kanfan {
     background: no-repeat;

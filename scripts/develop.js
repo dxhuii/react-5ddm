@@ -12,36 +12,35 @@ const config = require('../config')
 
 const compilerPromise = (compiler) => {
   return new Promise((resolve, reject) => {
+    // console.log(compiler)
     compiler.plugin('done', (stats) => {
       if (!stats.hasErrors()) {
         return resolve()
       }
       return reject('Compilation failed')
     })
-  }).catch(function (reason) {
-    console.log('errcatch:', reason)
   })
 }
 
 const app = express()
-const WEBPACK_PORT = config.PORT + 1
+const WEBPACK_PORT = config.port + 1
 
 const start = async () => {
   rimraf.sync('./dist')
 
-  let publicPath = config.domainName.split(':')
+  let public_path = config.domainName.split(':')
 
-  publicPath.pop()
+  public_path.pop()
 
-  publicPath = publicPath.join(':')
+  public_path = public_path.join(':')
 
-  clientConfig.entry.app.unshift(`webpack-hot-middleware/client?path=${publicPath}:${WEBPACK_PORT}/__webpack_hmr`)
+  clientConfig.entry.app.unshift(`webpack-hot-middleware/client?path=${public_path}:${WEBPACK_PORT}/__webpack_hmr`)
 
   clientConfig.output.hotUpdateMainFilename = `[hash].hot-update.json`
   clientConfig.output.hotUpdateChunkFilename = `[id].[hash].hot-update.js`
 
-  clientConfig.output.publicPath = `${publicPath}:${WEBPACK_PORT}/`
-  serverConfig.output.publicPath = `${publicPath}:${WEBPACK_PORT}/`
+  clientConfig.output.publicPath = `${public_path}:${WEBPACK_PORT}/`
+  serverConfig.output.publicPath = `${public_path}:${WEBPACK_PORT}/`
 
   const clientCompiler = webpack([clientConfig, serverConfig])
 
@@ -78,11 +77,6 @@ const start = async () => {
     if (error) {
       console.log(error, '-------error-------')
     }
-  })
-
-  process.on('unhandledRejection', (reason, p) => {
-    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason)
-    // application specific logging, throwing an error, or other logic here
   })
 
   await serverPromise

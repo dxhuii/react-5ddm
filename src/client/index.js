@@ -32,7 +32,7 @@ if (!debug) {
   }
 }
 
-(async function() {
+;(async function() {
   // 从页面中获取服务端生产redux数据，作为客户端redux初始值
   const store = configureStore(window.__initState__)
   let userinfo = getUserInfo(store.getState())
@@ -41,17 +41,9 @@ if (!debug) {
   const { href, pathname } = window.location
   if (GA) {
     ReactGA.initialize(GA, { debug })
-    enterEvent = userinfo => {
+    enterEvent = (userinfo) => {
       let option = { page: pathname, userId: userinfo && userinfo._id ? userinfo._id : null }
       if (!debug) {
-        if (href.indexOf('/play/') !== -1 && document.cookie.indexOf('plain') === -1) {
-          devtoolsDetector.addListener(function(isOpen, detail) {
-            if (isOpen) {
-              window.location.href = DOMAIN
-            }
-          })
-          devtoolsDetector.lanuch()
-        }
         ReactGA.set(option)
         ReactGA.pageview(pathname)
         window._hmt && window._hmt.push(['_trackPageview', pathname])
@@ -66,7 +58,7 @@ if (!debug) {
 
   let _route = null
 
-  router.list.some(route => {
+  router.list.some((route) => {
     let match = matchPath(pathname, route)
     if (match && match.path) {
       _route = route
