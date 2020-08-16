@@ -29,7 +29,7 @@ const WEBPACK_PORT = config.PORT + 1
 const start = async () => {
   rimraf.sync('./dist')
 
-  let publicPath = config.domainName.split(':')
+  let publicPath = config.PUBLIC_PATH.split(':')
 
   publicPath.pop()
 

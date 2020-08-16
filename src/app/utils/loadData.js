@@ -39,7 +39,7 @@ export default ({ dispatch, getState, reducerName, actionType, api, name = '', p
       method,
       url,
       data: isPage ? Object.assign({}, params, { s: url.split('=')[1], p: list.page }) : params,
-      headers: header ? { Authorization: localStorage.getItem('token') ? localStorage.getItem('token') : 0 } : {}
+      headers: header ? { Authorization: localStorage.getItem('token') ? localStorage.getItem('token') : 0 } : {},
     })
 
     if (err) {
@@ -49,7 +49,7 @@ export default ({ dispatch, getState, reducerName, actionType, api, name = '', p
       return
     }
 
-    list.data = isPage && list.page !== 1 ? list.data.concat(data.data) : data.data || {}
+    list.data = isPage && list.page !== 1 ? list.data.concat(data.data) : data.data || []
     list.params = params
     list.loading = false
 
