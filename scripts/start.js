@@ -16,6 +16,7 @@ const compilerPromise = (compiler) => {
       if (!stats.hasErrors()) {
         return resolve()
       }
+      // eslint-disable-next-line prefer-promise-reject-errors
       return reject('Compilation failed')
     })
   }).catch(function (reason) {
@@ -58,7 +59,7 @@ const start = async () => {
 
   app.use(
     webpackDevMiddleware(_clientCompiler, {
-      publicPath: clientConfig.output.publicPath,
+      publicPath: clientConfig.output.publicPath
     })
   )
 
@@ -90,7 +91,7 @@ const start = async () => {
 
   const script = nodemon({
     script: `./dist/server/server.js`,
-    ignore: ['src', 'scripts', 'config', './*.*', 'build/client'],
+    ignore: ['src', 'scripts', 'config', './*.*', 'build/client']
   })
 
   script.on('restart', () => {

@@ -10,9 +10,10 @@
   "editor.formatOnSave": true,
   "prettier.disableLanguages": ["react"],
   "prettier.stylelintIntegration": true,
-  "prettier.printWidth": 180,
+  "prettier.printWidth": 140,
   "prettier.singleQuote": true,
   "prettier.semi": false,
+  "prettier.trailingComma": "es5",
   "eslint.options": {
     "extensions": [".js", ".jsx"],
     "plugins": ["html"]
@@ -20,7 +21,16 @@
   "files.associations": {
     "*.js": "javascript"
   },
+  "javascript.validate.enable": false,
   "emmet.triggerExpansionOnTab": true,
-  "eslint.autoFixOnSave": true,
-  "javascript.suggestionActions.enabled": false
+  "javascript.suggestionActions.enabled": false,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    // For ESLint
+    "source.fixAll.eslint": true,
+    // For TSLint
+    "source.fixAll.tslint": true,
+    // For Stylelint
+    "source.fixAll.stylelint": true
+  }
 }

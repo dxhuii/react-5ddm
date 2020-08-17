@@ -7,7 +7,7 @@ import { DOMAIN_NAME } from 'Config'
 
 import './style.scss'
 
-export default function Sign({ isSign, onType, visible }) {
+export default function Sign ({ isSign, onType, visible }) {
   const setType = (e, isSign) => {
     e.stopPropagation()
     onType(isSign)

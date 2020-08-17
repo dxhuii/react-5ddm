@@ -7,7 +7,7 @@ import { useStore, useSelector } from 'react-redux'
 import { signOut } from '@/store/actions/user'
 import { getUserInfo } from '@/store/reducers/user'
 
-//组件
+// 组件
 import SearchAuto from '@/components/SearchAuto'
 import PlayLog from '@/components/PlayLog'
 import Modal from '@/components/Modal'
@@ -19,7 +19,7 @@ import { DOMAIN_NAME, NAME } from 'Config'
 
 import './style.scss'
 
-export default function() {
+export default function () {
   let timer = null
   let timerBlur = null
   const [isHide, onHide] = useState(false)
@@ -35,12 +35,12 @@ export default function() {
 
   const {
     match: { url = '', params = {} },
-    history,
+    history
   } = useReactRouter()
 
   const onSignOut = async () => {
     const _signOut = () => signOut()(store.dispatch, store.getState)
-    let [, success] = await _signOut()
+    const [, success] = await _signOut()
     if (success) {
       // 退出成功
       localStorage.removeItem('userid')
@@ -60,7 +60,7 @@ export default function() {
   const onChange = (e) => {
     clearTimeout(timer)
     const wd = trim(e.target.value)
-    timer = setTimeout(function() {
+    timer = setTimeout(function () {
       changeSearch(wd)
       onHide(true)
     }, 300)

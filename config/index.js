@@ -34,7 +34,7 @@ const conf = {
   HEAD: `<meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
-  `,
+  `
 }
 /**
  * 5ddm.com
@@ -59,7 +59,7 @@ const defalut = {
   EMAIL: 'ddm_com@outlook.com',
   ICP: '',
   WW: '',
-  BEIAN: false,
+  BEIAN: false
 }
 
 /**
@@ -85,11 +85,11 @@ const kanfan = {
   EMAIL: 'kanfan_net@outlook.com',
   ICP: '',
   WW: '',
-  BEIAN: false,
+  BEIAN: false
 }
 
-let config = {},
-  ico = ''
+let config = {}
+let ico = ''
 if (DOMAIN_NAME === 'kanfan.net') {
   config = Object.assign({}, conf, kanfan)
   ico = 'kanfan_'
@@ -100,7 +100,7 @@ if (DOMAIN_NAME === 'kanfan.net') {
 config.HEAD += `<link rel="icon" href="/${ico}favicon.ico" />`
 
 // 开发环境配置
-if (process.env.NODE_ENV == 'development') {
+if (process.env.NODE_ENV === 'development') {
   config.debug = true
   config.PORT = 4000
   config.CLASS_SCOPED_NAME = '[name]_[local]__[hash:base64:5]'

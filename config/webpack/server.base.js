@@ -2,9 +2,11 @@ const webpack = require('webpack')
 const path = require('path')
 const chalk = require('chalk')
 const nodeExternals = require('webpack-node-externals')
-const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const WebpackBar = require('webpackbar')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const config = require('../index')
+const devMode = process.env.NODE_ENV === 'development'
 
 module.exports = {
   name: 'server',
@@ -14,37 +16,52 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {
       '@': path.resolve('src/app'),
-      Config: path.resolve('config/index'),
-    },
+      Config: path.resolve('config/index')
+    }
   },
 
   entry: {
     app: [
       // '@babel/polyfill',
-      './src/server/index',
-    ],
+      './src/server/index'
+    ]
   },
 
   externals: [
     nodeExternals({
       // we still want imported css from external files to be bundled otherwise 3rd party packages
       // which require us to include their own css would not work properly
-      allowlist: /\.css$/,
-    }),
+      allowlist: /\.css$/
+    })
   ],
 
   output: {
     path: path.resolve(__dirname, '../../dist/server'),
     filename: 'server.js',
-    publicPath: config.PUBLIC_PATH + '/',
+    publicPath: config.PUBLIC_PATH + '/'
   },
 
   resolveLoader: {
-    moduleExtensions: ['-loader'],
+    moduleExtensions: ['-loader']
   },
 
   optimization: {
-    minimize: true, //devMode ? false : true
+    minimize: !devMode,
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true,
+        terserOptions: {
+          compress: {
+            // 关键代码
+            warnings: true,
+            drop_debugger: true,
+            drop_console: true
+          }
+        }
+      })
+    ]
   },
 
   module: {
@@ -53,7 +70,7 @@ module.exports = {
       {
         test: /\.js$/i,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel'
       },
 
       // scss 文件解析
@@ -64,13 +81,13 @@ module.exports = {
             loader: `css`,
             options: {
               modules: {
-                localIdentName: config.CLASS_SCOPED_NAME,
+                localIdentName: config.CLASS_SCOPED_NAME
               },
-              onlyLocals: true, // 只映射，不打包CSS
-            },
+              onlyLocals: true // 只映射，不打包CSS
+            }
           },
-          { loader: `sass` },
-        ],
+          { loader: `sass` }
+        ]
       },
 
       // css 解析
@@ -80,23 +97,19 @@ module.exports = {
           {
             loader: `css`,
             options: {
-              onlyLocals: true, // 只映射，不打包CSS
-            },
-          },
-        ],
-      },
-    ],
+              onlyLocals: true // 只映射，不打包CSS
+            }
+          }
+        ]
+      }
+    ]
   },
 
   plugins: [
     new webpack.DefinePlugin({
       __SERVER__: 'true',
-      __CLIENT__: 'false',
+      __CLIENT__: 'false'
     }),
-
-    new ProgressBarPlugin({
-      format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
-      clear: false,
-    }),
-  ],
+    new WebpackBar()
+  ]
 }

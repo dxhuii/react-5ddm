@@ -2,9 +2,10 @@ import config from '@/utils/config'
 import Ajax from '@/common/ajax'
 
 export default ({ dispatch, getState, reducerName, actionType, api, name = '', params = {}, isPage = false, header = false, method = 'get', callback = () => {} }) => {
+  // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve, reject) => {
-    let state = getState(),
-      list = state[reducerName][name] || {}
+    const state = getState()
+    const list = state[reducerName][name] || {}
     if (list.loading) {
       resolve(['loading...'])
       return
@@ -35,11 +36,11 @@ export default ({ dispatch, getState, reducerName, actionType, api, name = '', p
 
     const url = config.api[api]
 
-    let [err, data] = await Ajax({
+    const [err, data] = await Ajax({
       method,
       url,
       data: isPage ? Object.assign({}, params, { s: url.split('=')[1], p: list.page }) : params,
-      headers: header ? { Authorization: localStorage.getItem('token') ? localStorage.getItem('token') : 0 } : {},
+      headers: header ? { Authorization: localStorage.getItem('token') ? localStorage.getItem('token') : 0 } : {}
     })
 
     if (err) {

@@ -83,8 +83,8 @@
     "progress-bar-webpack-plugin": "^2.1.0",
     "rimraf": "^3.0.2",
     "sass-loader": "^9.0.2",
+    "terser-webpack-plugin": "^4.1.0",
     "typescript": "^3.9.7",
-    "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.1.0",
     "webpack": "^4.44.0",
     "webpack-bundle-analyzer": "^3.8.0",
@@ -92,7 +92,7 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-node-externals": "^2.5.0",
-    "webpack-parallel-uglify-plugin": "^1.1.2",
+    "webpackbar": "^4.0.0",
     "write-file-webpack-plugin": "^4.5.1"
   },
   "browserslist": [
