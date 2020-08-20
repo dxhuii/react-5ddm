@@ -32,10 +32,10 @@ export default class Main extends Component {
           progress={(data, index) => this.progress(data, index)}
           fileNum={data => this.setState({ file: data })}
         />
-        <ul styleName="img-list">
+        <ul styleName='img-list'>
           {file.length > 0
             ? file.map(item => (
-                <div key={item} styleName="progress" style={{ width: `${this.state[`progress_${item}`]}%` }}>
+                <div key={item} styleName='progress' style={{ width: `${this.state[`progress_${item}`]}%` }}>
                   {this.state[`progress_${item}`]}
                 </div>
               ))

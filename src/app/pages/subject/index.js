@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import useReactRouter from 'use-react-router'
 
@@ -45,38 +45,40 @@ export default Shell(() => {
   const [visible, onModal] = useState(false)
   const [isSign, onSign] = useState('signIn')
   const [loveData, setLove] = useState({})
+  const upDiv = useRef()
+  const downDiv = useRef()
   const menu = {
     201: 'tv',
     202: 'ova',
     203: 'juchang',
     4: 'tebie',
     204: 'zhenren',
-    35: 'qita',
+    35: 'qita'
   }
 
   const {
     location,
     match: {
-      params: { id, sid = 1 },
-    },
+      params: { id, sid = 1 }
+    }
   } = useReactRouter()
 
   const store = useStore()
-  const me = useSelector((state) => getUserInfo(state))
-  const info = useSelector((state) => getDetail(state, id))
-  const commentData = useSelector((state) => getComment(state, `${sid}_${id}`))
-  const loveD = useSelector((state) => getDetail(state, `love_${id}`))
-  const _comment = useCallback((args) => comment(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
-  const _love = useCallback((args) => love(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
-  const playData = useSelector((state) => getPlayList(state, id))
+  const me = useSelector(state => getUserInfo(state))
+  const info = useSelector(state => getDetail(state, id))
+  const commentData = useSelector(state => getComment(state, `${sid}_${id}`))
+  const loveD = useSelector(state => getDetail(state, `love_${id}`))
+  const _comment = useCallback(args => comment(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
+  const _love = useCallback(args => love(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
+  const playData = useSelector(state => getPlayList(state, id))
 
   const { userid, nickname } = me
   const { data = {}, loading } = info
   const { key, list = [] } = playData.data || {}
 
   useEffect(() => {
-    const getData = (args) => detail(args)(store.dispatch, store.getState)
-    const getPlayData = (args) => playlist(args)(store.dispatch, store.getState)
+    const getData = args => detail(args)(store.dispatch, store.getState)
+    const getPlayData = args => playlist(args)(store.dispatch, store.getState)
     if (!(playData && playData.data)) {
       getPlayData({ id })
     }
@@ -87,18 +89,18 @@ export default Shell(() => {
       _comment({ id, sid })
     }
     async function feachLove() {
-      let [, data] = await _love({ id, sid })
+      const [, data] = await _love({ id, sid })
       setLove(data.data || {})
     }
     if (!(loveD && loveD.data) && userid) feachLove()
-  }, [commentData, loveD, id, info, store.dispatch, store.getState, userid, sid, _love, _comment])
+  }, [commentData, loveD, id, info, store.dispatch, store.getState, userid, sid, _love, _comment, playData])
 
   const addMark = async (type, id, cid) => {
-    const onLike = (args) => mark(args)(store.dispatch, store.getState)
+    const onLike = args => mark(args)(store.dispatch, store.getState)
     if (userid) {
-      let [, data] = await onLike({ type, id, cid })
+      const [, data] = await onLike({ type, id, cid })
       if (data.code === 1) {
-        let [, res] = await _love({ id, sid })
+        const [, res] = await _love({ id, sid })
         setLove(res.data || {})
         Toast.success(data.msg)
       }
@@ -108,7 +110,7 @@ export default Shell(() => {
   }
 
   const onDigg = async (type, id) => {
-    const onDigg = (args) => digg(args)(store.dispatch, store.getState)
+    const onDigg = args => digg(args)(store.dispatch, store.getState)
     const [, res] = await onDigg({ type, id })
     if (res.code === 1) {
       if (type === 'up') {
@@ -122,7 +124,7 @@ export default Shell(() => {
     Toast.success(res.msg)
   }
 
-  const onType = (isSign) => {
+  const onType = isSign => {
     onSign(isSign)
     onModal(true)
   }
@@ -138,8 +140,8 @@ export default Shell(() => {
       Toast.error('评论内容不能为空')
       return
     }
-    const _addComment = (args) => addComment(args)(store.dispatch, store.getState)
-    let [, data] = await _addComment({ id, sid, content: content.value, nickname, pid: 0 })
+    const _addComment = args => addComment(args)(store.dispatch, store.getState)
+    const [, data] = await _addComment({ id, sid, content: content.value, nickname, pid: 0 })
     if (data.code === 1) {
       content.value = ''
       _comment({ id, sid })
@@ -148,7 +150,7 @@ export default Shell(() => {
 
   const playerList = (data = [], key, name) => {
     return data.map(({ title, vid }) => (
-      <a key={`${vid}`} href={`${playing(name, authcode(atob(vid), 'DECODE', key, 0))}`} target='_blank'>
+      <a key={`${vid}`} href={`${playing(name, authcode(atob(vid), 'DECODE', key, 0))}`} target='_blank' rel='noreferrer'>
         {title}
       </a>
     ))
@@ -184,15 +186,14 @@ export default Shell(() => {
     keywords,
     website,
     updateDate,
+    up,
+    down,
     jump,
     tvcont,
     status,
     year,
     storyId,
     actorId,
-    repairtitle,
-    pan,
-    vod_pantitle,
     pic = '',
     language = '',
     content = '',
@@ -201,9 +202,9 @@ export default Shell(() => {
     director = [],
     storylist = [],
     newsTextlist = [],
-    newsPiclist = [],
+    newsPiclist = []
   } = data
-  const reActor = actor ? actor.map((item) => item.title).join(',') : ''
+  const reActor = actor ? actor.map(item => item.title).join(',') : ''
   const rePic = formatPic(pic, 'orj360')
   const commitD = commentData.data || {}
   const commentList = commitD.list || []
@@ -214,7 +215,7 @@ export default Shell(() => {
     pic,
     title: `#${title}#${language ? `(${language})` : ''} - ${listName}${listNameBig} - #${NAME}# @99496动漫网`,
     desc: reContent,
-    url: `/subject/${id}`,
+    url: `/subject/${id}`
   }
   if (jump && !(typeof window === 'undefined')) {
     window.location.href = jump
@@ -224,17 +225,11 @@ export default Shell(() => {
   return (
     <>
       <div className='warp-bg'>
-        <Meta
-          title={`${title}全集在线观看${repairtitle && repairtitle !== '讨论帖' ? `_${repairtitle}` : ''}${
-            vod_pantitle || DOMAIN_NAME === 'dddm.tv' ? '_百度云盘下载' : ''
-          } - ${listName}${listNameBig}`}
-        >
+        <Meta title={`${title}全集在线观看 - ${listName}${listNameBig}`}>
           <meta name='description' content={`${title}动画全集由${reContent}`} />
           <meta
             name='keywords'
-            content={`${title},${title}动漫,${title}下载${
-              vod_pantitle ? `,${title}百度云盘下载` : ''
-            },${title}全集,${title}动画片,${title}在线观看${keywords ? `,${keywords}` : ''}`}
+            content={`${title},${title}动漫,${title}全集,${title}动画片,${title}在线观看${keywords ? `,${keywords}` : ''}`}
           />
           <meta property='og:locale' content='zh_CN' />
           <meta property='og:type' content='videolist' />
@@ -247,7 +242,7 @@ export default Shell(() => {
           <meta property='og:video:score' content={gold} />
           <meta property='og:video:actor' content={reActor} />
           <meta property='og:video:area' content={area} />
-          <meta property='og:video:class' content={`${listName}${mcid.length > 0 ? mcid.map((item) => item.title).join(',') : ''}`} />
+          <meta property='og:video:class' content={`${listName}${mcid.length > 0 ? mcid.map(item => item.title).join(',') : ''}`} />
           <meta property='og:video:language' content={language} />
           <meta property='og:video:update_date' content={updateDate} />
           <meta property='og:video:content_type' content='6' />
@@ -262,7 +257,7 @@ export default Shell(() => {
                 <span>
                   <Link to={`/type/${menu[cid] || 'list'}/-/-/-/-/-/addtime/`}>{listName}</Link>
                   {mcid.length > 0
-                    ? mcid.map((item) =>
+                    ? mcid.map(item =>
                         item.title ? (
                           <Link key={item.id} to={`/type/${menu[cid] || 'list'}/${item.id}/-/-/-/-/addtime/`}>
                             {item.title}
@@ -424,7 +419,7 @@ export default Shell(() => {
             <div styleName='title'>
               <h2>STAFF</h2>
             </div>
-            {original.length > 0 ? <p>原作：{original.map((item) => item.title)}</p> : null}
+            {original.length > 0 ? <p>原作：{original.map(item => item.title)}</p> : null}
             {director.length > 0 ? (
               <p>
                 导演：
@@ -449,7 +444,7 @@ export default Shell(() => {
         </div>
       </div>
       <Modal visible={visible} showModal={() => onModal(true)} closeModal={() => onModal(false)}>
-        <Sign isSign={isSign} onType={(val) => onType(val)} visible={visible} />
+        <Sign isSign={isSign} onType={val => onType(val)} visible={visible} />
       </Modal>
     </>
   )

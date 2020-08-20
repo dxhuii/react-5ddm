@@ -14,16 +14,16 @@ import './style.scss'
 
 export default Shell(() => {
   const {
-    location: { search },
+    location: { search }
   } = useReactRouter()
   const store = useStore()
-  const day = useSelector((state) => getList(state, 'page-hits_day'))
-  const week = useSelector((state) => getList(state, 'page-hits_week'))
-  const month = useSelector((state) => getList(state, 'page-hits_month'))
-  const all = useSelector((state) => getList(state, 'page-hits'))
+  const day = useSelector(state => getList(state, 'page-hits_day'))
+  const week = useSelector(state => getList(state, 'page-hits_week'))
+  const month = useSelector(state => getList(state, 'page-hits_month'))
+  const all = useSelector(state => getList(state, 'page-hits'))
 
   useEffect(() => {
-    const getData = (args) => TopList(args)(store.dispatch, store.getState)
+    const getData = args => TopList(args)(store.dispatch, store.getState)
     if (!day.data) {
       getData({ order: 'hits_day' })
     }

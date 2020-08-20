@@ -9,7 +9,7 @@ export function playlist({ id }) {
       reducerName: 'playlist',
       actionType: 'GET_PLAY_LIST',
       api: 'playlist',
-      params: { id, react: 1 }
+      params: { id },
     })
   }
 }
