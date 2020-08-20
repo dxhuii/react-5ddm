@@ -27,15 +27,15 @@ export default Shell(() => {
   const {
     location,
     match: {
-      params: { id, p }
-    }
+      params: { id, p },
+    },
   } = useReactRouter()
 
   const store = useStore()
-  const info = useSelector(state => getEpisodeList(state, id + (p ? '-' + p : '')))
+  const info = useSelector((state) => getEpisodeList(state, id + (p ? '-' + p : '')))
 
   useEffect(() => {
-    const getData = args => episode(args)(store.dispatch, store.getState)
+    const getData = (args) => episode(args)(store.dispatch, store.getState)
     onMore(false)
     if (!info.data) {
       getData({ id, p })
@@ -48,7 +48,7 @@ export default Shell(() => {
       const link = <Link to={`/episode/${id}/${i}`}>{`${i}集`}</Link>
       list.push(
         +p === i ? (
-          <li key={i} styleName="active">
+          <li key={i} styleName='active'>
             {link}
           </li>
         ) : (
@@ -56,7 +56,7 @@ export default Shell(() => {
         )
       )
     }
-    return list.map(item => item)
+    return list.map((item) => item)
   }
 
   const { data = {}, loading } = info
@@ -65,27 +65,33 @@ export default Shell(() => {
   const shareTitle = ` - #${NAME}# @99496动漫网`
   const shareConfig = {
     pic,
-    title: !p ? `#${vTitle}#剧情(共${storyNum}集)_${vTitle}全集剧情${shareTitle}` : `#${vTitle}#${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情${shareTitle}`,
+    title: !p
+      ? `#${vTitle}#剧情(共${storyNum}集)_${vTitle}全集剧情${shareTitle}`
+      : `#${vTitle}#${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情${shareTitle}`,
     desc: content,
-    url: !p ? `/episode/${id}` : `/episode/${id}/${p}`
+    url: !p ? `/episode/${id}` : `/episode/${id}/${p}`,
   }
   const reName = !p ? '' : name
   if (loading || !data.vTitle) return <Loading />
   return (
-    <div className="wp mt20 clearfix">
-      <Meta title={`${!p ? `${vTitle}剧情(共${storyNum}集)_${vTitle}全集剧情` : `${vTitle}${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情`}`}>
-        <meta name="keywords" content={`${vTitle}剧情,${vTitle}${reName}剧情, ${vTitle}${reName}${title}剧情`} />
-        <meta name="description" content={`${vTitle}${reName}${title}剧情介绍：${!p ? vContent : content}`} />
+    <div className='wp mt20 clearfix'>
+      <Meta
+        title={`${
+          !p ? `${vTitle}剧情(共${storyNum}集)_${vTitle}全集剧情` : `${vTitle}${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情`
+        }`}
+      >
+        <meta name='keywords' content={`${vTitle}剧情,${vTitle}${reName}剧情, ${vTitle}${reName}${title}剧情`} />
+        <meta name='description' content={`${vTitle}${reName}${title}剧情介绍：${!p ? vContent : content}`} />
       </Meta>
-      <div className="fl left">
-        <article styleName="article-body">
+      <div className='fl left'>
+        <article styleName='article-body'>
           <h1>
             <Link to={`/subject/${vid}`}>{vTitle}</Link> {name} {title}
           </h1>
-          <div styleName="article-content" className="clearfix">
+          <div styleName='article-content' className='clearfix'>
             {((!p ? vContent : content) || '').replace('&nbsp; ', '').replace('&nbsp; ', '')}
           </div>
-          <div styleName="article-context">
+          <div styleName='article-context'>
             {!p && storyNum >= 1 ? (
               <Link to={`/episode/${id}/1`}>分集剧情</Link>
             ) : (
@@ -97,26 +103,23 @@ export default Shell(() => {
           </div>
           <TagShare tag={[vTitle]} config={shareConfig} location={location} />
         </article>
-        <div styleName="article-bottom">
-          <div className="mt20" styleName="article-ads">
-            <Ads id={11} />
-          </div>
-          <div className="mt10" styleName="ep-like">
-            <div styleName="title">
+        <div styleName='article-bottom'>
+          <div className='mt10' styleName='ep-like'>
+            <div styleName='title'>
               <h2>相关动漫</h2>
             </div>
             {vid ? <DetailActor actor={actor} not={vid} /> : null}
           </div>
-          <div className="mt10" styleName="ep-like">
-            <div styleName="title">
+          <div className='mt10' styleName='ep-like'>
+            <div styleName='title'>
               <h2>小伙伴还在看(=￣ω￣=)（一周热门）</h2>
             </div>
             <HotWeek not={vid} />
           </div>
         </div>
       </div>
-      <div className="fr right">
-        <div className="box">
+      <div className='fr right'>
+        <div className='box'>
           <Detail title={vTitle} pic={pic} gold={gold} vid={vid} year={year} status={status} mcid={mcid} pid={pid} />
           <ul styleName={`eplist ${more ? 'auto' : ''}`}>
             <li styleName={!p ? 'active' : ''}>
@@ -124,7 +127,7 @@ export default Shell(() => {
             </li>
             {showList(id, storyNum, p)}
           </ul>
-          <ul styleName="eplist">
+          <ul styleName='eplist'>
             {p > 19 ? (
               <li styleName={!p ? 'active' : ''}>
                 <Link to={`/episode/${id}/${p}`}>{p}集</Link>
@@ -137,11 +140,11 @@ export default Shell(() => {
               </li>
             ) : null}
           </ul>
-          <Link styleName="go-detail" to={`/subject/${vid}`}>
+          <Link styleName='go-detail' to={`/subject/${vid}`}>
             去 {vTitle}
           </Link>
         </div>
-        <div className="mt20">
+        <div className='mt20'>
           <SideBar />
         </div>
       </div>

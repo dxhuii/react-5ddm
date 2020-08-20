@@ -6,7 +6,6 @@ import Footer from '@/components/Footer'
 import Loading from '@/components/Ui/Loading'
 
 import HomeLoadData from '@/pages/home/load-data'
-import PlayLoadData from '@/pages/play/load-data'
 import SubjectLoadData from '@/pages/subject/load-data'
 import WeekData from '@/pages/week/load-data'
 import ListLoadData from '@/pages/list/load-data'
@@ -31,10 +30,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/home'),
-      loading
+      loading,
     }),
     loadData: HomeLoadData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -42,10 +41,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/week'),
-      loading
+      loading,
     }),
     loadData: WeekData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -53,9 +52,9 @@ export default [
     exact,
     body: Loadable({
       loader: () => import('@/pages/week/out'),
-      loading
+      loading,
     }),
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -63,10 +62,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/week'),
-      loading
+      loading,
     }),
     loadData: WeekData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -74,9 +73,9 @@ export default [
     exact,
     body: Loadable({
       loader: () => import('@/pages/sign'),
-      loading
+      loading,
     }),
-    enter: 'tourists'
+    enter: 'tourists',
   },
 
   {
@@ -84,9 +83,9 @@ export default [
     exact,
     body: Loadable({
       loader: () => import('@/pages/reg'),
-      loading
+      loading,
     }),
-    enter: 'tourists'
+    enter: 'tourists',
   },
 
   {
@@ -94,10 +93,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/subject'),
-      loading
+      loading,
     }),
     loadData: SubjectLoadData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -105,21 +104,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/subject/news'),
-      loading
+      loading,
     }),
     loadData: detailNewstData,
-    enter: 'everybody'
-  },
-
-  {
-    path: '/play/:id/:pid',
-    ...base,
-    body: Loadable({
-      loader: () => import('@/pages/play'),
-      loading
-    }),
-    loadData: PlayLoadData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -127,10 +115,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/list'),
-      loading
+      loading,
     }),
     loadData: ListLoadData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -138,10 +126,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/list'),
-      loading
+      loading,
     }),
     loadData: ListLoadData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -149,10 +137,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/list'),
-      loading
+      loading,
     }),
     loadData: ListLoadData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -160,10 +148,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/news'),
-      loading
+      loading,
     }),
     loadData: newsData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -171,10 +159,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/news'),
-      loading
+      loading,
     }),
     loadData: newsData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -182,10 +170,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/article'),
-      loading
+      loading,
     }),
     loadData: articleData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -193,10 +181,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/time'),
-      loading
+      loading,
     }),
     loadData: timeData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -204,10 +192,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/list'),
-      loading
+      loading,
     }),
     loadData: ListLoadData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -215,10 +203,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/episode'),
-      loading
+      loading,
     }),
     loadData: episodeData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -226,10 +214,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/episode'),
-      loading
+      loading,
     }),
     loadData: episodeData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -237,10 +225,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/month'),
-      loading
+      loading,
     }),
     loadData: monthData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -248,10 +236,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/top'),
-      loading
+      loading,
     }),
     loadData: topData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -259,10 +247,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/new'),
-      loading
+      loading,
     }),
     loadData: newData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -270,10 +258,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('@/pages/episodelist'),
-      loading
+      loading,
     }),
     loadData: episodelistData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -281,10 +269,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('../pages/game'),
-      loading
+      loading,
     }),
     loadData: gameData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -292,10 +280,10 @@ export default [
     ...base,
     body: Loadable({
       loader: () => import('../pages/game'),
-      loading
+      loading,
     }),
     loadData: gameData,
-    enter: 'everybody'
+    enter: 'everybody',
   },
 
   {
@@ -304,8 +292,8 @@ export default [
     footer: Footer,
     body: Loadable({
       loader: () => import('@/pages/not-found'),
-      loading
+      loading,
     }),
-    enter: 'everybody'
-  }
+    enter: 'everybody',
+  },
 ]

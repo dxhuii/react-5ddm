@@ -1,3 +1,5 @@
+$d-c: #1985ff; // 主要颜色，鼠标经过
+
 @mixin clamp($num: 2) {
   overflow: hidden;
   /*超出隐藏*/
@@ -25,23 +27,17 @@
     border-style: dashed dashed solid dashed;
     border-color: transparent transparent $color transparent;
     border-top: none;
-  }
-
-  @else if $direction==bottom {
+  } @else if $direction==bottom {
     border-style: solid dashed dashed dashed;
     border-color: $color transparent transparent transparent;
     border-bottom: none;
-  }
-
-  @else if $direction==right {
+  } @else if $direction==right {
     border-style: dashed dashed dashed solid;
     border-color: transparent transparent transparent $color;
     border-right: none;
-  }
-
-  @else if $direction==left {
+  } @else if $direction==left {
     border-style: dashed solid dashed dashed;
     border-color: transparent $color transparent transparent;
     border-left: none;
-}
+  }
 }

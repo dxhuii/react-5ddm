@@ -9,7 +9,6 @@ import { getUserInfo } from '@/store/reducers/user'
 
 // 组件
 import SearchAuto from '@/components/SearchAuto'
-import PlayLog from '@/components/PlayLog'
 import Modal from '@/components/Modal'
 import Sign from '@/components/Sign'
 import Ads from '@/components/Ads'
@@ -27,7 +26,6 @@ export default function () {
   const [showMenu, onMenu] = useState(false)
   const [showSearch, onSearch] = useState(false)
   const [wd, changeSearch] = useState('')
-  const [showLog, onPlaylog] = useState(false)
   const [type, Login] = useState('signIn')
 
   const store = useStore()
@@ -35,7 +33,7 @@ export default function () {
 
   const {
     match: { url = '', params = {} },
-    history
+    history,
   } = useReactRouter()
 
   const onSignOut = async () => {
@@ -107,7 +105,6 @@ export default function () {
 
   const { userid, nickname } = me
   const logo = `header-logo ${DOMAIN_NAME === 'kanfan.net' ? 'kanfan' : ''}`
-  const isNot = !(url === '/' || /dongman|subject|play|search|type/.test(url))
   return (
     <Fragment>
       <header>
@@ -141,7 +138,15 @@ export default function () {
           </div>
         </nav>
         <div styleName={`header-search ${showSearch ? 'show' : ''}`}>
-          <input required type='search' placeholder={params.wd || '片名、导演、声优、原作...'} onChange={onChange} onBlur={onBlur} onFocus={onFocus} onKeyPress={onPressEnter} />
+          <input
+            required
+            type='search'
+            placeholder={params.wd || '片名、导演、声优、原作...'}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+            onKeyPress={onPressEnter}
+          />
           <button disabled={!wd} onClick={onSubmit}>
             <i className='iconfont'>&#xe78d;</i>
           </button>
@@ -151,7 +156,6 @@ export default function () {
           <a onClick={() => onSearch(!showSearch)} styleName='on-search'>
             搜索
           </a>
-          <a onClick={() => onPlaylog(!showLog)}>记录</a>
           {nickname ? <span>{nickname}</span> : null}
           {userid ? (
             <a onClick={() => onSignOut()}>退出</a>
@@ -165,12 +169,10 @@ export default function () {
             菜单
           </a>
         </div>
-        <PlayLog userid={userid} pid={params.pid} isShow={showLog} />
       </header>
       <Modal visible={visible} showModal={() => onModal(true)} closeModal={() => onModal(false)}>
         <Sign isSign={type} onType={(val) => onType(val)} visible={visible} />
       </Modal>
-      {isNot ? <Ads id={7} /> : null}
     </Fragment>
   )
 }

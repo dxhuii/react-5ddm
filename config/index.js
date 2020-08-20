@@ -2,8 +2,6 @@
  * 生产环境配置
  * API 接口地址
  * debug 是否开发
- * ISPLAY 是否播放
- * ISAD 是否显示广告
  * NAME 网站名称
  * DESCRIBE 网站首页标题
  * KEYWORDS 关键词
@@ -34,7 +32,7 @@ const conf = {
   HEAD: `<meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
-  `
+  `,
 }
 /**
  * 5ddm.com
@@ -43,7 +41,7 @@ const conf = {
 const defalut = {
   API: 'https://www.5ddm.com/home.php/',
   ISPLAY: false,
-  ISAD: true,
+  ISAD: false,
   NAME: '5D动漫(5站)',
   DESCRIBE: '5D动漫(5站) - 无广告免费的动漫网站',
   KEYWORDS: '5D动漫,5站',
@@ -57,9 +55,6 @@ const defalut = {
   CNZZ_STAT: '1276171240',
   GA: 'UA-7957076-8',
   EMAIL: 'ddm_com@outlook.com',
-  ICP: '',
-  WW: '',
-  BEIAN: false
 }
 
 /**
@@ -83,9 +78,6 @@ const kanfan = {
   CNZZ_STAT: '1277233437',
   GA: 'UA-7957076-10',
   EMAIL: 'kanfan_net@outlook.com',
-  ICP: '',
-  WW: '',
-  BEIAN: false
 }
 
 let config = {}

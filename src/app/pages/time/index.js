@@ -24,14 +24,14 @@ export default Shell(() => {
   const {
     location,
     match: {
-      params: { id }
-    }
+      params: { id },
+    },
   } = useReactRouter()
   const store = useStore()
-  const info = useSelector(state => getDetail(state, id))
+  const info = useSelector((state) => getDetail(state, id))
 
   useEffect(() => {
-    const getData = args => detail(args)(store.dispatch, store.getState)
+    const getData = (args) => detail(args)(store.dispatch, store.getState)
     if (!info.data) {
       getData({ id })
     }
@@ -43,19 +43,22 @@ export default Shell(() => {
     pic,
     title: `#${title}#播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新 - #${NAME}# @99496动漫网`,
     desc: content,
-    url: `/time/${id}`
+    url: `/time/${id}`,
   }
-  const reActor = actor ? actor.map(item => item.title).join(',') : ''
+  const reActor = actor ? actor.map((item) => item.title).join(',') : ''
   return (
-    <div className="wp mt20 clearfix">
+    <div className='wp mt20 clearfix'>
       <Meta title={`${title}播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新`}>
-        <meta name="keywords" content={`${title}播出时间,${listNameBig}${title}播出周期,${title}几点更新,${title}更新时间`} />
-        <meta name="description" content={`{$sitename}为你提供了包括${listNameBig}${title}播出时间、${title}周几更新以及${title}播出周期希望你能喜欢`} />
+        <meta name='keywords' content={`${title}播出时间,${listNameBig}${title}播出周期,${title}几点更新,${title}更新时间`} />
+        <meta
+          name='description'
+          content={`{$sitename}为你提供了包括${listNameBig}${title}播出时间、${title}周几更新以及${title}播出周期希望你能喜欢`}
+        />
       </Meta>
-      <div className="fl left">
-        <article styleName="article-body">
+      <div className='fl left'>
+        <article styleName='article-body'>
           <h1>{title}</h1>
-          <div styleName="article-content" className="clearfix">
+          <div styleName='article-content' className='clearfix'>
             <Link to={`/subject/${id}`}>
               <img src={pic} alt={`${title} 播出时间`} />
             </Link>
@@ -102,7 +105,7 @@ export default Shell(() => {
               )}
               在本网站播出，敬请关注！
             </p>
-            <p styleName="content">
+            <p styleName='content'>
               {title}简介：{content.replace(/<[^<>]+>/g, '')}
             </p>
             <p>
@@ -112,25 +115,22 @@ export default Shell(() => {
           </div>
           <TagShare tag={[title]} config={shareConfig} location={location} />
         </article>
-        <div styleName="article-bottom">
-          <div className="mt20" styleName="article-ads">
-            <Ads id={11} />
-          </div>
-          <div className="mt10" styleName="ep-like">
-            <div styleName="title">
+        <div styleName='article-bottom'>
+          <div className='mt10' styleName='ep-like'>
+            <div styleName='title'>
               <h2>相关动漫</h2>
             </div>
             {id ? <DetailActor actor={reActor} not={id} /> : null}
           </div>
-          <div className="mt10" styleName="ep-like">
-            <div styleName="title">
+          <div className='mt10' styleName='ep-like'>
+            <div styleName='title'>
               <h2>小伙伴还在看(=￣ω￣=)（一周热门）</h2>
             </div>
             <HotWeek not={id} />
           </div>
         </div>
       </div>
-      <div className="fr right">
+      <div className='fr right'>
         <SideBar />
       </div>
     </div>

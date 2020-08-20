@@ -2,7 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import compress from 'compression'
-import cache from 'memory-cache'
+import cache from './cache'
 
 // 抵御一些比较常见的安全web安全隐患
 // https://cnodejs.org/topic/56f3b0e8dd3dade17726fe85
@@ -66,7 +66,7 @@ app.get('*', async function(req, res) {
       function() {
         // 对游客的请求进行缓存
         if (!req.cookies[`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`]) {
-          cache.put(req.originalUrl, html, CACHA_TIME)
+          cache.set(req.originalUrl, html)
         }
         res.send(html)
       }

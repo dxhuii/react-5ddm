@@ -6,7 +6,9 @@ import useReactRouter from 'use-react-router'
 import { useStore, useSelector } from 'react-redux'
 import { detail, love } from '@/store/actions/detail'
 import { comment, addComment } from '@/store/actions/comment'
-import { mark } from '@/store/actions/mark'
+import { mark, digg } from '@/store/actions/mark'
+import { playlist } from '@/store/actions/playlist'
+import { getPlayList } from '@/store/reducers/playlist'
 import { getDetail } from '@/store/reducers/detail'
 import { getComment } from '@/store/reducers/comment'
 import { getUserInfo } from '@/store/reducers/user'
@@ -14,7 +16,6 @@ import { getUserInfo } from '@/store/reducers/user'
 import Loading from '@/components/Ui/Loading'
 import SideBar from '@/components/SideBar'
 import Share from '@/components/Share'
-import PlayList from '@/components/PlayList'
 import DetailActor from '@/components/Subject/DetailActor'
 import HotWeek from '@/components/Subject/HotWeek'
 import EpList from '@/components/Subject/EpList'
@@ -32,6 +33,11 @@ import Shell from '@/components/Shell'
 
 import { isNumber, formatPic } from '@/utils'
 import { DOMAIN_NAME, NAME, DOMAIN } from 'Config'
+
+import playing from '@/utils/play'
+
+import '@/utils/base64.min'
+import authcode from '@/utils/authcode'
 
 import './style.scss'
 
@@ -62,11 +68,18 @@ export default Shell(() => {
   const loveD = useSelector((state) => getDetail(state, `love_${id}`))
   const _comment = useCallback((args) => comment(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
   const _love = useCallback((args) => love(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
+  const playData = useSelector((state) => getPlayList(state, id))
 
   const { userid, nickname } = me
+  const { data = {}, loading } = info
+  const { key, list = [] } = playData.data || {}
 
   useEffect(() => {
     const getData = (args) => detail(args)(store.dispatch, store.getState)
+    const getPlayData = (args) => playlist(args)(store.dispatch, store.getState)
+    if (!(playData && playData.data)) {
+      getPlayData({ id })
+    }
     if (!info || !info.data) {
       getData({ id })
     }
@@ -94,6 +107,21 @@ export default Shell(() => {
     }
   }
 
+  const onDigg = async (type, id) => {
+    const onDigg = (args) => digg(args)(store.dispatch, store.getState)
+    const [, res] = await onDigg({ type, id })
+    if (res.code === 1) {
+      if (type === 'up') {
+        const up = upDiv.current.querySelector('span')
+        up.innerText = up.innerText * 1 + 1
+      } else {
+        const down = downDiv.current.querySelector('span')
+        down.innerText = down.innerText * 1 + 1
+      }
+    }
+    Toast.success(res.msg)
+  }
+
   const onType = (isSign) => {
     onSign(isSign)
     onModal(true)
@@ -118,7 +146,29 @@ export default Shell(() => {
     }
   }
 
-  const { data = {}, loading } = info
+  const playerList = (data = [], key, name) => {
+    return data.map(({ title, vid }) => (
+      <a key={`${vid}`} href={`${playing(name, authcode(atob(vid), 'DECODE', key, 0))}`} target='_blank'>
+        {title}
+      </a>
+    ))
+  }
+
+  const player = () => {
+    return list.map(({ playName, playTitle, copyright, list }) => (
+      <div styleName='player' key={`${playName}`}>
+        <div styleName='title'>
+          <h4>
+            <i className={`playicon ${playName}`}></i>
+            {playTitle}
+          </h4>
+          <span>{copyright}</span>
+        </div>
+        <div styleName='player-list'>{playerList(list, key, playName)}</div>
+      </div>
+    ))
+  }
+
   const {
     cid,
     title,
@@ -182,9 +232,9 @@ export default Shell(() => {
           <meta name='description' content={`${title}动画全集由${reContent}`} />
           <meta
             name='keywords'
-            content={`${title},${title}动漫,${title}下载${vod_pantitle ? `,${title}百度云盘下载` : ''},${title}全集,${title}动画片,${title}在线观看${
-              keywords ? `,${keywords}` : ''
-            }`}
+            content={`${title},${title}动漫,${title}下载${
+              vod_pantitle ? `,${title}百度云盘下载` : ''
+            },${title}全集,${title}动画片,${title}在线观看${keywords ? `,${keywords}` : ''}`}
           />
           <meta property='og:locale' content='zh_CN' />
           <meta property='og:type' content='videolist' />
@@ -285,23 +335,17 @@ export default Shell(() => {
               <li>
                 <Link to={`/time/${id}`}>播出时间</Link>
               </li>
-              {pan ? (
-                <li>
-                  <a href={pan} target='_blank' rel='noopener noreferrer'>
-                    网盘下载
-                  </a>
-                </li>
-              ) : null}
             </ul>
           </div>
         </div>
       </div>
-      <div className='mt20'>
-        <Ads id={3} />
+      <div styleName='digg' onClick={() => onDigg('up', id)} ref={upDiv}>
+        <i className='iconfont'>&#xe607;</i>
+        <span>{up}</span>
       </div>
-      <PlayList />
-      <div className='wp'>
-        <Ads id={4} />
+      <div styleName='digg' onClick={() => onDigg('down', id)} ref={downDiv}>
+        <i className='iconfont'>&#xe606;</i>
+        <span>{down}</span>
       </div>
       <div className='mt20 clearfix wp' styleName='detail-bottom'>
         <div className='fl box pb20 left'>
@@ -362,7 +406,15 @@ export default Shell(() => {
           </div>
         </div>
         <div className='fr right'>
-          <div className='box pb20'>
+          {list.length > 0 ? (
+            <div className='box pb20'>
+              <div styleName='title'>
+                <h2>在哪儿看这部动漫</h2>
+              </div>
+              {player()}
+            </div>
+          ) : null}
+          <div className={`box pb20 ${list.length > 0 ? 'mt20' : ''}`}>
             <div styleName='title'>
               <h2>角色声优</h2>
             </div>

@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 
 // Hook
 export default function useScript(src) {
-  // Keeping track of script loaded and error state
+  if (!src) return
   const [state, setState] = useState({
     loaded: false,
-    error: false
+    error: false,
   })
 
   useEffect(
@@ -26,7 +26,7 @@ export default function useScript(src) {
       const onScriptLoad = () => {
         setState({
           loaded: true,
-          error: false
+          error: false,
         })
       }
 

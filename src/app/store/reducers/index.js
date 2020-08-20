@@ -1,7 +1,6 @@
 import user from './user'
 import detail from './detail'
 import playlist from './playlist'
-import player from './player'
 import list from './list'
 import slide from './slide'
 import newsIndex from './newsIndex'
@@ -17,7 +16,6 @@ export default {
   user,
   detail,
   playlist,
-  player,
   list,
   slide,
   newsIndex,
@@ -28,5 +26,5 @@ export default {
   scroll,
   history,
   game,
-  comment
+  comment,
 }

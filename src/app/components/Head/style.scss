@@ -1,7 +1,9 @@
+@import '../../pages/__mixin.scss';
+
 header {
   display: flex;
   background-color: #fff;
-  box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+  box-shadow: 0 2px 4px 0 rgba(114, 144, 179, 0.06);
   background-clip: content-box;
   height: 56px;
   line-height: 56px;
@@ -11,23 +13,33 @@ header {
   right: 0;
   z-index: 999;
 
-  a {
-    padding: 0 15px;
-    display: inline-block;
-
-    &:hover {
-      color: #175199;
-    }
-
-    &.active {
-      font-weight: bold;
-    }
-  }
-
   nav {
     flex-grow: 1;
     display: flex;
+    margin-left: 30px;
+    a {
+      position: relative;
+      margin-right: 30px;
+      display: inline-block;
+      font-size: 16px;
 
+      &:hover,
+      &.active {
+        color: #18191a;
+        font-weight: 600;
+      }
+      &.active {
+        &::after {
+          position: absolute;
+          content: '';
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 2px;
+          background-color: #0088ff;
+        }
+      }
+    }
     &.show {
       display: inline-block;
     }
@@ -67,6 +79,7 @@ header {
 }
 
 .header-tool {
+  margin-right: 20px;
   span {
     padding: 0 15px;
   }
@@ -97,10 +110,10 @@ header {
   button {
     width: 30px;
     height: 30px;
-    margin-top: 3px;
+    margin-top: 1px;
     text-align: right;
     float: right;
-    color: #8590A6;
+    color: #8590a6;
   }
 
   &.show {
