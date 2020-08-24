@@ -18,7 +18,7 @@ import { DOMAIN_NAME, NAME } from 'Config'
 
 import './style.scss'
 
-export default function () {
+export default function Head() {
   let timer = null
   let timerBlur = null
   const [isHide, onHide] = useState(false)
@@ -29,11 +29,11 @@ export default function () {
   const [type, Login] = useState('signIn')
 
   const store = useStore()
-  const me = useSelector((state) => getUserInfo(state))
+  const me = useSelector(state => getUserInfo(state))
 
   const {
     match: { url = '', params = {} },
-    history,
+    history
   } = useReactRouter()
 
   const onSignOut = async () => {
@@ -55,7 +55,7 @@ export default function () {
     }
   })
 
-  const onChange = (e) => {
+  const onChange = e => {
     clearTimeout(timer)
     const wd = trim(e.target.value)
     timer = setTimeout(function () {
@@ -72,12 +72,12 @@ export default function () {
     onHide(true)
   }
 
-  const onType = (isSign) => {
+  const onType = isSign => {
     Login(isSign)
     onModal(true)
   }
 
-  const onPressEnter = (e) => {
+  const onPressEnter = e => {
     if (e.which === 13 && wd) {
       history.push(`/search/${wd}`)
     }
@@ -171,7 +171,7 @@ export default function () {
         </div>
       </header>
       <Modal visible={visible} showModal={() => onModal(true)} closeModal={() => onModal(false)}>
-        <Sign isSign={type} onType={(val) => onType(val)} visible={visible} />
+        <Sign isSign={type} onType={val => onType(val)} visible={visible} />
       </Modal>
     </Fragment>
   )

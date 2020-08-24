@@ -20,21 +20,21 @@ export default ({ user = {}, enterEvent = () => {} }) => {
       // 游客
       case 'tourists':
         if (user.userid) {
-          return <Redirect to="/" />
+          return <Redirect to='/' />
         } else {
           return <Layout {...props} />
         }
       // 注册用户
       case 'member':
         if (!user.userid) {
-          return <Redirect to="/" />
+          return <Redirect to='/' />
         } else {
           return <Layout {...props} />
         }
     }
   }
 
-  let dom = () => (
+  const dom = () => (
     <Fragment>
       <Switch>
         {list.map((route, index) => (

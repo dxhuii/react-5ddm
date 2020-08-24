@@ -283,13 +283,21 @@ export default Shell(() => {
               </p>
               <p styleName='detail-update'>更新时间：{updateDate}</p>
               <div styleName='detail-tool'>
-                <div styleName={`detail-tool__on ${remindid ? 'active' : ''}`} onClick={() => addMark('remind', id, cid, userid)}>
+                <div styleName={`detail-tool__on ${remindid ? '' : 'active'}`} onClick={() => addMark('remind', id, cid, userid)}>
                   <i className='iconfont'>&#xe6bd;</i>
                   {remindid ? '已追番' : '追番'}
                 </div>
-                <div styleName={`detail-tool__on ${loveid ? 'active' : ''}`} onClick={() => addMark('love', id, cid, userid)}>
+                <div styleName={`detail-tool__on ${loveid ? '' : 'active'}`} onClick={() => addMark('love', id, cid, userid)}>
                   <i className='iconfont'>&#xe66a;</i>
                   {loveid ? '已收藏' : '收藏'}
+                </div>
+                <div styleName='detail-tool__on digg active' onClick={() => onDigg('up', id)} ref={upDiv}>
+                  <i className='iconfont'>&#xe607;</i>
+                  <span>{up}</span>
+                </div>
+                <div styleName='detail-tool__on digg active' onClick={() => onDigg('down', id)} ref={downDiv}>
+                  <i className='iconfont'>&#xe606;</i>
+                  <span>{down}</span>
                 </div>
                 <div styleName='detail-tool__on share'>
                   <i className='iconfont'>&#xe655;</i>分享
@@ -333,14 +341,6 @@ export default Shell(() => {
             </ul>
           </div>
         </div>
-      </div>
-      <div styleName='digg' onClick={() => onDigg('up', id)} ref={upDiv}>
-        <i className='iconfont'>&#xe607;</i>
-        <span>{up}</span>
-      </div>
-      <div styleName='digg' onClick={() => onDigg('down', id)} ref={downDiv}>
-        <i className='iconfont'>&#xe606;</i>
-        <span>{down}</span>
       </div>
       <div className='mt20 clearfix wp' styleName='detail-bottom'>
         <div className='fl box pb20 left'>
