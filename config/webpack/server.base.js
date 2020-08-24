@@ -4,6 +4,7 @@ const chalk = require('chalk')
 const nodeExternals = require('webpack-node-externals')
 const WebpackBar = require('webpackbar')
 const TerserPlugin = require('terser-webpack-plugin')
+const LoadablePlugin = require('@loadable/webpack-plugin')
 
 const config = require('../index')
 const devMode = process.env.NODE_ENV === 'development'
@@ -110,6 +111,7 @@ module.exports = {
       __SERVER__: 'true',
       __CLIENT__: 'false'
     }),
-    new WebpackBar()
+    new WebpackBar(),
+    new LoadablePlugin()
   ]
 }

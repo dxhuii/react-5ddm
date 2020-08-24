@@ -5,6 +5,7 @@ const HtmlwebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const WebpackBar = require('webpackbar')
+const LoadablePlugin = require('@loadable/webpack-plugin')
 
 const config = require('../index')
 const devMode = process.env.NODE_ENV === 'development'
@@ -177,6 +178,7 @@ module.exports = {
     }),
 
     new WebpackBar(),
+    new LoadablePlugin(),
 
     // 创建视图模版文件，给server使用
     // 主要是打包后的添加的css、js静态文件路径添加到模版中

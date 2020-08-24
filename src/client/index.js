@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { matchPath } from 'react-router'
 import ReactGA from 'react-ga'
+import { loadableReady } from '@loadable/component'
 
 // 引入全局样式
 import '../app/pages/global.scss'
@@ -68,15 +69,17 @@ if (!debug) {
 
   // 预先加载首屏的js（否则会出现，loading 一闪的情况）
   await _route.body.preload()
-
-  ReactDOM.hydrate(
-    <Provider store={store}>
-      <BrowserRouter>
-        <Page />
-      </BrowserRouter>
-    </Provider>,
-    document.getElementById('app')
-  )
+  const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate
+  loadableReady(() => {
+    renderMethod(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Page />
+        </BrowserRouter>
+      </Provider>,
+      document.getElementById('app')
+    )
+  })
 
   if (debug) {
     if (module.hot) {

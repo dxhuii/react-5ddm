@@ -19,8 +19,11 @@
     span {
       display: inline-block;
       em {
-        color: #f00;
         margin-left: 5px;
+        &.line {
+          color: #999;
+          margin: 0 5px;
+        }
       }
       &:nth-child(1) {
         flex-grow: 1;

@@ -1,10 +1,12 @@
 // 服务端渲染依赖
+import path from 'path'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter, matchPath } from 'react-router'
 import { Provider } from 'react-redux'
 import MetaTagsServer from 'react-meta-tags/server'
 import { MetaTagsContext } from 'react-meta-tags'
+import { ChunkExtractor } from '@loadable/server'
 
 // 创建redux store
 import createStore from '@/store'
@@ -71,6 +73,12 @@ export default (req, res) => {
       params.redirect = redirect
     }
 
+    const nodeStats = path.resolve('./dist/server/loadable-stats.json')
+    const webStats = path.resolve('./dist/client/loadable-stats.json')
+
+    const nodeExtractor = new ChunkExtractor({ statsFile: nodeStats })
+    const webExtractor = new ChunkExtractor({ statsFile: webStats })
+
     // 获取路由dom
     const Page = router.dom
 
@@ -80,13 +88,15 @@ export default (req, res) => {
 
     // html
     params.html = ReactDOMServer.renderToString(
-      <Provider store={store}>
-        <MetaTagsContext extract={metaTagsInstance.extract}>
-          <StaticRouter location={req.url}>
-            <Page />
-          </StaticRouter>
-        </MetaTagsContext>
-      </Provider>
+      webExtractor.collectChunks(
+        <Provider store={store}>
+          <MetaTagsContext extract={metaTagsInstance.extract}>
+            <StaticRouter location={req.url}>
+              <Page />
+            </StaticRouter>
+          </MetaTagsContext>
+        </Provider>
+      )
     )
 
     // 获取页面的meta，嵌套到模版中

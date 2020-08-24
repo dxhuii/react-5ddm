@@ -9,6 +9,8 @@ import { getList } from '@/store/reducers/list'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
+import { isNumber } from '@/utils'
+
 // import Hashids from 'hashids'
 
 import './style.scss'
@@ -43,10 +45,10 @@ export default Shell(() => {
   const { data = [] } = info
   return (
     <>
-      <Meta title="最新更新的100个动漫" />
-      <div className="wp mt20">
-        <div className="box">
-          <ul styleName="newlist">
+      <Meta title='最新更新的100个动漫' />
+      <div className='wp mt20'>
+        <div className='box'>
+          <ul styleName='newlist'>
             <li>
               <span>动漫标题</span>
               <span>动漫分类</span>
@@ -56,8 +58,12 @@ export default Shell(() => {
             {data.map(item => (
               <li key={item.id}>
                 <span>
-                  <Link to={`/subject/${item.id}`}>{item.title}</Link> / <Link to={`/play/${item.id}/${item.pid}`}>{item.lastname}</Link>
-                  {item.isDate ? <em>new</em> : null}
+                  <Link to={`/subject/${item.id}`}>
+                    {item.title}
+                    <em styleName='line'>/</em>
+                    {isNumber(item.status) ? `更新至${item.status}话` : item.status}
+                    {item.isDate ? <em styleName='red'>new</em> : null}
+                  </Link>
                 </span>
                 <span>
                   <Link to={`/type/${menu[item.listId] || 'list'}/-/-/-/-/-/addtime/`}>{item.listName}</Link>

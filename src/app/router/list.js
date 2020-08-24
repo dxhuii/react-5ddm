@@ -1,5 +1,5 @@
 import React from 'react'
-import Loadable from 'react-loadable'
+import loadable from '@loadable/component'
 
 import Head from '@/components/Head'
 import Footer from '@/components/Footer'
@@ -22,15 +22,13 @@ import gameData from '@/pages/game/load-data'
 
 const exact = true
 const base = { exact, head: Head, footer: Footer }
-const loading = () => <Loading />
 
 export default [
   {
     path: '/',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/home'),
-      loading
+    body: loadable(() => import('@/pages/home'), {
+      fallback: <Loading />
     }),
     loadData: HomeLoadData,
     enter: 'everybody'
@@ -39,9 +37,8 @@ export default [
   {
     path: '/week',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/week'),
-      loading
+    body: loadable(() => import('@/pages/week'), {
+      fallback: <Loading />
     }),
     loadData: WeekData,
     enter: 'everybody'
@@ -50,9 +47,8 @@ export default [
   {
     path: '/week/out',
     exact,
-    body: Loadable({
-      loader: () => import('@/pages/week/out'),
-      loading
+    body: loadable(() => import('@/pages/week/out'), {
+      fallback: <Loading />
     }),
     enter: 'everybody'
   },
@@ -60,9 +56,8 @@ export default [
   {
     path: '/week/:id',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/week'),
-      loading
+    body: loadable(() => import('@/pages/week'), {
+      fallback: <Loading />
     }),
     loadData: WeekData,
     enter: 'everybody'
@@ -71,9 +66,8 @@ export default [
   {
     path: '/sign',
     exact,
-    body: Loadable({
-      loader: () => import('@/pages/sign'),
-      loading
+    body: loadable(() => import('@/pages/sign'), {
+      fallback: <Loading />
     }),
     enter: 'tourists'
   },
@@ -81,9 +75,8 @@ export default [
   {
     path: '/reg',
     exact,
-    body: Loadable({
-      loader: () => import('@/pages/reg'),
-      loading
+    body: loadable(() => import('@/pages/reg'), {
+      fallback: <Loading />
     }),
     enter: 'tourists'
   },
@@ -91,9 +84,8 @@ export default [
   {
     path: '/subject/:id',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/subject'),
-      loading
+    body: loadable(() => import('@/pages/subject'), {
+      fallback: <Loading />
     }),
     loadData: SubjectLoadData,
     enter: 'everybody'
@@ -102,9 +94,8 @@ export default [
   {
     path: '/subject/:id/news',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/subject/news'),
-      loading
+    body: loadable(() => import('@/pages/subject/news'), {
+      fallback: <Loading />
     }),
     loadData: detailNewstData,
     enter: 'everybody'
@@ -113,9 +104,8 @@ export default [
   {
     path: '/dongman',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/list'),
-      loading
+    body: loadable(() => import('@/pages/list'), {
+      fallback: <Loading />
     }),
     loadData: ListLoadData,
     enter: 'everybody'
@@ -124,9 +114,8 @@ export default [
   {
     path: '/dongman/:name',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/list'),
-      loading
+    body: loadable(() => import('@/pages/list'), {
+      fallback: <Loading />
     }),
     loadData: ListLoadData,
     enter: 'everybody'
@@ -135,9 +124,8 @@ export default [
   {
     path: '/type/:name/:mcid/:area/:year/:letter/:lz/:order',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/list'),
-      loading
+    body: loadable(() => import('@/pages/list'), {
+      fallback: <Loading />
     }),
     loadData: ListLoadData,
     enter: 'everybody'
@@ -146,9 +134,8 @@ export default [
   {
     path: '/news',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/news'),
-      loading
+    body: loadable(() => import('@/pages/news'), {
+      fallback: <Loading />
     }),
     loadData: newsData,
     enter: 'everybody'
@@ -157,9 +144,8 @@ export default [
   {
     path: '/news/:name',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/news'),
-      loading
+    body: loadable(() => import('@/pages/news'), {
+      fallback: <Loading />
     }),
     loadData: newsData,
     enter: 'everybody'
@@ -168,9 +154,8 @@ export default [
   {
     path: '/article/:id',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/article'),
-      loading
+    body: loadable(() => import('@/pages/article'), {
+      fallback: <Loading />
     }),
     loadData: articleData,
     enter: 'everybody'
@@ -179,9 +164,8 @@ export default [
   {
     path: '/time/:id',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/time'),
-      loading
+    body: loadable(() => import('@/pages/time'), {
+      fallback: <Loading />
     }),
     loadData: timeData,
     enter: 'everybody'
@@ -190,9 +174,8 @@ export default [
   {
     path: '/search/:wd',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/list'),
-      loading
+    body: loadable(() => import('@/pages/list'), {
+      fallback: <Loading />
     }),
     loadData: ListLoadData,
     enter: 'everybody'
@@ -201,9 +184,8 @@ export default [
   {
     path: '/episode/:id',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/episode'),
-      loading
+    body: loadable(() => import('@/pages/episode'), {
+      fallback: <Loading />
     }),
     loadData: episodeData,
     enter: 'everybody'
@@ -212,9 +194,8 @@ export default [
   {
     path: '/episode/:id/:p',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/episode'),
-      loading
+    body: loadable(() => import('@/pages/episode'), {
+      fallback: <Loading />
     }),
     loadData: episodeData,
     enter: 'everybody'
@@ -223,9 +204,8 @@ export default [
   {
     path: '/month/:month',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/month'),
-      loading
+    body: loadable(() => import('@/pages/month'), {
+      fallback: <Loading />
     }),
     loadData: monthData,
     enter: 'everybody'
@@ -234,9 +214,8 @@ export default [
   {
     path: '/top',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/top'),
-      loading
+    body: loadable(() => import('@/pages/top'), {
+      fallback: <Loading />
     }),
     loadData: topData,
     enter: 'everybody'
@@ -245,9 +224,8 @@ export default [
   {
     path: '/new',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/new'),
-      loading
+    body: loadable(() => import('@/pages/new'), {
+      fallback: <Loading />
     }),
     loadData: newData,
     enter: 'everybody'
@@ -256,9 +234,8 @@ export default [
   {
     path: '/ep',
     ...base,
-    body: Loadable({
-      loader: () => import('@/pages/episodelist'),
-      loading
+    body: loadable(() => import('@/pages/episodelist'), {
+      fallback: <Loading />
     }),
     loadData: episodelistData,
     enter: 'everybody'
@@ -267,9 +244,8 @@ export default [
   {
     path: '/game',
     ...base,
-    body: Loadable({
-      loader: () => import('../pages/game'),
-      loading
+    body: loadable(() => import('../pages/game'), {
+      fallback: <Loading />
     }),
     loadData: gameData,
     enter: 'everybody'
@@ -278,9 +254,8 @@ export default [
   {
     path: '/game/:wd',
     ...base,
-    body: Loadable({
-      loader: () => import('../pages/game'),
-      loading
+    body: loadable(() => import('../pages/game'), {
+      fallback: <Loading />
     }),
     loadData: gameData,
     enter: 'everybody'
@@ -290,9 +265,8 @@ export default [
     path: '**',
     head: Head,
     footer: Footer,
-    body: Loadable({
-      loader: () => import('@/pages/not-found'),
-      loading
+    body: loadable(() => import('@/pages/not-found'), {
+      fallback: <Loading />
     }),
     enter: 'everybody'
   }

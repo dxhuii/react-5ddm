@@ -17,6 +17,7 @@ module.exports = function (api) {
       '@babel/plugin-transform-modules-commonjs',
       '@babel/plugin-proposal-object-rest-spread',
       '@babel/plugin-proposal-export-namespace-from',
+      '@loadable/babel-plugin',
       [
         'react-css-modules',
         {
