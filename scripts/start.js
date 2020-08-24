@@ -10,9 +10,9 @@ const serverConfig = require('../config/webpack/server.dev')
 
 const config = require('../config')
 
-const compilerPromise = (compiler) => {
+const compilerPromise = compiler => {
   return new Promise((resolve, reject) => {
-    compiler.plugin('done', (stats) => {
+    compiler.plugin('done', stats => {
       if (!stats.hasErrors()) {
         return resolve()
       }

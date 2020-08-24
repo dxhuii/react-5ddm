@@ -32,7 +32,7 @@ if (!debug) {
   }
 }
 
-;(async function() {
+;(async function () {
   // 从页面中获取服务端生产redux数据，作为客户端redux初始值
   const store = configureStore(window.__initState__)
   let userinfo = getUserInfo(store.getState())
@@ -41,8 +41,8 @@ if (!debug) {
   const { href, pathname } = window.location
   if (GA) {
     ReactGA.initialize(GA, { debug })
-    enterEvent = (userinfo) => {
-      let option = { page: pathname, userId: userinfo && userinfo._id ? userinfo._id : null }
+    enterEvent = userinfo => {
+      const option = { page: pathname, userId: userinfo && userinfo._id ? userinfo._id : null }
       if (!debug) {
         ReactGA.set(option)
         ReactGA.pageview(pathname)
@@ -58,8 +58,8 @@ if (!debug) {
 
   let _route = null
 
-  router.list.some((route) => {
-    let match = matchPath(pathname, route)
+  router.list.some(route => {
+    const match = matchPath(pathname, route)
     if (match && match.path) {
       _route = route
       return true
@@ -85,7 +85,7 @@ if (!debug) {
   }
 
   // 解决在 ios safari iframe 上touchMove 滚动后，外部的点击事件会无效的问题
-  document.addEventListener('touchmove', function(e) {
+  document.addEventListener('touchmove', function (e) {
     e.preventDefault()
   })
 })()

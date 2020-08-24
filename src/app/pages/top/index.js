@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import useReactRouter from 'use-react-router'
+import { Link, useLocation } from 'react-router-dom'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
@@ -14,8 +13,8 @@ import './style.scss'
 
 export default Shell(() => {
   const {
-    location: { search }
-  } = useReactRouter()
+    params: { name }
+  } = useLocation()
   const store = useStore()
   const day = useSelector(state => getList(state, 'page-hits_day'))
   const week = useSelector(state => getList(state, 'page-hits_week'))
@@ -38,7 +37,7 @@ export default Shell(() => {
     }
   }, [all.data, day.data, month.data, store.dispatch, store.getState, week.data])
 
-  const isHits = search.indexOf('hits') !== -1
+  const isHits = name === 'hits'
   const dayData = day.data || []
   const weekData = week.data || []
   const monthData = month.data || []

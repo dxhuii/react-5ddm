@@ -8,7 +8,7 @@ import { saveScrollPosition, setScrollPosition } from '@/store/actions/scroll'
 // tools
 import parseUrl from '@/common/parse-url'
 
-export default function(Component) {
+export default function (Component) {
   function Shell({ history, location, match, staticContext }) {
     const [notFound, setNotFound] = useState('')
 

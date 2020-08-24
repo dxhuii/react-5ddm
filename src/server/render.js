@@ -16,8 +16,9 @@ import initData from '@/init-data'
 import { COOKIE_PREFIX, AUTH_COOKIE_NAME, CNZZ_STAT, BAIDU_STAT, debug } from 'Config'
 
 export default (req, res) => {
+  // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve, reject) => {
-    let params = {
+    const params = {
       code: 200,
       redirect: '',
       html: '',
@@ -30,17 +31,17 @@ export default (req, res) => {
     let store = createStore()
 
     // 准备数据，如果有token，获取用户信息并返回
-    let [err, user] = await initData(store, req.cookies[`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`] || '')
+    const [err, user] = await initData(store, req.cookies[`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`] || '')
 
     params.user = user
 
     let router = createRouter({ user })
 
-    let route = null,
-      match = null
+    let route = null
+    let match = null
 
     router.list.some(_route => {
-      let _match = matchPath(req.path, _route)
+      const _match = matchPath(req.path, _route)
       if (_match) {
         _match.search = req._parsedOriginalUrl.search || ''
         route = _route
@@ -49,13 +50,13 @@ export default (req, res) => {
       return _match
     })
 
-    if (route.enter == 'tourists' && user) {
+    if (route.enter === 'tourists' && user) {
       // 游客
       params.code = 403
       params.redirect = '/'
       resolve(params)
       return
-    } else if (route.enter == 'member' && !user) {
+    } else if (route.enter === 'member' && !user) {
       // 注册会员
       params.code = 403
       params.redirect = '/'
@@ -65,7 +66,7 @@ export default (req, res) => {
 
     if (route.loadData) {
       // 服务端加载数据，并返回页面的状态
-      let { code, redirect } = await route.loadData({ store, match, res, req, user })
+      const { code, redirect } = await route.loadData({ store, match, res, req, user })
       params.code = code
       params.redirect = redirect
     }

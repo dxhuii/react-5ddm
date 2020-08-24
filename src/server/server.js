@@ -1,3 +1,4 @@
+/* eslint-disable no-sequences */
 import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
@@ -29,7 +30,7 @@ app.use(express.static('./public'))
 app.use(function (req, res, next) {
   // 如果是游客，则优先使用缓存中的数据
   if (!req.cookies[`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`]) {
-    let _cache = cache.get(req.originalUrl)
+    const _cache = cache.get(req.originalUrl)
     if (_cache) {
       res.send(_cache)
       return
@@ -42,13 +43,14 @@ app.use(function (req, res, next) {
 app.use('/sign', sign())
 
 app.get('*', async function (req, res) {
-  let { code, redirect, html, meta, reduxState, CNZZ_STAT, BAIDU_STAT, debug } = await render(req, res)
+  const { code, redirect, html, meta, reduxState, CNZZ_STAT, BAIDU_STAT, debug } = await render(req, res)
 
   res.status(code)
 
   if (redirect) {
     res.redirect(redirect)
   } else {
+    // eslint-disable-next-line no-unused-expressions
     res.render('../dist/server/index.ejs', { html, reduxState, meta, CNZZ_STAT, BAIDU_STAT, debug }),
       function () {
         // 对游客的请求进行缓存

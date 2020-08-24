@@ -1,6 +1,6 @@
 import { isMobile } from './index'
 
-const tudou = (pv) => {
+const tudou = pv => {
   const data = pv.split(',')
   const len = data.length
   if (len === 1) {
@@ -11,30 +11,30 @@ const tudou = (pv) => {
     youku(data[2])
   }
 }
-const youku = (pv) => {
+const youku = pv => {
   const data = pv.split(',')
   return `https://v.youku.com/v_show/id_${data.length === 3 ? data[2] : pv}.html`
 }
-const iqiyi = (pv) => {
+const iqiyi = pv => {
   const plus = isMobile() ? '&tvid=' : '&tvId='
   const data = pv.split(/,|&tvid=|_/)
   const vid = /,|_/.test(pv) ? data[1] + plus + data[0] : data[0] + plus + data[1]
   return data.length > 1 ? `https://m.iqiyi.com/shareplay.html?vid=${vid}&autoplay=1&fullscreen=1` : '/'
 }
-const letv = (pv) => {
+const letv = pv => {
   const data = pv.split(',')
   return data.length === 2 ? '/' : 'https://www.le.com/ptv/vplay/' + data[0] + '.html'
 }
-const sohu = (pv) => {
+const sohu = pv => {
   return `https://tv.sohu.com/s/sohuplayer/iplay.html?vid=${pv.split('_')[0]}&autoplay=true`
 }
-const pptv = (pv) => {
+const pptv = pv => {
   return 'https://' + (isMobile() ? 'm' : 'www') + '.pptv.com/show/' + pv.split(',')[0] + '.html'
 }
-const qq = (pv) => {
+const qq = pv => {
   return `https://v.qq.com/txp/iframe/player.html?vid=${pv}`
 }
-const bilibili = (pv) => {
+const bilibili = pv => {
   const data = pv.split(',')
   return pv.indexOf('http') !== -1
     ? pv
@@ -42,7 +42,7 @@ const bilibili = (pv) => {
     ? 'https://www.bilibili.com/video/av' + data[0] + '/?p=' + data[1]
     : 'https://www.bilibili.com/video/av' + pv + '/'
 }
-const acfun = (pv) => {
+const acfun = pv => {
   let vid = ''
   if (pv.indexOf('ab') !== -1) {
     const data = pv.split('ab')

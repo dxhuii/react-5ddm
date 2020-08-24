@@ -48,17 +48,17 @@ export default function Share({ data = {}, location = {} }) {
 
   return (
     <>
-      <i styleName="wechat" onClick={shareToWeiXin} />
-      <i styleName="weibo" onClick={() => goShare('weibo')} />
-      <i styleName="tieba" onClick={() => goShare('tieba')} />
-      <i styleName="qzone" onClick={() => goShare('qzone')} />
-      <i styleName="qq" onClick={() => goShare('qq')} />
-      <i styleName="facebook" onClick={() => goShare('facebook')} />
-      <i styleName="twitter" onClick={() => goShare('twitter')} />
+      <i styleName='wechat' onClick={shareToWeiXin} />
+      <i styleName='weibo' onClick={() => goShare('weibo')} />
+      <i styleName='tieba' onClick={() => goShare('tieba')} />
+      <i styleName='qzone' onClick={() => goShare('qzone')} />
+      <i styleName='qq' onClick={() => goShare('qq')} />
+      <i styleName='facebook' onClick={() => goShare('facebook')} />
+      <i styleName='twitter' onClick={() => goShare('twitter')} />
       <>
         {showQrcode ? (
           <div
-            styleName="mark"
+            styleName='mark'
             onClick={e => {
               showQRcode(false)
             }}
@@ -66,14 +66,14 @@ export default function Share({ data = {}, location = {} }) {
         ) : null}
 
         {showQrcode ? (
-          <div styleName="qrcode">
+          <div styleName='qrcode'>
             <QRCode value={`${DOMAIN}${data.url}?_s=weixin`} />
             <div>微信扫一扫，分享</div>
           </div>
         ) : null}
 
         <div
-          styleName="tips-weixin-share"
+          styleName='tips-weixin-share'
           style={{ display: displayTips ? 'block' : 'none' }}
           onClick={() => {
             showTips(false)
