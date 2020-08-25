@@ -18,8 +18,8 @@ export default async ({ store, match }) => {
     })
     return { code: 200 }
   }
-  Promise.all([detail({ id })(store.dispatch, store.getState), vodNews({ id })(store.dispatch, store.getState)]).then(data => {
-    addCache(`vod_news_${id}`, data)
-    return { code: 200 }
-  })
+  const detailData = await detail({ id })(store.dispatch, store.getState)
+  const vodNewsData = await vodNews({ id })(store.dispatch, store.getState)
+  addCache(`vod_news_${id}`, [detailData[1], vodNewsData[1]])
+  return { code: 200 }
 }

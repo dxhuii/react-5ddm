@@ -36,20 +36,17 @@ export default async ({ store, match }) => {
     })
     return { code: 200 }
   }
-  Promise.all([
-    listLoad({
-      id,
-      mcid: isEmpty(mcid),
-      year: isEmpty(year),
-      area: isEmpty(area),
-      wd: isEmpty(wd),
-      letter: isEmpty(letter),
-      lz: isEmpty(lz),
-      order: isEmpty(order, 1)
-    })(store.dispatch, store.getState),
-    configLoad({ tag: 'list' })(store.dispatch, store.getState)
-  ]).then(data => {
-    addCache('list', data)
-    return { code: 200 }
-  })
+  const listData = await listLoad({
+    id,
+    mcid: isEmpty(mcid),
+    year: isEmpty(year),
+    area: isEmpty(area),
+    wd: isEmpty(wd),
+    letter: isEmpty(letter),
+    lz: isEmpty(lz),
+    order: isEmpty(order, 1)
+  })(store.dispatch, store.getState)
+  const configData = await configLoad({ tag: 'list' })(store.dispatch, store.getState)
+  addCache('list', [listData[1], configData[1]])
+  return { code: 200 }
 }

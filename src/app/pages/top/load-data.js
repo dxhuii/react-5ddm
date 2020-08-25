@@ -28,13 +28,11 @@ export default async ({ store, match }) => {
     })
     return { code: 200 }
   }
-  Promise.all([
-    TopList({ order: 'hits_day' })(store.dispatch, store.getState),
-    TopList({ order: 'hits_week' })(store.dispatch, store.getState),
-    TopList({ order: 'hits_month' })(store.dispatch, store.getState),
-    TopList({ order: 'hits' })(store.dispatch, store.getState)
-  ]).then(data => {
-    addCache('top', data)
-    return { code: 200 }
-  })
+  const t1 = await TopList({ order: 'hits_day' })(store.dispatch, store.getState)
+  const t2 = await TopList({ order: 'hits_week' })(store.dispatch, store.getState)
+  const t3 = await TopList({ order: 'hits_month' })(store.dispatch, store.getState)
+  const t4 = await TopList({ order: 'hits' })(store.dispatch, store.getState)
+
+  addCache('top', [t1[1], t2[1], t3[1], t4[1]])
+  return { code: 200 }
 }

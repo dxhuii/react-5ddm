@@ -1,4 +1,3 @@
-/* eslint-disable no-sequences */
 import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
@@ -50,18 +49,15 @@ app.get('*', async function (req, res) {
   if (redirect) {
     res.redirect(redirect)
   } else {
-    // eslint-disable-next-line no-unused-expressions
-    res.render('../dist/server/index.ejs', { html, reduxState, meta, CNZZ_STAT, BAIDU_STAT, debug }),
-      function () {
-        // 对游客的请求进行缓存
-        if (!req.cookies[`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`]) {
-          cache.set(req.originalUrl, html)
-        }
-        res.send(html)
+    // eslint-disable-next-line handle-callback-err
+    res.render('../dist/server/index.ejs', { html, reduxState, meta, CNZZ_STAT, BAIDU_STAT, debug }, function (err, html) {
+      // 对游客的请求进行缓存
+      if (!req.cookies[`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`]) {
+        cache.set(req.originalUrl, html)
       }
+      res.send(html)
+    })
   }
-
-  // res.end() /
 })
 
 app.listen(PORT)

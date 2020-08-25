@@ -19,8 +19,8 @@ export default async ({ store, match }) => {
     })
     return { code: 200 }
   }
-  Promise.all([detail({ id })(store.dispatch, store.getState), comment({ id, sid })(store.dispatch, store.getState)]).then(data => {
-    addCache(`subject-${id}`, data)
-    return { code: 200 }
-  })
+  const detailData = await detail({ id })(store.dispatch, store.getState)
+  const commentData = await comment({ id, sid })(store.dispatch, store.getState)
+  addCache(`subject-${id}`, [detailData[1], commentData[1]])
+  return { code: 200 }
 }

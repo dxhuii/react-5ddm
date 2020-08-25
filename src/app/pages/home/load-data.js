@@ -21,19 +21,15 @@ export default async ({ store, match }) => {
     return { code: 200 }
   }
 
-  Promise.all([
-    slide()(store.dispatch, store.getState),
-    recommend({ name: 'anime' })(store.dispatch, store.getState),
-    recommend({ name: 'news' })(store.dispatch, store.getState),
-    week()(store.dispatch, store.getState),
-    newsIndex({ name: 'newsPicList' })(store.dispatch, store.getState),
-    newsIndex({ name: 'newsTextList' })(store.dispatch, store.getState),
-    top({ name: 'topListIndexCN' })(store.dispatch, store.getState),
-    top({ name: 'topListIndexJP' })(store.dispatch, store.getState)
-  ]).then(data => {
-    // cacheData = data
-    addCache('home', data)
-    // lastCacheAt = new Date().getTime()
-    return { code: 200 }
-  })
+  const slideData = await slide()(store.dispatch, store.getState)
+  const recommendAnime = await recommend({ name: 'anime' })(store.dispatch, store.getState)
+  const recommendNews = await recommend({ name: 'news' })(store.dispatch, store.getState)
+  const weekData = await week()(store.dispatch, store.getState)
+  const newsIndexPic = await newsIndex({ name: 'newsPicList' })(store.dispatch, store.getState)
+  const newsIndexTet = await newsIndex({ name: 'newsTextList' })(store.dispatch, store.getState)
+  const topCn = await top({ name: 'topListIndexCN' })(store.dispatch, store.getState)
+  const topJp = await top({ name: 'topListIndexJP' })(store.dispatch, store.getState)
+  const allData = [slideData[1], recommendAnime[1], recommendNews[1], weekData[1], newsIndexPic[1], newsIndexTet[1], topCn[1], topJp[1]]
+  addCache('home', allData)
+  return { code: 200 }
 }
