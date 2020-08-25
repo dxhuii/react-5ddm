@@ -1,7 +1,6 @@
 import { newsIndex } from '@/store/actions/newsIndex'
 import { configLoad } from '@/store/actions/config'
 import cache from '@/utils/cache'
-import config from '@/utils/config'
 const { getCache, addCache } = cache
 
 const menu = {
@@ -41,8 +40,8 @@ export default async ({ store, match }) => {
     })
     return { code: 200 }
   }
-  const newsData = await newsIndex({ name: 'newslist', id })(store.dispatch, store.getState)
-  const configData = await configLoad({ tag: 'menu' })(store.dispatch, store.getState)
-  addCache('newslist', [newsData[1], configData[1]])
+  const d1 = await newsIndex({ name: 'newslist', id })(store.dispatch, store.getState)
+  const d2 = await configLoad({ tag: 'menu' })(store.dispatch, store.getState)
+  addCache('newslist', [d1[1], d2[1]])
   return { code: 200 }
 }

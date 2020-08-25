@@ -18,8 +18,8 @@ export default async ({ store, match }) => {
     })
     return { code: 200 }
   }
-  const detailData = await detail({ id })(store.dispatch, store.getState)
-  const vodNewsData = await vodNews({ id })(store.dispatch, store.getState)
-  addCache(`vod_news_${id}`, [detailData[1], vodNewsData[1]])
+  const d1 = await detail({ id })(store.dispatch, store.getState)
+  const d2 = await vodNews({ id })(store.dispatch, store.getState)
+  addCache(`vod_news_${id}`, [d1[1], d2[1]])
   return { code: 200 }
 }

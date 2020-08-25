@@ -36,7 +36,7 @@ export default async ({ store, match }) => {
     })
     return { code: 200 }
   }
-  const listData = await listLoad({
+  const d1 = await listLoad({
     id,
     mcid: isEmpty(mcid),
     year: isEmpty(year),
@@ -46,7 +46,7 @@ export default async ({ store, match }) => {
     lz: isEmpty(lz),
     order: isEmpty(order, 1)
   })(store.dispatch, store.getState)
-  const configData = await configLoad({ tag: 'list' })(store.dispatch, store.getState)
-  addCache('list', [listData[1], configData[1]])
+  const d2 = await configLoad({ tag: 'list' })(store.dispatch, store.getState)
+  addCache('list', [d1[1], d2[1]])
   return { code: 200 }
 }
