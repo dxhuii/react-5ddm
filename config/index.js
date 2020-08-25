@@ -18,11 +18,9 @@
  * CNZZ_STAT CNZZ统计
  * GA 谷歌分析
  * EMAIL 邮箱
- * ICP 备案号
- * WW 文网文
  */
 
-const DOMAIN_NAME = ''
+const DOMAIN_NAME = '5ddm.com'
 
 const conf = {
   debug: false,
@@ -32,7 +30,7 @@ const conf = {
   HEAD: `<meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
-  `,
+  `
 }
 /**
  * 5ddm.com
@@ -40,21 +38,19 @@ const conf = {
  */
 const defalut = {
   API: 'https://www.5ddm.com/home.php/',
-  ISPLAY: false,
-  ISAD: false,
   NAME: '5D动漫(5站)',
   DESCRIBE: '5D动漫(5站) - 无广告免费的动漫网站',
   KEYWORDS: '5D动漫,5站',
   DESCRIPTION: '5D动漫(5站)致力于为所有动漫迷们免费提供最新最快的高清动画下载及在线观看资源索引。',
   DOMAIN: 'https://www.5ddm.com',
   DOMAIN_NAME: '5ddm.com',
-  PORT: 6666,
+  PORT: 8080,
   COOKIE_PREFIX: 'ddm_',
-  PUBLIC_PATH: '//www.5ddm.com',
+  PUBLIC_PATH: '',
   BAIDU_STAT: '9449f42e45055b4f70ad84574c4c65c8',
   CNZZ_STAT: '1276171240',
   GA: 'UA-7957076-8',
-  EMAIL: 'ddm_com@outlook.com',
+  EMAIL: 'ddm_com@outlook.com'
 }
 
 /**
@@ -63,8 +59,6 @@ const defalut = {
  */
 const kanfan = {
   API: 'https://www.5ddm.com/home.php/',
-  ISPLAY: true,
-  ISAD: false,
   NAME: '看番',
   DESCRIBE: '看番 - 您的追番网站',
   KEYWORDS: '看番',
@@ -77,7 +71,7 @@ const kanfan = {
   BAIDU_STAT: '0014e9ce85a5c0d765e1913cf93cf939',
   CNZZ_STAT: '1277233437',
   GA: 'UA-7957076-10',
-  EMAIL: 'kanfan_net@outlook.com',
+  EMAIL: 'kanfan_net@outlook.com'
 }
 
 let config = {}

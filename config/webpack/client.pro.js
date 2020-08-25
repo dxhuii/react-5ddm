@@ -1,8 +1,8 @@
 const baseConfig = require('./client.base')
-const WebpackParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const OfflinePlugin = require('offline-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const webpackConfig = {
@@ -10,18 +10,29 @@ const webpackConfig = {
   ...baseConfig,
   plugins: [
     // 清空打包目录
-    new CleanWebpackPlugin({
-      verbose: true
+    new CleanWebpackPlugin(),
+    new CopyPlugin({
+      patterns: [{ from: 'src/app/static/favicon.ico', to: 'favicon.ico' }]
     }),
 
-    new CopyWebpackPlugin([
-      { from: 'src/app/static/favicon.ico', to: 'favicon.ico' },
-      { from: 'src/app/static/5d_favicon.ico', to: '5d_favicon.ico' },
-      { from: 'src/app/static/dd_favicon.ico', to: 'dd_favicon.ico' }
-      // { from: 'config/manifest.json', to: 'manifest.json' }
-    ]),
-
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
+    new OptimizeCSSAssetsPlugin({
+      assetNameRegExp: /\.css\.*(?!.*map)/g, // 注意不要写成 /\.css$/g
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: {
+        discardComments: {
+          removeAll: true
+        },
+        // 避免 cssnano 重新计算 z-index
+        safe: true,
+        // cssnano 集成了autoprefixer的功能
+        // 会使用到autoprefixer进行无关前缀的清理
+        // 关闭autoprefixer功能
+        // 使用postcss的autoprefixer功能
+        autoprefixer: false
+      },
+      canPrint: true
+    }),
     new OfflinePlugin({
       autoUpdate: 1000 * 60 * 5,
       ServiceWorker: {

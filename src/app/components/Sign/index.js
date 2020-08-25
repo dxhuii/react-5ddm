@@ -7,18 +7,18 @@ import { DOMAIN_NAME } from 'Config'
 
 import './style.scss'
 
-export default function Sign ({ isSign, onType, visible }) {
+export default function Sign({ isSign, onType, visible }) {
   const setType = (e, isSign) => {
     e.stopPropagation()
     onType(isSign)
   }
-  const logo = `logo ${DOMAIN_NAME === 'dddm.tv' ? 'dddm' : DOMAIN_NAME === '5ddm.com' ? 'ddm' : DOMAIN_NAME === 'kanfan.net' ? 'kanfan' : ''}`
+  const logo = `logo ${DOMAIN_NAME === 'kanfan.net' ? 'kanfan' : ''}`
   return (
-    <div styleName="user">
+    <div styleName='user'>
       <div styleName={logo} />
       <h1>{isSign === 'signIn' ? '登录' : '注册'}，可以发现更多</h1>
       {isSign === 'signIn' ? <SignIn visible={visible} /> : <SignUp visible={visible} />}
-      <div styleName="user-reg" className="mt20">
+      <div styleName='user-reg' className='mt20'>
         {isSign === 'signIn' ? (
           <span>
             还没有账号？<a onClick={e => setType(e, 'signUp')}>去注册</a>
