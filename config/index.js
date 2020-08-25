@@ -18,6 +18,7 @@
  * CNZZ_STAT CNZZ统计
  * GA 谷歌分析
  * EMAIL 邮箱
+ * weiboName 微博名称
  */
 
 const DOMAIN_NAME = '5ddm.com'
@@ -27,6 +28,15 @@ const conf = {
   CLASS_SCOPED_NAME: '[hash:base64:5]',
   AUTH_COOKIE_NAME: 'auth',
   CACHA_TIME: 300000,
+  weiboName: '微博',
+  // [选填] google广告
+  googleAdSense: {
+    client: '',
+    slot: {
+      pc: '',
+      h5: ''
+    }
+  },
   HEAD: `<meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">

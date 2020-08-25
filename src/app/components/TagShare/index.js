@@ -7,15 +7,15 @@ import './style.scss'
 
 export default function TagShare({ tag, config, location }) {
   return (
-    <div styleName="article-tool">
-      <div styleName="article-tool__tag">
+    <div styleName='article-tool'>
+      <div styleName='article-tool__tag'>
         {tag.map((item, index) => (
           <Link to={`/search/${item}`} key={index}>
             #{item}
           </Link>
         ))}
       </div>
-      <div styleName="article-tool__share">
+      <div styleName='article-tool__share'>
         <Share data={config} location={location} />
       </div>
     </div>

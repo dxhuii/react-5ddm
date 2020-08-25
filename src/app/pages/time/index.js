@@ -16,22 +16,20 @@ import Ads from '@/components/Ads'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
-import { NAME } from 'Config'
-
 import './style.scss'
 
 export default Shell(() => {
   const {
     location,
     match: {
-      params: { id },
-    },
+      params: { id }
+    }
   } = useReactRouter()
   const store = useStore()
-  const info = useSelector((state) => getDetail(state, id))
+  const info = useSelector(state => getDetail(state, id))
 
   useEffect(() => {
-    const getData = (args) => detail(args)(store.dispatch, store.getState)
+    const getData = args => detail(args)(store.dispatch, store.getState)
     if (!info.data) {
       getData({ id })
     }
@@ -41,11 +39,11 @@ export default Shell(() => {
   const { title, content = '', listNameBig, pic, actor, year, filmtime, director, mcid, updateDate, tvcont } = data
   const shareConfig = {
     pic,
-    title: `#${title}#播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新 - #${NAME}# @99496动漫网`,
+    title: `#${title}#播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新`,
     desc: content,
-    url: `/time/${id}`,
+    url: `/time/${id}`
   }
-  const reActor = actor ? actor.map((item) => item.title).join(',') : ''
+  const reActor = actor ? actor.map(item => item.title).join(',') : ''
   return (
     <div className='wp mt20 clearfix'>
       <Meta title={`${title}播出时间_${listNameBig}${title}更新时间,${title}几点更新,${title}周几更新`}>

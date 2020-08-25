@@ -1,7 +1,7 @@
 import config from '@/utils/config'
 import Ajax from '@/common/ajax'
 
-export default ({
+export default async ({
   dispatch,
   getState,
   reducerName,
@@ -14,66 +14,61 @@ export default ({
   method = 'get',
   callback = () => {}
 }) => {
-  // eslint-disable-next-line no-async-promise-executor
-  return new Promise(async (resolve, reject) => {
-    const state = getState()
-    const list = state[reducerName][name] || {}
-    if (list.loading) {
-      resolve(['loading...'])
-      return
+  const state = getState()
+  const list = state[reducerName][name] || {}
+  if (list.loading) {
+    return ['loading...']
+  }
+
+  // 已经加载所有，没有更多了
+  if (Reflect.has(list, 'more') && list.more) {
+    const result = [null, list]
+    callback(result)
+    return result
+  }
+
+  if (!Reflect.has(list, 'data')) list.data = []
+
+  // 添加页面page
+  if (isPage) {
+    if (!Reflect.has(list, 'page')) {
+      list.page = 1
+    } else {
+      // 如果以及存在筛选条件，那么下次请求，进行翻页
+      list.page += 1
     }
+  }
 
-    // 已经加载所有，没有更多了
-    if (Reflect.has(list, 'more') && list.more) {
-      resolve([null, list])
-      // eslint-disable-next-line standard/no-callback-literal
-      callback([null, list])
-      return
-    }
+  list.loading = true
 
-    if (!Reflect.has(list, 'data')) list.data = []
+  if (actionType) dispatch({ type: actionType, name, data: list })
 
-    // 添加页面page
-    if (isPage) {
-      if (!Reflect.has(list, 'page')) {
-        list.page = 1
-      } else {
-        // 如果以及存在筛选条件，那么下次请求，进行翻页
-        list.page += 1
-      }
-    }
+  const url = config.api[api]
 
-    list.loading = true
-
-    if (actionType) dispatch({ type: actionType, name, data: list })
-
-    const url = config.api[api]
-
-    const [err, data] = await Ajax({
-      method,
-      url,
-      data: isPage ? Object.assign({}, params, { s: url.split('=')[1], p: list.page }) : params,
-      headers: header ? { Authorization: localStorage.getItem('token') ? localStorage.getItem('token') : 0 } : {}
-    })
-
-    if (err) {
-      list.loading = false
-      resolve([null, list])
-      // eslint-disable-next-line standard/no-callback-literal
-      callback([null, list])
-      return
-    }
-
-    list.data = isPage && list.page !== 1 ? list.data.concat(data.data) : data.data || []
-    list.params = params
-    list.loading = false
-
-    if (isPage) list.more = list.data.length < params.limit
-
-    if (actionType) dispatch({ type: actionType, name, data: list })
-
-    resolve([null, list])
-    // eslint-disable-next-line standard/no-callback-literal
-    callback([null, list])
+  const [err, data] = await Ajax({
+    method,
+    url,
+    data: isPage ? Object.assign({}, params, { s: url.split('=')[1], p: list.page }) : params,
+    headers: header ? { Authorization: localStorage.getItem('token') ? localStorage.getItem('token') : 0 } : {}
   })
+
+  if (err) {
+    list.loading = false
+    const result = [null, list]
+    callback(result)
+    return result
+  }
+
+  list.data = isPage && list.page !== 1 ? list.data.concat(data.data) : data.data || []
+  list.params = params
+  list.loading = false
+
+  if (isPage) list.more = list.data.length < params.limit
+
+  if (actionType) dispatch({ type: actionType, name, data: list })
+
+  const result = [null, list]
+
+  callback(result)
+  return result
 }

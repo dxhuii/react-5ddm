@@ -25,7 +25,7 @@ const ServiceWorker = {
 
   uninstall: function () {
     // eslint-disable-next-line no-async-promise-executor
-    return new Promise(async resolve => {
+    return new Promise(resolve => {
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker
           .getRegistrations()

@@ -36,20 +36,20 @@ export default Shell(() => {
     location,
     match: {
       params: { id },
-      url,
-    },
+      url
+    }
   } = useReactRouter()
 
   const store = useStore()
-  const me = useSelector((state) => getUserInfo(state))
-  const articleData = useSelector((state) => getArticle(state, id))
-  const newsData = useSelector((state) => getNewsIndex(state, 'newslist', 44))
+  const me = useSelector(state => getUserInfo(state))
+  const articleData = useSelector(state => getArticle(state, id))
+  const newsData = useSelector(state => getNewsIndex(state, 'newslist', 44))
 
   useEffect(() => {
-    const getArticleData = (args) => article(args)(store.dispatch, store.getState)
-    const getNewsData = (args) => newsIndex(args)(store.dispatch, store.getState)
-    document.onkeyup = (event) => {
-      if (event.which == '27') {
+    const getArticleData = args => article(args)(store.dispatch, store.getState)
+    const getNewsData = args => newsIndex(args)(store.dispatch, store.getState)
+    document.onkeyup = event => {
+      if (event.which === '27') {
         isFull(false)
       }
     }
@@ -68,12 +68,12 @@ export default Shell(() => {
       // 火狐没有 e.path 属性
       const isFF = /Firefox/.test(navigator.userAgent)
       // 可点击区域
-      const elem = isFF ? e.rangeParent.id || e.rangeParent.parentNode.id : (e.path.filter((item) => item.id === 'content')[0] || []).id
+      const elem = isFF ? e.rangeParent.id || e.rangeParent.parentNode.id : (e.path.filter(item => item.id === 'content')[0] || []).id
       // 判断是否点击的图片
       if (e.target.nodeName === 'IMG' && content && elem === 'content') {
         e.preventDefault()
         e.stopPropagation()
-        let params = {}
+        const params = {}
         params.param = {}
         // 获取imglist
         const oPics = content.getElementsByTagName('img')
@@ -94,7 +94,7 @@ export default Shell(() => {
     })
   }
 
-  const closePic = (val) => {
+  const closePic = val => {
     setPic(val)
     if (!val) {
       imgObj.index = undefined
@@ -122,14 +122,14 @@ export default Shell(() => {
     content = '',
     playname = '',
     playurl = '',
-    vodlist = [],
+    vodlist = []
   } = data
   const playHtml = playing({ name: playname, vid: playurl, danmu: `article_${id}`, uid: userid, url }) || []
   const shareConfig = {
     pic,
-    title: `${title} - ${name} - #${NAME}# @99496动漫网`,
+    title: `${title} - ${name}`,
     desc: remark,
-    url: `/article/${id}`,
+    url: `/article/${id}`
   }
   const { imageArray = [], index } = imgObj
   if (loading || !data.title) return <Loading />
@@ -154,7 +154,7 @@ export default Shell(() => {
           <div styleName='article-head'>
             <h1>{title}</h1>
             <div styleName='article-label'>
-              <span>来源：{inputer ? inputer : '网络'}</span>
+              <span>来源：{inputer || '网络'}</span>
               <span>更新时间：{addtime}</span>
             </div>
           </div>

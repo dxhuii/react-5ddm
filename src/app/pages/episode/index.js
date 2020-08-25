@@ -18,8 +18,6 @@ import Ads from '@/components/Ads'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
-import { NAME } from 'Config'
-
 import './style.scss'
 
 export default Shell(() => {
@@ -27,15 +25,15 @@ export default Shell(() => {
   const {
     location,
     match: {
-      params: { id, p },
-    },
+      params: { id, p }
+    }
   } = useReactRouter()
 
   const store = useStore()
-  const info = useSelector((state) => getEpisodeList(state, id + (p ? '-' + p : '')))
+  const info = useSelector(state => getEpisodeList(state, id + (p ? '-' + p : '')))
 
   useEffect(() => {
-    const getData = (args) => episode(args)(store.dispatch, store.getState)
+    const getData = args => episode(args)(store.dispatch, store.getState)
     onMore(false)
     if (!info.data) {
       getData({ id, p })
@@ -43,7 +41,7 @@ export default Shell(() => {
   }, [id, info.data, p, store.dispatch, store.getState])
 
   const showList = (id, num, p) => {
-    let list = []
+    const list = []
     for (let i = 1; i <= num; i++) {
       const link = <Link to={`/episode/${id}/${i}`}>{`${i}集`}</Link>
       list.push(
@@ -56,20 +54,19 @@ export default Shell(() => {
         )
       )
     }
-    return list.map((item) => item)
+    return list.map(item => item)
   }
 
   const { data = {}, loading } = info
 
   const { title, name, content, prev, next, vid, vTitle, gold, pic, storyNum, vContent, actor, year, status, mcid, pid } = data
-  const shareTitle = ` - #${NAME}# @99496动漫网`
   const shareConfig = {
     pic,
     title: !p
-      ? `#${vTitle}#剧情(共${storyNum}集)_${vTitle}全集剧情${shareTitle}`
-      : `#${vTitle}#${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情${shareTitle}`,
+      ? `#${vTitle}#剧情(共${storyNum}集)_${vTitle}全集剧情`
+      : `#${vTitle}#${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情`,
     desc: content,
-    url: !p ? `/episode/${id}` : `/episode/${id}/${p}`,
+    url: !p ? `/episode/${id}` : `/episode/${id}/${p}`
   }
   const reName = !p ? '' : name
   if (loading || !data.vTitle) return <Loading />

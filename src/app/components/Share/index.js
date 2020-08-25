@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import QRCode from 'qrcode.react'
 
-import { DOMAIN, NAME } from 'Config'
+import { DOMAIN, NAME, weiboName } from 'Config'
 import weixin from '@/utils/weixin'
 
 import './style.scss'
@@ -22,7 +22,7 @@ export default function Share({ data = {}, location = {} }) {
   const goShare = type => {
     const { title, desc, pic, url } = data
     const enUrl = encodeURIComponent(`${DOMAIN}${url}`)
-    const enTitle = encodeURIComponent(title)
+    const enTitle = encodeURIComponent(`${title} - #${NAME}# @${weiboName}`)
     const enPic = encodeURIComponent(pic)
     const enDesc = encodeURIComponent(desc)
     const enName = encodeURIComponent(NAME)

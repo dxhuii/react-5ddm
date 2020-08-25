@@ -213,7 +213,7 @@ export default Shell(() => {
   const reContent = `${content.substring(0, 120)}${content.length > 120 ? '...' : ''}`
   const shareConfig = {
     pic,
-    title: `#${title}#${language ? `(${language})` : ''} - ${listName}${listNameBig} - #${NAME}# @99496动漫网`,
+    title: `#${title}#${language ? `(${language})` : ''} - ${listName}${listNameBig}`,
     desc: reContent,
     url: `/subject/${id}`
   }
