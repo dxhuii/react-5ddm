@@ -1,3 +1,12 @@
+// ArriveFooter 监听抵达页尾的事件
+import './vendors/arrive-footer'
+/**
+ * 懒加载图片、Dom
+ * 使用方式
+ * 给dom添加class="load-demand"、data-load-demand="<div></div> or <img />"
+ **/
+import './vendors/load-demand'
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
@@ -5,6 +14,8 @@ import { Provider } from 'react-redux'
 import { matchPath } from 'react-router'
 import ReactGA from 'react-ga'
 import { loadableReady } from '@loadable/component'
+
+import './service-worker'
 
 // 引入全局样式
 import '../app/pages/global.scss'
@@ -16,10 +27,7 @@ import { getUserInfo } from '@/store/reducers/user'
 import { GA, DOMAIN, debug } from 'Config'
 import { loadScript } from '@/utils/loadScript'
 
-import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 if (!debug) {
-  OfflinePluginRuntime.install()
-  OfflinePluginRuntime.applyUpdate()
   const { origin, pathname } = window.location
   if (!/out/.test(pathname)) {
     // 打开的不是目标网站跳转到目标网站

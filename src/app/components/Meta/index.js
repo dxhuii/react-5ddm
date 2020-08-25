@@ -7,6 +7,7 @@ import { NAME } from 'Config'
 export default function Meta({ title, url, children }) {
   let _title = ''
   _title += title || NAME
+  // eslint-disable-next-line no-unused-expressions
   if (title) url ? title : (_title += ` - ${NAME}`)
   return (
     <>

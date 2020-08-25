@@ -37,7 +37,9 @@ const webpackConfig = {
       autoUpdate: 1000 * 60 * 5,
       ServiceWorker: {
         publicPath: '/sw.js'
-      }
+      },
+      // 排除不需要缓存的文件
+      excludes: ['../server/index.ejs']
     }),
     ...baseConfig.plugins
   ]

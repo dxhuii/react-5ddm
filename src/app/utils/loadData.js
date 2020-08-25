@@ -1,7 +1,19 @@
 import config from '@/utils/config'
 import Ajax from '@/common/ajax'
 
-export default ({ dispatch, getState, reducerName, actionType, api, name = '', params = {}, isPage = false, header = false, method = 'get', callback = () => {} }) => {
+export default ({
+  dispatch,
+  getState,
+  reducerName,
+  actionType,
+  api,
+  name = '',
+  params = {},
+  isPage = false,
+  header = false,
+  method = 'get',
+  callback = () => {}
+}) => {
   // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve, reject) => {
     const state = getState()
@@ -14,6 +26,7 @@ export default ({ dispatch, getState, reducerName, actionType, api, name = '', p
     // 已经加载所有，没有更多了
     if (Reflect.has(list, 'more') && list.more) {
       resolve([null, list])
+      // eslint-disable-next-line standard/no-callback-literal
       callback([null, list])
       return
     }
@@ -46,6 +59,7 @@ export default ({ dispatch, getState, reducerName, actionType, api, name = '', p
     if (err) {
       list.loading = false
       resolve([null, list])
+      // eslint-disable-next-line standard/no-callback-literal
       callback([null, list])
       return
     }
@@ -59,6 +73,7 @@ export default ({ dispatch, getState, reducerName, actionType, api, name = '', p
     if (actionType) dispatch({ type: actionType, name, data: list })
 
     resolve([null, list])
+    // eslint-disable-next-line standard/no-callback-literal
     callback([null, list])
   })
 }

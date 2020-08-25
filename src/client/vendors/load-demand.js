@@ -2,9 +2,9 @@
  * 按需加载
  * 使用例子：<div class="load-demand" data-load-demand="<img src='***' />"></div>
  * */
-(function() {
+;(function () {
   // 如果是服务器，那么就不存在 window 和 document 全局变量，因此不继续执行
-  if (typeof window == 'undefined' || typeof document == 'undefined') {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
     return
   }
 
@@ -32,13 +32,13 @@
 
   // let postsModal = $('#posts-modal');
 
-  var update = function() {
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0,
-      elements = document.getElementsByClassName('load-demand')
+  var update = function () {
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+    var elements = document.getElementsByClassName('load-demand')
 
     // console.log(scrollTop);
     //  && $('#posts-modal').className.indexOf('show') != -1
-    if (document.getElementById('posts-modal') && document.getElementById('posts-modal').className.indexOf('show') != -1) {
+    if (document.getElementById('posts-modal') && document.getElementById('posts-modal').className.indexOf('show') !== -1) {
       // console.log(postsModal.className);
       // console.log('123123');
       scrollTop = document.getElementById('posts-modal').scrollTop
@@ -49,7 +49,7 @@
 
       let content = encodeURIComponent(elements[i].getAttribute('data-load-demand'))
 
-      if (content == '') continue
+      if (content === '') continue
 
       content = decodeURIComponent(content)
 
@@ -63,7 +63,7 @@
     }
   }
 
-  setInterval(function() {
+  setInterval(function () {
     update()
   }, 500)
 })()

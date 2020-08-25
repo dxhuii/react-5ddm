@@ -37,6 +37,7 @@
     "react/no-render-return-value": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react/display-name": "off",
     "prettier/prettier": [
       "error",
       {

@@ -2,7 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
 
 const AJAX = ({ url = '', method = 'get', data = {}, headers = {} }) => {
-  let option = { url, method, headers }
+  const option = { url, method, headers }
   if (method === 'get') {
     data._t = new Date().getTime()
     option.params = data
@@ -13,13 +13,13 @@ const AJAX = ({ url = '', method = 'get', data = {}, headers = {} }) => {
   return axios(option)
     .then(resp => {
       if (resp && resp.data) {
-        let res = resp.data
+        const res = resp.data
         return [null, res]
       } else {
         return ['return none']
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       if (error && error.response && error.response.data) {
         return [error.response.data]
       } else {

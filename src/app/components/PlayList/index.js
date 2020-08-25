@@ -21,7 +21,7 @@ export default () => {
   const [isAll, onAll] = useState(false)
 
   const store = useStore()
-  const info = useSelector((state) => getPlayList(state, id))
+  const info = useSelector(state => getPlayList(state, id))
 
   const pageNav = useRef()
   const pageNavUl = useRef()
@@ -112,7 +112,7 @@ export default () => {
     const num = parseInt(len / pageSize)
     const surplus = len % pageSize // 除 pageSize 的余数
     const pageNum = surplus ? num + 1 : num // 余数不为 0 分页数 + 1
-    let html = []
+    const html = []
     if (len > pageSize) {
       for (let i = 1; i <= pageNum; i++) {
         const pageFirst = i === 1 ? 1 : pageSize * (i - 1) + 1
@@ -127,12 +127,12 @@ export default () => {
       }
     }
 
-    return html.map((item) => item)
+    return html.map(item => item)
   }
 
   useEffect(() => {
     async function fetchData() {
-      const _playlist = (args) => playlist(args)(store.dispatch, store.getState)
+      const _playlist = args => playlist(args)(store.dispatch, store.getState)
       if (!(info && info.data)) {
         const [, data] = await _playlist({ id })
         if (data) {
@@ -178,7 +178,7 @@ export default () => {
           ) : null}
           <div styleName='playlist'>
             <ul styleName='playlist-ul'>
-              {dataSource.map((item) => (
+              {dataSource.map(item => (
                 <li styleName={+pid === +item.episode ? 'active' : ''} key={item.episode}>
                   {format(item.title, item.episode, id)}
                 </li>
@@ -196,7 +196,7 @@ export default () => {
               ) : null}
             </div>
             <ul>
-              {(isReverse ? list.reverse() : list).map((item) => (
+              {(isReverse ? list.reverse() : list).map(item => (
                 <li styleName={+pid === +item.episode ? 'active' : ''} key={item.episode}>
                   <Link to={`/play/${id}/${item.episode}`}>{firstNumber(item.title)}</Link>
                 </li>
