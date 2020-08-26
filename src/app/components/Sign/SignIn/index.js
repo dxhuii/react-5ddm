@@ -63,10 +63,10 @@ export default function SignIn({ visible }) {
 
   return (
     <form onSubmit={submit}>
-      <input type='text' ref={username} placeholder='请输入账号/邮箱' />
-      <input type='password' ref={password} placeholder='请输入密码' />
+      <input type='text' name='username' ref={username} placeholder='请输入账号/邮箱' />
+      <input type='password' name='password' ref={password} placeholder='请输入密码' />
       <div styleName='validate'>
-        <input type='text' ref={validate} placeholder='请输入验证' />
+        <input type='text' name='validate' ref={validate} placeholder='请输入验证' />
         <img src={base64img} onClick={getVerify} />
       </div>
       <button type='submit'>登录</button>

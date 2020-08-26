@@ -1,60 +1,41 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useCallback, useEffect } from 'react'
 
 // redux
 import { useStore } from 'react-redux'
-import { signUp, send } from '@/store/actions/user'
+import { signUp, getCode } from '@/store/actions/user'
 import Toast from '@/components/Toast'
 
 import '../style.scss'
 
-const sTime = 60
-let syTime = sTime
-
-export default () => {
+export default visible => {
   const store = useStore()
   const _signUp = args => signUp(args)(store.dispatch, store.getState)
-  const [paused, setPaused] = useState(true)
-  const [time, setTime] = useState(sTime)
-  const [username, password, mobile, rePassword, code] = [useRef(), useRef(), useRef(), useRef(), useRef()]
+  const [base64img, getBase64] = useState('')
+  const [imgkey, getImgKey] = useState('')
 
-  const tick = () => {
-    if (syTime === 1) {
-      setTime(sTime)
-      setPaused(true)
-    } else {
-      syTime = syTime - 1
-      setTime(syTime)
-      setPaused(false)
-    }
-    setTimeout(() => tick(), 1000)
-  }
+  const [username, password, email, rePassword, validate] = [useRef(), useRef(), useRef(), useRef(), useRef()]
 
-  const start = async () => {
-    if (!paused) return
-    const m = mobile.current
-    if (!m.value) {
-      Toast.error('请输入手机号')
-      m.focus()
-      return false
-    } else if (!/^[1][0-9]{10}$/.test(m.value)) {
-      Toast.error('手机号不正确')
-      m.focus()
-      return false
+  const getVerify = useCallback(async () => {
+    const _getCode = () => getCode()(store.dispatch, store.getState)
+    const [err, data] = await _getCode()
+    if (data.code === 0) {
+      const { base64img, imgkey } = data.data
+      getBase64(base64img)
+      getImgKey(imgkey)
     }
-    const _send = args => send(args)(store.dispatch, store.getState)
-    const [, data] = await _send({ to: m.value })
-    if (data.code === 1) {
-      tick()
-    }
-  }
+  }, [store.dispatch, store.getState])
+
+  useEffect(() => {
+    if (visible) getVerify()
+  }, [getVerify, visible])
 
   const submit = async event => {
     event.preventDefault()
     const u = username.current
-    const m = mobile.current
+    const e = email.current
     const p = password.current
     const r = rePassword.current
-    const c = code.current
+    const c = validate.current
 
     if (!u.value) {
       Toast.error('请输入用户名')
@@ -62,13 +43,9 @@ export default () => {
       return false
     }
 
-    if (!m.value) {
-      Toast.error('请输入手机号')
-      m.focus()
-      return false
-    } else if (!/^[1][0-9]{10}$/.test(m.value)) {
-      Toast.error('手机号不正确')
-      m.focus()
+    if (!e.value) {
+      Toast.error('请输入邮箱')
+      e.focus()
       return false
     }
 
@@ -84,7 +61,7 @@ export default () => {
       return false
     }
 
-    if (!code.value) {
+    if (!c.value) {
       Toast.error('请输入验证码')
       c.focus()
       return false
@@ -93,8 +70,9 @@ export default () => {
     const [, success] = await _signUp({
       username: u.value,
       password: p.value,
-      mobile: m.value,
-      code: c.value
+      email: e.value,
+      validate: c.value,
+      key: imgkey
     })
     if (success) {
       setTimeout(() => {
@@ -106,14 +84,14 @@ export default () => {
 
   return (
     <form onSubmit={submit}>
-      <input type='text' ref={username} placeholder='请输入账号' />
-      <input type='password' ref={password} placeholder='请输入密码' />
-      <input type='password' ref={rePassword} placeholder='再输入一次密码' />
+      <input type='text' name='username' ref={username} placeholder='请输入用户名' />
+      <input type='text' name='email' ref={email} placeholder='请输入邮箱' />
+      <input type='password' name='password' ref={password} placeholder='请输入密码' />
+      <input type='password' name='repassword' ref={rePassword} placeholder='再输入一次密码' />
       <div styleName='validate'>
-        <input type='text' ref={mobile} placeholder='请输入手机号' />
-        <div onClick={start}>{time > 1 && time < sTime ? time : '发送验证码'}</div>
+        <input type='text' name='validate' ref={validate} placeholder='请输入验证' />
+        <img src={base64img} onClick={getVerify} />
       </div>
-      <input type='text' ref={code} placeholder='请输入验证' />
       <button type='submit'>注册</button>
     </form>
   )

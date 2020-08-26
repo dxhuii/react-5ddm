@@ -76,6 +76,7 @@ export async function saveCookie(params, name) {
     }
   } else {
     Toast.error(data.msg)
+    return [null, false]
   }
 }
 
@@ -85,9 +86,9 @@ export function signIn({ username, password, validate, key }) {
   }
 }
 
-export function signUp({ username, password, mobile, validate, key }) {
+export function signUp({ username, password, email, validate, key }) {
   return () => {
-    return saveCookie({ user_name: username, user_password: password, to: mobile, validate, key }, 'reg')
+    return saveCookie({ user_name: username, user_password: password, user_email: email, validate, key }, 'reg')
   }
 }
 
