@@ -1,0 +1,99 @@
+/* 颜色变量 */
+
+/* 行为相关颜色 */
+$d-color-primary: #08f;
+$d-color-success: #4cd964;
+$d-color-warning: #f0ad4e;
+$d-color-error: #dd524d;
+
+/* 文字基本颜色 */
+$d-text-color: #333; //基本色
+$d-text-color-inverse: #fff; //反色
+$d-text-color-grey: #999; //辅助灰色，如加载更多的提示信息
+$d-text-color-placeholder: #808080;
+$d-text-color-disable: #c0c0c0;
+
+/* 背景颜色 */
+$d-bg-color: #ffffff;
+$d-bg-color-grey: #f8f8f8;
+$d-bg-color-hover: #f1f1f1; //点击状态颜色
+$d-bg-color-mask: rgba(0, 0, 0, 0.4); //遮罩颜色
+
+/* 边框颜色 */
+$d-border-color: #c8c7cc;
+
+/* 尺寸变量 */
+
+/* 文字尺寸 */
+$d-font-size-sm: 12px;
+$d-font-size-base: 14px;
+$d-font-size-lg: 16px;
+
+/* Border Radius */
+$d-border-radius-sm: 4px;
+$d-border-radius-base: 6px;
+$d-border-radius-lg: 10px;
+$d-border-radius-circle: 50%;
+
+/* 水平间距 */
+$d-spacing-row-sm: 10px;
+$d-spacing-row-base: 15px;
+$d-spacing-row-lg: 20px;
+
+/* 垂直间距 */
+$d-spacing-col-sm: 10px;
+$d-spacing-col-base: 15px;
+$d-spacing-col-lg: 20px;
+
+/* 透明度 */
+$d-opacity-disabled: 0.3; // 组件禁用态的透明度
+
+/* 文章场景相关 */
+$d-color-title: #2c405a; // 文章标题颜色
+$d-font-size-title: 18px;
+$d-color-subtitle: #555555; // 二级标题颜色
+$d-font-size-subtitle: 20px;
+$d-color-paragraph: #3f536e; // 文章段落颜色
+$d-font-size-paragraph: 22px;
+
+@mixin clamp($num: 2) {
+  overflow: hidden;
+  /*超出隐藏*/
+  text-overflow: ellipsis;
+  /*文本溢出时显示省略标记*/
+  display: -webkit-box;
+  /*设置弹性盒模型*/
+  -webkit-line-clamp: $num;
+  /*文本占的行数,如果要设置2行加...则设置为2*/
+  -webkit-box-orient: vertical;
+  /*子代元素垂直显示*/
+}
+
+//实体箭头
+@mixin triArrow($direction, $size, $color) {
+  width: 0;
+  height: 0;
+  line-height: 0;
+  font-size: 0;
+  overflow: hidden;
+  border-width: $size;
+  cursor: pointer;
+
+  @if $direction==top {
+    border-style: dashed dashed solid dashed;
+    border-color: transparent transparent $color transparent;
+    border-top: none;
+  } @else if $direction==bottom {
+    border-style: solid dashed dashed dashed;
+    border-color: $color transparent transparent transparent;
+    border-bottom: none;
+  } @else if $direction==right {
+    border-style: dashed dashed dashed solid;
+    border-color: transparent transparent transparent $color;
+    border-right: none;
+  } @else if $direction==left {
+    border-style: dashed solid dashed dashed;
+    border-color: transparent $color transparent transparent;
+    border-left: none;
+  }
+}

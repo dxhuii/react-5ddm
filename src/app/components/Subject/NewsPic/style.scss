@@ -1,4 +1,3 @@
-@import '../../../pages/_mixin';
 .newslist {
   display: flex;
   flex-wrap: wrap;
@@ -34,8 +33,8 @@
       font-size: 12px;
       padding: 10px 5px;
       overflow: hidden;
-      transition: top .1s ease-in-out;
-      background: linear-gradient(transparent, rgba(0, 0, 0, .1) 20%, rgba(0, 0, 0, .2) 35%, rgba(0, 0, 0, .6) 65%, rgba(0, 0, 0, .9));
+      transition: top 0.1s ease-in-out;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.2) 35%, rgba(0, 0, 0, 0.6) 65%, rgba(0, 0, 0, 0.9));
       p {
         margin-top: 0;
         @include clamp(4);
@@ -49,7 +48,7 @@
       .mark {
         top: 0;
         height: 100%;
-        background: rgba(0, 0, 0, .7);
+        background: rgba(0, 0, 0, 0.7);
       }
     }
   }

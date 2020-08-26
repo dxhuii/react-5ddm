@@ -92,7 +92,8 @@ module.exports = {
         loader: 'babel'
       },
       {
-        test: /\.scss$/,
+        // test: /\.scss$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
           'css-hot',
           {
@@ -109,17 +110,25 @@ module.exports = {
             }
           },
           {
-            loader: `sass`
+            loader: `sass`,
+            options: {
+              // Prefer `dart-sass`
+              implementation: require('sass'),
+              sassOptions: {
+                fiber: false
+              },
+              additionalData: '@import "~@/pages/variables.scss";'
+            }
           },
           { ...postcssConfig }
         ]
       },
 
       // css 解析
-      {
-        test: /\.css$/,
-        use: ['css-hot', { loader: MiniCssExtractPlugin.loader }, { loader: `css` }, { ...postcssConfig }]
-      },
+      // {
+      //   test: /\.css$/,
+      //   use: ['css-hot', { loader: MiniCssExtractPlugin.loader }, { loader: `css` }, { ...postcssConfig }]
+      // },
 
       // 小于8K的图片，转 base64
       {

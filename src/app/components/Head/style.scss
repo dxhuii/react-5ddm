@@ -1,5 +1,3 @@
-@import '../../pages/__mixin.scss';
-
 header {
   display: flex;
   background-color: #fff;
@@ -186,11 +184,6 @@ header {
     flex-basis: 120px;
     line-height: 48px;
 
-    &.dddm {
-      width: 110px;
-      background-size: 100px auto;
-    }
-
     /*5ddm*/
     &.ddm {
       width: 110px;
@@ -224,11 +217,6 @@ header {
     background-position: 0 5px;
     flex-basis: 80px;
     line-height: 36px;
-
-    &.dddm {
-      width: 70px;
-      background-size: 65px auto;
-    }
 
     /*5ddm*/
     &.ddm {

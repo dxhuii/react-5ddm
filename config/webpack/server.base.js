@@ -76,7 +76,8 @@ module.exports = {
 
       // scss 文件解析
       {
-        test: /\.scss$/,
+        // test: /\.scss$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
           {
             loader: `css`,
@@ -87,22 +88,32 @@ module.exports = {
               onlyLocals: true // 只映射，不打包CSS
             }
           },
-          { loader: `sass` }
-        ]
-      },
-
-      // css 解析
-      {
-        test: /\.css$/,
-        use: [
           {
-            loader: `css`,
+            loader: `sass`,
             options: {
-              onlyLocals: true // 只映射，不打包CSS
+              // Prefer `dart-sass`
+              implementation: require('sass'),
+              sassOptions: {
+                fiber: false
+              },
+              additionalData: '@import "~@/pages/variables.scss";'
             }
           }
         ]
       }
+
+      // css 解析
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     {
+      //       loader: `css`,
+      //       options: {
+      //         onlyLocals: true // 只映射，不打包CSS
+      //       }
+      //     }
+      //   ]
+      // }
     ]
   },
 

@@ -36,7 +36,7 @@ export default Shell(() => {
   const getYear = start => {
     const d = new Date()
     const s = d.getFullYear() - start
-    let y = []
+    const y = []
     for (let i = 0; i <= s; i++) {
       y.push(start + i)
     }
@@ -44,7 +44,7 @@ export default Shell(() => {
   }
 
   const getMonths = year => {
-    let m = []
+    const m = []
     for (let i = 1; i <= 12; i++) {
       m.push(i <= 9 ? `${year}0${i}` : `${year}${i}`)
     }
@@ -55,23 +55,23 @@ export default Shell(() => {
   return (
     <>
       <Meta title={`${year}年${m}月播出的新番动漫_${m}月新番_动漫新番表_新番表`}>
-        <meta name="keywords" content={`${year}年${m}月播出的新番动漫,${m}月新番,动漫新番表,${m}月最新动漫,${year}年${m}月的动漫,新番表`} />
+        <meta name='keywords' content={`${year}年${m}月播出的新番动漫,${m}月新番,动漫新番表,${m}月最新动漫,${year}年${m}月的动漫,新番表`} />
         <meta
-          name="description"
+          name='description'
           content={`您想知道${year}年${m}月有哪些新番动漫播出吗，你想了解最新的动漫新番表 ，${m}月份最新动漫观看指南，${m}月播出的动漫资讯信息，请关注本站。`}
         />
       </Meta>
       {loading ? <Loading /> : null}
-      <div className="wp mt20">
-        <div className="box">
-          <ul styleName="year" className="clearfix">
+      <div className='wp mt20'>
+        <div className='box'>
+          <ul styleName='year' className='clearfix'>
             {getYear(nowYear - 18).map(item => (
               <li key={item} styleName={year === item ? 'cur' : ''} onClick={() => onYear(item)}>
                 <span>{item}</span>
               </li>
             ))}
           </ul>
-          <div styleName="month">
+          <div styleName='month'>
             {getMonths(year).map(item => (
               <Link to={`/month/${item}`} key={item} styleName={month === item ? 'cur' : ''}>
                 {item}
@@ -79,7 +79,7 @@ export default Shell(() => {
             ))}
           </div>
         </div>
-        <div className="box mt20">
+        <div className='box mt20'>
           共 <b>{data.length}</b> 条
         </div>
         <Item data={data} />

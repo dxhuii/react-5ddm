@@ -13,39 +13,39 @@ export default function Comment({ data, submit }) {
   }
 
   return (
-    <div styleName="comment">
-      <div styleName="comment-form">
+    <div styleName='comment'>
+      <div styleName='comment-form'>
         <form onSubmit={addComment}>
           <textarea ref={commentContent}></textarea>
           <button>发表</button>
         </form>
       </div>
-      <div styleName="comment-list">
+      <div styleName='comment-list'>
         {data.length < 0 ? (
-          <div styleName="comment-empty" className="tac">
+          <div styleName='comment-empty' className='tac'>
             暂无评论，抢少发
           </div>
         ) : (
-          <ul styleName="comment-list__list" className="mt20">
+          <ul styleName='comment-list__list' className='mt20'>
             {data.map(item => (
               <li key={item.id}>
-                <div styleName="commit-list__people">
-                  <div styleName="avatar">
+                <div styleName='commit-list__people'>
+                  <div styleName='avatar'>
                     <img src={item.avatar} />
                     {item.username} {item.floor}楼
                   </div>
-                  <div styleName="commit-list__zan">
+                  <div styleName='commit-list__zan'>
                     {item.time} 有用({item.up}) 没用({item.down})
                   </div>
                 </div>
-                <div styleName="commit-list__content">
+                <div styleName='commit-list__content'>
                   {item.content}
                   {(item.sub || []).length > 0 ? (
-                    <ul styleName="commit-sublist" className="mt10">
+                    <ul styleName='commit-sublist' className='mt10'>
                       {item.sub.map(subItem => (
                         <li key={subItem.id}>
-                          <div styleName="commit-list__people">
-                            <span styleName="title">
+                          <div styleName='commit-list__people'>
+                            <span styleName='title'>
                               {subItem.at ? (
                                 <span>
                                   <Link to={`/people/${subItem.uid}`}>{subItem.username}</Link> 回复了
@@ -55,14 +55,14 @@ export default function Comment({ data, submit }) {
                                 <Link to={`/people/${subItem.uid}`}>{subItem.username}</Link>
                               )}
                             </span>
-                            <span styleName="time">
+                            <span styleName='time'>
                               {subItem.floor}楼 {subItem.time}
                             </span>
-                            <div styleName="commit-list__zan">
+                            <div styleName='commit-list__zan'>
                               有用({subItem.up}) 没用({subItem.down})
                             </div>
                           </div>
-                          <div styleName="commit-list__content">{subItem.content}</div>
+                          <div styleName='commit-list__content'>{subItem.content}</div>
                         </li>
                       ))}
                     </ul>
