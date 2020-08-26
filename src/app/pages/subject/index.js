@@ -283,11 +283,11 @@ export default Shell(() => {
               </p>
               <p styleName='detail-update'>更新时间：{updateDate}</p>
               <div styleName='detail-tool'>
-                <div styleName={`detail-tool__on ${remindid ? '' : 'active'}`} onClick={() => addMark('remind', id, cid, userid)}>
+                <div styleName={`detail-tool__on ${remindid ? 'active' : ''}`} onClick={() => addMark('remind', id, cid, userid)}>
                   <i className='iconfont'>&#xe6bd;</i>
                   {remindid ? '已追番' : '追番'}
                 </div>
-                <div styleName={`detail-tool__on ${loveid ? '' : 'active'}`} onClick={() => addMark('love', id, cid, userid)}>
+                <div styleName={`detail-tool__on ${loveid ? 'active' : ''}`} onClick={() => addMark('love', id, cid, userid)}>
                   <i className='iconfont'>&#xe66a;</i>
                   {loveid ? '已收藏' : '收藏'}
                 </div>

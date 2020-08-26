@@ -20,7 +20,7 @@
       height: 245px;
       border-radius: 5px;
       overflow: hidden;
-      box-shadow: 0 3px 14px 0 rgba(203, 193, 187, .40);
+      box-shadow: 0 3px 14px 0 rgba(203, 193, 187, 0.4);
     }
 
     img {
@@ -43,7 +43,7 @@
       overflow: hidden;
 
       &.today {
-        color: #0084ff;
+        color: #08f;
       }
     }
 
@@ -58,7 +58,7 @@
       overflow: hidden;
 
       &:hover {
-        color: #0084ff;
+        color: #08f;
       }
     }
   }

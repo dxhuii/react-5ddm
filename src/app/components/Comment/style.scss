@@ -1,5 +1,3 @@
-.comment {}
-
 .comment-form {
   position: relative;
   margin-top: 10px;
@@ -26,7 +24,7 @@
     height: 90px;
     line-height: 90px;
     text-align: center;
-    background-color: #0084FF;
+    background-color: #08f;
     color: #fff;
     transform: translateY(-50%);
     font-size: 18px;
@@ -37,7 +35,7 @@
   color: #646464;
 
   a {
-    color: #0084FF;
+    color: #08f;
   }
 }
 
@@ -47,7 +45,7 @@
 }
 
 .comment-list__list {
-  >li {
+  > li {
     padding-bottom: 15px;
     margin-bottom: 15px;
     border-bottom: 1px solid #ebebeb;
@@ -82,7 +80,7 @@
 
   .time,
   .title {
-    color: #8590A6;
+    color: #8590a6;
     font-size: 12px;
   }
 }
@@ -101,7 +99,7 @@
   background-color: #f6f6f6;
   padding: 10px;
 
-  >li {
+  > li {
     border-bottom: 1px solid #e8e8e8;
     padding-bottom: 10px;
     margin-bottom: 10px;

@@ -29,9 +29,9 @@
     }
     &:hover,
     &.active {
-      border-color: #0084FF !important;
+      border-color: #08f !important;
       a {
-        color: #0084FF;
+        color: #08f;
       }
     }
     p {
@@ -58,7 +58,7 @@
     margin-right: 10px;
     cursor: pointer;
     &.active {
-      color: #0084FF;
+      color: #08f;
     }
   }
 }
@@ -95,8 +95,8 @@
       }
       &.active {
         a {
-          color: #0084FF;
-          border-color: #0084FF;
+          color: #08f;
+          border-color: #08f;
         }
       }
     }
@@ -157,14 +157,14 @@
   padding-left: 30px;
   display: flex;
   z-index: 99;
-  background: linear-gradient(90deg, rgba(255, 255, 255, .2) 0%, #fff 15%, #fff 90%);
-  div{
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, #fff 15%, #fff 90%);
+  div {
     cursor: pointer;
   }
   .pn {
     width: 20px;
     height: 20px;
-    background-color: #0084FF;
+    background-color: #08f;
     color: #fff;
     margin-right: 1px;
     text-align: center;

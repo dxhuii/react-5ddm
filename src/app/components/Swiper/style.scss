@@ -6,7 +6,6 @@
 
   &:hover {
     :global {
-
       .swiper-prev,
       .swiper-next {
         display: block;
@@ -45,7 +44,7 @@
       position: absolute;
       width: 40px;
       height: 40px;
-      background: rgba(0, 0, 0, .5);
+      background: rgba(0, 0, 0, 0.5);
       border-radius: 50%;
       text-align: center;
       line-height: 50px;
@@ -61,12 +60,12 @@
         transform: translate(-50%, -50%);
         font-size: 20px;
         color: #fff;
-        opacity: .7;
+        opacity: 0.7;
       }
 
       &:hover {
         i {
-          color: #0084FF;
+          color: #08f;
         }
       }
     }
@@ -96,7 +95,7 @@
         margin: 0 3px;
 
         &.cur {
-          background: #0084FF;
+          background: #08f;
         }
       }
     }

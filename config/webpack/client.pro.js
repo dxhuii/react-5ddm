@@ -1,5 +1,5 @@
 const baseConfig = require('./client.base')
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const OfflinePlugin = require('offline-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
@@ -15,7 +15,7 @@ const webpackConfig = {
       patterns: [{ from: 'src/app/static/favicon.ico', to: 'favicon.ico' }]
     }),
 
-    // new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
     new OptimizeCSSAssetsPlugin({
       assetNameRegExp: /\.css\.*(?!.*map)/g, // 注意不要写成 /\.css$/g
       cssProcessor: require('cssnano'),

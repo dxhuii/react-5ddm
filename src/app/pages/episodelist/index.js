@@ -35,17 +35,17 @@ export default Shell(() => {
 
   return (
     <>
-      <Meta title="最新剧情动漫剧情,剧情动漫分集剧情,剧情动漫全集剧情">
-        <meta name="keywords" content="最新剧情动漫剧情,剧情动漫分集剧情,剧情动漫全集剧情" />
-        <meta name="description" content="最新剧情动漫剧情包含等全集剧情。" />
+      <Meta title='最新剧情动漫剧情,剧情动漫分集剧情,剧情动漫全集剧情'>
+        <meta name='keywords' content='最新剧情动漫剧情,剧情动漫分集剧情,剧情动漫全集剧情' />
+        <meta name='description' content='最新剧情动漫剧情包含等全集剧情。' />
       </Meta>
-      <div className="wp mt20 clearfix">
-        <div className="left fl">
-          <ul styleName="list">
+      <div className='wp mt20 clearfix'>
+        <div className='left fl'>
+          <ul styleName='list'>
             {data.map(item => (
               <li key={item.sid}>
                 <Link to={`/episode/${item.sid}`}>
-                  <div className="load-demand" data-load-demand={`<img src="${formatPic(item.pic, 'thumb150')}" alt="${item.title}" />`} />
+                  <div className='load-demand' data-load-demand={`<img src="${formatPic(item.pic, 'thumb150')}" alt="${item.title}" />`} />
                   <h4>{item.title}</h4>
                   <p>{isNumber(item.continu) ? `更新至${item.continu}话` : item.continu}</p>
                 </Link>
@@ -53,7 +53,7 @@ export default Shell(() => {
             ))}
           </ul>
         </div>
-        <div className="right fr">
+        <div className='right fr'>
           <SideBar />
         </div>
       </div>

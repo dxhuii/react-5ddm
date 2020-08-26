@@ -11,8 +11,8 @@
     padding: 0 10px;
     height: 24px;
     line-height: 24px;
-    background-color: rgba(0, 132, 255, .1);
-    color: #0084ff;
+    background-color: rgba(0, 132, 255, 0.1);
+    color: #08f;
     font-size: 14px;
     margin-right: 10px;
     margin-bottom: 10px;
@@ -23,7 +23,7 @@
     }
 
     &:hover {
-      background-color: rgba(0, 132, 255, .15);
+      background-color: rgba(0, 132, 255, 0.15);
     }
   }
 }

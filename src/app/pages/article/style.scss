@@ -38,7 +38,7 @@
   }
 
   a {
-    color: #0084ff;
+    color: #08f;
   }
 }
 
@@ -66,7 +66,7 @@
     color: #fff;
     font-size: 32px;
     transform: translate(-50%, -50%);
-    content: "加载中，请稍后...";
+    content: '加载中，请稍后...';
   }
 
   div {
@@ -80,7 +80,7 @@
     right: 10px;
     top: 10px;
     color: #fff;
-    text-shadow: 0 0 3px rgba($color: #000, $alpha: .5)
+    text-shadow: 0 0 3px rgba($color: #000, $alpha: 0.5);
   }
 }
 
@@ -95,7 +95,7 @@
   bottom: 0;
   right: 0;
   z-index: 999999;
-  background-color: rgba($color: #000, $alpha: .7);
+  background-color: rgba($color: #000, $alpha: 0.7);
 
   span {
     width: 40px;
@@ -103,7 +103,7 @@
     position: absolute;
     right: 15px;
     top: 15px;
-    background-color: rgba($color: #000, $alpha: .9);
+    background-color: rgba($color: #000, $alpha: 0.9);
     border-radius: 50%;
 
     &:before,
@@ -111,19 +111,19 @@
       position: absolute;
       right: 10px;
       top: 50%;
-      content: "";
+      content: '';
       width: 20px;
       height: 2px;
-      background: #FFF;
+      background: #fff;
       transform: translateY(-50%);
     }
 
     &:before {
-      transform: rotate(-45deg)
+      transform: rotate(-45deg);
     }
 
     &:after {
-      transform: rotate(45deg)
+      transform: rotate(45deg);
     }
   }
 
@@ -179,14 +179,14 @@
 
 .newslist-more {
   margin-top: 20px;
-  border: 1px solid #0084ff;
+  border: 1px solid #08f;
   height: 40px;
   line-height: 40px;
   text-align: center;
   border-radius: 5px;
 
   a {
-    color: #0084ff;
+    color: #08f;
     display: block;
   }
 }
@@ -212,7 +212,7 @@
       height: 300px;
     }
 
-    >a {
+    > a {
       display: none;
     }
   }

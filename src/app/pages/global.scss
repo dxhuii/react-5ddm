@@ -199,22 +199,6 @@
     visibility: hidden;
   }
 
-  .f14 {
-    font-size: 14px;
-  }
-
-  .f16 {
-    font-size: 16px;
-  }
-
-  .f18 {
-    font-size: 18px;
-  }
-
-  .cp {
-    cursor: pointer;
-  }
-
   .b {
     font-weight: 700;
   }
@@ -223,32 +207,12 @@
     white-space: nowrap;
   }
 
-  .tal {
-    text-align: left;
-  }
-
-  .tac {
-    text-align: center;
-  }
-
-  .tar {
-    text-align: right;
-  }
-
   .fr {
     float: right;
-  }
-
-  .db img {
-    display: block;
   }
 
   .fl {
     float: left;
-  }
-
-  .fr {
-    float: right;
   }
 
   .pr {
@@ -257,14 +221,6 @@
 
   .pa {
     position: absolute;
-  }
-
-  .oh {
-    overflow: hidden;
-  }
-
-  .hide {
-    display: none;
   }
 
   ::-webkit-input-placeholder {
@@ -387,7 +343,7 @@
       border-radius: 5px;
       text-align: center;
       padding-left: 15px;
-      color: #0084ff;
+      color: #08f;
 
       i {
         position: relative;
@@ -478,62 +434,7 @@
     }
   }
 
-  .explaywrap {
-    position: relative;
-    width: 100%;
-    background: url(https://wxt.sinaimg.cn/large/a15b4afegw1f3jj0rv3uaj21z41esu0y.jpg) no-repeat;
-    background-size: cover;
-    text-align: center;
-    font-weight: 600;
-
-    a {
-      position: absolute;
-      top: auto !important;
-      right: auto !important;
-      bottom: 180px !important;
-      left: 50% !important;
-      transform: translateX(-50%);
-      padding: 0 30px;
-      display: inline-block;
-      height: 48px;
-      line-height: 48px;
-      color: #fff;
-      font-size: 20px;
-      border-radius: 5px;
-      background-color: #f60;
-      text-decoration: none;
-
-      &.jump {
-        bottom: 135px !important;
-        background: transparent;
-        color: #333;
-        font-size: 16px;
-      }
-    }
-
-    p {
-      position: absolute;
-      bottom: 20px;
-      width: 100%;
-      color: red;
-      font-weight: 600;
-      font-size: 42px;
-      text-shadow: 0 0 1px #f60;
-      -webkit-text-stroke: 1px #fff;
-    }
-  }
-
-  .bigstar50,
-  .bigstar45,
-  .bigstar40,
-  .bigstar35,
-  .bigstar30,
-  .bigstar25,
-  .bigstar20,
-  .bigstar15,
-  .bigstar10,
-  .bigstar05,
-  .bigstar00 {
+  .bigstar {
     display: inline-block;
     zoom: 1;
     background: url(../static/img/ic_rating_m@2x.png) no-repeat;
@@ -543,21 +444,6 @@
     margin: 1px 5px 0 0;
     overflow: hidden;
     vertical-align: top;
-  }
-
-  .bigstar50 + span.rating_num,
-  .bigstar45 + span.rating_num,
-  .bigstar40 + span.rating_num,
-  .bigstar35 + span.rating_num,
-  .bigstar30 + span.rating_num,
-  .bigstar25 + span.rating_num,
-  .bigstar20 + span.rating_num,
-  .bigstar15 + span.rating_num,
-  .bigstar10 + span.rating_num,
-  .bigstar05 + span.rating_num,
-  .bigstar00 + span.rating_num {
-    font-size: 16px;
-    line-height: 1;
   }
 
   .bigstar50 {

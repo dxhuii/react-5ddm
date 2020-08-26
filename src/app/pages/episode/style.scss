@@ -38,19 +38,19 @@
     text-align: center;
 
     &.active {
-      border-color: #0084ff;
+      border-color: #08f;
 
       a {
-        color: #0084ff;
+        color: #08f;
       }
     }
 
     &:nth-child(5n) {
-      margin-right: 0
+      margin-right: 0;
     }
 
     span {
-      border-color: #0084ff transparent transparent;
+      border-color: #08f transparent transparent;
       border-style: solid dashed dashed;
       border-width: 5px;
       display: inline-block;
@@ -78,7 +78,7 @@
     border-radius: 12px;
 
     &:hover {
-      background-color: #0084ff;
+      background-color: #08f;
       color: #fff;
     }
   }
@@ -92,7 +92,7 @@
 .go-detail {
   margin-top: 15px;
   display: block;
-  color: #0084ff;
+  color: #08f;
 }
 
 .box {
@@ -107,7 +107,6 @@
     font-size: 16px;
   }
 }
-
 
 @media (min-width: 0) and (max-width: 1200px) {
   .article-body {

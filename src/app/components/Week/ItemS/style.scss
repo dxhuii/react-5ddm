@@ -20,7 +20,7 @@
       line-height: 24px;
       max-width: 90%;
       color: #233;
-      @include clamp(1)
+      @include clamp(1);
     }
   }
   a {
@@ -28,7 +28,7 @@
   }
   .today {
     a {
-      color: #0084ff;
+      color: #08f;
     }
   }
 }

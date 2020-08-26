@@ -32,7 +32,7 @@
       color: #ccc;
     }
     &.active {
-      background: #0084ff;
+      background: #08f;
       color: #fff;
       em {
         color: #ddd;
@@ -58,7 +58,7 @@
   backface-visibility: hidden;
   &::-webkit-scrollbar-button,
   &::-webkit-scrollbar-track {
-    display: none
+    display: none;
   }
   /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
   &::-webkit-scrollbar {
@@ -69,7 +69,7 @@
   }
   /*定义滚动条轨道 内阴影+圆角*/
   &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     /*滚动条的背景区域的圆角*/
     background-color: transparent;
@@ -79,7 +79,7 @@
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
     /*滚动条的圆角*/
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #ebebeb;
     /*滚动条的背景颜色*/
   }
@@ -102,7 +102,7 @@
       height: 77px;
       border-radius: 4px;
       overflow: hidden;
-      box-shadow: 0 3px 14px 0 hsla(23, 13%, 76%, .4);
+      box-shadow: 0 3px 14px 0 hsla(23, 13%, 76%, 0.4);
       z-index: 2;
       img {
         position: absolute;
@@ -119,7 +119,7 @@
     h4 {
       font-size: 12px;
       margin-right: 20px;
-      @include clamp(3)
+      @include clamp(3);
     }
     p {
       position: absolute;
@@ -138,12 +138,12 @@
         margin-left: 5px;
         display: inline-block;
         background-color: #f6f6f6;
-        color: #8590A6;
+        color: #8590a6;
         border-radius: 10px;
         padding: 3px 10px;
         &.today {
-          background-color: rgba(0, 132, 255, .1);
-          color: #0084ff;
+          background-color: rgba(0, 132, 255, 0.1);
+          color: #08f;
         }
       }
     }
@@ -172,7 +172,7 @@
     span {
       display: inline-block;
       cursor: pointer;
-      background: #0084ff;
+      background: #08f;
       color: #fff;
       width: 60px;
       height: 24px;

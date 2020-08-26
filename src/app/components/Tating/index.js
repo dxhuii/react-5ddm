@@ -21,7 +21,7 @@ export default function Tating({ data, id, sid }) {
     setStar(index)
     const onAddgold = args => addgold(args)(store.dispatch, store.getState)
     const getComment = args => comment(args)(store.dispatch, store.getState)
-    let [, data] = await onAddgold({ id, val: index })
+    const [, data] = await onAddgold({ id, val: index })
     if (data.code === 1) {
       getComment({ id, sid })
       Toast.success(data.msg)
@@ -61,23 +61,23 @@ export default function Tating({ data, id, sid }) {
     if (pinfen > 0) {
       const total = a + b + c + d + e
       const calc = val => `${((val / total) * 100).toFixed(2)}%`
-      const progressBar = val => <div styleName="progress-bar" style={{ width: calc(val) }} />
+      const progressBar = val => <div styleName='progress-bar' style={{ width: calc(val) }} />
       const scoreArr = [a, b, c, d, e]
       return (
-        <div styleName="rating" className="pr">
+        <div styleName='rating'>
           <h4>评分</h4>
-          <div styleName="rating-num">
+          <div styleName='rating-num'>
             <strong>{pinfen === '10.0' ? 10 : pinfen}</strong>
-            <span className={starClass(parseFloat(pinfen) * 5)} />
-            <span styleName="people">
+            <span className={`${starClass(parseFloat(pinfen) * 5)} bigstar`} />
+            <span styleName='people'>
               <em>{total}</em>人评价
             </span>
           </div>
-          <ul styleName="rating-show" className="clearfix">
+          <ul styleName='rating-show' className='clearfix'>
             {scoreArr.map((item, index) => (
               <li key={index}>
                 <span>{text[scoreArr.length - (index + 1)]}</span>
-                <div styleName="progress" title={calc(item)}>
+                <div styleName='progress' title={calc(item)}>
                   {progressBar(item)}
                 </div>
                 <em>{item}人</em>
@@ -87,7 +87,7 @@ export default function Tating({ data, id, sid }) {
         </div>
       )
     } else {
-      return <div styleName="noscore">还没有评分</div>
+      return <div styleName='noscore'>还没有评分</div>
     }
   }
 
@@ -98,14 +98,14 @@ export default function Tating({ data, id, sid }) {
   return (
     <>
       {show(data, starText)}
-      <div styleName="starBox">
+      <div styleName='starBox'>
         <em>评分</em>
-        <div styleName="starlist">
+        <div styleName='starlist'>
           {[1, 2, 3, 4, 5].map(item => (
             <a key={item} title={`${item}星`} styleName={`star_${item}`} onClick={() => onStar(item)} onMouseOver={() => move(item)} />
           ))}
         </div>
-        <div styleName="star_current" style={{ width: starWith }} />
+        <div styleName='star_current' style={{ width: starWith }} />
         <span>{starText[star - 1]}</span>
       </div>
     </>

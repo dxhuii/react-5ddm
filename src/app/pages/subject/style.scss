@@ -133,17 +133,17 @@
 }
 
 .detail-tool__on {
+  display: flex;
   width: 90px;
   height: 40px;
-  line-height: 38px;
-  text-align: center;
   border-radius: 5px;
   color: #e8f1ff;
   font-size: 16px;
-  background-color: #0084ff;
-  border: 1px solid #0084ff;
-  cursor: pointer;
+  background-color: #08f;
   margin-right: 15px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 
   &:last-child {
     margin-right: 0;
@@ -154,22 +154,19 @@
   }
 
   &:hover {
-    border-color: hsl(208.94117647058823, 100%, 45%);
-    background-color: hsl(208.94117647058823, 100%, 45%);
+    background-color: rgba($color: #08f, $alpha: 0.45);
   }
 
   i {
-    font-size: 16px;
-    position: relative;
-    top: -2px;
+    font-size: 18px;
     margin-right: 7px;
   }
 
   &.active {
     width: 100px;
-    background-color: #e8f1ff;
-    border-color: #e8f1ff;
-    color: #0084ff;
+    background-color: rgba($color: #fff, $alpha: 0.1);
+    border: 3px solid rgba($color: #fff, $alpha: 0.5);
+    color: #fff;
   }
 }
 
@@ -211,7 +208,7 @@
       font-weight: bold;
 
       a {
-        border-bottom: 2px solid #0084ff;
+        border-bottom: 2px solid #08f;
       }
     }
   }

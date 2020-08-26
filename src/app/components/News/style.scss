@@ -42,8 +42,8 @@
       font-size: 12px;
       padding: 10px 5px;
       overflow: hidden;
-      transition: top .1s ease-in-out;
-      background: linear-gradient(transparent, rgba(0, 0, 0, .1) 20%, rgba(0, 0, 0, .2) 35%, rgba(0, 0, 0, .6) 65%, rgba(0, 0, 0, .9));
+      transition: top 0.1s ease-in-out;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.2) 35%, rgba(0, 0, 0, 0.6) 65%, rgba(0, 0, 0, 0.9));
       p {
         @include clamp(4);
         color: #fff;
@@ -56,7 +56,7 @@
       .mark {
         top: 0;
         height: 100%;
-        background: rgba(0, 0, 0, .7);
+        background: rgba(0, 0, 0, 0.7);
       }
     }
   }
@@ -86,31 +86,31 @@
       }
       &.type-1 {
         border: 1px #38a4eb solid;
-        color: #38a4eb
+        color: #38a4eb;
       }
       &.type-2 {
         border: 1px #ff8aae solid;
-        color: #ff8aae
+        color: #ff8aae;
       }
       &.type-3 {
         border: 1px #4f748d solid;
-        color: #4f748d
+        color: #4f748d;
       }
       &.type-4 {
         border: 1px #ffa200 solid;
-        color: #ffa200
+        color: #ffa200;
       }
       &.type-5 {
         border: 1px #ff4949 solid;
-        color: #ff4949
+        color: #ff4949;
       }
       &.type-6 {
         border: 1px #66a01a solid;
-        color: #66a01a
+        color: #66a01a;
       }
       &.type-7 {
         border: 1px #ff7fef solid;
-        color: #ff7fef
+        color: #ff7fef;
       }
     }
   }
@@ -161,7 +161,7 @@
     span {
       display: inline-block;
       cursor: pointer;
-      background: #0084ff;
+      background: #08f;
       color: #fff;
       width: 60px;
       height: 24px;

@@ -12,11 +12,11 @@
       display: block;
     }
     &.cur {
-      color: #0084ff;
+      color: #08f;
       background-color: #fff;
       margin-bottom: -1px;
       span {
-        border-bottom: 1px solid #0084ff;
+        border-bottom: 1px solid #08f;
       }
     }
   }
@@ -40,7 +40,7 @@
     border-radius: 5px;
     &.cur {
       color: #fff;
-      background-color: #0084ff;
+      background-color: #08f;
     }
   }
 }
