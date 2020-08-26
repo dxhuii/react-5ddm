@@ -31,7 +31,7 @@ import Ads from '@/components/Ads'
 import Meta from '@/components/Meta'
 import Shell from '@/components/Shell'
 
-import { isNumber, formatPic } from '@/utils'
+import { trim, isNumber, formatPic } from '@/utils'
 import { DOMAIN_NAME, NAME, DOMAIN } from 'Config'
 
 import playing from '@/utils/play'
@@ -45,6 +45,7 @@ export default Shell(() => {
   const [visible, onModal] = useState(false)
   const [isSign, onSign] = useState('signIn')
   const [loveData, setLove] = useState({})
+  const [playShow, playSetShow] = useState({})
   const upDiv = useRef()
   const downDiv = useRef()
   const menu = {
@@ -148,25 +149,60 @@ export default Shell(() => {
     }
   }
 
+  const format = data => {
+    let num = ''
+    let subName = ''
+    if (data === '全集') {
+      num = data
+    } else {
+      const title = data.split(' ')
+      const name = data.split(/话|集/)
+      num = title[0]
+      subName = name[1] ? trim(name[1]) : ''
+    }
+
+    return (
+      <>
+        <p>{num}</p>
+        {subName ? <p>{subName}</p> : null}
+      </>
+    )
+  }
+
   const playerList = (data = [], key, name) => {
     return data.map(({ title, vid }) => (
       <a key={`${vid}`} href={`${playing(name, authcode(atob(vid), 'DECODE', key, 0))}`} target='_blank' rel='noreferrer'>
-        {title}
+        {format(title)}
       </a>
     ))
+  }
+
+  const showPlay = name => {
+    playSetShow({
+      [name]: true
+    })
+  }
+
+  const showPlayClose = name => {
+    playSetShow({
+      [name]: false
+    })
   }
 
   const player = () => {
     return list.map(({ playName, playTitle, copyright, list }) => (
       <div styleName='player' key={`${playName}`}>
-        <div styleName='title'>
+        <div styleName='title' onClick={() => showPlay(playName)}>
           <h4>
             <i className={`playicon ${playName}`}></i>
             {playTitle}
           </h4>
           <span>{copyright}</span>
         </div>
-        <div styleName='player-list'>{playerList(list, key, playName)}</div>
+        <div styleName={`player-list ${playShow[playName] ? 'show' : ''}`}>
+          <span onClick={() => showPlayClose(playName)}>✕</span>
+          {playerList(list, key, playName)}
+        </div>
       </div>
     ))
   }

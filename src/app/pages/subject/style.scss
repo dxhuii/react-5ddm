@@ -272,6 +272,43 @@
   }
   .player-list {
     display: none;
+    position: absolute;
+    border-radius: $d-border-radius-sm;
+    background-color: #fff;
+    padding: 0 10px 10px 0;
+    width: 595px;
+    transform: translateX(-75%);
+    box-shadow: 0 0 0 4px rgba(114, 144, 179, 0.3);
+    z-index: 10;
+    span {
+      position: absolute;
+      right: -25px;
+      top: -25px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    a {
+      width: 130px;
+      margin-left: 15px;
+      margin-top: 15px;
+      padding: 10px;
+      display: inline-block;
+      border-radius: $d-border-radius-sm;
+      border: 1px solid #ebebeb;
+      p {
+        margin-top: 0;
+      }
+      &:hover {
+        color: $d-text-color-hover;
+        border-color: $d-text-color-hover;
+        p {
+          color: $d-text-color-hover;
+        }
+      }
+    }
+    &.show {
+      display: block;
+    }
   }
 }
 
