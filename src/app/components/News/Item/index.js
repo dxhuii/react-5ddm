@@ -28,20 +28,22 @@ export default function NewsItem({ data }) {
   }
 
   return (
-    <ul styleName="list">
+    <ul styleName='list'>
       {data.map(item => (
         <li key={item.id}>
           <Link to={`/article/${item.id}`}>
-            {item.pic ? <div className="load-demand" data-load-demand={`<img src="${formatPic(item.pic, 'orj360')}" alt="${item.title}" />`} /> : null}
+            {item.pic ? (
+              <div className='load-demand' data-load-demand={`<img src="${formatPic(item.pic, 'orj360')}" alt="${item.title}" />`} />
+            ) : null}
           </Link>
-          <div styleName="info">
+          <div styleName='info'>
             <h3>
               <Link to={`/article/${item.id}`}>{item.title}</Link>
             </h3>
-            <div styleName="tag">&nbsp;</div>
+            <div styleName='tag'>&nbsp;</div>
             <p>
-              <span styleName="share">
-                <i className="iconfont">&#xe655;</i>分享
+              <span styleName='share'>
+                <i className='iconfont'>&#xe655;</i>分享
               </span>
               <span>
                 分类：<Link to={`/news/${menu[item.cid] || 'news'}`}>{item.name}</Link>

@@ -28,7 +28,7 @@
     height: 90px;
     line-height: 90px;
     text-align: center;
-    background-color: #08f;
+    background-color: $d-color-primary;
     color: #fff;
     transform: translateY(-50%);
     font-size: 18px;
@@ -39,7 +39,7 @@
   color: #646464;
 
   a {
-    color: #08f;
+    color: $d-text-color-hover;
   }
 }
 

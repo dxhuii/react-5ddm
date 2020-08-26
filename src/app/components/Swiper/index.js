@@ -32,7 +32,7 @@ export default function Swiper({ Pagination, Controller, Autoplay = 0, Start = 0
 
   const elem = Array.from(Array(children.length), (v, k) => k) || []
   return (
-    <div styleName="swiper">
+    <div styleName='swiper'>
       <Swipe
         ref={swipe}
         startSlide={Start}
@@ -49,7 +49,7 @@ export default function Swiper({ Pagination, Controller, Autoplay = 0, Start = 0
         {children}
       </Swipe>
       {Pagination ? (
-        <div className="swiper-page">
+        <div className='swiper-page'>
           {elem.map(item => (
             <em key={item} className={item === current ? 'cur' : ''} onClick={() => onCur(item)}>
               {item + 1}
@@ -59,11 +59,11 @@ export default function Swiper({ Pagination, Controller, Autoplay = 0, Start = 0
       ) : null}
       {Controller ? (
         <>
-          <div className="swiper-prev" onClick={prev}>
-            <i className="iconfont">&#xe8ff;</i>
+          <div className='swiper-prev' onClick={prev}>
+            <i className='iconfont'>&#xe8ff;</i>
           </div>
-          <div className="swiper-next" onClick={next}>
-            <i className="iconfont">&#xe65e;</i>
+          <div className='swiper-next' onClick={next}>
+            <i className='iconfont'>&#xe65e;</i>
           </div>
         </>
       ) : null}

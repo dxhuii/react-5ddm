@@ -27,7 +27,7 @@ class ToastBox extends Component {
     notice.key = this.getNoticeKey()
 
     // notices.push(notice);//展示所有的提示
-    notices[0] = notice //仅展示最后一个提示
+    notices[0] = notice // 仅展示最后一个提示
 
     this.setState({ notices })
     if (notice.duration > 0) {
@@ -64,11 +64,11 @@ class ToastBox extends Component {
       loading: 'toast_loading'
     }
     return (
-      <div styleName="toast">
+      <div styleName='toast'>
         {notices.map(notice => (
-          <div styleName="toast_box" key={notice.key}>
+          <div styleName='toast_box' key={notice.key}>
             <div styleName={`toast_icon ${icons[notice.type]}`} />
-            <div styleName="toast_text">{notice.content}</div>
+            <div styleName='toast_text'>{notice.content}</div>
           </div>
         ))}
       </div>

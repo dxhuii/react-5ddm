@@ -6,7 +6,7 @@ import './style.scss'
 
 export default function EpList({ data = [], id }) {
   return (
-    <ul styleName="eplist" className="mt20">
+    <ul styleName='eplist' className='mt20'>
       {data.map(item => (
         <li key={item.pid}>
           <h4>

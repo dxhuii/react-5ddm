@@ -27,7 +27,7 @@
         width: 560px;
         @include clamp(1);
         a {
-          color: #37a;
+          color: $d-text-color-hover;
           &:hover {
             color: #f60;
           }

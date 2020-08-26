@@ -29,8 +29,8 @@ export default function News({ name }) {
     return data.map(item => (
       <li key={item.id}>
         <Link to={`/article/${item.id}`}>
-          <div className="load-demand" data-load-demand={`<img src="${formatPic(item.pic, 'orj360')}" alt="${item.title}" />`} />
-          <div styleName="mark">
+          <div className='load-demand' data-load-demand={`<img src="${formatPic(item.pic, 'orj360')}" alt="${item.title}" />`} />
+          <div styleName='mark'>
             <p>{item.title}</p>
           </div>
         </Link>
@@ -40,48 +40,48 @@ export default function News({ name }) {
 
   return (
     <>
-      <div className="title">
+      <div className='title'>
         <h2>
-          <i className="title-icon news" /> 新闻
+          <i className='title-icon news' /> 新闻
         </h2>
-        <div styleName="tab">
+        <div styleName='tab'>
           <span>分类</span>
-          <ul styleName="news-tab">
+          <ul styleName='news-tab'>
             <li>
-              <Link to="/news/donghua">动画</Link>
+              <Link to='/news/donghua'>动画</Link>
             </li>
             <li>
-              <Link to="/news/manhua">漫画</Link>
+              <Link to='/news/manhua'>漫画</Link>
             </li>
             <li>
-              <Link to="/news/bagua">八卦</Link>
+              <Link to='/news/bagua'>八卦</Link>
             </li>
             <li>
-              <Link to="/news/jianping">简评</Link>
+              <Link to='/news/jianping'>简评</Link>
             </li>
             <li>
-              <Link to="/news/cosplay">COS</Link>
+              <Link to='/news/cosplay'>COS</Link>
             </li>
             <li>
-              <Link to="/news/chanye">产业</Link>
+              <Link to='/news/chanye'>产业</Link>
             </li>
             <li>
-              <Link to="/news/cast">声优</Link>
+              <Link to='/news/cast'>声优</Link>
             </li>
             <li>
-              <Link to="/news/pic">美图</Link>
+              <Link to='/news/pic'>美图</Link>
             </li>
             <li>
-              <Link to="/news/video">短视频</Link>
+              <Link to='/news/video'>短视频</Link>
             </li>
           </ul>
         </div>
-        <Link to="/news">
+        <Link to='/news'>
           更多
-          <i className="iconfont">&#xe65e;</i>
+          <i className='iconfont'>&#xe65e;</i>
         </Link>
       </div>
-      <ul styleName="newslist">
+      <ul styleName='newslist'>
         {loading ? <Loading /> : null}
         {showData()}
       </ul>

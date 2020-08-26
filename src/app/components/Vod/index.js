@@ -8,7 +8,16 @@ export default function ArticleVod({ data = [] }) {
     <>
       {data.map((item, index) => (
         <div className={`box ${index > 0 ? 'mt20' : ''}`} key={item.id}>
-          <Detail title={item.title} pic={item.pic} gold={item.gold} vid={item.id} pid={item.pid} status={item.status} year={item.year} mcid={item.mcid} />
+          <Detail
+            title={item.title}
+            pic={item.pic}
+            gold={item.gold}
+            vid={item.id}
+            pid={item.pid}
+            status={item.status}
+            year={item.year}
+            mcid={item.mcid}
+          />
         </div>
       ))}
     </>

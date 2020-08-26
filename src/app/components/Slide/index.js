@@ -23,7 +23,7 @@ export default () => {
   return (
     <Swiper Pagination={true} Controller={true} Autoplay={3000} Start={0}>
       {data.map(item => (
-        <div className="swipe-item" styleName="slide" key={item.url}>
+        <div className='swipe-item' styleName='slide' key={item.url}>
           <a href={item.url}>
             <img src={item.pic} />
             <p>{item.title}</p>

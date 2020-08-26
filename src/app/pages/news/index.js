@@ -68,11 +68,11 @@ export default Shell(() => {
   const { data = [] } = info
   const newsMenu = (config.data || {}).son || []
   return (
-    <div className="wp mt20 clearfix">
-      <Meta title="动漫新闻_动漫资讯_新番情报_动漫先行图_漫画情报" />
-      <div styleName="news-nav" className="box fl">
+    <div className='wp mt20 clearfix'>
+      <Meta title='动漫新闻_动漫资讯_新番情报_动漫先行图_漫画情报' />
+      <div styleName='news-nav' className='box fl'>
         <h2>
-          <Link to="/news">专栏</Link>
+          <Link to='/news'>专栏</Link>
         </h2>
         <ul>
           {newsMenu.map(item => (
@@ -82,10 +82,10 @@ export default Shell(() => {
           ))}
         </ul>
       </div>
-      <div styleName="news-left" className="box fl">
+      <div styleName='news-left' className='box fl'>
         <Item data={data} />
       </div>
-      <div className="right fr">
+      <div className='right fr'>
         <SideBar />
       </div>
     </div>

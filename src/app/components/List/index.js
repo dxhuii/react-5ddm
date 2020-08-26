@@ -15,13 +15,27 @@ export default function List({ id, mcid, year, area, wd, letter, lz, order }) {
     return val === undefined || val === '' || val === '-' ? (type ? 'addtime' : '') : val === '全部' ? '' : val
   }
 
-  const info = useSelector(state => getList(state, '' + id + isEmpty(mcid) + isEmpty(year) + isEmpty(area) + isEmpty(wd) + isEmpty(letter) + isEmpty(lz) + isEmpty(order, 1)))
+  const info = useSelector(state =>
+    getList(
+      state,
+      '' + id + isEmpty(mcid) + isEmpty(year) + isEmpty(area) + isEmpty(wd) + isEmpty(letter) + isEmpty(lz) + isEmpty(order, 1)
+    )
+  )
   const store = useStore()
 
   // 显示记录
   const showlist = useCallback(() => {
     const _listLoad = args => listLoad(args)(store.dispatch, store.getState)
-    _listLoad({ id, mcid: isEmpty(mcid), year: isEmpty(year), area: isEmpty(area), wd: isEmpty(wd), letter: isEmpty(letter), lz: isEmpty(lz), order: isEmpty(order, 1) })
+    _listLoad({
+      id,
+      mcid: isEmpty(mcid),
+      year: isEmpty(year),
+      area: isEmpty(area),
+      wd: isEmpty(wd),
+      letter: isEmpty(letter),
+      lz: isEmpty(lz),
+      order: isEmpty(order, 1)
+    })
   }, [area, id, letter, lz, mcid, order, store.dispatch, store.getState, wd, year])
 
   useEffect(() => {
@@ -35,9 +49,9 @@ export default function List({ id, mcid, year, area, wd, letter, lz, order }) {
   const { data = [], loading } = info || {}
 
   return (
-    <div styleName="main-list">
+    <div styleName='main-list'>
       {loading ? <Loading /> : null}
-      <div className="wp">
+      <div className='wp'>
         <Item data={data} />
       </div>
     </div>

@@ -21,5 +21,5 @@ export default function SideBar({ data = [] }) {
 }
 
 SideBar.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.array
 }

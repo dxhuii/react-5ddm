@@ -34,7 +34,7 @@ header {
           bottom: 0;
           width: 100%;
           height: 2px;
-          background-color: #08f;
+          background-color: $d-color-primary;
         }
       }
     }
@@ -70,7 +70,7 @@ header {
       width: 90px;
       content: '看番';
       font-size: 30px;
-      color: #08f;
+      color: $d-color-primary;
       letter-spacing: 5px;
     }
   }

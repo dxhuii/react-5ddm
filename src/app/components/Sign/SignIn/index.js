@@ -16,19 +16,19 @@ export default function SignIn({ visible }) {
   const password = useRef()
   const validate = useRef()
 
-  useEffect(() => {
-    if (visible) getVerify()
-  }, [getVerify, visible])
-
   const getVerify = useCallback(async () => {
     const _getCode = () => getCode()(store.dispatch, store.getState)
-    let [err, data] = await _getCode()
+    const [err, data] = await _getCode()
     if (data.code === 0) {
       const { base64img, imgkey } = data.data
       getBase64(base64img)
       getImgKey(imgkey)
     }
   }, [store.dispatch, store.getState])
+
+  useEffect(() => {
+    if (visible) getVerify()
+  }, [getVerify, visible])
 
   const submit = async event => {
     event.preventDefault()
@@ -52,7 +52,7 @@ export default function SignIn({ visible }) {
       return false
     }
 
-    let [err, success] = await _signIn({ username: name.value, password: pass.value, validate: vali.value, key: imgkey })
+    const [err, success] = await _signIn({ username: name.value, password: pass.value, validate: vali.value, key: imgkey })
     if (success) {
       setTimeout(() => {
         window.location.reload()
@@ -63,13 +63,13 @@ export default function SignIn({ visible }) {
 
   return (
     <form onSubmit={submit}>
-      <input type="text" ref={username} placeholder="请输入账号/邮箱" />
-      <input type="password" ref={password} placeholder="请输入密码" />
-      <div styleName="validate">
-        <input type="text" ref={validate} placeholder="请输入验证" />
+      <input type='text' ref={username} placeholder='请输入账号/邮箱' />
+      <input type='password' ref={password} placeholder='请输入密码' />
+      <div styleName='validate'>
+        <input type='text' ref={validate} placeholder='请输入验证' />
         <img src={base64img} onClick={getVerify} />
       </div>
-      <button type="submit">登录</button>
+      <button type='submit'>登录</button>
     </form>
   )
 }

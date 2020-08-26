@@ -18,7 +18,7 @@ export default function Modal({ closeModal, showModal, children, cls, visible })
   useEffect(() => {
     document.onkeyup = event => {
       if (visible) {
-        if (event.which == '27') {
+        if (event.which === 27) {
           closeModal()
         }
       }
@@ -26,10 +26,10 @@ export default function Modal({ closeModal, showModal, children, cls, visible })
   })
 
   return (
-    <div styleName={`cd-popup ${visible ? 'is-visible' : ''}`} role="alert" onClick={closeModals}>
-      <div styleName="cd-popup-container" onClick={showModals} style={cls}>
+    <div styleName={`cd-popup ${visible ? 'is-visible' : ''}`} role='alert' onClick={closeModals}>
+      <div styleName='cd-popup-container' onClick={showModals} style={cls}>
         {children}
-        <span styleName="cd-popup-close img-replace" onClick={closeModals} />
+        <span styleName='cd-popup-close img-replace' onClick={closeModals} />
       </div>
     </div>
   )

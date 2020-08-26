@@ -28,9 +28,9 @@
     }
     &:hover,
     &.active {
-      border-color: #08f !important;
+      border-color: $d-text-color-hover !important;
       a {
-        color: #08f;
+        color: $d-text-color-hover;
       }
     }
     p {

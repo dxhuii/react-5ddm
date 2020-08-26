@@ -31,7 +31,7 @@
       color: #ccc;
     }
     &.active {
-      background: #08f;
+      background: $d-text-color-hover;
       color: #fff;
       em {
         color: #ddd;
@@ -132,7 +132,7 @@
         padding: 3px 10px;
         &.today {
           background-color: rgba(0, 132, 255, 0.1);
-          color: #08f;
+          color: $d-color-primary;
         }
       }
     }

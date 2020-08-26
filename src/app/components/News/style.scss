@@ -111,6 +111,10 @@
         border: 1px #ff7fef solid;
         color: #ff7fef;
       }
+      &.type-8 {
+        border: 1px $d-color-primary solid;
+        color: $d-color-primary;
+      }
     }
   }
 }
@@ -160,7 +164,7 @@
     span {
       display: inline-block;
       cursor: pointer;
-      background: #08f;
+      background: $d-color-primary;
       color: #fff;
       width: 60px;
       height: 24px;

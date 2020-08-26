@@ -43,7 +43,7 @@
       overflow: hidden;
 
       &.today {
-        color: #08f;
+        color: $d-color-primary;
       }
     }
 
@@ -58,7 +58,7 @@
       overflow: hidden;
 
       &:hover {
-        color: #08f;
+        color: $d-text-color-hover;
       }
     }
   }

@@ -2,11 +2,11 @@ import React from 'react'
 
 import './style.scss'
 
-export default function() {
+export default function () {
   const top = () => {
     if (!(typeof window === 'undefined' || typeof document === 'undefined')) {
       // 设置定时器
-      let timer = setInterval(() => {
+      const timer = setInterval(() => {
         // 获取滚动条距离顶部的高度
         const osTop = document.documentElement.scrollTop || document.body.scrollTop // 同时兼容了ie和Chrome浏览器
 
@@ -23,8 +23,8 @@ export default function() {
   }
 
   return (
-    <div styleName="top" onClick={top}>
-      <i className="iconfont">&#xe900;</i>
+    <div styleName='top' onClick={top}>
+      <i className='iconfont'>&#xe900;</i>
     </div>
   )
 }

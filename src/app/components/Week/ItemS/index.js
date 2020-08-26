@@ -8,16 +8,17 @@ import './style.scss'
 
 export default function Item({ data }) {
   return (
-    <ul styleName="weeks">
+    <ul styleName='weeks'>
       {data.map(item => (
         <li key={item.id}>
           <Link key={item.id} to={`/subject/${item.id}`}>
-            <div className="load-demand" data-load-demand={`<img src="${formatPic(item.smallPic || item.pic, 'thumb150')}" alt="${item.title}" />`} />
+            <div
+              className='load-demand'
+              data-load-demand={`<img src="${formatPic(item.smallPic || item.pic, 'thumb150')}" alt="${item.title}" />`}
+            />
             <h4>{item.title}</h4>
+            <p styleName={item.isDate ? 'today' : ''}>{isNumber(item.status) ? `第${item.status}话` : item.status}</p>
           </Link>
-          <p styleName={item.isDate ? 'today' : ''}>
-            {isNumber(item.status) ? <Link to={`/play/${item.id}/${item.pid}`}>第{item.status}话</Link> : <Link to={`/play/${item.id}/${item.pid}`}>{item.status}</Link>}
-          </p>
         </li>
       ))}
     </ul>

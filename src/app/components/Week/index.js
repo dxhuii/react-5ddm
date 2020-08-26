@@ -27,8 +27,8 @@ export default function WeekDay({ id, title, link, isJp, type, linkText }) {
   }, [id, info.data, store.dispatch, store.getState])
 
   const getArea = (weekData = []) => {
-    let cn = []
-    let jp = []
+    const cn = []
+    const jp = []
     weekData.map(item => {
       if (item.area === '日本') {
         jp.push(item)
@@ -41,8 +41,8 @@ export default function WeekDay({ id, title, link, isJp, type, linkText }) {
 
   const getEveryWeek = (weekData, isCN) => {
     // isCN  1 日本  其他为中国
-    let data = {}
-    let [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday] = [[], [], [], [], [], [], []]
+    const data = {}
+    const [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday] = [[], [], [], [], [], [], []]
     weekData.map(item => {
       const day = item.weekday
       if (day === 1) {
@@ -83,14 +83,14 @@ export default function WeekDay({ id, title, link, isJp, type, linkText }) {
   const weekType = getArea(data)
   const weekData = type === -1 ? getEveryWeek(data) : getEveryWeek(weekType[type], type)
   return (
-    <div styleName="index-week">
-      <div className="title">
+    <div styleName='index-week'>
+      <div className='title'>
         {type !== -1 && (
           <h2>
             <i className={isJp ? 'title-icon' : 'title-icon cn'} /> {title}
           </h2>
         )}
-        <div styleName="week-tab">
+        <div styleName='week-tab'>
           <span onClick={onWeek}>最新</span>
           <ul styleName={`tab ${tab ? 'show' : ''}`} className={`${tab ? 'box' : ''}`}>
             {weekCn.map((item, index) => (
@@ -104,7 +104,7 @@ export default function WeekDay({ id, title, link, isJp, type, linkText }) {
         {link ? (
           <Link to={link}>
             {linkText || '新番时间表'}
-            <i className="iconfont">&#xe65e;</i>
+            <i className='iconfont'>&#xe65e;</i>
           </Link>
         ) : null}
       </div>

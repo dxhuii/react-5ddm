@@ -12,11 +12,11 @@
       display: block;
     }
     &.cur {
-      color: #08f;
+      color: $d-text-color-hover;
       background-color: #fff;
       margin-bottom: -1px;
       span {
-        border-bottom: 1px solid #08f;
+        border-bottom: 1px solid $d-text-color-hover;
       }
     }
   }
@@ -40,7 +40,7 @@
     border-radius: 5px;
     &.cur {
       color: #fff;
-      background-color: #08f;
+      background-color: $d-text-color-hover;
     }
   }
 }

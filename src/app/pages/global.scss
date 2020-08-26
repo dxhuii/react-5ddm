@@ -169,13 +169,13 @@
   }
 
   a {
-    color: #797c80;
+    color: $d-text-color-link;
     text-decoration: none;
     transition: all 0.15s ease-out;
   }
 
   a:hover {
-    color: #00a1d6;
+    color: $d-text-color-hover;
     text-decoration: none;
   }
 
@@ -224,27 +224,27 @@
   }
 
   ::-webkit-input-placeholder {
-    color: #666;
+    color: $d-text-color-placeholder;
   }
 
   ::-moz-placeholder {
-    color: #666;
+    color: $d-text-color-placeholder;
   }
 
   :-moz-placeholder {
-    color: #666;
+    color: $d-text-color-placeholder;
   }
 
   ::-ms-input-placeholder {
-    color: #666;
+    color: $d-text-color-placeholder;
   }
 
   input:-moz-placeholder {
-    color: #666;
+    color: $d-text-color-placeholder;
   }
 
   textarea:-moz-placeholder {
-    color: #666;
+    color: $d-text-color-placeholder;
   }
 
   .wp {
@@ -274,7 +274,7 @@
 
   body {
     padding-top: 55px;
-    background-color: #f6f6f6;
+    background-color: $d-bg-color-grey;
   }
 
   html {
@@ -343,7 +343,7 @@
       border-radius: 5px;
       text-align: center;
       padding-left: 15px;
-      color: #08f;
+      color: $d-text-color-link;
 
       i {
         position: relative;
@@ -493,7 +493,7 @@
   .box {
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
-    border-radius: 5px !important;
+    border-radius: $d-border-radius-sm !important;
     padding: 10px 20px;
   }
 
@@ -568,33 +568,6 @@
 
     .box {
       padding: 10px;
-    }
-
-    .explaywrap {
-      background: #000;
-
-      a {
-        background: #333;
-        height: 36px;
-        line-height: 36px;
-        font-size: 16px;
-        color: #aaa;
-        bottom: 150px !important;
-
-        &.jump {
-          bottom: 115px !important;
-          color: #fff;
-          font-size: 14px;
-        }
-      }
-
-      p {
-        font-size: 24px;
-        text-shadow: none;
-        color: #999;
-        -webkit-text-stroke: inherit;
-        bottom: 50px;
-      }
     }
   }
 

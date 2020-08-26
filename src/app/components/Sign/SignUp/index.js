@@ -42,7 +42,7 @@ export default () => {
       return false
     }
     const _send = args => send(args)(store.dispatch, store.getState)
-    let [, data] = await _send({ to: m.value })
+    const [, data] = await _send({ to: m.value })
     if (data.code === 1) {
       tick()
     }
@@ -90,7 +90,7 @@ export default () => {
       return false
     }
 
-    let [, success] = await _signUp({
+    const [, success] = await _signUp({
       username: u.value,
       password: p.value,
       mobile: m.value,
@@ -106,15 +106,15 @@ export default () => {
 
   return (
     <form onSubmit={submit}>
-      <input type="text" ref={username} placeholder="请输入账号" />
-      <input type="password" ref={password} placeholder="请输入密码" />
-      <input type="password" ref={rePassword} placeholder="再输入一次密码" />
-      <div styleName="validate">
-        <input type="text" ref={mobile} placeholder="请输入手机号" />
+      <input type='text' ref={username} placeholder='请输入账号' />
+      <input type='password' ref={password} placeholder='请输入密码' />
+      <input type='password' ref={rePassword} placeholder='再输入一次密码' />
+      <div styleName='validate'>
+        <input type='text' ref={mobile} placeholder='请输入手机号' />
         <div onClick={start}>{time > 1 && time < sTime ? time : '发送验证码'}</div>
       </div>
-      <input type="text" ref={code} placeholder="请输入验证" />
-      <button type="submit">注册</button>
+      <input type='text' ref={code} placeholder='请输入验证' />
+      <button type='submit'>注册</button>
     </form>
   )
 }

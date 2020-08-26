@@ -44,7 +44,7 @@
       overflow: hidden;
 
       &.today {
-        color: #08f;
+        color: $d-text-color-hover;
       }
     }
 
@@ -58,7 +58,7 @@
       @include clamp(1);
 
       &:hover {
-        color: #08f;
+        color: $d-text-color-hover;
       }
     }
   }

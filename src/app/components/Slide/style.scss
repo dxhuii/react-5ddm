@@ -17,7 +17,7 @@
     left: 0;
     right: 0;
     z-index: 2;
-    background: -webkit-linear-gradient(transparent, rgba(0, 0, 0, .5));
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
     color: #fff;
     padding-left: 10px;
     text-align: left;
@@ -31,7 +31,6 @@
 
 @media (min-width: 0) and (max-width: 1200px) {
   .slide {
-
     img {
       border-radius: 5px;
     }

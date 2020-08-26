@@ -31,8 +31,8 @@ export default Shell(() => {
   }, [info.data, store.dispatch, store.getState])
 
   const getArea = (weekData = []) => {
-    let cn = []
-    let jp = []
+    const cn = []
+    const jp = []
     weekData.map(item => {
       if (item.area === '日本') {
         jp.push(item)
@@ -45,8 +45,8 @@ export default Shell(() => {
 
   const getEveryWeek = weekData => {
     // isCN  1 日本  其他为中国
-    let data = {}
-    let [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday] = [[], [], [], [], [], [], []]
+    const data = {}
+    const [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday] = [[], [], [], [], [], [], []]
     weekData.map(item => {
       const day = item.weekday
       if (day === 1) {
@@ -82,20 +82,20 @@ export default Shell(() => {
   const today = new Date().getDay() - 1
   const title = id === '1' ? '日本' : id === '0' ? '国产' : ''
   return (
-    <div className="wp mt20">
+    <div className='wp mt20'>
       <Meta title={`${title}新番时间表`}>
-        <meta name="keywords" content={`${title}新番时间表,${title}动漫时间表`} />
-        <meta name="description" content={`${title}新番时间表`} />
+        <meta name='keywords' content={`${title}新番时间表,${title}动漫时间表`} />
+        <meta name='description' content={`${title}新番时间表`} />
       </Meta>
       {loading ? <Loading /> : null}
-      <ul styleName="list">
+      <ul styleName='list'>
         {weekCn.map((item, index) => (
           <li key={item} styleName={today === index ? 'active' : ''}>
             {item}
           </li>
         ))}
       </ul>
-      <ul styleName="weeklist">
+      <ul styleName='weeklist'>
         {weekEng.map((obj, index) => (
           <ItemS key={obj} data={weekData[weekEng[index]]} type={2} />
         ))}

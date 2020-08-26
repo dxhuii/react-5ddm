@@ -24,8 +24,8 @@ export default () => {
   }, [info.data, store.dispatch, store.getState])
 
   const getEveryWeek = weekData => {
-    let data = {}
-    let [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday] = [[], [], [], [], [], [], []]
+    const data = {}
+    const [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday] = [[], [], [], [], [], [], []]
     weekData.map(item => {
       const day = item.weekday
       if (day === 1) {
@@ -63,9 +63,9 @@ export default () => {
   if (loading) return <Loading />
   return (
     <>
-      <div className="title">
-        <div styleName="week-tab">
-          <ul styleName="tab">
+      <div className='title'>
+        <div styleName='week-tab'>
+          <ul styleName='tab'>
             {weekCn.map((item, index) => (
               <li key={index} onClick={() => setCurrent(index)} styleName={index === current ? 'active' : ''}>
                 {`${index !== 0 ? '周' : ''}${item}`}

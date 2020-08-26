@@ -137,7 +137,7 @@
   border-radius: 5px;
   color: #e8f1ff;
   font-size: 16px;
-  background-color: #08f;
+  background-color: $d-color-primary;
   margin-right: 15px;
   justify-content: center;
   align-items: center;
@@ -152,7 +152,7 @@
   }
 
   &:hover {
-    background-color: rgba($color: #08f, $alpha: 0.45);
+    background-color: rgba($color: $d-color-primary, $alpha: 0.45);
   }
 
   i {
@@ -206,7 +206,7 @@
       font-weight: bold;
 
       a {
-        border-bottom: 2px solid #08f;
+        border-bottom: 2px solid $d-text-color-hover;
       }
     }
   }

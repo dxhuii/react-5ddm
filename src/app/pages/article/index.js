@@ -49,7 +49,7 @@ export default Shell(() => {
     const getArticleData = args => article(args)(store.dispatch, store.getState)
     const getNewsData = args => newsIndex(args)(store.dispatch, store.getState)
     document.onkeyup = event => {
-      if (event.which === '27') {
+      if (event.which === 27) {
         isFull(false)
       }
     }

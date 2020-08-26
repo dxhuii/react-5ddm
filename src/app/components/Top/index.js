@@ -24,7 +24,7 @@ export default function Top({ name, title, sty }) {
   const { data = [], loading } = info
 
   return (
-    <div styleName="top" style={sty}>
+    <div styleName='top' style={sty}>
       <h2>{title || '排行榜'}</h2>
       <ul styleName={name === 'topListIndexCN' ? 'cn' : ''}>
         {loading ? <Loading /> : null}
@@ -32,7 +32,7 @@ export default function Top({ name, title, sty }) {
           <li key={item.id}>
             <span styleName={`top-li__num ${index <= 2 ? 'on' : ''}`}>{index + 1}</span>
             <Link to={`/subject/${item.id}`}>{item.title}</Link>
-            <span styleName="top-li__score">{item.gold}</span>
+            <span styleName='top-li__score'>{item.gold}</span>
           </li>
         ))}
       </ul>

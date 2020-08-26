@@ -65,7 +65,7 @@
 
       &:hover {
         i {
-          color: #08f;
+          color: $d-text-color-hover;
         }
       }
     }
@@ -95,7 +95,7 @@
         margin: 0 3px;
 
         &.cur {
-          background: #08f;
+          background: $d-text-color-hover;
         }
       }
     }

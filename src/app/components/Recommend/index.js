@@ -32,7 +32,7 @@ export default () => {
       <li key={item.id}>
         <Link to={link(item.id)}>
           <img src={formatPic(item.pic, 'orj360')} alt={item.title} />
-          <div styleName="mark">
+          <div styleName='mark'>
             <p>{item.title}</p>
           </div>
         </Link>
@@ -41,7 +41,7 @@ export default () => {
   }
 
   return (
-    <ul styleName="recommend">
+    <ul styleName='recommend'>
       {showData(anime.data, 1)}
       {showData(news.data)}
     </ul>

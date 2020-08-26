@@ -60,26 +60,26 @@ export default function NewsYG({ name, sty, isType, isCate, title }) {
 
   return (
     <div style={sty}>
-      <div className="title">
-        <h2 styleName="h2">{title || '预告'}</h2>
+      <div className='title'>
+        <h2 styleName='h2'>{title || '预告'}</h2>
         {isCate ? (
-          <ul styleName="news-tab tab">
+          <ul styleName='news-tab tab'>
             <li>
-              <Link to="/news/op">OP</Link>
+              <Link to='/news/op'>OP</Link>
             </li>
             <li>
-              <Link to="/news/ed">ED</Link>
+              <Link to='/news/ed'>ED</Link>
             </li>
             <li>
-              <Link to="/news/cm">CM</Link>
+              <Link to='/news/cm'>CM</Link>
             </li>
             <li>
-              <Link to="/news/bgm">BGM</Link>
+              <Link to='/news/bgm'>BGM</Link>
             </li>
           </ul>
         ) : null}
       </div>
-      <ul styleName="newstxt">
+      <ul styleName='newstxt'>
         {loading ? <Loading /> : null}
         {showData()}
       </ul>

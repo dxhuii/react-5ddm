@@ -7,7 +7,8 @@ $d-color-warning: #f0ad4e;
 $d-color-error: #dd524d;
 
 /* 文字基本颜色 */
-$d-text-color: #333; //基本色
+$d-text-color-link: #797c80; // 基本色
+$d-text-color-hover: #08f;
 $d-text-color-inverse: #fff; //反色
 $d-text-color-grey: #999; //辅助灰色，如加载更多的提示信息
 $d-text-color-placeholder: #808080;
@@ -15,7 +16,7 @@ $d-text-color-disable: #c0c0c0;
 
 /* 背景颜色 */
 $d-bg-color: #ffffff;
-$d-bg-color-grey: #f8f8f8;
+$d-bg-color-grey: #f7f9fa;
 $d-bg-color-hover: #f1f1f1; //点击状态颜色
 $d-bg-color-mask: rgba(0, 0, 0, 0.4); //遮罩颜色
 

@@ -16,9 +16,9 @@ import './style.scss'
 export default Shell(() => {
   const {
     match: {
-      params: { name, mcid, area, year, letter, lz, wd = '', order = 'addtime' },
+      params: { name, mcid, area, year, letter, lz, wd = '', order = 'addtime' }
     },
-    location: { pathname },
+    location: { pathname }
   } = useReactRouter()
 
   const type = {
@@ -27,7 +27,7 @@ export default Shell(() => {
     juchang: 203,
     tebie: 4,
     zhenren: 204,
-    qita: 35,
+    qita: 35
   }
 
   const [eId, getId] = useState(type[name] || 3)
@@ -37,10 +37,10 @@ export default Shell(() => {
   const [eLetter, getLetter] = useState(letter || '全部')
   const [eOrder, getOrder] = useState(order)
   const store = useStore()
-  const config = useSelector((state) => getConfig(state, 'list'))
+  const config = useSelector(state => getConfig(state, 'list'))
 
   useEffect(() => {
-    const _configLoad = (args) => configLoad(args)(store.dispatch, store.getState)
+    const _configLoad = args => configLoad(args)(store.dispatch, store.getState)
     if (!config.data) {
       _configLoad({ tag: 'list' })
     }
@@ -52,8 +52,8 @@ export default Shell(() => {
   }
 
   const formatArray = (data = []) => {
-    let f = [{ title: '全部', id: '' }]
-    for (let i of data) {
+    const f = [{ title: '全部', id: '' }]
+    for (const i of data) {
       f.push({ title: i, id: i })
     }
     return f
@@ -69,7 +69,7 @@ export default Shell(() => {
     }
   }
 
-  const isAll = (name) => {
+  const isAll = name => {
     return name === '全部' ? '' : name
   }
 
@@ -83,7 +83,7 @@ export default Shell(() => {
   const orderArr = [
     { title: '最新', id: 'addtime' },
     { title: '评分', id: 'gold' },
-    { title: '热门', id: 'hits' },
+    { title: '热门', id: 'hits' }
   ]
   const keyword = decodeURIComponent(wd)
   const typeName = findName(idArr, eId)
@@ -122,7 +122,7 @@ export default Shell(() => {
           <dl className='clearfix'>
             <dt>分类</dt>
             <dd>
-              {idArr.map((item) => (
+              {idArr.map(item => (
                 <a styleName={eId === item.id ? 'cur' : ''} onClick={() => getId(item.id)} key={item.id}>
                   {item.title}
                 </a>
@@ -132,7 +132,7 @@ export default Shell(() => {
           <dl className='clearfix'>
             <dt>类型</dt>
             <dd>
-              {mcidArr.map((item) => (
+              {mcidArr.map(item => (
                 <a styleName={eMcid === item.id ? 'cur' : ''} onClick={() => getMcid(item.id)} key={item.id}>
                   {item.title}
                 </a>
@@ -156,7 +156,7 @@ export default Shell(() => {
           <dl className='clearfix'>
             <dt>地区</dt>
             <dd>
-              {areaArr.map((item) => (
+              {areaArr.map(item => (
                 <a styleName={eArea === item.title ? 'cur' : ''} onClick={() => getArea(item.title)} key={item.id}>
                   {item.title}
                 </a>
@@ -166,7 +166,7 @@ export default Shell(() => {
           <dl className='clearfix'>
             <dt>年份</dt>
             <dd>
-              {yearArr.map((item) => (
+              {yearArr.map(item => (
                 <a styleName={eYear === item.title ? 'cur' : ''} onClick={() => getYear(item.title)} key={item.id}>
                   {item.title}
                 </a>
@@ -176,7 +176,7 @@ export default Shell(() => {
           <dl className='clearfix'>
             <dt>字母</dt>
             <dd>
-              {letterArr.map((item) => (
+              {letterArr.map(item => (
                 <a styleName={eLetter === item.title ? 'cur' : ''} onClick={() => getLetter(item.title)} key={item.id}>
                   {item.title}
                 </a>
@@ -186,7 +186,7 @@ export default Shell(() => {
           <dl className='clearfix'>
             <dt>排序</dt>
             <dd>
-              {orderArr.map((item) => (
+              {orderArr.map(item => (
                 <a styleName={eOrder === item.id ? 'cur' : ''} onClick={() => getOrder(item.id)} key={item.id}>
                   {item.title}
                 </a>

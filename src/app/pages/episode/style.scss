@@ -38,10 +38,10 @@
     text-align: center;
 
     &.active {
-      border-color: #08f;
+      border-color: $d-text-color-hover;
 
       a {
-        color: #08f;
+        color: $d-text-color-hover;
       }
     }
 
@@ -50,7 +50,7 @@
     }
 
     span {
-      border-color: #08f transparent transparent;
+      border-color: $d-color-primary transparent transparent;
       border-style: solid dashed dashed;
       border-width: 5px;
       display: inline-block;
@@ -78,7 +78,7 @@
     border-radius: 12px;
 
     &:hover {
-      background-color: #08f;
+      background-color: $d-text-color-hover;
       color: #fff;
     }
   }
@@ -92,7 +92,7 @@
 .go-detail {
   margin-top: 15px;
   display: block;
-  color: #08f;
+  color: $d-color-primary;
 }
 
 .box {

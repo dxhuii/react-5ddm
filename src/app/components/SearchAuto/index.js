@@ -37,7 +37,7 @@ export default function SearchAuto({ wd }) {
   return (
     <>
       {data.length > 0 ? (
-        <ul styleName="search-auto">
+        <ul styleName='search-auto'>
           {highLightKeywords(data).map(item => (
             <li key={item.id}>
               <Link to={`/subject/${item.id}`}>

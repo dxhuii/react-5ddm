@@ -8,12 +8,12 @@ import './style.scss'
 
 export default function NewsPic({ data = [] }) {
   return (
-    <ul styleName="newslist">
+    <ul styleName='newslist'>
       {data.map(item => (
         <li key={item.id}>
           <Link to={`/article/${item.id}`}>
             <img src={formatPic(item.pic, 'orj360')} alt={item.title} />
-            <div styleName="mark">
+            <div styleName='mark'>
               <p>{item.title}</p>
             </div>
           </Link>
