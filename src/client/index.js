@@ -25,7 +25,6 @@ import createRouter from '@/router'
 import { getUserInfo } from '@/store/reducers/user'
 
 import { GA, DOMAIN, debug } from 'Config'
-import { loadScript } from '@/utils/loadScript'
 
 if (!debug) {
   const { origin, pathname } = window.location
@@ -57,7 +56,6 @@ if (!debug) {
         ReactGA.pageview(pathname)
         window._hmt && window._hmt.push(['_trackPageview', pathname])
         window._czc && window._czc.push(['_trackPageview', pathname, document.referrer])
-        loadScript({ src: 'https://zz.bdstatic.com/linksubmit/push.js' })
       }
     }
   }
