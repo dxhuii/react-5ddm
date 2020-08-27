@@ -1,7 +1,5 @@
 import { listLoad } from '@/store/actions/list'
 import { configLoad } from '@/store/actions/config'
-import cache from '@/utils/cache'
-const { getCache, addCache } = cache
 
 function isEmpty(val, type) {
   return val === undefined || val === '' || val === '-' ? (type ? 'addtime' : '') : val
@@ -21,22 +19,7 @@ export default async ({ store, match }) => {
   const id = type[name] || 3
   const reduxName =
     id + isEmpty(mcid) + isEmpty(year) + isEmpty(area) + isEmpty(decodeURIComponent(wd)) + isEmpty(letter) + isEmpty(lz) + isEmpty(order, 1)
-  // console.log(reduxName)
-  const data = getCache('list')
-  if (data) {
-    store.dispatch({
-      type: 'GET_LIST',
-      name: reduxName,
-      data: data[0][1]
-    })
-    store.dispatch({
-      type: 'GET_CONFIG',
-      name: 'list',
-      data: data[1][1]
-    })
-    return { code: 200 }
-  }
-  const d1 = await listLoad({
+  await listLoad({
     id,
     mcid: isEmpty(mcid),
     year: isEmpty(year),
@@ -46,7 +29,6 @@ export default async ({ store, match }) => {
     lz: isEmpty(lz),
     order: isEmpty(order, 1)
   })(store.dispatch, store.getState)
-  const d2 = await configLoad({ tag: 'list' })(store.dispatch, store.getState)
-  addCache('list', [d1[1], d2[1]])
+  await configLoad({ tag: 'list' })(store.dispatch, store.getState)
   return { code: 200 }
 }

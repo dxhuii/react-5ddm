@@ -297,6 +297,7 @@
       border: 1px solid #ebebeb;
       p {
         margin-top: 0;
+        @include clamp(1);
       }
       &:hover {
         color: $d-text-color-hover;

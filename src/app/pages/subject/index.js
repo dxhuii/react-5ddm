@@ -171,7 +171,7 @@ export default Shell(() => {
 
   const playerList = (data = [], key, name) => {
     return data.map(({ title, vid }) => (
-      <a key={`${vid}`} href={`${playing(name, authcode(atob(vid), 'DECODE', key, 0))}`} target='_blank' rel='noreferrer'>
+      <a key={`${vid}`} href={`${playing(name, authcode(atob(vid), 'DECODE', key, 0))}`} target='_blank' rel='noreferrer' title={title}>
         {format(title)}
       </a>
     ))
