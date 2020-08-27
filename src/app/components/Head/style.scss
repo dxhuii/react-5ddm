@@ -3,13 +3,18 @@ header {
   background-color: #fff;
   box-shadow: 0 2px 4px 0 rgba(114, 144, 179, 0.06);
   background-clip: content-box;
-  height: 56px;
-  line-height: 56px;
+  height: 60px;
+  line-height: 60px;
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
   z-index: 999;
+  :global {
+    .wp {
+      display: flex;
+    }
+  }
 
   nav {
     flex-grow: 1;
@@ -33,7 +38,8 @@ header {
           left: 0;
           bottom: 0;
           width: 100%;
-          height: 2px;
+          height: 3px;
+          border-radius: 1.5px;
           background-color: $d-color-primary;
         }
       }
@@ -52,12 +58,11 @@ header {
 
 .header-logo {
   width: 120px;
-  line-height: 56px;
+  line-height: 60px;
   flex-basis: 120px;
   background: url(../../static/img/5d.svg) no-repeat;
   background-size: 110px auto;
   background-position: 0 15px;
-  margin-left: 10px;
   position: relative;
 
   &.kanfan {
@@ -89,8 +94,8 @@ header {
 .header-search {
   width: 300px;
   flex-basis: 300px;
-  background-color: #f6f6f6;
-  margin-top: 10px;
+  background-color: $d-bg-color-grey;
+  margin-top: 12px;
   height: 36px;
   border-radius: 3px;
   display: flex;
@@ -124,7 +129,7 @@ header {
 
 .header-nav {
   flex-grow: 1;
-  line-height: 56px;
+  line-height: 60px;
   white-space: nowrap;
 }
 

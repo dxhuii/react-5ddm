@@ -10,7 +10,7 @@ export default function (props) {
       oScript.onload = function () {
         ;(adsbygoogle = window.adsbygoogle || []).push({})
       }
-      oScript.type = 'text/javascript'
+      oScript.async = true
       oScript.src = '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
       oHead.appendChild(oScript)
     } else {

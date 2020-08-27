@@ -246,7 +246,7 @@ export default Shell(() => {
   const commentList = commitD.list || []
   const star = commitD.gold || {}
   const { loveid, remindid } = loveData
-  const reContent = `${content.substring(0, 120)}${content.length > 120 ? '...' : ''}`
+  const reContent = `${content.substring(0, 120)}${content.length > 120 ? '...' : ''}`.replace('剧情简介:', '').replace('故事讲述', '')
   const shareConfig = {
     pic,
     title: `#${title}#${language ? `(${language})` : ''} - ${listName}${listNameBig}`,
@@ -262,10 +262,10 @@ export default Shell(() => {
     <>
       <div className='warp-bg'>
         <Meta title={`${title}全集在线观看 - ${listName}${listNameBig}`}>
-          <meta name='description' content={`${title}动画全集由${reContent}`} />
+          <meta name='description' content={`${title}${listNameBig}简介和剧情介绍,${reContent}`} />
           <meta
             name='keywords'
-            content={`${title},${title}动漫,${title}全集,${title}动画片,${title}在线观看${keywords ? `,${keywords}` : ''}`}
+            content={`${title},${title}${listNameBig},${title}全集,${title}动画片,${title}在线观看${keywords ? `,${keywords}` : ''}`}
           />
           <meta property='og:locale' content='zh_CN' />
           <meta property='og:type' content='videolist' />
@@ -431,7 +431,7 @@ export default Shell(() => {
           </div>
           <div className='mt20'>
             <div styleName='title'>
-              <h2>评论</h2>
+              <h2>{title}的评论</h2>
             </div>
             <Comment data={commentList} submit={(e, content) => submit(e, content)} />
           </div>

@@ -21,14 +21,11 @@ import Ads from '@/components/Ads'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
-import playing from '@/utils/play'
 import { NAME } from 'Config'
 
 import './style.scss'
 
 export default Shell(() => {
-  const [full, isFull] = useState(false)
-  const [isfull, setIsfull] = useState(false)
   const [showPic, setPic] = useState(false)
   const [imgObj, setImgObj] = useState({})
   const articleContent = useRef()
@@ -48,11 +45,6 @@ export default Shell(() => {
   useEffect(() => {
     const getArticleData = args => article(args)(store.dispatch, store.getState)
     const getNewsData = args => newsIndex(args)(store.dispatch, store.getState)
-    document.onkeyup = event => {
-      if (event.which === 27) {
-        isFull(false)
-      }
-    }
     if (!articleData.data) {
       getArticleData({ id })
     }
@@ -119,12 +111,12 @@ export default Shell(() => {
     prev,
     next,
     jump,
+    original,
     content = '',
     playname = '',
     playurl = '',
     vodlist = []
   } = data
-  const playHtml = playing({ name: playname, vid: playurl, danmu: `article_${id}`, uid: userid, url }) || []
   const shareConfig = {
     pic,
     title: `${title} - ${name}`,
@@ -149,7 +141,7 @@ export default Shell(() => {
         <meta name='description' content={remark} />
         <meta name='keywords' content={keywords} />
       </Meta>
-      <div className={`fl left ${cid === 205 ? 'manhua' : ''}`}>
+      <div className='fl left'>
         <article styleName='article-body'>
           <div styleName='article-head'>
             <h1>{title}</h1>
@@ -158,21 +150,12 @@ export default Shell(() => {
               <span>更新时间：{addtime}</span>
             </div>
           </div>
-          {playname ? (
-            <div
-              styleName={`article-video ${playHtml[1] ? 'is-flvsp' : ''} ${full ? 'play-full' : ''}`}
-              onMouseOver={() => setIsfull(true)}
-              onMouseLeave={() => setIsfull(false)}
-            >
-              <div dangerouslySetInnerHTML={{ __html: playHtml[0] }} />
-              {isfull ? (
-                <a onMouseOver={() => setIsfull(true)} onClick={() => isFull(!full)}>
-                  {full ? '退出全屏' : '网页全屏'}
-                </a>
-              ) : null}
-            </div>
-          ) : null}
           <div ref={articleContent} id='content' styleName='article-content' dangerouslySetInnerHTML={{ __html: convertHTML(content) }} />
+          <div styleName='original'>
+            <a href={original} target='_blank' rel='noreferrer'>
+              点击查看原文
+            </a>
+          </div>
           {showPic ? (
             <div styleName='article-slide' onClick={() => closePic(false)}>
               <span />
@@ -216,11 +199,9 @@ export default Shell(() => {
           </div>
         </article>
       </div>
-      {cid === 205 ? null : (
-        <div className='fr right'>
-          <SideBar data={vodlist} />
-        </div>
-      )}
+      <div className='fr right'>
+        <SideBar data={vodlist} />
+      </div>
     </div>
   )
 })

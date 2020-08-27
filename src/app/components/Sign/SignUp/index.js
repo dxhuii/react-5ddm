@@ -47,6 +47,10 @@ export default visible => {
       Toast.error('请输入邮箱')
       e.focus()
       return false
+    } else if (!/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/.test(e.value)) {
+      Toast.error('邮箱地址不正确')
+      e.focus()
+      return false
     }
 
     if (!p.value) {

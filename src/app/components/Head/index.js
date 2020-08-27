@@ -108,66 +108,68 @@ export default function Head() {
   return (
     <Fragment>
       <header>
-        <NavLink styleName={logo} exact to='/' title={NAME} />
-        <nav styleName={showMenu ? 'show' : ''}>
-          <div styleName='header-nav'>
-            <NavLink styleName={url === '/' ? 'active' : ''} exact to='/'>
-              首页
-            </NavLink>
-            <NavLink styleName={/dongman|subject|play|week|type|search/.test(url) ? 'active' : ''} exact to='/dongman'>
-              动漫
-            </NavLink>
-            <NavLink styleName={/news|article/.test(url) ? 'active' : ''} exact to='/news'>
-              新闻
-            </NavLink>
-            <NavLink styleName={/ep/.test(url) ? 'active' : ''} exact to='/ep'>
-              剧情
-            </NavLink>
-            <NavLink styleName={/game/.test(url) ? 'active' : ''} exact to='/game'>
-              游戏
-            </NavLink>
-            <NavLink styleName={/top/.test(url) ? 'active' : ''} exact to='/top'>
-              排行榜
-            </NavLink>
-            <NavLink styleName={url === '/new' ? 'active' : ''} exact to='/new'>
-              最近更新
-            </NavLink>
-            <NavLink styleName={/month/.test(url) ? 'active' : ''} exact to={`/month/${getCurMonth()}`}>
-              {getCurMonth().substring(5)}月新番表
-            </NavLink>
+        <div className='wp'>
+          <NavLink styleName={logo} exact to='/' title={NAME} />
+          <nav styleName={showMenu ? 'show' : ''}>
+            <div styleName='header-nav'>
+              <NavLink styleName={url === '/' ? 'active' : ''} exact to='/'>
+                首页
+              </NavLink>
+              <NavLink styleName={/dongman|subject|play|week|type|search/.test(url) ? 'active' : ''} exact to='/dongman'>
+                动漫
+              </NavLink>
+              <NavLink styleName={/news|article/.test(url) ? 'active' : ''} exact to='/news'>
+                新闻
+              </NavLink>
+              <NavLink styleName={/ep/.test(url) ? 'active' : ''} exact to='/ep'>
+                剧情
+              </NavLink>
+              <NavLink styleName={/game/.test(url) ? 'active' : ''} exact to='/game'>
+                游戏
+              </NavLink>
+              <NavLink styleName={/top/.test(url) ? 'active' : ''} exact to='/top'>
+                排行榜
+              </NavLink>
+              <NavLink styleName={url === '/new' ? 'active' : ''} exact to='/new'>
+                最近更新
+              </NavLink>
+              <NavLink styleName={/month/.test(url) ? 'active' : ''} exact to={`/month/${getCurMonth()}`}>
+                {getCurMonth().substring(5)}月新番表
+              </NavLink>
+            </div>
+          </nav>
+          <div styleName={`header-search ${showSearch ? 'show' : ''}`}>
+            <input
+              required
+              type='search'
+              placeholder={params.wd || '片名、导演、声优、原作...'}
+              onChange={onChange}
+              onBlur={onBlur}
+              onFocus={onFocus}
+              onKeyPress={onPressEnter}
+            />
+            <button disabled={!wd} onClick={onSubmit}>
+              <i className='iconfont'>&#xe78d;</i>
+            </button>
+            {isHide ? <SearchAuto wd={wd} /> : null}
           </div>
-        </nav>
-        <div styleName={`header-search ${showSearch ? 'show' : ''}`}>
-          <input
-            required
-            type='search'
-            placeholder={params.wd || '片名、导演、声优、原作...'}
-            onChange={onChange}
-            onBlur={onBlur}
-            onFocus={onFocus}
-            onKeyPress={onPressEnter}
-          />
-          <button disabled={!wd} onClick={onSubmit}>
-            <i className='iconfont'>&#xe78d;</i>
-          </button>
-          {isHide ? <SearchAuto wd={wd} /> : null}
-        </div>
-        <div styleName='header-tool' className='tar'>
-          <a onClick={() => onSearch(!showSearch)} styleName='on-search'>
-            搜索
-          </a>
-          {nickname ? <span>{nickname}</span> : null}
-          {userid ? (
-            <a onClick={() => onSignOut()}>退出</a>
-          ) : (
-            <Fragment>
-              <a onClick={() => onType('signIn')}>登录</a>
-              <a onClick={() => onType('signUp')}>注册</a>
-            </Fragment>
-          )}
-          <a onClick={() => onMenu(!showMenu)} styleName='on-menu'>
-            菜单
-          </a>
+          <div styleName='header-tool' className='tar'>
+            <a onClick={() => onSearch(!showSearch)} styleName='on-search'>
+              搜索
+            </a>
+            {nickname ? <span>{nickname}</span> : null}
+            {userid ? (
+              <a onClick={() => onSignOut()}>退出</a>
+            ) : (
+              <Fragment>
+                <a onClick={() => onType('signIn')}>登录</a>
+                <a onClick={() => onType('signUp')}>注册</a>
+              </Fragment>
+            )}
+            <a onClick={() => onMenu(!showMenu)} styleName='on-menu'>
+              菜单
+            </a>
+          </div>
         </div>
       </header>
       <Modal visible={visible} showModal={() => onModal(true)} closeModal={() => onModal(false)}>

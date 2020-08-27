@@ -73,7 +73,7 @@ export default async (req, res) => {
   const webStats = path.resolve('./dist/client/loadable-stats.json')
 
   const nodeExtractor = new ChunkExtractor({ statsFile: nodeStats })
-  const webExtractor = new ChunkExtractor({ statsFile: webStats })
+  const webExtractor = new ChunkExtractor({ statsFile: webStats, entrypoints: ['app'] })
 
   // 获取路由dom
   const Page = router.dom

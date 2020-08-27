@@ -28,13 +28,13 @@ const conf = {
   CLASS_SCOPED_NAME: '[hash:base64:5]',
   AUTH_COOKIE_NAME: 'auth',
   CACHA_TIME: 300000,
-  weiboName: '微博',
+  weiboName: '5d动漫',
   // [选填] google广告
   googleAdSense: {
-    client: '',
+    client: 'pub-1710184184266697',
     slot: {
-      pc: '',
-      h5: ''
+      pc: '3946387868',
+      h5: '3946387868'
     }
   },
   HEAD: `<meta name="renderer" content="webkit">
@@ -58,8 +58,8 @@ const defalut = {
   COOKIE_PREFIX: 'ddm_',
   PUBLIC_PATH: '',
   BAIDU_STAT: '9449f42e45055b4f70ad84574c4c65c8',
-  CNZZ_STAT: '1276171240',
-  GA: 'UA-7957076-8',
+  CNZZ_STAT: '1279219478',
+  GA: 'UA-176562013-1',
   EMAIL: 'ddm_com@outlook.com'
 }
 
@@ -78,7 +78,7 @@ const kanfan = {
   PORT: 6669,
   COOKIE_PREFIX: 'kanfan_',
   PUBLIC_PATH: '//www.kanfan.net',
-  BAIDU_STAT: '0014e9ce85a5c0d765e1913cf93cf939',
+  BAIDU_STAT: '2181f9da0f7a8cdc001129fb5010a473',
   CNZZ_STAT: '1277233437',
   GA: 'UA-7957076-10',
   EMAIL: 'kanfan_net@outlook.com'
