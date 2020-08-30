@@ -222,22 +222,6 @@
   margin-top: 10px;
 }
 
-.detail-bottom {
-  :global {
-    .box {
-      .title {
-        margin-top: 10px;
-        padding-bottom: 10px;
-      }
-
-      p {
-        margin-top: 10px;
-        color: #8590a6;
-      }
-    }
-  }
-}
-
 .detail-content {
   line-height: 2;
   color: #666;
@@ -248,8 +232,10 @@
 }
 
 .right-actor {
-  max-height: 300px;
-  overflow: hidden;
+  padding-top: 6px;
+  p {
+    margin-top: 10px;
+  }
 
   &.auto {
     max-height: inherit;
@@ -257,7 +243,7 @@
 }
 
 .player {
-  margin-top: 5px;
+  margin-top: 16px;
   .title {
     display: flex;
     cursor: pointer;

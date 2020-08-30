@@ -70,7 +70,7 @@ export default Shell(() => {
   return (
     <div className='wp mt20 clearfix'>
       <Meta title='动漫新闻_动漫资讯_新番情报_动漫先行图_漫画情报' />
-      <div styleName='news-nav' className='box fl'>
+      <div styleName='news-nav' className='right-box fl'>
         <h2>
           <Link to='/news'>专栏</Link>
         </h2>
@@ -82,7 +82,7 @@ export default Shell(() => {
           ))}
         </ul>
       </div>
-      <div styleName='news-left' className='box fl'>
+      <div styleName='news-left' className='right-box fl'>
         <Item data={data} />
       </div>
       <div className='right fr'>

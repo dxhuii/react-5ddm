@@ -62,8 +62,8 @@ export default Shell(() => {
         />
       </Meta>
       {loading ? <Loading /> : null}
-      <div className='wp mt20'>
-        <div className='box'>
+      <div className='wp mt20' styleName='month-box'>
+        <div className='right-box'>
           <ul styleName='year' className='clearfix'>
             {getYear(nowYear - 18).map(item => (
               <li key={item} styleName={year === item ? 'cur' : ''} onClick={() => onYear(item)}>
@@ -79,10 +79,10 @@ export default Shell(() => {
             ))}
           </div>
         </div>
-        <div className='box mt20'>
+        <div className='right-box mt20 pb20'>
           共 <b>{data.length}</b> 条
         </div>
-        <Item data={data} />
+        {data.length > 0 ? <Item data={data} /> : null}
       </div>
     </>
   )

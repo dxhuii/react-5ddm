@@ -1,3 +1,15 @@
+.month-box {
+  > div {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  :global {
+    .pb20 {
+      padding-bottom: 16px !important;
+    }
+  }
+}
+
 .year {
   display: flex;
   flex-flow: wrap;

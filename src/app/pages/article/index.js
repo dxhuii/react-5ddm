@@ -199,9 +199,9 @@ export default Shell(() => {
           </div>
         </article>
       </div>
-      <div className='fr right'>
+      <aside className='fr right'>
         <SideBar data={vodlist} />
-      </div>
+      </aside>
     </div>
   )
 })

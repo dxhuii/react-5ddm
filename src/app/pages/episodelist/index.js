@@ -53,9 +53,9 @@ export default Shell(() => {
             ))}
           </ul>
         </div>
-        <div className='right fr'>
+        <aside className='right fr'>
           <SideBar />
-        </div>
+        </aside>
       </div>
     </>
   )

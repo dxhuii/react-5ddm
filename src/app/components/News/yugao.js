@@ -59,9 +59,12 @@ export default function NewsYG({ name, sty, isType, isCate, title }) {
   }
 
   return (
-    <div style={sty}>
-      <div className='title'>
-        <h2 styleName='h2'>{title || '预告'}</h2>
+    <div className='right-box'>
+      <div className='right-title'>
+        <h2>
+          <em></em>
+          {title || '排行榜'}
+        </h2>
         {isCate ? (
           <ul styleName='news-tab tab'>
             <li>

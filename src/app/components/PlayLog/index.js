@@ -59,12 +59,12 @@ export default function PlayLog({ userid, isShow }) {
   const { data } = info
   const list = (userid ? data : playlogList) || []
   return (
-    <div styleName="history" className="box" style={{ display: isShow ? 'block' : 'none' }}>
-      <div styleName="title">
+    <div styleName='history' className='box' style={{ display: isShow ? 'block' : 'none' }}>
+      <div styleName='title'>
         <h2>观看记录</h2>
         <span onClick={() => empty()}>清空记录</span>
       </div>
-      <ul styleName="list">
+      <ul styleName='list'>
         {list.map((item, index) => (
           <li key={index}>
             <span>

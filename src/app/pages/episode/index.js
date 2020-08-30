@@ -116,7 +116,7 @@ export default Shell(() => {
         </div>
       </div>
       <div className='fr right'>
-        <div className='box'>
+        <div className='right-box'>
           <Detail title={vTitle} pic={pic} gold={gold} vid={vid} year={year} status={status} mcid={mcid} pid={pid} />
           <ul styleName={`eplist ${more ? 'auto' : ''}`}>
             <li styleName={!p ? 'active' : ''}>
@@ -141,9 +141,7 @@ export default Shell(() => {
             去 {vTitle}
           </Link>
         </div>
-        <div className='mt20'>
-          <SideBar />
-        </div>
+        <SideBar />
       </div>
     </div>
   )

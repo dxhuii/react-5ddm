@@ -385,17 +385,17 @@ export default Shell(() => {
         </div>
       </div>
       <div className='mt20 clearfix wp' styleName='detail-bottom'>
-        <div className='fl box pb20 left'>
+        <div className='fl right-box pb20 left'>
           {newsTextlist.length > 0 ? (
-            <div className='mt10'>
+            <>
               <div styleName='title'>
                 <h2>预告片·OP·ED·BGM·MAD·CM·特典 · · · · · ·</h2>
               </div>
               <NewsText data={newsTextlist} />
-            </div>
+            </>
           ) : null}
           {content ? (
-            <div className='mt10'>
+            <>
               <div styleName='title'>
                 <h2>简介</h2>
               </div>
@@ -405,7 +405,7 @@ export default Shell(() => {
                   《{title}》动漫的网址：{DOMAIN}/subject/{id}
                 </p>
               </div>
-            </div>
+            </>
           ) : null}
           {storyId && storylist.length > 0 ? (
             <div styleName='ep'>
@@ -447,48 +447,54 @@ export default Shell(() => {
             />
           </div>
         </div>
-        <div className='fr right'>
+        <aside className='fr right'>
           {list.length > 0 ? (
-            <div className='box pb20'>
-              <div styleName='title'>
-                <h2>在哪儿看这部动漫</h2>
+            <div className='right-box'>
+              <div className='right-title'>
+                <h2>
+                  <em></em>在哪儿看这部动漫
+                </h2>
               </div>
               {player()}
             </div>
           ) : null}
-          <div className={`box pb20 ${list.length > 0 ? 'mt20' : ''}`}>
-            <div styleName='title'>
-              <h2>角色声优</h2>
+          <div className='right-box'>
+            <div className='right-title'>
+              <h2>
+                <em></em>角色声优
+              </h2>
             </div>
-            <div>{actor ? actor.map((item, index) => <p key={index}>{item.title}</p>) : <p>暂无</p>}</div>
+            <div styleName='right-actor'>{actor ? actor.map((item, index) => <p key={index}>{item.title}</p>) : <p>暂无</p>}</div>
           </div>
-          <div className='box pb20 mt20'>
-            <div styleName='title'>
-              <h2>STAFF</h2>
+          <div className='right-box'>
+            <div className='right-title'>
+              <h2>
+                <em></em>STAFF
+              </h2>
             </div>
-            {original.length > 0 ? <p>原作：{original.map(item => item.title)}</p> : null}
-            {director.length > 0 ? (
-              <p>
-                导演：
-                {director.map((item, index) => (
-                  <span key={`${item.title}_${index}`}>{item.title}</span>
-                ))}
-              </p>
-            ) : null}
-            {company ? <p>制作：{company}</p> : null}
-            {website ? (
-              <p>
-                官网：
-                <a href={website} target='_blank' rel='noopener noreferrer'>
-                  {website}
-                </a>
-              </p>
-            ) : null}
+            <div styleName='right-actor'>
+              {original.length > 0 ? <p>原作：{original.map(item => item.title)}</p> : null}
+              {director.length > 0 ? (
+                <p>
+                  导演：
+                  {director.map((item, index) => (
+                    <span key={`${item.title}_${index}`}>{item.title}</span>
+                  ))}
+                </p>
+              ) : null}
+              {company ? <p>制作：{company}</p> : null}
+              {website ? (
+                <p>
+                  官网：
+                  <a href={website} target='_blank' rel='noopener noreferrer'>
+                    {website}
+                  </a>
+                </p>
+              ) : null}
+            </div>
           </div>
-          <div className='mt20'>
-            <SideBar />
-          </div>
-        </div>
+          <SideBar />
+        </aside>
       </div>
       <Modal visible={visible} showModal={() => onModal(true)} closeModal={() => onModal(false)}>
         <Sign isSign={isSign} onType={val => onType(val)} visible={visible} />

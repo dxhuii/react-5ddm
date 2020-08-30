@@ -50,12 +50,12 @@ export default Shell(() => {
         <meta name='description' content={`${NAME}为您提供${vod.title}相关花絮,预告片以及，${vod.title}资讯新闻等更多信息请关注${NAME}`} />
       </Meta>
       <div className='wp clearfix mt20'>
-        <div className='left box fl'>
+        <div className='left right-box fl'>
           <Item data={data} />
         </div>
-        <div className='right fr'>
+        <aside className='right fr'>
           <SideBar vodid={+id} />
-        </div>
+        </aside>
       </div>
     </>
   )

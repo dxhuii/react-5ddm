@@ -7,7 +7,7 @@ export default function ArticleVod({ data = [] }) {
   return (
     <>
       {data.map((item, index) => (
-        <div className={`box ${index > 0 ? 'mt20' : ''}`} key={item.id}>
+        <div className='right-box' key={item.id}>
           <Detail
             title={item.title}
             pic={item.pic}

@@ -47,7 +47,7 @@ export default Shell(() => {
     <>
       <Meta title='最新更新的100个动漫' />
       <div className='wp mt20'>
-        <div className='box'>
+        <div className='right-box'>
           <ul styleName='newlist'>
             <li>
               <span>动漫标题</span>

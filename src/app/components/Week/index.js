@@ -92,7 +92,7 @@ export default function WeekDay({ id, title, link, isJp, type, linkText }) {
         )}
         <div styleName='week-tab'>
           <span onClick={onWeek}>最新</span>
-          <ul styleName={`tab ${tab ? 'show' : ''}`} className={`${tab ? 'box' : ''}`}>
+          <ul styleName={`tab ${tab ? 'show' : ''}`} className={`${tab ? 'right-box' : ''}`}>
             {weekCn.map((item, index) => (
               <li key={index} onClick={() => setCurrent(index)} styleName={index === current ? 'active' : ''}>
                 {`${index !== 0 ? '周' : ''}${item}`}

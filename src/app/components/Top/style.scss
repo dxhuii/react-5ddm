@@ -1,32 +1,16 @@
 .top {
   position: relative;
 
-  h2 {
-    margin-top: 3px;
-    font-size: 18px;
-  }
-
   ul {
-    margin-top: 20px;
-
+    margin-top: -2px;
     li {
-      padding-bottom: 20.5px;
+      margin-top: 18px;
       display: flex;
-
-      &:last-child {
-        padding-bottom: 0;
-      }
 
       a {
         flex-grow: 1;
         @include clamp(1);
         margin-left: 10px;
-      }
-    }
-
-    &.cn {
-      li {
-        padding-bottom: 24px;
       }
     }
   }

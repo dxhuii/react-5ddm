@@ -46,8 +46,10 @@ export default Shell(() => {
     <>
       <Meta title='动漫排行榜 动漫热播榜' />
       <div className='wp mt20' styleName='top'>
-        <div className='box'>
-          <h2>总</h2>
+        <div className='right-box'>
+          <div className='right-title'>
+            <h2>总</h2>
+          </div>
           <ul styleName='toplist'>
             {allData.map((item, index) => (
               <li key={item.id}>
@@ -58,8 +60,10 @@ export default Shell(() => {
             ))}
           </ul>
         </div>
-        <div className='box'>
-          <h2>月</h2>
+        <div className='right-box'>
+          <div className='right-title'>
+            <h2>月</h2>
+          </div>
           <ul styleName='toplist'>
             {monthData.map((item, index) => (
               <li key={item.id}>
@@ -70,8 +74,10 @@ export default Shell(() => {
             ))}
           </ul>
         </div>
-        <div className='box'>
-          <h2>周</h2>
+        <div className='right-box'>
+          <div className='right-title'>
+            <h2>周</h2>
+          </div>
           <ul styleName='toplist'>
             {weekData.map((item, index) => (
               <li key={item.id}>
@@ -82,8 +88,10 @@ export default Shell(() => {
             ))}
           </ul>
         </div>
-        <div className='box'>
-          <h2>日</h2>
+        <div className='right-box'>
+          <div className='right-title'>
+            <h2>日</h2>
+          </div>
           <ul styleName='toplist'>
             {dayData.map((item, index) => (
               <li key={item.id}>

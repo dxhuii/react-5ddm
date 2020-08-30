@@ -1,5 +1,7 @@
 .news-nav {
   width: 160px;
+  padding-bottom: 0;
+  margin-bottom: 0;
 
   h2 {
     font-size: 18px;
@@ -42,7 +44,6 @@
 .news-left {
   width: 740px;
   margin-left: 20px;
-  padding-top: 5px;
 }
 
 @media (min-width: 0) and (max-width: 1200px) {

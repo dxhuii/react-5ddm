@@ -46,11 +46,9 @@
 
 .week {
   position: relative;
-  height: 385px;
+  height: 380px;
   overflow-x: hidden;
   overflow-y: auto;
-  margin-top: 15px;
-  margin-bottom: -10px;
   display: flex;
   flex-flow: row wrap;
   align-content: flex-start;
@@ -92,7 +90,7 @@
     position: relative;
     height: 77px;
     width: 226px;
-    margin-bottom: 25px;
+    margin-top: 16px;
     div {
       float: left;
       position: relative;

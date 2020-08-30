@@ -1,7 +1,7 @@
 .main {
   display: flex;
   flex-wrap: wrap;
-  height: 440px;
+  height: 422px;
   overflow: hidden;
 
   &.cn {
@@ -24,6 +24,13 @@
 
 .main-right {
   width: 300px;
+  display: block;
+  :global {
+    .right-box {
+      padding: 2px 20px 0;
+      margin-bottom: 0;
+    }
+  }
 }
 
 .top-left {
@@ -119,7 +126,6 @@
     }
   }
 }
-
 
 @media (min-width: 0px) and (max-width: 399px) {
   .top-left {

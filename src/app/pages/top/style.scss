@@ -1,26 +1,21 @@
 .top {
   display: flex;
   :global {
-    .box {
+    .right-box {
       flex: 1;
       margin-right: 10px;
+      margin-bottom: 0;
       &:last-child {
         margin-right: 0;
-      }
-      h2 {
-        font-size: 16px;
-        height: 40px;
-        line-height: 40px;
       }
     }
   }
 }
 
 .toplist {
-  margin-top: 10px;
   li {
     display: flex;
-    padding-bottom: 20px;
+    padding-top: 16px;
     &:last-child {
       padding-bottom: 0;
     }

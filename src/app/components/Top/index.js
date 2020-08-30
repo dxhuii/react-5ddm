@@ -24,9 +24,14 @@ export default function Top({ name, title, sty }) {
   const { data = [], loading } = info
 
   return (
-    <div styleName='top' style={sty}>
-      <h2>{title || '排行榜'}</h2>
-      <ul styleName={name === 'topListIndexCN' ? 'cn' : ''}>
+    <div className='right-box' styleName='top'>
+      <div className='right-title'>
+        <h2>
+          <em></em>
+          {title || '排行榜'}
+        </h2>
+      </div>
+      <ul>
         {loading ? <Loading /> : null}
         {data.map((item, index) => (
           <li key={item.id}>
