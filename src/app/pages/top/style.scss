@@ -48,11 +48,5 @@
 @media (min-width: 0) and (max-width: 1200px) {
   .top {
     display: block;
-    :global {
-      .box {
-        margin-top: 10px;
-        margin-right: 0;
-      }
-    }
   }
 }

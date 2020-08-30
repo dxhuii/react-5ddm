@@ -24,6 +24,7 @@ export default Shell(() => {
       params: { name }
     }
   } = useReactRouter()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const menu = {
     zixun: 211,
     donghua: 206,
