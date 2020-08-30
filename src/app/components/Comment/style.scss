@@ -1,10 +1,58 @@
 .comment {
-  display: block;
+  margin-top: 20px;
 }
 
 .comment-form {
   position: relative;
-  margin-top: 10px;
+  margin: 10px 80px 0 85px;
+
+  .comment-avatar {
+    position: absolute;
+    left: -80px;
+    width: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    img {
+      width: 70px;
+      display: block;
+    }
+  }
+
+  .validate {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .comment-face {
+      margin-top: 10px;
+      width: 100px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border: 1px solid $d-border-color;
+      background-color: $d-bg-color-grey;
+      border-radius: $d-border-radius-sm;
+    }
+
+    .comment-code {
+      margin-top: 10px;
+      display: flex;
+      input {
+        width: 120px;
+        height: 38px;
+        padding: 0 10px;
+        border: 1px solid $d-border-color;
+        border-radius: $d-border-radius-sm;
+      }
+
+      img {
+        margin-left: 10px;
+        width: 120px;
+        height: 35px;
+        border-radius: 4px;
+      }
+    }
+  }
 
   form {
     display: flex;
@@ -12,30 +60,65 @@
 
   textarea {
     width: 100%;
-    height: 90px;
-    line-height: 30px;
-    border: 1px solid #e8f1ff;
+    height: 70px;
+    line-height: 24px;
+    border: 1px solid $d-border-color;
     outline: none;
     padding: 5px 10px;
-    box-shadow: 0 0 3px 3px #f6f6f6 inset;
+    background-color: $d-bg-color-grey;
+    border-radius: $d-border-radius-sm;
+    &:focus {
+      background-color: #fff;
+    }
   }
 
   button {
     position: absolute;
-    right: 0;
-    top: 50%;
-    width: 90px;
-    height: 90px;
-    line-height: 90px;
+    right: -85px;
+    top: 0;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
     text-align: center;
     background-color: $d-color-primary;
     color: #fff;
-    transform: translateY(-50%);
     font-size: 18px;
+    border-radius: $d-border-radius-sm;
+    &:disabled {
+      background-color: $d-text-color-disable;
+    }
+  }
+
+  .no-login {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 2;
+    background-color: $d-bg-color-grey;
+    border-radius: $d-border-radius-sm;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $d-text-color-grey;
+    span {
+      display: inline-block;
+      background-color: $d-color-primary;
+      color: #fff;
+      border-radius: $d-border-radius-sm;
+      padding: 0 10px;
+      margin: 0 5px;
+      height: 24px;
+      line-height: 24px;
+      cursor: pointer;
+    }
   }
 }
 
 .comment-list {
+  margin-top: 20px;
+  border-top: 1px solid $d-border-color;
   color: #646464;
 
   a {
@@ -96,7 +179,8 @@
 }
 
 .commit-list__content {
-  padding-top: 10px;
+  margin-left: 50px;
+  color: #333;
 }
 
 .commit-sublist {

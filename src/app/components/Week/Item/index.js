@@ -18,18 +18,13 @@ export default function Item({ data, type }) {
             />
             <h4>{item.title}</h4>
             {isNumber(item.status) ? (
-              item.isDate ? (
-                <p>
-                  更新至
-                  <span>{item.status}话</span>
-                </p>
-              ) : (
-                <p>
-                  更新至<span>{item.status}话</span>
-                </p>
-              )
+              <p>
+                更新至<span styleName={item.isDate ? 'today' : ''}>{item.status}话</span>
+              </p>
             ) : (
-              <p styleName='no'>{item.isDate ? <span>{item.status}</span> : <span>{item.status}</span>}</p>
+              <p styleName='no'>
+                <span styleName={item.isDate ? 'today' : ''}>{item.status}</span>
+              </p>
             )}
           </Link>
         </li>

@@ -1,27 +1,72 @@
-import React, { useRef } from 'react'
+import React, { useState, useCallback, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+// 生成异步加载组件
+// import loadable from '@loadable/component'
+// import pMinDelay from 'p-min-delay'
+
+import { useStore } from 'react-redux'
+import { getCode } from '@/store/actions/user'
 
 import './style.scss'
 
-export default function Comment({ data, submit }) {
+// const Editer = loadable(() => pMinDelay(import('@/components/Editer'), 200), { ssr: false })
+
+export default function Comment({ data, submit, me, login }) {
+  const store = useStore()
   const commentContent = useRef(null)
+  const validate = useRef(null)
+  const { userid, avatar } = me
+
+  const [base64img, getBase64] = useState('')
+  const [imgkey, getImgKey] = useState('')
+
+  const getVerify = useCallback(async () => {
+    const _getCode = () => getCode()(store.dispatch, store.getState)
+    const [err, data] = await _getCode()
+    if (data.code === 0) {
+      const { base64img, imgkey } = data.data
+      getBase64(base64img)
+      getImgKey(imgkey)
+    }
+  }, [store.dispatch, store.getState])
+
+  useEffect(() => {
+    getVerify()
+  }, [getVerify])
 
   const addComment = e => {
     const body = commentContent.current
-    submit(e, body)
+    const code = validate.current
+    submit(e, body, code, imgkey)
   }
 
   return (
     <div styleName='comment'>
       <div styleName='comment-form'>
+        <div styleName='comment-avatar'>
+          <img src={avatar || 'https://wxt.sinaimg.cn/large/628d024fgy1g5tfklg1lsg205k05kt8n.gif'} />
+        </div>
         <form onSubmit={addComment}>
-          <textarea ref={commentContent}></textarea>
-          <button>发表</button>
+          <textarea name='content' placeholder='发条友善的评论' ref={commentContent}></textarea>
+          <button disabled={!userid}>发表</button>
         </form>
+        <div styleName='validate'>
+          <div styleName='comment-face'>表情</div>
+          <div styleName='comment-code'>
+            <input type='text' name='validate' ref={validate} placeholder='请输入验证码' />
+            <img src={base64img} onClick={getVerify} />
+          </div>
+        </div>
+        {!userid ? (
+          <div styleName='no-login'>
+            请先<span onClick={() => login('signIn')}>登录</span>后发表评论 (・ω・)
+          </div>
+        ) : null}
       </div>
+      {/* <Editer /> */}
       <div styleName='comment-list'>
-        {data.length < 0 ? (
+        {data.length === 0 ? (
           <div styleName='comment-empty' className='tac'>
             暂无评论，抢少发
           </div>
@@ -83,5 +128,7 @@ Comment.defaultProps = {
 
 Comment.propTypes = {
   data: PropTypes.array,
-  submit: PropTypes.func
+  me: PropTypes.object,
+  submit: PropTypes.func,
+  login: PropTypes.func
 }

@@ -1,7 +1,7 @@
 .top {
   position: fixed;
   right: 10px;
-  bottom: 300px;
+  bottom: 100px;
   width: 30px;
   height: 30px;
   line-height: 30px;
@@ -24,6 +24,6 @@
 @media (min-width: 0px) and (max-width: 1200px) {
   .top {
     bottom: 80px;
-    opacity: .7;
+    opacity: 0.7;
   }
 }

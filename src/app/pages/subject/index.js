@@ -130,7 +130,7 @@ export default Shell(() => {
     onModal(true)
   }
 
-  const submit = async (e, content) => {
+  const submit = async (e, content, code, imgkey) => {
     e.preventDefault()
     if (!userid) {
       onModal(true)
@@ -141,10 +141,16 @@ export default Shell(() => {
       Toast.error('评论内容不能为空')
       return
     }
+    if (!code.value) {
+      code.focus()
+      Toast.error('验证码不能为空')
+      return
+    }
     const _addComment = args => addComment(args)(store.dispatch, store.getState)
-    const [, data] = await _addComment({ id, sid, content: content.value, nickname, pid: 0 })
+    const [, data] = await _addComment({ id, sid, content: content.value, nickname, pid: 0, validate: code.value, key: imgkey })
     if (data.code === 1) {
       content.value = ''
+      code.value = ''
       _comment({ id, sid })
     }
   }
@@ -433,7 +439,12 @@ export default Shell(() => {
             <div styleName='title'>
               <h2>{title}的评论</h2>
             </div>
-            <Comment data={commentList} submit={(e, content) => submit(e, content)} />
+            <Comment
+              me={me}
+              data={commentList}
+              login={a => onType(a)}
+              submit={(e, content, code, imgkey) => submit(e, content, code, imgkey)}
+            />
           </div>
         </div>
         <div className='fr right'>

@@ -15,13 +15,15 @@ export function comment({ id, sid }) {
   }
 }
 
-export function addComment({ id, sid = 1, content, nickname, pid }) {
+export function addComment({ id, sid = 1, content, nickname, pid, validate, key }) {
   return () => {
     return Post({
       api: 'addComment',
       params: {
         id,
         sid,
+        key,
+        validate,
         comm_txt: content,
         user_nickname: nickname,
         comm_pid: pid
