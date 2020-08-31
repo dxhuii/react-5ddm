@@ -384,19 +384,20 @@ export default Shell(() => {
           </div>
         </div>
       </div>
-      <div className='mt20 clearfix wp' styleName='detail-bottom'>
-        <div className='fl right-box pb20 left'>
+      <section className='mt20 clearfix wp' styleName='detail-bottom'>
+        <div className='left'>
           {newsTextlist.length > 0 ? (
-            <>
-              <div styleName='title'>
+            <div className='right-box'>
+              <div className='right-title'>
                 <h2>预告片·OP·ED·BGM·MAD·CM·特典 · · · · · ·</h2>
               </div>
               <NewsText data={newsTextlist} />
-            </>
+            </div>
           ) : null}
+
           {content ? (
-            <>
-              <div styleName='title'>
+            <div className='right-box'>
+              <div className='right-title'>
                 <h2>简介</h2>
               </div>
               <div styleName='detail-content' className='mt10'>
@@ -405,38 +406,38 @@ export default Shell(() => {
                   《{title}》动漫的网址：{DOMAIN}/subject/{id}
                 </p>
               </div>
-            </>
-          ) : null}
-          {storyId && storylist.length > 0 ? (
-            <div styleName='ep'>
-              <div styleName='title'>
-                <h2>分集剧情</h2>
-              </div>
-              <EpList id={storyId} data={storylist} />
             </div>
           ) : null}
-          <div className='mt10'>
-            <div styleName='title'>
+          {storyId && storylist.length > 0 ? (
+            <div className='right-box' styleName='ep'>
+              <div className='right-title'>
+                <h2>分集剧情</h2>
+              </div>
+              <EpList id={id} data={storylist} />
+            </div>
+          ) : null}
+          <div className='right-box'>
+            <div className='right-title'>
               <h2>相关动漫</h2>
             </div>
             {id ? <DetailActor actor={reActor} not={id} /> : null}
           </div>
           {newsPiclist.length > 0 ? (
-            <div className='mt10'>
-              <div styleName='title'>
+            <div className='right-box'>
+              <div className='right-title'>
                 <h2>新闻花絮</h2>
               </div>
               <NewsPic data={newsPiclist} />
             </div>
           ) : null}
-          <div className={`${newsPiclist.length > 0 ? 'mt20' : 'mt10'}`}>
-            <div styleName='title'>
+          <div className='right-box'>
+            <div className='right-title'>
               <h2>小伙伴还在看(=￣ω￣=)（一周热门）</h2>
             </div>
             <HotWeek not={id} />
           </div>
-          <div className='mt20'>
-            <div styleName='title'>
+          <div className='right-box'>
+            <div className='right-title'>
               <h2>{title}的评论</h2>
             </div>
             <Comment
@@ -447,7 +448,7 @@ export default Shell(() => {
             />
           </div>
         </div>
-        <aside className='fr right'>
+        <aside className='right'>
           {list.length > 0 ? (
             <div className='right-box'>
               <div className='right-title'>
@@ -486,7 +487,7 @@ export default Shell(() => {
               {website ? (
                 <p>
                   官网：
-                  <a href={website} target='_blank' rel='noopener noreferrer'>
+                  <a href={website} target='_blank' rel='noopener noreferrer' title={website}>
                     {website}
                   </a>
                 </p>
@@ -495,7 +496,7 @@ export default Shell(() => {
           </div>
           <SideBar />
         </aside>
-      </div>
+      </section>
       <Modal visible={visible} showModal={() => onModal(true)} closeModal={() => onModal(false)}>
         <Sign isSign={isSign} onType={val => onType(val)} visible={visible} />
       </Modal>

@@ -1,29 +1,7 @@
 {
-  "workbench.iconTheme": "vscode-icons",
-  "javascript.implicitProjectConfig.experimentalDecorators": true,
-  "vsicons.dontShowNewVersionMessage": true,
-  "window.zoomLevel": 1,
   "editor.tabSize": 2,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "prettier.jsxSingleQuote": true,
-  "prettier.jsxBracketSameLine": false,
   "editor.formatOnSave": true,
-  "prettier.disableLanguages": ["react"],
-  "prettier.printWidth": 140,
-  "prettier.singleQuote": true,
-  "prettier.semi": false,
-  "prettier.arrowParens": "avoid",
-  "prettier.trailingComma": "none",
-  "eslint.options": {
-    "extensions": [".js", ".jsx"],
-    "plugins": ["html"]
-  },
-  "files.associations": {
-    "*.js": "javascript"
-  },
-  "javascript.validate.enable": false,
-  "emmet.triggerExpansionOnTab": true,
-  "javascript.suggestionActions.enabled": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     // For ESLint
     "source.fixAll.eslint": true,
@@ -31,5 +9,28 @@
     "source.fixAll.tslint": true,
     // For Stylelint
     "source.fixAll.stylelint": true
-  }
+  },
+  "files.associations": {
+    "*.js": "javascript"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "eslint.options": {
+    "extensions": [".js", ".jsx"],
+    "plugins": ["html"]
+  },
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.suggestionActions.enabled": false,
+  "javascript.validate.enable": false,
+  "prettier.jsxSingleQuote": true,
+  "prettier.jsxBracketSameLine": false,
+  "prettier.disableLanguages": ["react"],
+  "prettier.printWidth": 140,
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "prettier.arrowParens": "avoid",
+  "prettier.trailingComma": "none",
+  "vsicons.dontShowNewVersionMessage": true,
+  "window.zoomLevel": 1,
+  "workbench.iconTheme": "vscode-icons"
 }

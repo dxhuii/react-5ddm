@@ -23,5 +23,5 @@ export default function EpList({ data = [], id }) {
 
 EpList.propTypes = {
   data: PropTypes.array.isRequired,
-  id: PropTypes.number.isRequired
+  id: PropTypes.any
 }

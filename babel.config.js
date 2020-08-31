@@ -17,10 +17,12 @@ module.exports = function (api) {
       '@babel/plugin-transform-modules-commonjs',
       '@babel/plugin-proposal-object-rest-spread',
       '@babel/plugin-proposal-export-namespace-from',
+      'react-hot-loader/babel',
       '@loadable/babel-plugin',
       [
         'react-css-modules',
         {
+          exclude: 'node_modules',
           generateScopedName: config.CLASS_SCOPED_NAME,
           filetypes: {
             '.scss': {

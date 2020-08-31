@@ -66,7 +66,7 @@ export default Shell(() => {
       ? `#${vTitle}#剧情(共${storyNum}集)_${vTitle}全集剧情`
       : `#${vTitle}#${name}${title ? ` ${title}` : ''}剧情_${vTitle}分集剧情`,
     desc: content,
-    url: !p ? `/episode/${id}` : `/episode/${id}/${p}`
+    url: !p ? `/episode/${vid}` : `/episode/${vid}/${p}`
   }
   const reName = !p ? '' : name
   if (loading || !data.vTitle) return <Loading />
@@ -90,11 +90,11 @@ export default Shell(() => {
           </div>
           <div styleName='article-context'>
             {!p && storyNum >= 1 ? (
-              <Link to={`/episode/${id}/1`}>分集剧情</Link>
+              <Link to={`/episode/${vid}/1`}>分集剧情</Link>
             ) : (
               <>
-                {prev && prev > 0 ? <Link to={`/episode/${id}/${prev}`}>上一集</Link> : <Link to={`/episode/${id}`}>剧情简介</Link>}
-                {next ? <Link to={`/episode/${id}/${next}`}>下一集</Link> : null}
+                {prev && prev > 0 ? <Link to={`/episode/${vid}/${prev}`}>上一集</Link> : <Link to={`/episode/${vid}`}>剧情简介</Link>}
+                {next ? <Link to={`/episode/${vid}/${next}`}>下一集</Link> : null}
               </>
             )}
           </div>

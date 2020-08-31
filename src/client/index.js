@@ -6,7 +6,7 @@ import './vendors/arrive-footer'
  * 给dom添加class="load-demand"、data-load-demand="<div></div> or <img />"
  **/
 import './vendors/load-demand'
-
+import { hot, setConfig } from 'react-hot-loader'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
@@ -25,6 +25,7 @@ import createRouter from '@/router'
 import { getUserInfo } from '@/store/reducers/user'
 
 import { GA, DOMAIN, debug } from 'Config'
+setConfig({ logLevel: 'debug', reloadHooks: 'all' })
 
 if (!debug) {
   const { origin, pathname } = window.location
@@ -61,7 +62,7 @@ if (!debug) {
   }
 
   const router = createRouter({ user: userinfo, enterEvent })
-  const Page = router.dom
+  const Page = hot(module)(router.dom)
 
   let _route = null
 

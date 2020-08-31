@@ -17,15 +17,13 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {
       '@': path.resolve('src/app'),
+      'react-dom': '@hot-loader/react-dom',
       Config: path.resolve('config/index')
     }
   },
 
   entry: {
-    app: [
-      // '@babel/polyfill',
-      './src/server/index'
-    ]
+    app: ['./src/server/index']
   },
 
   externals: [

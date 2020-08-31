@@ -235,6 +235,8 @@
   padding-top: 6px;
   p {
     margin-top: 10px;
+    white-space: nowrap;
+    @include clamp(1);
   }
 
   &.auto {
@@ -313,6 +315,17 @@
   a {
     color: #ccc;
     margin-left: 10px;
+  }
+}
+
+.detail-bottom {
+  display: flex;
+  margin-bottom: -10px;
+  :global {
+    .left {
+      margin-right: 20px;
+      background-color: transparent;
+    }
   }
 }
 
@@ -403,10 +416,6 @@
         }
       }
     }
-  }
-
-  .detail-bottom {
-    padding: 0 10px;
   }
 }
 

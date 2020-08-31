@@ -15,6 +15,7 @@
   "author": "dxhuii@qq.com",
   "license": "MIT",
   "dependencies": {
+    "@hot-loader/react-dom": "^16.13.0",
     "@loadable/component": "^5.13.1",
     "@loadable/server": "^5.13.1",
     "axios": "^0.19.2",
@@ -84,6 +85,7 @@
     "postcss-loader": "^3.0.0",
     "postcss-scss": "^2.1.1",
     "prettier-eslint": "^11.0.0",
+    "react-hot-loader": "^4.12.21",
     "rimraf": "^3.0.2",
     "sass": "^1.26.10",
     "sass-loader": "^10.0.1",

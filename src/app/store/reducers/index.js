@@ -26,5 +26,5 @@ export default {
   scroll,
   history,
   game,
-  comment,
+  comment
 }

@@ -1,6 +1,6 @@
 import cloneObj from '../clone'
 
-let initialState = {}
+const initialState = {}
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case 'SAVE_USER_INFO':
