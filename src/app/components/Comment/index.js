@@ -1,16 +1,11 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-// 生成异步加载组件
-// import loadable from '@loadable/component'
-// import pMinDelay from 'p-min-delay'
 
 import { useStore } from 'react-redux'
 import { getCode } from '@/store/actions/user'
 
 import './style.scss'
-
-// const Editer = loadable(() => pMinDelay(import('@/components/Editer'), 200), { ssr: false })
 
 export default function Comment({ data, submit, me, login }) {
   const store = useStore()
@@ -64,7 +59,6 @@ export default function Comment({ data, submit, me, login }) {
           </div>
         ) : null}
       </div>
-      {/* <Editer /> */}
       <div styleName='comment-list'>
         {data.length === 0 ? (
           <div styleName='comment-empty' className='tac'>

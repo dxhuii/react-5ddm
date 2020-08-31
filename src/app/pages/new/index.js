@@ -11,8 +11,6 @@ import Meta from '@/components/Meta'
 
 import { isNumber } from '@/utils'
 
-// import Hashids from 'hashids'
-
 import './style.scss'
 
 export default Shell(() => {
@@ -32,14 +30,6 @@ export default Shell(() => {
     if (!info.data) {
       getData({ order: 'addtime' })
     }
-
-    // const hashids = new Hashids('plain', 7)
-    // const s1 = hashids.encode(33320)
-    // const s2 = hashids.encode(33321)
-    // const s3 = hashids.encode(33322)
-    // const s4 = hashids.encode(33323)
-    // const s5 = hashids.encode(33324)
-    // console.log(hashids.decode('nyOwnDp'), s1, s2, s3, s4, s5)
   }, [info.data, store.dispatch, store.getState])
 
   const { data = [] } = info
