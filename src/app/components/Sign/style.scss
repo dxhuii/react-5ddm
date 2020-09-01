@@ -43,24 +43,13 @@
 
   .logo {
     position: relative;
-    line-height: 56px;
     height: 56px;
-    flex-basis: 150px;
-    font-size: 18px;
-    text-align: center;
-    color: #282828;
-    background: url(../../static/img/logo.png) no-repeat;
+    background-image: url(../../static/img/5d.svg);
     background-size: 150px auto;
     background-position: center 4px;
-    margin-left: 10px;
-
-    /*5ddm*/
-    &.ddm {
-      background-image: url(../../static/img/5d.svg);
-    }
+    background-repeat: no-repeat;
 
     &.kanfan {
-      background: no-repeat;
       width: 100%;
 
       &::before {
