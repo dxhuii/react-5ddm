@@ -77,8 +77,8 @@ module.exports = {
         },
         commons: {
           name: 'vendor',
-          test: /[\\/]node_modules[\\/]/
-          // chunks: 'all'
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'all'
         }
       }
     }
