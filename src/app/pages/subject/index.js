@@ -267,7 +267,7 @@ export default Shell(() => {
   return (
     <>
       <div className='warp-bg'>
-        <Meta title={`${title}全集在线观看 - ${listName}${listNameBig}`}>
+        <Meta title={`${title} - ${listName}${listNameBig}`}>
           <meta name='description' content={`${title}${listNameBig}简介和剧情介绍,${reContent}`} />
           <meta
             name='keywords'

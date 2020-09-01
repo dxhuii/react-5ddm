@@ -47,11 +47,11 @@ const conf = {
  *
  */
 const defalut = {
-  API: 'https://www.5ddm.com/home.php/',
+  API: 'https://api.5ddm.com/home.php/',
   NAME: '5D动漫(5站)',
-  DESCRIBE: '5D动漫(5站) - 无广告免费的动漫网站',
+  DESCRIBE: '5D动漫(5站)',
   KEYWORDS: '5D动漫,5站',
-  DESCRIPTION: '5D动漫(5站)致力于为所有动漫迷们免费提供最新最快的高清动画下载及在线观看资源索引。',
+  DESCRIPTION: '5D动漫(5站)为漫迷们提供追番索引。',
   DOMAIN: 'https://www.5ddm.com',
   DOMAIN_NAME: '5ddm.com',
   PORT: 8080,
