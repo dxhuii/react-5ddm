@@ -25,7 +25,7 @@ import createRouter from '@/router'
 import { getUserInfo } from '@/store/reducers/user'
 
 import { GA, DOMAIN, debug } from 'Config'
-setConfig({ logLevel: 'debug', reloadHooks: 'all' })
+setConfig({ logLevel: 'debug', reloadHooks: false })
 
 if (!debug) {
   const { origin, pathname } = window.location
