@@ -374,7 +374,7 @@ export default Shell(() => {
               ) : null}
               {storyId ? (
                 <li>
-                  <Link to={`/episode/${storyId}`}>分集剧情</Link>
+                  <Link to={`/episode/${id}`}>分集剧情</Link>
                 </li>
               ) : null}
               <li>

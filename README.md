@@ -84,7 +84,7 @@ node ./dist/server/server.js
 或使用 pm2 启动服务
 
 ```
-pm2 start ./dist/server/server.js --name "react-5ddm" --max-memory-restart 400M
+pm2 start ./dist/server/server.js --name "react-5ddm" --max-memory-restart 1000M
 ```
 
 ## 特点
