@@ -143,12 +143,6 @@ module.exports = {
               name: '[name].[hash:8].[ext]',
               outputPath: 'images/'
             }
-          },
-          {
-            loader: 'image-webpack', // 图片压缩
-            options: {
-              bypassOnDebug: true
-            }
           }
         ]
       },
