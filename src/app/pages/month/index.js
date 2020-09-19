@@ -21,7 +21,7 @@ export default Shell(() => {
       params: { month }
     }
   } = useReactRouter()
-  const nowYear = new Date().getFullYear()
+  const nowYear = new Date().getFullYear() + 2
   const [year, onYear] = useState(parseInt(month.substring(0, 4)))
   const store = useStore()
   const info = useSelector(state => getMonth(state, month))
@@ -35,7 +35,7 @@ export default Shell(() => {
 
   const getYear = start => {
     const d = new Date()
-    const s = d.getFullYear() - start
+    const s = d.getFullYear() + 2 - start
     const y = []
     for (let i = 0; i <= s; i++) {
       y.push(start + i)

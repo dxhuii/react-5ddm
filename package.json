@@ -28,6 +28,7 @@
     "lru-cache": "^6.0.0",
     "offline-plugin": "^5.0.7",
     "qrcode.react": "^1.0.0",
+    "rc-virtual-list": "^3.0.14",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-ga": "^3.1.2",
@@ -36,7 +37,6 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
-    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "swipejs": "^2.2.18",
     "use-react-router": "^1.0.7"
@@ -85,6 +85,7 @@
     "postcss-scss": "^2.1.1",
     "prettier-eslint": "^11.0.0",
     "react-hot-loader": "^4.12.21",
+    "redux-logger": "^3.0.6",
     "rimraf": "^3.0.2",
     "sass": "^1.26.10",
     "sass-loader": "^10.0.1",
