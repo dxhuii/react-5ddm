@@ -48,21 +48,6 @@
     background-size: 150px auto;
     background-position: center 4px;
     background-repeat: no-repeat;
-
-    &.kanfan {
-      width: 100%;
-
-      &::before {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90px;
-        content: '看番';
-        font-size: 30px;
-        color: $d-color-primary;
-        letter-spacing: 5px;
-      }
-    }
   }
 }
 

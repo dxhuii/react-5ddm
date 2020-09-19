@@ -12,10 +12,9 @@ export default function Sign({ isSign, onType, visible }) {
     e.stopPropagation()
     onType(isSign)
   }
-  const logo = `logo ${DOMAIN_NAME === 'kanfan.net' ? 'kanfan' : ''}`
   return (
     <div styleName='user'>
-      <div styleName={logo} />
+      <div styleName='logo' />
       <h1>{isSign === 'signIn' ? '登录' : '注册'}，可以发现更多</h1>
       {isSign === 'signIn' ? <SignIn visible={visible} /> : <SignUp visible={visible} />}
       <div styleName='user-reg' className='mt20'>

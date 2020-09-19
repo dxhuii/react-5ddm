@@ -64,21 +64,6 @@ header {
   background-size: 110px auto;
   background-position: 0 15px;
   position: relative;
-
-  &.kanfan {
-    background: no-repeat;
-    width: 90px;
-    flex-basis: 90px;
-
-    &::before {
-      position: absolute;
-      width: 90px;
-      content: '看番';
-      font-size: 30px;
-      color: $d-color-primary;
-      letter-spacing: 5px;
-    }
-  }
 }
 
 .header-tool {

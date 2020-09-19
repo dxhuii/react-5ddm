@@ -104,12 +104,11 @@ export default function Head() {
   }
 
   const { userid, nickname } = me
-  const logo = `header-logo ${DOMAIN_NAME === 'kanfan.net' ? 'kanfan' : ''}`
   return (
     <Fragment>
       <header>
         <div className='wp'>
-          <NavLink styleName={logo} exact to='/' title={NAME} />
+          <NavLink styleName='header-logo' exact to='/' title={NAME} />
           <nav styleName={showMenu ? 'show' : ''}>
             <div styleName='header-nav'>
               <NavLink styleName={url === '/' ? 'active' : ''} exact to='/'>

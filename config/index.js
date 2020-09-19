@@ -21,9 +21,7 @@
  * weiboName 微博名称
  */
 
-const DOMAIN_NAME = '5ddm.com'
-
-const conf = {
+const defalut = {
   debug: false,
   CLASS_SCOPED_NAME: '[hash:base64:5]',
   AUTH_COOKIE_NAME: 'auth',
@@ -40,13 +38,8 @@ const conf = {
   HEAD: `<meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
-  `
-}
-/**
- * 5ddm.com
- *
- */
-const defalut = {
+    <link rel="icon" href="/favicon.ico" />
+  `,
   API: 'https://api.5ddm.com/home.php/',
   NAME: '5D动漫(5站)',
   DESCRIBE: '5D动漫(5站)',
@@ -56,52 +49,20 @@ const defalut = {
   DOMAIN_NAME: '5ddm.com',
   PORT: 8080,
   COOKIE_PREFIX: 'ddm_',
-  PUBLIC_PATH: '',
+  PUBLIC_PATH: '//99496-1251036128.file.myqcloud.com/5ddm',
   BAIDU_STAT: '9449f42e45055b4f70ad84574c4c65c8',
   CNZZ_STAT: '1279219478',
   GA: 'UA-176562013-1',
   EMAIL: 'ddm_com@outlook.com'
 }
 
-/**
- * kanfan.net
- *
- */
-const kanfan = {
-  API: 'https://www.5ddm.com/home.php/',
-  NAME: '看番',
-  DESCRIBE: '看番 - 您的追番网站',
-  KEYWORDS: '看番',
-  DESCRIPTION: '看番致力于为所有动漫迷们免费提供最新最快的高清动画下载及在线观看资源索引。',
-  DOMAIN: 'https://www.kanfan.net',
-  DOMAIN_NAME: 'kanfan.net',
-  PORT: 6669,
-  COOKIE_PREFIX: 'kanfan_',
-  PUBLIC_PATH: '//www.kanfan.net',
-  BAIDU_STAT: '2181f9da0f7a8cdc001129fb5010a473',
-  CNZZ_STAT: '1277233437',
-  GA: 'UA-7957076-10',
-  EMAIL: 'kanfan_net@outlook.com'
-}
-
-let config = {}
-let ico = ''
-if (DOMAIN_NAME === 'kanfan.net') {
-  config = Object.assign({}, conf, kanfan)
-  ico = 'kanfan_'
-} else {
-  config = Object.assign({}, conf, defalut)
-}
-
-config.HEAD += `<link rel="icon" href="/${ico}favicon.ico" />`
-
 // 开发环境配置
 if (process.env.NODE_ENV === 'development') {
-  config.debug = true
-  config.PORT = 4000
-  config.CLASS_SCOPED_NAME = '[name]_[local]__[hash:base64:5]'
-  config.DOMAIN = '//localhost:4000'
-  config.PUBLIC_PATH = 'http://localhost:4000'
+  defalut.debug = true
+  defalut.PORT = 4000
+  defalut.CLASS_SCOPED_NAME = '[name]_[local]__[hash:base64:5]'
+  defalut.DOMAIN = '//localhost:4000'
+  defalut.PUBLIC_PATH = 'http://localhost:4000'
 }
 
-module.exports = config
+module.exports = defalut
