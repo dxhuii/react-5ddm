@@ -1,6 +1,6 @@
 import cloneObj from '../clone'
 
-let initialState = {}
+const initialState = {}
 
 export default (state = cloneObj(initialState), action = {}) => {
   const { data } = action

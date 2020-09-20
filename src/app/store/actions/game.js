@@ -7,8 +7,7 @@ export function gameList() {
       getState,
       reducerName: 'game',
       actionType: 'GET_GAME',
-      api: 'game',
-      method: 'get'
+      api: 'game'
     })
   }
 }

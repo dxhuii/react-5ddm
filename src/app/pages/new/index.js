@@ -56,11 +56,11 @@ export default Shell(() => {
                   </Link>
                 </span>
                 <span>
-                  <Link to={`/type/${menu[item.listId] || 'list'}/-/-/-/-/-/addtime/`}>{item.listName}</Link>
+                  <Link to={`/type/${menu[item.listId] || 'list'}/-/-/-/-/-/addtime`}>{item.listName}</Link>
                 </span>
                 <span>
                   {(item.mcid || []).map(val => (
-                    <Link to={`/type/${menu[item.listId] || 'list'}/${val.id}/-/-/-/-/addtime/`} key={val.id}>
+                    <Link to={`/type/${menu[item.listId] || 'list'}/${val.id}/-/-/-/-/addtime`} key={val.id}>
                       {val.title}
                     </Link>
                   ))}

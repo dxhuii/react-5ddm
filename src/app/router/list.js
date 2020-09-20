@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import Loading from '@/components/Ui/Loading'
 
 import HomeLoadData from '@/pages/home/load-data'
+import SimpleData from '@/pages/simple/load-data'
 import SubjectLoadData from '@/pages/subject/load-data'
 import WeekData from '@/pages/week/load-data'
 import ListLoadData from '@/pages/list/load-data'
@@ -31,6 +32,16 @@ export default [
       fallback: <Loading />
     }),
     loadData: HomeLoadData,
+    enter: 'everybody'
+  },
+
+  {
+    path: '/simple',
+    ...base,
+    body: loadable(() => import('@/pages/simple'), {
+      fallback: <Loading />
+    }),
+    loadData: SimpleData,
     enter: 'everybody'
   },
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 import './style.scss'
 
-export default function () {
+export default () => {
   const top = () => {
     if (!(typeof window === 'undefined' || typeof document === 'undefined')) {
       // 设置定时器

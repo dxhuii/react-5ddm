@@ -40,6 +40,7 @@ export default {
      */
     list: `${apiReact}list/id/3`, // 列表接口
     listNoId: `${apiReact}list`, // 列表接口
+    simple: `${apiReact}index/id/3`, // 首页列表接口
     playlist: `${apiReact}play`, // 播放列表 id:视频id
     player: `${apiReact}play`, // 单集 id:视频id，pid，集数
     detail: `${apiReact}detail`, // 视频详情

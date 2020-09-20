@@ -15,7 +15,7 @@ export default async ({
   callback = () => {}
 }) => {
   const state = getState()
-  const list = state[reducerName][name] || {}
+  const list = (name ? state[reducerName][name] : state[reducerName]) || {}
   if (list.loading) {
     return ['loading...']
   }
@@ -28,7 +28,6 @@ export default async ({
   }
 
   if (!Reflect.has(list, 'data')) list.data = []
-
   // 添加页面page
   if (isPage) {
     if (!Reflect.has(list, 'page')) {

@@ -1,11 +1,12 @@
 import cloneObj from '../clone'
 
 const initialState = {}
+
 export default (state = cloneObj(initialState), action = {}) => {
+  const { data } = action
   switch (action.type) {
-    case 'GET_NEWS_ARTICLE':
-      var { name, data } = action
-      if ((name, data)) state[name] = data
+    case 'GET_SIMPLE':
+      if (data) state = data
       break
     default:
       return state
@@ -13,4 +14,4 @@ export default (state = cloneObj(initialState), action = {}) => {
   return cloneObj(state)
 }
 
-export const getArticle = (state, name) => state.article[name] || {}
+export const getSimple = state => state.simple || {}
