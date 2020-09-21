@@ -14,6 +14,9 @@ export default (state = cloneObj(initialState), action = {}) => {
     case 'GET_VOD_NEWS':
       if (name && data) state[name] = data
       break
+    case 'UPDATE_SUBJECT_DIGG':
+      state[action.id].data[name] += 1
+      break
     default:
       return state
   }

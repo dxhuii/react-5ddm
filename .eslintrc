@@ -18,8 +18,8 @@
     "it": true,
     "ArriveFooter": true,
     "__CLIENT__": true,
-    "adsbygoogle": true,
-    "importScripts": true
+    "__SERVER__": true,
+    "adsbygoogle": true
   },
   "plugins": ["react-hooks", "react", "babel"],
   "parser": "babel-eslint",
@@ -36,7 +36,12 @@
     "react/jsx-uses-vars": "error",
     "react/no-render-return-value": "off",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": [
+      "warn",
+      {
+        "additionalHooks": "(useMyCustomHook|useMyOtherCustomHook)"
+      }
+    ],
     "react/display-name": "off",
     "prettier/prettier": [
       "error",

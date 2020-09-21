@@ -9,7 +9,7 @@ export function simple() {
       actionType: 'GET_SIMPLE',
       api: 'simple',
       params: {
-        limit: 20
+        limit: 10
       },
       isPage: true
     })

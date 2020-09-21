@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom'
 // redux
 import { useStore, useSelector } from 'react-redux'
 import { simple } from '@/store/actions/simple'
+import { mark, digg } from '@/store/actions/mark'
 import { getSimple } from '@/store/reducers/simple'
 import Loading from '@/components/Ui/Loading'
+import Toast from '@/components/Toast'
 
 // 壳组件
 import Shell from '@/components/Shell'
@@ -43,7 +45,7 @@ export default Shell(() => {
   }, [info.data, store.dispatch, store.getState])
 
   const starClass = pfnum => {
-    var pfclass = ''
+    let pfclass = ''
     if (pfnum >= 50) {
       pfclass = 'bigstar50'
     } else if (pfnum >= 45) {
@@ -68,6 +70,14 @@ export default Shell(() => {
       pfclass = 'bigstar0'
     }
     return pfclass
+  }
+
+  const onDigg = async (type, id) => {
+    const onDigg = args => digg(args)(store.dispatch, store.getState)
+    const [, res] = await onDigg({ type, id })
+    if (res.code === 1) {
+      Toast.success(res.msg)
+    }
   }
 
   const { data = [], loading } = info
@@ -117,7 +127,7 @@ export default Shell(() => {
               <div styleName='list-gold'>
                 {item.gold ? (
                   <div>
-                    <span className={`${starClass(item.gold * 5)} bigstar`} /> {item.gold}
+                    <span className={`${starClass(item.gold * 5)} bigstar`} /> {item.gold} 分
                   </div>
                 ) : (
                   '暂无评分'
@@ -126,8 +136,13 @@ export default Shell(() => {
               <p styleName='list-opa'>
                 <a>订阅</a>
                 <a>收藏</a>
-                <a>{item.up}</a>
-                <a>{item.down}</a> {item.time}更新 {item.status}
+                <a onClick={() => onDigg('up', item.id)}>
+                  <i className='iconfont'>&#xe607;</i> {item.up}
+                </a>
+                <a onClick={() => onDigg('down', item.id)}>
+                  <i className='iconfont'>&#xe606;</i> {item.down}
+                </a>
+                {item.time}更新 {item.status}
               </p>
             </div>
           </li>

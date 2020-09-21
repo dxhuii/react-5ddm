@@ -12,7 +12,7 @@
     const scroll = e => {
       const scrollTop = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset || 0
       const scrollHeight = document.body.scrollHeight || document.documentElement.scrollTop
-      if (scrollTop + clientHeight >= scrollHeight - 100) {
+      if (scrollTop + clientHeight >= scrollHeight - 150) {
         const timestamp = new Date().getTime()
 
         list.map(val => {

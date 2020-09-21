@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import useReactRouter from 'use-react-router'
 
@@ -46,8 +46,7 @@ export default Shell(() => {
   const [isSign, onSign] = useState('signIn')
   const [loveData, setLove] = useState({})
   const [playShow, playSetShow] = useState({})
-  const upDiv = useRef()
-  const downDiv = useRef()
+  const [playName, playSetName] = useState('')
   const menu = {
     201: 'tv',
     202: 'ova',
@@ -77,9 +76,18 @@ export default Shell(() => {
   const { data = {}, loading } = info
   const { key, list = [] } = playData.data || {}
 
+  const closePlayBox = useCallback(() => {
+    if (playName) {
+      playSetShow({
+        [playName]: false
+      })
+    }
+  }, [playName])
+
   useEffect(() => {
     const getData = args => detail(args)(store.dispatch, store.getState)
     const getPlayData = args => playlist(args)(store.dispatch, store.getState)
+    document.addEventListener('click', closePlayBox)
     if (!(playData && playData.data)) {
       getPlayData({ id })
     }
@@ -94,7 +102,11 @@ export default Shell(() => {
       setLove(data.data || {})
     }
     if (!(loveD && loveD.data) && userid) feachLove()
-  }, [commentData, loveD, id, info, store.dispatch, store.getState, userid, sid, _love, _comment, playData])
+  }, [commentData, loveD, id, info, store.dispatch, store.getState, userid, sid, _love, _comment, playData, closePlayBox])
+
+  const playBox = e => {
+    e.nativeEvent.stopImmediatePropagation()
+  }
 
   const addMark = async (type, id, cid) => {
     const onLike = args => mark(args)(store.dispatch, store.getState)
@@ -112,17 +124,10 @@ export default Shell(() => {
 
   const onDigg = async (type, id) => {
     const onDigg = args => digg(args)(store.dispatch, store.getState)
-    const [, res] = await onDigg({ type, id })
+    const [, res] = await onDigg({ type, id, sid, info: 'subject' })
     if (res.code === 1) {
-      if (type === 'up') {
-        const up = upDiv.current.querySelector('span')
-        up.innerText = up.innerText * 1 + 1
-      } else {
-        const down = downDiv.current.querySelector('span')
-        down.innerText = down.innerText * 1 + 1
-      }
+      Toast.success(res.msg)
     }
-    Toast.success(res.msg)
   }
 
   const onType = isSign => {
@@ -183,22 +188,26 @@ export default Shell(() => {
     ))
   }
 
-  const showPlay = name => {
+  const showPlay = (e, name) => {
+    e.nativeEvent.stopImmediatePropagation()
     playSetShow({
       [name]: true
     })
+    playSetName(name)
   }
 
-  const showPlayClose = name => {
+  const showPlayClose = (e, name) => {
+    e.nativeEvent.stopImmediatePropagation()
     playSetShow({
       [name]: false
     })
+    playSetName('')
   }
 
   const player = () => {
     return list.map(({ playName, playTitle, copyright, list }) => (
       <div styleName='player' key={`${playName}`}>
-        <div styleName='title' onClick={() => showPlay(playName)}>
+        <div styleName='title' onClick={e => showPlay(e, playName)}>
           <h4>
             <i className={`playicon ${playName}`}></i>
             {playTitle}
@@ -206,8 +215,10 @@ export default Shell(() => {
           <span>{copyright}</span>
         </div>
         <div styleName={`player-list ${playShow[playName] ? 'show' : ''}`}>
-          <span onClick={() => showPlayClose(playName)}>✕</span>
-          {playerList(list, key, playName)}
+          <span onClick={e => showPlayClose(e, playName)}>✕</span>
+          <div styleName='player-box' onClick={e => playBox(e)}>
+            {playerList(list, key, playName)}
+          </div>
         </div>
       </div>
     ))
@@ -333,11 +344,11 @@ export default Shell(() => {
                   <i className='iconfont'>&#xe66a;</i>
                   {loveid ? '已收藏' : '收藏'}
                 </div>
-                <div styleName='detail-tool__on digg active' onClick={() => onDigg('up', id)} ref={upDiv}>
+                <div styleName='detail-tool__on digg active' onClick={() => onDigg('up', id)}>
                   <i className='iconfont'>&#xe607;</i>
                   <span>{up}</span>
                 </div>
-                <div styleName='detail-tool__on digg active' onClick={() => onDigg('down', id)} ref={downDiv}>
+                <div styleName='detail-tool__on digg active' onClick={() => onDigg('down', id)}>
                   <i className='iconfont'>&#xe606;</i>
                   <span>{down}</span>
                 </div>
