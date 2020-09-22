@@ -18,7 +18,11 @@ import render from './render'
 import sign from './sign'
 
 const app = express()
-app.use(helmet())
+app.use(
+  helmet({
+    contentSecurityPolicy: false
+  })
+)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())

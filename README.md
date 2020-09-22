@@ -111,3 +111,15 @@ pm2 start ./dist/server/server.js --name "react-5ddm" --max-memory-restart 1000M
 > - https://www.npmjs.com/package/css-loader#onlylocals 解决服务端会把 CSS 打包进 JS 的问题
 
 ## react-css-modules 不支持 css-loader4.x 用 @dr.pogodin/react-css-modules 暂时代替一下
+
+- postcss-scss 3.0 暂时不支持，需要 postcss 8.x
+- postcss-nested 5.0 暂时不支持，需要 postcss 8.x 但又有其他组件不支持，暂时用老版本
+- helmet 升级到 4.x 版本后，加入如下代码
+
+```js
+app.use(
+  helmet({
+    contentSecurityPolicy: false
+  })
+)
+```
