@@ -20,13 +20,15 @@ module.exports = function (api) {
       'react-hot-loader/babel',
       '@loadable/babel-plugin',
       [
-        'react-css-modules',
+        '@dr.pogodin/react-css-modules',
         {
           exclude: 'node_modules',
           generateScopedName: config.CLASS_SCOPED_NAME,
+          webpackHotModuleReloading: true,
           filetypes: {
             '.scss': {
-              syntax: 'postcss-scss'
+              syntax: 'postcss-scss',
+              plugins: ['postcss-nested']
             }
           }
         }

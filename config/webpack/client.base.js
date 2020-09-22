@@ -17,7 +17,9 @@ const devMode = process.env.NODE_ENV === 'development'
 const postcssConfig = {
   loader: 'postcss-loader',
   options: {
-    plugins: () => [require('postcss-flexbugs-fixes'), require('autoprefixer')]
+    postcssOptions: {
+      plugins: ['postcss-flexbugs-fixes', 'autoprefixer']
+    }
   }
 }
 

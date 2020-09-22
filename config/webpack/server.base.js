@@ -81,9 +81,10 @@ module.exports = {
             loader: `css`,
             options: {
               modules: {
-                localIdentName: config.CLASS_SCOPED_NAME
-              },
-              onlyLocals: true // 只映射，不打包CSS
+                localIdentName: config.CLASS_SCOPED_NAME,
+                exportOnlyLocals: true
+              }
+              // onlyLocals: true // 只映射，不打包CSS
             }
           },
           {

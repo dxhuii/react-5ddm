@@ -82,6 +82,8 @@ export default Shell(() => {
 
   const { data = [], loading } = info
 
+  console.log(loading)
+
   if (!Loading) return <Loading />
   return (
     <div className='wp mt20'>
@@ -148,6 +150,7 @@ export default Shell(() => {
           </li>
         ))}
       </div>
+      {loading ? <Loading /> : null}
     </div>
   )
 })

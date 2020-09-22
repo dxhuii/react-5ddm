@@ -109,3 +109,5 @@ pm2 start ./dist/server/server.js --name "react-5ddm" --max-memory-restart 1000M
 # 引用
 
 > - https://www.npmjs.com/package/css-loader#onlylocals 解决服务端会把 CSS 打包进 JS 的问题
+
+## react-css-modules 不支持 css-loader4.x 用 @dr.pogodin/react-css-modules 暂时代替一下
