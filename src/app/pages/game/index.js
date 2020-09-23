@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import useReactRouter from 'use-react-router'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import QRCode from 'qrcode.react'
 
 // redux
@@ -15,15 +15,13 @@ import { isMobile, formatPic } from '@/utils'
 
 import './style.scss'
 
-export default Shell(() => {
+const Game = () => {
   const [showGame, onShowGame] = useState(false)
   const [show, onShow] = useState(false)
+  const history = useHistory()
   const {
-    history,
-    match: {
-      params: { wd }
-    }
-  } = useReactRouter()
+    params: { wd }
+  } = useRouteMatch()
 
   const store = useStore()
   const info = useSelector(state => getGame(state))
@@ -225,4 +223,12 @@ export default Shell(() => {
       </div>
     </>
   )
-})
+}
+
+Game.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  if (user) return { code: 200 }
+  await gameList()(store.dispatch, store.getState)
+  return { code: 200 }
+}
+
+export default Shell(Game)

@@ -1,6 +1,5 @@
 import React, { useState, Fragment, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
-import useReactRouter from 'use-react-router'
+import { NavLink, useHistory, useRouteMatch } from 'react-router-dom'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
@@ -30,11 +29,8 @@ export default function Head() {
 
   const store = useStore()
   const me = useSelector(state => getUserInfo(state))
-
-  const {
-    match: { url = '', params = {} },
-    history
-  } = useReactRouter()
+  const history = useHistory()
+  const { url = '', params = {} } = useRouteMatch()
 
   const onSignOut = async () => {
     const _signOut = () => signOut()(store.dispatch, store.getState)

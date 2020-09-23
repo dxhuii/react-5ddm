@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import useReactRouter from 'use-react-router'
+import { useLocation, useRouteMatch } from 'react-router-dom'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
@@ -13,22 +13,20 @@ import Meta from '@/components/Meta'
 
 import './style.scss'
 
-export default Shell(() => {
-  const {
-    match: {
-      params: { name, mcid, area, year, letter, lz, wd = '', order = 'addtime' }
-    },
-    location: { pathname }
-  } = useReactRouter()
+const type = {
+  tv: 201,
+  ova: 202,
+  juchang: 203,
+  tebie: 4,
+  zhenren: 204,
+  qita: 35
+}
 
-  const type = {
-    tv: 201,
-    ova: 202,
-    juchang: 203,
-    tebie: 4,
-    zhenren: 204,
-    qita: 35
-  }
+const TypeList = () => {
+  const { pathname } = useLocation()
+  const {
+    params: { name, mcid, area, year, letter, lz, wd = '', order = 'addtime' }
+  } = useRouteMatch()
 
   const [eId, getId] = useState(type[name] || 3)
   const [eMcid, getMcid] = useState(mcid ? parseInt(mcid) : '')
@@ -40,9 +38,9 @@ export default Shell(() => {
   const config = useSelector(state => getConfig(state, 'list'))
 
   useEffect(() => {
-    const _configLoad = args => configLoad(args)(store.dispatch, store.getState)
+    const getData = args => configLoad(args)(store.dispatch, store.getState)
     if (!config.data) {
-      _configLoad({ tag: 'list' })
+      getData({ tag: 'list' })
     }
   }, [config, config.data, eMcid, mcid, store.dispatch, store.getState])
 
@@ -205,4 +203,13 @@ export default Shell(() => {
       </div>
     </>
   )
-})
+}
+
+TypeList.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  if (user) return { code: 200 }
+  await configLoad({ tag: 'list' })(store.dispatch, store.getState)
+  await List.loadDataOnServer({ store, match, res, req, user, type })
+  return { code: 200 }
+}
+
+export default Shell(TypeList)

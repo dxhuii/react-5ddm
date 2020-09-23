@@ -13,7 +13,7 @@ import { isNumber } from '@/utils'
 
 import './style.scss'
 
-export default Shell(() => {
+const New = () => {
   const store = useStore()
   const info = useSelector(state => getList(state, 'page-addtime'))
   const menu = {
@@ -73,4 +73,12 @@ export default Shell(() => {
       </div>
     </>
   )
-})
+}
+
+New.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  if (user) return { code: 200 }
+  await TopList({ order: 'addtime' })(store.dispatch, store.getState)
+  return { code: 200 }
+}
+
+export default Shell(New)

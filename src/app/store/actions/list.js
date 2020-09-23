@@ -52,11 +52,7 @@ export function recommend({ name }) {
       reducerName: 'list',
       actionType: 'GET_RECOMMEND',
       api: name === 'anime' ? 'list' : 'newslist',
-      params: Object.assign(
-        {},
-        { limit: 4, order: 'hits_week', p: 0 },
-        name === 'anime' ? { day: 7 } : { day: 30, id: '211,206,205,207,208,209,212,213,221,222' }
-      )
+      params: Object.assign({}, { limit: 4, order: 'hits_week', p: 0 }, name === 'anime' ? { day: 7 } : { day: 30, id: '44' })
     })
   }
 }

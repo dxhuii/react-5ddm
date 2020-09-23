@@ -8,14 +8,14 @@ import { getSlide } from '@/store/reducers/slide'
 import Swiper from '../Swiper'
 import './style.scss'
 
-export default () => {
+const Slide = () => {
   const info = useSelector(state => getSlide(state))
   const store = useStore()
 
   useEffect(() => {
-    const _slide = args => slide(args)(store.dispatch, store.getState)
+    const getData = args => slide(args)(store.dispatch, store.getState)
     if (!info.data) {
-      _slide()
+      getData()
     }
   }, [store.dispatch, store.getState, info.data])
 
@@ -33,3 +33,9 @@ export default () => {
     </Swiper>
   )
 }
+
+Slide.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  await slide()(store.dispatch, store.getState)
+}
+
+export default Slide

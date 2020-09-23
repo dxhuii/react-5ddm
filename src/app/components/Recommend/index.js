@@ -10,7 +10,7 @@ import { formatPic } from '@/utils'
 
 import './style.scss'
 
-export default () => {
+const Recommend = () => {
   const anime = useSelector(state => getList(state, 'anime'))
   const news = useSelector(state => getList(state, 'news'))
 
@@ -47,3 +47,10 @@ export default () => {
     </ul>
   )
 }
+
+Recommend.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  await recommend({ name: 'anime' })(store.dispatch, store.getState)
+  await recommend({ name: 'news' })(store.dispatch, store.getState)
+}
+
+export default Recommend

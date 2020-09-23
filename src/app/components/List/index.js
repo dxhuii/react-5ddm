@@ -10,23 +10,30 @@ import Item from './Item'
 import Loading from '@/components/Ui/Loading'
 
 import './style.scss'
-export default function List({ id, mcid, year, area, wd, letter, lz, order }) {
-  const isEmpty = (val, type) => {
-    return val === undefined || val === '' || val === '-' ? (type ? 'addtime' : '') : val === '全部' ? '' : val
-  }
 
-  const info = useSelector(state =>
-    getList(
-      state,
-      '' + id + isEmpty(mcid) + isEmpty(year) + isEmpty(area) + isEmpty(wd) + isEmpty(letter) + isEmpty(lz) + isEmpty(order, 1)
-    )
-  )
+const isEmpty = (val, type) => {
+  return val === undefined || val === '' || val === '-' ? (type ? 'addtime' : '') : val === '全部' ? '' : val
+}
+
+const type = {
+  tv: 201,
+  ova: 202,
+  juchang: 203,
+  tebie: 4,
+  zhenren: 204,
+  qita: 35
+}
+
+const List = ({ id, mcid, year, area, wd, letter, lz, order }) => {
+  const reducerName =
+    '' + id + isEmpty(mcid) + isEmpty(year) + isEmpty(area) + isEmpty(wd) + isEmpty(letter) + isEmpty(lz) + isEmpty(order, 1)
+  const info = useSelector(state => getList(state, reducerName))
   const store = useStore()
 
   // 显示记录
   const showlist = useCallback(() => {
-    const _listLoad = args => listLoad(args)(store.dispatch, store.getState)
-    _listLoad({
+    const getData = args => listLoad(args)(store.dispatch, store.getState)
+    getData({
       id,
       mcid: isEmpty(mcid),
       year: isEmpty(year),
@@ -68,3 +75,20 @@ List.propTypes = {
   lz: PropTypes.any,
   order: PropTypes.string
 }
+
+List.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  const { name, mcid, year, area, wd = '', order, letter, lz } = match.params
+  const id = type[name] || 3
+  await listLoad({
+    id,
+    mcid: isEmpty(mcid),
+    year: isEmpty(year),
+    area: isEmpty(area),
+    wd: isEmpty(wd),
+    letter: isEmpty(letter),
+    lz: isEmpty(lz),
+    order: isEmpty(order, 1)
+  })(store.dispatch, store.getState)
+}
+
+export default List

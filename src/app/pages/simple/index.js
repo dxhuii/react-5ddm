@@ -18,7 +18,7 @@ import { DESCRIBE, KEYWORDS, DESCRIPTION } from 'Config'
 
 import './style.scss'
 
-export default Shell(() => {
+const Simple = () => {
   const [height, setHeight] = useState(0)
   const info = useSelector(state => getSimple(state))
   const store = useStore()
@@ -151,4 +151,12 @@ export default Shell(() => {
       {loading ? <Loading /> : null}
     </div>
   )
-})
+}
+
+Simple.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  if (user) return { code: 200 }
+  await simple()(store.dispatch, store.getState)
+  return { code: 200 }
+}
+
+export default Shell(Simple)

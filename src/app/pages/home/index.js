@@ -5,8 +5,8 @@ import Recommend from '@/components/Recommend'
 import WeekDay from '@/components/Week'
 import Top from '@/components/Top'
 import List from '@/components/List'
-import News from '@/components/News'
-import NewsYG from '@/components/News/yugao'
+// import News from '@/components/News'
+// import NewsYG from '@/components/News/yugao'
 import Ads from '@/components/Ads'
 
 // 壳组件
@@ -16,7 +16,7 @@ import Meta from '@/components/Meta'
 import { DESCRIBE, KEYWORDS, DESCRIPTION } from 'Config'
 import './style.scss'
 
-export default Shell(() => {
+const Home = () => {
   const [order, onSelect] = useState('addtime')
   return (
     <div className='warp-bg'>
@@ -41,14 +41,14 @@ export default Shell(() => {
             <Top name='topListIndexJP' />
           </div>
         </div>
-        <div className='mt20' styleName='main news'>
+        {/* <div className='mt20' styleName='main news'>
           <div styleName='main-left'>
             <News name='newsPicList' />
           </div>
           <div styleName='main-right'>
             <NewsYG name='newsTextList' isCate={true} />
           </div>
-        </div>
+        </div> */}
         <div className='mt20' styleName='main cn'>
           <div styleName='main-left'>
             <WeekDay title='国创' link='/week/0' type={0} />
@@ -72,4 +72,18 @@ export default Shell(() => {
       <List id={3} day={365} order={order} limit={30} scrollLoad={true} />
     </div>
   )
-})
+}
+
+Home.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  // if (user) return { code: 200 }
+  await Slide.loadDataOnServer({ store, match, res, req, user })
+  await Recommend.loadDataOnServer({ store, match, res, req, user })
+  await WeekDay.loadDataOnServer({ store, match, res, req, user })
+  await Top.loadDataOnServer({ store, match, res, req, user })
+  // await List.loadDataOnServer({ store, match, res, req, user })
+  // await News.loadDataOnServer({ store, match, res, req, user })
+  // await NewsYG.loadDataOnServer({ store, match, res, req, user })
+  return { code: 200 }
+}
+
+export default Shell(Home)

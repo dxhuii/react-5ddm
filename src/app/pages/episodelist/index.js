@@ -14,7 +14,7 @@ import { formatPic, isNumber } from '@/utils'
 
 import './style.scss'
 
-export default Shell(() => {
+const EpisodeList = () => {
   const store = useStore()
   const info = useSelector(state => getEpisodeList(state, 'episodelist'))
 
@@ -59,4 +59,12 @@ export default Shell(() => {
       </div>
     </>
   )
-})
+}
+
+EpisodeList.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  if (user) return { code: 200 }
+  await episodeList({ name: 'episodelist' })(store.dispatch, store.getState)
+  return { code: 200 }
+}
+
+export default Shell(EpisodeList)

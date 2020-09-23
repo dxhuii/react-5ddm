@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import useReactRouter from 'use-react-router'
+import PropTypes from 'prop-types'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
@@ -15,12 +15,10 @@ import Meta from '@/components/Meta'
 
 import './style.scss'
 
-export default Shell(() => {
+const Month = ({ match }) => {
   const {
-    match: {
-      params: { month }
-    }
-  } = useReactRouter()
+    params: { month }
+  } = match
   const nowYear = new Date().getFullYear() + 2
   const [year, onYear] = useState(parseInt(month.substring(0, 4)))
   const store = useStore()
@@ -86,4 +84,17 @@ export default Shell(() => {
       </div>
     </>
   )
-})
+}
+
+Month.propTypes = {
+  match: PropTypes.object
+}
+
+Month.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  if (user) return { code: 200 }
+  const { month } = match.params
+  await monthLoad({ month })(store.dispatch, store.getState)
+  return { code: 200 }
+}
+
+export default Shell(Month)

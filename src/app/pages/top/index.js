@@ -11,7 +11,7 @@ import Meta from '@/components/Meta'
 
 import './style.scss'
 
-export default Shell(() => {
+const Top = () => {
   const {
     params: { name }
   } = useLocation()
@@ -105,4 +105,15 @@ export default Shell(() => {
       </div>
     </>
   )
-})
+}
+
+Top.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  if (user) return { code: 200 }
+  await TopList({ order: 'hits_day' })(store.dispatch, store.getState)
+  await TopList({ order: 'hits_week' })(store.dispatch, store.getState)
+  await TopList({ order: 'hits_month' })(store.dispatch, store.getState)
+  await TopList({ order: 'hits' })(store.dispatch, store.getState)
+  return { code: 200 }
+}
+
+export default Shell(Top)

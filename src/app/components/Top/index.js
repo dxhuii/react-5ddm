@@ -10,14 +10,14 @@ import Loading from '@/components/Ui/Loading'
 
 import './style.scss'
 
-export default function Top({ name, title, sty }) {
+const Top = ({ name, title, sty }) => {
   const info = useSelector(state => getList(state, name))
   const store = useStore()
 
   useEffect(() => {
-    const _top = args => top(args)(store.dispatch, store.getState)
+    const getData = args => top(args)(store.dispatch, store.getState)
     if (!info.data) {
-      _top({ name })
+      getData({ name })
     }
   }, [store.dispatch, store.getState, info.data, name])
 
@@ -50,3 +50,10 @@ Top.propTypes = {
   title: PropTypes.string,
   sty: PropTypes.object
 }
+
+Top.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  await top({ name: 'topListIndexCN' })(store.dispatch, store.getState)
+  await top({ name: 'topListIndexJP' })(store.dispatch, store.getState)
+}
+
+export default Top

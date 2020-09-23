@@ -9,8 +9,8 @@ import './style.scss'
 
 export default Shell(() => {
   return (
-    <div styleName="week-out">
-      <Meta title="新番时间表" />
+    <div styleName='week-out'>
+      <Meta title='新番时间表' />
       <WeekDay />
     </div>
   )

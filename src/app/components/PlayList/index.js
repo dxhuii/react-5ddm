@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { Link } from 'react-router-dom'
-
-import useReactRouter from 'use-react-router'
+import { Link, useRouteMatch } from 'react-router-dom'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
@@ -13,8 +11,9 @@ import { trim, firstNumber, isMobile } from '@/utils'
 import './style.scss'
 
 export default () => {
-  const { match } = useReactRouter()
-  const { id, pid } = match.params || {}
+  const {
+    params: { id, pid }
+  } = useRouteMatch()
   const [start, setStart] = useState(0)
   const [end, setEnd] = useState(18)
   const [isReverse, onReverse] = useState(false)

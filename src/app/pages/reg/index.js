@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
-import useReactRouter from 'use-react-router'
+import { Link, useLocation } from 'react-router-dom'
 
 // redux
 import { useStore } from 'react-redux'
@@ -16,7 +15,7 @@ const sTime = 60
 let syTime = sTime
 
 export default Shell(() => {
-  const { location } = useReactRouter()
+  const location = useLocation()
   const store = useStore()
   const [paused, setPaused] = useState(true)
   const [time, setTime] = useState(sTime)

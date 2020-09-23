@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react'
-import useReactRouter from 'use-react-router'
+import PropTypes from 'prop-types'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
@@ -13,13 +13,12 @@ import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
 import { NAME } from 'Config'
+import { propTypes } from 'qrcode.react'
 
-export default Shell(() => {
+const SubjectNews = ({ match }) => {
   const {
-    match: {
-      params: { id }
-    }
-  } = useReactRouter()
+    params: { id }
+  } = match
   const store = useStore()
   const info = useSelector(state => getDetail(state, `vod_news_${id}`))
   const vodInfo = useSelector(state => getDetail(state, id))
@@ -59,4 +58,18 @@ export default Shell(() => {
       </div>
     </>
   )
-})
+}
+
+SubjectNews.propTypes = {
+  match: PropTypes.object
+}
+
+SubjectNews.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  if (user) return { code: 200 }
+  const { id } = match.params
+  await detail({ id })(store.dispatch, store.getState)
+  await vodNews({ id })(store.dispatch, store.getState)
+  return { code: 200 }
+}
+
+export default Shell(SubjectNews)

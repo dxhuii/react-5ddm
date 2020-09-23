@@ -39,5 +39,11 @@ export default function (Component) {
     staticContext: PropTypes.object
   }
 
+  Shell.loadDataOnServer =
+    Component.loadDataOnServer ||
+    function () {
+      return { code: 200 }
+    }
+
   return Shell
 }

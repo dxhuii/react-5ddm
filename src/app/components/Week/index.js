@@ -12,7 +12,7 @@ import Item from '@/components/Week/Item'
 
 import './style.scss'
 
-export default function WeekDay({ id, title, link, isJp, type, linkText }) {
+const WeekDay = ({ id, title, link, isJp, type, linkText }) => {
   const [current, setCurrent] = useState(0)
   const [tab, showTab] = useState(false)
 
@@ -20,9 +20,9 @@ export default function WeekDay({ id, title, link, isJp, type, linkText }) {
   const store = useStore()
 
   useEffect(() => {
-    const _week = args => week(args)(store.dispatch, store.getState)
+    const getData = args => week(args)(store.dispatch, store.getState)
     if (!info.data) {
-      _week({ id })
+      getData({ id })
     }
   }, [id, info.data, store.dispatch, store.getState])
 
@@ -122,3 +122,9 @@ WeekDay.propTypes = {
   type: PropTypes.number,
   linkText: PropTypes.string
 }
+
+WeekDay.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  await week()(store.dispatch, store.getState)
+}
+
+export default WeekDay

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import useReactRouter from 'use-react-router'
+import PropTypes from 'prop-types'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
@@ -14,12 +14,10 @@ import Meta from '@/components/Meta'
 
 import './style.scss'
 
-export default Shell(() => {
+const Week = ({ match }) => {
   const {
-    match: {
-      params: { id }
-    }
-  } = useReactRouter()
+    params: { id }
+  } = match
   const store = useStore()
   const info = useSelector(state => getList(state, 'week'))
 
@@ -102,4 +100,16 @@ export default Shell(() => {
       </ul>
     </div>
   )
-})
+}
+
+Week.propTypes = {
+  match: PropTypes.object
+}
+
+Week.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  if (user) return { code: 200 }
+  await week()(store.dispatch, store.getState)
+  return { code: 200 }
+}
+
+export default Shell(Week)

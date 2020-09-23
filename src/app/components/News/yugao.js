@@ -10,14 +10,14 @@ import { getNewsIndex } from '@/store/reducers/newsIndex'
 import Loading from '@/components/Ui/Loading'
 import './style.scss'
 
-export default function NewsYG({ name, sty, isType, isCate, title }) {
+const NewsYG = ({ name, sty, isType, isCate, title }) => {
   const info = useSelector(state => getNewsIndex(state, name))
   const store = useStore()
 
   useEffect(() => {
-    const _newsIndex = args => newsIndex(args)(store.dispatch, store.getState)
+    const getData = args => newsIndex(args)(store.dispatch, store.getState)
     if (!info.data) {
-      _newsIndex({ name })
+      getData({ name })
     }
   })
 
@@ -97,3 +97,9 @@ NewsYG.propTypes = {
   title: PropTypes.string,
   sty: PropTypes.object
 }
+
+NewsYG.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  await newsIndex({ name: 'newsTextList' })(store.dispatch, store.getState)
+}
+
+export default NewsYG

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import useReactRouter from 'use-react-router'
+import { Link, useLocation, useRouteMatch } from 'react-router-dom'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
@@ -18,13 +17,11 @@ import Meta from '@/components/Meta'
 
 import './style.scss'
 
-export default Shell(() => {
+const Time = () => {
+  const location = useLocation()
   const {
-    location,
-    match: {
-      params: { id }
-    }
-  } = useReactRouter()
+    params: { id }
+  } = useRouteMatch()
   const store = useStore()
   const info = useSelector(state => getDetail(state, id))
 
@@ -133,4 +130,13 @@ export default Shell(() => {
       </div>
     </div>
   )
-})
+}
+
+Time.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  if (user) return { code: 200 }
+  const { id } = match.params
+  await detail({ id })(store.dispatch, store.getState)
+  return { code: 200 }
+}
+
+export default Shell(Time)

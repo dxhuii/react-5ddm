@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Link } from 'react-router-dom'
-import useReactRouter from 'use-react-router'
+import { Link, useLocation, useRouteMatch } from 'react-router-dom'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
@@ -41,7 +40,7 @@ import authcode from '@/utils/authcode'
 
 import './style.scss'
 
-export default Shell(() => {
+const Subject = () => {
   const [visible, onModal] = useState(false)
   const [isSign, onSign] = useState('signIn')
   const [loveData, setLove] = useState({})
@@ -55,13 +54,10 @@ export default Shell(() => {
     204: 'zhenren',
     35: 'qita'
   }
-
+  const location = useLocation()
   const {
-    location,
-    match: {
-      params: { id, sid = 1 }
-    }
-  } = useReactRouter()
+    params: { id, sid = 1 }
+  } = useRouteMatch()
 
   const store = useStore()
   const me = useSelector(state => getUserInfo(state))
@@ -513,4 +509,14 @@ export default Shell(() => {
       </Modal>
     </>
   )
-})
+}
+
+Subject.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  if (user) return { code: 200 }
+  const { id, sid = 1 } = match.params
+  await detail({ id })(store.dispatch, store.getState)
+  await comment({ id, sid })(store.dispatch, store.getState)
+  return { code: 200 }
+}
+
+export default Shell(Subject)

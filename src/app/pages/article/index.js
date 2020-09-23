@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
-import { Link } from 'react-router-dom'
-import useReactRouter from 'use-react-router'
+import { Link, useLocation, useParams, useRouteMatch } from 'react-router-dom'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
@@ -25,17 +24,15 @@ import { NAME } from 'Config'
 
 import './style.scss'
 
-export default Shell(() => {
+const Article = () => {
   const [showPic, setPic] = useState(false)
   const [imgObj, setImgObj] = useState({})
   const articleContent = useRef()
+  const location = useLocation()
   const {
-    location,
-    match: {
-      params: { id },
-      url
-    }
-  } = useReactRouter()
+    params: { id },
+    url
+  } = useRouteMatch()
 
   const store = useStore()
   const me = useSelector(state => getUserInfo(state))
@@ -204,4 +201,13 @@ export default Shell(() => {
       </aside>
     </div>
   )
-})
+}
+
+Article.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  if (user) return { code: 200 }
+  const { id } = match.params
+  await article({ id })(store.dispatch, store.getState)
+  return { code: 200 }
+}
+
+export default Shell(Article)

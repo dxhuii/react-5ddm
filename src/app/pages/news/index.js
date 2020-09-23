@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback } from 'react'
-import { Link } from 'react-router-dom'
-import useReactRouter from 'use-react-router'
+import { Link, useRouteMatch } from 'react-router-dom'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
@@ -18,33 +17,32 @@ import Meta from '@/components/Meta'
 
 import './style.scss'
 
-export default Shell(() => {
+const menu = {
+  zixun: 211,
+  donghua: 206,
+  manhua: 205,
+  cast: 207,
+  bagua: 208,
+  jianping: 221,
+  pic: 212,
+  video: 222,
+  yugao: 214,
+  op: 215,
+  bgm: 216,
+  ed: 217,
+  cm: 223,
+  cosplay: 213,
+  mad: 220,
+  shengrou: 218,
+  tedian: 219,
+  chanye: 209
+}
+
+const News = () => {
   const {
-    match: {
-      params: { name }
-    }
-  } = useReactRouter()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const menu = {
-    zixun: 211,
-    donghua: 206,
-    manhua: 205,
-    cast: 207,
-    bagua: 208,
-    jianping: 221,
-    pic: 212,
-    video: 222,
-    yugao: 214,
-    op: 215,
-    bgm: 216,
-    ed: 217,
-    cm: 223,
-    cosplay: 213,
-    mad: 220,
-    shengrou: 218,
-    tedian: 219,
-    chanye: 209
-  }
+    params: { name }
+  } = useRouteMatch()
+
   const store = useStore()
   const config = useSelector(state => getConfig(state, 'menu'))
   const info = useSelector(state => getNewsIndex(state, 'newslist', menu[name] || 44))
@@ -52,7 +50,7 @@ export default Shell(() => {
   const load = useCallback(async () => {
     const getData = args => newsIndex(args)(store.dispatch, store.getState)
     await getData({ name: 'newslist', id: menu[name] || 44 })
-  }, [menu, name, store.dispatch, store.getState])
+  }, [name, store.dispatch, store.getState])
 
   useEffect(() => {
     const getData = args => configLoad(args)(store.dispatch, store.getState)
@@ -91,4 +89,14 @@ export default Shell(() => {
       </div>
     </div>
   )
-})
+}
+
+News.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  if (user) return { code: 200 }
+  const id = menu[match.params.name]
+  await newsIndex({ name: 'newslist', id })(store.dispatch, store.getState)
+  await configLoad({ tag: 'menu' })(store.dispatch, store.getState)
+  return { code: 200 }
+}
+
+export default Shell(News)

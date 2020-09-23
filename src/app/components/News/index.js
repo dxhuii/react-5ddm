@@ -12,14 +12,14 @@ import { formatPic } from '@/utils'
 
 import './style.scss'
 
-export default function News({ name }) {
+const News = ({ name }) => {
   const info = useSelector(state => getNewsIndex(state, name))
   const store = useStore()
 
   useEffect(() => {
-    const _newsIndex = args => newsIndex(args)(store.dispatch, store.getState)
+    const getData = args => newsIndex(args)(store.dispatch, store.getState)
     if (!info.data) {
-      _newsIndex({ name })
+      getData({ name })
     }
   })
 
@@ -92,3 +92,9 @@ export default function News({ name }) {
 News.propTypes = {
   name: PropTypes.string
 }
+
+News.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  await newsIndex({ name: 'newsPicList' })(store.dispatch, store.getState)
+}
+
+export default News

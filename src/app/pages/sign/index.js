@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react'
-import { Link } from 'react-router-dom'
-import useReactRouter from 'use-react-router'
+import { Link, useLocation } from 'react-router-dom'
 
 // redux
 import { useStore } from 'react-redux'
@@ -12,7 +11,7 @@ import Meta from '@/components/Meta'
 import './style.scss'
 
 export default Shell(() => {
-  const { location } = useReactRouter()
+  const location = useLocation()
   const store = useStore()
   const _signIn = args => signIn(args)(store.dispatch, store.getState)
   const [base64img, getBase64] = useState('')

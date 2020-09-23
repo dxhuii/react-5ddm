@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import useReactRouter from 'use-react-router'
+import { Link, useLocation, useRouteMatch } from 'react-router-dom'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
@@ -20,14 +19,12 @@ import Meta from '@/components/Meta'
 
 import './style.scss'
 
-export default Shell(() => {
+const Episode = () => {
   const [more, onMore] = useState(false)
+  const location = useLocation()
   const {
-    location,
-    match: {
-      params: { id, p }
-    }
-  } = useReactRouter()
+    params: { id, p }
+  } = useRouteMatch()
 
   const store = useStore()
   const info = useSelector(state => getEpisodeList(state, id + (p ? '-' + p : '')))
@@ -145,4 +142,12 @@ export default Shell(() => {
       </div>
     </div>
   )
-})
+}
+
+Episode.loadDataOnServer = async ({ store, match, res, req, user }) => {
+  const { id, p = 0 } = match.params
+  await episode({ id, p })(store.dispatch, store.getState)
+  return { code: 200 }
+}
+
+export default Shell(Episode)
