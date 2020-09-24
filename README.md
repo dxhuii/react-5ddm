@@ -102,10 +102,10 @@ pm2 start ./dist/server/server.js --name "react-5ddm" --max-memory-restart 1000M
 ## 感谢
 
 > - 本站基于以下脚手架开发
-> - ⚛️React 同构脚手架 [https://github.com/54sword/react-starter](https://github.com/54sword/react-starter)
+> - ⚛️ React 同构脚手架 [https://github.com/54sword/react-starter](https://github.com/54sword/react-starter)
 > - 本站衍生出的脚手架，基于以上脚手架优化而来
 > - [https://github.com/dxhuii/react-ssr](https://github.com/dxhuii/react-ssr)
 
-# 引用
+# 升级日志
 
-> - https://www.npmjs.com/package/css-loader#onlylocals 解决服务端会把 CSS 打包进 JS 的问题
+> - [CHANGELOG.md](https://github.com/dxhuii/react-5ddm/blob/master/CHANGELOG.md)
