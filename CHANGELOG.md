@@ -3,7 +3,7 @@
 - `babel-plugin-react-css-modules` 不支持 `css-loader4.x` 用 `@dr.pogodin/babel-plugin-react-css-modules` 暂时代替一下
 - `babel-plugin-react-css-modules` 这个不支持 `css-loader 4.x`版本
 - 换成 `@dr.pogodin/babel-plugin-react-css-modules` 这个就支持了，这个是别人基于 `babel-plugin-react-css-modules` 升级了对 `css-loader 4.x` 支持
-- `css-loader`从 3.x 升级到 4.x，服务端需要修改以下配置
+- `css-loader`从 3.x 升级到 4.x，服务端需要修改以下配置 `https://www.npmjs.com/package/css-loader#exportonlylocals`
 
 ````js
 {
@@ -39,7 +39,7 @@
 }
 ````
 
-这样的嵌套，需要修改配置
+这样的嵌套，需要修改配置 `https://www.npmjs.com/package/postcss-nested`
 
 ```js
 ;[
@@ -58,7 +58,7 @@
 ]
 ```
 
-增加 `plugins: ['postcss-nested']` 这个插件就支持了。
+增加 `plugins: ['postcss-nested']` 这个插件就支持了。 `https://www.npmjs.com/package/@dr.pogodin/babel-plugin-react-css-modules#configurate-syntax-loaders`
 
 - `postcss-nested` 这个现在是 5.0 版，最新的。必须 `@dr.pogodin/babel-plugin-react-css-modules` 他才支持 5.0 的版本，`babel-plugin-react-css-modules` 这个不支持。
 
@@ -66,7 +66,7 @@
 
 - `helmet` 这个升级到 4.x 版本也会报错。
 
-需要修改配置
+需要修改配置 `https://www.npmjs.com/package/helmet#how-it-works`
 
 ```js
 app.use(
