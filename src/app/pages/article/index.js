@@ -20,7 +20,7 @@ import Ads from '@/components/Ads'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
-import { NAME } from 'Config'
+import { name } from 'Config'
 
 import './style.scss'
 
@@ -134,7 +134,7 @@ const Article = () => {
         <meta property='og:description' content={remark} />
         <meta property='og:image' content={pic} />
         <meta property='og:url' content={`/article/${id}`} />
-        <meta property='og:site_name' content={NAME} />
+        <meta property='og:site_name' content={name} />
         <meta name='description' content={remark} />
         <meta name='keywords' content={keywords} />
       </Meta>

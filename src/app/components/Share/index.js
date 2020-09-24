@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import QRCode from 'qrcode.react'
 
-import { DOMAIN, NAME, weiboName } from 'Config'
+import { domain, name, weiboName } from 'Config'
 import weixin from '@/utils/weixin'
 
 import './style.scss'
@@ -21,12 +21,12 @@ export default function Share({ data = {}, location = {} }) {
 
   const goShare = type => {
     const { title, desc, pic, url } = data
-    const enUrl = encodeURIComponent(`${DOMAIN}${url}`)
-    const enTitle = encodeURIComponent(`${title} - #${NAME}# @${weiboName}`)
+    const enUrl = encodeURIComponent(`${domain}${url}`)
+    const enTitle = encodeURIComponent(`${title} - #${name}# @${weiboName}`)
     const enPic = encodeURIComponent(pic)
     const enDesc = encodeURIComponent(desc)
-    const enName = encodeURIComponent(NAME)
-    const enFrom = encodeURIComponent('来自' + NAME + ' ' + DOMAIN)
+    const enName = encodeURIComponent(name)
+    const enFrom = encodeURIComponent('来自' + name + ' ' + domain)
     const site = {
       qq: `https://connect.qq.com/widget/shareqq/index.html?url=${enUrl}&title=${enTitle}&desc=&summary=${enDesc}&pics=${enPic}&site=${enName}`,
       weibo: `https://service.weibo.com/share/share.php?appkey=111884427&url=${enUrl}&title=${enTitle}&pic=${enPic}`,
@@ -67,7 +67,7 @@ export default function Share({ data = {}, location = {} }) {
 
         {showQrcode ? (
           <div styleName='qrcode'>
-            <QRCode value={`${DOMAIN}${data.url}?_s=weixin`} />
+            <QRCode value={`${domain}${data.url}?_s=weixin`} />
             <div>微信扫一扫，分享</div>
           </div>
         ) : null}

@@ -14,7 +14,7 @@ import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
 import { isNumber, formatPic } from '@/utils'
-import { DESCRIBE, KEYWORDS, DESCRIPTION } from 'Config'
+import { describe, keywords, description } from 'Config'
 
 import './style.scss'
 
@@ -85,9 +85,9 @@ const Simple = () => {
   if (!Loading) return <Loading />
   return (
     <div className='wp mt20'>
-      <Meta title={DESCRIBE}>
-        <meta name='keywords' content={KEYWORDS} />
-        <meta name='description' content={DESCRIPTION} />
+      <Meta title={describe}>
+        <meta name='keywords' content={keywords} />
+        <meta name='description' content={description} />
       </Meta>
       <div styleName='list' className='right-box'>
         {data.map(item => (

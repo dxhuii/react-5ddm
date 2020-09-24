@@ -31,7 +31,7 @@ import Meta from '@/components/Meta'
 import Shell from '@/components/Shell'
 
 import { trim, isNumber, formatPic } from '@/utils'
-import { DOMAIN_NAME, NAME, DOMAIN } from 'Config'
+import { name, domain } from 'Config'
 
 import playing from '@/utils/play'
 
@@ -98,6 +98,9 @@ const Subject = () => {
       setLove(data.data || {})
     }
     if (!(loveD && loveD.data) && userid) feachLove()
+    return () => {
+      document.removeEventListener('click', closePlayBox)
+    }
   }, [commentData, loveD, id, info, store.dispatch, store.getState, userid, sid, _love, _comment, playData, closePlayBox])
 
   const playBox = e => {
@@ -287,7 +290,7 @@ const Subject = () => {
           <meta property='og:image' content={rePic} />
           <meta property='og:url' content={`/subject/${id}`} />
           <meta property='og:video' content={`/play/${id}/1`} />
-          <meta property='og:site_name' content={NAME} />
+          <meta property='og:site_name' content={name} />
           <meta property='og:video:score' content={gold} />
           <meta property='og:video:actor' content={reActor} />
           <meta property='og:video:area' content={area} />
@@ -410,7 +413,7 @@ const Subject = () => {
               <div styleName='detail-content' className='mt10'>
                 {content}
                 <p>
-                  《{title}》动漫的网址：{DOMAIN}/subject/{id}
+                  《{title}》动漫的网址：{domain}/subject/{id}
                 </p>
               </div>
             </div>

@@ -13,7 +13,7 @@ import Ads from '@/components/Ads'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
-import { DESCRIBE, KEYWORDS, DESCRIPTION } from 'Config'
+import { describe, keywords, description } from 'Config'
 import './style.scss'
 
 const Home = () => {
@@ -21,9 +21,9 @@ const Home = () => {
   return (
     <div className='warp-bg'>
       <div className='wp'>
-        <Meta title={DESCRIBE} url='/'>
-          <meta name='keywords' content={KEYWORDS} />
-          <meta name='description' content={DESCRIPTION} />
+        <Meta title={describe} url='/'>
+          <meta name='keywords' content={keywords} />
+          <meta name='description' content={description} />
         </Meta>
         <div className='pt20' styleName='main top'>
           <div styleName='top-left'>

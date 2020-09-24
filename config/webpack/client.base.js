@@ -43,7 +43,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../../dist/client'),
     filename: devMode ? '[name].bundle.js' : '[name].[hash].js',
-    publicPath: config.PUBLIC_PATH + '/'
+    publicPath: config.publicPath + '/'
   },
 
   resolveLoader: {
@@ -106,7 +106,7 @@ module.exports = {
             loader: `css`,
             options: {
               modules: {
-                localIdentName: config.CLASS_SCOPED_NAME
+                localIdentName: config.classScopedName
               },
               sourceMap: true,
               importLoaders: 1
@@ -183,10 +183,10 @@ module.exports = {
       metaDom: '<%- meta %>',
       htmlDom: '<%- html %>',
       reduxState: '<%- reduxState %>',
-      CNZZ_STAT: '<%- CNZZ_STAT %>',
-      BAIDU_STAT: '<%- BAIDU_STAT %>',
+      cnzzStat: '<%- cnzzStat %>',
+      baiduStat: '<%- baiduStat %>',
       debug: '<%- debug %>',
-      head: config.HEAD
+      head: config.head
       // inject: false
     })
   ]

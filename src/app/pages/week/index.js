@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
+import { useRouteMatch } from 'react-router-dom'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
@@ -14,10 +14,10 @@ import Meta from '@/components/Meta'
 
 import './style.scss'
 
-const Week = ({ match }) => {
+const Week = () => {
   const {
     params: { id }
-  } = match
+  } = useRouteMatch()
   const store = useStore()
   const info = useSelector(state => getList(state, 'week'))
 
@@ -100,10 +100,6 @@ const Week = ({ match }) => {
       </ul>
     </div>
   )
-}
-
-Week.propTypes = {
-  match: PropTypes.object
 }
 
 Week.loadDataOnServer = async ({ store, match, res, req, user }) => {

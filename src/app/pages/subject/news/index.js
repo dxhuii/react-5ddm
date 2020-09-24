@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react'
-import PropTypes from 'prop-types'
+import { useRouteMatch } from 'react-router-dom'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
@@ -12,13 +12,13 @@ import Item from '@/components/News/Item'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
-import { NAME } from 'Config'
+import { name } from 'Config'
 import { propTypes } from 'qrcode.react'
 
-const SubjectNews = ({ match }) => {
+const SubjectNews = () => {
   const {
     params: { id }
-  } = match
+  } = useRouteMatch()
   const store = useStore()
   const info = useSelector(state => getDetail(state, `vod_news_${id}`))
   const vodInfo = useSelector(state => getDetail(state, id))
@@ -46,7 +46,7 @@ const SubjectNews = ({ match }) => {
     <>
       <Meta title={`${vod.title}预告_${vod.title}花絮_${vod.title}新闻_${vod.title}新闻列表`}>
         <meta name='keywords' content={`${vod.title}预告,${vod.title}花絮,${vod.title}新闻`} />
-        <meta name='description' content={`${NAME}为您提供${vod.title}相关花絮,预告片以及，${vod.title}资讯新闻等更多信息请关注${NAME}`} />
+        <meta name='description' content={`${name}为您提供${vod.title}相关花絮,预告片以及，${vod.title}资讯新闻等更多信息请关注${name}`} />
       </Meta>
       <div className='wp clearfix mt20'>
         <div className='left right-box fl'>
@@ -58,10 +58,6 @@ const SubjectNews = ({ match }) => {
       </div>
     </>
   )
-}
-
-SubjectNews.propTypes = {
-  match: PropTypes.object
 }
 
 SubjectNews.loadDataOnServer = async ({ store, match, res, req, user }) => {

@@ -24,16 +24,17 @@ import configureStore from '@/store'
 import createRouter from '@/router'
 import { getUserInfo } from '@/store/reducers/user'
 
-import { GA, DOMAIN, debug } from 'Config'
+import { ga, domain, debug } from 'Config'
+
 setConfig({ logLevel: 'debug', reloadHooks: false })
 
 if (!debug) {
   const { origin, pathname } = window.location
   if (!/out/.test(pathname)) {
     // 打开的不是目标网站跳转到目标网站
-    // if (origin !== DOMAIN) {
-    //   window.location.href = DOMAIN + pathname
-    // }
+    if (origin !== domain) {
+      window.location.href = domain + pathname
+    }
     // 禁止被iframe
     if (window.top !== window.self) {
       window.top.location = window.location
@@ -48,8 +49,8 @@ if (!debug) {
   if (!userinfo || !userinfo.userid) userinfo = {}
   let enterEvent = () => {}
   const { href, pathname } = window.location
-  if (GA) {
-    ReactGA.initialize(GA, { debug })
+  if (ga) {
+    ReactGA.initialize(ga, { debug })
     enterEvent = userinfo => {
       const option = { page: pathname, userId: userinfo && userinfo._id ? userinfo._id : null }
       if (!debug) {
@@ -76,6 +77,7 @@ if (!debug) {
 
   // 预先加载首屏的js（否则会出现，loading 一闪的情况）
   await _route.body.preload()
+
   const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate
   loadableReady(() => {
     renderMethod(

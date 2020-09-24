@@ -15,7 +15,7 @@ import createRouter from '@/router'
 // 加载初始数据
 import initData from '@/init-data'
 
-import { COOKIE_PREFIX, AUTH_COOKIE_NAME, CNZZ_STAT, BAIDU_STAT, debug } from 'Config'
+import { cookiePrefix, authCookieNmae, cnzzStat, baiduStat, debug } from 'Config'
 
 export default async (req, res) => {
   const params = {
@@ -31,7 +31,7 @@ export default async (req, res) => {
   let store = createStore()
 
   // 准备数据，如果有token，获取用户信息并返回
-  const [err, user] = await initData(store, req.cookies[`${COOKIE_PREFIX}${AUTH_COOKIE_NAME}`] || '')
+  const [err, user] = await initData(store, req.cookies[`${cookiePrefix}${authCookieNmae}`] || '')
 
   params.user = user
 
@@ -115,8 +115,8 @@ export default async (req, res) => {
 
   // console.log(metaTagsInstance.renderToString(), 'metaTagsInstance.renderToString()')
 
-  params.CNZZ_STAT = CNZZ_STAT
-  params.BAIDU_STAT = BAIDU_STAT
+  params.cnzzStat = cnzzStat
+  params.baiduStat = baiduStat
   params.debug = debug
 
   // redux

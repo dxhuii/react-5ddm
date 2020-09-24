@@ -37,7 +37,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../../dist/server'),
     filename: 'server.js',
-    publicPath: config.PUBLIC_PATH + '/'
+    publicPath: config.publicPath + '/'
   },
 
   resolveLoader: {
@@ -81,7 +81,7 @@ module.exports = {
             loader: `css`,
             options: {
               modules: {
-                localIdentName: config.CLASS_SCOPED_NAME,
+                localIdentName: config.classScopedName,
                 exportOnlyLocals: true
               }
               // onlyLocals: true // 只映射，不打包CSS

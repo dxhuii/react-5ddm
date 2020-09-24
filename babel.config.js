@@ -23,7 +23,7 @@ module.exports = function (api) {
         '@dr.pogodin/react-css-modules',
         {
           exclude: 'node_modules',
-          generateScopedName: config.CLASS_SCOPED_NAME,
+          generateScopedName: config.classScopedName,
           webpackHotModuleReloading: true,
           filetypes: {
             '.scss': {

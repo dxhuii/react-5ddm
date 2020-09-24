@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import SignIn from './SignIn'
 import SignUp from './SignUp'
-import { DOMAIN_NAME } from 'Config'
 
 import './style.scss'
 

@@ -10,7 +10,7 @@
   loader: `css`,
   options: {
     modules: {
-      localIdentName: config.CLASS_SCOPED_NAME
+      localIdentName: config.classScopedName
     }
     onlyLocals: true // 只映射，不打包CSS
   }
@@ -25,7 +25,7 @@
   loader: `css`,
   options: {
     modules: {
-      localIdentName: config.CLASS_SCOPED_NAME,
+      localIdentName: config.classScopedName,
       exportOnlyLocals: true
     }
     // onlyLocals: true // 只映射，不打包CSS
@@ -50,7 +50,7 @@
   '@dr.pogodin/react-css-modules',
   {
     exclude: 'node_modules',
-    generateScopedName: config.CLASS_SCOPED_NAME,
+    generateScopedName: config.classScopedName,
     webpackHotModuleReloading: true,
     filetypes: {
       '.scss': {

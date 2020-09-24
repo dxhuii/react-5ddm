@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { isNumber, formatPic } from '@/utils'
 
-import { DOMAIN } from 'Config'
+import { domain } from 'Config'
 
 import '../out.scss'
 
@@ -12,7 +12,7 @@ export default function Item({ data }) {
     <ul styleName='week'>
       {data.map(item => (
         <li key={item.id}>
-          <a target='_blank' rel='noopener noreferrer' href={`${DOMAIN}/subject/${item.id}`} key={item.id}>
+          <a target='_blank' rel='noopener noreferrer' href={`${domain}/subject/${item.id}`} key={item.id}>
             <div>
               <img src={formatPic(item.smallPic || item.pic, 'thumb150')} alt={item.title} />
             </div>

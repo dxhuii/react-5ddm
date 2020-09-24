@@ -13,7 +13,7 @@ import Sign from '@/components/Sign'
 import Ads from '@/components/Ads'
 
 import { trim } from '@/utils'
-import { DOMAIN_NAME, NAME } from 'Config'
+import { name } from 'Config'
 
 import './style.scss'
 
@@ -104,7 +104,7 @@ export default function Head() {
     <Fragment>
       <header>
         <div className='wp'>
-          <NavLink styleName='header-logo' exact to='/' title={NAME} />
+          <NavLink styleName='header-logo' exact to='/' title={name} />
           <nav styleName={showMenu ? 'show' : ''}>
             <div styleName='header-nav'>
               <NavLink styleName={url === '/' ? 'active' : ''} exact to='/'>
