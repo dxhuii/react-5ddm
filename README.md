@@ -42,7 +42,7 @@
 **_没有在 windows 机器上测试过，可能会报错_**
 
 ```
-$ git clone git@gitee.com:dxhuii/react-5ddm.git
+$ git clone git@github.com:dxhuii/react-5ddm.git
 $ cd react-5ddm
 $ yarn
 $ yarn start
@@ -89,15 +89,15 @@ pm2 start ./dist/server/server.js --name "react-5ddm" --max-memory-restart 1000M
 
 ## 特点
 
-- 🖥 支持首屏服务端渲染，支持 SEO
+- 🖥 支持首屏服务端渲染，支持 `SEO`
 - ✂️ 按页面将代码分片，然后按需加载
-- 🌈 支持 CSS Modules，避免 CSS 全局污染
-- ⚙️ 支持流行 UI 框架 Bootstrap 4
+- 🌈 支持 `CSS Modules`，避免 `CSS` 全局污染
+- ⚙️ 支持流行 UI 框架 `Bootstrap 4`
 - 🔄 开发环境支持热更新
 - 🎛 内置登录、退出、页面权限控制、帖子列表获取、帖子详情获取等功能
 - 🚧 内置用户访问页面时，301、404 状态相应的处理逻辑
 
-> 注：项目里面包含了对 vscode 的配置
+> 注：项目里面包含了对 `vscode` 的配置
 
 ## 感谢
 
@@ -109,17 +109,3 @@ pm2 start ./dist/server/server.js --name "react-5ddm" --max-memory-restart 1000M
 # 引用
 
 > - https://www.npmjs.com/package/css-loader#onlylocals 解决服务端会把 CSS 打包进 JS 的问题
-
-## react-css-modules 不支持 css-loader4.x 用 @dr.pogodin/react-css-modules 暂时代替一下
-
-- postcss-scss 3.0 暂时不支持，需要 postcss 8.x
-- postcss-nested 5.0 暂时不支持，需要 postcss 8.x 但又有其他组件不支持，暂时用老版本
-- helmet 升级到 4.x 版本后，加入如下代码
-
-```js
-app.use(
-  helmet({
-    contentSecurityPolicy: false
-  })
-)
-```
