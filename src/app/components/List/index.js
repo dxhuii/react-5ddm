@@ -7,7 +7,7 @@ import { listLoad } from '@/store/actions/list'
 import { getList } from '@/store/reducers/list'
 
 import Item from './Item'
-import Loading from '@/components/Ui/Loading'
+import BaseLoading from '@/components/BaseLoading'
 
 import './style.scss'
 
@@ -57,10 +57,10 @@ const List = ({ id, mcid, year, area, wd, letter, lz, order }) => {
 
   return (
     <div styleName='main-list'>
-      {loading ? <Loading /> : null}
       <div className='wp'>
         <Item data={data} />
       </div>
+      {loading ? <BaseLoading /> : null}
     </div>
   )
 }

@@ -6,7 +6,7 @@ import { useStore, useSelector } from 'react-redux'
 import { simple } from '@/store/actions/simple'
 import { mark, digg } from '@/store/actions/mark'
 import { getSimple } from '@/store/reducers/simple'
-import Loading from '@/components/Ui/Loading'
+import BaseLoading from '@/components/BaseLoading'
 import Toast from '@/components/Toast'
 
 // 壳组件
@@ -19,7 +19,6 @@ import { describe, keywords, description } from 'Config'
 import './style.scss'
 
 const Simple = () => {
-  const [height, setHeight] = useState(0)
   const info = useSelector(state => getSimple(state))
   const store = useStore()
 
@@ -38,7 +37,6 @@ const Simple = () => {
       getData()
     }
     ArriveFooter.add('simple', getData)
-    setHeight(window.innerHeight - 61)
     return () => {
       ArriveFooter.remove('simple')
     }
@@ -80,9 +78,8 @@ const Simple = () => {
     }
   }
 
-  const { data = [], loading } = info
+  const { data = [], loading = true } = info
 
-  if (!Loading) return <Loading />
   return (
     <div className='wp mt20'>
       <Meta title={describe}>
@@ -147,8 +144,8 @@ const Simple = () => {
             </div>
           </li>
         ))}
+        {loading ? <BaseLoading height={100} /> : null}
       </div>
-      {loading ? <Loading /> : null}
     </div>
   )
 }

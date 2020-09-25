@@ -40,7 +40,7 @@ const config = {
   domain: 'https://www.5ddm.com',
   port: 8080,
   publicPath: '//99496-1251036128.file.myqcloud.com/5ddm',
-  baiduStat: '9449f42e45055b4f70ad84574c4c65c8',
+  baiduStat: '2181f9da0f7a8cdc001129fb5010a473',
   cnzzStat: '1279219478',
   ga: 'UA-176562013-1',
   // [选填] google广告

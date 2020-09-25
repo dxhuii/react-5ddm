@@ -74,8 +74,8 @@ module.exports = {
 
       // scss 文件解析
       {
-        // test: /\.scss$/,
-        test: /\.(sa|sc|c)ss$/,
+        test: /\.scss$/,
+        // test: /\.(sa|sc|c)ss$/,
         use: [
           {
             loader: `css`,
@@ -99,20 +99,22 @@ module.exports = {
             }
           }
         ]
-      }
+      },
 
-      // css 解析
-      // {
-      //   test: /\.css$/,
-      //   use: [
-      //     {
-      //       loader: `css`,
-      //       options: {
-      //         onlyLocals: true // 只映射，不打包CSS
-      //       }
-      //     }
-      //   ]
-      // }
+      // css 文件解析
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: `css`,
+            options: {
+              modules: {
+                exportOnlyLocals: true // 只映射，不打包CSS
+              }
+            }
+          }
+        ]
+      }
     ]
   },
 

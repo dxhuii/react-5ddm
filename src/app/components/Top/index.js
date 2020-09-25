@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { useStore, useSelector } from 'react-redux'
 import { top } from '@/store/actions/list'
 import { getList } from '@/store/reducers/list'
-import Loading from '@/components/Ui/Loading'
+import BaseLoading from '@/components/BaseLoading'
 
 import './style.scss'
 
@@ -32,7 +32,7 @@ const Top = ({ name, title, sty }) => {
         </h2>
       </div>
       <ul>
-        {loading ? <Loading /> : null}
+        {loading ? <BaseLoading /> : null}
         {data.map((item, index) => (
           <li key={item.id}>
             <span styleName={`top-li__num ${index <= 2 ? 'on' : ''}`}>{index + 1}</span>

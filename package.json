@@ -7,6 +7,7 @@
     "dev": "cross-env NODE_ENV=development webpack --config config/webpack/server.dev.js && NODE_ENV=development webpack --config config/webpack/client.dev.js && node ./dist/server/server.js",
     "pro": "cross-env NODE_ENV=production webpack --config config/webpack/server.pro.js && NODE_ENV=production webpack --config config/webpack/client.pro.js && node ./dist/server/server.js",
     "dist": "cross-env NODE_ENV=production webpack --config config/webpack/server.pro.js && NODE_ENV=production webpack --config config/webpack/client.pro.js",
+    "ana": "cross-env NODE_ENV=production webpack --config config/webpack/server.pro.js && NODE_ENV=production webpack --config config/webpack/client.ana.js",
     "server": "cross-env node ./dist/server/server.js"
   },
   "engines": {
