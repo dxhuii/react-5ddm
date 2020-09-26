@@ -126,10 +126,13 @@ export default function Head() {
                 排行榜
               </NavLink>
               <NavLink styleName={url === '/new' ? 'active' : ''} exact to='/new'>
-                最近更新
+                更新
               </NavLink>
               <NavLink styleName={/month/.test(url) ? 'active' : ''} exact to={`/month/${getCurMonth()}`}>
-                {getCurMonth().substring(5)}月新番表
+                {getCurMonth().substring(5)}月新番
+              </NavLink>
+              <NavLink styleName={url === '/simple' ? 'active' : ''} exact to='/simple'>
+                简洁版
               </NavLink>
             </div>
           </nav>

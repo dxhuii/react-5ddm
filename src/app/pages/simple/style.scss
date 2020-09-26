@@ -75,6 +75,12 @@
   }
   &-play {
     margin-top: 15px;
+    span {
+      float: left;
+    }
+    i {
+      margin-top: 0;
+    }
   }
   &-gold {
     margin-top: 15px;

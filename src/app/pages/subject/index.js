@@ -30,7 +30,7 @@ import Ads from '@/components/Ads'
 import Meta from '@/components/Meta'
 import Shell from '@/components/Shell'
 
-import { trim, isNumber, formatPic } from '@/utils'
+import { trim, isNumber, formatPic, getName } from '@/utils'
 import { name, domain } from 'Config'
 
 import playing from '@/utils/play'
@@ -70,7 +70,7 @@ const Subject = () => {
 
   const { userid, nickname } = me
   const { data = {}, loading } = info
-  const { key, list = [] } = playData.data || {}
+  const { key, list = [], all, quote } = playData.data || {}
 
   const closePlayBox = useCallback(() => {
     if (playName) {
@@ -204,14 +204,14 @@ const Subject = () => {
   }
 
   const player = () => {
-    return list.map(({ playName, playTitle, copyright, list }) => (
+    return list.map(({ playName, playTitle, price, list }) => (
       <div styleName='player' key={`${playName}`}>
         <div styleName='title' onClick={e => showPlay(e, playName)}>
           <h4>
             <i className={`playicon ${playName}`}></i>
             {playTitle}
           </h4>
-          <span>{copyright}</span>
+          <span>{price}</span>
         </div>
         <div styleName={`player-list ${playShow[playName] ? 'show' : ''}`}>
           <span onClick={e => showPlayClose(e, playName)}>✕</span>
@@ -220,6 +220,62 @@ const Subject = () => {
           </div>
         </div>
       </div>
+    ))
+  }
+
+  const jumpLink = v => {
+    if (!(typeof window === 'undefined')) {
+      window.open(v)
+    }
+  }
+
+  const allPlay = () => {
+    return all
+      ? all.map(({ vid, price }) => {
+          const v = authcode(atob(vid), 'DECODE', key, 0)
+          return (
+            <div styleName='player' key={vid}>
+              <div styleName='title' onClick={() => jumpLink(v)}>
+                <h4>
+                  <i className={`playicon ${getName(v)[1]}`}></i>
+                  {getName(v)[0]}
+                </h4>
+                <span>{price}</span>
+              </div>
+            </div>
+          )
+        })
+      : null
+  }
+
+  const reference = ({ douban, baike, quote, all, title }) => {
+    const arr = []
+    const url = v => authcode(atob(v), 'DECODE', key, 0)
+    if (douban) {
+      arr.push({ name: '豆瓣', url: `https://movie.douban.com/subject/${douban}/` })
+    }
+    if (baike) {
+      arr.push({ name: '百度百科', url: decodeURIComponent(baike) })
+    }
+    if (all && all.length) {
+      all.map(({ vid }) => {
+        const v = url(vid)
+        arr.push({ name: getName(v)[0], url: v })
+      })
+    }
+    if (quote && quote.length) {
+      quote.map(({ vid }) => {
+        const v = url(vid)
+        arr.push({ name: getName(v)[0], url: decodeURIComponent(v) })
+      })
+    }
+    return arr.map(({ name, url }) => (
+      <li key={url}>
+        <span>[{name}]</span>
+        <a href={url} target='_blank' rel='noopener noreferrer'>
+          {url}
+        </a>
+      </li>
     ))
   }
 
@@ -246,6 +302,8 @@ const Subject = () => {
     year,
     storyId,
     actorId,
+    douban,
+    baike,
     pic = '',
     language = '',
     content = '',
@@ -273,7 +331,7 @@ const Subject = () => {
     window.location.href = jump
   }
   if (loading || !data.title) return <Loading />
-  // console.log(loveData, 'loveData')
+
   return (
     <>
       <div className='warp-bg'>
@@ -459,11 +517,21 @@ const Subject = () => {
           </div>
         </div>
         <aside className='right'>
+          {all && all.length > 0 ? (
+            <div className='right-box'>
+              <div className='right-title'>
+                <h2>
+                  <em></em>在哪儿看这部动漫(全集)
+                </h2>
+              </div>
+              {allPlay()}
+            </div>
+          ) : null}
           {list.length > 0 ? (
             <div className='right-box'>
               <div className='right-title'>
                 <h2>
-                  <em></em>在哪儿看这部动漫
+                  <em></em>在哪儿看这部动漫(分集)
                 </h2>
               </div>
               {player()}
@@ -506,6 +574,12 @@ const Subject = () => {
           </div>
           <SideBar />
         </aside>
+      </section>
+      <section className='right-box wp mt20'>
+        <div className='right-title'>
+          <h2>参考资料</h2>
+        </div>
+        <ul styleName='reference'>{reference({ douban, baike, all, quote, title })}</ul>
       </section>
       <Modal visible={visible} showModal={() => onModal(true)} closeModal={() => onModal(false)}>
         <Sign isSign={isSign} onType={val => onType(val)} visible={visible} />

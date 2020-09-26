@@ -362,6 +362,21 @@
   }
 }
 
+.reference {
+  li {
+    padding-bottom: 10px;
+    margin-top: 10px;
+    border-bottom: 1px solid #ebebeb;
+    &:last-child {
+      border-bottom: none;
+    }
+    span {
+      color: #333;
+      margin-right: 10px;
+    }
+  }
+}
+
 @media (min-width: 0) and (max-width: 1200px) {
   .detail-pic {
     width: 30%;

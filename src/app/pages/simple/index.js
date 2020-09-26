@@ -13,8 +13,10 @@ import Toast from '@/components/Toast'
 import Shell from '@/components/Shell'
 import Meta from '@/components/Meta'
 
-import { isNumber, formatPic } from '@/utils'
+import { isNumber, formatPic, getName } from '@/utils'
 import { describe, keywords, description } from 'Config'
+import '@/utils/base64.min'
+import authcode from '@/utils/authcode'
 
 import './style.scss'
 
@@ -78,6 +80,24 @@ const Simple = () => {
     }
   }
 
+  const see = ({ play, all }) => {
+    if ((play && play.length) || all) {
+      return (
+        <div styleName='list-play' className='clearfix'>
+          <span>哪可以看：</span>
+          {all
+            ? all.all &&
+              all.all.map(({ vid }) => {
+                const url = v => authcode(atob(v), 'DECODE', all.key, 0)
+                const v = url(vid)
+                return <i key={v} className={`playicon ${getName(v)[1]}`} title={getName(v)[0]} />
+              })
+            : play.map(play => play && <i key={play} className={`playicon ${play}`} title={play} />)}
+        </div>
+      )
+    }
+  }
+
   const { data = [], loading = true } = info
 
   return (
@@ -120,7 +140,7 @@ const Simple = () => {
                   时间
                 </Link>
               </p>
-              <div styleName='list-play'>哪可以看：{item.play && item.play.map(play => <span key={play}>{play}</span>)}</div>
+              {see({ play: item.play, all: item.all })}
               <div styleName='list-gold'>
                 {item.gold ? (
                   <div>

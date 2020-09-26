@@ -8,7 +8,7 @@
     return
   }
 
-  var clientHeight = document.documentElement.clientHeight
+  let clientHeight = document.documentElement.clientHeight
 
   window.addEventListener(
     'resize',
@@ -19,8 +19,8 @@
   )
 
   function getElementViewTop(element) {
-    var actualTop = element.offsetTop
-    var current = element.offsetParent
+    let actualTop = element.offsetTop
+    let current = element.offsetParent
 
     while (current !== null) {
       actualTop += current.offsetTop
@@ -32,9 +32,9 @@
 
   // let postsModal = $('#posts-modal');
 
-  var update = function () {
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-    var elements = document.getElementsByClassName('load-demand')
+  const update = function () {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+    const elements = document.getElementsByClassName('load-demand')
 
     // console.log(scrollTop);
     //  && $('#posts-modal').className.indexOf('show') != -1
@@ -44,7 +44,7 @@
       scrollTop = document.getElementById('posts-modal').scrollTop
     }
 
-    for (var i = 0, max = elements.length; i < max; i++) {
+    for (let i = 0, max = elements.length; i < max; i++) {
       if (elements[i].innerHTML) continue
 
       let content = encodeURIComponent(elements[i].getAttribute('data-load-demand'))
@@ -53,8 +53,8 @@
 
       content = decodeURIComponent(content)
 
-      var y1 = getElementViewTop(elements[i])
-      var y2 = y1 + elements[i].offsetHeight
+      const y1 = getElementViewTop(elements[i])
+      const y2 = y1 + elements[i].offsetHeight - clientHeight / 2
 
       if ((scrollTop <= y1 && y1 < scrollTop + clientHeight) || (scrollTop < y2 && y2 < scrollTop + clientHeight)) {
         elements[i].innerHTML = content + elements[i].innerHTML
