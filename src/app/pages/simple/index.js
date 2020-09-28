@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom'
 // redux
 import { useStore, useSelector } from 'react-redux'
 import { simple } from '@/store/actions/simple'
-import { mark, digg } from '@/store/actions/mark'
+import { digg } from '@/store/actions/mark'
 import { getSimple } from '@/store/reducers/simple'
 import BaseLoading from '@/components/BaseLoading'
+import ShowPlaylist from '@/components/ShowPlaylist'
+import Modal from '@/components/Modal'
 import Toast from '@/components/Toast'
 
 // 壳组件
@@ -15,21 +17,26 @@ import Meta from '@/components/Meta'
 
 import { isNumber, formatPic, getName } from '@/utils'
 import { describe, keywords, description } from 'Config'
-import '@/utils/base64.min'
+
+import { Base64 } from 'js-base64'
 import authcode from '@/utils/authcode'
 
 import './style.scss'
 
 const Simple = () => {
+  const [visible, onModal] = useState(false)
+  const [params, onShowPlay] = useState({})
   const info = useSelector(state => getSimple(state))
   const store = useStore()
+
+  const { data = [], loading = true } = info
 
   const menu = {
     201: 'tv',
     202: 'ova',
     203: 'juchang',
-    4: 'tebie',
     204: 'zhenren',
+    4: 'tebie',
     35: 'qita'
   }
 
@@ -80,25 +87,25 @@ const Simple = () => {
     }
   }
 
-  const see = ({ play, all }) => {
-    if ((play && play.length) || all) {
-      return (
-        <div styleName='list-play' className='clearfix'>
-          <span>哪可以看：</span>
-          {all
-            ? all.all &&
-              all.all.map(({ vid }) => {
-                const url = v => authcode(atob(v), 'DECODE', all.key, 0)
-                const v = url(vid)
-                return <i key={v} className={`playicon ${getName(v)[1]}`} title={getName(v)[0]} />
-              })
-            : play.map(play => play && <i key={play} className={`playicon ${play}`} title={play} />)}
-        </div>
-      )
-    }
+  const onShow = ({ id, type }) => {
+    onShowPlay({
+      id,
+      type
+    })
+    onModal(true)
   }
 
-  const { data = [], loading = true } = info
+  const see = ({ play, all, id }) => {
+    return all
+      ? all.all.map(({ vid }) => {
+          const url = v => authcode(Base64.atob(v), 'DECODE', all.key, 0)
+          const v = url(vid)
+          return (
+            <i key={v} className={`playicon ${getName(v)[1]}`} title={getName(v)[0]} onClick={() => onShow({ id, type: getName(v)[1] })} />
+          )
+        })
+      : play.map(play => play && <i key={play} className={`playicon ${play}`} title={play} />)
+  }
 
   return (
     <div className='wp mt20'>
@@ -130,42 +137,58 @@ const Simple = () => {
               {item.foreign && <h4>{item.foreign}</h4>}
               <p>
                 <Link to={`/subject/${item.id}`}>详情</Link>
-                {item.music ? <span>音乐</span> : null}
-                {item.role ? <span>角色</span> : null}
+                {item.music ? <a>音乐</a> : null}
+                {item.role ? <a>角色</a> : null}
                 {item.part ? <Link to={`/episode/${item.id}`}>剧情</Link> : null}
-                {item.lines ? <span>插曲</span> : null}
-                {item.theme ? <span>话题</span> : null}
-                {item.picture ? <span>图片</span> : null}
+                {item.lines ? <a>插曲</a> : null}
+                {item.theme ? <a>话题</a> : null}
+                {item.picture ? <a>图片</a> : null}
                 <Link to={`/time/${item.id}`} title='播出时间'>
                   时间
                 </Link>
               </p>
-              {see({ play: item.play, all: item.all })}
+              {(item.play && item.play.length) || item.all ? (
+                <div styleName='list-play' className='clearfix'>
+                  <span>哪可以看：</span>
+                  {see({ play: item.play, all: item.all, id: item.id })}
+                </div>
+              ) : null}
               <div styleName='list-gold'>
                 {item.gold ? (
                   <div>
                     <span className={`${starClass(item.gold * 5)} bigstar`} /> {item.gold} 分
                   </div>
                 ) : (
-                  '暂无评分'
+                  <span>暂无评分</span>
                 )}
+                {item.filmtime && `首番时间：${item.filmtime} ${item.time}`}
               </div>
               <p styleName='list-opa'>
-                <a>订阅</a>
-                <a>收藏</a>
+                <a>
+                  <i className='iconfont'>&#xe6bd;</i> 订阅
+                </a>
+                <a>
+                  <i className='iconfont'>&#xe66a;</i> 收藏
+                </a>
                 <a onClick={() => onDigg('up', item.id)}>
                   <i className='iconfont'>&#xe607;</i> {item.up}
                 </a>
                 <a onClick={() => onDigg('down', item.id)}>
                   <i className='iconfont'>&#xe606;</i> {item.down}
                 </a>
-                {item.time}更新 {item.status}
+                <span style={item.isDate ? { color: '#f99f11' } : {}}>{item.addtime}更新</span>
+                {item.status === '未播出' ? (item.tvcont ? item.tvcont : item.status) : item.status}
               </p>
             </div>
           </li>
         ))}
         {loading ? <BaseLoading height={100} /> : null}
       </div>
+      {params.id ? (
+        <Modal cls={{ width: 895 }} visible={visible} showModal={() => onModal(true)} closeModal={() => onModal(false)}>
+          <ShowPlaylist {...params} />
+        </Modal>
+      ) : null}
     </div>
   )
 }

@@ -32,18 +32,18 @@ export default function (Component) {
     return <Component match={match} setNotFound={setNotFound} />
   }
 
+  Shell.loadDataOnServer =
+    Component.loadDataOnServer ||
+    function () {
+      return { code: 200 }
+    }
+
   Shell.propTypes = {
     history: PropTypes.object,
     location: PropTypes.object,
     match: PropTypes.object,
     staticContext: PropTypes.object
   }
-
-  Shell.loadDataOnServer =
-    Component.loadDataOnServer ||
-    function () {
-      return { code: 200 }
-    }
 
   return Shell
 }

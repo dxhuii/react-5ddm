@@ -84,11 +84,17 @@
   }
   &-gold {
     margin-top: 15px;
+    span {
+      margin-right: 10px;
+    }
   }
   &-opa {
     position: absolute;
     bottom: 0;
     left: 170px;
     right: 0;
+    span {
+      margin-right: 10px;
+    }
   }
 }

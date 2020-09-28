@@ -20,8 +20,8 @@ export const isMobile = () => {
 }
 
 // 去掉字符串前后空格
-export const trim = str => {
-  return str.replace(/(^\s*)|(\s*$)/g, '')
+export const trim = (str = '') => {
+  return str.trim() // replace(/(^\s*)|(\s*$)/g, '')
 }
 
 // 提取字符串第一次出现的数字
@@ -38,6 +38,20 @@ export const firstNumber = str => {
       return str
     }
   }
+}
+
+export const format = data => {
+  let num = ''
+  let subName = ''
+  if (/全集|全片|ova|OVA|OAD|oad|日语|国语|普通话|总集|pv|PV|SP|sp/.test(data)) {
+    num = data
+  } else {
+    const title = data.split(' ')
+    const name = data.split(/话|集/)
+    num = title[0]
+    subName = name[1] ? trim(name[1]) : ''
+  }
+  return [num, subName]
 }
 
 export const getName = vid => {

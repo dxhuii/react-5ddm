@@ -30,12 +30,12 @@ import Ads from '@/components/Ads'
 import Meta from '@/components/Meta'
 import Shell from '@/components/Shell'
 
-import { trim, isNumber, formatPic, getName } from '@/utils'
+import { isNumber, formatPic, getName, format } from '@/utils'
 import { name, domain } from 'Config'
 
 import playing from '@/utils/play'
 
-import '@/utils/base64.min'
+import { Base64 } from 'js-base64'
 import authcode from '@/utils/authcode'
 
 import './style.scss'
@@ -159,32 +159,22 @@ const Subject = () => {
     }
   }
 
-  const format = data => {
-    let num = ''
-    let subName = ''
-    if (data === '全集') {
-      num = data
-    } else {
-      const title = data.split(' ')
-      const name = data.split(/话|集/)
-      num = title[0]
-      subName = name[1] ? trim(name[1]) : ''
-    }
-
-    return (
-      <>
-        <p>{num}</p>
-        {subName ? <p>{subName}</p> : null}
-      </>
-    )
-  }
-
   const playerList = (data = [], key, name) => {
-    return data.map(({ title, vid }) => (
-      <a key={`${vid}`} href={`${playing(name, authcode(atob(vid), 'DECODE', key, 0))}`} target='_blank' rel='noreferrer' title={title}>
-        {format(title)}
-      </a>
-    ))
+    return data.map(({ title, vid }) => {
+      const [num, subName] = format(title)
+      return (
+        <a
+          key={vid}
+          href={`${playing(name, authcode(Base64.atob(vid), 'DECODE', key, 0))}`}
+          target='_blank'
+          rel='noopener noreferrer'
+          title={title}
+        >
+          <p>{num}</p>
+          {subName ? <p>{subName}</p> : null}
+        </a>
+      )
+    })
   }
 
   const showPlay = (e, name) => {
@@ -205,7 +195,7 @@ const Subject = () => {
 
   const player = () => {
     return list.map(({ playName, playTitle, price, list }) => (
-      <div styleName='player' key={`${playName}`}>
+      <div styleName='player' key={playName}>
         <div styleName='title' onClick={e => showPlay(e, playName)}>
           <h4>
             <i className={`playicon ${playName}`}></i>
@@ -232,7 +222,7 @@ const Subject = () => {
   const allPlay = () => {
     return all
       ? all.map(({ vid, price }) => {
-          const v = authcode(atob(vid), 'DECODE', key, 0)
+          const v = authcode(Base64.atob(vid), 'DECODE', key, 0)
           return (
             <div styleName='player' key={vid}>
               <div styleName='title' onClick={() => jumpLink(v)}>
@@ -250,7 +240,7 @@ const Subject = () => {
 
   const reference = ({ douban, baike, quote, all, title }) => {
     const arr = []
-    const url = v => authcode(atob(v), 'DECODE', key, 0)
+    const url = v => authcode(Base64.atob(v), 'DECODE', key, 0)
     if (douban) {
       arr.push({ name: '豆瓣', url: `https://movie.douban.com/subject/${douban}/` })
     }

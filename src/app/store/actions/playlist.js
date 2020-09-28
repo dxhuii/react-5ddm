@@ -9,7 +9,21 @@ export function playlist({ id }) {
       reducerName: 'playlist',
       actionType: 'GET_PLAY_LIST',
       api: 'playlist',
-      params: { id },
+      params: { id }
+    })
+  }
+}
+
+export function playlistType({ id, type }) {
+  return (dispatch, getState) => {
+    return loadData({
+      dispatch,
+      getState,
+      name: `${type}_${id}`,
+      reducerName: 'playlist',
+      actionType: 'GET_PLAY_LIST_TYPE',
+      api: 'playlist',
+      params: { id, type }
     })
   }
 }

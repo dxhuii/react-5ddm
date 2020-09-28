@@ -1,0 +1,30 @@
+.showlist {
+  max-height: 400px;
+  overflow-y: auto;
+  text-align: left;
+  .showbox {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    a {
+      width: 130px;
+      margin-left: 15px;
+      margin-top: 15px;
+      padding: 10px;
+      display: inline-block;
+      border-radius: $d-border-radius-sm;
+      border: 1px solid #ebebeb;
+      p {
+        margin-top: 0;
+        @include clamp(1);
+      }
+      &:hover {
+        color: $d-text-color-hover;
+        border-color: $d-text-color-hover;
+        p {
+          color: $d-text-color-hover;
+        }
+      }
+    }
+  }
+}

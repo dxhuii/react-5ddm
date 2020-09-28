@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { Base64 } from 'js-base64'
 import md5 from '@/utils/md5.min'
 export default (str, operation, key, expiry) => {
   var operation = operation ? operation : 'DECODE'
@@ -32,8 +33,7 @@ export default (str, operation, key, expiry) => {
 
   if (operation == 'DECODE') {
     str = str.substr(ckey_length)
-    strbuf = atob(str)
-    //string = b.toString();
+    strbuf = Base64.atob(str)
   } else {
     expiry = expiry ? expiry + time() : 0
     tmpstr = expiry.toString()
