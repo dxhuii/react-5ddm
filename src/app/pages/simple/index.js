@@ -155,13 +155,13 @@ const Simple = () => {
               ) : null}
               <div styleName='list-gold'>
                 {item.gold ? (
-                  <div>
+                  <>
                     <span className={`${starClass(item.gold * 5)} bigstar`} /> {item.gold} 分
-                  </div>
+                  </>
                 ) : (
-                  <span>暂无评分</span>
+                  '暂无评分'
                 )}
-                {item.filmtime && `首番时间：${item.filmtime} ${item.time}`}
+                {item.filmtime && <span style={{ marginLeft: 10 }}>{`首番时间：${item.filmtime} ${item.time}`}</span>}
               </div>
               <p styleName='list-opa'>
                 <a>
