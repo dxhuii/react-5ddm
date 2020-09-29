@@ -9,14 +9,14 @@ fs.writeFile(
   "description": "${config.description}",
   "icons": [
     {
-        "src": "/favicon.ico",
-        "type": "image/x-icon",
-        "sizes": "64x64"
+        "src": "/icon_144.png",
+        "type": "image/png",
+        "sizes": "144x144"
     },
     {
         "src": "/favicon.png",
         "type": "image/png",
-        "sizes": "64x64"
+        "sizes": "512x512"
     }
   ],
   "start_url": "/",

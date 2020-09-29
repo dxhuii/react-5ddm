@@ -13,7 +13,7 @@ import Sign from '@/components/Sign'
 import Ads from '@/components/Ads'
 
 import { trim } from '@/utils'
-import { name } from 'Config'
+import { name, index } from 'Config'
 
 import './style.scss'
 
@@ -100,11 +100,12 @@ export default function Head() {
   }
 
   const { userid, nickname } = me
+  const logo = ['', 'gk', 'a8']
   return (
     <Fragment>
       <header>
         <div className='wp'>
-          <NavLink styleName='header-logo' exact to='/' title={name} />
+          <NavLink styleName={`header-logo ${logo[index]}`} exact to='/' title={name} />
           <nav styleName={showMenu ? 'show' : ''}>
             <div styleName='header-nav'>
               <NavLink styleName={url === '/' ? 'active' : ''} exact to='/'>

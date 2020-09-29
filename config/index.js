@@ -20,11 +20,29 @@
  * weiboName 微博名称
  */
 
+const index = 0
+const name = ['5d动漫(5站)', 'Geekacg', '8ana']
+const cookiePrefix = ['ddm_', 'geekacg', 'ana']
+const describe = ['5d动漫(5站)', '', '']
+const keywords = ['5d动漫,5站,二次元导航,二次元主页', 'Geekacg,极客动漫,二次元导航,二次元主页', '8ana,二次元导航,二次元主页']
+const description = [
+  '5d动漫(5站) - 及时收录动漫网站及资讯、动画、漫画、音乐等内容，让您的二次元网络生活更简单精彩。',
+  'Geekacg - 及时收录动漫网站及资讯、动画、漫画、音乐等内容，让您的二次元网络生活更简单精彩。',
+  '8ana - 及时收录动漫网站及资讯、动画、漫画、音乐等内容，让您的二次元网络生活更简单精彩。'
+]
+const port = ['8080', '9999', '9998']
+const domain = ['https://www.5ddm.com', 'https://www.geekacg.com', 'https://www.8ana.com']
+const publicPath = ['5ddm', 'geekacg', '8ana']
+const baiduStat = ['2181f9da0f7a8cdc001129fb5010a473', 'dac7d3d29140921f2cfb16fe78565450', '']
+const cnzzStat = ['1279219478', '1279307969', '']
+const ga = ['UA-176562013-1', 'UA-176562013-2', 'UA-176562013-3']
+const eMail = ['ddm_com@outlook.com', 'geekacg@outlook.com', '']
+
 const config = {
   debug: false,
   classScopedName: '[hash:base64:5]',
   authCookieNmae: 'auth',
-  cookiePrefix: 'ddm_',
+  cookiePrefix: cookiePrefix[index],
   cacheTime: 300000,
   weiboName: '5d动漫',
   head: `<meta name="renderer" content="webkit">
@@ -33,16 +51,16 @@ const config = {
     <link rel="icon" href="/favicon.ico" />
   `,
   api: 'https://api.5ddm.com/',
-  name: '5D动漫(5站)',
-  describe: '5D动漫(5站)',
-  keywords: '5D动漫,5站',
-  description: '5D动漫(5站)为漫迷们提供追番索引。',
-  domain: 'https://www.5ddm.com',
-  port: 8080,
-  publicPath: '//99496-1251036128.file.myqcloud.com/5ddm',
-  baiduStat: '2181f9da0f7a8cdc001129fb5010a473',
-  cnzzStat: '1279219478',
-  ga: 'UA-176562013-1',
+  name: name[index],
+  describe: describe[index],
+  keywords: keywords[index],
+  description: description[index],
+  domain: domain[index],
+  port: port[index],
+  publicPath: `//99496-1251036128.file.myqcloud.com/${publicPath[index]}`,
+  baiduStat: baiduStat[index],
+  cnzzStat: cnzzStat[index],
+  ga: ga[index],
   // [选填] google广告
   googleAdSense: {
     client: 'pub-1710184184266697',
@@ -51,7 +69,8 @@ const config = {
       h5: '3946387868'
     }
   },
-  eMail: 'ddm_com@outlook.com'
+  eMail: eMail[index],
+  index
 }
 
 // 开发环境配置

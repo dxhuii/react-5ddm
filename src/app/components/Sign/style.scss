@@ -48,6 +48,13 @@
     background-size: 150px auto;
     background-position: center 4px;
     background-repeat: no-repeat;
+    &.gk {
+      background-image: url(../../static/gk.svg);
+      background-size: 180px auto;
+    }
+    &.a8 {
+      background-image: url(../../static/8a.svg);
+    }
   }
 }
 
