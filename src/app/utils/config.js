@@ -36,7 +36,6 @@ export default {
      */
     list: `${apiV1}list/id/3`, // 列表接口
     listNoId: `${apiV1}list`, // 列表接口
-    simple: `${apiV1}list/id/3`, // 首页列表接口
     playlist: `${apiV1}play`, // 播放列表 id:视频id
     player: `${apiV1}play`, // 单集 id:视频id，pid，集数
     detail: `${apiV1}detail`, // 视频详情
@@ -55,6 +54,6 @@ export default {
     love: `${apiV1}favoriteAndRemind`, // 查询评分，是否收藏，订阅
     cmdigg: `${apiV1}cmdigg`, // 评论顶踩
     config: `${apiV1}config`, // 网站各种配置 name menu菜单 sns配置 user配置 pay支付配置 emot配置 list 各种列表
-    game: `${apiGame}game` // 游戏 order排序 wd 关键词 p 分页 limit 每页条数
+    game: apiGame // 游戏 order排序 wd 关键词 p 分页 limit 每页条数
   }
 }

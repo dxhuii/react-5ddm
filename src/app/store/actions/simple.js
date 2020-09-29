@@ -7,7 +7,7 @@ export function simple({ uid = '' }) {
       getState,
       reducerName: 'simple',
       actionType: 'GET_SIMPLE',
-      api: 'simple',
+      api: 'list',
       params: {
         uid,
         type: 'simple',
