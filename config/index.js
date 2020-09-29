@@ -48,7 +48,7 @@ const config = {
   head: `<meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
   `,
   api: 'https://api.5ddm.com/',
   name: name[index],
