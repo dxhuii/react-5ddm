@@ -8,8 +8,8 @@ export function loadUserInfo({ user }) {
     const [err, data] = await Ajax({
       url: config.api.getuserinfo,
       method: 'get',
-      headers: {
-        Authorization: user.token
+      data: {
+        uid: user.userid
       }
     })
 

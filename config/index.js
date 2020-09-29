@@ -32,7 +32,7 @@ const config = {
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
     <link rel="icon" href="/favicon.ico" />
   `,
-  api: 'https://api.5ddm.com/home.php/',
+  api: 'https://api.5ddm.com/',
   name: '5D动漫(5站)',
   describe: '5D动漫(5站)',
   keywords: '5D动漫,5站',
@@ -57,6 +57,7 @@ const config = {
 // 开发环境配置
 if (process.env.NODE_ENV === 'development') {
   config.debug = true
+  config.cacheTime = 0
   config.port = 4000
   config.classScopedName = '[name]_[local]__[hash:base64:5]'
   config.domain = '//localhost:4000'

@@ -51,7 +51,7 @@ const List = ({ id, mcid, year, area, wd, letter, lz, order }) => {
     return () => {
       ArriveFooter.remove(id)
     }
-  }, [id, info.data, showlist, store.dispatch, store.getState])
+  }, [id, info.data, showlist])
 
   const { data = [], loading } = info || {}
 
