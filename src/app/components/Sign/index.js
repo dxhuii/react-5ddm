@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 
+import { index } from 'Config'
+
 import './style.scss'
 
 export default function Sign({ isSign, onType, visible }) {
@@ -11,9 +13,10 @@ export default function Sign({ isSign, onType, visible }) {
     e.stopPropagation()
     onType(isSign)
   }
+  const logo = ['', 'gk', 'a8']
   return (
     <div styleName='user'>
-      <div styleName='logo' />
+      <div styleName={`logo ${logo[index]}`} />
       <h1>{isSign === 'signIn' ? '登录' : '注册'}，可以发现更多</h1>
       {isSign === 'signIn' ? <SignIn visible={visible} /> : <SignUp visible={visible} />}
       <div styleName='user-reg' className='mt20'>

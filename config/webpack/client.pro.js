@@ -4,6 +4,11 @@ const OfflinePlugin = require('offline-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
+const icon = ['5d', 'gk', '8a']
+const index = process.env.SITE_INDEX
+
+console.log(index)
+
 const webpackConfig = {
   mode: 'production',
   ...baseConfig,
@@ -12,8 +17,8 @@ const webpackConfig = {
     new CleanWebpackPlugin(),
     new CopyPlugin({
       patterns: [
-        { from: 'src/app/static/favicon.ico', to: 'favicon.ico' },
-        { from: 'src/app/static/favicon.png', to: 'favicon.png' }
+        { from: `src/app/static/${icon[index]}_144.png`, to: 'icon_144.png' },
+        { from: `src/app/static/${icon[index]}_512.png`, to: 'favicon.png' }
       ]
     }),
 
