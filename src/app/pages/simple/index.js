@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 
 // redux
@@ -6,6 +6,7 @@ import { useStore, useSelector } from 'react-redux'
 import { simple } from '@/store/actions/simple'
 import { digg } from '@/store/actions/mark'
 import { getSimple } from '@/store/reducers/simple'
+import { getUserInfo } from '@/store/reducers/user'
 import BaseLoading from '@/components/BaseLoading'
 import ShowPlaylist from '@/components/ShowPlaylist'
 import Modal from '@/components/Modal'
@@ -26,9 +27,11 @@ import './style.scss'
 const Simple = () => {
   const [visible, onModal] = useState(false)
   const [params, onShowPlay] = useState({})
+  const me = useSelector(state => getUserInfo(state))
   const info = useSelector(state => getSimple(state))
   const store = useStore()
 
+  const { userid } = me
   const { data = [], loading = true } = info
 
   const menu = {
@@ -40,16 +43,18 @@ const Simple = () => {
     35: 'qita'
   }
 
-  useEffect(() => {
+  const get = useCallback(() => {
     const getData = args => simple(args)(store.dispatch, store.getState)
-    if (!info.data) {
-      getData()
-    }
-    ArriveFooter.add('simple', getData)
+    getData({ uid: userid })
+  }, [store.dispatch, store.getState, userid])
+
+  useEffect(() => {
+    if (!info.data) get()
+    ArriveFooter.add('simple', get)
     return () => {
       ArriveFooter.remove('simple')
     }
-  }, [info.data, store.dispatch, store.getState])
+  }, [get, info.data, userid])
 
   const starClass = pfnum => {
     let pfclass = ''
@@ -104,7 +109,7 @@ const Simple = () => {
             <i key={v} className={`playicon ${getName(v)[1]}`} title={getName(v)[0]} onClick={() => onShow({ id, type: getName(v)[1] })} />
           )
         })
-      : play.map(play => play && <i key={play} className={`playicon ${play}`} title={play} />)
+      : play.map(play => play && <i key={play} className={`playicon ${play}`} title={play} onClick={() => onShow({ id, type: play })} />)
   }
 
   return (
@@ -164,11 +169,17 @@ const Simple = () => {
                 {item.filmtime && <span style={{ marginLeft: 10 }}>{`首番时间：${item.filmtime} ${item.time}`}</span>}
               </div>
               <p styleName='list-opa'>
-                <a>
-                  <i className='iconfont'>&#xe6bd;</i> 订阅
+                <a styleName={item.remindid ? 'active' : ''}>
+                  <i className='iconfont' styleName='fav'>
+                    &#xe6bd;
+                  </i>
+                  {item.remindid ? '已追番' : '追番'}
                 </a>
-                <a>
-                  <i className='iconfont'>&#xe66a;</i> 收藏
+                <a styleName={item.loveid ? 'active' : ''}>
+                  <i className='iconfont' styleName='fav'>
+                    &#xe66a;
+                  </i>
+                  {item.loveid ? '已收藏' : '收藏'}
                 </a>
                 <a onClick={() => onDigg('up', item.id)}>
                   <i className='iconfont'>&#xe607;</i> {item.up}

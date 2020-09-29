@@ -32,17 +32,17 @@ const config = {
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
     <link rel="icon" href="/favicon.ico" />
   `,
-  api: 'https://api.5ddm.com/home.php/',
-  name: 'Geekacg',
-  describe: 'Geekacg - 你的二次元主页',
-  keywords: 'Geekacg,极客动漫,二次元导航,二次元主页',
-  description: 'Geekacg - 及时收录动漫网站及资讯、动画、漫画、音乐等内容，让您的二次元网络生活更简单精彩。',
-  domain: 'https://www.geekacg.com',
-  port: 9999,
-  publicPath: '//99496-1251036128.file.myqcloud.com/geekacg',
-  baiduStat: 'dac7d3d29140921f2cfb16fe78565450',
-  cnzzStat: '1279307969',
-  ga: 'UA-176562013-2',
+  api: 'https://api.5ddm.com/',
+  name: '5D动漫(5站)',
+  describe: '5D动漫(5站)',
+  keywords: '5D动漫,5站',
+  description: '5D动漫(5站)为漫迷们提供追番索引。',
+  domain: 'https://www.5ddm.com',
+  port: 8080,
+  publicPath: '//99496-1251036128.file.myqcloud.com/5ddm',
+  baiduStat: '2181f9da0f7a8cdc001129fb5010a473',
+  cnzzStat: '1279219478',
+  ga: 'UA-176562013-1',
   // [选填] google广告
   googleAdSense: {
     client: 'pub-1710184184266697',
@@ -57,6 +57,7 @@ const config = {
 // 开发环境配置
 if (process.env.NODE_ENV === 'development') {
   config.debug = true
+  config.cacheTime = 0
   config.port = 4000
   config.classScopedName = '[name]_[local]__[hash:base64:5]'
   config.domain = '//localhost:4000'

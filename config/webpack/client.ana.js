@@ -12,7 +12,10 @@ const webpackConfig = {
     // 清空打包目录
     new CleanWebpackPlugin(),
     new CopyPlugin({
-      patterns: [{ from: 'src/app/static/favicon.ico', to: 'favicon.ico' }]
+      patterns: [
+        { from: 'src/app/static/favicon.ico', to: 'favicon.ico' },
+        { from: 'src/app/static/favicon.png', to: 'favicon.png' }
+      ]
     }),
 
     new BundleAnalyzerPlugin(),
