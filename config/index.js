@@ -20,7 +20,7 @@
  * weiboName 微博名称
  */
 
-const index = 0
+const index = 1
 const name = ['5d动漫(5站)', 'Geekacg', '8ana']
 const cookiePrefix = ['ddm_', 'geekacg', 'ana']
 const describe = ['5d动漫(5站)', '', '']
