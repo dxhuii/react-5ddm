@@ -33,10 +33,10 @@ const description = [
 const port = ['8080', '9999', '9998']
 const domain = ['https://www.5ddm.com', 'https://www.geekacg.com', 'https://www.8ana.com']
 const publicPath = ['5ddm', 'geekacg', '8ana']
-const baiduStat = ['2181f9da0f7a8cdc001129fb5010a473', 'dac7d3d29140921f2cfb16fe78565450', '']
-const cnzzStat = ['1279219478', '1279307969', '']
+const baiduStat = ['2181f9da0f7a8cdc001129fb5010a473', 'dac7d3d29140921f2cfb16fe78565450', '4e154b7f092fba14a8a96cc7e1b6b70c']
+const cnzzStat = ['1279219478', '1279307969', '1279316952']
 const ga = ['UA-176562013-1', 'UA-176562013-2', 'UA-176562013-3']
-const eMail = ['ddm_com@outlook.com', 'geekacg@outlook.com', '']
+const eMail = ['ddm_com@outlook.com', 'geekacg@outlook.com', 'ana8_com@outlook.com']
 
 const config = {
   debug: false,
