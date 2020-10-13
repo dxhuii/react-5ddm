@@ -15,7 +15,7 @@ import createRouter from '@/router'
 // 加载初始数据
 import initData from '@/init-data'
 
-import { cookiePrefix, authCookieNmae, cnzzStat, baiduStat, debug } from 'Config'
+import { cookiePrefix, authCookieNmae, cnzzStat, baiduStat } from 'Config'
 
 export default async (req, res) => {
   const params = {
@@ -117,7 +117,6 @@ export default async (req, res) => {
 
   params.cnzzStat = cnzzStat
   params.baiduStat = baiduStat
-  params.debug = debug
 
   // redux
   params.reduxState = JSON.stringify(store.getState()).replace(/</g, '\\x3c')

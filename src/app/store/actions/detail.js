@@ -32,7 +32,7 @@ export function vodNews({ id }) {
   }
 }
 
-export function love({ id, sid }) {
+export function love({ id, sid, uid }) {
   return (dispatch, getState) => {
     return loadData({
       dispatch,
@@ -41,8 +41,7 @@ export function love({ id, sid }) {
       reducerName: 'detail',
       actionType: 'GET_LOVE',
       api: 'love',
-      params: { id, sid },
-      header: true
+      params: { id, sid, uid }
     })
   }
 }

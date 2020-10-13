@@ -20,7 +20,7 @@ export function newsIndex({ name, id = 44, p = 0, order = 'addtime' }) {
       actionType: 'GET_NEWS_INDEX_LIST',
       api: 'newslist',
       params: Object.assign({}, api, { p }),
-      isPage: name === 'newslist' ? true : false
+      isPage: name === 'newslist'
     })
   }
 }

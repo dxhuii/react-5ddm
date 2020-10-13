@@ -30,7 +30,7 @@ import Ads from '@/components/Ads'
 import Meta from '@/components/Meta'
 import Shell from '@/components/Shell'
 
-import { isNumber, formatPic, getName, format } from '@/utils'
+import { isNumber, formatPic, getName, format, isMobile } from '@/utils'
 import { name, domain } from 'Config'
 
 import playing from '@/utils/play'
@@ -94,10 +94,14 @@ const Subject = () => {
       _comment({ id, sid })
     }
     async function feachLove() {
-      const [, data] = await _love({ id, sid })
+      const [, data] = await _love({ id, sid, uid: userid })
       setLove(data.data || {})
     }
-    if (!(loveD && loveD.data) && userid) feachLove()
+    if (!(loveD && loveD.data) && userid) {
+      feachLove()
+    } else {
+      setLove(loveD.data || {})
+    }
     return () => {
       document.removeEventListener('click', closePlayBox)
     }
@@ -112,7 +116,7 @@ const Subject = () => {
     if (userid) {
       const [, data] = await onLike({ type, id, cid })
       if (data.code === 1) {
-        const [, res] = await _love({ id, sid })
+        const [, res] = await _love({ id, sid, uid: userid })
         setLove(res.data || {})
         Toast.success(data.msg)
       }
@@ -337,7 +341,6 @@ const Subject = () => {
           <meta property='og:description' content={reContent} />
           <meta property='og:image' content={rePic} />
           <meta property='og:url' content={`/subject/${id}`} />
-          <meta property='og:video' content={`/play/${id}/1`} />
           <meta property='og:site_name' content={name} />
           <meta property='og:video:score' content={gold} />
           <meta property='og:video:actor' content={reActor} />
@@ -444,6 +447,26 @@ const Subject = () => {
       </div>
       <section className='mt20 clearfix wp' styleName='detail-bottom'>
         <div className='left'>
+          {all && all.length > 0 && isMobile() ? (
+            <div className='right-box'>
+              <div className='right-title'>
+                <h2>
+                  <em></em>在哪儿看这部动漫(全集)
+                </h2>
+              </div>
+              {allPlay()}
+            </div>
+          ) : null}
+          {list.length > 0 && isMobile() ? (
+            <div className='right-box'>
+              <div className='right-title'>
+                <h2>
+                  <em></em>在哪儿看这部动漫(分集)
+                </h2>
+              </div>
+              {player()}
+            </div>
+          ) : null}
           {newsTextlist.length > 0 ? (
             <div className='right-box'>
               <div className='right-title'>

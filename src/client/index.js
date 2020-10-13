@@ -49,7 +49,7 @@ if (!debug) {
   if (!userinfo || !userinfo.userid) userinfo = {}
   let enterEvent = () => {}
   const { href, pathname } = window.location
-  if (ga) {
+  if (ga && !debug) {
     ReactGA.initialize(ga, { debug })
     enterEvent = userinfo => {
       const option = { page: pathname, userId: userinfo && userinfo._id ? userinfo._id : null }
@@ -97,7 +97,13 @@ if (!debug) {
   }
 
   // 解决在 ios safari iframe 上touchMove 滚动后，外部的点击事件会无效的问题
-  document.addEventListener('touchmove', function (e) {
-    e.preventDefault()
-  })
+  const ele = document.getElementById('app')
+  ele.addEventListener(
+    'touchmove',
+    e => {
+      e.preventDefault()
+      e.stopPropagation()
+    },
+    { passive: false }
+  )
 })()

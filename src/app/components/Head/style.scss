@@ -29,7 +29,6 @@ header {
       &:hover,
       &.active {
         color: #18191a;
-        font-weight: 600;
       }
       &.active {
         &::after {
@@ -79,7 +78,7 @@ header {
 }
 
 .header-tool {
-  margin-right: 20px;
+  font-size: 16px;
   span {
     margin-left: 15px;
   }
@@ -137,6 +136,8 @@ header {
 
     nav {
       display: none;
+      margin-left: 0;
+      padding-left: 10px;
 
       &.show {
         position: absolute;
@@ -172,25 +173,32 @@ header {
 
   .header-tool {
     flex-grow: 1;
+    text-align: right;
+    padding-right: 15px;
+    white-space: nowrap;
 
     a,
     span {
-      padding: 0 7px;
+      padding: 0 5px;
     }
   }
 
   .header-logo {
-    width: 120px;
+    width: 125px;
     background-size: 120px auto;
-    background-position: 0 5px;
-    flex-basis: 120px;
-    line-height: 48px;
+    background-position: 5px 7px;
+    flex-basis: 125px;
 
-    /*5ddm*/
-    &.ddm {
-      width: 110px;
-      background-size: 100px auto;
-      background-position: 0 11px;
+    /*geekacg*/
+    &.gk {
+      width: 130px;
+      background-size: 130px auto;
+      background-position: 5px 11px;
+    }
+    &.a8 {
+      width: 90px;
+      background-size: 90px auto;
+      background-position: 5px 9px;
     }
   }
 
@@ -214,17 +222,22 @@ header {
   }
 
   .header-logo {
-    width: 80px;
+    width: 95px;
     background-size: 80px auto;
-    background-position: 0 5px;
-    flex-basis: 80px;
+    background-position: 5px 7px;
     line-height: 36px;
 
-    /*5ddm*/
-    &.ddm {
+    /*geekacg*/
+    &.gk {
+      width: 110px;
+      background-size: 110px auto;
+      background-position: 5px 7px;
+    }
+
+    &.a8 {
       width: 70px;
-      background-size: 65px auto;
-      background-position: 0 11px;
+      background-size: 70px auto;
+      background-position: 5px 6px;
     }
   }
 }

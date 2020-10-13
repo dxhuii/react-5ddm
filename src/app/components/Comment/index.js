@@ -55,7 +55,7 @@ export default function Comment({ data, submit, me, login }) {
         </div>
         {!userid ? (
           <div styleName='no-login'>
-            请先<span onClick={() => login('signIn')}>登录</span>后发表评论 (・ω・)
+            请先<span onClick={() => login('signIn')}>登录</span>后评论 (・ω・)
           </div>
         ) : null}
       </div>

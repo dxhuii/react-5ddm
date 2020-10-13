@@ -10,13 +10,14 @@ import cache from './cache'
 import helmet from 'helmet'
 
 // 配置
-import { port, authCookieNmae, cookiePrefix } from 'Config'
+import { port, authCookieNmae, cookiePrefix, debug } from 'Config'
 
 import render from './render'
 
 // 路由
 import sign from './sign'
 
+const auth = `${cookiePrefix}${authCookieNmae}`
 const app = express()
 app.use(
   helmet({
@@ -32,7 +33,7 @@ app.use(express.static('./public'))
 
 app.use(function (req, res, next) {
   // 如果是游客，则优先使用缓存中的数据
-  if (!req.cookies[`${cookiePrefix}${authCookieNmae}`]) {
+  if (!req.cookies[auth] && !debug) {
     const _cache = cache.get(req.originalUrl)
     if (_cache) {
       res.send(_cache)
@@ -46,7 +47,7 @@ app.use(function (req, res, next) {
 app.use('/sign', sign())
 
 app.get('*', async function (req, res) {
-  const { code, redirect, html, meta, reduxState, cnzzStat, baiduStat, debug } = await render(req, res)
+  const { code, redirect, html, meta, reduxState, cnzzStat, baiduStat } = await render(req, res)
 
   res.status(code)
 
@@ -54,9 +55,9 @@ app.get('*', async function (req, res) {
     res.redirect(redirect)
   } else {
     // eslint-disable-next-line handle-callback-err
-    res.render('../dist/server/index.ejs', { html, reduxState, meta, cnzzStat, baiduStat, debug }, function (err, html) {
+    res.render('../dist/server/index.ejs', { html, reduxState, meta, cnzzStat, baiduStat }, function (err, html) {
       // 对游客的请求进行缓存
-      if (!req.cookies[`${cookiePrefix}${authCookieNmae}`]) {
+      if (!req.cookies[auth] && !debug) {
         cache.set(req.originalUrl, html)
       }
       res.send(html)

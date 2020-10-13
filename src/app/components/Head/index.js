@@ -20,6 +20,9 @@ import './style.scss'
 export default function Head() {
   let timer = null
   let timerBlur = null
+  const date = new Date()
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
   const [isHide, onHide] = useState(false)
   const [visible, onModal] = useState(false)
   const [showMenu, onMenu] = useState(false)
@@ -85,9 +88,6 @@ export default function Head() {
 
   // 判断为几月新番
   const getCurMonth = () => {
-    const date = new Date()
-    const year = date.getFullYear()
-    const month = date.getMonth() + 1
     let m = '10'
     if (month >= 1 && month < 4) {
       m = '01'
@@ -130,7 +130,7 @@ export default function Head() {
                 更新
               </NavLink>
               <NavLink styleName={/month/.test(url) ? 'active' : ''} exact to={`/month/${getCurMonth()}`}>
-                {getCurMonth().substring(5)}月新番
+                {getCurMonth().substring(month >= 10 ? 4 : 5)}月新番
               </NavLink>
               <NavLink styleName={url === '/simple' ? 'active' : ''} exact to='/simple'>
                 简洁版
