@@ -43,7 +43,6 @@ import './style.scss'
 const Subject = () => {
   const [visible, onModal] = useState(false)
   const [isSign, onSign] = useState('signIn')
-  const [loveData, setLove] = useState({})
   const [playShow, playSetShow] = useState({})
   const [playName, playSetName] = useState('')
   const menu = {
@@ -93,14 +92,8 @@ const Subject = () => {
     if (!commentData || !commentData.data) {
       _comment({ id, sid })
     }
-    async function feachLove() {
-      const [, data] = await _love({ id, sid, uid: userid })
-      setLove(data.data || {})
-    }
     if (!(loveD && loveD.data) && userid) {
-      feachLove()
-    } else {
-      setLove(loveD.data || {})
+      _love({ id, sid, uid: userid })
     }
     return () => {
       document.removeEventListener('click', closePlayBox)
@@ -116,8 +109,7 @@ const Subject = () => {
     if (userid) {
       const [, data] = await onLike({ type, id, cid })
       if (data.code === 1) {
-        const [, res] = await _love({ id, sid, uid: userid })
-        setLove(res.data || {})
+        _love({ id, sid, uid: userid })
         Toast.success(data.msg)
       }
     } else {
@@ -313,7 +305,7 @@ const Subject = () => {
   const commitD = commentData.data || {}
   const commentList = commitD.list || []
   const star = commitD.gold || {}
-  const { loveid, remindid } = loveData
+  const { loveid, remindid } = loveD.data || {}
   const reContent = `${content.substring(0, 120)}${content.length > 120 ? '...' : ''}`.replace('剧情简介:', '').replace('故事讲述', '')
   const shareConfig = {
     pic,
