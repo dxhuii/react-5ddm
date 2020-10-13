@@ -45,7 +45,7 @@ const Simple = () => {
 
   const get = useCallback(() => {
     const getData = args => simple(args)(store.dispatch, store.getState)
-    getData({ uid: userid })
+    getData({ uid: userid || '' })
   }, [store.dispatch, store.getState, userid])
 
   useEffect(() => {
@@ -206,7 +206,7 @@ const Simple = () => {
 
 Simple.loadDataOnServer = async ({ store, match, res, req, user }) => {
   if (user) return { code: 200 }
-  await simple()(store.dispatch, store.getState)
+  await simple({ uid: (user || {}).userid })(store.dispatch, store.getState)
   return { code: 200 }
 }
 
