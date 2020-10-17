@@ -1,6 +1,10 @@
 .simple {
   display: flex;
   justify-content: space-between;
+  &-right {
+    position: fixed;
+    width: 300px;
+  }
 }
 
 .userinfo {

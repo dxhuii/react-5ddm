@@ -218,18 +218,20 @@ const Simple = () => {
         {loading ? <BaseLoading height={100} /> : null}
       </div>
       <div className='right'>
-        <div className='right-box'>
-          <div className='right-title'>
-            <h2>
-              <em></em>用户信息
-            </h2>
+        <div styleName='simple-right'>
+          <div className='right-box'>
+            <div className='right-title'>
+              <h2>
+                <em></em>用户信息
+              </h2>
+            </div>
+            <div styleName='userinfo'>
+              <img src={avatar} />
+              {name}
+            </div>
           </div>
-          <div styleName='userinfo'>
-            <img src={avatar} />
-            {name}
-          </div>
+          <SideBar />
         </div>
-        <SideBar />
       </div>
       {params.id ? (
         <Modal cls={{ width: 895 }} visible={visible} showModal={() => onModal(true)} closeModal={() => onModal(false)}>
