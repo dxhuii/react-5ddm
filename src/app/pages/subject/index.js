@@ -3,7 +3,7 @@ import { Link, useLocation, useRouteMatch } from 'react-router-dom'
 
 // redux
 import { useStore, useSelector } from 'react-redux'
-import { detail, love } from '@/store/actions/detail'
+import { detail } from '@/store/actions/detail'
 import { comment, addComment } from '@/store/actions/comment'
 import { mark, digg } from '@/store/actions/mark'
 import { playlist } from '@/store/actions/playlist'
@@ -64,7 +64,6 @@ const Subject = () => {
   const commentData = useSelector(state => getComment(state, `${sid}_${id}`))
   const loveD = useSelector(state => getDetail(state, `love_${id}`))
   const _comment = useCallback(args => comment(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
-  const _love = useCallback(args => love(args)(store.dispatch, store.getState), [store.dispatch, store.getState])
   const playData = useSelector(state => getPlayList(state, id))
 
   const { userid, nickname } = me
@@ -87,18 +86,15 @@ const Subject = () => {
       getPlayData({ id })
     }
     if (!info || !info.data) {
-      getData({ id })
+      getData({ id, uid: userid })
     }
     if (!commentData || !commentData.data) {
       _comment({ id, sid })
     }
-    if (!(loveD && loveD.data) && userid) {
-      _love({ id, sid, uid: userid })
-    }
     return () => {
       document.removeEventListener('click', closePlayBox)
     }
-  }, [commentData, loveD, id, info, store.dispatch, store.getState, userid, sid, _love, _comment, playData, closePlayBox])
+  }, [commentData, id, info, store.dispatch, store.getState, userid, sid, _comment, playData, closePlayBox])
 
   const playBox = e => {
     e.nativeEvent.stopImmediatePropagation()
@@ -107,9 +103,8 @@ const Subject = () => {
   const addMark = async (type, id, cid) => {
     const onLike = args => mark(args)(store.dispatch, store.getState)
     if (userid) {
-      const [, data] = await onLike({ type, id, cid })
+      const [, data] = await onLike({ type, id, cid, info: 'subject' })
       if (data.code === 1) {
-        _love({ id, sid, uid: userid })
         Toast.success(data.msg)
       }
     } else {
@@ -290,6 +285,8 @@ const Subject = () => {
     actorId,
     douban,
     baike,
+    loveid,
+    remindid,
     pic = '',
     language = '',
     content = '',
@@ -305,7 +302,6 @@ const Subject = () => {
   const commitD = commentData.data || {}
   const commentList = commitD.list || []
   const star = commitD.gold || {}
-  const { loveid, remindid } = loveD.data || {}
   const reContent = `${content.substring(0, 120)}${content.length > 120 ? '...' : ''}`.replace('剧情简介:', '').replace('故事讲述', '')
   const shareConfig = {
     pic,
@@ -378,11 +374,11 @@ const Subject = () => {
               </p>
               <p styleName='detail-update'>更新时间：{updateDate}</p>
               <div styleName='detail-tool'>
-                <div styleName={`detail-tool__on ${remindid ? 'active' : ''}`} onClick={() => addMark('remind', id, cid, userid)}>
+                <div styleName={`detail-tool__on ${remindid ? 'active' : ''}`} onClick={() => addMark('remind', id, cid)}>
                   <i className='iconfont'>&#xe6bd;</i>
                   {remindid ? '已追番' : '追番'}
                 </div>
-                <div styleName={`detail-tool__on ${loveid ? 'active' : ''}`} onClick={() => addMark('love', id, cid, userid)}>
+                <div styleName={`detail-tool__on ${loveid ? 'active' : ''}`} onClick={() => addMark('love', id, cid)}>
                   <i className='iconfont'>&#xe66a;</i>
                   {loveid ? '已收藏' : '收藏'}
                 </div>

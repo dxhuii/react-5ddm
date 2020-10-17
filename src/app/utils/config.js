@@ -51,7 +51,6 @@ export default {
     addgold: `${apiV1}addgold`, // 评分 val 分值 id 视频ID sid 视频大类
 
     getuserinfo: `${apiV1}userinfo`, // 获取用户信息 参数 id  val评分值
-    love: `${apiV1}favoriteAndRemind`, // 查询评分，是否收藏，订阅
     cmdigg: `${apiV1}cmdigg`, // 评论顶踩
     config: `${apiV1}config`, // 网站各种配置 name menu菜单 sns配置 user配置 pay支付配置 emot配置 list 各种列表
     game: apiGame // 游戏 order排序 wd 关键词 p 分页 limit 每页条数

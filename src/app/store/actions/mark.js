@@ -2,8 +2,9 @@ import storage from '@/common/storage'
 import Toast from '@/components/Toast'
 import Post from '@/utils/post'
 
-export function mark({ type, id, cid }) {
-  return () => {
+export function mark({ type, id, cid, info = 'list' }) {
+  return dispatch => {
+    dispatch({ type: info === 'list' ? 'UPDATE_MARK' : 'UPDATE_SUBJECT_MARK', id, name: type })
     return Post({
       api: 'mark',
       params: {

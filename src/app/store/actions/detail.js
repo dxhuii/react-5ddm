@@ -1,6 +1,6 @@
 import loadData from '@/utils/loadData'
 
-export function detail({ id }) {
+export function detail({ id, uid = '' }) {
   return (dispatch, getState) => {
     return loadData({
       dispatch,
@@ -9,7 +9,7 @@ export function detail({ id }) {
       reducerName: 'detail',
       actionType: 'GET_DETAIL',
       api: 'detail',
-      params: { id }
+      params: { id, uid }
     })
   }
 }
@@ -28,20 +28,6 @@ export function vodNews({ id }) {
         limit: 20
       },
       isPage: true
-    })
-  }
-}
-
-export function love({ id, sid, uid }) {
-  return (dispatch, getState) => {
-    return loadData({
-      dispatch,
-      getState,
-      name: `love_${id}`,
-      reducerName: 'detail',
-      actionType: 'GET_LOVE',
-      api: 'love',
-      params: { id, sid, uid }
     })
   }
 }

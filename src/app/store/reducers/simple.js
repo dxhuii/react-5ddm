@@ -17,6 +17,19 @@ export default (state = cloneObj(initialState), action = {}) => {
         }
       }
       break
+    case 'UPDATE_MARK':
+      if (state.data.length > 0) {
+        for (let n = 0, max = state.data.length; n < max; n++) {
+          if (state.data[n].id === action.id) {
+            if (state.data[n][`${action.name}id`]) {
+              state.data[n][`${action.name}id`] = null
+            } else {
+              state.data[n][`${action.name}id`] = action.id
+            }
+          }
+        }
+      }
+      break
     default:
       return state
   }

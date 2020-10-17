@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom'
 // redux
 import { useStore, useSelector } from 'react-redux'
 import { simple } from '@/store/actions/simple'
-import { digg } from '@/store/actions/mark'
+import { mark, digg } from '@/store/actions/mark'
 import { getSimple } from '@/store/reducers/simple'
 import { getUserInfo } from '@/store/reducers/user'
+
+import SideBar from '@/components/SideBar'
 import BaseLoading from '@/components/BaseLoading'
 import ShowPlaylist from '@/components/ShowPlaylist'
 import Modal from '@/components/Modal'
@@ -31,7 +33,7 @@ const Simple = () => {
   const info = useSelector(state => getSimple(state))
   const store = useStore()
 
-  const { userid } = me
+  const { userid, name, avatar } = me
   const { data = [], loading = true } = info
 
   const menu = {
@@ -86,9 +88,21 @@ const Simple = () => {
 
   const onDigg = async (type, id) => {
     const onDigg = args => digg(args)(store.dispatch, store.getState)
-    const [, res] = await onDigg({ type, id })
+    const [, res] = await onDigg({ type, id, info: 'list' })
     if (res.code === 1) {
       Toast.success(res.msg)
+    }
+  }
+
+  const addMark = async (type, id, cid) => {
+    const onLike = args => mark(args)(store.dispatch, store.getState)
+    if (userid) {
+      const [, data] = await onLike({ type, id, cid, info: 'list' })
+      if (data.code === 1) {
+        Toast.success(data.msg)
+      }
+    } else {
+      onModal(true)
     }
   }
 
@@ -113,87 +127,109 @@ const Simple = () => {
   }
 
   return (
-    <div className='wp mt20'>
+    <div className='wp mt20' styleName='simple'>
       <Meta title={describe}>
         <meta name='keywords' content={keywords} />
         <meta name='description' content={description} />
       </Meta>
-      <div styleName='list' className='right-box'>
-        {data.map(item => (
-          <li key={item.id}>
-            <Link to={`/subject/${item.id}`} styleName='list-pic'>
-              <span>{item.area}</span>
-              <span>{item.lang}</span>
-              <img src={formatPic(item.pic, 'orj360')} />
-            </Link>
-            <div styleName='list-info'>
-              <div styleName='list-title'>
-                <h2>
-                  <Link to={`/subject/${item.id}`}>{item.title}</Link>({item.year})
-                </h2>
-                <Link to={`/type/${menu[item.cid] || 'list'}/-/-/-/-/-/addtime`}>{item.name}</Link>
-                {item.mcid &&
-                  item.mcid.map(val => (
-                    <Link to={`/type/${menu[item.cid] || 'list'}/${val.id}/-/-/-/-/addtime`} key={val.id}>
-                      {val.title}
-                    </Link>
-                  ))}
-              </div>
-              {item.foreign && <h4>{item.foreign}</h4>}
-              <p>
-                <Link to={`/subject/${item.id}`}>详情</Link>
-                {item.music ? <a>音乐</a> : null}
-                {item.role ? <a>角色</a> : null}
-                {item.part ? <Link to={`/episode/${item.id}`}>剧情</Link> : null}
-                {item.lines ? <a>插曲</a> : null}
-                {item.theme ? <a>话题</a> : null}
-                {item.picture ? <a>图片</a> : null}
-                <Link to={`/time/${item.id}`} title='播出时间'>
-                  时间
-                </Link>
-              </p>
-              {(item.play && item.play.length) || item.all ? (
-                <div styleName='list-play' className='clearfix'>
-                  <span>哪可以看：</span>
-                  {see({ play: item.play, all: item.all, id: item.id })}
+      <div className='right-box left'>
+        <div className='right-title'>
+          <h2>番剧</h2>
+          <span>
+            <Link to='/dongman'>筛选</Link>
+          </span>
+        </div>
+        <ul styleName='list'>
+          {data.map(item => (
+            <li key={item.id}>
+              <Link to={`/subject/${item.id}`} styleName='list-pic'>
+                <span>{item.area}</span>
+                <span>{item.lang}</span>
+                <img src={formatPic(item.pic, 'orj360')} />
+              </Link>
+              <div styleName='list-info'>
+                <div styleName='list-title'>
+                  <h2>
+                    <Link to={`/subject/${item.id}`}>{item.title}</Link>({item.year})
+                  </h2>
+                  <Link to={`/type/${menu[item.cid] || 'list'}/-/-/-/-/-/addtime`}>{item.name}</Link>
+                  {item.mcid &&
+                    item.mcid.map(val => (
+                      <Link to={`/type/${menu[item.cid] || 'list'}/${val.id}/-/-/-/-/addtime`} key={val.id}>
+                        {val.title}
+                      </Link>
+                    ))}
                 </div>
-              ) : null}
-              <div styleName='list-gold'>
-                {item.gold ? (
-                  <>
-                    <span className={`${starClass(item.gold * 5)} bigstar`} /> {item.gold} 分
-                  </>
-                ) : (
-                  '暂无评分'
-                )}
-                {item.filmtime && <span style={{ marginLeft: 10 }}>{`首番时间：${item.filmtime} ${item.time}`}</span>}
+                {item.foreign && <h4>{item.foreign}</h4>}
+                <p>
+                  <Link to={`/subject/${item.id}`}>详情</Link>
+                  {item.music ? <a>音乐</a> : null}
+                  {item.role ? <a>角色</a> : null}
+                  {item.part ? <Link to={`/episode/${item.id}`}>剧情</Link> : null}
+                  {item.lines ? <a>插曲</a> : null}
+                  {item.theme ? <a>话题</a> : null}
+                  {item.picture ? <a>图片</a> : null}
+                  <Link to={`/time/${item.id}`} title='播出时间'>
+                    时间
+                  </Link>
+                </p>
+                {(item.play && item.play.length) || item.all ? (
+                  <div styleName='list-play' className='clearfix'>
+                    <span>哪可以看：</span>
+                    {see({ play: item.play, all: item.all, id: item.id })}
+                  </div>
+                ) : null}
+                <div styleName='list-gold'>
+                  {item.gold ? (
+                    <>
+                      <span className={`${starClass(item.gold * 5)} bigstar`} /> {item.gold} 分
+                    </>
+                  ) : (
+                    '暂无评分'
+                  )}
+                  {item.filmtime && <span style={{ marginLeft: 10 }}>{`首番时间：${item.filmtime} ${item.time}`}</span>}
+                </div>
+                <p styleName='list-opa'>
+                  <a onClick={() => addMark('remind', item.id, item.cid)} styleName={item.remindid ? 'active' : ''}>
+                    <i className='iconfont' styleName='fav'>
+                      &#xe6bd;
+                    </i>
+                    {item.remindid ? '已追番' : '追番'}
+                  </a>
+                  <a onClick={() => addMark('love', item.id, item.cid)} styleName={item.loveid ? 'active' : ''}>
+                    <i className='iconfont' styleName='fav'>
+                      &#xe66a;
+                    </i>
+                    {item.loveid ? '已收藏' : '收藏'}
+                  </a>
+                  <a onClick={() => onDigg('up', item.id)}>
+                    <i className='iconfont'>&#xe607;</i> {item.up}
+                  </a>
+                  <a onClick={() => onDigg('down', item.id)}>
+                    <i className='iconfont'>&#xe606;</i> {item.down}
+                  </a>
+                  <span style={item.isDate ? { color: '#f99f11' } : {}}>{item.addtime}更新</span>
+                  {item.status === '未播出' ? (item.tvcont ? item.tvcont : item.status) : item.status}
+                </p>
               </div>
-              <p styleName='list-opa'>
-                <a styleName={item.remindid ? 'active' : ''}>
-                  <i className='iconfont' styleName='fav'>
-                    &#xe6bd;
-                  </i>
-                  {item.remindid ? '已追番' : '追番'}
-                </a>
-                <a styleName={item.loveid ? 'active' : ''}>
-                  <i className='iconfont' styleName='fav'>
-                    &#xe66a;
-                  </i>
-                  {item.loveid ? '已收藏' : '收藏'}
-                </a>
-                <a onClick={() => onDigg('up', item.id)}>
-                  <i className='iconfont'>&#xe607;</i> {item.up}
-                </a>
-                <a onClick={() => onDigg('down', item.id)}>
-                  <i className='iconfont'>&#xe606;</i> {item.down}
-                </a>
-                <span style={item.isDate ? { color: '#f99f11' } : {}}>{item.addtime}更新</span>
-                {item.status === '未播出' ? (item.tvcont ? item.tvcont : item.status) : item.status}
-              </p>
-            </div>
-          </li>
-        ))}
+            </li>
+          ))}
+        </ul>
         {loading ? <BaseLoading height={100} /> : null}
+      </div>
+      <div className='right'>
+        <div className='right-box'>
+          <div className='right-title'>
+            <h2>
+              <em></em>用户信息
+            </h2>
+          </div>
+          <div styleName='userinfo'>
+            <img src={avatar} />
+            {name}
+          </div>
+        </div>
+        <SideBar />
       </div>
       {params.id ? (
         <Modal cls={{ width: 895 }} visible={visible} showModal={() => onModal(true)} closeModal={() => onModal(false)}>
