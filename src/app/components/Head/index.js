@@ -109,7 +109,7 @@ export default function Head() {
           <nav styleName={showMenu ? 'show' : ''}>
             <div styleName='header-nav'>
               <NavLink styleName={url === '/' ? 'active' : ''} exact to='/'>
-                首页
+                {index === 0 ? '首页' : '简洁版'}
               </NavLink>
               <NavLink styleName={/dongman|subject|play|week|type|search/.test(url) ? 'active' : ''} exact to='/dongman'>
                 动漫
@@ -133,7 +133,7 @@ export default function Head() {
                 {getCurMonth().substring(month >= 10 ? 4 : 5)}月新番
               </NavLink>
               <NavLink styleName={url === '/simple' ? 'active' : ''} exact to='/simple'>
-                简洁版
+                {index !== 0 ? '首页' : '简洁版'}
               </NavLink>
             </div>
           </nav>

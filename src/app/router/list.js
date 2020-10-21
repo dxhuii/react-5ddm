@@ -5,25 +5,32 @@ import Head from '@/components/Head'
 import Footer from '@/components/Footer'
 import Loading from '@/components/Ui/Loading'
 
+import { index } from 'Config'
+
 const exact = true
 const base = { exact, head: Head, footer: Footer }
+
+const isHome = is =>
+  is
+    ? loadable(() => import('@/pages/simple'), {
+        fallback: <Loading />
+      })
+    : loadable(() => import('@/pages/home'), {
+        fallback: <Loading />
+      })
 
 export default [
   {
     path: '/',
     ...base,
-    body: loadable(() => import('@/pages/home'), {
-      fallback: <Loading />
-    }),
+    body: isHome(index !== 0),
     enter: 'everybody'
   },
 
   {
     path: '/simple',
     ...base,
-    body: loadable(() => import('@/pages/simple'), {
-      fallback: <Loading />
-    }),
+    body: isHome(index === 0),
     enter: 'everybody'
   },
 

@@ -219,17 +219,19 @@ const Simple = () => {
       </div>
       <div className='right'>
         <div styleName='simple-right'>
-          <div className='right-box'>
-            <div className='right-title'>
-              <h2>
-                <em></em>用户信息
-              </h2>
+          {avatar ? (
+            <div className='right-box'>
+              <div className='right-title'>
+                <h2>
+                  <em></em>用户信息
+                </h2>
+              </div>
+              <div styleName='userinfo'>
+                <img src={avatar} />
+                {name}
+              </div>
             </div>
-            <div styleName='userinfo'>
-              <img src={avatar} />
-              {name}
-            </div>
-          </div>
+          ) : null}
           <SideBar />
         </div>
       </div>
