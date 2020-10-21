@@ -12,6 +12,7 @@ import SideBar from '@/components/SideBar'
 import BaseLoading from '@/components/BaseLoading'
 import ShowPlaylist from '@/components/ShowPlaylist'
 import Modal from '@/components/Modal'
+import Sign from '@/components/Sign'
 import Toast from '@/components/Toast'
 
 // 壳组件
@@ -28,7 +29,9 @@ import './style.scss'
 
 const Simple = () => {
   const [visible, onModal] = useState(false)
+  const [visibleLogin, onModalLogin] = useState(false)
   const [params, onShowPlay] = useState({})
+  const [isSign, onSign] = useState('signIn')
   const me = useSelector(state => getUserInfo(state))
   const info = useSelector(state => getSimple(state))
   const store = useStore()
@@ -94,6 +97,11 @@ const Simple = () => {
     }
   }
 
+  const onType = isSign => {
+    onSign(isSign)
+    onModalLogin(true)
+  }
+
   const addMark = async (type, id, cid) => {
     const onLike = args => mark(args)(store.dispatch, store.getState)
     if (userid) {
@@ -102,7 +110,7 @@ const Simple = () => {
         Toast.success(data.msg)
       }
     } else {
-      onModal(true)
+      onModalLogin(true)
     }
   }
 
@@ -240,6 +248,9 @@ const Simple = () => {
           <ShowPlaylist {...params} />
         </Modal>
       ) : null}
+      <Modal visible={visibleLogin} showModal={() => onModalLogin(true)} closeModal={() => onModalLogin(false)}>
+        <Sign isSign={isSign} onType={val => onType(val)} visible={visibleLogin} />
+      </Modal>
     </div>
   )
 }
