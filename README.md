@@ -1,3 +1,5 @@
+## 些仓库不在维护，请稳步 https://github.com/dxhuii/geekacg
+
 ## 重要
 
 - 项目 api 是第三方的，无法开源
